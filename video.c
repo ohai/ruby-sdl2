@@ -54,5 +54,7 @@ void rubysdl2_init_video(void)
   mWindow = rb_define_class_under(mSDL2, "Window", rb_cObject);
 
   rb_define_singleton_method(mWindow, "create", Window_s_create, 6);
+  rb_define_const(mWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
+  rb_define_const(mWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 }
   
