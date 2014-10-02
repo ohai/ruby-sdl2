@@ -1,5 +1,6 @@
 #include "rubysdl2_internal.h"
 #include <SDL_video.h>
+#include <ruby/encoding.h>
 
 static VALUE mWindow;
 
@@ -40,6 +41,7 @@ static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w,
                              VALUE flags)
 {
   SDL_Window* window;
+  title = rb_str_export_to_enc(title, rb_utf8_encoding());
   window = SDL_CreateWindow(StringValueCStr(title),
                             NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h),
                             NUM2UINT(flags));
