@@ -1,40 +1,61 @@
 #include "rubysdl2_internal.h"
 #include <SDL_video.h>
+
 #include <ruby/encoding.h>
 
 static VALUE mWindow;
+// static VALUE mRenderer;
+// static VALUE mTexture;
 
-typedef struct {
-  SDL_Window* window;
-} Window;
+#define DEFINE_WRAP_STRUCT(SDL_typename, struct_name, field)    \
+  typedef struct {                                              \
+    SDL_typename* field;                                        \
+  } struct_name;                                  
 
-SDL_Window* Get_SDL_Window(VALUE obj)
-{
-  Window* w;
-  if (!rb_obj_is_kind_of(obj, mWindow))
-    rb_raise(rb_eTypeError, "wrong argument type %s (expected SDL2::Window)",
-             rb_obj_classname(obj));
-  Data_Get_Struct(obj, Window, w);
-
-  if (w->window == NULL) {
-    HANDLE_ERROR(SDL_SetError("Wiwndow is already destroyed"));
+#define DEFINE_GETTER(ctype, var_class, classname)                      \
+  ctype* Get_##ctype(VALUE obj)                                         \
+  {                                                                     \
+    ctype* s;                                                           \
+    if (!rb_obj_is_kind_of(obj, var_class))                             \
+      rb_raise(rb_eTypeError, "wrong argument type %s (expected %s)",   \
+               rb_obj_classname(obj), classname);                       \
+    Data_Get_Struct(obj, ctype, s);                                     \
+                                                                        \
+    return s;                                                           \
   }
 
-  return w->window;
-}
+#define DEFINE_WRAP_GETTER(SDL_typename, struct_name, field, classname) \
+  SDL_typename* Get_##SDL_typename(VALUE obj)                           \
+  {                                                                     \
+    struct_name* s = Get_##struct_name(obj);                            \
+      if (s->field == NULL)                                             \
+        HANDLE_ERROR(SDL_SetError(classname " is already destroyed"));  \
+                                                                        \
+      return s->field;                                                  \
+  }
 
+#define DEFINE_NEW(SDL_typename, struct_name, field, var_class)         \
+  static void struct_name##_free(struct_name* s);                       \
+  static VALUE struct_name##_new(SDL_typename* data)                    \
+  {                                                                     \
+    struct_name* s = ALLOC(struct_name);                                \
+    s->field = data;                                                    \
+    return Data_Wrap_Struct(var_class, 0, struct_name##_free, s);       \
+  }
+
+#define DEFINE_DESTROYABLE(SDL_typename, struct_name, field, var_class, classname) \
+  DEFINE_WRAP_STRUCT(SDL_typename, struct_name, field);                 \
+  DEFINE_GETTER(struct_name, var_class, classname);                     \
+  DEFINE_WRAP_GETTER(SDL_typename, struct_name, field, classname);      \
+  DEFINE_NEW(SDL_typename, struct_name, field, var_class)
+
+
+DEFINE_DESTROYABLE(SDL_Window, Window, window, mWindow, "SDL2::Window");
 static void Window_free(Window* w)
-{
+{                                 
   if (w->window != NULL)
     SDL_DestroyWindow(w->window);
   free(w);
-}
-
-static VALUE Window_new(SDL_Window* window)
-{
-  Window* w = ALLOC(Window);
-  w->window = window;
-  return Data_Wrap_Struct(mWindow, 0, Window_free, w);
 }
 
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
