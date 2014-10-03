@@ -4,6 +4,6 @@ SDL2.init(SDL2::INIT_EVERYTHING)
 
 window = SDL2::Window.create("testsprite",
                              SDL2::Window::OP_CENTERED, SDL2::Window::OP_CENTERED,
-                             640, 480, 0);
-
+                             640, 480, 0)
+p window.destroy?
 sleep 1

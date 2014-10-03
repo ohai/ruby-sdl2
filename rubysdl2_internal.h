@@ -11,8 +11,11 @@ void rubysdl2_init_video(void);
 #define SDL2_EXTERN extern
 #endif
 
+/** macros */
 #define HANDLE_ERROR(c) (rubysdl2_handle_error((c), __func__))
+#define INT2BOOL(x) ((x)?Qtrue:Qfalse)
 
+/** classes and modules */
 SDL2_EXTERN VALUE mSDL2;
 SDL2_EXTERN VALUE eSDL2Error;
 

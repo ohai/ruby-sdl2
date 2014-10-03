@@ -43,11 +43,18 @@ static VALUE mWindow;
     return Data_Wrap_Struct(var_class, 0, struct_name##_free, s);       \
   }
 
+#define DEFINE_DESTROY_P(struct_name, field)                    \
+  static VALUE struct_name##_destroy_p(VALUE self)              \
+  {                                                             \
+    return INT2BOOL(Get_##struct_name(self)->field == NULL);    \
+  }
+
 #define DEFINE_DESTROYABLE(SDL_typename, struct_name, field, var_class, classname) \
   DEFINE_WRAP_STRUCT(SDL_typename, struct_name, field);                 \
   DEFINE_GETTER(struct_name, var_class, classname);                     \
   DEFINE_WRAP_GETTER(SDL_typename, struct_name, field, classname);      \
-  DEFINE_NEW(SDL_typename, struct_name, field, var_class)
+  DEFINE_NEW(SDL_typename, struct_name, field, var_class);              \
+  DEFINE_DESTROY_P(struct_name, field);
 
 
 DEFINE_DESTROYABLE(SDL_Window, Window, window, mWindow, "SDL2::Window");
@@ -77,6 +84,7 @@ void rubysdl2_init_video(void)
   mWindow = rb_define_class_under(mSDL2, "Window", rb_cObject);
 
   rb_define_singleton_method(mWindow, "create", Window_s_create, 6);
+  rb_define_method(mWindow, "destroy?", Window_destroy_p, 0);
   rb_define_const(mWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
   rb_define_const(mWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 #define DEFINE_SDL_WINDOW_FLAGS_CONST(n) \
