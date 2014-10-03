@@ -65,11 +65,6 @@ static void Window_free(Window* w)
   free(w);
 }
 
-/* static VALUE Window_destroy_p(VALUE self) */
-/* { */
-/*   return INT2BOOL(Get_Window(self)->window == NULL); */
-/* } */
-
 
 DEFINE_DESTROYABLE(SDL_Renderer, Renderer, renderer, mRenderer, "SDL2::Renderer");
 static void Renderer_free(Renderer* r)
