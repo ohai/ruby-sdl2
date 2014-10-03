@@ -1,10 +1,10 @@
 #include "rubysdl2_internal.h"
 #include <SDL_video.h>
-
+#include <SDL_render.h>
 #include <ruby/encoding.h>
 
 static VALUE mWindow;
-// static VALUE mRenderer;
+static VALUE mRenderer;
 // static VALUE mTexture;
 
 #define DEFINE_WRAP_STRUCT(SDL_typename, struct_name, field)    \
@@ -65,10 +65,23 @@ static void Window_free(Window* w)
   free(w);
 }
 
+/* static VALUE Window_destroy_p(VALUE self) */
+/* { */
+/*   return INT2BOOL(Get_Window(self)->window == NULL); */
+/* } */
+
+
+DEFINE_DESTROYABLE(SDL_Renderer, Renderer, renderer, mRenderer, "SDL2::Renderer");
+static void Renderer_free(Renderer* r)
+{
+  
+}
+
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
                              VALUE flags)
 {
   SDL_Window* window;
+  VALUE win;
   title = rb_str_export_to_enc(title, rb_utf8_encoding());
   window = SDL_CreateWindow(StringValueCStr(title),
                             NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h),
@@ -76,7 +89,9 @@ static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w,
   if (window == NULL)
     HANDLE_ERROR(-1);
 
-  return Window_new(window);
+  win = Window_new(window);
+  rb_iv_set(win, "renderer", rb_ary_new());
+  return win;
 }
                              
 void rubysdl2_init_video(void)
@@ -106,6 +121,9 @@ void rubysdl2_init_video(void)
   DEFINE_SDL_WINDOW_FLAGS_CONST(ALLOW_HIGHDPI);
 #endif
 #undef DEFINE_SDL_WINDOW_FLAGS_CONST
-  
+
+  mRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
+
+  rb_define_method(mRenderer, "destroy?", Renderer_destroy_p, 0);
 }
   
