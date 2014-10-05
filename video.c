@@ -280,6 +280,15 @@ static VALUE Renderer_debug_info(VALUE self)
   return info;
 }
 
+static VALUE Texture_debug_info(VALUE self)
+{
+  Texture* t = Get_Texture(self);
+  VALUE info = rb_hash_new();
+  rb_hash_aset(info, rb_str_new2("destroy?"), INT2BOOL(t->texture == NULL));
+  rb_hash_aset(info, rb_str_new2("refcount"), INT2NUM(t->refcount));
+  return info;
+}
+
 static VALUE Surface_s_load_bmp(VALUE self, VALUE fname)
 {
   SDL_Surface* surface = SDL_LoadBMP(StringValueCStr(fname));
@@ -393,7 +402,7 @@ void rubysdl2_init_video(void)
   cTexture = rb_define_class_under(mSDL2, "Texture", rb_cObject);
 
   rb_define_method(cTexture, "destroy?", Texture_destroy_p, 0);
-  
+  rb_define_method(cTexture, "debug_info", Texture_debug_info, 0);
   
   cSurface = rb_define_class_under(mSDL2, "Surface", rb_cObject);
   
