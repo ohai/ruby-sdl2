@@ -13,6 +13,7 @@ void rubysdl2_init_video(void);
 
 /** macros */
 #define HANDLE_ERROR(c) (rubysdl2_handle_error((c), __func__))
+#define SDL_ERROR() (HANDLE_ERROR(-1))
 #define INT2BOOL(x) ((x)?Qtrue:Qfalse)
 
 /** classes and modules */

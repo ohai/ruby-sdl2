@@ -234,6 +234,15 @@ static VALUE Window_debug_info(VALUE self)
   return info;
 }
 
+static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
+{
+  SDL_Texture* texture = SDL_CreateTextureFromSurface(Get_SDL_Renderer(self),
+                                                      Get_SDL_Surface(surface));
+  if (texture == NULL)
+    SDL_ERROR();
+  
+  return Texture_new(texture, Get_Renderer(self));
+}
 
 static VALUE Renderer_debug_info(VALUE self)
 {
@@ -251,6 +260,16 @@ static VALUE Renderer_debug_info(VALUE self)
   rb_hash_aset(info, rb_str_new2("refcount"), INT2NUM(r->refcount));
   
   return info;
+}
+
+static VALUE Surface_s_load_bmp(VALUE self, VALUE fname)
+{
+  SDL_Surface* surface = SDL_LoadBMP(StringValueCStr(fname));
+
+  if (surface == NULL)
+    HANDLE_ERROR(-1);
+
+  return Surface_new(surface);
 }
 
 void rubysdl2_init_video(void)
@@ -288,7 +307,7 @@ void rubysdl2_init_video(void)
 
   rb_define_method(cRenderer, "destroy?", Renderer_destroy_p, 0);
   rb_define_method(cRenderer, "debug_info", Renderer_debug_info, 0);
-
+  rb_define_method(cRenderer, "create_texture_from", Renderer_create_texture_from, 1);
 #define DEFINE_SDL_RENDERER_FLAGS_CONST(n) \
   rb_define_const(cRenderer, #n, UINT2NUM(SDL_RENDERER_##n))
   DEFINE_SDL_RENDERER_FLAGS_CONST(SOFTWARE);
@@ -307,6 +326,8 @@ void rubysdl2_init_video(void)
   
   cSurface = rb_define_class_under(mSDL2, "Surface", rb_cObject);
 
+  rb_define_singleton_method(cSurface, "load_bmp", Surface_s_load_bmp, 1);
   rb_define_method(cSurface, "destroy?", Surface_destroy_p, 0);
+  
 }
   
