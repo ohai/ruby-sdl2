@@ -115,6 +115,17 @@ static VALUE Renderer_new(SDL_Renderer* renderer)
 
 DEFINE_WRAPPER(SDL_Renderer, Renderer, renderer, cRenderer, "SDL2::Renderer")
 
+static void Window_attach_renderer(Window* w, Renderer* r)
+{
+  if (w->num_renderers == w->max_renderers) {
+    w->max_renderers *= 2;
+    REALLOC_N(w->renderers, Renderer*, w->max_renderers);
+  }
+  w->renderers[w->num_renderers++] = r;
+  ++r->refcount;
+}
+
+
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
                              VALUE flags)
 {
@@ -131,16 +142,6 @@ static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w,
   return win;
 }
 
-static void Window_attach_renderer(Window* w, Renderer* r)
-{
-  if (w->num_renderers == w->max_renderers) {
-    w->max_renderers *= 2;
-    REALLOC_N(w->renderers, Renderer*, w->max_renderers);
-  }
-  w->renderers[w->num_renderers++] = r;
-  ++r->refcount;
-}
-
 static VALUE Window_create_renderer(VALUE self, VALUE index, VALUE flags)
 {
   SDL_Renderer* sdl_renderer;
@@ -155,6 +156,41 @@ static VALUE Window_create_renderer(VALUE self, VALUE index, VALUE flags)
   return renderer;
 }
 
+static VALUE Window_debug_info(VALUE self)
+{
+  Window* w = Get_Window(self);
+  VALUE info = rb_hash_new();
+  int num_active_renderers = 0;
+  int i;
+  rb_hash_aset(info, rb_str_new2("destroy?"), INT2BOOL(w->window == NULL));
+  rb_hash_aset(info, rb_str_new2("max_renderers"), INT2NUM(w->max_renderers));
+  rb_hash_aset(info, rb_str_new2("num_renderers"), INT2NUM(w->num_renderers));
+  for (i=0; i<w->num_renderers; ++i)
+    if (w->renderers[i]->renderer)
+      ++num_active_renderers;
+  rb_hash_aset(info, rb_str_new2("num_active_renderers"), INT2NUM(num_active_renderers));
+  
+  return info;
+}
+
+
+static VALUE Renderer_debug_info(VALUE self)
+{
+  Renderer* r = Get_Renderer(self);
+  VALUE info = rb_hash_new();
+  int num_active_textures = 0;
+  int i;
+  rb_hash_aset(info, rb_str_new2("destroy?"), INT2BOOL(r->renderer == NULL));
+  rb_hash_aset(info, rb_str_new2("max_textures"), INT2NUM(r->max_textures));
+  rb_hash_aset(info, rb_str_new2("num_textures"), INT2NUM(r->num_textures));
+  for (i=0; i<r->num_textures; ++i)
+    if (r->textures[i]->texture)
+      ++num_active_textures;
+  rb_hash_aset(info, rb_str_new2("num_active_textures"), INT2NUM(num_active_textures));
+
+  return info;
+}
+
 void rubysdl2_init_video(void)
 {
   cWindow = rb_define_class_under(mSDL2, "Window", rb_cObject);
@@ -162,6 +198,7 @@ void rubysdl2_init_video(void)
   rb_define_singleton_method(cWindow, "create", Window_s_create, 6);
   rb_define_method(cWindow, "destroy?", Window_destroy_p, 0);
   rb_define_method(cWindow, "create_renderer", Window_create_renderer, 2);
+  rb_define_method(cWindow, "debug_info", Window_debug_info, 0);
   rb_define_const(cWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
   rb_define_const(cWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 #define DEFINE_SDL_WINDOW_FLAGS_CONST(n) \
@@ -187,5 +224,8 @@ void rubysdl2_init_video(void)
   cRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
 
   rb_define_method(cRenderer, "destroy?", Renderer_destroy_p, 0);
+  rb_define_method(cRenderer, "debug_info", Renderer_debug_info, 0);
+
+  
 }
   
