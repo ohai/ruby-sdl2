@@ -69,10 +69,12 @@ static void Renderer_free(Renderer*);
 static void Window_free(Window* w)
 {
   int i;
-  if (w->window != NULL)
-    SDL_DestroyWindow(w->window);
   for (i=0; i<w->num_renderers; ++i) 
     Renderer_free(w->renderers[i]);
+  
+  if (w->window)
+    SDL_DestroyWindow(w->window);
+  
   free(w->renderers);
   free(w);
 }
@@ -89,9 +91,13 @@ static VALUE Window_new(SDL_Window* window)
 
 DEFINE_WRAPPER(SDL_Window, Window, window, cWindow, "SDL2::Window");
 
+static void Texture_free(Texture*);
 static void Renderer_free(Renderer* r)
 {
-  if (r->renderer != NULL) {
+  int i;
+  for (i=0; i<r->num_textures; ++i)
+    Texture_free(r->textures[i]);
+  if (r->renderer) {
     SDL_DestroyRenderer(r->renderer);
     r->renderer = NULL;
   }
