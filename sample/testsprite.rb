@@ -19,4 +19,6 @@ rect = SDL2::Rect.new(48, 128, 16, 16)
 p rect.x
 rect.x = 32
 p rect.x
+
+renderer.copy_texture(texture, nil, rect)
 sleep 1

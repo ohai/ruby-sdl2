@@ -189,6 +189,8 @@ static VALUE Surface_new(SDL_Surface* surface)
 
 DEFINE_WRAPPER(SDL_Surface, Surface, surface, cSurface, "SDL2::Surface");
 
+DEFINE_GETTER(SDL_Rect, cRect, "SDL2::Rect");
+
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
                              VALUE flags)
 {
@@ -243,6 +245,15 @@ static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
     SDL_ERROR();
   
   return Texture_new(texture, Get_Renderer(self));
+}
+
+static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstrect)
+{
+  HANDLE_ERROR(SDL_RenderCopy(Get_SDL_Renderer(self),
+                              Get_SDL_Texture(texture),
+                              srcrect == Qnil ? NULL : Get_SDL_Rect(srcrect),
+                              dstrect == Qnil ? NULL : Get_SDL_Rect(dstrect)));
+  return Qnil;
 }
 
 static VALUE Renderer_debug_info(VALUE self)
@@ -360,6 +371,7 @@ void rubysdl2_init_video(void)
   rb_define_method(cRenderer, "destroy?", Renderer_destroy_p, 0);
   rb_define_method(cRenderer, "debug_info", Renderer_debug_info, 0);
   rb_define_method(cRenderer, "create_texture_from", Renderer_create_texture_from, 1);
+  rb_define_method(cRenderer, "copy", Renderer_copy, 3);
 #define DEFINE_SDL_RENDERER_FLAGS_CONST(n) \
   rb_define_const(cRenderer, #n, UINT2NUM(SDL_RENDERER_##n))
   DEFINE_SDL_RENDERER_FLAGS_CONST(SOFTWARE);
