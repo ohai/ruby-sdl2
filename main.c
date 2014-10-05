@@ -24,7 +24,7 @@ typedef enum {
 
 sdl2_state state = NOT_INITIALIZED;
 
-static void sdl2_quit(VALUE unused)
+static void quit(VALUE unused)
 {
   if (state != INITIALIZDE)
     return;
@@ -65,6 +65,6 @@ void Init_sdl2_ext(void)
   
   rubysdl2_init_video();
 
-  rb_set_end_proc(sdl2_quit, 0);
+  rb_set_end_proc(quit, 0);
   return;
 }
