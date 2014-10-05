@@ -221,7 +221,8 @@ static VALUE Renderer_debug_info(VALUE self)
     if (r->textures[i]->texture)
       ++num_active_textures;
   rb_hash_aset(info, rb_str_new2("num_active_textures"), INT2NUM(num_active_textures));
-
+  rb_hash_aset(info, rb_str_new2("refcount"), INT2NUM(r->refcount));
+  
   return info;
 }
 
