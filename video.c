@@ -6,6 +6,7 @@
 static VALUE cWindow;
 static VALUE cRenderer;
 static VALUE cTexture;
+static VALUE cSurface;
 
 #define DEFINE_GETTER(ctype, var_class, classname)                      \
   ctype* Get_##ctype(VALUE obj)                                         \
@@ -64,6 +65,10 @@ typedef struct Texture {
   SDL_Texture* texture;
   int refcount;
 } Texture;
+
+typedef struct Surface {
+  SDL_Surface* surface;
+} Surface;
 
 static void Renderer_free(Renderer*);
 static void Window_free(Window* w)
@@ -167,6 +172,22 @@ static VALUE Texture_new(SDL_Texture* texture, Renderer* r)
 DEFINE_WRAPPER(SDL_Texture, Texture, texture, cTexture, "SDL2::Texture");
 
 
+static void Surface_free(Surface* s)
+{
+  if (s->surface)
+    SDL_FreeSurface(s->surface);
+  free(s);
+}
+
+static VALUE Surface_new(SDL_Surface* surface)
+{
+  Surface* s = ALLOC(Surface);
+  s->surface = surface;
+  return Data_Wrap_Struct(cSurface, 0, Surface_free, s);
+}
+
+DEFINE_WRAPPER(SDL_Surface, Surface, surface, cSurface, "SDL2::Surface");
+
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
                              VALUE flags)
 {
@@ -262,6 +283,7 @@ void rubysdl2_init_video(void)
 #endif
 #undef DEFINE_SDL_WINDOW_FLAGS_CONST
 
+  
   cRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
 
   rb_define_method(cRenderer, "destroy?", Renderer_destroy_p, 0);
@@ -277,8 +299,14 @@ void rubysdl2_init_video(void)
   DEFINE_SDL_RENDERER_FLAGS_CONST(TARGETTEXTURE);
 #undef DEFINE_SDL_RENDERER_FLAGS_CONST
   
+  
   cTexture = rb_define_class_under(mSDL2, "Texture", rb_cObject);
 
   rb_define_method(cTexture, "destroy?", Texture_destroy_p, 0);
+  
+  
+  cSurface = rb_define_class_under(mSDL2, "Surface", rb_cObject);
+
+  rb_define_method(cSurface, "destroy?", Surface_destroy_p, 0);
 }
   
