@@ -256,6 +256,12 @@ static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstre
   return Qnil;
 }
 
+static VALUE Renderer_present(VALUE self)
+{
+  SDL_RenderPresent(Get_SDL_Renderer(self));
+  return Qnil;
+}
+
 static VALUE Renderer_debug_info(VALUE self)
 {
   Renderer* r = Get_Renderer(self);
@@ -372,6 +378,7 @@ void rubysdl2_init_video(void)
   rb_define_method(cRenderer, "debug_info", Renderer_debug_info, 0);
   rb_define_method(cRenderer, "create_texture_from", Renderer_create_texture_from, 1);
   rb_define_method(cRenderer, "copy", Renderer_copy, 3);
+  rb_define_method(cRenderer, "present", Renderer_present, 0);
 #define DEFINE_SDL_RENDERER_FLAGS_CONST(n) \
   rb_define_const(cRenderer, #n, UINT2NUM(SDL_RENDERER_##n))
   DEFINE_SDL_RENDERER_FLAGS_CONST(SOFTWARE);
