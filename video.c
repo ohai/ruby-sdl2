@@ -226,6 +226,15 @@ void rubysdl2_init_video(void)
   rb_define_method(cRenderer, "destroy?", Renderer_destroy_p, 0);
   rb_define_method(cRenderer, "debug_info", Renderer_debug_info, 0);
 
+#define DEFINE_SDL_RENDERER_FLAGS_CONST(n) \
+  rb_define_const(cRenderer, #n, UINT2NUM(SDL_RENDERER_##n))
+  DEFINE_SDL_RENDERER_FLAGS_CONST(SOFTWARE);
+  DEFINE_SDL_RENDERER_FLAGS_CONST(ACCELERATED);
+#ifdef SDL_RENDERER_PRESENTVSYNC
+  DEFINE_SDL_RENDERER_FLAGS_CONST(PRESENTVSYNC);
+#endif
+  DEFINE_SDL_RENDERER_FLAGS_CONST(TARGETTEXTURE);
+#undef DEFINE_SDL_RENDERER_FLAGS_CONST
   
 }
   
