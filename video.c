@@ -7,6 +7,7 @@ static VALUE cWindow;
 static VALUE cRenderer;
 static VALUE cTexture;
 static VALUE cSurface;
+static VALUE cRect;
 
 #define DEFINE_GETTER(ctype, var_class, classname)                      \
   ctype* Get_##ctype(VALUE obj)                                         \
@@ -281,6 +282,48 @@ static VALUE Surface_destroy(VALUE self)
   return Qnil;
 }
 
+static VALUE Rect_s_allocate(VALUE klass)
+{
+  SDL_Rect* rect = ALLOC(SDL_Rect);
+  rect->x = rect->y = rect->w = rect->h = 0;
+  
+  return Data_Wrap_Struct(cRect, 0, free, rect);
+}
+
+static VALUE Rect_initialize(int argc, VALUE* argv, VALUE self)
+{
+  VALUE x, y, w, h;
+  rb_scan_args(argc, argv, "04", &x, &y, &w, &h);
+  if (argc == 0) {
+    /* do nothing*/
+  } else if (argc == 4) {
+    SDL_Rect* rect;
+    Data_Get_Struct(self, SDL_Rect, rect);
+    rect->x = NUM2INT(x); rect->y = NUM2INT(y);
+    rect->w = NUM2INT(w); rect->h = NUM2INT(h);
+  } else {
+    rb_raise(rb_eArgError, "wrong number of arguments (%d for 0 or 4)", argc);
+  }
+  return Qnil;
+}
+
+#define RECT_ACCESSOR(field)                            \
+  static VALUE Rect_##field(VALUE self)                 \
+  {                                                     \
+    SDL_Rect* r; Data_Get_Struct(self, SDL_Rect, r);    \
+    return INT2NUM(r->field);                           \
+  }                                                     \
+  static VALUE Rect_set_##field(VALUE self, VALUE val)  \
+  {                                                     \
+    SDL_Rect* r; Data_Get_Struct(self, SDL_Rect, r);    \
+    r->field = NUM2INT(val); return val;                \
+  }
+
+RECT_ACCESSOR(x);
+RECT_ACCESSOR(y);
+RECT_ACCESSOR(w);
+RECT_ACCESSOR(h);
+
 void rubysdl2_init_video(void)
 {
   cWindow = rb_define_class_under(mSDL2, "Window", rb_cObject);
@@ -334,9 +377,24 @@ void rubysdl2_init_video(void)
   
   
   cSurface = rb_define_class_under(mSDL2, "Surface", rb_cObject);
-
+  
   rb_define_singleton_method(cSurface, "load_bmp", Surface_s_load_bmp, 1);
   rb_define_method(cSurface, "destroy?", Surface_destroy_p, 0);
   rb_define_method(cSurface, "destroy", Surface_destroy, 0);
+
+
+  cRect = rb_define_class_under(mSDL2, "Rect", rb_cObject);
+
+  rb_define_alloc_func(cRect, Rect_s_allocate);
+  rb_define_private_method(cRect, "initialize", Rect_initialize, -1);
+#define DEFINE_RECT_ACCESSOR(field)                     \
+  rb_define_method(cRect, #field, Rect_##field, 0);     \
+  rb_define_method(cRect, #field "=", Rect_set_##field, 1);
+
+  DEFINE_RECT_ACCESSOR(x);
+  DEFINE_RECT_ACCESSOR(y);
+  DEFINE_RECT_ACCESSOR(w);
+  DEFINE_RECT_ACCESSOR(h);
+#undef DEFINE_RECT_ACCESSOR
 }
   

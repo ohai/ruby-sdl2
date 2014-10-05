@@ -15,4 +15,8 @@ texture = renderer.create_texture_from(icon)
 icon.destroy
 
 p icon.destroy?
+rect = SDL2::Rect.new(48, 128, 16, 16)
+p rect.x
+rect.x = 32
+p rect.x
 sleep 1
