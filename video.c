@@ -5,7 +5,7 @@
 
 static VALUE cWindow;
 static VALUE cRenderer;
-/* static VALUE mTexture; */
+static VALUE cTexture;
 
 #define DEFINE_GETTER(ctype, var_class, classname)                      \
   ctype* Get_##ctype(VALUE obj)                                         \
@@ -102,19 +102,6 @@ static void Renderer_free(Renderer* r)
   }
 }
 
-static VALUE Renderer_new(SDL_Renderer* renderer)
-{
-  Renderer* r = ALLOC(Renderer);
-  r->renderer = renderer;
-  r->num_textures = 0;
-  r->max_textures = 16;
-  r->textures = ALLOC_N(Texture*, 16);
-  r->refcount = 1;
-  return Data_Wrap_Struct(cRenderer, 0, Renderer_free, r);
-}
-
-DEFINE_WRAPPER(SDL_Renderer, Renderer, renderer, cRenderer, "SDL2::Renderer")
-
 static void Window_attach_renderer(Window* w, Renderer* r)
 {
   if (w->num_renderers == w->max_renderers) {
@@ -124,6 +111,54 @@ static void Window_attach_renderer(Window* w, Renderer* r)
   w->renderers[w->num_renderers++] = r;
   ++r->refcount;
 }
+
+static VALUE Renderer_new(SDL_Renderer* renderer, Window* w)
+{
+  Renderer* r = ALLOC(Renderer);
+  r->renderer = renderer;
+  r->num_textures = 0;
+  r->max_textures = 16;
+  r->textures = ALLOC_N(Texture*, 16);
+  r->refcount = 1;
+  Window_attach_renderer(w, r);
+  return Data_Wrap_Struct(cRenderer, 0, Renderer_free, r);
+}
+
+DEFINE_WRAPPER(SDL_Renderer, Renderer, renderer, cRenderer, "SDL2::Renderer")
+
+
+static void Texture_free(Texture* t)
+{
+  if (t->texture != NULL) {
+    SDL_DestroyTexture(t->texture);
+    t->texture = NULL;
+  }
+  t->refcount--;
+  if (t->refcount == 0) {
+    free(t);
+  }
+}
+
+static void Renderer_attach_texture(Renderer* r, Texture* t)
+{
+  if (r->max_textures == r->num_textures) {
+    r->max_textures *= 2;
+    REALLOC_N(r->textures, Texture*, r->max_textures);
+  }
+  r->textures[r->num_textures++] = t;
+  ++t->refcount;
+}
+
+static VALUE Texture_new(SDL_Texture* texture, Renderer* r)
+{
+  Texture* t = ALLOC(Texture);
+  t->texture = texture;
+  t->refcount = 1;
+  Renderer_attach_texture(r, t);
+  return Data_Wrap_Struct(cTexture, 0, Texture_free, t);
+}
+
+DEFINE_WRAPPER(SDL_Texture, Texture, texture, cTexture, "SDL2::Texture");
 
 
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
@@ -151,8 +186,7 @@ static VALUE Window_create_renderer(VALUE self, VALUE index, VALUE flags)
   if (sdl_renderer == NULL)
     HANDLE_ERROR(-1);
   
-  renderer = Renderer_new(sdl_renderer);
-  Window_attach_renderer(Get_Window(self), Get_Renderer(renderer));
+  renderer = Renderer_new(sdl_renderer, Get_Window(self));
   return renderer;
 }
 
@@ -236,5 +270,8 @@ void rubysdl2_init_video(void)
   DEFINE_SDL_RENDERER_FLAGS_CONST(TARGETTEXTURE);
 #undef DEFINE_SDL_RENDERER_FLAGS_CONST
   
+  cTexture = rb_define_class_under(mSDL2, "Texture", rb_cObject);
+
+  rb_define_method(cTexture, "destroy?", Texture_destroy_p, 0);
 }
   
