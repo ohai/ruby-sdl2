@@ -272,6 +272,15 @@ static VALUE Surface_s_load_bmp(VALUE self, VALUE fname)
   return Surface_new(surface);
 }
 
+static VALUE Surface_destroy(VALUE self)
+{
+  Surface* s = Get_Surface(self);
+  if (s->surface)
+    SDL_FreeSurface(s->surface);
+  s->surface = NULL;
+  return Qnil;
+}
+
 void rubysdl2_init_video(void)
 {
   cWindow = rb_define_class_under(mSDL2, "Window", rb_cObject);
@@ -328,6 +337,6 @@ void rubysdl2_init_video(void)
 
   rb_define_singleton_method(cSurface, "load_bmp", Surface_s_load_bmp, 1);
   rb_define_method(cSurface, "destroy?", Surface_destroy_p, 0);
-  
+  rb_define_method(cSurface, "destroy", Surface_destroy, 0);
 }
   

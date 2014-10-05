@@ -12,5 +12,7 @@ icon = SDL2::Surface.load_bmp("icon.bmp")
 p icon.destroy?
 
 texture = renderer.create_texture_from(icon)
+icon.destroy
 
+p icon.destroy?
 sleep 1
