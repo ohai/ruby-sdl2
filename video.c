@@ -3,14 +3,9 @@
 #include <SDL_render.h>
 #include <ruby/encoding.h>
 
-static VALUE mWindow;
-static VALUE mRenderer;
-// static VALUE mTexture;
-
-#define DEFINE_WRAP_STRUCT(SDL_typename, struct_name, field)    \
-  typedef struct {                                              \
-    SDL_typename* field;                                        \
-  } struct_name;                                  
+static VALUE cWindow;
+static VALUE cRenderer;
+/* static VALUE mTexture; */
 
 #define DEFINE_GETTER(ctype, var_class, classname)                      \
   ctype* Get_##ctype(VALUE obj)                                         \
@@ -34,43 +29,91 @@ static VALUE mRenderer;
       return s->field;                                                  \
   }
 
-#define DEFINE_NEW(SDL_typename, struct_name, field, var_class)         \
-  static void struct_name##_free(struct_name* s);                       \
-  static VALUE struct_name##_new(SDL_typename* data)                    \
-  {                                                                     \
-    struct_name* s = ALLOC(struct_name);                                \
-    s->field = data;                                                    \
-    return Data_Wrap_Struct(var_class, 0, struct_name##_free, s);       \
-  }
-
 #define DEFINE_DESTROY_P(struct_name, field)                    \
   static VALUE struct_name##_destroy_p(VALUE self)              \
   {                                                             \
     return INT2BOOL(Get_##struct_name(self)->field == NULL);    \
   }
 
-#define DEFINE_DESTROYABLE(SDL_typename, struct_name, field, var_class, classname) \
-  DEFINE_WRAP_STRUCT(SDL_typename, struct_name, field);                 \
+#define DEFINE_WRAPPER(SDL_typename, struct_name, field, var_class, classname) \
   DEFINE_GETTER(struct_name, var_class, classname);                     \
   DEFINE_WRAP_GETTER(SDL_typename, struct_name, field, classname);      \
-  DEFINE_NEW(SDL_typename, struct_name, field, var_class);              \
   DEFINE_DESTROY_P(struct_name, field);
 
 
-DEFINE_DESTROYABLE(SDL_Window, Window, window, mWindow, "SDL2::Window");
+struct Window;
+struct Renderer;
+struct Texture;
+
+typedef struct Window {
+  SDL_Window* window;
+  int num_renderers;
+  int max_renderers;
+  struct Renderer** renderers;
+} Window;
+
+typedef struct Renderer {
+  SDL_Renderer* renderer;
+  int num_textures;
+  int max_textures;
+  struct Texture** textures;
+  int refcount;
+} Renderer;
+
+typedef struct Texture {
+  SDL_Texture* texture;
+  int refcount;
+} Texture;
+
+static void Renderer_free(Renderer*);
 static void Window_free(Window* w)
-{                                 
+{
+  int i;
   if (w->window != NULL)
     SDL_DestroyWindow(w->window);
+  for (i=0; i<w->num_renderers; ++i) 
+    Renderer_free(w->renderers[i]);
+  free(w->renderers);
   free(w);
 }
 
+static VALUE Window_new(SDL_Window* window)
+{
+  Window* w = ALLOC(Window);
+  w->window = window;
+  w->num_renderers = 0;
+  w->max_renderers = 4;
+  w->renderers = ALLOC_N(struct Renderer*, 4);
+  return Data_Wrap_Struct(cWindow, 0, Window_free, w);
+}
 
-DEFINE_DESTROYABLE(SDL_Renderer, Renderer, renderer, mRenderer, "SDL2::Renderer");
+DEFINE_WRAPPER(SDL_Window, Window, window, cWindow, "SDL2::Window");
+
 static void Renderer_free(Renderer* r)
 {
-  
+  if (r->renderer != NULL) {
+    SDL_DestroyRenderer(r->renderer);
+    r->renderer = NULL;
+  }
+  r->refcount--;
+  if (r->refcount == 0) {
+    free(r->textures);
+    free(r);
+  }
 }
+
+static VALUE Renderer_new(SDL_Renderer* renderer)
+{
+  Renderer* r = ALLOC(Renderer);
+  r->renderer = renderer;
+  r->num_textures = 0;
+  r->max_textures = 16;
+  r->textures = ALLOC_N(Texture*, 16);
+  r->refcount = 1;
+  return Data_Wrap_Struct(cRenderer, 0, Renderer_free, r);
+}
+
+DEFINE_WRAPPER(SDL_Renderer, Renderer, renderer, cRenderer, "SDL2::Renderer")
 
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
                              VALUE flags)
@@ -85,20 +128,44 @@ static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w,
     HANDLE_ERROR(-1);
 
   win = Window_new(window);
-  rb_iv_set(win, "renderer", rb_ary_new());
   return win;
 }
-                             
+
+static void Window_attach_renderer(Window* w, Renderer* r)
+{
+  if (w->num_renderers == w->max_renderers) {
+    w->max_renderers *= 2;
+    REALLOC_N(w->renderers, Renderer*, w->max_renderers);
+  }
+  w->renderers[w->num_renderers++] = r;
+  ++r->refcount;
+}
+
+static VALUE Window_create_renderer(VALUE self, VALUE index, VALUE flags)
+{
+  SDL_Renderer* sdl_renderer;
+  VALUE renderer;
+  sdl_renderer = SDL_CreateRenderer(Get_SDL_Window(self), NUM2INT(index), NUM2UINT(flags));
+  
+  if (sdl_renderer == NULL)
+    HANDLE_ERROR(-1);
+  
+  renderer = Renderer_new(sdl_renderer);
+  Window_attach_renderer(Get_Window(self), Get_Renderer(renderer));
+  return renderer;
+}
+
 void rubysdl2_init_video(void)
 {
-  mWindow = rb_define_class_under(mSDL2, "Window", rb_cObject);
+  cWindow = rb_define_class_under(mSDL2, "Window", rb_cObject);
 
-  rb_define_singleton_method(mWindow, "create", Window_s_create, 6);
-  rb_define_method(mWindow, "destroy?", Window_destroy_p, 0);
-  rb_define_const(mWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
-  rb_define_const(mWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
+  rb_define_singleton_method(cWindow, "create", Window_s_create, 6);
+  rb_define_method(cWindow, "destroy?", Window_destroy_p, 0);
+  rb_define_method(cWindow, "create_renderer", Window_create_renderer, 2);
+  rb_define_const(cWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
+  rb_define_const(cWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 #define DEFINE_SDL_WINDOW_FLAGS_CONST(n) \
-  rb_define_const(mWindow, #n, UINT2NUM(SDL_WINDOW_##n));
+  rb_define_const(cWindow, #n, UINT2NUM(SDL_WINDOW_##n));
   DEFINE_SDL_WINDOW_FLAGS_CONST(FULLSCREEN);
   DEFINE_SDL_WINDOW_FLAGS_CONST(FULLSCREEN_DESKTOP);
   DEFINE_SDL_WINDOW_FLAGS_CONST(OPENGL);
@@ -117,8 +184,8 @@ void rubysdl2_init_video(void)
 #endif
 #undef DEFINE_SDL_WINDOW_FLAGS_CONST
 
-  mRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
+  cRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
 
-  rb_define_method(mRenderer, "destroy?", Renderer_destroy_p, 0);
+  rb_define_method(cRenderer, "destroy?", Renderer_destroy_p, 0);
 }
   
