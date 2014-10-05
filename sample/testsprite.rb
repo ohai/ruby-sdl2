@@ -22,4 +22,19 @@ p rect.x
 
 renderer.copy(texture, nil, rect)
 renderer.present
-sleep 1
+
+loop do
+  while ev = SDL2::Event.poll
+    case ev
+    when SDL2::Event::KeyDown
+      if ev.scancode == 41
+        exit
+      else
+        p ev.scancode
+      end
+    end
+  end
+
+  sleep 0.1
+end
+

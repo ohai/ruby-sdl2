@@ -6,7 +6,7 @@ int rubysdl2_handle_error(int code, const char* cfunc);
 int rubysdl2_is_active(void);
 
 void rubysdl2_init_video(void);
-
+void rubysdl2_init_event(void);
 
 #ifndef SDL2_EXTERN
 #define SDL2_EXTERN extern

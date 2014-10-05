@@ -68,7 +68,8 @@ void Init_sdl2_ext(void)
   rb_define_attr(eSDL2Error, "error_code", 1, 0);
   
   rubysdl2_init_video();
-
+  rubysdl2_init_event();
+  
   rb_set_end_proc(quit, 0);
   return;
 }
