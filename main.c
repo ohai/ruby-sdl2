@@ -19,14 +19,14 @@ int rubysdl2_handle_error(int code, const char* cfunc)
 }
 
 typedef enum {
-  NOT_INITIALIZED, INITIALIZDE, FINALIZED
+  NOT_INITIALIZED, INITIALIZDED, FINALIZED
 } sdl2_state;
 
 sdl2_state state = NOT_INITIALIZED;
 
 static void quit(VALUE unused)
 {
-  if (state != INITIALIZDE)
+  if (state != INITIALIZDED)
     return;
   
   SDL_Quit();
@@ -37,10 +37,14 @@ static VALUE SDL2_s_init(VALUE self, VALUE flags)
 {
   SDL_SetMainReady();
   HANDLE_ERROR(SDL_Init(NUM2UINT(flags)));
-  state = INITIALIZDE;
+  state = INITIALIZDED;
   return Qnil;
 }
 
+int rubysdl2_is_active(void)
+{
+  return state == INITIALIZDED;
+}
 
 void Init_sdl2_ext(void)
 {

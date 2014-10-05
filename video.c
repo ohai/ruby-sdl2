@@ -78,7 +78,7 @@ static void Window_free(Window* w)
   for (i=0; i<w->num_renderers; ++i) 
     Renderer_free(w->renderers[i]);
   
-  if (w->window)
+  if (w->window && rubysdl2_is_active())
     SDL_DestroyWindow(w->window);
   
   free(w->renderers);
@@ -103,10 +103,10 @@ static void Renderer_free(Renderer* r)
   int i;
   for (i=0; i<r->num_textures; ++i)
     Texture_free(r->textures[i]);
-  if (r->renderer) {
+  if (r->renderer && rubysdl2_is_active()) {
     SDL_DestroyRenderer(r->renderer);
-    r->renderer = NULL;
   }
+  r->renderer = NULL;
   r->refcount--;
   if (r->refcount == 0) {
     free(r->textures);
@@ -141,10 +141,10 @@ DEFINE_WRAPPER(SDL_Renderer, Renderer, renderer, cRenderer, "SDL2::Renderer")
 
 static void Texture_free(Texture* t)
 {
-  if (t->texture != NULL) {
+  if (t->texture && rubysdl2_is_active()) {
     SDL_DestroyTexture(t->texture);
-    t->texture = NULL;
   }
+  t->texture = NULL;
   t->refcount--;
   if (t->refcount == 0) {
     free(t);
@@ -175,7 +175,7 @@ DEFINE_WRAPPER(SDL_Texture, Texture, texture, cTexture, "SDL2::Texture");
 
 static void Surface_free(Surface* s)
 {
-  if (s->surface)
+  if (s->surface && rubysdl2_is_active())
     SDL_FreeSurface(s->surface);
   free(s);
 }

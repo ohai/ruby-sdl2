@@ -3,6 +3,7 @@
 #define SDL_MAIN_HANDLED
 
 int rubysdl2_handle_error(int code, const char* cfunc);
+int rubysdl2_is_active(void);
 
 void rubysdl2_init_video(void);
 
