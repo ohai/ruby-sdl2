@@ -7,6 +7,7 @@ int rubysdl2_is_active(void);
 
 void rubysdl2_init_video(void);
 void rubysdl2_init_event(void);
+void rubysdl2_init_key(void);
 
 #ifndef SDL2_EXTERN
 #define SDL2_EXTERN extern
