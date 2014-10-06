@@ -10,7 +10,7 @@ static VALUE cSurface;
 static VALUE cRect;
 
 #define DEFINE_GETTER(ctype, var_class, classname)                      \
-  ctype* Get_##ctype(VALUE obj)                                         \
+  static ctype* Get_##ctype(VALUE obj)                                         \
   {                                                                     \
     ctype* s;                                                           \
     if (!rb_obj_is_kind_of(obj, var_class))                             \
@@ -22,7 +22,7 @@ static VALUE cRect;
   }
 
 #define DEFINE_WRAP_GETTER(SDL_typename, struct_name, field, classname) \
-  SDL_typename* Get_##SDL_typename(VALUE obj)                           \
+  static SDL_typename* Get_##SDL_typename(VALUE obj)                           \
   {                                                                     \
     struct_name* s = Get_##struct_name(obj);                            \
       if (s->field == NULL)                                             \
