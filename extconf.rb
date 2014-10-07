@@ -16,6 +16,7 @@ end
 
 def config(pkg_config, header, libnames)
   if system("pkg-config", pkg_config, "--exists")
+    puts("Use pkg-config #{pkg_config}")
     add_cflags(run_config_program("pkg-config", pkg_config, "--cflags"))
     add_libs(run_config_program("pkg-config", pkg_config, "--libs"))
   else
@@ -30,4 +31,6 @@ add_cflags(run_config_program(sdl2_config, "--cflags"))
 add_libs(run_config_program(sdl2_config, "--libs"))
 
 config("SDL2_image", "SDL_image.h", ["SDL2_image", "SDL_image"])
+config("SDL2_mixer", "SDL_mixer.h", ["SDL2_mixer", "SDL_mixer"])
+
 create_makefile('sdl2_ext')

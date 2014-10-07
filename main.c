@@ -2,6 +2,12 @@
 #include "rubysdl2_internal.h"
 #include <SDL.h>
 #include <stdio.h>
+#ifdef HAVE_SDL_IMAGE_H
+#include <SDL_image.h>
+#endif
+#ifdef HAVE_SDL_MIXER_H
+#include <SDL_mixer.h>
+#endif
 
 int rubysdl2_handle_error(int code, const char* cfunc)
 {
@@ -28,7 +34,13 @@ static void quit(VALUE unused)
 {
     if (state != INITIALIZDED)
         return;
-  
+    
+#ifdef HAVE_SDL_IMAGE_H
+    IMG_Quit();
+#endif
+#ifdef HAVE_SDL_MIXER_H
+    Mix_Quit();
+#endif
     SDL_Quit();
     state = FINALIZED;
 }
@@ -72,6 +84,7 @@ void Init_sdl2_ext(void)
     rubysdl2_init_key();
     rubysdl2_init_timer();
     rubysdl2_init_image();
+    rubysdl2_init_mixer();
     
     rb_set_end_proc(quit, 0);
     return;
