@@ -7,6 +7,7 @@ static VALUE cWindow;
 static VALUE cRenderer;
 static VALUE cTexture;
 static VALUE cRect;
+static VALUE cPoint;
 static VALUE cSurface;
 static VALUE cRendererInfo;
 
@@ -157,6 +158,8 @@ static VALUE Surface_new(SDL_Surface* surface)
 DEFINE_WRAPPER(SDL_Surface, Surface, surface, cSurface, "SDL2::Surface");
 
 DEFINE_GETTER(SDL_Rect, cRect, "SDL2::Rect");
+
+DEFINE_GETTER(SDL_Point, cPoint, "SDL2::Point");
 
 static VALUE RendererInfo_new(SDL_RendererInfo* info)
 {
@@ -378,22 +381,41 @@ static VALUE Rect_initialize(int argc, VALUE* argv, VALUE self)
     return Qnil;
 }
 
-#define RECT_ACCESSOR(field)                                    \
-    static VALUE Rect_##field(VALUE self)                       \
+#define FIELD_ACCESSOR(classname, typename, field)              \
+    static VALUE classname##_##field(VALUE self)                \
     {                                                           \
-        SDL_Rect* r; Data_Get_Struct(self, SDL_Rect, r);        \
+        typename* r; Data_Get_Struct(self, typename, r);        \
         return INT2NUM(r->field);                               \
     }                                                           \
-    static VALUE Rect_set_##field(VALUE self, VALUE val)        \
+    static VALUE classname##_set_##field(VALUE self, VALUE val) \
     {                                                           \
-        SDL_Rect* r; Data_Get_Struct(self, SDL_Rect, r);        \
+        typename* r; Data_Get_Struct(self, typename, r);        \
         r->field = NUM2INT(val); return val;                    \
     }
 
-RECT_ACCESSOR(x);
-RECT_ACCESSOR(y);
-RECT_ACCESSOR(w);
-RECT_ACCESSOR(h);
+FIELD_ACCESSOR(Rect, SDL_Rect, x);
+FIELD_ACCESSOR(Rect, SDL_Rect, y);
+FIELD_ACCESSOR(Rect, SDL_Rect, w);
+FIELD_ACCESSOR(Rect, SDL_Rect, h);
+
+static VALUE Point_s_allocate(VALUE klass)
+{
+    SDL_Point* point;
+    return Data_Make_Struct(klass, SDL_Point, 0, free, point);
+}
+
+static VALUE Point_initialize(int argc, VALUE* argv, VALUE self)
+{
+    VALUE x, y;
+    SDL_Point* point = Get_SDL_Point(self);
+    rb_scan_args(argc, argv, "02", &x, &y);
+    point->x = (x == Qnil) ? 0 : NUM2INT(x);
+    point->y = (y == Qnil) ? 0 : NUM2INT(y);
+    return Qnil;
+}
+
+FIELD_ACCESSOR(Point, SDL_Point, x);
+FIELD_ACCESSOR(Point, SDL_Point, y);
 
 void rubysdl2_init_video(void)
 {
@@ -454,7 +476,12 @@ void rubysdl2_init_video(void)
     DEFINE_SDL_RENDERER_FLAGS_CONST(TARGETTEXTURE);
 #undef DEFINE_SDL_RENDERER_FLAGS_CONST
   
-  
+#define DEFINE_SDL_FLIP_CONST(t)                                        \
+    rb_define_const(cRenderer, "FLIP_" #t, SDL_FLIP_##t)
+    DEFINE_SDL_FLIP_CONST(NONE);
+    DEFINE_SDL_FLIP_CONST(HORIZONTAL);
+    DEFINE_SDL_FLIP_CONST(VERTICAL);
+    
     cTexture = rb_define_class_under(mSDL2, "Texture", rb_cObject);
     
     rb_undef_alloc_func(cTexture);
@@ -469,20 +496,26 @@ void rubysdl2_init_video(void)
     rb_define_method(cSurface, "destroy", Surface_destroy, 0);
 
 
+#define DEFINE_FIELD_ACCESSOR(classname, classvar, field)               \
+    rb_define_method(classvar, #field, classname##_##field, 0);         \
+    rb_define_method(classvar, #field "=", classname##_set_##field, 1);
+
     cRect = rb_define_class_under(mSDL2, "Rect", rb_cObject);
 
     rb_define_alloc_func(cRect, Rect_s_allocate);
     rb_define_private_method(cRect, "initialize", Rect_initialize, -1);
-#define DEFINE_RECT_ACCESSOR(field)                             \
-    rb_define_method(cRect, #field, Rect_##field, 0);           \
-    rb_define_method(cRect, #field "=", Rect_set_##field, 1);
+    DEFINE_FIELD_ACCESSOR(Rect, cRect, x);
+    DEFINE_FIELD_ACCESSOR(Rect, cRect, y);
+    DEFINE_FIELD_ACCESSOR(Rect, cRect, w);
+    DEFINE_FIELD_ACCESSOR(Rect, cRect, h);
 
-    DEFINE_RECT_ACCESSOR(x);
-    DEFINE_RECT_ACCESSOR(y);
-    DEFINE_RECT_ACCESSOR(w);
-    DEFINE_RECT_ACCESSOR(h);
-#undef DEFINE_RECT_ACCESSOR
+    cPoint = rb_define_class_under(mSDL2, "Point", rb_cObject);
 
+    rb_define_alloc_func(cPoint, Point_s_allocate);
+    rb_define_private_method(cPoint, "initialze", Point_initialize, -1);
+    DEFINE_FIELD_ACCESSOR(Point, cPoint, x);
+    DEFINE_FIELD_ACCESSOR(Point, cPoint, y);
+    
     cRendererInfo = rb_define_class_under(cRenderer, "Info", rb_cObject);
     define_attr_readers(cRendererInfo, "name", "flags", "texture_formats",
                         "max_texture_width", "max_texture_height", NULL);
