@@ -378,6 +378,41 @@ static VALUE Texture_set_blend_mode(VALUE self, VALUE mode)
     return mode;
 }
 
+static VALUE Texture_alpha_mod(VALUE self)
+{
+    Uint8 alpha;
+    HANDLE_ERROR(SDL_GetTextureAlphaMod(Get_SDL_Texture(self), &alpha));
+    return INT2FIX(alpha);
+}
+
+static VALUE Texture_set_alpha_mod(VALUE self, VALUE alpha)
+{
+    HANDLE_ERROR(SDL_SetTextureAlphaMod(Get_SDL_Texture(self), NUM2UINT8(alpha)));
+    return alpha;
+}
+
+static VALUE Texture_color_mod(VALUE self)
+{
+    Uint8 r, g, b;
+    HANDLE_ERROR(SDL_GetTextureColorMod(Get_SDL_Texture(self), &r, &g, &b));
+    return rb_ary_new3(3, INT2FIX(r), INT2FIX(g), INT2FIX(b));
+}
+
+static VALUE Texture_set_color_mod(VALUE self, VALUE rgb)
+{
+    VALUE r, g, b;
+    Check_Type(rgb, T_ARRAY);
+    if (RARRAY_LEN(rgb) != 3)
+        rb_raise(rb_eArgError, "wrong number of Array elements (%ld for 3)",
+                 RARRAY_LEN(rgb));
+    r = rb_ary_entry(rgb, 0);
+    g = rb_ary_entry(rgb, 1);
+    b = rb_ary_entry(rgb, 2);
+    HANDLE_ERROR(SDL_SetTextureColorMod(Get_SDL_Texture(self),
+                                        NUM2UINT8(r), NUM2UINT8(g), NUM2UINT8(b)));
+    return Qnil;
+}
+
 static VALUE Texture_debug_info(VALUE self)
 {
     Texture* t = Get_Texture(self);
@@ -572,6 +607,10 @@ void rubysdl2_init_video(void)
     rb_define_method(cTexture, "destroy?", Texture_destroy_p, 0);
     rb_define_method(cTexture, "blend_mode", Texture_blend_mode, 0);
     rb_define_method(cTexture, "blend_mode=", Texture_set_blend_mode, 1);
+    rb_define_method(cTexture, "color_mod", Texture_color_mod, 0);
+    rb_define_method(cTexture, "color_mod=", Texture_set_color_mod, 1);
+    rb_define_method(cTexture, "alpha_mod", Texture_alpha_mod, 0);
+    rb_define_method(cTexture, "alpha_mod=", Texture_set_alpha_mod, 1);
     rb_define_method(cTexture, "debug_info", Texture_debug_info, 0);
     
     
