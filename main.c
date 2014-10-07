@@ -73,6 +73,31 @@ int rubysdl2_is_active(void)
     return state == INITIALIZDED;
 }
 
+static VALUE libsdl_version(void)
+{
+    SDL_version version;
+    SDL_GetVersion(&version);
+    return rb_sprintf("%d.%d.%d", version.major, version.minor, version.patch);
+}
+
+static VALUE libsdl_version_number(void)
+{
+    SDL_version version;
+    SDL_GetVersion(&version);
+    return rb_ary_new3(3, INT2FIX(version.major), INT2FIX(version.minor),
+                       INT2FIX(version.patch));
+}
+
+static VALUE libsdl_revision(void)
+{
+    return rb_usascii_str_new_cstr(SDL_GetRevision());
+}
+
+static VALUE libsdl_revision_number(void)
+{
+    return INT2NUM(SDL_GetRevisionNumber());
+}
+
 void Init_sdl2_ext(void)
 {
     mSDL2 = rb_define_module("SDL2");
@@ -90,7 +115,12 @@ void Init_sdl2_ext(void)
     DEFINE_SDL_INIT_CONST(EVENTS);
     DEFINE_SDL_INIT_CONST(EVERYTHING);
     DEFINE_SDL_INIT_CONST(NOPARACHUTE);
-  
+
+    rb_define_const(mSDL2, "LIBSDL_VERSION", libsdl_version());
+    rb_define_const(mSDL2, "LIBSDL_VERSION_NUMBER", libsdl_version_number());
+    rb_define_const(mSDL2, "LIBSDL_REVISION", libsdl_revision());
+    rb_define_const(mSDL2, "LIBSDL_REVISION_NUMBER", libsdl_revision_number());
+    
     eSDL2Error = rb_define_class_under(mSDL2, "Error", rb_eStandardError);
     rb_define_attr(eSDL2Error, "error_code", 1, 0);
   
