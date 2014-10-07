@@ -256,12 +256,35 @@ static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
     return Texture_new(texture, Get_Renderer(self));
 }
 
+static SDL_Rect* Get_SDL_Rect_or_NULL(VALUE rect)
+{
+    return rect == Qnil ? NULL : Get_SDL_Rect(rect);
+}
+
+static SDL_Point* Get_SDL_Point_or_NULL(VALUE point)
+{
+    return point == Qnil ? NULL : Get_SDL_Point(point);
+}
+
 static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstrect)
 {
     HANDLE_ERROR(SDL_RenderCopy(Get_SDL_Renderer(self),
                                 Get_SDL_Texture(texture),
-                                srcrect == Qnil ? NULL : Get_SDL_Rect(srcrect),
-                                dstrect == Qnil ? NULL : Get_SDL_Rect(dstrect)));
+                                Get_SDL_Rect_or_NULL(srcrect),
+                                Get_SDL_Rect_or_NULL(dstrect)));
+    return Qnil;
+}
+
+static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE dstrect,
+                              VALUE angle, VALUE center, VALUE flip)
+{
+    HANDLE_ERROR(SDL_RenderCopyEx(Get_SDL_Renderer(self),
+                                  Get_SDL_Texture(texture),
+                                  Get_SDL_Rect_or_NULL(srcrect),
+                                  Get_SDL_Rect_or_NULL(dstrect),
+                                  NUM2DBL(angle),
+                                  Get_SDL_Point_or_NULL(center),
+                                  NUM2INT(flip)));
     return Qnil;
 }
 
@@ -472,6 +495,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cRenderer, "debug_info", Renderer_debug_info, 0);
     rb_define_method(cRenderer, "create_texture_from", Renderer_create_texture_from, 1);
     rb_define_method(cRenderer, "copy", Renderer_copy, 3);
+    rb_define_method(cRenderer, "copy_ex", Renderer_copy_ex, 6);
     rb_define_method(cRenderer, "present", Renderer_present, 0);
     rb_define_method(cRenderer, "draw_color",Renderer_draw_color, 4);
     rb_define_method(cRenderer, "draw_line",Renderer_draw_line, 4);
@@ -490,7 +514,7 @@ void rubysdl2_init_video(void)
 #undef DEFINE_SDL_RENDERER_FLAGS_CONST
   
 #define DEFINE_SDL_FLIP_CONST(t)                                        \
-    rb_define_const(cRenderer, "FLIP_" #t, SDL_FLIP_##t)
+    rb_define_const(cRenderer, "FLIP_" #t, INT2FIX(SDL_FLIP_##t))
     DEFINE_SDL_FLIP_CONST(NONE);
     DEFINE_SDL_FLIP_CONST(HORIZONTAL);
     DEFINE_SDL_FLIP_CONST(VERTICAL);

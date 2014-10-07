@@ -10,6 +10,8 @@ texture = renderer.load_texture("icon.bmp")
 
 rect = SDL2::Rect.new(48, 128, 32, 32)
 renderer.copy(texture, nil, rect)
+renderer.copy_ex(texture, nil, SDL2::Rect.new(128, 256, 48, 48), 45, nil,
+                 SDL2::Renderer::FLIP_NONE)
 renderer.present
 
 loop do
