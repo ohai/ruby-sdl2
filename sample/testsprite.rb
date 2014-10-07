@@ -9,8 +9,6 @@ renderer = window.create_renderer(-1, 0)
 texture = renderer.load_texture("icon.bmp")
 
 rect = SDL2::Rect.new(48, 128, 32, 32)
-p SDL2::Renderer.drivers_info
-p renderer.info
 renderer.copy(texture, nil, rect)
 renderer.present
 

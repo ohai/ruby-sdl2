@@ -173,6 +173,17 @@ static VALUE RendererInfo_new(SDL_RendererInfo* info)
     
     return rinfo;
 }
+
+static VALUE SDL2_s_video_drivers(VALUE self)
+{
+    int num_drivers = HANDLE_ERROR(SDL_GetNumVideoDrivers());
+    int i;
+    VALUE drivers = rb_ary_new();
+    for (i=0; i<num_drivers; ++i)
+        rb_ary_push(drivers, rb_usascii_str_new_cstr(SDL_GetVideoDriver(i)));
+    return drivers;
+}
+
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
                              VALUE flags)
 {
@@ -354,6 +365,8 @@ RECT_ACCESSOR(h);
 
 void rubysdl2_init_video(void)
 {
+    rb_define_module_function(mSDL2, "video_drivers", SDL2_s_video_drivers, 0);
+    
     cWindow = rb_define_class_under(mSDL2, "Window", rb_cObject);
     
     rb_undef_alloc_func(cWindow);
