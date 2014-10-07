@@ -181,6 +181,7 @@ void rubysdl2_init_mixer(void)
     rb_define_const(mMixer, "DEFAULT_FORMAT", UINT2NUM(MIX_DEFAULT_FORMAT));
     
     cChunk = rb_define_class_under(mMixer, "Chunk", rb_cObject);
+    rb_undef_alloc_func(cChunk);
     rb_define_singleton_method(cChunk, "load", Chunk_s_load, 1);
     rb_define_method(cChunk, "destroy", Chunk_destroy, 0);
     rb_define_method(cChunk, "destroy?", Chunk_destroy_p, 0);
@@ -188,6 +189,7 @@ void rubysdl2_init_mixer(void)
     rb_define_method(cChunk, "volume=", Chunk_set_volume, 1);
     
     cMusic = rb_define_class_under(mMixer, "Music", rb_cObject);
+    rb_undef_alloc_func(cMusic);
     rb_define_method(cMusic, "destroy", Music_destroy, 0);
     rb_define_singleton_method(cMusic, "load", Music_s_load, 1);
     rb_define_method(cMusic, "destroy?", Music_destroy_p, 0);

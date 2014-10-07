@@ -319,7 +319,8 @@ RECT_ACCESSOR(h);
 void rubysdl2_init_video(void)
 {
     cWindow = rb_define_class_under(mSDL2, "Window", rb_cObject);
-
+    
+    rb_undef_alloc_func(cWindow);
     rb_define_singleton_method(cWindow, "create", Window_s_create, 6);
     rb_define_method(cWindow, "destroy?", Window_destroy_p, 0);
     rb_define_method(cWindow, "create_renderer", Window_create_renderer, 2);
@@ -348,7 +349,8 @@ void rubysdl2_init_video(void)
 
   
     cRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
-
+    
+    rb_undef_alloc_func(cRenderer);
     rb_define_method(cRenderer, "destroy?", Renderer_destroy_p, 0);
     rb_define_method(cRenderer, "debug_info", Renderer_debug_info, 0);
     rb_define_method(cRenderer, "create_texture_from", Renderer_create_texture_from, 1);
@@ -366,12 +368,14 @@ void rubysdl2_init_video(void)
   
   
     cTexture = rb_define_class_under(mSDL2, "Texture", rb_cObject);
-
+    
+    rb_undef_alloc_func(cTexture);
     rb_define_method(cTexture, "destroy?", Texture_destroy_p, 0);
     rb_define_method(cTexture, "debug_info", Texture_debug_info, 0);
   
     cSurface = rb_define_class_under(mSDL2, "Surface", rb_cObject);
-  
+    
+    rb_undef_alloc_func(cSurface);
     rb_define_singleton_method(cSurface, "load_bmp", Surface_s_load_bmp, 1);
     rb_define_method(cSurface, "destroy?", Surface_destroy_p, 0);
     rb_define_method(cSurface, "destroy", Surface_destroy, 0);
