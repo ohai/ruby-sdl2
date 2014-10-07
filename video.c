@@ -381,6 +381,13 @@ static VALUE Rect_initialize(int argc, VALUE* argv, VALUE self)
     return Qnil;
 }
 
+static VALUE Rect_inspect(VALUE self)
+{
+    SDL_Rect* rect = Get_SDL_Rect(self);
+    return rb_sprintf("<SDL2::Rect: x=%d y=%d w=%d h=%d>",
+                      rect->x, rect->y, rect->w, rect->h);
+}
+
 #define FIELD_ACCESSOR(classname, typename, field)              \
     static VALUE classname##_##field(VALUE self)                \
     {                                                           \
@@ -412,6 +419,12 @@ static VALUE Point_initialize(int argc, VALUE* argv, VALUE self)
     point->x = (x == Qnil) ? 0 : NUM2INT(x);
     point->y = (y == Qnil) ? 0 : NUM2INT(y);
     return Qnil;
+}
+
+static VALUE Point_inspect(VALUE self)
+{
+    SDL_Point* point = Get_SDL_Point(self);
+    return rb_sprintf("<SDL2::Point x=%d y=%d>", point->x, point->y);
 }
 
 FIELD_ACCESSOR(Point, SDL_Point, x);
@@ -504,6 +517,7 @@ void rubysdl2_init_video(void)
 
     rb_define_alloc_func(cRect, Rect_s_allocate);
     rb_define_private_method(cRect, "initialize", Rect_initialize, -1);
+    rb_define_method(cRect, "inspect", Rect_inspect, 0);
     DEFINE_FIELD_ACCESSOR(Rect, cRect, x);
     DEFINE_FIELD_ACCESSOR(Rect, cRect, y);
     DEFINE_FIELD_ACCESSOR(Rect, cRect, w);
@@ -512,7 +526,8 @@ void rubysdl2_init_video(void)
     cPoint = rb_define_class_under(mSDL2, "Point", rb_cObject);
 
     rb_define_alloc_func(cPoint, Point_s_allocate);
-    rb_define_private_method(cPoint, "initialze", Point_initialize, -1);
+    rb_define_private_method(cPoint, "initialize", Point_initialize, -1);
+    rb_define_method(cPoint, "inspect", Point_inspect, 0);
     DEFINE_FIELD_ACCESSOR(Point, cPoint, x);
     DEFINE_FIELD_ACCESSOR(Point, cPoint, y);
     

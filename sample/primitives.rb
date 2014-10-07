@@ -19,7 +19,7 @@ renderer.present
 
 loop do
   while ev = SDL2::Event.poll
-    if SDL2::Event::KeyDown === ev && ev.scancode == SDL::Key::Scan::ESCAPE
+    if SDL2::Event::KeyDown === ev && ev.scancode == SDL2::Key::Scan::ESCAPE
       exit
     end
   end
