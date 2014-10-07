@@ -457,6 +457,7 @@ void rubysdl2_init_video(void)
 {
     rb_define_module_function(mSDL2, "video_drivers", SDL2_s_video_drivers, 0);
     
+    
     cWindow = rb_define_class_under(mSDL2, "Window", rb_cObject);
     
     rb_undef_alloc_func(cWindow);
@@ -484,7 +485,6 @@ void rubysdl2_init_video(void)
 #ifdef SDL_WINDOW_ALLOW_HIGHDPI
     DEFINE_SDL_WINDOW_FLAGS_CONST(ALLOW_HIGHDPI);
 #endif
-#undef DEFINE_SDL_WINDOW_FLAGS_CONST
 
   
     cRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
@@ -511,20 +511,20 @@ void rubysdl2_init_video(void)
     DEFINE_SDL_RENDERER_FLAGS_CONST(PRESENTVSYNC);
 #endif
     DEFINE_SDL_RENDERER_FLAGS_CONST(TARGETTEXTURE);
-#undef DEFINE_SDL_RENDERER_FLAGS_CONST
-  
 #define DEFINE_SDL_FLIP_CONST(t)                                        \
     rb_define_const(cRenderer, "FLIP_" #t, INT2FIX(SDL_FLIP_##t))
     DEFINE_SDL_FLIP_CONST(NONE);
     DEFINE_SDL_FLIP_CONST(HORIZONTAL);
     DEFINE_SDL_FLIP_CONST(VERTICAL);
+
     
     cTexture = rb_define_class_under(mSDL2, "Texture", rb_cObject);
     
     rb_undef_alloc_func(cTexture);
     rb_define_method(cTexture, "destroy?", Texture_destroy_p, 0);
     rb_define_method(cTexture, "debug_info", Texture_debug_info, 0);
-  
+
+    
     cSurface = rb_define_class_under(mSDL2, "Surface", rb_cObject);
     
     rb_undef_alloc_func(cSurface);
@@ -532,11 +532,12 @@ void rubysdl2_init_video(void)
     rb_define_method(cSurface, "destroy?", Surface_destroy_p, 0);
     rb_define_method(cSurface, "destroy", Surface_destroy, 0);
 
-
+    
 #define DEFINE_FIELD_ACCESSOR(classname, classvar, field)               \
     rb_define_method(classvar, #field, classname##_##field, 0);         \
     rb_define_method(classvar, #field "=", classname##_set_##field, 1);
-
+    
+    
     cRect = rb_define_class_under(mSDL2, "Rect", rb_cObject);
 
     rb_define_alloc_func(cRect, Rect_s_allocate);
@@ -547,6 +548,7 @@ void rubysdl2_init_video(void)
     DEFINE_FIELD_ACCESSOR(Rect, cRect, w);
     DEFINE_FIELD_ACCESSOR(Rect, cRect, h);
 
+    
     cPoint = rb_define_class_under(mSDL2, "Point", rb_cObject);
 
     rb_define_alloc_func(cPoint, Point_s_allocate);
@@ -554,6 +556,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cPoint, "inspect", Point_inspect, 0);
     DEFINE_FIELD_ACCESSOR(Point, cPoint, x);
     DEFINE_FIELD_ACCESSOR(Point, cPoint, y);
+
     
     cRendererInfo = rb_define_class_under(cRenderer, "Info", rb_cObject);
     define_attr_readers(cRendererInfo, "name", "flags", "texture_formats",
