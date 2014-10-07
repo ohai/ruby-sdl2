@@ -6,8 +6,8 @@
 static VALUE cWindow;
 static VALUE cRenderer;
 static VALUE cTexture;
-static VALUE cSurface;
 static VALUE cRect;
+static VALUE cSurface;
 
 #define DEFINE_GETTER(ctype, var_class, classname)                      \
     static ctype* Get_##ctype(VALUE obj)                                \
@@ -426,3 +426,56 @@ void rubysdl2_init_video(void)
 #undef DEFINE_RECT_ACCESSOR
 }
   
+#ifdef HAVE_SDL_IMAGE_H
+#include <SDL_image.h>
+
+static VALUE mIMG;
+
+static VALUE IMG_s_init(VALUE self, VALUE f)
+{
+    int flags = NUM2INT(f);
+    if (IMG_Init(flags) & flags != flags) 
+        rb_raise(eSDL2Error, "Couldn't initialze SDL_image");
+    return Qnil;
+}
+
+static VALUE Surface_s_load(VALUE self, VALUE fname)
+{
+    SDL_Surface* surface = IMG_Load(StringValueCStr(fname));
+    if (!surface) {
+        SDL_SetError(IMG_GetError());
+        SDL_ERROR();
+    }
+    return Surface_new(surface);
+}
+
+static VALUE Renderer_load_texture(VALUE self, VALUE fname)
+{
+    SDL_Texture* texture = IMG_LoadTexture(Get_SDL_Renderer(self), StringValueCStr(fname));
+    if (!texture) {
+        SDL_SetError(IMG_GetError());
+        SDL_ERROR();
+    }
+    return Texture_new(texture, Get_Renderer(self));
+}
+
+void rubysdl2_init_image(void)
+{
+    mIMG = rb_define_module_under(mSDL2, "IMG");
+    rb_define_module_function(mIMG, "init", IMG_s_init, 1);
+
+    rb_define_singleton_method(cSurface, "load", Surface_s_load, 1);
+    rb_define_method(cRenderer, "load_texture", Renderer_load_texture, 1);
+                     
+    
+    rb_define_const(mIMG, "INIT_JPG", INT2NUM(IMG_INIT_JPG));
+    rb_define_const(mIMG, "INIT_PNG", INT2NUM(IMG_INIT_PNG));
+    rb_define_const(mIMG, "INIT_TIF", INT2NUM(IMG_INIT_TIF));
+    rb_define_const(mIMG, "INIT_WEBP", INT2NUM(IMG_INIT_WEBP));
+}
+
+#else /* HAVE_SDL_IMAGE_H */
+void rubysdl2_init_image(void)
+{
+}
+#endif

@@ -71,7 +71,8 @@ void Init_sdl2_ext(void)
     rubysdl2_init_event();
     rubysdl2_init_key();
     rubysdl2_init_timer();
-  
+    rubysdl2_init_image();
+    
     rb_set_end_proc(quit, 0);
     return;
 }
