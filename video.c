@@ -297,7 +297,8 @@ static VALUE Renderer_present(VALUE self)
 static VALUE Renderer_draw_color(VALUE self, VALUE r, VALUE g, VALUE b, VALUE a)
 {
     HANDLE_ERROR(SDL_SetRenderDrawColor(Get_SDL_Renderer(self),
-                                        NUM2UINT(r), NUM2UINT(g), NUM2UINT(b), NUM2UINT(a)));
+                                        NUM2UINT8(r), NUM2UINT8(g), NUM2UINT8(b),
+                                        NUM2UINT8(a)));
     return Qnil;
 }
 
