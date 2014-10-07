@@ -516,7 +516,12 @@ void rubysdl2_init_video(void)
     DEFINE_SDL_FLIP_CONST(NONE);
     DEFINE_SDL_FLIP_CONST(HORIZONTAL);
     DEFINE_SDL_FLIP_CONST(VERTICAL);
-
+#define DEFINE_BLENDMODE_CONST(t)                                       \
+    rb_define_const(mSDL2, "BLENDMODE_" #t, INT2FIX(SDL_BLENDMODE_##t))
+    DEFINE_BLENDMODE_CONST(NONE);
+    DEFINE_BLENDMODE_CONST(BLEND);
+    DEFINE_BLENDMODE_CONST(ADD);
+    DEFINE_BLENDMODE_CONST(MOD);
     
     cTexture = rb_define_class_under(mSDL2, "Texture", rb_cObject);
     
