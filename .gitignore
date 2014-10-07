@@ -3,3 +3,5 @@
 Makefile
 *.so
 local/
+mkmf.log
+sample/sample.wav
