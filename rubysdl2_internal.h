@@ -19,6 +19,9 @@ void rubysdl2_init_timer(void);
 #define SDL_ERROR() (HANDLE_ERROR(-1))
 #define INT2BOOL(x) ((x)?Qtrue:Qfalse)
 
+#define mSDL2 rubysdl2_mSDL2
+#define eSDL2Error rubysdl2_eSDL2Error
+
 /** classes and modules */
 SDL2_EXTERN VALUE mSDL2;
 SDL2_EXTERN VALUE eSDL2Error;
