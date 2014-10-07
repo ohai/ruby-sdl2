@@ -294,13 +294,31 @@ static VALUE Renderer_present(VALUE self)
     return Qnil;
 }
 
-static VALUE Renderer_draw_color(VALUE self, VALUE r, VALUE g, VALUE b, VALUE a)
+static VALUE Renderer_draw_color(VALUE self)
 {
+    Uint8 r, g, b, a;
+    HANDLE_ERROR(SDL_GetRenderDrawColor(Get_SDL_Renderer(self), &r, &g, &b, &a));
+    return rb_ary_new3(4, INT2FIX(r), INT2FIX(g), INT2FIX(b), INT2FIX(a));
+}
+
+static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
+{
+    VALUE r, g, b, a;
+    Check_Type(rgba, T_ARRAY);
+    if (RARRAY_LEN(rgba) != 3 && RARRAY_LEN(rgba) != 4)
+        rb_raise(rb_eArgError, "wrong number of Array elements (%ld for 3 or 4)",
+                 RARRAY_LEN(rgba));
+    r = rb_ary_entry(rgba, 0);
+    g = rb_ary_entry(rgba, 1);
+    b = rb_ary_entry(rgba, 2);
+    a = rb_ary_entry(rgba, 3); if (a == Qnil) a = INT2FIX(255);
+    
     HANDLE_ERROR(SDL_SetRenderDrawColor(Get_SDL_Renderer(self),
                                         NUM2UINT8(r), NUM2UINT8(g), NUM2UINT8(b),
                                         NUM2UINT8(a)));
     return Qnil;
 }
+
 
 static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
 {
@@ -572,7 +590,8 @@ void rubysdl2_init_video(void)
     rb_define_method(cRenderer, "copy", Renderer_copy, 3);
     rb_define_method(cRenderer, "copy_ex", Renderer_copy_ex, 6);
     rb_define_method(cRenderer, "present", Renderer_present, 0);
-    rb_define_method(cRenderer, "draw_color",Renderer_draw_color, 4);
+    rb_define_method(cRenderer, "draw_color",Renderer_draw_color, 0);
+    rb_define_method(cRenderer, "draw_color=",Renderer_set_draw_color, 1);
     rb_define_method(cRenderer, "draw_line",Renderer_draw_line, 4);
     rb_define_method(cRenderer, "draw_point",Renderer_draw_point, 2);
     rb_define_method(cRenderer, "draw_rect", Renderer_draw_rect, 1);
