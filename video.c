@@ -268,6 +268,38 @@ static VALUE Renderer_present(VALUE self)
     return Qnil;
 }
 
+static VALUE Renderer_draw_color(VALUE self, VALUE r, VALUE g, VALUE b, VALUE a)
+{
+    HANDLE_ERROR(SDL_SetRenderDrawColor(Get_SDL_Renderer(self),
+                                        NUM2UINT(r), NUM2UINT(g), NUM2UINT(b), NUM2UINT(a)));
+    return Qnil;
+}
+
+static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
+{
+    HANDLE_ERROR(SDL_RenderDrawLine(Get_SDL_Renderer(self),
+                                    NUM2INT(x1), NUM2INT(y1), NUM2INT(x2), NUM2INT(y2)));
+    return Qnil;
+}
+
+static VALUE Renderer_draw_point(VALUE self, VALUE x, VALUE y)
+{
+    HANDLE_ERROR(SDL_RenderDrawPoint(Get_SDL_Renderer(self), NUM2INT(x), NUM2INT(y)));
+    return Qnil;
+}
+
+static VALUE Renderer_draw_rect(VALUE self, VALUE rect)
+{
+    HANDLE_ERROR(SDL_RenderDrawRect(Get_SDL_Renderer(self), Get_SDL_Rect(rect)));
+    return Qnil;
+}
+
+static VALUE Renderer_fill_rect(VALUE self, VALUE rect)
+{
+    HANDLE_ERROR(SDL_RenderFillRect(Get_SDL_Renderer(self), Get_SDL_Rect(rect)));
+    return Qnil;
+}
+
 static VALUE Renderer_info(VALUE self)
 {
     SDL_RendererInfo info;
@@ -406,6 +438,11 @@ void rubysdl2_init_video(void)
     rb_define_method(cRenderer, "create_texture_from", Renderer_create_texture_from, 1);
     rb_define_method(cRenderer, "copy", Renderer_copy, 3);
     rb_define_method(cRenderer, "present", Renderer_present, 0);
+    rb_define_method(cRenderer, "draw_color",Renderer_draw_color, 4);
+    rb_define_method(cRenderer, "draw_line",Renderer_draw_line, 4);
+    rb_define_method(cRenderer, "draw_point",Renderer_draw_point, 2);
+    rb_define_method(cRenderer, "draw_rect",Renderer_draw_rect, 1);
+    rb_define_method(cRenderer, "fill_rect",Renderer_fill_rect, 1);
     rb_define_method(cRenderer, "info", Renderer_info, 0);
 #define DEFINE_SDL_RENDERER_FLAGS_CONST(n)                      \
     rb_define_const(cRenderer, #n, UINT2NUM(SDL_RENDERER_##n))
