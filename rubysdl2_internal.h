@@ -2,9 +2,16 @@
 
 #define SDL_MAIN_HANDLED
 
+#ifndef SDL2_EXTERN
+#define SDL2_EXTERN extern
+#endif
+
+/** utility functions */
 int rubysdl2_handle_error(int code, const char* cfunc);
 int rubysdl2_is_active(void);
+void rubysdl2_define_attr_readers(VALUE klass, ...);
 
+/** initialize interfaces */
 void rubysdl2_init_video(void);
 void rubysdl2_init_event(void);
 void rubysdl2_init_key(void);
@@ -12,14 +19,12 @@ void rubysdl2_init_timer(void);
 void rubysdl2_init_image(void);
 void rubysdl2_init_mixer(void);
 
-#ifndef SDL2_EXTERN
-#define SDL2_EXTERN extern
-#endif
-
 /** macros */
 #define HANDLE_ERROR(c) (rubysdl2_handle_error((c), __func__))
 #define SDL_ERROR() (HANDLE_ERROR(-1))
 #define INT2BOOL(x) ((x)?Qtrue:Qfalse)
+
+#define define_attr_readers rubysdl2_define_attr_readers
 
 #define DEFINE_GETTER(ctype, var_class, classname)                      \
     static ctype* Get_##ctype(VALUE obj)                                \

@@ -8,6 +8,7 @@ static VALUE cRenderer;
 static VALUE cTexture;
 static VALUE cRect;
 static VALUE cSurface;
+static VALUE cRendererInfo;
 
 struct Window;
 struct Renderer;
@@ -157,6 +158,21 @@ DEFINE_WRAPPER(SDL_Surface, Surface, surface, cSurface, "SDL2::Surface");
 
 DEFINE_GETTER(SDL_Rect, cRect, "SDL2::Rect");
 
+static VALUE RendererInfo_new(SDL_RendererInfo* info)
+{
+    VALUE rinfo = rb_obj_alloc(cRendererInfo);
+    VALUE texture_formats = rb_ary_new();
+    unsigned int i;
+    
+    rb_iv_set(rinfo, "@name", rb_usascii_str_new_cstr(info->name));
+    rb_iv_set(rinfo, "@texture_formats", texture_formats);
+    for (i=0; i<info->num_texture_formats; ++i)
+        rb_ary_push(texture_formats, UINT2NUM(info->texture_formats[i]));
+    rb_iv_set(rinfo, "@max_texture_width", INT2NUM(info->max_texture_width));
+    rb_iv_set(rinfo, "@max_texture_height", INT2NUM(info->max_texture_height));
+    
+    return rinfo;
+}
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
                              VALUE flags)
 {
@@ -203,6 +219,19 @@ static VALUE Window_debug_info(VALUE self)
     return info;
 }
 
+static VALUE Renderer_s_drivers_info(VALUE self)
+{
+    int num_drivers = SDL_GetNumRenderDrivers();
+    VALUE info_ary = rb_ary_new();
+    int i;
+    for (i=0; i<num_drivers; ++i) {
+        SDL_RendererInfo info;
+        HANDLE_ERROR(SDL_GetRenderDriverInfo(i, &info));
+        rb_ary_push(info_ary, RendererInfo_new(&info));
+    }
+    return info_ary;
+}
+
 static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
 {
     SDL_Texture* texture = SDL_CreateTextureFromSurface(Get_SDL_Renderer(self),
@@ -226,6 +255,13 @@ static VALUE Renderer_present(VALUE self)
 {
     SDL_RenderPresent(Get_SDL_Renderer(self));
     return Qnil;
+}
+
+static VALUE Renderer_info(VALUE self)
+{
+    SDL_RendererInfo info;
+    HANDLE_ERROR(SDL_GetRendererInfo(Get_SDL_Renderer(self), &info));
+    return RendererInfo_new(&info);
 }
 
 static VALUE Renderer_debug_info(VALUE self)
@@ -351,11 +387,13 @@ void rubysdl2_init_video(void)
     cRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
     
     rb_undef_alloc_func(cRenderer);
+    rb_define_singleton_method(cRenderer, "drivers_info", Renderer_s_drivers_info, 0);
     rb_define_method(cRenderer, "destroy?", Renderer_destroy_p, 0);
     rb_define_method(cRenderer, "debug_info", Renderer_debug_info, 0);
     rb_define_method(cRenderer, "create_texture_from", Renderer_create_texture_from, 1);
     rb_define_method(cRenderer, "copy", Renderer_copy, 3);
     rb_define_method(cRenderer, "present", Renderer_present, 0);
+    rb_define_method(cRenderer, "info", Renderer_info, 0);
 #define DEFINE_SDL_RENDERER_FLAGS_CONST(n)                      \
     rb_define_const(cRenderer, #n, UINT2NUM(SDL_RENDERER_##n))
     DEFINE_SDL_RENDERER_FLAGS_CONST(SOFTWARE);
@@ -394,6 +432,10 @@ void rubysdl2_init_video(void)
     DEFINE_RECT_ACCESSOR(w);
     DEFINE_RECT_ACCESSOR(h);
 #undef DEFINE_RECT_ACCESSOR
+
+    cRendererInfo = rb_define_class_under(cRenderer, "Info", rb_cObject);
+    define_attr_readers(cRendererInfo, "name", "flags", "texture_formats",
+                        "max_texture_width", "max_texture_height", NULL);
 }
   
 #ifdef HAVE_SDL_IMAGE_H

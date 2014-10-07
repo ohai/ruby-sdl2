@@ -8,6 +8,7 @@
 #ifdef HAVE_SDL_MIXER_H
 #include <SDL_mixer.h>
 #endif
+#include <stdarg.h>
 
 int rubysdl2_handle_error(int code, const char* cfunc)
 {
@@ -22,6 +23,20 @@ int rubysdl2_handle_error(int code, const char* cfunc)
     rb_iv_set(eSDL2Error, "@error_code", INT2NUM(code));
   
     rb_exc_raise(err);
+}
+
+void rubysdl2_define_attr_readers(VALUE klass, ...)
+{
+    va_list ap;
+
+    va_start(ap, klass);
+    for (;;) {
+        const char* field_name = va_arg(ap, const char*);
+        if (field_name == NULL)
+            break;
+        rb_define_attr(klass, field_name, 1, 0);
+    }
+    va_end(ap);
 }
 
 typedef enum {
