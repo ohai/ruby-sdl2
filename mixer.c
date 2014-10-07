@@ -114,6 +114,16 @@ static VALUE Chunk_s_load(VALUE self, VALUE fname)
     return Chunk_new(chunk);
 }
 
+static VALUE Chunk_s_decoders(VALUE self)
+{
+    int i;
+    int num_decoders = Mix_GetNumChunkDecoders();
+    VALUE ary = rb_ary_new();
+    for (i=0; i < num_decoders; ++i)
+        rb_ary_push(ary, rb_usascii_str_new_cstr(Mix_GetChunkDecoder(i)));
+    return ary;
+}
+
 static VALUE Chunk_destroy(VALUE self)
 {
     Chunk* c = Get_Chunk(self);
@@ -183,6 +193,7 @@ void rubysdl2_init_mixer(void)
     cChunk = rb_define_class_under(mMixer, "Chunk", rb_cObject);
     rb_undef_alloc_func(cChunk);
     rb_define_singleton_method(cChunk, "load", Chunk_s_load, 1);
+    rb_define_singleton_method(cChunk, "decoders", Chunk_s_decoders, 0);
     rb_define_method(cChunk, "destroy", Chunk_destroy, 0);
     rb_define_method(cChunk, "destroy?", Chunk_destroy_p, 0);
     rb_define_method(cChunk, "volume", Chunk_volume, 0);
