@@ -12,6 +12,8 @@ rect = SDL2::Rect.new(48, 128, 32, 32)
 renderer.copy(texture, nil, rect)
 renderer.copy_ex(texture, nil, SDL2::Rect.new(128, 256, 48, 48), 45, nil,
                  SDL2::Renderer::FLIP_NONE)
+texture.blend_mode = SDL2::BLENDMODE_ADD
+renderer.copy(texture, nil, SDL2::Rect.new(128, 294, 48, 48))
 renderer.present
 
 loop do

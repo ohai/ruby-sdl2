@@ -333,6 +333,19 @@ static VALUE Renderer_info(VALUE self)
     return RendererInfo_new(&info);
 }
 
+static VALUE Renderer_draw_blend_mode(VALUE self)
+{
+    SDL_BlendMode mode;
+    HANDLE_ERROR(SDL_GetRenderDrawBlendMode(Get_SDL_Renderer(self), &mode));
+    return INT2FIX(mode);
+}
+
+static VALUE Renderer_set_draw_blend_mode(VALUE self, VALUE mode)
+{
+    HANDLE_ERROR(SDL_SetRenderDrawBlendMode(Get_SDL_Renderer(self), NUM2INT(mode)));
+    return mode;
+}
+    
 static VALUE Renderer_debug_info(VALUE self)
 {
     Renderer* r = Get_Renderer(self);
@@ -349,6 +362,19 @@ static VALUE Renderer_debug_info(VALUE self)
     rb_hash_aset(info, rb_str_new2("refcount"), INT2NUM(r->refcount));
   
     return info;
+}
+
+static VALUE Texture_blend_mode(VALUE self)
+{
+    SDL_BlendMode mode;
+    HANDLE_ERROR(SDL_GetTextureBlendMode(Get_SDL_Texture(self), &mode));
+    return INT2FIX(mode);
+}
+
+static VALUE Texture_set_blend_mode(VALUE self, VALUE mode)
+{
+    HANDLE_ERROR(SDL_SetTextureBlendMode(Get_SDL_Texture(self), NUM2INT(mode)));
+    return mode;
 }
 
 static VALUE Texture_debug_info(VALUE self)
@@ -377,6 +403,19 @@ static VALUE Surface_destroy(VALUE self)
         SDL_FreeSurface(s->surface);
     s->surface = NULL;
     return Qnil;
+}
+
+static VALUE Surface_blend_mode(VALUE self)
+{
+    SDL_BlendMode mode;
+    HANDLE_ERROR(SDL_GetSurfaceBlendMode(Get_SDL_Surface(self), &mode));
+    return INT2FIX(mode);
+}
+
+static VALUE Surface_set_blend_mode(VALUE self, VALUE mode)
+{
+    HANDLE_ERROR(SDL_SetSurfaceBlendMode(Get_SDL_Surface(self), NUM2INT(mode)));
+    return mode;
 }
 
 static VALUE Rect_s_allocate(VALUE klass)
@@ -500,8 +539,11 @@ void rubysdl2_init_video(void)
     rb_define_method(cRenderer, "draw_color",Renderer_draw_color, 4);
     rb_define_method(cRenderer, "draw_line",Renderer_draw_line, 4);
     rb_define_method(cRenderer, "draw_point",Renderer_draw_point, 2);
-    rb_define_method(cRenderer, "draw_rect",Renderer_draw_rect, 1);
-    rb_define_method(cRenderer, "fill_rect",Renderer_fill_rect, 1);
+    rb_define_method(cRenderer, "draw_rect", Renderer_draw_rect, 1);
+    rb_define_method(cRenderer, "fill_rect", Renderer_fill_rect, 1);
+    rb_define_method(cRenderer, "draw_blend_mode", Renderer_draw_blend_mode, 0);
+    rb_define_method(cRenderer, "draw_blend_mode=", Renderer_set_draw_blend_mode, 1);
+    
     rb_define_method(cRenderer, "info", Renderer_info, 0);
 #define DEFINE_SDL_RENDERER_FLAGS_CONST(n)                      \
     rb_define_const(cRenderer, #n, UINT2NUM(SDL_RENDERER_##n))
@@ -527,8 +569,10 @@ void rubysdl2_init_video(void)
     
     rb_undef_alloc_func(cTexture);
     rb_define_method(cTexture, "destroy?", Texture_destroy_p, 0);
+    rb_define_method(cTexture, "blend_mode", Texture_blend_mode, 0);
+    rb_define_method(cTexture, "blend_mode=", Texture_set_blend_mode, 1);
     rb_define_method(cTexture, "debug_info", Texture_debug_info, 0);
-
+    
     
     cSurface = rb_define_class_under(mSDL2, "Surface", rb_cObject);
     
@@ -536,7 +580,8 @@ void rubysdl2_init_video(void)
     rb_define_singleton_method(cSurface, "load_bmp", Surface_s_load_bmp, 1);
     rb_define_method(cSurface, "destroy?", Surface_destroy_p, 0);
     rb_define_method(cSurface, "destroy", Surface_destroy, 0);
-
+    rb_define_method(cSurface, "blend_mode", Surface_blend_mode, 0);
+    rb_define_method(cSurface, "blend_mode=", Surface_set_blend_mode, 1);
     
 #define DEFINE_FIELD_ACCESSOR(classname, classvar, field)               \
     rb_define_method(classvar, #field, classname##_##field, 0);         \
