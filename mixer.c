@@ -170,7 +170,7 @@ void rubysdl2_init_mixer(void)
     rb_define_module_function(mMixer, "play?", Mixer_s_play_p, 1);
     
 #define DEFINE_MIX_INIT(t) \
-    rb_define_const(mMixer, "INIT_" #t, MIX_INIT_##t)
+    rb_define_const(mMixer, "INIT_" #t, UINT2NUM(MIX_INIT_##t))
     DEFINE_MIX_INIT(FLAC);
     DEFINE_MIX_INIT(MOD);
     DEFINE_MIX_INIT(MODPLUG);
