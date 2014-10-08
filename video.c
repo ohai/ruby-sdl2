@@ -1,5 +1,6 @@
 #include "rubysdl2_internal.h"
 #include <SDL_video.h>
+#include <SDL_version.h>
 #include <SDL_render.h>
 #include <ruby/encoding.h>
 
@@ -364,7 +365,54 @@ static VALUE Renderer_set_draw_blend_mode(VALUE self, VALUE mode)
     HANDLE_ERROR(SDL_SetRenderDrawBlendMode(Get_SDL_Renderer(self), NUM2INT(mode)));
     return mode;
 }
-    
+
+static VALUE Renderer_clip_rect(VALUE self)
+{
+    VALUE rect = rb_obj_alloc(cRect);
+    SDL_RenderGetClipRect(Get_SDL_Renderer(self), Get_SDL_Rect(rect));
+    return rect;
+}
+
+#if SDL_VERSION_ATLEAST(2,0,4)
+static VALUE Render_clip_enabled_p(VALUE self)
+{
+    return INT2BOOL(SDL_RenderIsClipEnabled(Get_SDL_Renderer(self)));
+}
+#endif
+
+static VALUE Renderer_logical_size(VALUE self)
+{
+    int w, h;
+    SDL_RenderGetLogicalSize(Get_SDL_Renderer(self), &w, &h);
+    return rb_ary_new3(2, INT2FIX(w), INT2FIX(h));
+}
+
+static VALUE Renderer_scale(VALUE self)
+{
+    float scaleX, scaleY;
+    SDL_RenderGetScale(Get_SDL_Renderer(self), &scaleX, &scaleY);
+    return rb_ary_new3(2, DBL2NUM(scaleX), DBL2NUM(scaleY));
+}
+
+static VALUE Renderer_viewport(VALUE self)
+{
+    VALUE rect = rb_obj_alloc(cRect);
+    SDL_RenderGetViewport(Get_SDL_Renderer(self), Get_SDL_Rect(rect));
+    return rect;
+}
+
+static VALUE Renderer_support_render_target_p(VALUE self)
+{
+    return INT2BOOL(SDL_RenderTargetSupported(Get_SDL_Renderer(self)));
+}
+
+static VALUE Renderer_output_size(VALUE self)
+{
+    int w, h;
+    HANDLE_ERROR(SDL_GetRendererOutputSize(Get_SDL_Renderer(self), &w, &h));
+    return rb_ary_new3(2, INT2FIX(w), INT2FIX(h));
+}
+
 static VALUE Renderer_debug_info(VALUE self)
 {
     Renderer* r = Get_Renderer(self);
@@ -598,6 +646,15 @@ void rubysdl2_init_video(void)
     rb_define_method(cRenderer, "fill_rect", Renderer_fill_rect, 1);
     rb_define_method(cRenderer, "draw_blend_mode", Renderer_draw_blend_mode, 0);
     rb_define_method(cRenderer, "draw_blend_mode=", Renderer_set_draw_blend_mode, 1);
+    rb_define_method(cRenderer, "clip_rect", Renderer_clip_rect, 0);
+#if SDL_VERSION_ATLEAST(2,0,4)
+    rb_define_method(cRenderer, "clip_enabled?", Render_clip_enabled_p, 0);
+#endif
+    rb_define_method(cRenderer, "logical_size", Renderer_logical_size, 0);
+    rb_define_method(cRenderer, "scale", Renderer_scale, 0);
+    rb_define_method(cRenderer, "viewport", Renderer_viewport, 0);
+    rb_define_method(cRenderer, "support_render_target?", Renderer_support_render_target_p, 0);
+    rb_define_method(cRenderer, "output_size", Renderer_output_size, 0);
     
     rb_define_method(cRenderer, "info", Renderer_info, 0);
 #define DEFINE_SDL_RENDERER_FLAGS_CONST(n)                      \
