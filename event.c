@@ -2,9 +2,9 @@
 #include <SDL_events.h>
 
 static VALUE cEvent;
-static VALUE cKeyboardEvent;
-static VALUE cKeyDown;
-static VALUE cKeyUp;
+static VALUE cEvKeyboard;
+static VALUE cEvKeyDown;
+static VALUE cEvKeyUp;
 
 static VALUE event_type_to_class[SDL_LASTEVENT];
 
@@ -56,8 +56,8 @@ static void init_event_type_to_class(void)
     for (i=0; i<SDL_LASTEVENT; ++i)
         event_type_to_class[i] = cEvent;
     
-    event_type_to_class[SDL_KEYDOWN] = cKeyDown;
-    event_type_to_class[SDL_KEYUP] = cKeyUp;
+    event_type_to_class[SDL_KEYDOWN] = cEvKeyDown;
+    event_type_to_class[SDL_KEYUP] = cEvKeyUp;
 }
 
 #define DEFINE_EVENT_ACCESSOR(classname, classvar, name)                \
@@ -71,15 +71,15 @@ void rubysdl2_init_event(void)
     cEvent = rb_define_class_under(mSDL2, "Event", rb_cObject);
     rb_define_singleton_method(cEvent, "poll", Event_s_poll, 0);
     
-    cKeyboardEvent = rb_define_class_under(cEvent, "Keyboard", cEvent);
-    cKeyUp = rb_define_class_under(cEvent, "KeyUp", cKeyboardEvent);
-    cKeyDown = rb_define_class_under(cEvent, "KeyDown", cKeyboardEvent);
+    cEvKeyboard = rb_define_class_under(cEvent, "Keyboard", cEvent);
+    cEvKeyUp = rb_define_class_under(cEvent, "KeyUp", cEvKeyboard);
+    cEvKeyDown = rb_define_class_under(cEvent, "KeyDown", cEvKeyboard);
 
     DEFINE_EVENT_ACCESSOR(Event, cEvent, timestamp);
-    DEFINE_EVENT_ACCESSOR(Keyboard, cKeyboardEvent, state);
-    DEFINE_EVENT_ACCESSOR(Keyboard, cKeyboardEvent, scancode);
-    DEFINE_EVENT_ACCESSOR(Keyboard, cKeyboardEvent, sym);
-    DEFINE_EVENT_ACCESSOR(Keyboard, cKeyboardEvent, mod);
+    DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, state);
+    DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, scancode);
+    DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, sym);
+    DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, mod);
     
     init_event_type_to_class();
 }
