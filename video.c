@@ -47,17 +47,24 @@ typedef struct Surface {
 } Surface;
 
 static void Renderer_free(Renderer*);
-static void Window_free(Window* w)
+static void Window_destroy_internal(Window* w)
 {
     int i;
-    GC_LOG((stderr, "Window free: %p\n", w));
     for (i=0; i<w->num_renderers; ++i) 
         Renderer_free(w->renderers[i]);
+    w->num_renderers = w->max_renderers = 0;
+    free(w->renderers);
+    w->renderers = NULL;
+}
+
+static void Window_free(Window* w)
+{
     
+    GC_LOG((stderr, "Window free: %p\n", w));
+    Window_destroy_internal(w);
     if (w->window && rubysdl2_is_active())
         SDL_DestroyWindow(w->window);
-  
-    free(w->renderers);
+    
     free(w);
 }
 
@@ -74,10 +81,9 @@ static VALUE Window_new(SDL_Window* window)
 DEFINE_WRAPPER(SDL_Window, Window, window, cWindow, "SDL2::Window");
 
 static void Texture_free(Texture*);
-static void Renderer_free(Renderer* r)
+static void Renderer_destroy_internal(Renderer* r)
 {
     int i;
-    GC_LOG((stderr, "Renderer free: %p (refcount=%d)\n", r, r->refcount));
     for (i=0; i<r->num_textures; ++i)
         Texture_free(r->textures[i]);
     free(r->textures);
@@ -88,6 +94,13 @@ static void Renderer_free(Renderer* r)
         SDL_DestroyRenderer(r->renderer);
     }
     r->renderer = NULL;
+}
+
+static void Renderer_free(Renderer* r)
+{
+    GC_LOG((stderr, "Renderer free: %p (refcount=%d)\n", r, r->refcount));
+    Renderer_destroy_internal(r);
+    
     r->refcount--;
     if (r->refcount == 0) {
         free(r);
@@ -118,14 +131,18 @@ static VALUE Renderer_new(SDL_Renderer* renderer, Window* w)
 
 DEFINE_WRAPPER(SDL_Renderer, Renderer, renderer, cRenderer, "SDL2::Renderer");
 
-
-static void Texture_free(Texture* t)
+static void Texture_destroy_internal(Texture* t)
 {
-    GC_LOG((stderr, "Texture free: %p (refcount=%d)\n", t, t->refcount));
     if (t->texture && rubysdl2_is_active()) {
         SDL_DestroyTexture(t->texture);
     }
     t->texture = NULL;
+}
+
+static void Texture_free(Texture* t)
+{
+    GC_LOG((stderr, "Texture free: %p (refcount=%d)\n", t, t->refcount));
+    Texture_destroy_internal(t);
     t->refcount--;
     if (t->refcount == 0) {
         free(t);
@@ -217,6 +234,12 @@ static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w,
     return win;
 }
 
+static VALUE Window_destroy(VALUE self)
+{
+    Window_destroy_internal(Get_Window(self));
+    return Qnil;
+}
+
 static VALUE Window_create_renderer(VALUE self, VALUE index, VALUE flags)
 {
     SDL_Renderer* sdl_renderer;
@@ -258,6 +281,12 @@ static VALUE Renderer_s_drivers_info(VALUE self)
         rb_ary_push(info_ary, RendererInfo_new(&info));
     }
     return info_ary;
+}
+
+static VALUE Renderer_destroy(VALUE self)
+{
+    Renderer_destroy_internal(Get_Renderer(self));
+    return Qnil;
 }
 
 static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
@@ -444,6 +473,12 @@ static VALUE Renderer_debug_info(VALUE self)
     return info;
 }
 
+static VALUE Texture_destroy(VALUE self)
+{
+    Texture_destroy_internal(Get_Texture(self));
+    return Qnil;
+}
+
 static VALUE Texture_blend_mode(VALUE self)
 {
     SDL_BlendMode mode;
@@ -617,6 +652,7 @@ void rubysdl2_init_video(void)
     rb_undef_alloc_func(cWindow);
     rb_define_singleton_method(cWindow, "create", Window_s_create, 6);
     rb_define_method(cWindow, "destroy?", Window_destroy_p, 0);
+    rb_define_method(cWindow, "destroy", Window_destroy, 0);
     rb_define_method(cWindow, "create_renderer", Window_create_renderer, 2);
     rb_define_method(cWindow, "debug_info", Window_debug_info, 0);
     rb_define_const(cWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
@@ -646,6 +682,7 @@ void rubysdl2_init_video(void)
     rb_undef_alloc_func(cRenderer);
     rb_define_singleton_method(cRenderer, "drivers_info", Renderer_s_drivers_info, 0);
     rb_define_method(cRenderer, "destroy?", Renderer_destroy_p, 0);
+    rb_define_method(cRenderer, "destroy", Renderer_destroy, 0);
     rb_define_method(cRenderer, "debug_info", Renderer_debug_info, 0);
     rb_define_method(cRenderer, "create_texture_from", Renderer_create_texture_from, 1);
     rb_define_method(cRenderer, "copy", Renderer_copy, 3);
@@ -694,6 +731,7 @@ void rubysdl2_init_video(void)
     
     rb_undef_alloc_func(cTexture);
     rb_define_method(cTexture, "destroy?", Texture_destroy_p, 0);
+    rb_define_method(cTexture, "destroy", Texture_destroy, 0);
     rb_define_method(cTexture, "blend_mode", Texture_blend_mode, 0);
     rb_define_method(cTexture, "blend_mode=", Texture_set_blend_mode, 1);
     rb_define_method(cTexture, "color_mod", Texture_color_mod, 0);
