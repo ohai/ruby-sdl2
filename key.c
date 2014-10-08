@@ -568,7 +568,7 @@ void rubysdl2_init_key(void)
     DEFINE_KEYCODE(SLEEP);
 
 #define DEFINE_KEYMOD(name) \
-    rb_define_const(mMod, #name, KMOD_##name)
+    rb_define_const(mMod, #name, INT2NUM(KMOD_##name))
     
     DEFINE_KEYMOD(NONE);
     DEFINE_KEYMOD(LSHIFT);
