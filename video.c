@@ -16,6 +16,12 @@ struct Window;
 struct Renderer;
 struct Texture;
 
+#ifdef DEBUG_GC
+#define GC_LOG(args) fprintf args
+#else
+#define GC_LOG(args) 
+#endif
+
 typedef struct Window {
     SDL_Window* window;
     int num_renderers;
@@ -44,9 +50,10 @@ static void Renderer_free(Renderer*);
 static void Window_free(Window* w)
 {
     int i;
+    GC_LOG((stderr, "Window free: %p\n", w));
     for (i=0; i<w->num_renderers; ++i) 
         Renderer_free(w->renderers[i]);
-  
+    
     if (w->window && rubysdl2_is_active())
         SDL_DestroyWindow(w->window);
   
@@ -70,15 +77,19 @@ static void Texture_free(Texture*);
 static void Renderer_free(Renderer* r)
 {
     int i;
+    GC_LOG((stderr, "Renderer free: %p (refcount=%d)\n", r, r->refcount));
     for (i=0; i<r->num_textures; ++i)
         Texture_free(r->textures[i]);
+    free(r->textures);
+    r->textures = NULL;
+    r->max_textures = r->num_textures = 0;
+
     if (r->renderer && rubysdl2_is_active()) {
         SDL_DestroyRenderer(r->renderer);
     }
     r->renderer = NULL;
     r->refcount--;
     if (r->refcount == 0) {
-        free(r->textures);
         free(r);
     }
 }
@@ -110,6 +121,7 @@ DEFINE_WRAPPER(SDL_Renderer, Renderer, renderer, cRenderer, "SDL2::Renderer");
 
 static void Texture_free(Texture* t)
 {
+    GC_LOG((stderr, "Texture free: %p (refcount=%d)\n", t, t->refcount));
     if (t->texture && rubysdl2_is_active()) {
         SDL_DestroyTexture(t->texture);
     }
@@ -144,6 +156,7 @@ DEFINE_WRAPPER(SDL_Texture, Texture, texture, cTexture, "SDL2::Texture");
 
 static void Surface_free(Surface* s)
 {
+    GC_LOG((stderr, "Surface free: %p\n", s));
     if (s->surface && rubysdl2_is_active())
         SDL_FreeSurface(s->surface);
     free(s);
