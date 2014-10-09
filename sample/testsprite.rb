@@ -20,6 +20,7 @@ texture.color_mod = [128, 128, 255]
 renderer.copy(texture, nil, SDL2::Rect.new(300, 420, 48, 48))
 loop do
   while ev = SDL2::Event.poll
+    p ev
     case ev
     when SDL2::Event::KeyDown
       if ev.scancode == SDL2::Key::Scan::ESCAPE
