@@ -106,7 +106,7 @@ static VALUE Mixer_s_play_channel(int argc, VALUE* argv, VALUE self)
                               NUM2INT(loops), NUM2INT(ticks));
     HANDLE_MIX_ERROR(ch);
     protect_playing_chunk_from_gc(ch, chunk);
-    return Qnil;
+    return INT2FIX(ch);
 }
 
 static VALUE Mixer_s_fadein_channel(int argc, VALUE* argv, VALUE self)
@@ -120,7 +120,7 @@ static VALUE Mixer_s_fadein_channel(int argc, VALUE* argv, VALUE self)
                                 NUM2INT(loops), NUM2INT(ms), NUM2INT(ticks));
     HANDLE_MIX_ERROR(ch);
     protect_playing_chunk_from_gc(ch, chunk);
-    return Qnil;
+    return INT2FIX(ch);
 }
 
 static VALUE Mixer_s_play_music(VALUE self, VALUE music, VALUE loops)
