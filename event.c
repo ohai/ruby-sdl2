@@ -1,5 +1,6 @@
 #include "rubysdl2_internal.h"
 #include <SDL_events.h>
+#include <SDL_version.h>
 
 static VALUE cEvent;
 static VALUE cEvQuit;
@@ -10,10 +11,10 @@ static VALUE cEvKeyDown;
 static VALUE cEvKeyUp;
 static VALUE cEvTextEditing;
 static VALUE cEvTextInput;
-/* static VALUE cEvMouseButton; */
-/* static VALUE cEvMouseButtonDown; */
-/* static VALUE cEvMouseButtonUp; */
-/* static VALUE cEvMouseMotion; */
+static VALUE cEvMouseButton;
+static VALUE cEvMouseButtonDown;
+static VALUE cEvMouseButtonUp;
+static VALUE cEvMouseMotion;
 /* static VALUE cEvMouseWheel; */
 /* static VALUE cEvJoyAxisMotion; */
 /* static VALUE cEvJoyBallMotion; */
@@ -177,18 +178,68 @@ static VALUE EvTextInput_inspect(VALUE self)
 }
 
 
+EVENT_ACCESSOR_UINT(MouseButton, window_id, button.windowID);
+EVENT_ACCESSOR_UINT(MouseButton, which, button.which);
+EVENT_ACCESSOR_UINT8(MouseButton, button, button.button);
+EVENT_ACCESSOR_UINT8(MouseButton, state, button.state);
+#if SDL_VERSION_ATLEAST(2,0,2)
+EVENT_ACCESSOR_UINT8(MouseButton, clicks, button.clicks);
+#endif
+EVENT_ACCESSOR_INT(MouseButton, x, button.x);
+EVENT_ACCESSOR_INT(MouseButton, y, button.y);
+static VALUE EvMouseButton_inspect(VALUE self)
+{
+    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    return rb_sprintf("<%s: type=%u timestamp=%u"
+                      " window_id=%u which=%u button=%hhu state=%hhu"
+#if SDL_VERSION_ATLEAST(2,0,2)
+                      " clicks=%hhu"
+#endif
+                      " x=%d y=%d>",
+                      rb_obj_classname(self), ev->common.type, ev->common.timestamp,
+                      ev->button.windowID, ev->button.which,
+                      ev->button.button, ev->button.state,
+#if SDL_VERSION_ATLEAST(2,0,2)
+                      ev->button.clicks,
+#endif
+                      ev->button.x, ev->button.y);
+}
+
+
+EVENT_ACCESSOR_UINT(MouseMotion, window_id, motion.windowID);
+EVENT_ACCESSOR_UINT(MouseMotion, which, motion.which);
+EVENT_ACCESSOR_UINT(MouseMotion, state, motion.state);
+EVENT_ACCESSOR_INT(MouseMotion, x, motion.x);
+EVENT_ACCESSOR_INT(MouseMotion, y, motion.y);
+EVENT_ACCESSOR_INT(MouseMotion, xrel, motion.xrel);
+EVENT_ACCESSOR_INT(MouseMotion, yrel, motion.yrel);
+static VALUE EvMouseMotion_inspect(VALUE self)
+{
+    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    return rb_sprintf("<%s: type=%u timestamp=%u"
+                      " window_id=%u which=%u state=%u"
+                      " x=%d y=%d xrel=%d yrel=%d>",
+                      rb_obj_classname(self), ev->common.type, ev->common.timestamp,
+                      ev->motion.windowID, ev->motion.which, ev->motion.state,
+                      ev->motion.x, ev->motion.y, ev->motion.xrel, ev->motion.yrel);
+}
+
+
 static void init_event_type_to_class(void)
 {
     int i;
     for (i=0; i<SDL_LASTEVENT; ++i)
         event_type_to_class[i] = cEvent;
-
+    
     event_type_to_class[SDL_QUIT] = cEvQuit;
     event_type_to_class[SDL_WINDOWEVENT] = cEvWindow;
     event_type_to_class[SDL_KEYDOWN] = cEvKeyDown;
     event_type_to_class[SDL_KEYUP] = cEvKeyUp;
     event_type_to_class[SDL_TEXTEDITING] = cEvTextEditing;
     event_type_to_class[SDL_TEXTINPUT] = cEvTextInput;
+    event_type_to_class[SDL_MOUSEBUTTONDOWN] = cEvMouseButtonDown;
+    event_type_to_class[SDL_MOUSEBUTTONUP] = cEvMouseButtonUp;
+    event_type_to_class[SDL_MOUSEMOTION] = cEvMouseMotion;
 }
 
 #define DEFINE_EVENT_READER(classname, classvar, name)                  \
@@ -216,6 +267,10 @@ void rubysdl2_init_event(void)
     cEvKeyDown = rb_define_class_under(cEvent, "KeyDown", cEvKeyboard);
     cEvTextEditing = rb_define_class_under(cEvent, "TextEditing", cEvent);
     cEvTextInput = rb_define_class_under(cEvent, "TextInput", cEvent);
+    cEvMouseButton = rb_define_class_under(cEvent, "MouseButton", cEvent);
+    cEvMouseButtonDown = rb_define_class_under(cEvent, "MouseButtonDown", cEvMouseButton);
+    cEvMouseButtonUp = rb_define_class_under(cEvent, "MouseButtonUp", cEvMouseButton);
+    cEvMouseMotion = rb_define_class_under(cEvent, "MouseMotion", cEvent);
     
     DEFINE_EVENT_ACCESSOR(Event, cEvent, timestamp);
     rb_define_method(cEvent, "inspect", Event_inspect, 0);
@@ -243,6 +298,26 @@ void rubysdl2_init_event(void)
     DEFINE_EVENT_ACCESSOR(TextInput, cEvTextInput, window_id);
     DEFINE_EVENT_ACCESSOR(TextInput, cEvTextInput, text);
     rb_define_method(cEvTextInput, "inspect", EvTextInput_inspect, 0);
+
+    DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, window_id);
+    DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, which);
+    DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, button);
+    DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, state);
+#if SDL_VERSION_ATLEAST(2,0,2)
+    DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, clicks);
+#endif
+    DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, x);
+    DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, y);
+    rb_define_method(cEvMouseButton, "inspect", EvMouseButton_inspect, 0);
+
+    DEFINE_EVENT_ACCESSOR(MouseMotion, cEvMouseMotion, window_id);
+    DEFINE_EVENT_ACCESSOR(MouseMotion, cEvMouseMotion, which);
+    DEFINE_EVENT_ACCESSOR(MouseMotion, cEvMouseMotion, state);
+    DEFINE_EVENT_ACCESSOR(MouseMotion, cEvMouseMotion, x);
+    DEFINE_EVENT_ACCESSOR(MouseMotion, cEvMouseMotion, y);
+    DEFINE_EVENT_ACCESSOR(MouseMotion, cEvMouseMotion, xrel);
+    DEFINE_EVENT_ACCESSOR(MouseMotion, cEvMouseMotion, yrel);
+    rb_define_method(cEvMouseMotion, "inspect", EvMouseMotion_inspect, 0);
     
     init_event_type_to_class();
 }
