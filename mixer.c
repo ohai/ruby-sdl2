@@ -156,7 +156,7 @@ static VALUE Chunk_s_decoders(VALUE self)
 static VALUE Chunk_destroy(VALUE self)
 {
     Chunk* c = Get_Chunk(self);
-    if (c) Mix_FreeChunk(c->chunk);
+    if (c->chunk) Mix_FreeChunk(c->chunk);
     c->chunk = NULL;
     return Qnil;
 }
