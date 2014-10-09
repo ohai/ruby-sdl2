@@ -65,20 +65,20 @@ static void set_string(char* field, VALUE str, int maxlength)
 }
 
 #define EVENT_READER(classname, name, field, c2ruby)            \
-    static VALUE classname##_##name(VALUE self)                 \
+    static VALUE Ev##classname##_##name(VALUE self)             \
     {                                                           \
         SDL_Event* ev;                                          \
         Data_Get_Struct(self, SDL_Event, ev);                   \
         return c2ruby(ev->field);                               \
     }                                                           \
 
-#define EVENT_WRITER(classname, name, field, ruby2c)            \
-    static VALUE classname##_set_##name(VALUE self, VALUE val)  \
-    {                                                           \
-        SDL_Event* ev;                                          \
-        Data_Get_Struct(self, SDL_Event, ev);                   \
-        ev->field = ruby2c(val);                                \
-        return Qnil;                                            \
+#define EVENT_WRITER(classname, name, field, ruby2c)                    \
+    static VALUE Ev##classname##_set_##name(VALUE self, VALUE val)      \
+    {                                                                   \
+        SDL_Event* ev;                                                  \
+        Data_Get_Struct(self, SDL_Event, ev);                           \
+        ev->field = ruby2c(val);                                        \
+        return Qnil;                                                    \
     }
 
 #define EVENT_ACCESSOR(classname, name, field, ruby2c, c2ruby)  \
@@ -140,7 +140,7 @@ EVENT_ACCESSOR_UINT(TextEditing, window_id, edit.windowID);
 EVENT_ACCESSOR_INT(TextEditing, start, edit.start);
 EVENT_ACCESSOR_INT(TextEditing, length, edit.length);
 EVENT_READER(TextEditing, text, edit.text, utf8str_new_cstr);
-static VALUE TextEditing_set_text(VALUE self, VALUE str)
+static VALUE EvTextEditing_set_text(VALUE self, VALUE str)
 {
     SDL_Event* ev;
     Data_Get_Struct(self, SDL_Event, ev);
@@ -160,7 +160,7 @@ static VALUE EvTextEditing_inspect(VALUE self)
 
 EVENT_ACCESSOR_UINT(TextInput, window_id, text.windowID);
 EVENT_READER(TextInput, text, text.text, utf8str_new_cstr);
-static VALUE TextInput_set_text(VALUE self, VALUE str)
+static VALUE EvTextInput_set_text(VALUE self, VALUE str)
 {
     SDL_Event* ev;
     Data_Get_Struct(self, SDL_Event, ev);
@@ -176,6 +176,7 @@ static VALUE EvTextInput_inspect(VALUE self)
                       ev->text.windowID, ev->text.text);
 }
 
+
 static void init_event_type_to_class(void)
 {
     int i;
@@ -190,11 +191,11 @@ static void init_event_type_to_class(void)
     event_type_to_class[SDL_TEXTINPUT] = cEvTextInput;
 }
 
-#define DEFINE_EVENT_READER(classname, classvar, name)          \
-    rb_define_method(classvar, #name, classname##_##name, 0)
+#define DEFINE_EVENT_READER(classname, classvar, name)                  \
+    rb_define_method(classvar, #name, Ev##classname##_##name, 0)
 
 #define DEFINE_EVENT_WRITER(classname, classvar, name)                  \
-    rb_define_method(classvar, #name "=", classname##_set_##name, 1)
+    rb_define_method(classvar, #name "=", Ev##classname##_set_##name, 1)
 
 #define DEFINE_EVENT_ACCESSOR(classname, classvar, name)                \
     do {                                                                \
