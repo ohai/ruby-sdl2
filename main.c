@@ -9,6 +9,7 @@
 #include <SDL_mixer.h>
 #endif
 #include <stdarg.h>
+#include <ruby/encoding.h>
 
 int rubysdl2_handle_error(int code, const char* cfunc)
 {
@@ -37,6 +38,11 @@ void rubysdl2_define_attr_readers(VALUE klass, ...)
         rb_define_attr(klass, field_name, 1, 0);
     }
     va_end(ap);
+}
+
+VALUE utf8str_new_cstr(const char* str)
+{
+    return rb_enc_str_new(str, strlen(str), rb_utf8_encoding());
 }
 
 typedef enum {

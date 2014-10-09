@@ -10,6 +10,7 @@
 int rubysdl2_handle_error(int code, const char* cfunc);
 int rubysdl2_is_active(void);
 void rubysdl2_define_attr_readers(VALUE klass, ...);
+VALUE rubysdl2_utf8str_new_cstr(const char* str);
 
 /** initialize interfaces */
 void rubysdl2_init_video(void);
@@ -26,6 +27,7 @@ void rubysdl2_init_mixer(void);
 #define NUM2UINT8 NUM2UINT
 
 #define define_attr_readers rubysdl2_define_attr_readers
+#define utf8str_new_cstr rubysdl2_utf8str_new_cstr
 
 #define DEFINE_GETTER(ctype, var_class, classname)                      \
     static ctype* Get_##ctype(VALUE obj)                                \
