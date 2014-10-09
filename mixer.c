@@ -189,6 +189,9 @@ void rubysdl2_init_mixer(void)
     DEFINE_MIX_FORMAT(U16SYS);
     DEFINE_MIX_FORMAT(S16SYS);
     rb_define_const(mMixer, "DEFAULT_FORMAT", UINT2NUM(MIX_DEFAULT_FORMAT));
+    rb_define_const(mMixer, "DEFAULT_CHANNELS", INT2FIX(MIX_DEFAULT_CHANNELS));
+    rb_define_const(mMixer, "MAX_VOLUME", INT2FIX(MIX_MAX_VOLUME));
+
     
     cChunk = rb_define_class_under(mMixer, "Chunk", rb_cObject);
     rb_undef_alloc_func(cChunk);
@@ -198,6 +201,7 @@ void rubysdl2_init_mixer(void)
     rb_define_method(cChunk, "destroy?", Chunk_destroy_p, 0);
     rb_define_method(cChunk, "volume", Chunk_volume, 0);
     rb_define_method(cChunk, "volume=", Chunk_set_volume, 1);
+
     
     cMusic = rb_define_class_under(mMixer, "Music", rb_cObject);
     rb_undef_alloc_func(cMusic);
