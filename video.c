@@ -357,8 +357,8 @@ static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
     a = rb_ary_entry(rgba, 3); if (a == Qnil) a = INT2FIX(255);
     
     HANDLE_ERROR(SDL_SetRenderDrawColor(Get_SDL_Renderer(self),
-                                        NUM2UINT8(r), NUM2UINT8(g), NUM2UINT8(b),
-                                        NUM2UINT8(a)));
+                                        NUM2UCHAR(r), NUM2UCHAR(g), NUM2UCHAR(b),
+                                        NUM2UCHAR(a)));
     return Qnil;
 }
 
@@ -501,7 +501,7 @@ static VALUE Texture_alpha_mod(VALUE self)
 
 static VALUE Texture_set_alpha_mod(VALUE self, VALUE alpha)
 {
-    HANDLE_ERROR(SDL_SetTextureAlphaMod(Get_SDL_Texture(self), NUM2UINT8(alpha)));
+    HANDLE_ERROR(SDL_SetTextureAlphaMod(Get_SDL_Texture(self), NUM2UCHAR(alpha)));
     return alpha;
 }
 
@@ -523,7 +523,7 @@ static VALUE Texture_set_color_mod(VALUE self, VALUE rgb)
     g = rb_ary_entry(rgb, 1);
     b = rb_ary_entry(rgb, 2);
     HANDLE_ERROR(SDL_SetTextureColorMod(Get_SDL_Texture(self),
-                                        NUM2UINT8(r), NUM2UINT8(g), NUM2UINT8(b)));
+                                        NUM2UCHAR(r), NUM2UCHAR(g), NUM2UCHAR(b)));
     return Qnil;
 }
 

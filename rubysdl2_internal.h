@@ -24,7 +24,8 @@ void rubysdl2_init_mixer(void);
 #define HANDLE_ERROR(c) (rubysdl2_handle_error((c), __func__))
 #define SDL_ERROR() (HANDLE_ERROR(-1))
 #define INT2BOOL(x) ((x)?Qtrue:Qfalse)
-#define NUM2UINT8 NUM2UINT
+#define NUM2UCHAR NUM2UINT
+#define UCHAR2NUM UINT2NUM
 
 #define define_attr_readers rubysdl2_define_attr_readers
 #define utf8str_new_cstr rubysdl2_utf8str_new_cstr
