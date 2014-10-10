@@ -62,6 +62,15 @@ VALUE Mixer_s_init(VALUE self, VALUE f)
     return Qnil;
 }
 
+static void check_channel(VALUE ch, int allow_minus_1)
+{
+    int channel = NUM2INT(ch);
+    if (channel >= Mix_AllocateChannels(-1))
+        rb_raise(rb_eArgError, "too large number of channel (%d)", channel);
+    if (channel == -1 && !allow_minus_1 || channel < -1)
+        rb_raise(rb_eArgError, "negative number of channel is not allowed");
+}
+
 static VALUE Mixer_s_open(int argc, VALUE* argv, VALUE self)
 {
     VALUE freq, format, channels, chunksize;
@@ -102,6 +111,7 @@ static VALUE Mixer_s_play_channel(int argc, VALUE* argv, VALUE self)
     rb_scan_args(argc, argv, "31", &channel, &chunk, &loops, &ticks);
     if (ticks == Qnil)
         ticks = INT2FIX(-1);
+    check_channel(channel, 1);
     ch = Mix_PlayChannelTimed(NUM2INT(channel), Get_Mix_Chunk(chunk),
                               NUM2INT(loops), NUM2INT(ticks));
     HANDLE_MIX_ERROR(ch);
@@ -116,6 +126,7 @@ static VALUE Mixer_s_fade_in_channel(int argc, VALUE* argv, VALUE self)
     rb_scan_args(argc, argv, "41", &channel, &chunk, &loops, &ms, &ticks);
     if (ticks == Qnil)
         ticks = INT2FIX(-1);
+    check_channel(channel, 1);
     ch = Mix_FadeInChannelTimed(NUM2INT(channel), Get_Mix_Chunk(chunk),
                                 NUM2INT(loops), NUM2INT(ms), NUM2INT(ticks));
     HANDLE_MIX_ERROR(ch);
@@ -125,30 +136,35 @@ static VALUE Mixer_s_fade_in_channel(int argc, VALUE* argv, VALUE self)
 
 static VALUE Mixer_s_pause(VALUE self, VALUE channel)
 {
+    check_channel(channel, 1);
     Mix_Pause(NUM2INT(channel));
     return Qnil;
 }
 
 static VALUE Mixer_s_resume(VALUE self, VALUE channel)
 {
+    check_channel(channel, 1);
     Mix_Resume(NUM2INT(channel));
     return Qnil;
 }
 
 static VALUE Mixer_s_halt_channel(VALUE self, VALUE channel)
 {
+    check_channel(channel, 1);
     Mix_HaltChannel(NUM2INT(channel));
     return Qnil;
 }
 
 static VALUE Mixer_s_expire_channel(VALUE self, VALUE channel, VALUE ticks)
 {
+    check_channel(channel, 1);
     Mix_ExpireChannel(NUM2INT(channel), NUM2INT(ticks));
     return Qnil;
 }
 
 static VALUE Mixer_s_fade_out_channel(VALUE self, VALUE channel, VALUE ms)
 {
+    check_channel(channel, 1);
     Mix_FadeOutChannel(NUM2INT(channel), NUM2INT(ms));
     return Qnil;
 }
