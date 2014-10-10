@@ -169,12 +169,6 @@ static VALUE Mixer_s_fade_out_channel(VALUE self, VALUE channel, VALUE ms)
     return Qnil;
 }
 
-static VALUE Mixer_s_play_music(VALUE self, VALUE music, VALUE loops)
-{
-    HANDLE_MIX_ERROR(Mix_PlayMusic(Get_Mix_Music(music), NUM2INT(loops)));
-    return Qnil;
-}
-
 static VALUE Mixer_s_play_p(VALUE self, VALUE channel)
 {
     check_channel(channel, 0);
@@ -197,6 +191,12 @@ static VALUE Mixer_s_playing_chunk(VALUE self, VALUE channel)
 {
     check_channel(channel, 0);
     return rb_ary_entry(playing_chunks, NUM2INT(channel));
+}
+
+static VALUE Mixer_s_play_music(VALUE self, VALUE music, VALUE loops)
+{
+    HANDLE_MIX_ERROR(Mix_PlayMusic(Get_Mix_Music(music), NUM2INT(loops)));
+    return Qnil;
 }
 
 static VALUE Chunk_s_load(VALUE self, VALUE fname)
@@ -246,6 +246,17 @@ static VALUE Chunk_inspect(VALUE self)
                       StringValueCStr(filename),
                       Mix_VolumeChunk(Get_Mix_Chunk(self), -1));
 }
+
+static VALUE Music_s_decoders(VALUE self)
+{
+    int num_decoders = Mix_GetNumMusicDecoders();
+    int i;
+    VALUE decoders = rb_ary_new2(num_decoders);
+    for (i=0; i<num_decoders; ++i)
+        rb_ary_push(decoders, utf8str_new_cstr(Mix_GetMusicDecoder(i)));
+    return decoders;
+}
+
 
 static VALUE Music_s_load(VALUE self, VALUE fname)
 {
@@ -321,8 +332,9 @@ void rubysdl2_init_mixer(void)
     
     cMusic = rb_define_class_under(mMixer, "Music", rb_cObject);
     rb_undef_alloc_func(cMusic);
-    rb_define_method(cMusic, "destroy", Music_destroy, 0);
+    rb_define_singleton_method(cMusic, "decoders", Music_s_decoders, 0);
     rb_define_singleton_method(cMusic, "load", Music_s_load, 1);
+    rb_define_method(cMusic, "destroy", Music_destroy, 0);
     rb_define_method(cMusic, "destroy?", Music_destroy_p, 0);
 
     rb_gc_register_address(&playing_chunks);
