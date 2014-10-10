@@ -123,6 +123,36 @@ static VALUE Mixer_s_fadein_channel(int argc, VALUE* argv, VALUE self)
     return INT2FIX(ch);
 }
 
+static VALUE Mixer_s_pause(VALUE self, VALUE channel)
+{
+    Mix_Pause(NUM2INT(channel));
+    return Qnil;
+}
+
+static VALUE Mixer_s_resume(VALUE self, VALUE channel)
+{
+    Mix_Resume(NUM2INT(channel));
+    return Qnil;
+}
+
+static VALUE Mixer_s_halt_channel(VALUE self, VALUE channel)
+{
+    Mix_HaltChannel(NUM2INT(channel));
+    return Qnil;
+}
+
+static VALUE Mixer_s_expire_channel(VALUE self, VALUE channel, VALUE ticks)
+{
+    Mix_ExpireChannel(NUM2INT(channel), NUM2INT(ticks));
+    return Qnil;
+}
+
+static VALUE Mixer_s_fade_out_channel(VALUE self, VALUE channel, VALUE ms)
+{
+    Mix_FadeOutChannel(NUM2INT(channel), NUM2INT(ms));
+    return Qnil;
+}
+
 static VALUE Mixer_s_play_music(VALUE self, VALUE music, VALUE loops)
 {
     HANDLE_MIX_ERROR(Mix_PlayMusic(Get_Mix_Music(music), NUM2INT(loops)));
@@ -196,6 +226,11 @@ void rubysdl2_init_mixer(void)
     rb_define_module_function(mMixer, "query", Mixer_s_query, 0);
     rb_define_module_function(mMixer, "play_channel", Mixer_s_play_channel, -1);
     rb_define_module_function(mMixer, "fadein_channel", Mixer_s_fadein_channel, -1);
+    rb_define_module_function(mMixer, "pause", Mixer_s_pause, 1);
+    rb_define_module_function(mMixer, "resume", Mixer_s_resume, 1);
+    rb_define_module_function(mMixer, "halt_channel", Mixer_s_halt_channel, 1);
+    rb_define_module_function(mMixer, "expire_channel", Mixer_s_expire_channel, 2);
+    rb_define_module_function(mMixer, "fade_out_channel", Mixer_s_fade_out_channel, 2);
     rb_define_module_function(mMixer, "play_music", Mixer_s_play_music, 2);
     rb_define_module_function(mMixer, "play?", Mixer_s_play_p, 1);
     
