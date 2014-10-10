@@ -175,9 +175,22 @@ static VALUE Mixer_s_play_music(VALUE self, VALUE music, VALUE loops)
     return Qnil;
 }
 
-static VALUE Mixer_s_play_p(VALUE self, VALUE chunnel)
+static VALUE Mixer_s_play_p(VALUE self, VALUE channel)
 {
-    return INT2BOOL(Mix_Playing(NUM2INT(chunnel)));
+    check_channel(channel, 0);
+    return INT2BOOL(Mix_Playing(NUM2INT(channel)));
+}
+
+static VALUE Mixer_s_pause_p(VALUE self, VALUE channel)
+{
+    check_channel(channel, 0);
+    return INT2BOOL(Mix_Paused(NUM2INT(channel)));
+}
+
+static VALUE Mixer_s_fading(VALUE self, VALUE which)
+{
+    check_channel(which, 0);
+    return INT2FIX(Mix_FadingChannel(NUM2INT(which)));
 }
 
 static VALUE Chunk_s_load(VALUE self, VALUE fname)
@@ -247,8 +260,11 @@ void rubysdl2_init_mixer(void)
     rb_define_module_function(mMixer, "halt_channel", Mixer_s_halt_channel, 1);
     rb_define_module_function(mMixer, "expire_channel", Mixer_s_expire_channel, 2);
     rb_define_module_function(mMixer, "fade_out_channel", Mixer_s_fade_out_channel, 2);
-    rb_define_module_function(mMixer, "play_music", Mixer_s_play_music, 2);
     rb_define_module_function(mMixer, "play?", Mixer_s_play_p, 1);
+    rb_define_module_function(mMixer, "pause?", Mixer_s_pause_p, 1);
+    rb_define_module_function(mMixer, "fading", Mixer_s_fading, 1);
+    rb_define_module_function(mMixer, "play_music", Mixer_s_play_music, 2);
+    
     
 #define DEFINE_MIX_INIT(t) \
     rb_define_const(mMixer, "INIT_" #t, UINT2NUM(MIX_INIT_##t))
