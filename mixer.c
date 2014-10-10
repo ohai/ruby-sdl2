@@ -193,6 +193,12 @@ static VALUE Mixer_s_fading(VALUE self, VALUE which)
     return INT2FIX(Mix_FadingChannel(NUM2INT(which)));
 }
 
+static VALUE Mixer_s_playing_chunk(VALUE self, VALUE channel)
+{
+    check_channel(channel, 0);
+    return rb_ary_entry(playing_chunks, NUM2INT(channel));
+}
+
 static VALUE Chunk_s_load(VALUE self, VALUE fname)
 {
     Mix_Chunk* chunk = Mix_LoadWAV(StringValueCStr(fname));
@@ -263,6 +269,7 @@ void rubysdl2_init_mixer(void)
     rb_define_module_function(mMixer, "play?", Mixer_s_play_p, 1);
     rb_define_module_function(mMixer, "pause?", Mixer_s_pause_p, 1);
     rb_define_module_function(mMixer, "fading", Mixer_s_fading, 1);
+    rb_define_module_function(mMixer, "playing_chunk", Mixer_s_playing_chunk, 1);
     rb_define_module_function(mMixer, "play_music", Mixer_s_play_music, 2);
     
     
