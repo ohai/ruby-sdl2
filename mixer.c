@@ -109,7 +109,7 @@ static VALUE Mixer_s_play_channel(int argc, VALUE* argv, VALUE self)
     return INT2FIX(ch);
 }
 
-static VALUE Mixer_s_fadein_channel(int argc, VALUE* argv, VALUE self)
+static VALUE Mixer_s_fade_in_channel(int argc, VALUE* argv, VALUE self)
 {
     VALUE channel, chunk, loops, ms, ticks;
     int ch;
@@ -225,7 +225,7 @@ void rubysdl2_init_mixer(void)
     rb_define_module_function(mMixer, "close", Mixer_s_close, 0);
     rb_define_module_function(mMixer, "query", Mixer_s_query, 0);
     rb_define_module_function(mMixer, "play_channel", Mixer_s_play_channel, -1);
-    rb_define_module_function(mMixer, "fadein_channel", Mixer_s_fadein_channel, -1);
+    rb_define_module_function(mMixer, "fade_in_channel", Mixer_s_fade_in_channel, -1);
     rb_define_module_function(mMixer, "pause", Mixer_s_pause, 1);
     rb_define_module_function(mMixer, "resume", Mixer_s_resume, 1);
     rb_define_module_function(mMixer, "halt_channel", Mixer_s_halt_channel, 1);
