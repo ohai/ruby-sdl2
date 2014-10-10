@@ -202,10 +202,12 @@ static VALUE Mixer_s_playing_chunk(VALUE self, VALUE channel)
 static VALUE Chunk_s_load(VALUE self, VALUE fname)
 {
     Mix_Chunk* chunk = Mix_LoadWAV(StringValueCStr(fname));
+    VALUE c;
     if (!chunk)
         MIX_ERROR();
-    
-    return Chunk_new(chunk);
+    c = Chunk_new(chunk);
+    rb_iv_set(c, "@filename", fname);
+    return c;
 }
 
 static VALUE Chunk_s_decoders(VALUE self)
@@ -234,6 +236,15 @@ static VALUE Chunk_volume(VALUE self)
 static VALUE Chunk_set_volume(VALUE self, VALUE vol)
 {
     return INT2NUM(Mix_VolumeChunk(Get_Mix_Chunk(self), NUM2INT(vol)));
+}
+
+static VALUE Chunk_inspect(VALUE self)
+{
+    VALUE filename = rb_iv_get(self, "@filename");
+    return rb_sprintf("<%s: filename=\"%s\" volume=%d>",
+                      rb_obj_classname(self),
+                      StringValueCStr(filename),
+                      Mix_VolumeChunk(Get_Mix_Chunk(self), -1));
 }
 
 static VALUE Music_s_load(VALUE self, VALUE fname)
@@ -305,7 +316,8 @@ void rubysdl2_init_mixer(void)
     rb_define_method(cChunk, "destroy?", Chunk_destroy_p, 0);
     rb_define_method(cChunk, "volume", Chunk_volume, 0);
     rb_define_method(cChunk, "volume=", Chunk_set_volume, 1);
-
+    rb_define_method(cChunk, "inspect", Chunk_inspect, 0);
+    rb_define_attr(cChunk, "filename", 1, 0);
     
     cMusic = rb_define_class_under(mMixer, "Music", rb_cObject);
     rb_undef_alloc_func(cMusic);
