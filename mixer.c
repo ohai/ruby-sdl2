@@ -261,8 +261,11 @@ static VALUE Music_s_decoders(VALUE self)
 static VALUE Music_s_load(VALUE self, VALUE fname)
 {
     Mix_Music* music = Mix_LoadMUS(StringValueCStr(fname));
-    if (music) MIX_ERROR();
-    return Music_new(music);
+    VALUE mus;
+    if (!music) MIX_ERROR();
+    mus = Music_new(music);
+    rb_iv_set(mus, "@filename", fname);
+    return mus;
 }
 
 static VALUE Music_destroy(VALUE self)
@@ -271,6 +274,14 @@ static VALUE Music_destroy(VALUE self)
     if (c) Mix_FreeMusic(c->music);
     c->music = NULL;
     return Qnil;
+}
+
+static VALUE Music_inspect(VALUE self)
+{
+    VALUE filename = rb_iv_get(self, "@filename");
+    return rb_sprintf("<%s: filename=\"%s\" type=%d>",
+                      rb_obj_classname(self), StringValueCStr(filename),
+                      Mix_GetMusicType(Get_Mix_Music(self)));
 }
 
 void rubysdl2_init_mixer(void)
@@ -336,7 +347,8 @@ void rubysdl2_init_mixer(void)
     rb_define_singleton_method(cMusic, "load", Music_s_load, 1);
     rb_define_method(cMusic, "destroy", Music_destroy, 0);
     rb_define_method(cMusic, "destroy?", Music_destroy_p, 0);
-
+    rb_define_method(cMusic, "inspect", Music_inspect, 0);
+    
     rb_gc_register_address(&playing_chunks);
     rb_gc_register_address(&playing_music);
 }
