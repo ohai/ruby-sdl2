@@ -370,19 +370,11 @@ static VALUE Renderer_draw_color(VALUE self)
 
 static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
 {
-    VALUE r, g, b, a;
-    Check_Type(rgba, T_ARRAY);
-    if (RARRAY_LEN(rgba) != 3 && RARRAY_LEN(rgba) != 4)
-        rb_raise(rb_eArgError, "wrong number of Array elements (%ld for 3 or 4)",
-                 RARRAY_LEN(rgba));
-    r = rb_ary_entry(rgba, 0);
-    g = rb_ary_entry(rgba, 1);
-    b = rb_ary_entry(rgba, 2);
-    a = rb_ary_entry(rgba, 3); if (a == Qnil) a = INT2FIX(255);
+    SDL_Color color = Array_to_SDL_Color(rgba);
     
     HANDLE_ERROR(SDL_SetRenderDrawColor(Get_SDL_Renderer(self),
-                                        NUM2UCHAR(r), NUM2UCHAR(g), NUM2UCHAR(b),
-                                        NUM2UCHAR(a)));
+                                        color.r, color.g, color.b, color.a));
+                                        
     return Qnil;
 }
 
@@ -538,16 +530,9 @@ static VALUE Texture_color_mod(VALUE self)
 
 static VALUE Texture_set_color_mod(VALUE self, VALUE rgb)
 {
-    VALUE r, g, b;
-    Check_Type(rgb, T_ARRAY);
-    if (RARRAY_LEN(rgb) != 3)
-        rb_raise(rb_eArgError, "wrong number of Array elements (%ld for 3)",
-                 RARRAY_LEN(rgb));
-    r = rb_ary_entry(rgb, 0);
-    g = rb_ary_entry(rgb, 1);
-    b = rb_ary_entry(rgb, 2);
+    SDL_Color color = Array_to_SDL_Color(rgb);
     HANDLE_ERROR(SDL_SetTextureColorMod(Get_SDL_Texture(self),
-                                        NUM2UCHAR(r), NUM2UCHAR(g), NUM2UCHAR(b)));
+                                        color.r, color.g, color.b));
     return Qnil;
 }
 
