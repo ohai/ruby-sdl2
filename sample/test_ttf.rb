@@ -35,6 +35,7 @@ p font.num_faces
 p font.face_is_fixed_width?
 p font.face_family_name
 p font.face_style_name
+p font.size_text("Foo")
 
 renderer.draw_color = [255,0,0]
 renderer.fill_rect(SDL2::Rect.new(0,0,640,480))

@@ -91,6 +91,14 @@ TTF_ATTR_READER(face_is_fixed_width_p, FaceIsFixedWidth, INT2BOOL);
 TTF_ATTR_READER(face_family_name, FaceFamilyName, utf8str_new_cstr);
 TTF_ATTR_READER(face_style_name, FaceStyleName, utf8str_new_cstr);
 
+static VALUE TTF_size_text(VALUE self, VALUE text)
+{
+    int w, h;
+    text = rb_str_export_to_enc(text, rb_utf8_encoding());
+    HANDLE_TTF_ERROR(TTF_SizeUTF8(Get_TTF_Font(self), StringValueCStr(text), &w, &h));
+    return rb_ary_new3(2, INT2NUM(w), INT2NUM(h));
+}
+
 static SDL_Surface* render_solid(TTF_Font* font, const char* text, SDL_Color fg, SDL_Color bg)
 {
     return TTF_RenderUTF8_Solid(font, text, fg);
@@ -160,7 +168,8 @@ void rubysdl2_init_ttf(void)
     rb_define_method(cTTF, "face_is_fixed_width?", TTF_face_is_fixed_width_p, 0);
     DEFINE_TTF_ATTR_READER(face_family_name);
     DEFINE_TTF_ATTR_READER(face_style_name);
-    
+
+    rb_define_method(cTTF, "size_text", TTF_size_text, 1);
     rb_define_method(cTTF, "render_solid", TTF_render_solid, 2);
     rb_define_method(cTTF, "render_shaded", TTF_render_shaded, 3);
     rb_define_method(cTTF, "render_blended", TTF_render_blended, 2);
