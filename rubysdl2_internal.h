@@ -21,6 +21,7 @@ VALUE rubysdl2_SDL_version_to_Array(const SDL_version* ver);
 void rubysdl2_init_video(void);
 void rubysdl2_init_event(void);
 void rubysdl2_init_key(void);
+void rubysdl2_init_joystick(void);
 void rubysdl2_init_timer(void);
 void rubysdl2_init_image(void);
 void rubysdl2_init_mixer(void);
