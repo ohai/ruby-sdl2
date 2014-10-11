@@ -176,6 +176,7 @@ void rubysdl2_init_ttf(void)
 
 #define DEFINE_TTF_CONST(name)                  \
     rb_define_const(cTTF, #name, INT2NUM((TTF_##name)))
+    DEFINE_TTF_CONST(STYLE_NORMAL);
     DEFINE_TTF_CONST(STYLE_BOLD);
     DEFINE_TTF_CONST(STYLE_ITALIC);
     DEFINE_TTF_CONST(STYLE_UNDERLINE);
