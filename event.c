@@ -95,6 +95,8 @@ static void set_string(char* field, VALUE str, int maxlength)
 #define EVENT_ACCESSOR_INT(classname, name, field) \
     EVENT_ACCESSOR(classname, name, field, NUM2INT, INT2NUM)
 
+#define EVENT_ACCESSOR_BOOL(classname, name, field)             \
+    EVENT_ACCESSOR(classname, name, field, RTEST, INT2BOOL)
 
 
 EVENT_ACCESSOR_UINT(Event, timestamp, common.timestamp);
@@ -241,7 +243,7 @@ static VALUE EvMouseWheel_inspect(VALUE self)
 
 EVENT_ACCESSOR_INT(JoyButton, which, jbutton.which);
 EVENT_ACCESSOR_UINT8(JoyButton, button, jbutton.button);
-EVENT_ACCESSOR(JoyButton, pressed, jbutton.state, RTEST, INT2BOOL);
+EVENT_ACCESSOR_BOOL(JoyButton, pressed, jbutton.state)
 static VALUE EvJoyButton_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
