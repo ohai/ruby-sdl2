@@ -310,6 +310,9 @@ static VALUE Chunk_set_volume(VALUE self, VALUE vol)
 static VALUE Chunk_inspect(VALUE self)
 {
     VALUE filename = rb_iv_get(self, "@filename");
+    if (RTEST(Chunk_destroy_p(self)))
+        return rb_sprintf("<%s: destroyed>", rb_obj_classname(self));
+    
     return rb_sprintf("<%s: filename=\"%s\" volume=%d>",
                       rb_obj_classname(self),
                       StringValueCStr(filename),
@@ -348,6 +351,9 @@ static VALUE Music_destroy(VALUE self)
 static VALUE Music_inspect(VALUE self)
 {
     VALUE filename = rb_iv_get(self, "@filename");
+    if (RTEST(Music_destroy_p(self)))
+        return rb_sprintf("<%s: destroyed>", rb_obj_classname(self));
+    
     return rb_sprintf("<%s: filename=\"%s\" type=%d>",
                       rb_obj_classname(self), StringValueCStr(filename),
                       Mix_GetMusicType(Get_Mix_Music(self)));
