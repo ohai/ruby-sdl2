@@ -19,6 +19,7 @@ void rubysdl2_init_key(void);
 void rubysdl2_init_timer(void);
 void rubysdl2_init_image(void);
 void rubysdl2_init_mixer(void);
+void rubysdl2_init_ttf(void);
 
 /** macros */
 #define HANDLE_ERROR(c) (rubysdl2_handle_error((c), __func__))
@@ -26,9 +27,6 @@ void rubysdl2_init_mixer(void);
 #define INT2BOOL(x) ((x)?Qtrue:Qfalse)
 #define NUM2UCHAR NUM2UINT
 #define UCHAR2NUM UINT2NUM
-
-#define define_attr_readers rubysdl2_define_attr_readers
-#define utf8str_new_cstr rubysdl2_utf8str_new_cstr
 
 #define DEFINE_GETTER(ctype, var_class, classname)                      \
     static ctype* Get_##ctype(VALUE obj)                                \
@@ -63,10 +61,14 @@ void rubysdl2_init_mixer(void);
     DEFINE_WRAP_GETTER(SDL_typename, struct_name, field, classname);    \
     DEFINE_DESTROY_P(struct_name, field);
 
-/** classes and modules */
+/** prefix macros */
+#define define_attr_readers rubysdl2_define_attr_readers
+#define utf8str_new_cstr rubysdl2_utf8str_new_cstr
+
 #define mSDL2 rubysdl2_mSDL2
 #define eSDL2Error rubysdl2_eSDL2Error
 
+/** classes and modules */
 SDL2_EXTERN VALUE mSDL2;
 SDL2_EXTERN VALUE eSDL2Error;
 

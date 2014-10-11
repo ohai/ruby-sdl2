@@ -8,6 +8,9 @@
 #ifdef HAVE_SDL_MIXER_H
 #include <SDL_mixer.h>
 #endif
+#ifdef HAVE_SDL_TTF_H
+#include <SDL_ttf.h>
+#endif
 #include <stdarg.h>
 #include <ruby/encoding.h>
 
@@ -61,6 +64,9 @@ static void quit(VALUE unused)
 #endif
 #ifdef HAVE_SDL_MIXER_H
     Mix_Quit();
+#endif
+#ifdef HAVE_SDL_TTF_H
+    TTF_Quit();
 #endif
     SDL_Quit();
     state = FINALIZED;
@@ -136,6 +142,7 @@ void Init_sdl2_ext(void)
     rubysdl2_init_timer();
     rubysdl2_init_image();
     rubysdl2_init_mixer();
+    rubysdl2_init_ttf();
     
     rb_set_end_proc(quit, 0);
     return;
