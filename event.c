@@ -37,6 +37,11 @@ static VALUE cEvJoyButtonUp;
 /* static VALUE cEvDrop; */
 
 
+static const char* INT2BOOLSTR(int bool)
+{
+    return bool ? "true" : "false";
+}
+
 static VALUE event_type_to_class[SDL_LASTEVENT];
 
 static VALUE Event_new(SDL_Event* ev)
@@ -183,7 +188,7 @@ static VALUE EvTextInput_inspect(VALUE self)
 EVENT_ACCESSOR_UINT(MouseButton, window_id, button.windowID);
 EVENT_ACCESSOR_UINT(MouseButton, which, button.which);
 EVENT_ACCESSOR_UINT8(MouseButton, button, button.button);
-EVENT_ACCESSOR_UINT8(MouseButton, state, button.state);
+EVENT_ACCESSOR_BOOL(MouseButton, pressed, button.state);
 #if SDL_VERSION_ATLEAST(2,0,2)
 EVENT_ACCESSOR_UINT8(MouseButton, clicks, button.clicks);
 #endif
@@ -193,14 +198,14 @@ static VALUE EvMouseButton_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
-                      " window_id=%u which=%u button=%hhu state=%hhu"
+                      " window_id=%u which=%u button=%hhu pressed=%s"
 #if SDL_VERSION_ATLEAST(2,0,2)
                       " clicks=%hhu"
 #endif
                       " x=%d y=%d>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
                       ev->button.windowID, ev->button.which,
-                      ev->button.button, ev->button.state,
+                      ev->button.button, INT2BOOLSTR(ev->button.state),
 #if SDL_VERSION_ATLEAST(2,0,2)
                       ev->button.clicks,
 #endif
@@ -251,7 +256,7 @@ static VALUE EvJoyButton_inspect(VALUE self)
                       " which=%d button=%u pressed=%s>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
                       ev->jbutton.which, ev->jbutton.button,
-                      ev->jbutton.state ? "true" : "false");
+                      INT2BOOLSTR(ev->jbutton.state));
 }
 
 
@@ -339,12 +344,13 @@ void rubysdl2_init_event(void)
     DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, window_id);
     DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, which);
     DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, button);
-    DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, state);
+    DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, pressed);
 #if SDL_VERSION_ATLEAST(2,0,2)
     DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, clicks);
 #endif
     DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, x);
     DEFINE_EVENT_ACCESSOR(MouseButton, cEvMouseButton, y);
+    rb_define_alias(cEvMouseButton, "pressed?", "pressed");
     rb_define_method(cEvMouseButton, "inspect", EvMouseButton_inspect, 0);
 
     DEFINE_EVENT_ACCESSOR(MouseMotion, cEvMouseMotion, window_id);
