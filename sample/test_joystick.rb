@@ -20,7 +20,7 @@ renderer = window.create_renderer(-1, 0)
 loop do
   while ev = SDL2::Event.poll
     case ev
-    when SDL2::Event::JoyButton
+    when SDL2::Event::JoyButton, SDL2::Event::JoyAxisMotion
       p ev
     when SDL2::Event::KeyDown
       if ev.scancode == SDL2::Key::Scan::ESCAPE
@@ -32,6 +32,6 @@ loop do
   end
 
   renderer.present
-  #GC.start
+  GC.start
   sleep 0.1
 end
