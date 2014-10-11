@@ -1,6 +1,7 @@
 #define SDL2_EXTERN
 #include "rubysdl2_internal.h"
 #include <SDL.h>
+#include <SDL_version.h>
 #include <stdio.h>
 #ifdef HAVE_SDL_IMAGE_H
 #include <SDL_image.h>
@@ -48,6 +49,16 @@ VALUE utf8str_new_cstr(const char* str)
     return rb_enc_str_new(str, strlen(str), rb_utf8_encoding());
 }
 
+VALUE SDL_version_to_String(SDL_version* ver)
+{
+    return rb_sprintf("%d.%d.%d", ver->major, ver->minor, ver->patch);
+}
+
+VALUE SDL_version_to_Array(SDL_version* ver)
+{
+    return rb_ary_new3(3, INT2FIX(ver->major), INT2FIX(ver->minor), INT2FIX(ver->patch));
+}
+
 typedef enum {
     NOT_INITIALIZED, INITIALIZDED, FINALIZED
 } sdl2_state;
@@ -89,15 +100,14 @@ static VALUE libsdl_version(void)
 {
     SDL_version version;
     SDL_GetVersion(&version);
-    return rb_sprintf("%d.%d.%d", version.major, version.minor, version.patch);
+    return SDL_version_to_String(&version);
 }
 
 static VALUE libsdl_version_number(void)
 {
     SDL_version version;
     SDL_GetVersion(&version);
-    return rb_ary_new3(3, INT2FIX(version.major), INT2FIX(version.minor),
-                       INT2FIX(version.patch));
+    return SDL_version_to_Array(&version);
 }
 
 static VALUE libsdl_revision(void)

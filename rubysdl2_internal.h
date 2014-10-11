@@ -1,6 +1,7 @@
 #include <ruby.h>
 #define SDL_MAIN_HANDLED
 #include <SDL_surface.h>
+#include <SDL_version.h>
 
 #ifndef SDL2_EXTERN
 #define SDL2_EXTERN extern
@@ -13,6 +14,8 @@ void rubysdl2_define_attr_readers(VALUE klass, ...);
 VALUE rubysdl2_utf8str_new_cstr(const char* str);
 VALUE rubysdl2_Surface_new(SDL_Surface* surface);
 SDL_Color rubysdl2_Array_to_SDL_Color(VALUE ary);
+VALUE rubysdl2_SDL_version_to_String(SDL_version* ver);
+VALUE rubysdl2_SDL_version_to_Array(SDL_version* ver);
 
 /** initialize interfaces */
 void rubysdl2_init_video(void);
@@ -74,6 +77,8 @@ SDL2_EXTERN VALUE rubysdl2_eSDL2Error;
 #define Array_to_SDL_Color rubysdl2_Array_to_SDL_Color 
 #define mSDL2 rubysdl2_mSDL2
 #define eSDL2Error rubysdl2_eSDL2Error
+#define SDL_version_to_String rubysdl2_SDL_version_to_String
+#define SDL_version_to_Array rubysdl2_SDL_version_to_Array
 
 
 
