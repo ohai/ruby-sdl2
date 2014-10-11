@@ -21,7 +21,7 @@ typedef struct Music {
     Mix_Music* music;
 } Music;
 
-void Chunk_free(Chunk* c)
+static void Chunk_free(Chunk* c)
 {
     if (c->chunk) 
         Mix_FreeChunk(c->chunk);
@@ -37,7 +37,7 @@ static VALUE Chunk_new(Mix_Chunk* chunk)
 
 DEFINE_WRAPPER(Mix_Chunk, Chunk, chunk, cChunk, "SDL2::Mixer::Chunk");
 
-void Music_free(Music* m)
+static void Music_free(Music* m)
 {
     if (m->music) 
         Mix_FreeMusic(m->music);
@@ -53,7 +53,7 @@ static VALUE Music_new(Mix_Music* music)
                             
 DEFINE_WRAPPER(Mix_Music, Music, music, cMusic, "SDL2::Mixer::Music");
 
-VALUE Mixer_s_init(VALUE self, VALUE f)
+static VALUE Mixer_s_init(VALUE self, VALUE f)
 {
     int flags = NUM2INT(f);
     if (Mix_Init(flags) & flags != flags) 
