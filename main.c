@@ -49,12 +49,12 @@ VALUE utf8str_new_cstr(const char* str)
     return rb_enc_str_new(str, strlen(str), rb_utf8_encoding());
 }
 
-VALUE SDL_version_to_String(SDL_version* ver)
+VALUE SDL_version_to_String(const SDL_version* ver)
 {
     return rb_sprintf("%d.%d.%d", ver->major, ver->minor, ver->patch);
 }
 
-VALUE SDL_version_to_Array(SDL_version* ver)
+VALUE SDL_version_to_Array(const SDL_version* ver)
 {
     return rb_ary_new3(3, INT2FIX(ver->major), INT2FIX(ver->minor), INT2FIX(ver->patch));
 }

@@ -14,8 +14,8 @@ void rubysdl2_define_attr_readers(VALUE klass, ...);
 VALUE rubysdl2_utf8str_new_cstr(const char* str);
 VALUE rubysdl2_Surface_new(SDL_Surface* surface);
 SDL_Color rubysdl2_Array_to_SDL_Color(VALUE ary);
-VALUE rubysdl2_SDL_version_to_String(SDL_version* ver);
-VALUE rubysdl2_SDL_version_to_Array(SDL_version* ver);
+VALUE rubysdl2_SDL_version_to_String(const SDL_version* ver);
+VALUE rubysdl2_SDL_version_to_Array(const SDL_version* ver);
 
 /** initialize interfaces */
 void rubysdl2_init_video(void);
