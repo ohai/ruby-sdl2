@@ -15,7 +15,7 @@ static VALUE cEvMouseButton;
 static VALUE cEvMouseButtonDown;
 static VALUE cEvMouseButtonUp;
 static VALUE cEvMouseMotion;
-/* static VALUE cEvMouseWheel; */
+static VALUE cEvMouseWheel;
 /* static VALUE cEvJoyAxisMotion; */
 /* static VALUE cEvJoyBallMotion; */
 /* static VALUE cEvJoyButton; */
@@ -225,6 +225,20 @@ static VALUE EvMouseMotion_inspect(VALUE self)
 }
 
 
+EVENT_ACCESSOR_UINT(MouseWheel, window_id, wheel.windowID);
+EVENT_ACCESSOR_UINT(MouseWheel, which, wheel.which);
+EVENT_ACCESSOR_INT(MouseWheel, x, wheel.x);
+EVENT_ACCESSOR_INT(MouseWheel, y, wheel.y);
+static VALUE EvMouseWheel_inspect(VALUE self)
+{
+    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    return rb_sprintf("<%s: type=%u timestamp=%u"
+                      " window_id=%u which=%u x=%d y=%d>",
+                      rb_obj_classname(self), ev->common.type, ev->common.timestamp,
+                      ev->wheel.windowID, ev->wheel.which, ev->wheel.x, ev->wheel.y);
+}
+
+
 static void init_event_type_to_class(void)
 {
     int i;
@@ -240,6 +254,7 @@ static void init_event_type_to_class(void)
     event_type_to_class[SDL_MOUSEBUTTONDOWN] = cEvMouseButtonDown;
     event_type_to_class[SDL_MOUSEBUTTONUP] = cEvMouseButtonUp;
     event_type_to_class[SDL_MOUSEMOTION] = cEvMouseMotion;
+    event_type_to_class[SDL_MOUSEWHEEL] = cEvMouseWheel;
 }
 
 #define DEFINE_EVENT_READER(classname, classvar, name)                  \
@@ -271,6 +286,7 @@ void rubysdl2_init_event(void)
     cEvMouseButtonDown = rb_define_class_under(cEvent, "MouseButtonDown", cEvMouseButton);
     cEvMouseButtonUp = rb_define_class_under(cEvent, "MouseButtonUp", cEvMouseButton);
     cEvMouseMotion = rb_define_class_under(cEvent, "MouseMotion", cEvent);
+    cEvMouseWheel = rb_define_class_under(cEvent, "MouseWheel", cEvent);
     
     DEFINE_EVENT_ACCESSOR(Event, cEvent, timestamp);
     rb_define_method(cEvent, "inspect", Event_inspect, 0);
@@ -318,6 +334,12 @@ void rubysdl2_init_event(void)
     DEFINE_EVENT_ACCESSOR(MouseMotion, cEvMouseMotion, xrel);
     DEFINE_EVENT_ACCESSOR(MouseMotion, cEvMouseMotion, yrel);
     rb_define_method(cEvMouseMotion, "inspect", EvMouseMotion_inspect, 0);
+
+    DEFINE_EVENT_ACCESSOR(MouseWheel, cEvMouseWheel, window_id);
+    DEFINE_EVENT_ACCESSOR(MouseWheel, cEvMouseWheel, which);
+    DEFINE_EVENT_ACCESSOR(MouseWheel, cEvMouseWheel, x);
+    DEFINE_EVENT_ACCESSOR(MouseWheel, cEvMouseWheel, y);
+    rb_define_method(cEvMouseWheel, "inspect", EvMouseWheel_inspect, 0);
     
     init_event_type_to_class();
 }
