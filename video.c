@@ -179,7 +179,7 @@ static void Surface_free(Surface* s)
     free(s);
 }
 
-static VALUE Surface_new(SDL_Surface* surface)
+VALUE Surface_new(SDL_Surface* surface)
 {
     Surface* s = ALLOC(Surface);
     s->surface = surface;
