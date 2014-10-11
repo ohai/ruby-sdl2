@@ -13,7 +13,7 @@ typedef struct TTF {
     TTF_Font* font;
 } TTF;
 
-#define TTF_ATTRIBUTE(attr, capitalized_attr, c2ruby, ruby2c)           \
+#define TTF_ATTRIBUTE(attr, capitalized_attr, ruby2c, c2ruby)           \
     static VALUE TTF_##attr(VALUE self)                                 \
     {                                                                   \
         return c2ruby(TTF_Get##capitalized_attr(Get_TTF_Font(self)));   \
@@ -25,7 +25,7 @@ typedef struct TTF {
     }
 
 #define TTF_ATTRIBUTE_INT(attr, capitalized_attr)               \
-    TTF_ATTRIBUTE(attr, capitalized_attr, INT2NUM, NUM2INT)
+    TTF_ATTRIBUTE(attr, capitalized_attr, NUM2INT, INT2NUM)
 
 #define TTF_ATTR_READER(attr, capitalized_attr, c2ruby)                 \
     static VALUE TTF_##attr(VALUE self)                                 \
@@ -81,7 +81,7 @@ static VALUE TTF_destroy(VALUE self)
 TTF_ATTRIBUTE_INT(style, FontStyle);
 TTF_ATTRIBUTE_INT(outline, FontOutline);
 TTF_ATTRIBUTE_INT(hinting, FontHinting);
-TTF_ATTRIBUTE(kerning, FontKerning, INT2BOOL, RTEST);
+TTF_ATTRIBUTE(kerning, FontKerning, RTEST, INT2BOOL);
 TTF_ATTR_READER(height, Height, INT2FIX);
 TTF_ATTR_READER(ascent, Ascent, INT2FIX);
 TTF_ATTR_READER(descent, Descent, INT2FIX);
