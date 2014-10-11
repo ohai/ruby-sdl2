@@ -13,6 +13,26 @@ typedef struct TTF {
     TTF_Font* font;
 } TTF;
 
+#define TTF_ATTRIBUTE(attr, capitalized_attr, c2ruby, ruby2c)           \
+    static VALUE TTF_##attr(VALUE self)                                 \
+    {                                                                   \
+        return c2ruby(TTF_Get##capitalized_attr(Get_TTF_Font(self)));   \
+    }                                                                   \
+    static VALUE TTF_set_##attr(VALUE self, VALUE val)                  \
+    {                                                                   \
+        TTF_Set##capitalized_attr(Get_TTF_Font(self), ruby2c(val));     \
+            return Qnil;                                                \
+    }
+
+#define TTF_ATTRIBUTE_INT(attr, capitalized_attr)               \
+    TTF_ATTRIBUTE(attr, capitalized_attr, INT2NUM, NUM2INT)
+
+#define TTF_ATTR_READER(attr, capitalized_attr, c2ruby)                 \
+    static VALUE TTF_##attr(VALUE self)                                 \
+    {                                                                   \
+        return c2ruby(TTF_Font##capitalized_attr(Get_TTF_Font(self)));  \
+    }
+
 static void TTF_free(TTF* f)
 {
     if (rubysdl2_is_active() && f->font)
@@ -57,6 +77,19 @@ static VALUE TTF_destroy(VALUE self)
     f->font = NULL;
     return Qnil;
 }
+
+TTF_ATTRIBUTE_INT(style, FontStyle);
+TTF_ATTRIBUTE_INT(outline, FontOutline);
+TTF_ATTRIBUTE_INT(hinting, FontHinting);
+TTF_ATTRIBUTE(kerning, FontKerning, INT2BOOL, RTEST);
+TTF_ATTR_READER(height, Height, INT2FIX);
+TTF_ATTR_READER(ascent, Ascent, INT2FIX);
+TTF_ATTR_READER(descent, Descent, INT2FIX);
+TTF_ATTR_READER(line_skip, LineSkip, INT2FIX);
+TTF_ATTR_READER(num_faces, Faces, LONG2NUM);
+TTF_ATTR_READER(face_is_fixed_width_p, FaceIsFixedWidth, INT2BOOL);
+TTF_ATTR_READER(face_family_name, FaceFamilyName, utf8str_new_cstr);
+TTF_ATTR_READER(face_style_name, FaceStyleName, utf8str_new_cstr);
 
 static SDL_Surface* render_solid(TTF_Font* font, const char* text, SDL_Color fg, SDL_Color bg)
 {
@@ -105,10 +138,44 @@ void rubysdl2_init_ttf(void)
     rb_define_singleton_method(cTTF, "open", TTF_s_open, -1);
     rb_define_method(cTTF, "destroy?", TTF_destroy_p, 0);
     rb_define_method(cTTF, "destroy", TTF_destroy, 0);
+    
+#define DEFINE_TTF_ATTRIBUTE(attr) do {                         \
+        rb_define_method(cTTF, #attr, TTF_##attr, 0);           \
+        rb_define_method(cTTF, #attr "=", TTF_set_##attr, 1);   \
+    } while (0)
+    
+    DEFINE_TTF_ATTRIBUTE(style);
+    DEFINE_TTF_ATTRIBUTE(outline);
+    DEFINE_TTF_ATTRIBUTE(hinting);
+    DEFINE_TTF_ATTRIBUTE(kerning);
+    
+#define DEFINE_TTF_ATTR_READER(attr)                    \
+    rb_define_method(cTTF, #attr, TTF_##attr, 0)
+
+    DEFINE_TTF_ATTR_READER(height);
+    DEFINE_TTF_ATTR_READER(ascent);
+    DEFINE_TTF_ATTR_READER(descent);
+    DEFINE_TTF_ATTR_READER(line_skip);
+    DEFINE_TTF_ATTR_READER(num_faces);
+    rb_define_method(cTTF, "face_is_fixed_width?", TTF_face_is_fixed_width_p, 0);
+    DEFINE_TTF_ATTR_READER(face_family_name);
+    DEFINE_TTF_ATTR_READER(face_style_name);
+    
     rb_define_method(cTTF, "render_solid", TTF_render_solid, 2);
     rb_define_method(cTTF, "render_shaded", TTF_render_shaded, 3);
     rb_define_method(cTTF, "render_blended", TTF_render_blended, 2);
 
+#define DEFINE_TTF_CONST(name)                  \
+    rb_define_const(cTTF, #name, INT2NUM((TTF_##name)))
+    DEFINE_TTF_CONST(STYLE_BOLD);
+    DEFINE_TTF_CONST(STYLE_ITALIC);
+    DEFINE_TTF_CONST(STYLE_UNDERLINE);
+    DEFINE_TTF_CONST(STYLE_STRIKETHROUGH);
+
+    DEFINE_TTF_CONST(HINTING_NORMAL);
+    DEFINE_TTF_CONST(HINTING_LIGHT);
+    DEFINE_TTF_CONST(HINTING_MONO);
+    DEFINE_TTF_CONST(HINTING_NONE);
 }
 
 #else /* HAVE_SDL_TTF_H */
