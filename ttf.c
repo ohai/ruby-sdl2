@@ -49,6 +49,15 @@ static VALUE TTF_s_open(int argc, VALUE* argv, VALUE self)
     return TTF_new(font);
 }
 
+static VALUE TTF_destroy(VALUE self)
+{
+    TTF* f = Get_TTF(self);
+    if (f->font)
+        TTF_CloseFont(f->font);
+    f->font = NULL;
+    return Qnil;
+}
+
 static SDL_Surface* render_solid(TTF_Font* font, const char* text, SDL_Color fg, SDL_Color bg)
 {
     return TTF_RenderUTF8_Solid(font, text, fg);
@@ -95,6 +104,7 @@ void rubysdl2_init_ttf(void)
     rb_define_singleton_method(cTTF, "init", TTF_s_init, 0);
     rb_define_singleton_method(cTTF, "open", TTF_s_open, -1);
     rb_define_method(cTTF, "destroy?", TTF_destroy_p, 0);
+    rb_define_method(cTTF, "destroy", TTF_destroy, 0);
     rb_define_method(cTTF, "render_solid", TTF_render_solid, 2);
     rb_define_method(cTTF, "render_shaded", TTF_render_shaded, 3);
     rb_define_method(cTTF, "render_blended", TTF_render_blended, 2);
