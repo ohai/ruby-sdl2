@@ -23,7 +23,7 @@ typedef struct Music {
 
 static void Chunk_free(Chunk* c)
 {
-    if (c->chunk) 
+    if (rubysdl2_is_active() && c->chunk) 
         Mix_FreeChunk(c->chunk);
     free(c);
 }
@@ -39,7 +39,7 @@ DEFINE_WRAPPER(Mix_Chunk, Chunk, chunk, cChunk, "SDL2::Mixer::Chunk");
 
 static void Music_free(Music* m)
 {
-    if (m->music) 
+    if (rubysdl2_is_active() && m->music) 
         Mix_FreeMusic(m->music);
     free(m);
 }
