@@ -7,6 +7,10 @@ p SDL2::Joystick.num_connected_joysticks
 exit if SDL2::Joystick.num_connected_joysticks == 0
 $joystick = SDL2::Joystick.open(0)
 p $joystick.name
+p $joystick.num_axes
+p $joystick.num_hats
+p $joystick.num_buttons
+p $joystick.num_balls
 
 window = SDL2::Window.create("testsprite",0, 0, 640, 480, 0)
                              
