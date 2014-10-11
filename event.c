@@ -18,9 +18,9 @@ static VALUE cEvMouseMotion;
 static VALUE cEvMouseWheel;
 /* static VALUE cEvJoyAxisMotion; */
 /* static VALUE cEvJoyBallMotion; */
-/* static VALUE cEvJoyButton; */
-/* static VALUE cEvJoyButtonDown; */
-/* static VALUE cEvJoyButtonUp; */
+static VALUE cEvJoyButton;
+static VALUE cEvJoyButtonDown;
+static VALUE cEvJoyButtonUp;
 /* static VALUE cEvJoyHatMotion; */
 /* static VALUE cEvJoyDevice; */
 /* static VALUE cEvJoyDeviceAdded; */
@@ -239,6 +239,20 @@ static VALUE EvMouseWheel_inspect(VALUE self)
 }
 
 
+EVENT_ACCESSOR_INT(JoyButton, which, jbutton.which);
+EVENT_ACCESSOR_UINT8(JoyButton, button, jbutton.button);
+EVENT_ACCESSOR(JoyButton, pressed, jbutton.state, RTEST, INT2BOOL);
+static VALUE EvJoyButton_inspect(VALUE self)
+{
+    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    return rb_sprintf("<%s: type=%u timestamp=%u"
+                      " which=%d button=%u pressed=%s>",
+                      rb_obj_classname(self), ev->common.type, ev->common.timestamp,
+                      ev->jbutton.which, ev->jbutton.button,
+                      ev->jbutton.state ? "true" : "false");
+}
+
+
 static void init_event_type_to_class(void)
 {
     int i;
@@ -255,6 +269,8 @@ static void init_event_type_to_class(void)
     event_type_to_class[SDL_MOUSEBUTTONUP] = cEvMouseButtonUp;
     event_type_to_class[SDL_MOUSEMOTION] = cEvMouseMotion;
     event_type_to_class[SDL_MOUSEWHEEL] = cEvMouseWheel;
+    event_type_to_class[SDL_JOYBUTTONDOWN] = cEvJoyButtonDown;
+    event_type_to_class[SDL_JOYBUTTONUP] = cEvJoyButtonUp;
 }
 
 #define DEFINE_EVENT_READER(classname, classvar, name)                  \
@@ -287,6 +303,9 @@ void rubysdl2_init_event(void)
     cEvMouseButtonUp = rb_define_class_under(cEvent, "MouseButtonUp", cEvMouseButton);
     cEvMouseMotion = rb_define_class_under(cEvent, "MouseMotion", cEvent);
     cEvMouseWheel = rb_define_class_under(cEvent, "MouseWheel", cEvent);
+    cEvJoyButton = rb_define_class_under(cEvent, "JoyButton", cEvent);
+    cEvJoyButtonDown = rb_define_class_under(cEvent, "JoyButtonDown", cEvJoyButton);
+    cEvJoyButtonUp = rb_define_class_under(cEvent, "JoyButtonUp", cEvJoyButton);
     
     DEFINE_EVENT_ACCESSOR(Event, cEvent, timestamp);
     rb_define_method(cEvent, "inspect", Event_inspect, 0);
@@ -340,6 +359,12 @@ void rubysdl2_init_event(void)
     DEFINE_EVENT_ACCESSOR(MouseWheel, cEvMouseWheel, x);
     DEFINE_EVENT_ACCESSOR(MouseWheel, cEvMouseWheel, y);
     rb_define_method(cEvMouseWheel, "inspect", EvMouseWheel_inspect, 0);
+
+    DEFINE_EVENT_ACCESSOR(JoyButton, cEvJoyButton, which);
+    DEFINE_EVENT_ACCESSOR(JoyButton, cEvJoyButton, button);
+    DEFINE_EVENT_ACCESSOR(JoyButton, cEvJoyButton, pressed);
+    rb_define_alias(cEvJoyButton, "pressed?", "pressed");
+    rb_define_method(cEvJoyButton, "inspect", EvJoyButton_inspect, 0);
     
     init_event_type_to_class();
 }
