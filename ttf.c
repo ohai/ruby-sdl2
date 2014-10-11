@@ -139,8 +139,6 @@ static VALUE TTF_render_blended(VALUE self, VALUE text, VALUE fg)
 
 void rubysdl2_init_ttf(void)
 {
-    const SDL_version* SDL_ttf_version;
-    
     cTTF = rb_define_class_under(mSDL2, "TTF", rb_cObject);
     rb_undef_alloc_func(cTTF);
 
@@ -188,10 +186,6 @@ void rubysdl2_init_ttf(void)
     DEFINE_TTF_CONST(HINTING_LIGHT);
     DEFINE_TTF_CONST(HINTING_MONO);
     DEFINE_TTF_CONST(HINTING_NONE);
-
-    SDL_ttf_version = TTF_Linked_Version();
-    rb_define_const(cTTF, "VERSION", SDL_version_to_String(SDL_ttf_version));
-    rb_define_const(cTTF, "VERSION_NUMBER", SDL_version_to_Array(SDL_ttf_version));
 }
 
 #else /* HAVE_SDL_TTF_H */

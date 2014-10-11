@@ -142,6 +142,28 @@ void Init_sdl2_ext(void)
     rb_define_const(mSDL2, "LIBSDL_VERSION_NUMBER", libsdl_version_number());
     rb_define_const(mSDL2, "LIBSDL_REVISION", libsdl_revision());
     rb_define_const(mSDL2, "LIBSDL_REVISION_NUMBER", libsdl_revision_number());
+
+#ifdef HAVE_SDL_IMAGE_H
+    {
+        const SDL_version* version = IMG_Linked_Version();
+        rb_define_const(mSDL2, "LIBSDL_IMAGE_VERSION", SDL_version_to_String(version));
+        rb_define_const(mSDL2, "LIBSDL_IMAGE_VERSION_NUMBER", SDL_version_to_Array(version));
+    }
+#endif
+#ifdef HAVE_SDL_TTF_H
+    {
+        const SDL_version* version = TTF_Linked_Version();
+        rb_define_const(mSDL2, "LIBSDL_TTF_VERSION", SDL_version_to_String(version));
+        rb_define_const(mSDL2, "LIBSDL_TTF_VERSION_NUMBER", SDL_version_to_Array(version));
+    }
+#endif
+#ifdef HAVE_SDL_MIXER_H
+    {
+        const SDL_version* version = Mix_Linked_Version();
+        rb_define_const(mSDL2, "LIBSDL_MIXER_VERSION", SDL_version_to_String(version));
+        rb_define_const(mSDL2, "LIBSDL_MIXER_VERSION_NUMBER", SDL_version_to_Array(version));
+    }
+#endif
     
     eSDL2Error = rb_define_class_under(mSDL2, "Error", rb_eStandardError);
     rb_define_attr(eSDL2Error, "error_code", 1, 0);
