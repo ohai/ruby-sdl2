@@ -1,4 +1,4 @@
-# This sample needs a wave file `sample.wav', please prepare.
+# ruby playwave.rb sample.wav
 require 'sdl2'
 
 SDL2::init(SDL2::INIT_AUDIO)
