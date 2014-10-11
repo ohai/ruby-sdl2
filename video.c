@@ -208,6 +208,30 @@ static VALUE RendererInfo_new(SDL_RendererInfo* info)
     return rinfo;
 }
 
+SDL_Color Array_to_SDL_Color(VALUE ary)
+{
+    SDL_Color color;
+    VALUE a;
+    if (ary == Qnil) {
+        color.r = color.g = color.b = 0; color.a = 255;
+        return color;
+    }
+        
+    Check_Type(ary, T_ARRAY);
+    if (RARRAY_LEN(ary) != 3 && RARRAY_LEN(ary) != 4)
+        rb_raise(rb_eArgError, "wrong number of Array elements (%ld for 3 or 4)",
+                 RARRAY_LEN(ary));
+    color.r = NUM2UCHAR(rb_ary_entry(ary, 0));
+    color.g = NUM2UCHAR(rb_ary_entry(ary, 1));
+    color.b = NUM2UCHAR(rb_ary_entry(ary, 2));
+    a = rb_ary_entry(ary, 3);
+    if (a == Qnil)
+        color.a = 255;
+    else
+        color.a = NUM2UCHAR(a);
+    return color;
+}
+
 static VALUE SDL2_s_video_drivers(VALUE self)
 {
     int num_drivers = HANDLE_ERROR(SDL_GetNumVideoDrivers());

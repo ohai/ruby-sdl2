@@ -49,30 +49,6 @@ static VALUE TTF_s_open(int argc, VALUE* argv, VALUE self)
     return TTF_new(font);
 }
 
-static SDL_Color Array_to_SDL_Color(VALUE ary)
-{
-    SDL_Color color;
-    VALUE a;
-    if (ary == Qnil) {
-        color.r = color.g = color.b = 0; color.a = 255;
-        return color;
-    }
-        
-    Check_Type(ary, T_ARRAY);
-    if (RARRAY_LEN(ary) != 3 && RARRAY_LEN(ary) != 4)
-        rb_raise(rb_eArgError, "wrong number of Array elements (%ld for 3 or 4)",
-                 RARRAY_LEN(ary));
-    color.r = NUM2UCHAR(rb_ary_entry(ary, 0));
-    color.g = NUM2UCHAR(rb_ary_entry(ary, 1));
-    color.b = NUM2UCHAR(rb_ary_entry(ary, 2));
-    a = rb_ary_entry(ary, 3);
-    if (a == Qnil)
-        color.a = 255;
-    else
-        color.a = NUM2UCHAR(a);
-    return color;
-}
-
 static SDL_Surface* render_solid(TTF_Font* font, const char* text, SDL_Color fg, SDL_Color bg)
 {
     return TTF_RenderUTF8_Solid(font, text, fg);

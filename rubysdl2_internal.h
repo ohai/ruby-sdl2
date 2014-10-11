@@ -12,6 +12,7 @@ int rubysdl2_is_active(void);
 void rubysdl2_define_attr_readers(VALUE klass, ...);
 VALUE rubysdl2_utf8str_new_cstr(const char* str);
 VALUE rubysdl2_Surface_new(SDL_Surface* surface);
+SDL_Color rubysdl2_Array_to_SDL_Color(VALUE ary);
 
 /** initialize interfaces */
 void rubysdl2_init_video(void);
@@ -70,7 +71,7 @@ SDL2_EXTERN VALUE rubysdl2_eSDL2Error;
 #define define_attr_readers rubysdl2_define_attr_readers
 #define utf8str_new_cstr rubysdl2_utf8str_new_cstr
 #define Surface_new rubysdl2_Surface_new
-
+#define Array_to_SDL_Color rubysdl2_Array_to_SDL_Color 
 #define mSDL2 rubysdl2_mSDL2
 #define eSDL2Error rubysdl2_eSDL2Error
 
