@@ -84,6 +84,15 @@ static VALUE Event_s_enabled_p(VALUE self)
     return INT2BOOL(SDL_EventState(NUM2INT(event_type), SDL_QUERY) == SDL_ENABLE);
 }
 
+static VALUE Event_s_set_enable(VALUE self, VALUE val)
+{
+    VALUE event_type = rb_iv_get(self, "event_type");
+    if (event_type == Qnil) 
+        rb_raise(rb_eArgError, "You cannot enable %s directly", rb_class2name(self));
+    SDL_EventState(NUM2INT(event_type), RTEST(val) ? SDL_ENABLE : SDL_DISABLE);
+    return val;
+}
+
 static void set_string(char* field, VALUE str, int maxlength)
 {
     StringValueCStr(str);
@@ -380,6 +389,7 @@ void rubysdl2_init_event(void)
     rb_define_alloc_func(cEvent, Event_s_allocate);
     rb_define_singleton_method(cEvent, "poll", Event_s_poll, 0);
     rb_define_singleton_method(cEvent, "enabled?", Event_s_enabled_p, 0);
+    rb_define_singleton_method(cEvent, "enable=", Event_s_set_enable, 1);
     
     cEvQuit = rb_define_class_under(cEvent, "Quit", cEvent);
     cEvWindow = rb_define_class_under(cEvent, "Window", cEvent);
