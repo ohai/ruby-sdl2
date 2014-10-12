@@ -7,6 +7,7 @@ window = SDL2::Window.create("testsprite",
                              640, 480, 0)
 puts "window id: #{window.window_id}"
 p SDL2::Window.all_windows
+p window.display_mode
 renderer = window.create_renderer(-1, 0)
 texture = renderer.load_texture("icon.bmp")
 

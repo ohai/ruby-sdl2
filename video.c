@@ -5,6 +5,8 @@
 #include <ruby/encoding.h>
 
 static VALUE cWindow;
+static VALUE cDisplay;
+static VALUE cDisplayMode;
 static VALUE cRenderer;
 static VALUE cTexture;
 static VALUE cRect;
@@ -81,6 +83,25 @@ static VALUE Window_new(SDL_Window* window)
 }
 
 DEFINE_WRAPPER(SDL_Window, Window, window, cWindow, "SDL2::Window");
+
+static VALUE DisplayMode_s_allocate(VALUE klass)
+{
+    SDL_DisplayMode* mode = ALLOC(SDL_DisplayMode);
+    mode->format = mode->w = mode->h = mode->refresh_rate = 0;
+    mode->driverdata = NULL;
+    return Data_Wrap_Struct(klass, 0, free, mode);
+}
+
+static VALUE DisplayMode_new(SDL_DisplayMode* mode)
+{
+    VALUE display_mode = DisplayMode_s_allocate(cDisplayMode);
+    SDL_DisplayMode* m;
+    Data_Get_Struct(display_mode, SDL_DisplayMode, m);
+    *m = *mode;
+    return display_mode;
+}
+
+DEFINE_GETTER(static, SDL_DisplayMode, cDisplayMode, "SDL2::Display::Mode");
 
 static void Texture_free(Texture*);
 static void Renderer_destroy_internal(Renderer* r)
@@ -290,6 +311,13 @@ static VALUE Window_window_id(VALUE self)
     return UINT2NUM(SDL_GetWindowID(Get_SDL_Window(self)));
 }
 
+static VALUE Window_display_mode(VALUE self)
+{
+    SDL_DisplayMode mode;
+    HANDLE_ERROR(SDL_GetWindowDisplayMode(Get_SDL_Window(self), &mode));
+    return DisplayMode_new(&mode);
+}
+
 static VALUE Window_inspect(VALUE self)
 {
     Window* w = Get_Window(self);
@@ -315,6 +343,14 @@ static VALUE Window_debug_info(VALUE self)
     rb_hash_aset(info, rb_str_new2("num_active_renderers"), INT2NUM(num_active_renderers));
   
     return info;
+}
+
+static VALUE DisplayMode_inspect(VALUE self)
+{
+    SDL_DisplayMode* mode = Get_SDL_DisplayMode(self);
+    return rb_sprintf("<%s: format=%u w=%d h=%d refresh_rate=%d>",
+                      rb_obj_classname(self), mode->format, mode->w, mode->h,
+                      mode->refresh_rate);
 }
 
 static VALUE Renderer_s_drivers_info(VALUE self)
@@ -689,6 +725,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cWindow, "create_renderer", Window_create_renderer, 2);
     rb_define_method(cWindow, "window_id", Window_window_id, 0);
     rb_define_method(cWindow, "inspect", Window_inspect, 0);
+    rb_define_method(cWindow, "display_mode", Window_display_mode, 0);
     rb_define_method(cWindow, "debug_info", Window_debug_info, 0);
     rb_define_const(cWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
     rb_define_const(cWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
@@ -711,7 +748,15 @@ void rubysdl2_init_video(void)
     DEFINE_SDL_WINDOW_FLAGS_CONST(ALLOW_HIGHDPI);
 #endif
 
-  
+
+    cDisplay = rb_define_class_under(mSDL2, "Display", rb_cObject);
+    
+    /* rb_define_module_function(cDisplay, "displays", Display_s_displays, 0); */
+    /* rb_define_method(cDisplay, "modes", Display_modes, 0); */
+    
+    cDisplayMode = rb_define_class_under(cDisplay, "Mode", rb_cObject);
+    rb_define_method(cDisplayMode, "inspect", DisplayMode_inspect, 0);
+    
     cRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
     
     rb_undef_alloc_func(cRenderer);
