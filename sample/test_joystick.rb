@@ -13,6 +13,7 @@ if SDL2::Joystick.num_connected_joysticks > 0
   p $joystick.num_balls
   p $joystick.GUID
   p $joystick.attached?
+  p $joystick.index
 end
 
 window = SDL2::Window.create("testsprite",0, 0, 640, 480, 0)
