@@ -78,13 +78,8 @@ static VALUE TextInput_s_stop(VALUE self)
 
 static VALUE TextInput_s_set_rect(VALUE self, VALUE rect)
 {
-    SDL_Rect r;
-    Check_Type(rect, T_ARRAY);
-    r.x = NUM2INT(rb_ary_entry(rect, 0));
-    r.y = NUM2INT(rb_ary_entry(rect, 1));
-    r.w = NUM2INT(rb_ary_entry(rect, 2));
-    r.h = NUM2INT(rb_ary_entry(rect, 3));
-    SDL_SetTextInputRect(&r);
+    SDL_Rect *r = Get_SDL_Rect(rect);
+    SDL_SetTextInputRect(r);
     return rect;
 }
 
