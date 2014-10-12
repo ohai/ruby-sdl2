@@ -295,28 +295,34 @@ static VALUE EvJoyDevice_inspect(VALUE self)
 }
 
 
+static void connect_event_class(SDL_EventType type, VALUE klass)
+{
+    event_type_to_class[type] = klass;
+    rb_iv_set(klass, "event_type", INT2NUM(type));
+}
+
 static void init_event_type_to_class(void)
 {
     int i;
     for (i=0; i<SDL_LASTEVENT; ++i)
         event_type_to_class[i] = cEvent;
     
-    event_type_to_class[SDL_QUIT] = cEvQuit;
-    event_type_to_class[SDL_WINDOWEVENT] = cEvWindow;
-    event_type_to_class[SDL_KEYDOWN] = cEvKeyDown;
-    event_type_to_class[SDL_KEYUP] = cEvKeyUp;
-    event_type_to_class[SDL_TEXTEDITING] = cEvTextEditing;
-    event_type_to_class[SDL_TEXTINPUT] = cEvTextInput;
-    event_type_to_class[SDL_MOUSEBUTTONDOWN] = cEvMouseButtonDown;
-    event_type_to_class[SDL_MOUSEBUTTONUP] = cEvMouseButtonUp;
-    event_type_to_class[SDL_MOUSEMOTION] = cEvMouseMotion;
-    event_type_to_class[SDL_MOUSEWHEEL] = cEvMouseWheel;
-    event_type_to_class[SDL_JOYBUTTONDOWN] = cEvJoyButtonDown;
-    event_type_to_class[SDL_JOYBUTTONUP] = cEvJoyButtonUp;
-    event_type_to_class[SDL_JOYAXISMOTION] = cEvJoyAxisMotion;
-    event_type_to_class[SDL_JOYDEVICEADDED] = cEvJoyDeviceAdded;
-    event_type_to_class[SDL_JOYDEVICEREMOVED] = cEvJoyDeviceRemoved;
-    event_type_to_class[SDL_JOYHATMOTION] = cEvJoyHatMotion;
+    connect_event_class(SDL_QUIT, cEvQuit);
+    connect_event_class(SDL_WINDOWEVENT, cEvWindow);
+    connect_event_class(SDL_KEYDOWN, cEvKeyDown);
+    connect_event_class(SDL_KEYUP, cEvKeyUp);
+    connect_event_class(SDL_TEXTEDITING, cEvTextEditing);
+    connect_event_class(SDL_TEXTINPUT, cEvTextInput);
+    connect_event_class(SDL_MOUSEBUTTONDOWN, cEvMouseButtonDown);
+    connect_event_class(SDL_MOUSEBUTTONUP, cEvMouseButtonUp);
+    connect_event_class(SDL_MOUSEMOTION, cEvMouseMotion);
+    connect_event_class(SDL_MOUSEWHEEL, cEvMouseWheel);
+    connect_event_class(SDL_JOYBUTTONDOWN, cEvJoyButtonDown);
+    connect_event_class(SDL_JOYBUTTONUP, cEvJoyButtonUp);
+    connect_event_class(SDL_JOYAXISMOTION, cEvJoyAxisMotion);
+    connect_event_class(SDL_JOYDEVICEADDED, cEvJoyDeviceAdded);
+    connect_event_class(SDL_JOYDEVICEREMOVED, cEvJoyDeviceRemoved);
+    connect_event_class(SDL_JOYHATMOTION, cEvJoyHatMotion);
 }
 
 #define DEFINE_EVENT_READER(classname, classvar, name)                  \
