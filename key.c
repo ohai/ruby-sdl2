@@ -7,6 +7,7 @@
 static VALUE mKey;
 static VALUE mScan;
 static VALUE mMod;
+static VALUE mTextInput;
 
 static VALUE Key_s_name_of(VALUE self, VALUE code)
 {
@@ -60,12 +61,40 @@ static VALUE Mod_s_state(VALUE self)
     return UINT2NUM(SDL_GetModState());
 }
 
+static VALUE TextInput_s_active_p(VALUE self)
+{
+    return INT2BOOL(SDL_IsTextInputActive());
+}
+
+static VALUE TextInput_s_start(VALUE self)
+{
+    SDL_StartTextInput(); return Qnil;
+}
+
+static VALUE TextInput_s_stop(VALUE self)
+{
+    SDL_StopTextInput(); return Qnil;
+}
+
+static VALUE TextInput_s_set_rect(VALUE self, VALUE rect)
+{
+    SDL_Rect r;
+    Check_Type(rect, T_ARRAY);
+    r.x = NUM2INT(rb_ary_entry(rect, 0));
+    r.y = NUM2INT(rb_ary_entry(rect, 1));
+    r.w = NUM2INT(rb_ary_entry(rect, 2));
+    r.h = NUM2INT(rb_ary_entry(rect, 3));
+    SDL_SetTextInputRect(&r);
+    return rect;
+}
+
 void rubysdl2_init_key(void)
 {
     mKey = rb_define_module_under(mSDL2, "Key");
     mScan = rb_define_module_under(mKey, "Scan");
     mMod = rb_define_module_under(mKey, "Mod");
-
+    mTextInput = rb_define_module_under(mSDL2, "TextInput");
+    
     rb_define_module_function(mKey, "name_of", Key_s_name_of, 1);
     rb_define_module_function(mKey, "keycode_from_name", Key_s_keycode_from_name, 1);
     rb_define_module_function(mKey, "keycode_from_scancode", Key_s_keycode_from_scancode, 1);
@@ -74,6 +103,10 @@ void rubysdl2_init_key(void)
     rb_define_module_function(mScan, "from_name", Scan_s_from_name, 1);
     rb_define_module_function(mScan, "from_keycode", Scan_s_from_keycode, 1);
     rb_define_module_function(mMod, "state", Mod_s_state, 0);
+    rb_define_module_function(mTextInput, "active?", TextInput_s_active_p, 0);
+    rb_define_module_function(mTextInput, "start", TextInput_s_start, 0);
+    rb_define_module_function(mTextInput, "stop", TextInput_s_stop, 0);
+    rb_define_module_function(mTextInput, "rect=", TextInput_s_set_rect, 1);
     
 #define DEFINE_SCANCODE(name) \
     rb_define_const(mScan, #name, INT2NUM(SDL_SCANCODE_##name))
