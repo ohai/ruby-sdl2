@@ -277,6 +277,11 @@ static VALUE Window_create_renderer(VALUE self, VALUE index, VALUE flags)
     return renderer;
 }
 
+static VALUE Window_window_id(VALUE self)
+{
+    return UINT2NUM(SDL_GetWindowID(Get_SDL_Window(self)));
+}
+
 static VALUE Window_debug_info(VALUE self)
 {
     Window* w = Get_Window(self);
@@ -663,6 +668,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cWindow, "destroy?", Window_destroy_p, 0);
     rb_define_method(cWindow, "destroy", Window_destroy, 0);
     rb_define_method(cWindow, "create_renderer", Window_create_renderer, 2);
+    rb_define_method(cWindow, "window_id", Window_window_id, 0);
     rb_define_method(cWindow, "debug_info", Window_debug_info, 0);
     rb_define_const(cWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
     rb_define_const(cWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));

@@ -5,6 +5,7 @@ SDL2.init(SDL2::INIT_EVERYTHING)
 window = SDL2::Window.create("testsprite",
                              SDL2::Window::OP_CENTERED, SDL2::Window::OP_CENTERED,
                              640, 480, 0)
+puts "window id: #{window.window_id}"
 renderer = window.create_renderer(-1, 0)
 texture = renderer.load_texture("icon.bmp")
 
