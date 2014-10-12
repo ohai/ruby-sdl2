@@ -36,7 +36,19 @@ static VALUE cEvJoyDeviceRemoved;
 /* static VALUE cEvUser; */
 /* static VALUE cEvDrop; */
 
-
+/* TODO:
+   - easy
+   SDL_FlushEvent{,s}
+   SDL_HasEvent{,s}
+   SDL_PumpEvent
+   SDL_PeepEvents
+   SDL_DropEvent
+   SDL_QuitRequested
+   - difficult
+   SDL_PushEvent
+   SDL_WaitEvent{,Timeout}
+   SDL_UserEvent, SDL_RegisterEvents
+ */
 static const char* INT2BOOLSTR(int bool)
 {
     return bool ? "true" : "false";
