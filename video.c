@@ -12,6 +12,8 @@ static VALUE cPoint;
 static VALUE cSurface;
 static VALUE cRendererInfo;
 
+static VALUE hash_windowid_to_window = Qnil;
+
 struct Window;
 struct Renderer;
 struct Texture;
@@ -255,7 +257,13 @@ static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w,
         HANDLE_ERROR(-1);
 
     win = Window_new(window);
+    rb_hash_aset(hash_windowid_to_window, UINT2NUM(SDL_GetWindowID(window)), win);
     return win;
+}
+
+static VALUE Window_s_all_windows(VALUE self)
+{
+    return rb_hash_dup(hash_windowid_to_window);
 }
 
 static VALUE Window_destroy(VALUE self)
@@ -280,6 +288,16 @@ static VALUE Window_create_renderer(VALUE self, VALUE index, VALUE flags)
 static VALUE Window_window_id(VALUE self)
 {
     return UINT2NUM(SDL_GetWindowID(Get_SDL_Window(self)));
+}
+
+static VALUE Window_inspect(VALUE self)
+{
+    Window* w = Get_Window(self);
+    if (w->window)
+        return rb_sprintf("<%s:%p window_id=%d>",
+                          rb_obj_classname(self), (void*)self, SDL_GetWindowID(w->window));
+    else
+        return rb_sprintf("<%s:%p (destroyed)>", rb_obj_classname(self), (void*)self);
 }
 
 static VALUE Window_debug_info(VALUE self)
@@ -665,10 +683,12 @@ void rubysdl2_init_video(void)
     
     rb_undef_alloc_func(cWindow);
     rb_define_singleton_method(cWindow, "create", Window_s_create, 6);
+    rb_define_singleton_method(cWindow, "all_windows", Window_s_all_windows, 0);
     rb_define_method(cWindow, "destroy?", Window_destroy_p, 0);
     rb_define_method(cWindow, "destroy", Window_destroy, 0);
     rb_define_method(cWindow, "create_renderer", Window_create_renderer, 2);
     rb_define_method(cWindow, "window_id", Window_window_id, 0);
+    rb_define_method(cWindow, "inspect", Window_inspect, 0);
     rb_define_method(cWindow, "debug_info", Window_debug_info, 0);
     rb_define_const(cWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
     rb_define_const(cWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
@@ -794,6 +814,9 @@ void rubysdl2_init_video(void)
     cRendererInfo = rb_define_class_under(cRenderer, "Info", rb_cObject);
     define_attr_readers(cRendererInfo, "name", "flags", "texture_formats",
                         "max_texture_width", "max_texture_height", NULL);
+
+    rb_gc_register_address(&hash_windowid_to_window);
+    hash_windowid_to_window = rb_hash_new();
 }
   
 #ifdef HAVE_SDL_IMAGE_H
