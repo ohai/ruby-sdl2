@@ -53,9 +53,14 @@ static VALUE Event_new(SDL_Event* ev)
 
 static VALUE Event_s_allocate(VALUE klass)
 {
-    SDL_Event* e = ALLOC(SDL_Event);
+    SDL_Event* e;
+    VALUE event_type = rb_iv_get(klass, "event_type");
+    if (event_type == Qnil)
+        rb_raise(rb_eArgError, "Cannot allocate %s", rb_class2name(klass));
+    
+    e = ALLOC(SDL_Event);
     memset(e, 0, sizeof(SDL_Event));
-    e->common.type = NUM2INT(rb_iv_get(klass, "event_type"));
+    e->common.type = NUM2INT(event_type);
     return Data_Wrap_Struct(klass, 0, free, e);
 }
 
