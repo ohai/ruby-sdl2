@@ -5,6 +5,8 @@ SDL2.init(SDL2::INIT_EVERYTHING)
 window = SDL2::Window.create("testsprite", 0, 0, 640, 480, 0)
 renderer = window.create_renderer(-1, 0)
 
+puts "scancode of \"X\": #{SDL2::Key::Scan.from_name("X")}"
+puts "scancode of SDL2::Key::X: #{SDL2::Key::Scan.from_keycode(SDL2::Key::X)}"
 loop do
   while ev = SDL2::Event.poll
     case ev

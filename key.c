@@ -35,6 +35,16 @@ static VALUE Scan_s_name_of(VALUE self, VALUE code)
     return utf8str_new_cstr(SDL_GetScancodeName(NUM2INT(code)));
 }
 
+static VALUE Scan_s_from_name(VALUE self, VALUE name)
+{
+    return INT2NUM(SDL_GetScancodeFromName(StringValueCStr(name)));
+}
+
+static VALUE Scan_s_from_keycode(VALUE self, VALUE keycode)
+{
+    return INT2NUM(SDL_GetScancodeFromKey(NUM2INT(keycode)));
+}
+
 static VALUE Mod_s_state(VALUE self)
 {
     return UINT2NUM(SDL_GetModState());
@@ -49,6 +59,8 @@ void rubysdl2_init_key(void)
     rb_define_module_function(mKey, "name_of", Key_s_name_of, 1);
     rb_define_module_function(mKey, "pressed?", Key_s_pressed_p, 1);
     rb_define_module_function(mScan, "name_of", Scan_s_name_of, 1);
+    rb_define_module_function(mScan, "from_name", Scan_s_from_name, 1);
+    rb_define_module_function(mScan, "from_keycode", Scan_s_from_keycode, 1);
     rb_define_module_function(mMod, "state", Mod_s_state, 0);
     
 #define DEFINE_SCANCODE(name) \
