@@ -15,6 +15,8 @@ static VALUE Key_s_state(VALUE self, VALUE code)
     if (!state) {
         SDL_PumpEvents();
         state = SDL_GetKeyboardState(NULL);
+        if (!state)
+            rb_raise(eSDL2Error, "Event subsystem is not initialized");
     }
     scancode = NUM2UINT(code);
     if (scancode >= SDL_NUM_SCANCODES) 
