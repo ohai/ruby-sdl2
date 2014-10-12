@@ -8,6 +8,11 @@ static VALUE mKey;
 static VALUE mScan;
 static VALUE mMod;
 
+static VALUE Key_s_name_of(VALUE self, VALUE code)
+{
+    return utf8str_new_cstr(SDL_GetKeyName(NUM2INT(code)));
+}
+
 static VALUE Key_s_pressed_p(VALUE self, VALUE code)
 {
     const Uint8* state = SDL_GetKeyboardState(NULL);
@@ -25,14 +30,21 @@ static VALUE Key_s_pressed_p(VALUE self, VALUE code)
     return INT2BOOL(state[scancode]);
 }
 
+static VALUE Scan_s_name_of(VALUE self, VALUE code)
+{
+    return utf8str_new_cstr(SDL_GetScancodeName(NUM2INT(code)));
+}
+
 void rubysdl2_init_key(void)
 {
     mKey = rb_define_module_under(mSDL2, "Key");
     mScan = rb_define_module_under(mKey, "Scan");
     mMod = rb_define_module_under(mKey, "Mod");
 
+    rb_define_module_function(mKey, "name_of", Key_s_name_of, 1);
     rb_define_module_function(mKey, "pressed?", Key_s_pressed_p, 1);
-
+    rb_define_module_function(mScan, "name_of", Scan_s_name_of, 1);
+    
 #define DEFINE_SCANCODE(name) \
     rb_define_const(mScan, #name, INT2NUM(SDL_SCANCODE_##name))
 #define DEFINE_SCANCODE_NUMBER(name)                                    \
