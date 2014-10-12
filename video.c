@@ -767,6 +767,7 @@ void rubysdl2_init_video(void)
     cRect = rb_define_class_under(mSDL2, "Rect", rb_cObject);
 
     rb_define_alloc_func(cRect, Rect_s_allocate);
+    rb_define_alias(rb_singleton_class(cRect), "[]", "new");
     rb_define_private_method(cRect, "initialize", Rect_initialize, -1);
     rb_define_method(cRect, "inspect", Rect_inspect, 0);
     DEFINE_FIELD_ACCESSOR(Rect, cRect, x);
