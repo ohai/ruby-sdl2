@@ -34,8 +34,8 @@ void rubysdl2_init_ttf(void);
 #define NUM2UCHAR NUM2UINT
 #define UCHAR2NUM UINT2NUM
 
-#define DEFINE_GETTER(ctype, var_class, classname)                      \
-    static ctype* Get_##ctype(VALUE obj)                                \
+#define DEFINE_GETTER(scope, ctype, var_class, classname)               \
+    scope ctype* Get_##ctype(VALUE obj)                                 \
     {                                                                   \
         ctype* s;                                                       \
         if (!rb_obj_is_kind_of(obj, var_class))                         \
@@ -46,8 +46,8 @@ void rubysdl2_init_ttf(void);
         return s;                                                       \
     }
 
-#define DEFINE_WRAP_GETTER(SDL_typename, struct_name, field, classname) \
-    static SDL_typename* Get_##SDL_typename(VALUE obj)                  \
+#define DEFINE_WRAP_GETTER(scope, SDL_typename, struct_name, field, classname) \
+    scope SDL_typename* Get_##SDL_typename(VALUE obj)                   \
     {                                                                   \
         struct_name* s = Get_##struct_name(obj);                        \
             if (s->field == NULL)                                       \
@@ -56,16 +56,16 @@ void rubysdl2_init_ttf(void);
             return s->field;                                            \
     }
 
-#define DEFINE_DESTROY_P(struct_name, field)                            \
-    static VALUE struct_name##_destroy_p(VALUE self)                    \
+#define DEFINE_DESTROY_P(scope, struct_name, field)                     \
+    scope VALUE struct_name##_destroy_p(VALUE self)                     \
     {                                                                   \
         return INT2BOOL(Get_##struct_name(self)->field == NULL);        \
     }
 
 #define DEFINE_WRAPPER(SDL_typename, struct_name, field, var_class, classname) \
-    DEFINE_GETTER(struct_name, var_class, classname);                   \
-    DEFINE_WRAP_GETTER(SDL_typename, struct_name, field, classname);    \
-    DEFINE_DESTROY_P(struct_name, field);
+    DEFINE_GETTER(static, struct_name, var_class, classname);           \
+    DEFINE_WRAP_GETTER(static ,SDL_typename, struct_name, field, classname); \
+    DEFINE_DESTROY_P(static, struct_name, field);
 
 /** classes and modules */
 SDL2_EXTERN VALUE rubysdl2_mSDL2;

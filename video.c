@@ -188,9 +188,9 @@ VALUE Surface_new(SDL_Surface* surface)
 
 DEFINE_WRAPPER(SDL_Surface, Surface, surface, cSurface, "SDL2::Surface");
 
-DEFINE_GETTER(SDL_Rect, cRect, "SDL2::Rect");
+DEFINE_GETTER(static, SDL_Rect, cRect, "SDL2::Rect");
 
-DEFINE_GETTER(SDL_Point, cPoint, "SDL2::Point");
+DEFINE_GETTER(static, SDL_Point, cPoint, "SDL2::Point");
 
 static VALUE RendererInfo_new(SDL_RendererInfo* info)
 {
