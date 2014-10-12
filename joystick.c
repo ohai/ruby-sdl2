@@ -36,6 +36,14 @@ static VALUE Joystick_s_open(VALUE self, VALUE device_index)
     return Joystick_new(joystick);
 }
 
+static VALUE Joystick_attached_p(VALUE self)
+{
+    Joystick* j = Get_Joystick(self);
+    if (!j->joystick)
+        return Qfalse;
+    return INT2BOOL(SDL_JoystickGetAttached(j->joystick));
+}
+
 static VALUE Joystick_destroy(VALUE self)
 {
     Joystick* j = Get_Joystick(self);
@@ -101,6 +109,7 @@ void rubysdl2_init_joystick(void)
     rb_define_singleton_method(cJoystick, "open", Joystick_s_open, 1);
     rb_define_method(cJoystick, "destroy?", Joystick_destroy_p, 0);
     rb_define_alias(cJoystick, "close?", "destroy?");
+    rb_define_method(cJoystick, "attached?", Joystick_attached_p, 0);
     rb_define_method(cJoystick, "destroy", Joystick_destroy, 0);
     rb_define_alias(cJoystick, "close", "destroy");
     rb_define_method(cJoystick, "name", Joystick_name, 0);
