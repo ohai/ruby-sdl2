@@ -104,6 +104,7 @@ static void set_string(char* field, VALUE str, int maxlength)
     EVENT_ACCESSOR(classname, name, field, RTEST, INT2BOOL)
 
 
+EVENT_READER(Event, type, common.type, INT2NUM);
 EVENT_ACCESSOR_UINT(Event, timestamp, common.timestamp);
 static VALUE Event_inspect(VALUE self)
 {
@@ -343,7 +344,8 @@ void rubysdl2_init_event(void)
     cEvJoyDevice = rb_define_class_under(cEvent, "JoyDevice", cEvent);
     cEvJoyDeviceAdded = rb_define_class_under(cEvent, "JoyDeviceAdded", cEvJoyDevice);
     cEvJoyDeviceRemoved = rb_define_class_under(cEvent, "JoyDeviceRemoved", cEvJoyDevice);
-    
+
+    DEFINE_EVENT_READER(Event, cEvent, type);
     DEFINE_EVENT_ACCESSOR(Event, cEvent, timestamp);
     rb_define_method(cEvent, "inspect", Event_inspect, 0);
     
