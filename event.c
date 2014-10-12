@@ -17,7 +17,7 @@ static VALUE cEvMouseButtonUp;
 static VALUE cEvMouseMotion;
 static VALUE cEvMouseWheel;
 static VALUE cEvJoyAxisMotion;
-/* static VALUE cEvJoyBallMotion; */
+static VALUE cEvJoyBallMotion;
 static VALUE cEvJoyButton;
 static VALUE cEvJoyButtonDown;
 static VALUE cEvJoyButtonUp;
@@ -49,6 +49,14 @@ static VALUE Event_new(SDL_Event* ev)
     SDL_Event* e = ALLOC(SDL_Event);
     *e = *ev;
     return Data_Wrap_Struct(event_type_to_class[ev->type], 0, free, e);
+}
+
+static VALUE Event_s_allocate(VALUE klass)
+{
+    SDL_Event* e = ALLOC(SDL_Event);
+    memset(e, 0, sizeof(SDL_Event));
+    e->common.type = NUM2INT(rb_iv_get(klass, "event_type"));
+    return Data_Wrap_Struct(klass, 0, free, e);
 }
 
 static VALUE Event_s_poll(VALUE self)
@@ -274,6 +282,20 @@ static VALUE EvJoyAxisMotion_inspect(VALUE self)
 }
 
 
+EVENT_ACCESSOR_INT(JoyBallMotion, which, jball.which);
+EVENT_ACCESSOR_UINT8(JoyBallMotion, ball, jball.ball);
+EVENT_ACCESSOR_INT(JoyBallMotion, xrel, jball.xrel);
+EVENT_ACCESSOR_INT(JoyBallMotion, yrel, jball.yrel);
+static VALUE EvJoyBallMotion_inspect(VALUE self)
+{
+    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    return rb_sprintf("<%s: type=%u timestamp=%u"
+                      " which=%d ball=%u xrel=%d yrel=%d>",
+                      rb_obj_classname(self), ev->common.type, ev->common.timestamp,
+                      ev->jball.which, ev->jball.ball, ev->jball.xrel, ev->jball.yrel);
+}
+
+
 EVENT_ACCESSOR_INT(JoyHatMotion, which, jhat.which);
 EVENT_ACCESSOR_UINT8(JoyHatMotion, hat, jhat.hat);
 EVENT_ACCESSOR_UINT8(JoyHatMotion, value, jhat.value);
@@ -320,6 +342,7 @@ static void init_event_type_to_class(void)
     connect_event_class(SDL_JOYBUTTONDOWN, cEvJoyButtonDown);
     connect_event_class(SDL_JOYBUTTONUP, cEvJoyButtonUp);
     connect_event_class(SDL_JOYAXISMOTION, cEvJoyAxisMotion);
+    connect_event_class(SDL_JOYBALLMOTION, cEvJoyBallMotion);
     connect_event_class(SDL_JOYDEVICEADDED, cEvJoyDeviceAdded);
     connect_event_class(SDL_JOYDEVICEREMOVED, cEvJoyDeviceRemoved);
     connect_event_class(SDL_JOYHATMOTION, cEvJoyHatMotion);
@@ -340,6 +363,7 @@ static void init_event_type_to_class(void)
 void rubysdl2_init_event(void)
 {
     cEvent = rb_define_class_under(mSDL2, "Event", rb_cObject);
+    rb_define_alloc_func(cEvent, Event_s_allocate);
     rb_define_singleton_method(cEvent, "poll", Event_s_poll, 0);
 
     cEvQuit = rb_define_class_under(cEvent, "Quit", cEvent);
@@ -359,6 +383,7 @@ void rubysdl2_init_event(void)
     cEvJoyButtonDown = rb_define_class_under(cEvent, "JoyButtonDown", cEvJoyButton);
     cEvJoyButtonUp = rb_define_class_under(cEvent, "JoyButtonUp", cEvJoyButton);
     cEvJoyAxisMotion = rb_define_class_under(cEvent, "JoyAxisMotion", cEvent);
+    cEvJoyBallMotion = rb_define_class_under(cEvent, "JoyBallMotion", cEvent);
     cEvJoyHatMotion = rb_define_class_under(cEvent, "JoyHatMotion", cEvent);
     cEvJoyDevice = rb_define_class_under(cEvent, "JoyDevice", cEvent);
     cEvJoyDeviceAdded = rb_define_class_under(cEvent, "JoyDeviceAdded", cEvJoyDevice);
@@ -430,6 +455,12 @@ void rubysdl2_init_event(void)
     DEFINE_EVENT_ACCESSOR(JoyAxisMotion, cEvJoyAxisMotion, value);
     rb_define_method(cEvJoyAxisMotion, "inspect", EvJoyAxisMotion_inspect, 0);
 
+    DEFINE_EVENT_ACCESSOR(JoyBallMotion, cEvJoyBallMotion, which);
+    DEFINE_EVENT_ACCESSOR(JoyBallMotion, cEvJoyBallMotion, ball);
+    DEFINE_EVENT_ACCESSOR(JoyBallMotion, cEvJoyBallMotion, xrel);
+    DEFINE_EVENT_ACCESSOR(JoyBallMotion, cEvJoyBallMotion, yrel);
+    rb_define_method(cEvJoyBallMotion, "inspect", EvJoyBallMotion_inspect, 0);
+    
     DEFINE_EVENT_ACCESSOR(JoyHatMotion, cEvJoyHatMotion, which);
     DEFINE_EVENT_ACCESSOR(JoyHatMotion, cEvJoyHatMotion, hat);
     DEFINE_EVENT_ACCESSOR(JoyHatMotion, cEvJoyHatMotion, value);
