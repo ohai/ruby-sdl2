@@ -70,6 +70,28 @@ static VALUE Joystick_num_hats(VALUE self)
     return INT2FIX(SDL_JoystickNumHats(Get_SDL_Joystick(self)));
 }
 
+static VALUE Joystick_axis(VALUE self, VALUE which)
+{
+    return INT2FIX(SDL_JoystickGetAxis(Get_SDL_Joystick(self), NUM2INT(which)));
+}
+
+static VALUE Joystick_ball(VALUE self, VALUE which)
+{
+    int dx, dy;
+    HANDLE_ERROR(SDL_JoystickGetBall(Get_SDL_Joystick(self), NUM2INT(which), &dx, &dy));
+    return rb_ary_new3(2, INT2NUM(dx), INT2NUM(dy));
+}
+
+static VALUE Joystick_button(VALUE self, VALUE which)
+{
+    return INT2BOOL(SDL_JoystickGetButton(Get_SDL_Joystick(self), NUM2INT(which)));
+}
+
+static VALUE Joystick_hat(VALUE self, VALUE which)
+{
+    return UINT2NUM(SDL_JoystickGetHat(Get_SDL_Joystick(self), NUM2INT(which)));
+}
+    
 void rubysdl2_init_joystick(void)
 {
     cJoystick = rb_define_class_under(mSDL2, "Joystick", rb_cObject);
@@ -86,4 +108,8 @@ void rubysdl2_init_joystick(void)
     rb_define_method(cJoystick, "num_balls", Joystick_num_balls, 0);
     rb_define_method(cJoystick, "num_buttons", Joystick_num_buttons, 0);
     rb_define_method(cJoystick, "num_hats", Joystick_num_hats, 0);
+    rb_define_method(cJoystick, "axis", Joystick_axis, 1);
+    rb_define_method(cJoystick, "ball", Joystick_ball, 1);
+    rb_define_method(cJoystick, "button", Joystick_button, 1);
+    rb_define_method(cJoystick, "hat", Joystick_hat, 1);
 }
