@@ -44,6 +44,15 @@ static VALUE Joystick_attached_p(VALUE self)
     return INT2BOOL(SDL_JoystickGetAttached(j->joystick));
 }
 
+static VALUE Joystick_GUID(VALUE self)
+{
+    SDL_JoystickGUID guid;
+    char buf[128];
+    guid = SDL_JoystickGetGUID(Get_SDL_Joystick(self));
+    SDL_JoystickGetGUIDString(guid, buf, sizeof(buf));
+    return rb_usascii_str_new_cstr(buf);
+}
+
 static VALUE Joystick_destroy(VALUE self)
 {
     Joystick* j = Get_Joystick(self);
@@ -110,6 +119,7 @@ void rubysdl2_init_joystick(void)
     rb_define_method(cJoystick, "destroy?", Joystick_destroy_p, 0);
     rb_define_alias(cJoystick, "close?", "destroy?");
     rb_define_method(cJoystick, "attached?", Joystick_attached_p, 0);
+    rb_define_method(cJoystick, "GUID", Joystick_GUID, 0);
     rb_define_method(cJoystick, "destroy", Joystick_destroy, 0);
     rb_define_alias(cJoystick, "close", "destroy");
     rb_define_method(cJoystick, "name", Joystick_name, 0);
