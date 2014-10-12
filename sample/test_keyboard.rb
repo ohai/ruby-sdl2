@@ -7,6 +7,9 @@ renderer = window.create_renderer(-1, 0)
 
 puts "scancode of \"X\": #{SDL2::Key::Scan.from_name("X")}"
 puts "scancode of SDL2::Key::X: #{SDL2::Key::Scan.from_keycode(SDL2::Key::X)}"
+puts "keycode of \"X\": #{SDL2::Key.keycode_from_name("X")}"
+puts "keycode of SDL2::Key::Scan::X: #{SDL2::Key.keycode_from_scancode(SDL2::Key::Scan::X)}"
+
 loop do
   while ev = SDL2::Event.poll
     case ev
