@@ -21,7 +21,7 @@ static VALUE cEvJoyAxisMotion;
 static VALUE cEvJoyButton;
 static VALUE cEvJoyButtonDown;
 static VALUE cEvJoyButtonUp;
-/* static VALUE cEvJoyHatMotion; */
+static VALUE cEvJoyHatMotion;
 static VALUE cEvJoyDevice;
 static VALUE cEvJoyDeviceAdded;
 static VALUE cEvJoyDeviceRemoved;
@@ -274,6 +274,17 @@ static VALUE EvJoyAxisMotion_inspect(VALUE self)
 }
 
 
+EVENT_ACCESSOR_INT(JoyHatMotion, which, jhat.which);
+EVENT_ACCESSOR_UINT8(JoyHatMotion, hat, jhat.hat);
+EVENT_ACCESSOR_UINT8(JoyHatMotion, value, jhat.value);
+static VALUE EvJoyHatMotion_inspect(VALUE self)
+{
+    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    return rb_sprintf("<%s: type=%u timestamp=%u which=%d hat=%u value=%u>",
+                      rb_obj_classname(self), ev->common.type, ev->common.timestamp,
+                      ev->jhat.which, ev->jhat.hat, ev->jhat.value);
+}
+
 EVENT_ACCESSOR_INT(JoyDevice, which, jdevice.which);
 static VALUE EvJoyDevice_inspect(VALUE self)
 {
@@ -305,6 +316,7 @@ static void init_event_type_to_class(void)
     event_type_to_class[SDL_JOYAXISMOTION] = cEvJoyAxisMotion;
     event_type_to_class[SDL_JOYDEVICEADDED] = cEvJoyDeviceAdded;
     event_type_to_class[SDL_JOYDEVICEREMOVED] = cEvJoyDeviceRemoved;
+    event_type_to_class[SDL_JOYHATMOTION] = cEvJoyHatMotion;
 }
 
 #define DEFINE_EVENT_READER(classname, classvar, name)                  \
@@ -341,6 +353,7 @@ void rubysdl2_init_event(void)
     cEvJoyButtonDown = rb_define_class_under(cEvent, "JoyButtonDown", cEvJoyButton);
     cEvJoyButtonUp = rb_define_class_under(cEvent, "JoyButtonUp", cEvJoyButton);
     cEvJoyAxisMotion = rb_define_class_under(cEvent, "JoyAxisMotion", cEvent);
+    cEvJoyHatMotion = rb_define_class_under(cEvent, "JoyHatMotion", cEvent);
     cEvJoyDevice = rb_define_class_under(cEvent, "JoyDevice", cEvent);
     cEvJoyDeviceAdded = rb_define_class_under(cEvent, "JoyDeviceAdded", cEvJoyDevice);
     cEvJoyDeviceRemoved = rb_define_class_under(cEvent, "JoyDeviceRemoved", cEvJoyDevice);
@@ -411,6 +424,11 @@ void rubysdl2_init_event(void)
     DEFINE_EVENT_ACCESSOR(JoyAxisMotion, cEvJoyAxisMotion, value);
     rb_define_method(cEvJoyAxisMotion, "inspect", EvJoyAxisMotion_inspect, 0);
 
+    DEFINE_EVENT_ACCESSOR(JoyHatMotion, cEvJoyHatMotion, which);
+    DEFINE_EVENT_ACCESSOR(JoyHatMotion, cEvJoyHatMotion, hat);
+    DEFINE_EVENT_ACCESSOR(JoyHatMotion, cEvJoyHatMotion, value);
+    rb_define_method(cEvJoyHatMotion, "inspect", EvJoyHatMotion_inspect, 0);
+    
     DEFINE_EVENT_ACCESSOR(JoyDevice, cEvJoyDevice, which);
     rb_define_method(cEvJoyDevice, "inspect", EvJoyDevice_inspect, 0);
     
