@@ -2,6 +2,7 @@
 #include <SDL_joystick.h>
 
 static VALUE cJoystick;
+static VALUE cDeviceInfo;
 
 typedef struct Joystick {
     SDL_Joystick* joystick;
@@ -26,6 +27,27 @@ DEFINE_WRAPPER(SDL_Joystick, Joystick, joystick, cJoystick, "SDL2::Joystick");
 static VALUE Joystick_s_num_connected_joysticks(VALUE self)
 {
     return INT2FIX(HANDLE_ERROR(SDL_NumJoysticks()));
+}
+
+static VALUE GUID_to_String(SDL_JoystickGUID guid)
+{
+    char buf[128];
+    SDL_JoystickGetGUIDString(guid, buf, sizeof(buf));
+    return rb_usascii_str_new_cstr(buf);
+}
+
+static VALUE Joystick_s_devices(VALUE self)
+{
+    int num_joysticks = SDL_NumJoysticks();
+    int i;
+    VALUE devices = rb_ary_new2(num_joysticks);
+    for (i=0; i<num_joysticks; ++i) {
+        VALUE device = rb_obj_alloc(cDeviceInfo);
+        rb_iv_set(device, "@GUID", GUID_to_String(SDL_JoystickGetDeviceGUID(i)));
+        rb_iv_set(device, "@name", utf8str_new_cstr(SDL_JoystickNameForIndex(i)));
+        rb_ary_push(devices, device);
+    }
+    return devices;
 }
 
 static VALUE Joystick_s_open(VALUE self, VALUE device_index)
@@ -117,9 +139,11 @@ static VALUE Joystick_hat(VALUE self, VALUE which)
 void rubysdl2_init_joystick(void)
 {
     cJoystick = rb_define_class_under(mSDL2, "Joystick", rb_cObject);
-
+    cDeviceInfo = rb_define_class_under(cJoystick, "DeviceInfo", rb_cObject);
+    
     rb_define_singleton_method(cJoystick, "num_connected_joysticks",
                                Joystick_s_num_connected_joysticks, 0);
+    rb_define_singleton_method(cJoystick, "devices", Joystick_s_devices, 0);
     rb_define_singleton_method(cJoystick, "open", Joystick_s_open, 1);
     rb_define_method(cJoystick, "destroy?", Joystick_destroy_p, 0);
     rb_define_alias(cJoystick, "close?", "destroy?");
@@ -137,4 +161,8 @@ void rubysdl2_init_joystick(void)
     rb_define_method(cJoystick, "ball", Joystick_ball, 1);
     rb_define_method(cJoystick, "button", Joystick_button, 1);
     rb_define_method(cJoystick, "hat", Joystick_hat, 1);
+    
+    
+    rb_define_attr(cDeviceInfo, "GUID", 1, 0);
+    rb_define_attr(cDeviceInfo, "name", 1, 0);
 }

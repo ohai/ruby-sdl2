@@ -4,6 +4,8 @@ SDL2.init(SDL2::INIT_EVERYTHING)
 SDL2::TTF.init
 
 p SDL2::Joystick.num_connected_joysticks
+p SDL2::Joystick.devices
+
 if SDL2::Joystick.num_connected_joysticks > 0
   $joystick = SDL2::Joystick.open(0)
   p $joystick.name
