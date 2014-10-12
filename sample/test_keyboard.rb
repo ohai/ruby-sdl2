@@ -14,6 +14,7 @@ loop do
       puts "scancode: #{ev.scancode}(#{SDL2::Key::Scan.name_of(ev.scancode)})"
       puts "keycode: #{ev.sym}(#{SDL2::Key.name_of(ev.sym)})"
       puts "mod: #{ev.mod}"
+      puts "mod(SDL2::Key::Mod.state): #{SDL2::Key::Mod.state}"
     end
   end
 end
