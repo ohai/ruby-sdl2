@@ -49,10 +49,6 @@ static VALUE cEvJoyDeviceRemoved;
    SDL_WaitEvent{,Timeout}
    SDL_UserEvent, SDL_RegisterEvents
  */
-static const char* INT2BOOLSTR(int bool)
-{
-    return bool ? "true" : "false";
-}
 
 static VALUE event_type_to_class[SDL_LASTEVENT];
 
@@ -249,7 +245,7 @@ static VALUE EvMouseButton_inspect(VALUE self)
                       " x=%d y=%d>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
                       ev->button.windowID, ev->button.which,
-                      ev->button.button, INT2BOOLSTR(ev->button.state),
+                      ev->button.button, INT2BOOLCSTR(ev->button.state),
 #if SDL_VERSION_ATLEAST(2,0,2)
                       ev->button.clicks,
 #endif
@@ -300,7 +296,7 @@ static VALUE EvJoyButton_inspect(VALUE self)
                       " which=%d button=%u pressed=%s>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
                       ev->jbutton.which, ev->jbutton.button,
-                      INT2BOOLSTR(ev->jbutton.state));
+                      INT2BOOLCSTR(ev->jbutton.state));
 }
 
 
