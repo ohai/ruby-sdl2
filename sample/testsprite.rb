@@ -4,6 +4,8 @@ SDL2.init(SDL2::INIT_EVERYTHING)
 
 p SDL2::Display.displays
 SDL2::Display.displays.each{|display| p display.modes }
+print "curent mode: "; p SDL2::Display.displays.first.current_mode
+print "desktop mode: "; p SDL2::Display.displays.first.desktop_mode
 
 window = SDL2::Window.create("testsprite",
                              SDL2::Window::OP_CENTERED, SDL2::Window::OP_CENTERED,

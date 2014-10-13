@@ -377,6 +377,20 @@ static VALUE Display_modes(VALUE self)
     return modes;
 }
 
+static VALUE Display_current_mode(VALUE self)
+{
+    SDL_DisplayMode mode;
+    HANDLE_ERROR(SDL_GetCurrentDisplayMode(NUM2INT(rb_iv_get(self, "@index")), &mode));
+    return DisplayMode_new(&mode);
+}
+
+static VALUE Display_desktop_mode(VALUE self)
+{
+    SDL_DisplayMode mode;
+    HANDLE_ERROR(SDL_GetDesktopDisplayMode(NUM2INT(rb_iv_get(self, "@index")), &mode));
+    return DisplayMode_new(&mode);
+}
+
 static VALUE DisplayMode_inspect(VALUE self)
 {
     SDL_DisplayMode* mode = Get_SDL_DisplayMode(self);
@@ -787,6 +801,8 @@ void rubysdl2_init_video(void)
     rb_define_attr(cDisplay, "index", 1, 0);
     rb_define_attr(cDisplay, "name", 1, 0);
     rb_define_method(cDisplay, "modes", Display_modes, 0); 
+    rb_define_method(cDisplay, "current_mode", Display_current_mode, 0);
+    rb_define_method(cDisplay, "desktop_mode", Display_desktop_mode, 0);
     
     cDisplayMode = rb_define_class_under(cDisplay, "Mode", rb_cObject);
 
