@@ -1,6 +1,10 @@
 require 'sdl2'
+require "pp"
 
 SDL2.init(SDL2::INIT_VIDEO)
+
+pp SDL2::PixelFormat::FORMATS.map{|f| f.name}
+p SDL2::PixelFormat::RGBA8888
 
 p SDL2::Display.displays
 SDL2::Display.displays.each{|display| p display.modes }

@@ -1034,6 +1034,54 @@ void rubysdl2_init_video(void)
     rb_define_method(cPixelFormat, "indexed?", PixelFormat_indexed_p, 0);
     rb_define_method(cPixelFormat, "alpha?", PixelFormat_alpha_p, 0);
     rb_define_method(cPixelFormat, "fourcc?", PixelFormat_fourcc_p, 0);
+
+    {
+        VALUE formats = rb_ary_new();
+        rb_define_const(cPixelFormat, "FORMATS", formats);
+#define DEFINE_PIXELFORMAT_CONST(t)                                     \
+        do {                                                            \
+            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_##t);  \
+            rb_define_const(cPixelFormat, #t, format);                  \
+            rb_ary_push(formats, format);                               \
+        } while (0)
+        DEFINE_PIXELFORMAT_CONST(UNKNOWN);
+        DEFINE_PIXELFORMAT_CONST(INDEX1LSB);
+        DEFINE_PIXELFORMAT_CONST(INDEX1MSB);
+        DEFINE_PIXELFORMAT_CONST(INDEX4LSB);
+        DEFINE_PIXELFORMAT_CONST(INDEX4MSB);
+        DEFINE_PIXELFORMAT_CONST(INDEX8);
+        DEFINE_PIXELFORMAT_CONST(RGB332);
+        DEFINE_PIXELFORMAT_CONST(RGB444);
+        DEFINE_PIXELFORMAT_CONST(RGB555);
+        DEFINE_PIXELFORMAT_CONST(BGR555);
+        DEFINE_PIXELFORMAT_CONST(ARGB4444);
+        DEFINE_PIXELFORMAT_CONST(RGBA4444);
+        DEFINE_PIXELFORMAT_CONST(ABGR4444);
+        DEFINE_PIXELFORMAT_CONST(BGRA4444);
+        DEFINE_PIXELFORMAT_CONST(ARGB1555);
+        DEFINE_PIXELFORMAT_CONST(RGBA5551);
+        DEFINE_PIXELFORMAT_CONST(ABGR1555);
+        DEFINE_PIXELFORMAT_CONST(BGRA5551);
+        DEFINE_PIXELFORMAT_CONST(RGB565);
+        DEFINE_PIXELFORMAT_CONST(BGR565);
+        DEFINE_PIXELFORMAT_CONST(RGB24);
+        DEFINE_PIXELFORMAT_CONST(BGR24);
+        DEFINE_PIXELFORMAT_CONST(RGB888);
+        DEFINE_PIXELFORMAT_CONST(RGBX8888);
+        DEFINE_PIXELFORMAT_CONST(BGR888);
+        DEFINE_PIXELFORMAT_CONST(BGRX8888);
+        DEFINE_PIXELFORMAT_CONST(ARGB8888);
+        DEFINE_PIXELFORMAT_CONST(RGBA8888);
+        DEFINE_PIXELFORMAT_CONST(ABGR8888);
+        DEFINE_PIXELFORMAT_CONST(BGRA8888);
+        DEFINE_PIXELFORMAT_CONST(ARGB2101010);
+        DEFINE_PIXELFORMAT_CONST(YV12);
+        DEFINE_PIXELFORMAT_CONST(IYUV);
+        DEFINE_PIXELFORMAT_CONST(YUY2);
+        DEFINE_PIXELFORMAT_CONST(UYVY);
+        DEFINE_PIXELFORMAT_CONST(YVYU);
+        rb_obj_freeze(formats);
+    }
     
     rb_gc_register_address(&hash_windowid_to_window);
     hash_windowid_to_window = rb_hash_new();
