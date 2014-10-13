@@ -311,6 +311,11 @@ static VALUE Window_s_all_windows(VALUE self)
     return rb_hash_dup(hash_windowid_to_window);
 }
 
+static VALUE Window_s_find_by_id(VALUE self, VALUE id)
+{
+    return rb_hash_aref(hash_windowid_to_window, id);
+}
+
 static VALUE Window_destroy(VALUE self)
 {
     Window_destroy_internal(Get_Window(self));
@@ -951,6 +956,7 @@ void rubysdl2_init_video(void)
     rb_undef_alloc_func(cWindow);
     rb_define_singleton_method(cWindow, "create", Window_s_create, 6);
     rb_define_singleton_method(cWindow, "all_windows", Window_s_all_windows, 0);
+    rb_define_singleton_method(cWindow, "find_by_id", Window_s_find_by_id, 1);
     rb_define_method(cWindow, "destroy?", Window_destroy_p, 0);
     rb_define_method(cWindow, "destroy", Window_destroy, 0);
     rb_define_method(cWindow, "create_renderer", Window_create_renderer, 2);
