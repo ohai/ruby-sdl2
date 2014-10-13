@@ -30,10 +30,9 @@ p renderer.viewport
 p renderer.support_render_target?
 p renderer.output_size
 
-p renderer.info.texture_formats.map{|format| SDL2::PixelFormat.new(format) }
+p renderer.info.texture_formats
 renderer.info.texture_formats.each do |format|
-  format = SDL2::PixelFormat.new(format)
-  p [format.name, format.type,  format.order, format.layout, format.bps, format.bytes_per_pixel,
+  p [format.format, format.name, format.type,  format.order, format.layout, format.bps, format.bytes_per_pixel,
      format.indexed?, format.alpha?, format.fourcc?]
 
 end

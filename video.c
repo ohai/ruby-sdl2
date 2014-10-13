@@ -224,6 +224,12 @@ DEFINE_GETTER(, SDL_Rect, cRect, "SDL2::Rect");
 
 DEFINE_GETTER(static, SDL_Point, cPoint, "SDL2::Point");
 
+static VALUE PixelFormat_new(Uint32 format)
+{
+    VALUE fmt = UINT2NUM(format);
+    return rb_class_new_instance(1, &fmt, cPixelFormat);
+}
+
 static VALUE RendererInfo_new(SDL_RendererInfo* info)
 {
     VALUE rinfo = rb_obj_alloc(cRendererInfo);
@@ -233,7 +239,7 @@ static VALUE RendererInfo_new(SDL_RendererInfo* info)
     rb_iv_set(rinfo, "@name", rb_usascii_str_new_cstr(info->name));
     rb_iv_set(rinfo, "@texture_formats", texture_formats);
     for (i=0; i<info->num_texture_formats; ++i)
-        rb_ary_push(texture_formats, UINT2NUM(info->texture_formats[i]));
+        rb_ary_push(texture_formats, PixelFormat_new(info->texture_formats[i]));
     rb_iv_set(rinfo, "@max_texture_width", INT2NUM(info->max_texture_width));
     rb_iv_set(rinfo, "@max_texture_height", INT2NUM(info->max_texture_height));
     
@@ -428,11 +434,19 @@ static VALUE Display_bounds(VALUE self)
     return rect;
 }
 
+static Uint32 uint32_for_format(VALUE format)
+{
+    if (rb_obj_is_kind_of(format, cPixelFormat))
+        return NUM2UINT(rb_iv_get(format, "@format"));
+    else
+        return NUM2UINT(format);
+}
+
 static VALUE DisplayMode_initialize(VALUE self, VALUE format, VALUE w, VALUE h,
                                     VALUE refresh_rate)
 {
     SDL_DisplayMode* mode = Get_SDL_DisplayMode(self);
-    mode->format = NUM2UINT(format);
+    mode->format = uint32_for_format(format);
     mode->w = NUM2INT(w); mode->h = NUM2INT(h);
     mode->refresh_rate = NUM2INT(refresh_rate);
     return Qnil;
