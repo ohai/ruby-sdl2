@@ -534,6 +534,12 @@ static VALUE Renderer_present(VALUE self)
     return Qnil;
 }
 
+static VALUE Renderer_clear(VALUE self)
+{
+    HANDLE_ERROR(SDL_RenderClear(Get_SDL_Renderer(self)));
+    return Qnil;
+}
+
 static VALUE Renderer_draw_color(VALUE self)
 {
     Uint8 r, g, b, a;
@@ -978,6 +984,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cRenderer, "present", Renderer_present, 0);
     rb_define_method(cRenderer, "draw_color",Renderer_draw_color, 0);
     rb_define_method(cRenderer, "draw_color=",Renderer_set_draw_color, 1);
+    rb_define_method(cRenderer, "clear", Renderer_clear, 0);
     rb_define_method(cRenderer, "draw_line",Renderer_draw_line, 4);
     rb_define_method(cRenderer, "draw_point",Renderer_draw_point, 2);
     rb_define_method(cRenderer, "draw_rect", Renderer_draw_rect, 1);
