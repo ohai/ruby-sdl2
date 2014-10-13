@@ -411,6 +411,13 @@ static VALUE Display_closest_mode(VALUE self, VALUE mode)
     return DisplayMode_new(&closest);
 }
 
+static VALUE Display_bounds(VALUE self)
+{
+    VALUE rect = rb_obj_alloc(cRect);
+    HANDLE_ERROR(SDL_GetDisplayBounds(Display_index_int(self), Get_SDL_Rect(rect)));
+    return rect;
+}
+
 static VALUE DisplayMode_initialize(VALUE self, VALUE format, VALUE w, VALUE h,
                                     VALUE refresh_rate)
 {
@@ -835,7 +842,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cDisplay, "current_mode", Display_current_mode, 0);
     rb_define_method(cDisplay, "desktop_mode", Display_desktop_mode, 0);
     rb_define_method(cDisplay, "closest_mode", Display_closest_mode, 1);
-
+    rb_define_method(cDisplay, "bounds", Display_bounds, 0);
     
     cDisplayMode = rb_define_class_under(cDisplay, "Mode", rb_cObject);
 
