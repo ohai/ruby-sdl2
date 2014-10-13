@@ -4,8 +4,11 @@ SDL2.init(SDL2::INIT_EVERYTHING)
 
 p SDL2::Display.displays
 SDL2::Display.displays.each{|display| p display.modes }
-print "curent mode: "; p SDL2::Display.displays.first.current_mode
-print "desktop mode: "; p SDL2::Display.displays.first.desktop_mode
+display = SDL2::Display.displays.first
+print "curent mode: "; p display.current_mode
+print "desktop mode: "; p display.desktop_mode
+search_mode = SDL2::Display::Mode.new(0, 640, 480, 60)
+puts "The mode closest to #{search_mode.inspect} is #{display.closest_mode(search_mode).inspect}"
 
 window = SDL2::Window.create("testsprite",
                              SDL2::Window::OP_CENTERED, SDL2::Window::OP_CENTERED,
@@ -13,6 +16,7 @@ window = SDL2::Window.create("testsprite",
 puts "window id: #{window.window_id}"
 p SDL2::Window.all_windows
 p window.display_mode
+p window.display
 renderer = window.create_renderer(-1, 0)
 texture = renderer.load_texture("icon.bmp")
 

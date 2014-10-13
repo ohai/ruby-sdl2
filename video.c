@@ -326,6 +326,12 @@ static VALUE Window_display_mode(VALUE self)
     return DisplayMode_new(&mode);
 }
 
+static VALUE Window_display(VALUE self)
+{
+    int display_index = HANDLE_ERROR(SDL_GetWindowDisplayIndex(Get_SDL_Window(self)));
+    return Display_new(display_index);
+}
+
 static VALUE Window_inspect(VALUE self)
 {
     Window* w = Get_Window(self);
@@ -363,6 +369,11 @@ static VALUE Display_s_displays(VALUE self)
     return displays;
 }
 
+static VALUE Display_index_int(VALUE display)
+{
+    return NUM2INT(rb_iv_get(display, "@index"));
+}
+
 static VALUE Display_modes(VALUE self)
 {
     int i;
@@ -389,6 +400,25 @@ static VALUE Display_desktop_mode(VALUE self)
     SDL_DisplayMode mode;
     HANDLE_ERROR(SDL_GetDesktopDisplayMode(NUM2INT(rb_iv_get(self, "@index")), &mode));
     return DisplayMode_new(&mode);
+}
+
+static VALUE Display_closest_mode(VALUE self, VALUE mode)
+{
+    SDL_DisplayMode closest;
+    if (!SDL_GetClosestDisplayMode(Display_index_int(self), Get_SDL_DisplayMode(mode),
+                                   &closest))
+        SDL_ERROR();
+    return DisplayMode_new(&closest);
+}
+
+static VALUE DisplayMode_initialize(VALUE self, VALUE format, VALUE w, VALUE h,
+                                    VALUE refresh_rate)
+{
+    SDL_DisplayMode* mode = Get_SDL_DisplayMode(self);
+    mode->format = NUM2UINT(format);
+    mode->w = NUM2INT(w); mode->h = NUM2INT(h);
+    mode->refresh_rate = NUM2INT(refresh_rate);
+    return Qnil;
 }
 
 static VALUE DisplayMode_inspect(VALUE self)
@@ -772,6 +802,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cWindow, "window_id", Window_window_id, 0);
     rb_define_method(cWindow, "inspect", Window_inspect, 0);
     rb_define_method(cWindow, "display_mode", Window_display_mode, 0);
+    rb_define_method(cWindow, "display", Window_display, 0);
     rb_define_method(cWindow, "debug_info", Window_debug_info, 0);
     rb_define_const(cWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
     rb_define_const(cWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
@@ -803,10 +834,13 @@ void rubysdl2_init_video(void)
     rb_define_method(cDisplay, "modes", Display_modes, 0); 
     rb_define_method(cDisplay, "current_mode", Display_current_mode, 0);
     rb_define_method(cDisplay, "desktop_mode", Display_desktop_mode, 0);
+    rb_define_method(cDisplay, "closest_mode", Display_closest_mode, 1);
+
     
     cDisplayMode = rb_define_class_under(cDisplay, "Mode", rb_cObject);
 
     rb_define_alloc_func(cDisplayMode, DisplayMode_s_allocate);
+    rb_define_private_method(cDisplayMode, "initialize", DisplayMode_initialize, 4);
     rb_define_method(cDisplayMode, "inspect", DisplayMode_inspect, 0);
 
     
