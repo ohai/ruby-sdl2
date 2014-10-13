@@ -369,7 +369,7 @@ static VALUE Display_s_displays(VALUE self)
     return displays;
 }
 
-static VALUE Display_index_int(VALUE display)
+static int Display_index_int(VALUE display)
 {
     return NUM2INT(rb_iv_get(display, "@index"));
 }
@@ -377,7 +377,7 @@ static VALUE Display_index_int(VALUE display)
 static VALUE Display_modes(VALUE self)
 {
     int i;
-    int index = NUM2INT(rb_iv_get(self, "@index"));
+    int index = Display_index_int(self);
     int num_modes = SDL_GetNumDisplayModes(index);
     VALUE modes = rb_ary_new2(num_modes);
     for (i=0; i<num_modes; ++i) {
@@ -391,14 +391,14 @@ static VALUE Display_modes(VALUE self)
 static VALUE Display_current_mode(VALUE self)
 {
     SDL_DisplayMode mode;
-    HANDLE_ERROR(SDL_GetCurrentDisplayMode(NUM2INT(rb_iv_get(self, "@index")), &mode));
+    HANDLE_ERROR(SDL_GetCurrentDisplayMode(Display_index_int(self), &mode));
     return DisplayMode_new(&mode);
 }
 
 static VALUE Display_desktop_mode(VALUE self)
 {
     SDL_DisplayMode mode;
-    HANDLE_ERROR(SDL_GetDesktopDisplayMode(NUM2INT(rb_iv_get(self, "@index")), &mode));
+    HANDLE_ERROR(SDL_GetDesktopDisplayMode(Display_index_int(self), &mode));
     return DisplayMode_new(&mode);
 }
 
