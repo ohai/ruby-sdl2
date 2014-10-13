@@ -2,6 +2,9 @@ require "sdl2"
 
 SDL2.init(SDL2::INIT_EVERYTHING)
 
+p SDL2::Display.displays
+SDL2::Display.displays.each{|display| p display.modes }
+
 window = SDL2::Window.create("testsprite",
                              SDL2::Window::OP_CENTERED, SDL2::Window::OP_CENTERED,
                              640, 480, 0)

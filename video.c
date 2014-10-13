@@ -84,6 +84,14 @@ static VALUE Window_new(SDL_Window* window)
 
 DEFINE_WRAPPER(SDL_Window, Window, window, cWindow, "SDL2::Window");
 
+static VALUE Display_new(int index)
+{
+    VALUE display = rb_obj_alloc(cDisplay);
+    rb_iv_set(display, "@index", INT2NUM(index));
+    rb_iv_set(display, "@name", utf8str_new_cstr(SDL_GetDisplayName(index)));
+    return display;
+}
+
 static VALUE DisplayMode_s_allocate(VALUE klass)
 {
     SDL_DisplayMode* mode = ALLOC(SDL_DisplayMode);
@@ -343,6 +351,30 @@ static VALUE Window_debug_info(VALUE self)
     rb_hash_aset(info, rb_str_new2("num_active_renderers"), INT2NUM(num_active_renderers));
   
     return info;
+}
+
+static VALUE Display_s_displays(VALUE self)
+{
+    int i;
+    int num_displays = SDL_GetNumVideoDisplays();
+    VALUE displays = rb_ary_new2(num_displays);
+    for (i=0; i<num_displays; ++i)
+        rb_ary_push(displays, Display_new(i));
+    return displays;
+}
+
+static VALUE Display_modes(VALUE self)
+{
+    int i;
+    int index = NUM2INT(rb_iv_get(self, "@index"));
+    int num_modes = SDL_GetNumDisplayModes(index);
+    VALUE modes = rb_ary_new2(num_modes);
+    for (i=0; i<num_modes; ++i) {
+        SDL_DisplayMode mode;
+        HANDLE_ERROR(SDL_GetDisplayMode(index, i, &mode));
+        rb_ary_push(modes, DisplayMode_new(&mode));
+    }
+    return modes;
 }
 
 static VALUE DisplayMode_inspect(VALUE self)
@@ -751,11 +783,16 @@ void rubysdl2_init_video(void)
 
     cDisplay = rb_define_class_under(mSDL2, "Display", rb_cObject);
     
-    /* rb_define_module_function(cDisplay, "displays", Display_s_displays, 0); */
-    /* rb_define_method(cDisplay, "modes", Display_modes, 0); */
+    rb_define_module_function(cDisplay, "displays", Display_s_displays, 0);
+    rb_define_attr(cDisplay, "index", 1, 0);
+    rb_define_attr(cDisplay, "name", 1, 0);
+    rb_define_method(cDisplay, "modes", Display_modes, 0); 
     
     cDisplayMode = rb_define_class_under(cDisplay, "Mode", rb_cObject);
+
+    rb_define_alloc_func(cDisplayMode, DisplayMode_s_allocate);
     rb_define_method(cDisplayMode, "inspect", DisplayMode_inspect, 0);
+
     
     cRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
     
