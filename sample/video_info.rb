@@ -18,6 +18,7 @@ puts "current video driver: #{SDL2.current_video_driver}"
 
 window = SDL2::Window.create("testsprite", 0, 0, 640, 480, 0)
 renderer = window.create_renderer(-1, 0)
+texture = renderer.load_texture("icon.bmp")
 
 puts "window id: #{window.window_id}"
 p SDL2::Window.all_windows
@@ -40,6 +41,10 @@ renderer.info.texture_formats.each do |format|
      format.indexed?, format.alpha?, format.fourcc?]
 
 end
+
+p texture
+texture.destroy
+p texture
 
 renderer.present
 

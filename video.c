@@ -703,6 +703,48 @@ static VALUE Texture_set_color_mod(VALUE self, VALUE rgb)
     return Qnil;
 }
 
+static VALUE Texture_format(VALUE self)
+{
+    Uint32 format;
+    HANDLE_ERROR(SDL_QueryTexture(Get_SDL_Texture(self), &format, NULL, NULL, NULL));
+    return PixelFormat_new(format);
+}
+
+static VALUE Texture_access_pattern(VALUE self)
+{
+    int access;
+    HANDLE_ERROR(SDL_QueryTexture(Get_SDL_Texture(self), NULL, &access, NULL, NULL));
+    return INT2FIX(access);
+}
+
+static VALUE Texture_w(VALUE self)
+{
+    int w;
+    HANDLE_ERROR(SDL_QueryTexture(Get_SDL_Texture(self), NULL, NULL, &w, NULL));
+    return INT2FIX(w);
+}
+
+static VALUE Texture_h(VALUE self)
+{
+    int h;
+    HANDLE_ERROR(SDL_QueryTexture(Get_SDL_Texture(self), NULL, NULL, NULL, &h));
+    return INT2FIX(h);
+}
+
+static VALUE Texture_inspect(VALUE self)
+{
+    Texture* t = Get_Texture(self);
+    Uint32 format;
+    int access, w, h;
+    if (!t->texture)
+        return rb_sprintf("<%s: (destroyed)>", rb_obj_classname(self));
+    
+    HANDLE_ERROR(SDL_QueryTexture(t->texture, &format, &access, &w, &h));
+    return rb_sprintf("<%s:%p format=%s access=%d w=%d h=%d>",
+                      rb_obj_classname(self), (void*)self, SDL_GetPixelFormatName(format),
+                      access, w, h);
+}
+
 static VALUE Texture_debug_info(VALUE self)
 {
     Texture* t = Get_Texture(self);
@@ -977,8 +1019,18 @@ void rubysdl2_init_video(void)
     rb_define_method(cTexture, "color_mod=", Texture_set_color_mod, 1);
     rb_define_method(cTexture, "alpha_mod", Texture_alpha_mod, 0);
     rb_define_method(cTexture, "alpha_mod=", Texture_set_alpha_mod, 1);
+    rb_define_method(cTexture, "format", Texture_format, 0);
+    rb_define_method(cTexture, "access_pattern", Texture_access_pattern, 0);
+    rb_define_method(cTexture, "w", Texture_w, 0);
+    rb_define_method(cTexture, "h", Texture_h, 0);
+    rb_define_method(cTexture, "inspect", Texture_inspect, 0);
     rb_define_method(cTexture, "debug_info", Texture_debug_info, 0);
-    
+#define DEFINE_TEXTUREAH_ACCESS_CONST(t)                                \
+    rb_define_const(cTexture, "ACCESS_" #t, INT2NUM(SDL_TEXTUREACCESS_##t))
+    DEFINE_TEXTUREAH_ACCESS_CONST(STATIC);
+    DEFINE_TEXTUREAH_ACCESS_CONST(STREAMING);
+    DEFINE_TEXTUREAH_ACCESS_CONST(TARGET);
+
     
     cSurface = rb_define_class_under(mSDL2, "Surface", rb_cObject);
     
