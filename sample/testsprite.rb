@@ -6,7 +6,8 @@ window = SDL2::Window.create("testsprite",
                              SDL2::Window::OP_CENTERED, SDL2::Window::OP_CENTERED,
                              640, 480, 0)
 
-renderer = window.create_renderer(-1, 0)
+renderer = window.create_renderer(-1,
+                                  SDL2::Renderer::ACCELERATED|SDL2::Renderer::TARGETTEXTURE)
 texture = renderer.load_texture("icon.bmp")
 
 rect = SDL2::Rect.new(48, 128, 32, 32)
@@ -19,6 +20,20 @@ renderer.copy(texture, nil, SDL2::Rect[128, 294, 48, 48])
 texture.blend_mode = SDL2::BLENDMODE_NONE
 texture.color_mod = [128, 128, 255]
 renderer.copy(texture, nil, SDL2::Rect[300, 420, 48, 48])
+
+texture.blend_mode = SDL2::BLENDMODE_NONE
+texture.color_mod = [255, 255, 255]
+
+if renderer.support_render_target?
+  empty_texture = renderer.create_texture(renderer.info.texture_formats.first,
+                                          SDL2::Texture::ACCESS_TARGET, 128, 128)
+  renderer.render_target = empty_texture
+  renderer.draw_color = [255, 0, 255]
+  renderer.draw_line(0, 0, 128, 128)
+  renderer.reset_render_target
+  renderer.copy(empty_texture, SDL2::Rect[0, 0, 128, 128], SDL2::Rect[420, 20, 128, 128])
+end
+
 loop do
   while ev = SDL2::Event.poll
     p ev

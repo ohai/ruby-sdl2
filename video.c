@@ -486,6 +486,17 @@ static VALUE Renderer_destroy(VALUE self)
     return Qnil;
 }
 
+static VALUE Renderer_create_texture(VALUE self, VALUE format, VALUE access,
+                                     VALUE w, VALUE h)
+{
+    SDL_Texture* texture = SDL_CreateTexture(Get_SDL_Renderer(self),
+                                             uint32_for_format(format),
+                                             NUM2INT(access), NUM2INT(w), NUM2INT(h));
+    if (!texture)
+        SDL_ERROR();
+    return Texture_new(texture, Get_Renderer(self));
+}
+
 static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
 {
     SDL_Texture* texture = SDL_CreateTextureFromSurface(Get_SDL_Renderer(self),
@@ -648,6 +659,24 @@ static VALUE Renderer_output_size(VALUE self)
     int w, h;
     HANDLE_ERROR(SDL_GetRendererOutputSize(Get_SDL_Renderer(self), &w, &h));
     return rb_ary_new3(2, INT2FIX(w), INT2FIX(h));
+}
+
+static VALUE Renderer_set_render_target(VALUE self, VALUE target)
+{
+    HANDLE_ERROR(SDL_SetRenderTarget(Get_SDL_Renderer(self),
+                                     (target == Qnil) ? NULL : Get_SDL_Texture(target)));
+    rb_iv_set(self, "render_target", target);
+    return Qnil;
+}
+
+static VALUE Renderer_render_target(VALUE self)
+{
+    return rb_iv_get(self, "render_target");
+}
+
+static VALUE Renderer_reset_render_target(VALUE self)
+{
+    return Renderer_set_render_target(self, Qnil);
 }
 
 static VALUE Renderer_debug_info(VALUE self)
@@ -978,6 +1007,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cRenderer, "destroy?", Renderer_destroy_p, 0);
     rb_define_method(cRenderer, "destroy", Renderer_destroy, 0);
     rb_define_method(cRenderer, "debug_info", Renderer_debug_info, 0);
+    rb_define_method(cRenderer, "create_texture", Renderer_create_texture, 4);
     rb_define_method(cRenderer, "create_texture_from", Renderer_create_texture_from, 1);
     rb_define_method(cRenderer, "copy", Renderer_copy, 3);
     rb_define_method(cRenderer, "copy_ex", Renderer_copy_ex, 6);
@@ -1000,6 +1030,9 @@ void rubysdl2_init_video(void)
     rb_define_method(cRenderer, "viewport", Renderer_viewport, 0);
     rb_define_method(cRenderer, "support_render_target?", Renderer_support_render_target_p, 0);
     rb_define_method(cRenderer, "output_size", Renderer_output_size, 0);
+    rb_define_method(cRenderer, "render_target", Renderer_render_target, 0);
+    rb_define_method(cRenderer, "render_target=", Renderer_set_render_target, 1);
+    rb_define_method(cRenderer, "reset_render_target", Renderer_reset_render_target, 0);
     
     rb_define_method(cRenderer, "info", Renderer_info, 0);
 #define DEFINE_SDL_RENDERER_FLAGS_CONST(n)                      \
