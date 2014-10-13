@@ -823,8 +823,8 @@ static VALUE PixelFormat_type(VALUE self)
 PIXELFORMAT_ATTR_READER(name, SDL_GetPixelFormatName, utf8str_new_cstr);
 PIXELFORMAT_ATTR_READER(order,  SDL_PIXELORDER, UINT2NUM);
 PIXELFORMAT_ATTR_READER(layout,  SDL_PIXELLAYOUT, UINT2NUM);
-PIXELFORMAT_ATTR_READER(bits,  SDL_BITSPERPIXEL, INT2NUM);
-PIXELFORMAT_ATTR_READER(bytes,  SDL_BYTESPERPIXEL, INT2NUM);
+PIXELFORMAT_ATTR_READER(bits_per_pixel,  SDL_BITSPERPIXEL, INT2NUM);
+PIXELFORMAT_ATTR_READER(bytes_per_pixel,  SDL_BYTESPERPIXEL, INT2NUM);
 PIXELFORMAT_ATTR_READER(indexed_p,  SDL_ISPIXELFORMAT_INDEXED, INT2BOOL);
 PIXELFORMAT_ATTR_READER(alpha_p,  SDL_ISPIXELFORMAT_ALPHA, INT2BOOL);
 PIXELFORMAT_ATTR_READER(fourcc_p,  SDL_ISPIXELFORMAT_FOURCC, INT2BOOL);
@@ -1014,8 +1014,9 @@ void rubysdl2_init_video(void)
     rb_define_method(cPixelFormat, "type", PixelFormat_type, 0);
     rb_define_method(cPixelFormat, "order", PixelFormat_order, 0);
     rb_define_method(cPixelFormat, "layout", PixelFormat_layout, 0);
-    rb_define_method(cPixelFormat, "bits", PixelFormat_bits, 0);
-    rb_define_method(cPixelFormat, "bytes", PixelFormat_bytes, 0);
+    rb_define_method(cPixelFormat, "bits_per_pixel", PixelFormat_bits_per_pixel, 0);
+    rb_define_alias(cPixelFormat, "bps", "bits_per_pixel");
+    rb_define_method(cPixelFormat, "bytes_per_pixel", PixelFormat_bytes_per_pixel, 0);
     rb_define_method(cPixelFormat, "indexed?", PixelFormat_indexed_p, 0);
     rb_define_method(cPixelFormat, "alpha?", PixelFormat_alpha_p, 0);
     rb_define_method(cPixelFormat, "fourcc?", PixelFormat_fourcc_p, 0);
