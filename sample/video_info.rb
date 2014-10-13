@@ -48,6 +48,9 @@ p texture
 texture.destroy
 p texture
 
+p SDL2::ScreenSaver.enabled?
+SDL2::ScreenSaver.disable
+p SDL2::ScreenSaver.enabled?
 
 renderer.present
 

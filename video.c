@@ -14,6 +14,7 @@ static VALUE cPoint;
 static VALUE cSurface;
 static VALUE cRendererInfo;
 static VALUE cPixelFormat; /* NOTE: This is related to SDL_PixelFormatEnum, not SDL_PixelFormat */
+static VALUE mScreenSaver;
 
 static VALUE hash_windowid_to_window = Qnil;
 
@@ -946,6 +947,23 @@ static VALUE PixelFormat_inspect(VALUE self)
                       INT2BOOLCSTR(SDL_ISPIXELFORMAT_FOURCC(format)));
 }
 
+static VALUE ScreenSaver_enable(VALUE self)
+{
+    SDL_EnableScreenSaver();
+    return Qnil;
+}
+
+static VALUE ScreenSaver_disable(VALUE self)
+{
+    SDL_DisableScreenSaver();
+    return Qnil;
+}
+
+static VALUE ScreenSaver_enabled_p(VALUE self)
+{
+    return INT2BOOL(SDL_IsScreenSaverEnabled());
+}
+
 void rubysdl2_init_video(void)
 {
     rb_define_module_function(mSDL2, "video_drivers", SDL2_s_video_drivers, 0);
@@ -1188,6 +1206,11 @@ void rubysdl2_init_video(void)
         DEFINE_PIXELFORMAT_CONST(YVYU);
         rb_obj_freeze(formats);
     }
+
+    mScreenSaver = rb_define_module_under(mSDL2, "ScreenSaver");
+    rb_define_module_function(mScreenSaver, "enable", ScreenSaver_enable, 0);
+    rb_define_module_function(mScreenSaver, "disable", ScreenSaver_disable, 0);
+    rb_define_module_function(mScreenSaver, "enabled?", ScreenSaver_enabled_p, 0);
     
     rb_gc_register_address(&hash_windowid_to_window);
     hash_windowid_to_window = rb_hash_new();
