@@ -2,6 +2,7 @@
 *~
 Makefile
 *.so
+TAGS
 local/
 mkmf.log
 sample/sample.wav
