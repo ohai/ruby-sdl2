@@ -455,9 +455,10 @@ static VALUE DisplayMode_initialize(VALUE self, VALUE format, VALUE w, VALUE h,
 static VALUE DisplayMode_inspect(VALUE self)
 {
     SDL_DisplayMode* mode = Get_SDL_DisplayMode(self);
-    return rb_sprintf("<%s: format=%u w=%d h=%d refresh_rate=%d>",
-                      rb_obj_classname(self), mode->format, mode->w, mode->h,
-                      mode->refresh_rate);
+    return rb_sprintf("<%s: format=%s w=%d h=%d refresh_rate=%d>",
+                      rb_obj_classname(self), SDL_GetPixelFormatName(mode->format),
+                      mode->w, mode->h, mode->refresh_rate);
+                      
 }
 
 static VALUE Renderer_s_drivers_info(VALUE self)
