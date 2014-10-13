@@ -431,7 +431,25 @@ void rubysdl2_init_event(void)
     DEFINE_EVENT_ACCESSOR(Window, cEvWindow, data1);
     DEFINE_EVENT_ACCESSOR(Window, cEvWindow, data2);
     rb_define_method(cEvWindow, "inspect", EvWindow_inspect, 0);
-
+#define DEFINE_EVENT_ID_CONST(t) \
+    rb_define_const(cEvWindow, #t, INT2NUM(SDL_WINDOWEVENT_##t))
+    DEFINE_EVENT_ID_CONST(NONE);
+    DEFINE_EVENT_ID_CONST(SHOWN);
+    DEFINE_EVENT_ID_CONST(HIDDEN);
+    DEFINE_EVENT_ID_CONST(EXPOSED);
+    DEFINE_EVENT_ID_CONST(MOVED);
+    DEFINE_EVENT_ID_CONST(RESIZED);
+    DEFINE_EVENT_ID_CONST(SIZE_CHANGED);
+    DEFINE_EVENT_ID_CONST(MINIMIZED);
+    DEFINE_EVENT_ID_CONST(MAXIMIZED);
+    DEFINE_EVENT_ID_CONST(RESTORED);
+    DEFINE_EVENT_ID_CONST(ENTER);
+    DEFINE_EVENT_ID_CONST(LEAVE);
+    DEFINE_EVENT_ID_CONST(FOCUS_GAINED);
+    DEFINE_EVENT_ID_CONST(FOCUS_LOST);
+    DEFINE_EVENT_ID_CONST(CLOSE);
+    
+                    
     DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, window_id);
     DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, state);
     DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, repeat);
