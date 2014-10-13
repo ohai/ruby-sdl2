@@ -17,6 +17,7 @@ SDL_Color rubysdl2_Array_to_SDL_Color(VALUE ary);
 VALUE rubysdl2_SDL_version_to_String(const SDL_version* ver);
 VALUE rubysdl2_SDL_version_to_Array(const SDL_version* ver);
 SDL_Rect* rubysdl2_Get_SDL_Rect(VALUE);
+const char* rubysdl2_INT2BOOLCSTR(int);
 
 /** initialize interfaces */
 void rubysdl2_init_video(void);
@@ -82,7 +83,7 @@ SDL2_EXTERN VALUE rubysdl2_eSDL2Error;
 #define eSDL2Error rubysdl2_eSDL2Error
 #define SDL_version_to_String rubysdl2_SDL_version_to_String
 #define SDL_version_to_Array rubysdl2_SDL_version_to_Array
-
+#define INT2BOOLCSTR  rubysdl2_INT2BOOLCSTR 
 
 
 

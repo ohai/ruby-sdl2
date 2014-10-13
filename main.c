@@ -59,6 +59,11 @@ VALUE SDL_version_to_Array(const SDL_version* ver)
     return rb_ary_new3(3, INT2FIX(ver->major), INT2FIX(ver->minor), INT2FIX(ver->patch));
 }
 
+const char* INT2BOOLCSTR(int n)
+{
+    return n ? "true" : "false";
+}
+
 typedef enum {
     NOT_INITIALIZED, INITIALIZDED, FINALIZED
 } sdl2_state;

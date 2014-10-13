@@ -13,6 +13,7 @@ static VALUE cRect;
 static VALUE cPoint;
 static VALUE cSurface;
 static VALUE cRendererInfo;
+static VALUE cPixelFormat; /* NOTE: This is related to SDL_PixelFormatEnum, not SDL_PixelFormat */
 
 static VALUE hash_windowid_to_window = Qnil;
 
@@ -802,6 +803,45 @@ static VALUE Point_inspect(VALUE self)
 FIELD_ACCESSOR(Point, SDL_Point, x);
 FIELD_ACCESSOR(Point, SDL_Point, y);
 
+static VALUE PixelForamt_initialize(VALUE self, VALUE format)
+{
+    rb_iv_set(self, "@format", format);
+    return Qnil;
+}
+
+static VALUE PixelFormat_type(VALUE self)
+{
+    return UINT2NUM(SDL_PIXELTYPE(rb_iv_get(self, "@format")));
+}
+
+#define PIXELFORMAT_ATTR_READER(field, extractor, c2ruby)               \
+    static VALUE PixelFormat_##field(VALUE self)                        \
+    {                                                                   \
+        return c2ruby(extractor(NUM2UINT(rb_iv_get(self, "@format")))); \
+    }
+
+PIXELFORMAT_ATTR_READER(order,  SDL_PIXELORDER, UINT2NUM);
+PIXELFORMAT_ATTR_READER(layout,  SDL_PIXELLAYOUT, UINT2NUM);
+PIXELFORMAT_ATTR_READER(bits,  SDL_BITSPERPIXEL, INT2NUM);
+PIXELFORMAT_ATTR_READER(bytes,  SDL_BYTESPERPIXEL, INT2NUM);
+PIXELFORMAT_ATTR_READER(indexed_p,  SDL_ISPIXELFORMAT_INDEXED, INT2BOOL);
+PIXELFORMAT_ATTR_READER(alpha_p,  SDL_ISPIXELFORMAT_ALPHA, INT2BOOL);
+PIXELFORMAT_ATTR_READER(fourcc_p,  SDL_ISPIXELFORMAT_FOURCC, INT2BOOL);
+
+static VALUE PixelFormat_inspect(VALUE self)
+{
+    Uint32 format = NUM2UINT(rb_iv_get(self, "@format"));
+    return rb_sprintf("<%s: %s type=%d order=%d layout=%d"
+                      " bits=%d bytes=%d indexed=%s alpha=%s fourcc=%s>",
+                      rb_obj_classname(self),
+                      SDL_GetPixelFormatName(format),
+                      SDL_PIXELTYPE(format), SDL_PIXELORDER(format), SDL_PIXELLAYOUT(format),
+                      SDL_BITSPERPIXEL(format), SDL_BYTESPERPIXEL(format),
+                      INT2BOOLCSTR(SDL_ISPIXELFORMAT_INDEXED(format)),
+                      INT2BOOLCSTR(SDL_ISPIXELFORMAT_ALPHA(format)),
+                      INT2BOOLCSTR(SDL_ISPIXELFORMAT_FOURCC(format)));
+}
+
 void rubysdl2_init_video(void)
 {
     rb_define_module_function(mSDL2, "video_drivers", SDL2_s_video_drivers, 0);
@@ -962,7 +1002,22 @@ void rubysdl2_init_video(void)
     cRendererInfo = rb_define_class_under(cRenderer, "Info", rb_cObject);
     define_attr_readers(cRendererInfo, "name", "flags", "texture_formats",
                         "max_texture_width", "max_texture_height", NULL);
-
+    
+    
+    cPixelFormat = rb_define_class_under(mSDL2, "PixelFormat", rb_cObject);
+    
+    rb_define_private_method(cPixelFormat, "initialize", PixelForamt_initialize, 1);
+    rb_define_attr(cPixelFormat, "format", 1, 0);
+    rb_define_method(cPixelFormat, "inspect", PixelFormat_inspect, 0);
+    rb_define_method(cPixelFormat, "type", PixelFormat_type, 0);
+    rb_define_method(cPixelFormat, "order", PixelFormat_order, 0);
+    rb_define_method(cPixelFormat, "layout", PixelFormat_layout, 0);
+    rb_define_method(cPixelFormat, "bits", PixelFormat_bits, 0);
+    rb_define_method(cPixelFormat, "bytes", PixelFormat_bytes, 0);
+    rb_define_method(cPixelFormat, "indexed?", PixelFormat_indexed_p, 0);
+    rb_define_method(cPixelFormat, "alpha?", PixelFormat_alpha_p, 0);
+    rb_define_method(cPixelFormat, "fourcc?", PixelFormat_fourcc_p, 0);
+    
     rb_gc_register_address(&hash_windowid_to_window);
     hash_windowid_to_window = rb_hash_new();
 }
