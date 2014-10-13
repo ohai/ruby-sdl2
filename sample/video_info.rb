@@ -24,6 +24,8 @@ puts "window id: #{window.window_id}"
 p SDL2::Window.all_windows
 p window.display_mode
 p window.display
+p window.renderer
+p renderer
 
 p SDL2.video_drivers
 p SDL2::Renderer.drivers_info
@@ -45,6 +47,7 @@ end
 p texture
 texture.destroy
 p texture
+
 
 renderer.present
 

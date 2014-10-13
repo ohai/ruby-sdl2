@@ -327,7 +327,13 @@ static VALUE Window_create_renderer(VALUE self, VALUE index, VALUE flags)
         HANDLE_ERROR(-1);
   
     renderer = Renderer_new(sdl_renderer, Get_Window(self));
+    rb_iv_set(self, "renderer", renderer);
     return renderer;
+}
+
+static VALUE Window_renderer(VALUE self)
+{
+    return rb_iv_get(self, "renderer");
 }
 
 static VALUE Window_window_id(VALUE self)
@@ -913,6 +919,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cWindow, "destroy?", Window_destroy_p, 0);
     rb_define_method(cWindow, "destroy", Window_destroy, 0);
     rb_define_method(cWindow, "create_renderer", Window_create_renderer, 2);
+    rb_define_method(cWindow, "renderer", Window_renderer, 0);
     rb_define_method(cWindow, "window_id", Window_window_id, 0);
     rb_define_method(cWindow, "inspect", Window_inspect, 0);
     rb_define_method(cWindow, "display_mode", Window_display_mode, 0);
