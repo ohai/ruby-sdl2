@@ -820,6 +820,7 @@ static VALUE PixelFormat_type(VALUE self)
         return c2ruby(extractor(NUM2UINT(rb_iv_get(self, "@format")))); \
     }
 
+PIXELFORMAT_ATTR_READER(name, SDL_GetPixelFormatName, utf8str_new_cstr);
 PIXELFORMAT_ATTR_READER(order,  SDL_PIXELORDER, UINT2NUM);
 PIXELFORMAT_ATTR_READER(layout,  SDL_PIXELLAYOUT, UINT2NUM);
 PIXELFORMAT_ATTR_READER(bits,  SDL_BITSPERPIXEL, INT2NUM);
@@ -1008,6 +1009,7 @@ void rubysdl2_init_video(void)
     
     rb_define_private_method(cPixelFormat, "initialize", PixelForamt_initialize, 1);
     rb_define_attr(cPixelFormat, "format", 1, 0);
+    rb_define_method(cPixelFormat, "name", PixelFormat_name, 0);
     rb_define_method(cPixelFormat, "inspect", PixelFormat_inspect, 0);
     rb_define_method(cPixelFormat, "type", PixelFormat_type, 0);
     rb_define_method(cPixelFormat, "order", PixelFormat_order, 0);

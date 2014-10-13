@@ -33,7 +33,7 @@ p renderer.output_size
 p renderer.info.texture_formats.map{|format| SDL2::PixelFormat.new(format) }
 renderer.info.texture_formats.each do |format|
   format = SDL2::PixelFormat.new(format)
-  p [format.type,  format.order, format.layout, format.bits, format.bytes,
+  p [format.name, format.type,  format.order, format.layout, format.bits, format.bytes,
      format.indexed?, format.alpha?, format.fourcc?]
 
 end
