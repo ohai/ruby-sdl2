@@ -10,6 +10,7 @@ print "desktop mode: "; p display.desktop_mode
 search_mode = SDL2::Display::Mode.new(0, 640, 480, 60)
 puts "The mode closest to #{search_mode.inspect} is #{display.closest_mode(search_mode).inspect}"
 print "bounds: "; p display.bounds
+puts "current video driver: #{SDL2.current_video_driver}"
 
 window = SDL2::Window.create("testsprite",
                              SDL2::Window::OP_CENTERED, SDL2::Window::OP_CENTERED,

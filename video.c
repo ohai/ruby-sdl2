@@ -273,6 +273,15 @@ static VALUE SDL2_s_video_drivers(VALUE self)
     return drivers;
 }
 
+static VALUE SDL2_s_current_video_driver(VALUE self)
+{
+    const char* name = SDL_GetCurrentVideoDriver();
+    if (name)
+        return utf8str_new_cstr(name);
+    else
+        return Qnil;
+}
+
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
                              VALUE flags)
 {
@@ -796,7 +805,7 @@ FIELD_ACCESSOR(Point, SDL_Point, y);
 void rubysdl2_init_video(void)
 {
     rb_define_module_function(mSDL2, "video_drivers", SDL2_s_video_drivers, 0);
-    
+    rb_define_module_function(mSDL2, "current_video_driver", SDL2_s_current_video_driver, 0);
     
     cWindow = rb_define_class_under(mSDL2, "Window", rb_cObject);
     
