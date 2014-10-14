@@ -367,6 +367,122 @@ static VALUE Window_display(VALUE self)
     return Display_new(display_index);
 }
 
+static VALUE Window_brightness(VALUE self)
+{
+    return DBL2NUM(SDL_GetWindowBrightness(Get_SDL_Window(self)));
+}
+
+static VALUE Window_set_brightness(VALUE self, VALUE brightness)
+{
+    HANDLE_ERROR(SDL_SetWindowBrightness(Get_SDL_Window(self), NUM2DBL(brightness)));
+    return brightness;
+}
+
+static VALUE Window_flags(VALUE self)
+{
+    return UINT2NUM(SDL_GetWindowFlags(Get_SDL_Window(self)));
+}
+
+static VALUE gamma_table_to_Array(Uint16 r[])
+{
+    int i;
+    VALUE ary = rb_ary_new2(256);
+    for (i=0; i<256; ++i)
+        rb_ary_push(ary, UINT2NUM(r[i]));
+    return ary;
+}
+
+static VALUE Window_gamma_ramp(VALUE self)
+{
+    Uint16 r[256], g[256], b[256];
+    HANDLE_ERROR(SDL_GetWindowGammaRamp(Get_SDL_Window(self), r, g, b));
+    return rb_ary_new3(3,
+                       gamma_table_to_Array(r),
+                       gamma_table_to_Array(g),
+                       gamma_table_to_Array(b));
+}
+
+/* Window_set_gamma_ramp */
+
+static VALUE Window_input_is_grabbed_p(VALUE self)
+{
+    return INT2BOOL(SDL_GetWindowGrab(Get_SDL_Window(self)));
+}
+
+static VALUE Window_set_input_is_grabbed(VALUE self, VALUE grabbed)
+{
+    SDL_SetWindowGrab(Get_SDL_Window(self), RTEST(grabbed));
+    return grabbed;
+}
+
+static VALUE Window_get_int_int(void (*func)(SDL_Window*, int*, int*), VALUE window)
+{
+    int n, m;
+    func(Get_SDL_Window(window), &n, &m);
+    return rb_ary_new3(2, INT2NUM(n), INT2NUM(m));
+}
+
+static VALUE Window_set_int_int(void (*func)(SDL_Window*, int, int), VALUE window, VALUE val)
+{
+    Check_Type(val, T_ARRAY);
+    if (RARRAY_LEN(val) != 2)
+        rb_raise(rb_eArgError, "Wrong array size (%ld for 2)", RARRAY_LEN(val));
+    func(Get_SDL_Window(window), NUM2INT(rb_ary_entry(val, 0)), NUM2INT(rb_ary_entry(val, 1)));
+    return Qnil;
+}
+
+static VALUE Window_maximum_size(VALUE self)
+{
+    return Window_get_int_int(SDL_GetWindowMaximumSize, self);
+}
+
+static VALUE Window_set_maximum_size(VALUE self, VALUE max_size)
+{
+    return Window_set_int_int(SDL_SetWindowMaximumSize, self, max_size);
+}
+
+static VALUE Window_minimum_size(VALUE self)
+{
+    return Window_get_int_int(SDL_GetWindowMinimumSize, self);
+}
+
+static VALUE Window_set_minimum_size(VALUE self, VALUE min_size)
+{
+    return Window_set_int_int(SDL_SetWindowMinimumSize, self, min_size);
+}
+
+static VALUE Window_position(VALUE self)
+{
+    return Window_get_int_int(SDL_GetWindowPosition, self);
+}
+
+static VALUE Window_set_position(VALUE self, VALUE xy)
+{
+    return Window_set_int_int(SDL_SetWindowPosition, self, xy);
+}
+
+static VALUE Window_size(VALUE self)
+{
+    return Window_get_int_int(SDL_GetWindowSize, self);
+}
+
+static VALUE Window_set_size(VALUE self, VALUE size)
+{
+    return Window_set_int_int(SDL_SetWindowSize, self, size);
+}
+
+static VALUE Window_title(VALUE self)
+{
+    return utf8str_new_cstr(SDL_GetWindowTitle(Get_SDL_Window(self)));
+}
+
+static VALUE Window_set_title(VALUE self, VALUE title)
+{
+    title = rb_str_export_to_enc(title, rb_utf8_encoding());
+    SDL_SetWindowTitle(Get_SDL_Window(self), StringValueCStr(title));
+    return Qnil;
+}
+
 static VALUE Window_inspect(VALUE self)
 {
     Window* w = Get_Window(self);
@@ -971,6 +1087,10 @@ static VALUE ScreenSaver_enabled_p(VALUE self)
     return INT2BOOL(SDL_IsScreenSaverEnabled());
 }
 
+#define DEFINE_FIELD_ACCESSOR(classname, classvar, field)               \
+    rb_define_method(classvar, #field, classname##_##field, 0);         \
+    rb_define_method(classvar, #field "=", classname##_set_##field, 1);
+    
 void rubysdl2_init_video(void)
 {
     rb_define_module_function(mSDL2, "video_drivers", SDL2_s_video_drivers, 0);
@@ -991,6 +1111,16 @@ void rubysdl2_init_video(void)
     rb_define_method(cWindow, "display_mode", Window_display_mode, 0);
     rb_define_method(cWindow, "display", Window_display, 0);
     rb_define_method(cWindow, "debug_info", Window_debug_info, 0);
+    DEFINE_FIELD_ACCESSOR(Window, cWindow, brightness);
+    rb_define_method(cWindow, "flags", Window_flags, 0);
+    rb_define_method(cWindow, "gamma_ramp", Window_gamma_ramp, 0);
+    rb_define_method(cWindow, "input_is_grabbed?", Window_input_is_grabbed_p, 0);
+    rb_define_method(cWindow, "input_is_grabbed=", Window_set_input_is_grabbed, 1);
+    DEFINE_FIELD_ACCESSOR(Window, cWindow, maximum_size);
+    DEFINE_FIELD_ACCESSOR(Window, cWindow, minimum_size);
+    DEFINE_FIELD_ACCESSOR(Window, cWindow, position);
+    DEFINE_FIELD_ACCESSOR(Window, cWindow, size);
+    DEFINE_FIELD_ACCESSOR(Window, cWindow, title);
     rb_define_const(cWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
     rb_define_const(cWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 #define DEFINE_SDL_WINDOW_FLAGS_CONST(n)                        \
@@ -1118,10 +1248,6 @@ void rubysdl2_init_video(void)
     rb_define_method(cSurface, "destroy", Surface_destroy, 0);
     rb_define_method(cSurface, "blend_mode", Surface_blend_mode, 0);
     rb_define_method(cSurface, "blend_mode=", Surface_set_blend_mode, 1);
-    
-#define DEFINE_FIELD_ACCESSOR(classname, classvar, field)               \
-    rb_define_method(classvar, #field, classname##_##field, 0);         \
-    rb_define_method(classvar, #field "=", classname##_set_##field, 1);
     
     
     cRect = rb_define_class_under(mSDL2, "Rect", rb_cObject);
