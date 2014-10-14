@@ -33,5 +33,6 @@ add_libs(run_config_program(sdl2_config, "--libs"))
 config("SDL2_image", "SDL_image.h", ["SDL2_image", "SDL_image"])
 config("SDL2_mixer", "SDL_mixer.h", ["SDL2_mixer", "SDL_mixer"])
 config("SDL2_ttf", "SDL_ttf.h", ["SDL2_ttf", "SDL_ttf"])
+have_header("SDL_filesytem.h")
 
 create_makefile('sdl2_ext')

@@ -182,6 +182,7 @@ void Init_sdl2_ext(void)
     rubysdl2_init_image();
     rubysdl2_init_mixer();
     rubysdl2_init_ttf();
+    rubysdl2_init_filesystem();
     
     rb_set_end_proc(quit, 0);
     return;

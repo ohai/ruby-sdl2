@@ -32,6 +32,7 @@ void rubysdl2_init_timer(void);
 void rubysdl2_init_image(void);
 void rubysdl2_init_mixer(void);
 void rubysdl2_init_ttf(void);
+void rubysdl2_init_filesystem(void);
 
 /** macros */
 #define HANDLE_ERROR(c) (rubysdl2_handle_error((c), __func__))
