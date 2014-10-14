@@ -15,7 +15,10 @@ loop do
       when SDL2::Key::ESCAPE
         exit
       when SDL2::Key::S
-        p SDL2::Mouse.state
+        state = SDL2::Mouse.state
+        p state
+        p [state.x, state.y, state.button_bits,
+           state.pressed?(1), state.pressed?(2), state.pressed?(3)]
       when SDL2::Key::R
         p SDL2::Mouse.relative_state        
       when SDL2::Key::SPACE
