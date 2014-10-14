@@ -494,6 +494,19 @@ static VALUE Window_set_title(VALUE self, VALUE title)
     return Qnil;
 }
 
+#define SIMPLE_WINDOW_METHOD(SDL_name, name)                            \
+    static VALUE Window_##name(VALUE self)                              \
+    {                                                                   \
+        SDL_##SDL_name##Window(Get_SDL_Window(self)); return Qnil;      \
+    }
+
+SIMPLE_WINDOW_METHOD(Show, show);
+SIMPLE_WINDOW_METHOD(Hide, hide);
+SIMPLE_WINDOW_METHOD(Maximize, maximize);
+SIMPLE_WINDOW_METHOD(Minimize, minimize);
+SIMPLE_WINDOW_METHOD(Raise, raise);
+SIMPLE_WINDOW_METHOD(Restore, restore);
+
 static VALUE Window_inspect(VALUE self)
 {
     Window* w = Get_Window(self);
@@ -1133,6 +1146,12 @@ void rubysdl2_init_video(void)
     DEFINE_C_ACCESSOR(Window, cWindow, size);
     DEFINE_C_ACCESSOR(Window, cWindow, title);
     DEFINE_C_ACCESSOR(Window, cWindow, bordered);
+    rb_define_method(cWindow, "show", Window_show, 0);
+    rb_define_method(cWindow, "hide", Window_hide, 0);
+    rb_define_method(cWindow, "maximize", Window_maximize, 0);
+    rb_define_method(cWindow, "minimize", Window_minimize, 0);
+    rb_define_method(cWindow, "raise", Window_raise, 0);
+    rb_define_method(cWindow, "restore", Window_restore, 0);
     rb_define_const(cWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
     rb_define_const(cWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 #define DEFINE_SDL_WINDOW_FLAGS_CONST(n)                        \
