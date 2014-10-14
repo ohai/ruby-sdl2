@@ -1087,7 +1087,7 @@ static VALUE ScreenSaver_enabled_p(VALUE self)
     return INT2BOOL(SDL_IsScreenSaverEnabled());
 }
 
-#define DEFINE_FIELD_ACCESSOR(classname, classvar, field)               \
+#define DEFINE_C_ACCESSOR(classname, classvar, field)               \
     rb_define_method(classvar, #field, classname##_##field, 0);         \
     rb_define_method(classvar, #field "=", classname##_set_##field, 1);
     
@@ -1111,16 +1111,16 @@ void rubysdl2_init_video(void)
     rb_define_method(cWindow, "display_mode", Window_display_mode, 0);
     rb_define_method(cWindow, "display", Window_display, 0);
     rb_define_method(cWindow, "debug_info", Window_debug_info, 0);
-    DEFINE_FIELD_ACCESSOR(Window, cWindow, brightness);
+    DEFINE_C_ACCESSOR(Window, cWindow, brightness);
     rb_define_method(cWindow, "flags", Window_flags, 0);
     rb_define_method(cWindow, "gamma_ramp", Window_gamma_ramp, 0);
     rb_define_method(cWindow, "input_is_grabbed?", Window_input_is_grabbed_p, 0);
     rb_define_method(cWindow, "input_is_grabbed=", Window_set_input_is_grabbed, 1);
-    DEFINE_FIELD_ACCESSOR(Window, cWindow, maximum_size);
-    DEFINE_FIELD_ACCESSOR(Window, cWindow, minimum_size);
-    DEFINE_FIELD_ACCESSOR(Window, cWindow, position);
-    DEFINE_FIELD_ACCESSOR(Window, cWindow, size);
-    DEFINE_FIELD_ACCESSOR(Window, cWindow, title);
+    DEFINE_C_ACCESSOR(Window, cWindow, maximum_size);
+    DEFINE_C_ACCESSOR(Window, cWindow, minimum_size);
+    DEFINE_C_ACCESSOR(Window, cWindow, position);
+    DEFINE_C_ACCESSOR(Window, cWindow, size);
+    DEFINE_C_ACCESSOR(Window, cWindow, title);
     rb_define_const(cWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
     rb_define_const(cWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 #define DEFINE_SDL_WINDOW_FLAGS_CONST(n)                        \
@@ -1256,10 +1256,10 @@ void rubysdl2_init_video(void)
     rb_define_alias(rb_singleton_class(cRect), "[]", "new");
     rb_define_private_method(cRect, "initialize", Rect_initialize, -1);
     rb_define_method(cRect, "inspect", Rect_inspect, 0);
-    DEFINE_FIELD_ACCESSOR(Rect, cRect, x);
-    DEFINE_FIELD_ACCESSOR(Rect, cRect, y);
-    DEFINE_FIELD_ACCESSOR(Rect, cRect, w);
-    DEFINE_FIELD_ACCESSOR(Rect, cRect, h);
+    DEFINE_C_ACCESSOR(Rect, cRect, x);
+    DEFINE_C_ACCESSOR(Rect, cRect, y);
+    DEFINE_C_ACCESSOR(Rect, cRect, w);
+    DEFINE_C_ACCESSOR(Rect, cRect, h);
 
     
     cPoint = rb_define_class_under(mSDL2, "Point", rb_cObject);
@@ -1267,8 +1267,8 @@ void rubysdl2_init_video(void)
     rb_define_alloc_func(cPoint, Point_s_allocate);
     rb_define_private_method(cPoint, "initialize", Point_initialize, -1);
     rb_define_method(cPoint, "inspect", Point_inspect, 0);
-    DEFINE_FIELD_ACCESSOR(Point, cPoint, x);
-    DEFINE_FIELD_ACCESSOR(Point, cPoint, y);
+    DEFINE_C_ACCESSOR(Point, cPoint, x);
+    DEFINE_C_ACCESSOR(Point, cPoint, y);
 
     
     cRendererInfo = rb_define_class_under(cRenderer, "Info", rb_cObject);
