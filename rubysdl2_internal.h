@@ -23,6 +23,7 @@ const char* rubysdl2_INT2BOOLCSTR(int);
 void rubysdl2_init_video(void);
 void rubysdl2_init_event(void);
 void rubysdl2_init_key(void);
+void rubysdl2_init_mouse(void);
 void rubysdl2_init_joystick(void);
 void rubysdl2_init_timer(void);
 void rubysdl2_init_image(void);

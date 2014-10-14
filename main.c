@@ -176,6 +176,7 @@ void Init_sdl2_ext(void)
     rubysdl2_init_video();
     rubysdl2_init_event();
     rubysdl2_init_key();
+    rubysdl2_init_mouse();
     rubysdl2_init_joystick();
     rubysdl2_init_timer();
     rubysdl2_init_image();
