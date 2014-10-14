@@ -20,7 +20,15 @@ loop do
         p SDL2::Mouse.relative_state        
       when SDL2::Key::SPACE
         SDL2::Mouse.relative_mode = ! SDL2::Mouse.relative_mode?
+      when SDL2::Key::T
+        if SDL2::Mouse::Cursor.shown?
+          SDL2::Mouse::Cursor.hide
+        else
+          SDL2::Mouse::Cursor.show
+        end
       end
+    when SDL2::Event::MouseButtonDown
+      p ev
     end
   end
 
