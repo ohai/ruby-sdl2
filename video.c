@@ -1221,12 +1221,9 @@ void rubysdl2_init_video(void)
     rb_undef_alloc_func(cTexture);
     rb_define_method(cTexture, "destroy?", Texture_destroy_p, 0);
     rb_define_method(cTexture, "destroy", Texture_destroy, 0);
-    rb_define_method(cTexture, "blend_mode", Texture_blend_mode, 0);
-    rb_define_method(cTexture, "blend_mode=", Texture_set_blend_mode, 1);
-    rb_define_method(cTexture, "color_mod", Texture_color_mod, 0);
-    rb_define_method(cTexture, "color_mod=", Texture_set_color_mod, 1);
-    rb_define_method(cTexture, "alpha_mod", Texture_alpha_mod, 0);
-    rb_define_method(cTexture, "alpha_mod=", Texture_set_alpha_mod, 1);
+    DEFINE_C_ACCESSOR(Texture, cTexture, blend_mode);
+    DEFINE_C_ACCESSOR(Texture, cTexture, color_mod);
+    DEFINE_C_ACCESSOR(Texture, cTexture, alpha_mod);
     rb_define_method(cTexture, "format", Texture_format, 0);
     rb_define_method(cTexture, "access_pattern", Texture_access_pattern, 0);
     rb_define_method(cTexture, "w", Texture_w, 0);
@@ -1246,9 +1243,7 @@ void rubysdl2_init_video(void)
     rb_define_singleton_method(cSurface, "load_bmp", Surface_s_load_bmp, 1);
     rb_define_method(cSurface, "destroy?", Surface_destroy_p, 0);
     rb_define_method(cSurface, "destroy", Surface_destroy, 0);
-    rb_define_method(cSurface, "blend_mode", Surface_blend_mode, 0);
-    rb_define_method(cSurface, "blend_mode=", Surface_set_blend_mode, 1);
-    
+    DEFINE_C_ACCESSOR(Surface, cSurface, blend_mode);
     
     cRect = rb_define_class_under(mSDL2, "Rect", rb_cObject);
 
