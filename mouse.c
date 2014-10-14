@@ -78,27 +78,19 @@ static VALUE State_pressed_p(VALUE self, VALUE index)
 
 static VALUE State_inspect(VALUE self)
 {
-    char pressed_buttons[256];
-    char* p = pressed_buttons;
     int i;
     Uint32 buttons = NUM2UINT(rb_iv_get(self, "@button_bits"));
-    *p = 0;
+    VALUE pressed = rb_ary_new();
+    VALUE string_for_pressed;
     for (i=1; i<=32; ++i) 
-        if (buttons & SDL_BUTTON(i)) {
-            int d = sprintf(p, "%d ", i);
-            if (d < 0)
-                rb_raise(rb_eRuntimeError, "sprintf error");
-            p += d;
-            if (p - pressed_buttons >= 128)
-                rb_raise(rb_eRuntimeError, "sprintf buffer overflow error");
-        }
-    if (p != pressed_buttons)
-        *(p-1) = 0;
+        if (buttons & SDL_BUTTON(i)) 
+            rb_ary_push(pressed, rb_sprintf("%d", i));
     
+    string_for_pressed = rb_ary_join(pressed, rb_str_new2(" "));
     return rb_sprintf("<%s:%p x=%d y=%d pressed=[%s]>",
                       rb_obj_classname(self), (void*)self,
                       NUM2INT(rb_iv_get(self, "@x")), NUM2INT(rb_iv_get(self, "@y")),
-                      pressed_buttons);
+                      StringValueCStr(string_for_pressed));
 }
 
 void rubysdl2_init_mouse(void)
