@@ -476,6 +476,17 @@ static VALUE Window_title(VALUE self)
     return utf8str_new_cstr(SDL_GetWindowTitle(Get_SDL_Window(self)));
 }
 
+static VALUE Window_bordered(VALUE self)
+{
+    return INT2BOOL(!(SDL_GetWindowFlags(Get_SDL_Window(self)) & SDL_WINDOW_BORDERLESS));
+}
+
+static VALUE Window_set_bordered(VALUE self, VALUE bordered)
+{
+    SDL_SetWindowBordered(Get_SDL_Window(self), RTEST(bordered));
+    return bordered;
+}
+
 static VALUE Window_set_title(VALUE self, VALUE title)
 {
     title = rb_str_export_to_enc(title, rb_utf8_encoding());
@@ -1121,6 +1132,7 @@ void rubysdl2_init_video(void)
     DEFINE_C_ACCESSOR(Window, cWindow, position);
     DEFINE_C_ACCESSOR(Window, cWindow, size);
     DEFINE_C_ACCESSOR(Window, cWindow, title);
+    DEFINE_C_ACCESSOR(Window, cWindow, bordered);
     rb_define_const(cWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
     rb_define_const(cWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 #define DEFINE_SDL_WINDOW_FLAGS_CONST(n)                        \

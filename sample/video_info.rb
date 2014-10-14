@@ -31,6 +31,7 @@ print "window minimum size: "; p window.minimum_size
 print "window position: "; p window.position
 print "window size: "; p window.size
 print "window title: "; p window.title
+print "window bordered: "; p window.bordered
 
 p window.renderer
 p renderer
