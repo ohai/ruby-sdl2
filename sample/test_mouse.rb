@@ -29,6 +29,8 @@ loop do
         else
           SDL2::Mouse::Cursor.show
         end
+      when SDL2::Key::W
+        p SDL2::Mouse.focused_window
       end
     when SDL2::Event::MouseButtonDown
       p ev

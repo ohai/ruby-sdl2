@@ -51,6 +51,15 @@ static VALUE Mouse_s_relative_state(VALUE self)
     return mouse_state(SDL_GetRelativeMouseState);
 }
 
+static VALUE Mouse_s_focused_window(VALUE self)
+{
+    SDL_Window* window = SDL_GetMouseFocus();
+    if (!window)
+        return Qnil;
+    else
+        return find_window_by_id(SDL_GetWindowID(window));
+}
+
 static VALUE Cursor_s_show(VALUE self)
 {
     HANDLE_ERROR(SDL_ShowCursor(SDL_ENABLE));
@@ -104,7 +113,7 @@ void rubysdl2_init_mouse(void)
     rb_define_module_function(mMouse, "relative_mode?", Mouse_s_relative_mode_p, 0);
     rb_define_module_function(mMouse, "relative_mode=", Mouse_s_set_relative_mode, 1);
     rb_define_module_function(mMouse, "relative_state", Mouse_s_relative_state, 0);
-
+    rb_define_module_function(mMouse, "focused_window", Mouse_s_focused_window, 0);
     
     cCursor = rb_define_class_under(mMouse, "Cursor", rb_cObject);
     

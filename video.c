@@ -317,6 +317,11 @@ static VALUE Window_s_find_by_id(VALUE self, VALUE id)
     return rb_hash_aref(hash_windowid_to_window, id);
 }
 
+VALUE find_window_by_id(Uint32 id)
+{
+    return Window_s_find_by_id(Qnil, UINT2NUM(id));
+}
+
 static VALUE Window_destroy(VALUE self)
 {
     Window_destroy_internal(Get_Window(self));
