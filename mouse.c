@@ -77,6 +77,20 @@ static VALUE Cursor_s_shown_p(VALUE self)
     return INT2BOOL(HANDLE_ERROR(SDL_ShowCursor(SDL_QUERY)));
 }
 
+static VALUE Cursor_s_warp(VALUE self, VALUE window, VALUE x, VALUE y)
+{
+    SDL_WarpMouseInWindow(Get_SDL_Window(window), NUM2INT(x), NUM2INT(y));
+    return Qnil;
+}
+
+#if SDL_VERSION_ATLEAST(2,0,4)
+static VALUE Cursor_s_warp_globally(VALUE self, VALUE x, VALUE y)
+{
+    SDL_WarpMouseGlobal(NUM2INT(x), NUM2INT(y));
+    return Qnil;
+}
+#endif
+
 static VALUE State_pressed_p(VALUE self, VALUE index)
 {
     int idx = NUM2INT(index);
@@ -120,7 +134,12 @@ void rubysdl2_init_mouse(void)
     rb_define_singleton_method(cCursor, "show", Cursor_s_show, 0);
     rb_define_singleton_method(cCursor, "hide", Cursor_s_hide, 0);
     rb_define_singleton_method(cCursor, "shown?", Cursor_s_shown_p, 0);
-
+    rb_define_singleton_method(cCursor, "warp", Cursor_s_warp, 3);
+#if SDL_VERSION_ATLEAST(2,0,4)
+    rb_define_singleton_method(cCursor, "warp_globally", Cursor_s_warp_globally, 3);
+#endif
+    
+    
     cState = rb_define_class_under(mMouse, "State", rb_cObject);
 
     rb_undef_method(rb_singleton_class(cState), "new");

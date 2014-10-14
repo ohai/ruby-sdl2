@@ -2,6 +2,7 @@
 #define SDL_MAIN_HANDLED
 #include <SDL_surface.h>
 #include <SDL_version.h>
+#include <SDL_video.h>
 
 #ifndef SDL2_EXTERN
 #define SDL2_EXTERN extern
@@ -18,6 +19,7 @@ VALUE rubysdl2_SDL_version_to_String(const SDL_version* ver);
 VALUE rubysdl2_SDL_version_to_Array(const SDL_version* ver);
 VALUE rubysdl2_find_window_by_id(Uint32 id);
 SDL_Rect* rubysdl2_Get_SDL_Rect(VALUE);
+SDL_Window* rubysdl2_Get_SDL_Window(VALUE);
 const char* rubysdl2_INT2BOOLCSTR(int);
 
 /** initialize interfaces */
@@ -80,6 +82,7 @@ SDL2_EXTERN VALUE rubysdl2_eSDL2Error;
 #define utf8str_new_cstr rubysdl2_utf8str_new_cstr
 #define Surface_new rubysdl2_Surface_new
 #define Get_SDL_Rect rubysdl2_Get_SDL_Rect
+#define Get_SDL_Window rubysdl2_Get_SDL_Window
 #define Array_to_SDL_Color rubysdl2_Array_to_SDL_Color 
 #define mSDL2 rubysdl2_mSDL2
 #define eSDL2Error rubysdl2_eSDL2Error

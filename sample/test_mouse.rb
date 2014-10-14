@@ -29,8 +29,10 @@ loop do
         else
           SDL2::Mouse::Cursor.show
         end
-      when SDL2::Key::W
+      when SDL2::Key::F
         p SDL2::Mouse.focused_window
+      when SDL2::Key::W
+        SDL2::Mouse::Cursor.warp(window, 100, 20)
       end
     when SDL2::Event::MouseButtonDown
       p ev

@@ -84,7 +84,9 @@ static VALUE Window_new(SDL_Window* window)
     return Data_Wrap_Struct(cWindow, 0, Window_free, w);
 }
 
-DEFINE_WRAPPER(SDL_Window, Window, window, cWindow, "SDL2::Window");
+DEFINE_GETTER(static, Window, cWindow, "SDL2::Window");
+DEFINE_WRAP_GETTER(, SDL_Window, Window, window, "SDL2::Window");
+DEFINE_DESTROY_P(static, Window, window);
 
 static VALUE Display_new(int index)
 {
