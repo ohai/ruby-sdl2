@@ -3,13 +3,13 @@
 
 static VALUE sym_priority;
 
-static VALUE Hint_s_clear(VALUE self)
+static VALUE Hints_s_clear(VALUE self)
 {
     SDL_ClearHints();
     return Qnil;
 }
 
-static VALUE Hint_s_aref(VALUE self, VALUE name)
+static VALUE Hints_s_aref(VALUE self, VALUE name)
 {
     const char* value = SDL_GetHint(StringValueCStr(name));
     if (value)
@@ -18,7 +18,7 @@ static VALUE Hint_s_aref(VALUE self, VALUE name)
         return Qnil;
 }
 
-static VALUE Hint_s_aset(int argc, VALUE* argv, VALUE self)
+static VALUE Hints_s_aset(int argc, VALUE* argv, VALUE self)
 {
     VALUE name, pri, value;
     rb_scan_args(argc, argv, "21", &name, &pri, &value);
@@ -36,18 +36,18 @@ static VALUE Hint_s_aset(int argc, VALUE* argv, VALUE self)
     return Qnil;
 }
 
-void rubysdl2_init_hint(void)
+void rubysdl2_init_hints(void)
 {
-    VALUE mHint = rb_define_module_under(mSDL2, "Hint");
+    VALUE mHints = rb_define_module_under(mSDL2, "Hints");
     
-    rb_define_singleton_method(mHint, "clear", Hint_s_clear, 0);
-    rb_define_singleton_method(mHint, "[]", Hint_s_aref, 1);
-    rb_define_singleton_method(mHint, "get", Hint_s_aref, 1);
-    rb_define_singleton_method(mHint, "[]=", Hint_s_aset, -1);
-    rb_define_singleton_method(mHint, "set", Hint_s_aset, -1);
+    rb_define_singleton_method(mHints, "clear", Hints_s_clear, 0);
+    rb_define_singleton_method(mHints, "[]", Hints_s_aref, 1);
+    rb_define_singleton_method(mHints, "get", Hints_s_aref, 1);
+    rb_define_singleton_method(mHints, "[]=", Hints_s_aset, -1);
+    rb_define_singleton_method(mHints, "set", Hints_s_aset, -1);
     
 #define DEFINE_HINT_CONST(t) \
-    rb_define_const(mHint, #t, INT2NUM(SDL_HINT_##t))
+    rb_define_const(mHints, #t, INT2NUM(SDL_HINT_##t))
     DEFINE_HINT_CONST(DEFAULT);
     DEFINE_HINT_CONST(NORMAL);
     DEFINE_HINT_CONST(OVERRIDE);
