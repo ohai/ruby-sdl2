@@ -172,7 +172,8 @@ void Init_sdl2_ext(void)
     
     eSDL2Error = rb_define_class_under(mSDL2, "Error", rb_eStandardError);
     rb_define_attr(eSDL2Error, "error_code", 1, 0);
-  
+
+    rubysdl2_init_hint();
     rubysdl2_init_video();
     rubysdl2_init_event();
     rubysdl2_init_key();

@@ -23,6 +23,7 @@ SDL_Window* rubysdl2_Get_SDL_Window(VALUE);
 const char* rubysdl2_INT2BOOLCSTR(int);
 
 /** initialize interfaces */
+void rubysdl2_init_hint(void);
 void rubysdl2_init_video(void);
 void rubysdl2_init_event(void);
 void rubysdl2_init_key(void);
