@@ -6,8 +6,8 @@ SDL2.show_simple_message_box(SDL2::MESSAGEBOX_WARNING, "warning! warning!",
 
 button = SDL2.show_message_box(flags: SDL2::MESSAGEBOX_WARNING,
                                window: nil,
-                               title: "Enemy is approaching",
-                               message: "That was when it all began",
+                               title: "警告ウインドウ",
+                               message: "ここに警告文が出ます",
                                buttons: [ { # flags is ignored
                                            id: 0, 
                                            text: "いいえ",
