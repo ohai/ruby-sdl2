@@ -21,7 +21,7 @@ button = SDL2.show_message_box(flags: SDL2::MESSAGEBOX_WARNING,
                                           text: "キャンセル",
                                          },
                                         ],
-                               color_schema: {
+                               color_scheme: {
                                               bg: [255, 0, 0],
                                               text: [0, 255, 0],
                                               button_border: [255, 0, 0],
