@@ -1112,26 +1112,6 @@ static VALUE ScreenSaver_enabled_p(VALUE self)
     return INT2BOOL(SDL_IsScreenSaverEnabled());
 }
 
-static inline SDL_Window* Get_SDL_Window_or_NULL(VALUE win)
-{
-    if (win == Qnil)
-        return NULL;
-    else
-        return Get_SDL_Window(win);
-}
-
-static VALUE SDL2_s_show_simple_message_box(VALUE self, VALUE flag, VALUE title,
-                                            VALUE message, VALUE parent)
-{
-    title = rb_str_export_to_utf8(title);
-    message = rb_str_export_to_utf8(message);
-    HANDLE_ERROR(SDL_ShowSimpleMessageBox(NUM2UINT(flag),
-                                          StringValueCStr(title),
-                                          StringValueCStr(message),
-                                          Get_SDL_Window_or_NULL(parent)));
-    return Qnil;
-}
-
 #define DEFINE_C_ACCESSOR(classname, classvar, field)               \
     rb_define_method(classvar, #field, classname##_##field, 0);         \
     rb_define_method(classvar, #field "=", classname##_set_##field, 1);
@@ -1391,13 +1371,7 @@ void rubysdl2_init_video(void)
     rb_define_module_function(mScreenSaver, "enable", ScreenSaver_enable, 0);
     rb_define_module_function(mScreenSaver, "disable", ScreenSaver_disable, 0);
     rb_define_module_function(mScreenSaver, "enabled?", ScreenSaver_enabled_p, 0);
-
-    rb_define_module_function(mSDL2, "show_simple_message_box",
-                              SDL2_s_show_simple_message_box, 4);
-
-    rb_define_const(mSDL2, "MESSAGEBOX_ERROR", INT2NUM(SDL_MESSAGEBOX_ERROR));
-    rb_define_const(mSDL2, "MESSAGEBOX_WARNING", INT2NUM(SDL_MESSAGEBOX_WARNING));
-    rb_define_const(mSDL2, "MESSAGEBOX_INFORMATION", INT2NUM(SDL_MESSAGEBOX_INFORMATION));
+    
     
     rb_gc_register_address(&hash_windowid_to_window);
     hash_windowid_to_window = rb_hash_new();

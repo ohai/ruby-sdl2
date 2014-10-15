@@ -1,4 +1,5 @@
 #include <ruby.h>
+#include <ruby/encoding.h>
 #define SDL_MAIN_HANDLED
 #include <SDL_surface.h>
 #include <SDL_version.h>
@@ -25,6 +26,7 @@ const char* rubysdl2_INT2BOOLCSTR(int);
 /** initialize interfaces */
 void rubysdl2_init_hints(void);
 void rubysdl2_init_video(void);
+void rubysdl2_init_messagebox(void);
 void rubysdl2_init_event(void);
 void rubysdl2_init_key(void);
 void rubysdl2_init_mouse(void);
