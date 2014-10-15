@@ -41,6 +41,7 @@ void rubysdl2_init_filesystem(void);
 #define INT2BOOL(x) ((x)?Qtrue:Qfalse)
 #define NUM2UCHAR NUM2UINT
 #define UCHAR2NUM UINT2NUM
+#define rb_str_export_to_utf8(str) rb_str_export_to_enc((str), rb_utf8_encoding())
 
 #define DEFINE_GETTER(scope, ctype, var_class, classname)               \
     scope ctype* Get_##ctype(VALUE obj)                                 \
