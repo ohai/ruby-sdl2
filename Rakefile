@@ -13,10 +13,12 @@ task "merge-po",["locale"] do |_, args|
   sh "rmsgmerge -o doc/po/#{locale}.po doc/po/#{locale}.po doc/po/rubysdl2.pot"
 end
 
-task "gen-doc", ["locale"] do |_, args|
+task "doc", ["locale"] do |_, args|
   locale = args.locale
-  p locale
-  if locale
+  if locale == "all"
+    sh "yard doc -o doc/doc-ja --locale ja --po-dir doc/po main.c *.c"
+    sh "yard doc -o doc/doc-en main.c *.c"
+  elsif locale
     sh "yard doc -o doc/doc-#{locale} --locale #{locale} --po-dir doc/po main.c *.c"
   else
     sh "yard doc -o doc/doc-en main.c *.c"
