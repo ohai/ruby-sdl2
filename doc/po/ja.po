@@ -1,0 +1,149 @@
+# Japanese translations for PACKAGE package.
+# Copyright (C) 2014 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Ippei Obayashi <ohai@kmc.gr.jp>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-16 18:39+0900\n"
+"PO-Revision-Date: 2014-10-16 18:10+0900\n"
+"Last-Translator: Ippei Obayashi <ohai@kmc.gr.jp>\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# SDL2::Window
+# SDL2::Window.create
+#: ../../video.c:297
+msgid "This class represents a window."
+msgstr ""
+
+# SDL2::Window
+# SDL2::Window.create
+#: ../../video.c:299
+msgid ""
+"If you want to use graphical application using Ruby/SDL, first you need to\n"
+"create a window."
+msgstr ""
+
+# SDL2::Window
+# SDL2::Window.create
+#: ../../video.c:302
+msgid ""
+"All of methods/class methods are available only after initializing video\n"
+"subsystem by {SDL2.init}."
+msgstr ""
+
+# SDL2::Window#input_is_grabbed?
+#: ../../video.c:419
+msgid "Window_set_gamma_ramp"
+msgstr ""
+
+# SDL2::Rect#x
+#: ../../video.c:1010 ../../video.c:1061
+msgid "X coordiante of the left-top point of the rectangle"
+msgstr "長方形の左上の点のX座標"
+
+# SDL2::Rect#y
+#: ../../video.c:1010 ../../video.c:1061
+msgid "Y coordiante of the left-top point of the rectangle"
+msgstr "長方形の左上の点のY座標"
+
+# SDL2::Rect#w
+#: ../../video.c:1010 ../../video.c:1061
+msgid "Width of the rectangle"
+msgstr "長方形の幅"
+
+# SDL2::Rect#h
+#: ../../video.c:1010 ../../video.c:1061
+msgid "Height of the rectangle"
+msgstr "長方形の高さ"
+
+# SDL2::Rect.[]
+#: ../../video.c:1010
+msgid "Alias of new. See {#initialize}."
+msgstr "new の別名。詳しくは {#initialize}参照。"
+
+# SDL2::Rect
+#: ../../video.c:1010
+msgid "This class represents a rectangle in SDL2."
+msgstr "このクラスは SDL2 上の長方形を表します"
+
+# SDL2::Rect
+#: ../../video.c:1012
+msgid ""
+"Any rectanle is represented by four attributes x, y, w, and h,\n"
+"and these four attributes must be integer."
+msgstr ""
+
+# SDL2::Rect#initialize
+#: ../../video.c:1045
+msgid "Create a new SDL2::Rect object"
+msgstr "SDL2::Rect オブジェクトを生成します"
+
+# @param [Integer]
+#: ../../video.c:1061
+msgid "tag|param|x"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:1061
+msgid "tag|param|y"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:1061
+msgid "tag|param|h"
+msgstr ""
+
+# @overload
+#: ../../video.c:1061
+msgid "tag|overload|initialize"
+msgstr ""
+
+# @overload
+#: ../../video.c:1061
+msgid "tag|overload|initialze"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:1061
+msgid "tag|param|w"
+msgstr ""
+
+# SDL2::Rect#inspect
+#: ../../video.c:1079
+msgid "Inspection string for debug"
+msgstr ""
+
+# SDL2::Point#x
+#: ../../video.c:1095
+msgid "Return x"
+msgstr ""
+
+# SDL2::Point#x=
+#: ../../video.c:1095
+msgid "Set x to val"
+msgstr ""
+
+# SDL2::Point#y
+#: ../../video.c:1095
+msgid "Return y"
+msgstr ""
+
+# SDL2::Point#y=
+#: ../../video.c:1095
+msgid "Set y to val"
+msgstr ""
+
+# SDL2::Point
+#: ../../video.c:1095
+msgid ""
+"This class represents a point in SDL library.\n"
+"Some method requires this method."
+msgstr ""

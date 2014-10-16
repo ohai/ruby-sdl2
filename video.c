@@ -293,6 +293,18 @@ static VALUE SDL2_s_current_video_driver(VALUE self)
         return Qnil;
 }
 
+/*
+ * Document-class: SDL2::Window
+ * 
+ * This class represents a window.
+ *
+ * If you want to use graphical application using Ruby/SDL, first you need to
+ * create a window.
+ * 
+ * All of methods/class methods are available only after initializing video
+ * subsystem by {SDL2.init}.
+ */
+
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
                              VALUE flags)
 {
@@ -981,6 +993,46 @@ static VALUE Surface_set_blend_mode(VALUE self, VALUE mode)
     return mode;
 }
 
+#define FIELD_ACCESSOR(classname, typename, field)              \
+    static VALUE classname##_##field(VALUE self)                \
+    {                                                           \
+        typename* r; Data_Get_Struct(self, typename, r);        \
+        return INT2NUM(r->field);                               \
+    }                                                           \
+    static VALUE classname##_set_##field(VALUE self, VALUE val) \
+    {                                                           \
+        typename* r; Data_Get_Struct(self, typename, r);        \
+        r->field = NUM2INT(val); return val;                    \
+    }
+
+
+/* Document-class: SDL2::Rect
+ *
+ * This class represents a rectangle in SDL2.
+ *
+ * Any rectanle is represented by four attributes x, y, w, and h,
+ * and these four attributes must be integer.
+ *
+ * @!attribute [rw] x
+ *   X coordiante of the left-top point of the rectangle
+ *   @return [Integer]
+ *
+ * @!attribute [rw] y
+ *   Y coordiante of the left-top point of the rectangle
+ *   @return [Integer]
+ *
+ * @!attribute [rw] w
+ *   Width of the rectangle
+ *   @return [Integer]
+ *
+ * @!attribute [rw] h
+ *   Height of the rectangle
+ *   @return [Integer]
+ *
+ * @!method self.[](*args)
+ *   Alias of new. See {#initialize}.
+ *   @return [SDL2::Rect]
+ */
 static VALUE Rect_s_allocate(VALUE klass)
 {
     SDL_Rect* rect = ALLOC(SDL_Rect);
@@ -989,6 +1041,23 @@ static VALUE Rect_s_allocate(VALUE klass)
     return Data_Wrap_Struct(cRect, 0, free, rect);
 }
 
+/* 
+ * Create a new SDL2::Rect object
+ *
+ * @return [SDL2::Rect]
+ * 
+ * @overload initialze(x, y, w, h)
+ *   Create a new SDL2::Rect object
+ *   
+ * @param x [Integer] X coordiante of the left-top point of the rectangle
+ * @param y [Integer] Y coordiante of the left-top point of the rectangle
+ * @param w [Integer] Width of the rectangle
+ * @param h [Integer] Height of the rectangle
+ *   
+ * @overload initialize
+ *   Create a new SDL2::Rect object whose x, w, w, and h is all
+ *   zero.
+ */
 static VALUE Rect_initialize(int argc, VALUE* argv, VALUE self)
 {
     VALUE x, y, w, h;
@@ -1006,6 +1075,10 @@ static VALUE Rect_initialize(int argc, VALUE* argv, VALUE self)
     return Qnil;
 }
 
+/*
+ * Inspection string for debug
+ * @return [String]
+ */
 static VALUE Rect_inspect(VALUE self)
 {
     SDL_Rect* rect = Get_SDL_Rect(self);
@@ -1013,23 +1086,29 @@ static VALUE Rect_inspect(VALUE self)
                       rect->x, rect->y, rect->w, rect->h);
 }
 
-#define FIELD_ACCESSOR(classname, typename, field)              \
-    static VALUE classname##_##field(VALUE self)                \
-    {                                                           \
-        typename* r; Data_Get_Struct(self, typename, r);        \
-        return INT2NUM(r->field);                               \
-    }                                                           \
-    static VALUE classname##_set_##field(VALUE self, VALUE val) \
-    {                                                           \
-        typename* r; Data_Get_Struct(self, typename, r);        \
-        r->field = NUM2INT(val); return val;                    \
-    }
-
 FIELD_ACCESSOR(Rect, SDL_Rect, x);
 FIELD_ACCESSOR(Rect, SDL_Rect, y);
 FIELD_ACCESSOR(Rect, SDL_Rect, w);
 FIELD_ACCESSOR(Rect, SDL_Rect, h);
 
+/* 
+ * Document-class: SDL2::Point
+ *
+ * This class represents a point in SDL library. 
+ * Some method requires this method.
+ *
+ * @!method x
+ *   Return x
+ *
+ * @!method x=(val)
+ *   Set x to val
+ *
+ * @!method y
+ *   Return y
+ *   
+ * @!method y=(val)
+ *   Set y to val
+ */
 static VALUE Point_s_allocate(VALUE klass)
 {
     SDL_Point* point;
@@ -1280,8 +1359,8 @@ void rubysdl2_init_video(void)
     cRect = rb_define_class_under(mSDL2, "Rect", rb_cObject);
 
     rb_define_alloc_func(cRect, Rect_s_allocate);
+    rb_define_method(cRect, "initialize", Rect_initialize, -1);
     rb_define_alias(rb_singleton_class(cRect), "[]", "new");
-    rb_define_private_method(cRect, "initialize", Rect_initialize, -1);
     rb_define_method(cRect, "inspect", Rect_inspect, 0);
     DEFINE_C_ACCESSOR(Rect, cRect, x);
     DEFINE_C_ACCESSOR(Rect, cRect, y);
