@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-16 18:39+0900\n"
+"POT-Creation-Date: 2014-10-16 22:24+0900\n"
 "PO-Revision-Date: 2014-10-16 18:10+0900\n"
 "Last-Translator: Ippei Obayashi <ohai@kmc.gr.jp>\n"
 "Language-Team: Japanese\n"
@@ -79,10 +79,10 @@ msgstr "このクラスは SDL2 上の長方形を表します"
 msgid ""
 "Any rectanle is represented by four attributes x, y, w, and h,\n"
 "and these four attributes must be integer."
-msgstr ""
+msgstr "長方形は x, y (左上の x,y 座標)と w(幅), h(高さ) で表されます。これらの値はすべて整数でなければなりません。"
 
 # SDL2::Rect#initialize
-#: ../../video.c:1045
+#: ../../video.c:1045 ../../video.c:1062
 msgid "Create a new SDL2::Rect object"
 msgstr "SDL2::Rect オブジェクトを生成します"
 
@@ -116,10 +116,17 @@ msgstr ""
 msgid "tag|param|w"
 msgstr ""
 
+# SDL2::Rect#initialize
+#: ../../video.c:1062
+msgid ""
+"Create a new SDL2::Rect object whose x, w, w, and h are all\n"
+"zero."
+msgstr "SDL2::Rect オブジェクトを生成します。x,y,w,h はすべて 0 で初期化されます。"
+
 # SDL2::Rect#inspect
 #: ../../video.c:1079
 msgid "Inspection string for debug"
-msgstr ""
+msgstr "デバッグ用文字列を返します"
 
 # SDL2::Point#x
 #: ../../video.c:1095

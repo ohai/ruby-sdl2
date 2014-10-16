@@ -1049,13 +1049,13 @@ static VALUE Rect_s_allocate(VALUE klass)
  * @overload initialze(x, y, w, h)
  *   Create a new SDL2::Rect object
  *   
- * @param x [Integer] X coordiante of the left-top point of the rectangle
- * @param y [Integer] Y coordiante of the left-top point of the rectangle
- * @param w [Integer] Width of the rectangle
- * @param h [Integer] Height of the rectangle
+ *   @param x [Integer] X coordiante of the left-top point of the rectangle
+ *   @param y [Integer] Y coordiante of the left-top point of the rectangle
+ *   @param w [Integer] Width of the rectangle
+ *   @param h [Integer] Height of the rectangle
  *   
  * @overload initialize
- *   Create a new SDL2::Rect object whose x, w, w, and h is all
+ *   Create a new SDL2::Rect object whose x, w, w, and h are all
  *   zero.
  */
 static VALUE Rect_initialize(int argc, VALUE* argv, VALUE self)
