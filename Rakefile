@@ -1,6 +1,16 @@
 
+SOURCE_FILES = "main.c *.c"
+
+def yardoc(locale = nil)
+  if locale
+    sh "yard doc -o doc/doc-#{locale} --locale #{locale} --po-dir doc/po #{SOURCE_FILES}"
+  else
+    sh "yard doc -o doc/doc-en #{SOURCE_FILES}"
+  end
+end
+
 task "pot" do
-  sh "yard i18n -o doc/po/rubysdl2.pot main.c *.c"
+  sh "yard i18n -o doc/po/rubysdl2.pot #{SOURCE_FILES}"
 end
 
 task "init-po",["locale"] do |_, args|
@@ -16,12 +26,12 @@ end
 task "doc", ["locale"] do |_, args|
   locale = args.locale
   if locale == "all"
-    sh "yard doc -o doc/doc-ja --locale ja --po-dir doc/po main.c *.c"
-    sh "yard doc -o doc/doc-en main.c *.c"
+    yardoc
+    yardoc("ja")
   elsif locale
-    sh "yard doc -o doc/doc-#{locale} --locale #{locale} --po-dir doc/po main.c *.c"
+    yardoc(locale)
   else
-    sh "yard doc -o doc/doc-en main.c *.c"
+    yardoc
   end
 end
 
