@@ -3,6 +3,7 @@
 #include <SDL_version.h>
 #include <SDL_render.h>
 #include <SDL_messagebox.h>
+#include <SDL_endian.h>
 #include <ruby/encoding.h>
 
 static VALUE cWindow;
@@ -993,6 +994,104 @@ static VALUE Surface_set_blend_mode(VALUE self, VALUE mode)
     return mode;
 }
 
+static VALUE Surface_must_lock_p(VALUE self)
+{
+    return INT2BOOL(SDL_MUSTLOCK(Get_SDL_Surface(self)));
+}
+
+static VALUE Surface_lock(VALUE self)
+{
+    HANDLE_ERROR(SDL_LockSurface(Get_SDL_Surface(self)));
+    return Qnil;
+}
+
+static VALUE Surface_unlock(VALUE self)
+{
+    SDL_UnlockSurface(Get_SDL_Surface(self));
+    return Qnil;
+}
+
+static VALUE Surface_pixel(VALUE self, VALUE x_coord, VALUE y_coord)
+{
+    int x = NUM2INT(x_coord);
+    int y = NUM2INT(y_coord);
+    SDL_Surface* surface = Get_SDL_Surface(self);
+    int offset;
+    Uint32 pixel = 0;
+    int i;
+    
+    if (x < 0 || x >= surface->w || y < 0 || y >= surface->h)
+        rb_raise(rb_eArgError, "(%d, %d) out of range for %dx%d",
+                 x, y, surface->w, surface->h);
+    offset = surface->pitch * y + surface->format->BytesPerPixel * x;
+    for (i=0; i<surface->format->BytesPerPixel; ++i) {
+        pixel += *((Uint8*)surface->pixels + offset + i) << (8*i);
+    }
+
+    return UINT2NUM(SDL_SwapLE32(pixel));
+}
+
+static VALUE Surface_pixel_color(VALUE self, VALUE x, VALUE y)
+{
+    Uint32 pixel = NUM2UINT(Surface_pixel(self, x, y));
+    SDL_Surface* surface = Get_SDL_Surface(self);
+    Uint8 r, g, b, a;
+    SDL_GetRGBA(pixel, surface->format, &r, &g, &b, &a);
+
+    return rb_ary_new3(4, UCHAR2NUM(r), UCHAR2NUM(g), UCHAR2NUM(b), UCHAR2NUM(a));
+}
+
+static Uint32 pixel_value(VALUE val, SDL_PixelFormat* format)
+{
+    if (RTEST(rb_funcall(val, rb_intern("integer?"), 0, 0))) {
+        return NUM2UINT(val);
+    } else {
+        long len;
+        Uint8 r, g, b, a;
+        Check_Type(val, T_ARRAY);
+        len = RARRAY_LEN(val);
+        if (len == 3 || len == 4) {
+            r = NUM2UCHAR(rb_ary_entry(val, 0));
+            g = NUM2UCHAR(rb_ary_entry(val, 1));
+            b = NUM2UCHAR(rb_ary_entry(val, 2));
+            if (len == 3)
+                a = 255;
+            else
+                a = NUM2UCHAR(rb_ary_entry(val, 3));
+            return SDL_MapRGBA(format, r, g, b, a);
+        } else {
+            rb_raise(rb_eArgError, "Wrong length of array (%ld for 3..4)", len);
+        }
+    }
+    return 0;
+}
+
+static VALUE Surface_unset_color_key(VALUE self)
+{
+    HANDLE_ERROR(SDL_SetColorKey(Get_SDL_Surface(self), SDL_FALSE, 0));
+    return Qnil;
+}
+
+static VALUE Surface_set_color_key(VALUE self, VALUE key)
+{
+    SDL_Surface* surface = Get_SDL_Surface(self);
+    if (key == Qnil)
+        return Surface_unset_color_key(self);
+    
+    HANDLE_ERROR(SDL_SetColorKey(surface, SDL_TRUE, pixel_value(key, surface->format)));
+    
+    return key;
+}
+
+static VALUE Surface_color_key(VALUE self)
+{
+    Uint32 key;
+    if (SDL_GetColorKey(Get_SDL_Surface(self), &key) < 0)
+        return Qnil;
+    else
+        return UINT2NUM(key);
+}
+
 #define FIELD_ACCESSOR(classname, typename, field)              \
     static VALUE classname##_##field(VALUE self)                \
     {                                                           \
@@ -1355,6 +1454,14 @@ void rubysdl2_init_video(void)
     rb_define_method(cSurface, "destroy?", Surface_destroy_p, 0);
     rb_define_method(cSurface, "destroy", Surface_destroy, 0);
     DEFINE_C_ACCESSOR(Surface, cSurface, blend_mode);
+    rb_define_method(cSurface, "must_lock?", Surface_must_lock_p, 0);
+    rb_define_method(cSurface, "lock", Surface_lock, 0);
+    rb_define_method(cSurface, "unlock", Surface_unlock, 0);
+    rb_define_method(cSurface, "pixel", Surface_pixel, 2);
+    rb_define_method(cSurface, "pixel_color", Surface_pixel_color, 2);
+    rb_define_method(cSurface, "color_key", Surface_color_key, 0);
+    rb_define_method(cSurface, "color_key=", Surface_set_color_key, 2);
+    rb_define_method(cSurface, "unset_color_key", Surface_set_color_key, 0);
     
     cRect = rb_define_class_under(mSDL2, "Rect", rb_cObject);
 
