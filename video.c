@@ -1331,8 +1331,8 @@ void rubysdl2_init_video(void)
     rb_define_method(cWindow, "minimize", Window_minimize, 0);
     rb_define_method(cWindow, "raise", Window_raise, 0);
     rb_define_method(cWindow, "restore", Window_restore, 0);
-    rb_define_const(cWindow, "OP_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
-    rb_define_const(cWindow, "OP_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
+    rb_define_const(cWindow, "POS_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
+    rb_define_const(cWindow, "POS_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 #define DEFINE_SDL_WINDOW_FLAGS_CONST(n)                        \
     rb_define_const(cWindow, #n, UINT2NUM(SDL_WINDOW_##n));
     DEFINE_SDL_WINDOW_FLAGS_CONST(FULLSCREEN);
