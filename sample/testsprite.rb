@@ -4,7 +4,7 @@ require 'optparse'
 MAX_SPEED = 1
 
 class Integer
-  def bit_on?(mask)
+  def bit?(mask)
     (self & mask) != 0
   end
 end
@@ -165,7 +165,7 @@ class App
     }
     
     opts.on("--windows N", "Number of windows", Integer){|n|
-      if n != 1 and @window_flags.bit_on?(SDL2::Window::FULLSCREEN|SDL2::Window::FULLSCREEN_DESKTOP)
+      if n != 1 and @window_flags.bit?(SDL2::Window::FULLSCREEN|SDL2::Window::FULLSCREEN_DESKTOP)
         raise "Only one window is available for fullscreen mode"
       end
       @num_window = n
@@ -251,6 +251,14 @@ class App
       case event.sym
       when SDL2::Key::ESCAPE
         exit
+      when SDL2::Key::RETURN
+        if event.mod.bit?(SDL2::Key::Mod::ALT)
+          if event.window.fullscreen_mode == 0
+            event.window.fullscreen_mode = SDL2::Window::FULLSCREEN_DESKTOP
+          else
+            event.window.fullscreen_mode = 0
+          end
+        end
       end
     end
   end

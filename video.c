@@ -521,6 +521,18 @@ SIMPLE_WINDOW_METHOD(Minimize, minimize);
 SIMPLE_WINDOW_METHOD(Raise, raise);
 SIMPLE_WINDOW_METHOD(Restore, restore);
 
+static VALUE Window_fullscreen_mode(VALUE self)
+{
+    Uint32 flags = SDL_GetWindowFlags(Get_SDL_Window(self));
+    return UINT2NUM(flags & (SDL_WINDOW_FULLSCREEN|SDL_WINDOW_FULLSCREEN_DESKTOP));
+}
+
+static VALUE Window_set_fullscreen_mode(VALUE self, VALUE flags)
+{
+    HANDLE_ERROR(SDL_SetWindowFullscreen(Get_SDL_Window(self), NUM2UINT(flags)));
+    return flags;
+}
+
 static VALUE Window_inspect(VALUE self)
 {
     Window* w = Get_Window(self);
@@ -1331,6 +1343,8 @@ void rubysdl2_init_video(void)
     rb_define_method(cWindow, "minimize", Window_minimize, 0);
     rb_define_method(cWindow, "raise", Window_raise, 0);
     rb_define_method(cWindow, "restore", Window_restore, 0);
+    rb_define_method(cWindow, "fullscreen_mode", Window_fullscreen_mode, 0);
+    rb_define_method(cWindow, "fullscreen_mode=", Window_set_fullscreen_mode, 1);
     rb_define_const(cWindow, "POS_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
     rb_define_const(cWindow, "POS_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 #define DEFINE_SDL_WINDOW_FLAGS_CONST(n)                        \
