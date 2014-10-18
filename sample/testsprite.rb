@@ -35,14 +35,16 @@ end
                    
 
 class WindowData
-  def initialize(sdl_window, renderer, cycle)
+  def initialize(sdl_window, renderer, cycle, blend_mode)
     @sdl_window = sdl_window
     @renderer = renderer
     @cycle = cycle
+    @blend_mode = blend_mode
   end
 
   def setup(spritepath, num_sprites)
     load_sprite(spritepath)
+    @sprite.blend_mode = @blend_mode
     @sprites = Array.new(num_sprites){
       Sprite.new(@sdl_window, @renderer, @sprite)
     }
@@ -143,6 +145,7 @@ class App
     @spritepath = "icon.bmp"
     @renderer_flags = 0
     @num_sprites = 100
+    @blend_mode = SDL2::BLENDMODE_BLEND
     @cycle = Cycle.new(false, false, rand(255), rand(255), [1,-1].sample, [1,-1].sample)
   end
 
@@ -191,7 +194,18 @@ class App
 
     opts.on("--allow-highdip"){ @window_flags |= SDL2::Window::ALLOW_HIGHDPI }
 
-    opts.on("--blend MODE"){|blendmode| raise NotImplementedError }
+    opts.on("--blend MODE", "none|blend|add|mod"){|blend_mode|
+      @blend_mode = case blend_mode
+                   when "none"
+                     SDL2::BLENDMODE_NONE
+                   when "blend"
+                     SDL2::BLENDMODE_BLEND
+                   when "add"
+                     SDL2::BLENDMODE_ADD
+                   when "mod"
+                     SDL2::BLENDMODE_MOD
+                   end
+    }
 
     opts.on("--cycle-color"){ @cycle.cycle_color = true }
 
@@ -214,7 +228,7 @@ class App
                                    @window_x, @window_y, @window_w, @window_h,
                                    @window_flags)
       renderer = window.create_renderer(-1, @renderer_flags)
-      WindowData.new(window, renderer, @cycle)
+      WindowData.new(window, renderer, @cycle, @blend_mode)
     end
 
     @windows.each{|win| win.setup(@spritepath, @num_sprites) }
