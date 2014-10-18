@@ -61,6 +61,12 @@ static VALUE Mod_s_state(VALUE self)
     return UINT2NUM(SDL_GetModState());
 }
 
+static VALUE Mod_s_set_state(VALUE self, VALUE keymod)
+{
+    SDL_SetModState(NUM2UINT(keymod));
+    return Qnil;
+}
+
 static VALUE TextInput_s_active_p(VALUE self)
 {
     return INT2BOOL(SDL_IsTextInputActive());
@@ -98,6 +104,7 @@ void rubysdl2_init_key(void)
     rb_define_module_function(mScan, "from_name", Scan_s_from_name, 1);
     rb_define_module_function(mScan, "from_keycode", Scan_s_from_keycode, 1);
     rb_define_module_function(mMod, "state", Mod_s_state, 0);
+    rb_define_module_function(mMod, "state=", Mod_s_set_state, 1);
     rb_define_module_function(mTextInput, "active?", TextInput_s_active_p, 0);
     rb_define_module_function(mTextInput, "start", TextInput_s_start, 0);
     rb_define_module_function(mTextInput, "stop", TextInput_s_stop, 0);
