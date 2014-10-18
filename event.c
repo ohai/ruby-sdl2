@@ -152,6 +152,11 @@ static VALUE Event_inspect(VALUE self)
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp);
 }
 
+static VALUE Event_window(VALUE self)
+{
+    VALUE window_id = rb_funcall(self, rb_intern("window_id"), 0, 0);
+    return find_window_by_id(NUM2UINT(window_id));
+}
 
 EVENT_ACCESSOR_UINT(Window, window_id, window.windowID);
 EVENT_ACCESSOR_UINT(Window, event, window.event);
@@ -425,6 +430,7 @@ void rubysdl2_init_event(void)
     DEFINE_EVENT_READER(Event, cEvent, type);
     DEFINE_EVENT_ACCESSOR(Event, cEvent, timestamp);
     rb_define_method(cEvent, "inspect", Event_inspect, 0);
+    rb_define_method(cEvent, "window", Event_window, 0);
     
     DEFINE_EVENT_ACCESSOR(Window, cEvWindow, window_id);
     DEFINE_EVENT_ACCESSOR(Window, cEvWindow, event);
