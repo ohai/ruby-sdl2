@@ -1479,6 +1479,7 @@ void rubysdl2_init_video(void)
 
     rb_define_alloc_func(cPoint, Point_s_allocate);
     rb_define_private_method(cPoint, "initialize", Point_initialize, -1);
+    rb_define_alias(rb_singleton_class(cPoint), "[]", "new");
     rb_define_method(cPoint, "inspect", Point_inspect, 0);
     DEFINE_C_ACCESSOR(Point, cPoint, x);
     DEFINE_C_ACCESSOR(Point, cPoint, y);
