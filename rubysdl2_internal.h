@@ -1,5 +1,5 @@
 /*
- * Ruby/SDL2 Ruby extensiion library for SDL 2.x
+ * Ruby/SDL2   Ruby extensiion library for SDL 2.x
  * 
  * Copyright (C) 2014 Ippei Obayashi
  *
