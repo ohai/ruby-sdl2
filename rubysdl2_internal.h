@@ -1,3 +1,23 @@
+/*
+ * Ruby/SDL2 Ruby extensiion library for SDL 2.x
+ * 
+ * Copyright (C) 2014 Ippei Obayashi
+ *
+ * This file is part of Ruby/SDL2.
+ * 
+ * Ruby/SDL2 is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Ruby/SDL2 is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Ruby/SDL2.  If not, see <http://www.gnu.org/licenses/>.
+ */                                
 #include <ruby.h>
 #include <ruby/encoding.h>
 #define SDL_MAIN_HANDLED
