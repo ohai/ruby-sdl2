@@ -519,7 +519,6 @@ void rubysdl2_init_mixer(void)
     rb_define_module_function(mChannels, "resume", Channels_s_resume, 1);
     rb_define_module_function(mChannels, "halt", Channels_s_halt, 1);
     rb_define_module_function(mChannels, "expire", Channels_s_expire, 1);
-    rb_define_module_function(mChannels, "pause", Channels_s_pause, 2);
     rb_define_module_function(mChannels, "fade_out", Channels_s_fade_out, 2);
     rb_define_module_function(mChannels, "play?", Channels_s_play_p, 1);
     rb_define_module_function(mChannels, "pause?", Channels_s_pause_p, 1);
