@@ -102,6 +102,16 @@ static VALUE Mixer_s_query(VALUE self)
                        INT2NUM(channels), INT2NUM(num_opened));
 }
 
+static VALUE Channels_s_allocate(VALUE self, VALUE num_channels)
+{
+    return INT2NUM(Mix_AllocateChannels(NUM2INT(num_channels)));
+}
+
+static VALUE Channels_s_reserve(VALUE self, VALUE num)
+{
+    return INT2NUM(Mix_ReserveChannels(NUM2INT(num)));
+}
+
 static VALUE Channels_s_volume(VALUE self, VALUE channel)
 {
     return INT2NUM(Mix_Volume(NUM2INT(channel), -1));
@@ -436,6 +446,8 @@ void rubysdl2_init_mixer(void)
 
     
     mChannels = rb_define_module_under(mMixer, "Channels");
+    rb_define_module_function(mChannels, "allocate", Channels_s_allocate, 1);
+    rb_define_module_function(mChannels, "reserve", Channels_s_reserve, 1);
     rb_define_module_function(mChannels, "volume", Channels_s_volume, 1);
     rb_define_module_function(mChannels, "set_volume", Channels_s_set_volume, 2);
     rb_define_module_function(mChannels, "play", Channels_s_play, -1);
