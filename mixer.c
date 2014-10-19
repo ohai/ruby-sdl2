@@ -216,6 +216,69 @@ static VALUE Channels_s_playing_chunk(VALUE self, VALUE channel)
     return rb_ary_entry(playing_chunks, NUM2INT(channel));
 }
 
+static VALUE Group_initialize(VALUE self, VALUE tag)
+{
+    rb_iv_set(self, "@tag", tag);
+    return Qnil;
+}
+
+static VALUE Group_s_default(VALUE self)
+{
+    VALUE tag = INT2FIX(-1);
+    return rb_class_new_instance(1, &tag, self);
+}
+
+inline static int Group_tag(VALUE group)
+{
+    return NUM2INT(rb_iv_get(group, "@tag"));
+}
+
+static VALUE Group_eq(VALUE self, VALUE other)
+{
+    return INT2BOOL(rb_obj_is_instance_of(other, cGroup) &&
+                    Group_tag(self) == Group_tag(other));
+}
+
+static VALUE Group_add(VALUE self, VALUE which)
+{
+    if (!Mix_GroupChannel(NUM2INT(which), Group_tag(self))) {
+        SDL_SetError("Cannot add channel %d", NUM2INT(which));
+        SDL_ERROR();
+    }
+    return Qnil;
+}
+
+static VALUE Group_count(VALUE self)
+{
+    return INT2NUM(Mix_GroupCount(Group_tag(self)));
+}
+
+static VALUE Group_available(VALUE self)
+{
+    return INT2NUM(Mix_GroupAvailable(Group_tag(self)));
+}
+
+static VALUE Group_oldest(VALUE self)
+{
+    return INT2NUM(Mix_GroupOldest(Group_tag(self)));
+}
+
+static VALUE Group_newer(VALUE self)
+{
+    return INT2NUM(Mix_GroupNewer(Group_tag(self)));
+}
+
+static VALUE Group_fade_out(VALUE self, VALUE ms)
+{
+    return INT2NUM(Mix_FadeOutGroup(Group_tag(self), NUM2INT(ms)));
+}
+
+static VALUE Group_halt(VALUE self)
+{
+    Mix_HaltGroup(Group_tag(self));
+    return Qnil;
+}
+
 static VALUE MusicChannel_s_play(VALUE self, VALUE music, VALUE loops)
 {
     HANDLE_MIX_ERROR(Mix_PlayMusic(Get_Mix_Music(music), NUM2INT(loops)));
@@ -465,6 +528,17 @@ void rubysdl2_init_mixer(void)
 
     
     cGroup = rb_define_class_under(mChannels, "Group", rb_cObject);
+    rb_define_method(cGroup, "initialize", Group_initialize, 1);
+    rb_define_singleton_method(cGroup, "default", Group_s_default, 0);
+    rb_define_attr(cGroup, "tag", 1, 0);
+    rb_define_method(cGroup, "==", Group_eq, 1);
+    rb_define_method(cGroup, "add", Group_add, 1);
+    rb_define_method(cGroup, "count", Group_count, 0);
+    rb_define_method(cGroup, "available", Group_available, 0);
+    rb_define_method(cGroup, "newer", Group_newer, 0);
+    rb_define_method(cGroup, "oldest", Group_oldest, 0);
+    rb_define_method(cGroup, "fade_out", Group_fade_out, 1);
+    rb_define_method(cGroup, "halt", Group_halt, 0);
     
     
     mMusicChannel = rb_define_module_under(mMixer, "MusicChannel");
