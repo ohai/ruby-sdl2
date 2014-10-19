@@ -259,6 +259,20 @@ class App
             event.window.fullscreen_mode = 0
           end
         end
+      when SDL2::Key::M
+        if event.mod.bit?(SDL2::Key::Mod::CTRL|SDL2::Key::Mod::CAPS)
+          window = event.window
+          if window.flags & SDL2::Window::MAXIMIZED != 0
+            window.restore
+          else
+            window.maximize
+          end
+        end
+      when SDL2::Key::Z
+        if event.mod.bit?(SDL2::Key::Mod::CTRL|SDL2::Key::Mod::CAPS)
+          window = event.window
+          window.minimize if window
+        end
       end
     end
   end
