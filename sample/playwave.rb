@@ -10,9 +10,9 @@ p SDL2::Mixer::Chunk.decoders
 p SDL2::Mixer::Music.decoders
 wave = SDL2::Mixer::Chunk.load(ARGV[0])
 
-SDL2::Mixer.fade_in_channel(0, wave, 0, 600)
+SDL2::Mixer::Channels.fade_in(0, wave, 0, 600)
 
-while SDL2::Mixer.play?(0)
+while SDL2::Mixer::Channels.play?(0)
   sleep 1
 end
 

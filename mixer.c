@@ -5,6 +5,9 @@
 static VALUE mMixer;
 static VALUE cChunk;
 static VALUE cMusic;
+static VALUE mChannels;
+static VALUE cGroup;
+static VALUE mMusicChannel;
 
 static VALUE playing_chunks = Qnil;
 static VALUE playing_music = Qnil;
@@ -104,7 +107,7 @@ static void protect_playing_chunk_from_gc(int channel, VALUE chunk)
     rb_ary_store(playing_chunks, channel, chunk);
 }
 
-static VALUE Mixer_s_play_channel(int argc, VALUE* argv, VALUE self)
+static VALUE Channels_s_play(int argc, VALUE* argv, VALUE self)
 {
     VALUE channel, chunk, loops, ticks;
     int ch;
@@ -119,7 +122,7 @@ static VALUE Mixer_s_play_channel(int argc, VALUE* argv, VALUE self)
     return INT2FIX(ch);
 }
 
-static VALUE Mixer_s_fade_in_channel(int argc, VALUE* argv, VALUE self)
+static VALUE Channels_s_fade_in(int argc, VALUE* argv, VALUE self)
 {
     VALUE channel, chunk, loops, ms, ticks;
     int ch;
@@ -134,73 +137,73 @@ static VALUE Mixer_s_fade_in_channel(int argc, VALUE* argv, VALUE self)
     return INT2FIX(ch);
 }
 
-static VALUE Mixer_s_pause(VALUE self, VALUE channel)
+static VALUE Channels_s_pause(VALUE self, VALUE channel)
 {
     check_channel(channel, 1);
     Mix_Pause(NUM2INT(channel));
     return Qnil;
 }
 
-static VALUE Mixer_s_resume(VALUE self, VALUE channel)
+static VALUE Channels_s_resume(VALUE self, VALUE channel)
 {
     check_channel(channel, 1);
     Mix_Resume(NUM2INT(channel));
     return Qnil;
 }
 
-static VALUE Mixer_s_halt_channel(VALUE self, VALUE channel)
+static VALUE Channels_s_halt(VALUE self, VALUE channel)
 {
     check_channel(channel, 1);
     Mix_HaltChannel(NUM2INT(channel));
     return Qnil;
 }
 
-static VALUE Mixer_s_expire_channel(VALUE self, VALUE channel, VALUE ticks)
+static VALUE Channels_s_expire(VALUE self, VALUE channel, VALUE ticks)
 {
     check_channel(channel, 1);
     Mix_ExpireChannel(NUM2INT(channel), NUM2INT(ticks));
     return Qnil;
 }
 
-static VALUE Mixer_s_fade_out_channel(VALUE self, VALUE channel, VALUE ms)
+static VALUE Channels_s_fade_out(VALUE self, VALUE channel, VALUE ms)
 {
     check_channel(channel, 1);
     Mix_FadeOutChannel(NUM2INT(channel), NUM2INT(ms));
     return Qnil;
 }
 
-static VALUE Mixer_s_play_p(VALUE self, VALUE channel)
+static VALUE Channels_s_play_p(VALUE self, VALUE channel)
 {
     check_channel(channel, 0);
     return INT2BOOL(Mix_Playing(NUM2INT(channel)));
 }
 
-static VALUE Mixer_s_pause_p(VALUE self, VALUE channel)
+static VALUE Channels_s_pause_p(VALUE self, VALUE channel)
 {
     check_channel(channel, 0);
     return INT2BOOL(Mix_Paused(NUM2INT(channel)));
 }
 
-static VALUE Mixer_s_fading(VALUE self, VALUE which)
+static VALUE Channels_s_fading(VALUE self, VALUE which)
 {
     check_channel(which, 0);
     return INT2FIX(Mix_FadingChannel(NUM2INT(which)));
 }
 
-static VALUE Mixer_s_playing_chunk(VALUE self, VALUE channel)
+static VALUE Channels_s_playing_chunk(VALUE self, VALUE channel)
 {
     check_channel(channel, 0);
     return rb_ary_entry(playing_chunks, NUM2INT(channel));
 }
 
-static VALUE Mixer_s_play_music(VALUE self, VALUE music, VALUE loops)
+static VALUE MusicChannel_s_play(VALUE self, VALUE music, VALUE loops)
 {
     HANDLE_MIX_ERROR(Mix_PlayMusic(Get_Mix_Music(music), NUM2INT(loops)));
     playing_music = music;
     return Qnil;
 }
 
-static VALUE Mixer_s_fade_in_music(int argc, VALUE* argv, VALUE self)
+static VALUE MusicChannel_s_fade_in(int argc, VALUE* argv, VALUE self)
 {
     VALUE music, loops, fade_in_ms, pos;
     rb_scan_args(argc, argv, "31", &music, &loops, &fade_in_ms, &pos);
@@ -211,61 +214,66 @@ static VALUE Mixer_s_fade_in_music(int argc, VALUE* argv, VALUE self)
     return Qnil;
 }
 
-static VALUE Mixer_s_volume_music(VALUE self)
+static VALUE MusicChannel_s_volume(VALUE self)
 {
     return INT2FIX(Mix_VolumeMusic(-1));
 }
 
-static VALUE Mixer_s_set_volume_music(VALUE self, VALUE volume)
+static VALUE MusicChannel_s_set_volume(VALUE self, VALUE volume)
 {
     Mix_VolumeMusic(NUM2INT(volume));
     return volume;
 }
 
-static VALUE Mixer_s_pause_music(VALUE self)
+static VALUE MusicChannel_s_pause(VALUE self)
 {
     Mix_PauseMusic(); return Qnil;
 }
 
-static VALUE Mixer_s_resume_music(VALUE self)
+static VALUE MusicChannel_s_resume(VALUE self)
 {
     Mix_ResumeMusic(); return Qnil;
 }
 
-static VALUE Mixer_s_rewind_music(VALUE self)
+static VALUE MusicChannel_s_rewind(VALUE self)
 {
     Mix_RewindMusic(); return Qnil;
 }
 
-static VALUE Mixer_s_set_music_position(VALUE self, VALUE position)
+static VALUE MusicChannel_s_set_position(VALUE self, VALUE position)
 {
     HANDLE_MIX_ERROR(Mix_SetMusicPosition(NUM2DBL(position)));
     return Qnil;
 }
 
-static VALUE Mixer_s_halt_music(VALUE self)
+static VALUE MusicChannel_s_halt(VALUE self)
 {
     Mix_HaltMusic(); return Qnil;
 }
 
-static VALUE Mixer_s_fade_out_music(VALUE self, VALUE fade_out_ms)
+static VALUE MusicChannel_s_fade_out(VALUE self, VALUE fade_out_ms)
 {
     Mix_FadeOutMusic(NUM2INT(fade_out_ms)); return Qnil;
 }
 
-static VALUE Mixer_s_play_music_p(VALUE self)
+static VALUE MusicChannel_s_play_p(VALUE self)
 {
     return INT2BOOL(Mix_PlayingMusic());
 }
 
-static VALUE Mixer_s_pause_music_p(VALUE self)
+static VALUE MusicChannel_s_pause_p(VALUE self)
 {
     return INT2BOOL(Mix_PausedMusic());
 }
 
-static VALUE Mixer_s_fading_music(VALUE self)
+static VALUE MusicChannel_s_fading(VALUE self)
 {
     return INT2NUM(Mix_FadingMusic());
+}
+
+static VALUE MusicChannel_s_playing_music(VALUE self)
+{
+    return playing_music;
 }
 
 static VALUE Chunk_s_load(VALUE self, VALUE fname)
@@ -359,6 +367,7 @@ static VALUE Music_inspect(VALUE self)
                       Mix_GetMusicType(Get_Mix_Music(self)));
 }
 
+
 void rubysdl2_init_mixer(void)
 {
     mMixer = rb_define_module_under(mSDL2, "Mixer");
@@ -367,30 +376,6 @@ void rubysdl2_init_mixer(void)
     rb_define_module_function(mMixer, "open", Mixer_s_open, -1);
     rb_define_module_function(mMixer, "close", Mixer_s_close, 0);
     rb_define_module_function(mMixer, "query", Mixer_s_query, 0);
-    rb_define_module_function(mMixer, "play_channel", Mixer_s_play_channel, -1);
-    rb_define_module_function(mMixer, "fade_in_channel", Mixer_s_fade_in_channel, -1);
-    rb_define_module_function(mMixer, "pause", Mixer_s_pause, 1);
-    rb_define_module_function(mMixer, "resume", Mixer_s_resume, 1);
-    rb_define_module_function(mMixer, "halt_channel", Mixer_s_halt_channel, 1);
-    rb_define_module_function(mMixer, "expire_channel", Mixer_s_expire_channel, 2);
-    rb_define_module_function(mMixer, "fade_out_channel", Mixer_s_fade_out_channel, 2);
-    rb_define_module_function(mMixer, "play?", Mixer_s_play_p, 1);
-    rb_define_module_function(mMixer, "pause?", Mixer_s_pause_p, 1);
-    rb_define_module_function(mMixer, "fading", Mixer_s_fading, 1);
-    rb_define_module_function(mMixer, "playing_chunk", Mixer_s_playing_chunk, 1);
-    rb_define_module_function(mMixer, "play_music", Mixer_s_play_music, 2);
-    rb_define_module_function(mMixer, "fade_in_music", Mixer_s_fade_in_music, -1);
-    rb_define_module_function(mMixer, "volume_music", Mixer_s_volume_music, 0);
-    rb_define_module_function(mMixer, "volume_music=", Mixer_s_set_volume_music, 1);
-    rb_define_module_function(mMixer, "pause_music", Mixer_s_pause_music, 0);
-    rb_define_module_function(mMixer, "resume_music", Mixer_s_resume_music, 0);
-    rb_define_module_function(mMixer, "rewind_music", Mixer_s_rewind_music, 0);
-    rb_define_module_function(mMixer, "set_music_position", Mixer_s_set_music_position, 1);
-    rb_define_module_function(mMixer, "halt_music", Mixer_s_halt_music, 0);
-    rb_define_module_function(mMixer, "fade_out_music", Mixer_s_fade_out_music, 1);
-    rb_define_module_function(mMixer, "play_music?", Mixer_s_play_music_p, 0);
-    rb_define_module_function(mMixer, "pause_music?", Mixer_s_pause_music_p, 0);
-    rb_define_module_function(mMixer, "fading_music", Mixer_s_fading_music, 0);
     
 #define DEFINE_MIX_INIT(t) \
     rb_define_const(mMixer, "INIT_" #t, UINT2NUM(MIX_INIT_##t))
@@ -417,6 +402,7 @@ void rubysdl2_init_mixer(void)
     rb_define_const(mMixer, "NO_FADING", INT2FIX(MIX_NO_FADING));
     rb_define_const(mMixer, "FADING_OUT", INT2FIX(MIX_FADING_OUT));
     rb_define_const(mMixer, "FADING_IN", INT2FIX(MIX_FADING_IN));
+
     
     cChunk = rb_define_class_under(mMixer, "Chunk", rb_cObject);
     rb_undef_alloc_func(cChunk);
@@ -428,6 +414,7 @@ void rubysdl2_init_mixer(void)
     rb_define_method(cChunk, "volume=", Chunk_set_volume, 1);
     rb_define_method(cChunk, "inspect", Chunk_inspect, 0);
     rb_define_attr(cChunk, "filename", 1, 0);
+
     
     cMusic = rb_define_class_under(mMixer, "Music", rb_cObject);
     rb_undef_alloc_func(cMusic);
@@ -436,6 +423,42 @@ void rubysdl2_init_mixer(void)
     rb_define_method(cMusic, "destroy", Music_destroy, 0);
     rb_define_method(cMusic, "destroy?", Music_destroy_p, 0);
     rb_define_method(cMusic, "inspect", Music_inspect, 0);
+
+    
+    mChannels = rb_define_module_under(mMixer, "Channels");
+    rb_define_module_function(mChannels, "play", Channels_s_play, -1);
+    rb_define_module_function(mChannels, "fade_in", Channels_s_fade_in, -1);
+    rb_define_module_function(mChannels, "pause", Channels_s_pause, 1);
+    rb_define_module_function(mChannels, "resume", Channels_s_resume, 1);
+    rb_define_module_function(mChannels, "halt", Channels_s_halt, 1);
+    rb_define_module_function(mChannels, "expire", Channels_s_expire, 1);
+    rb_define_module_function(mChannels, "pause", Channels_s_pause, 2);
+    rb_define_module_function(mChannels, "fade_out", Channels_s_fade_out, 2);
+    rb_define_module_function(mChannels, "play?", Channels_s_play_p, 1);
+    rb_define_module_function(mMixer, "pause?", Channels_s_pause_p, 1);
+    rb_define_module_function(mChannels, "fading", Channels_s_fading, 1);
+    rb_define_module_function(mChannels, "playing_chunk", Channels_s_playing_chunk, 1);
+
+    
+    cGroup = rb_define_class_under(mChannels, "Group", rb_cObject);
+    
+    
+    mMusicChannel = rb_define_module_under(mMixer, "MusicChannel");
+    rb_define_module_function(mMusicChannel, "play", MusicChannel_s_play, 2);
+    rb_define_module_function(mMusicChannel, "fade_in", MusicChannel_s_fade_in, -1);
+    rb_define_module_function(mMusicChannel, "volume", MusicChannel_s_volume, 0);
+    rb_define_module_function(mMusicChannel, "volume=", MusicChannel_s_set_volume, 1);
+    rb_define_module_function(mMusicChannel, "pause", MusicChannel_s_pause, 0);
+    rb_define_module_function(mMusicChannel, "resume", MusicChannel_s_resume, 0);
+    rb_define_module_function(mMusicChannel, "rewind", MusicChannel_s_rewind, 0);
+    rb_define_module_function(mMusicChannel, "set_position", MusicChannel_s_set_position, 1);
+    rb_define_module_function(mMusicChannel, "halt", MusicChannel_s_halt, 0);
+    rb_define_module_function(mMusicChannel, "fade_out", MusicChannel_s_fade_out, 1);
+    rb_define_module_function(mMusicChannel, "play?", MusicChannel_s_play_p, 0);
+    rb_define_module_function(mMusicChannel, "pause?", MusicChannel_s_pause_p, 0);
+    rb_define_module_function(mMusicChannel, "fading", MusicChannel_s_fading, 0);
+    rb_define_module_function(mMusicChannel, "playing_music", MusicChannel_s_playing_music, 0);
+
     
     rb_gc_register_address(&playing_chunks);
     rb_gc_register_address(&playing_music);
