@@ -522,7 +522,7 @@ void rubysdl2_init_mixer(void)
     rb_define_module_function(mChannels, "pause", Channels_s_pause, 2);
     rb_define_module_function(mChannels, "fade_out", Channels_s_fade_out, 2);
     rb_define_module_function(mChannels, "play?", Channels_s_play_p, 1);
-    rb_define_module_function(mMixer, "pause?", Channels_s_pause_p, 1);
+    rb_define_module_function(mChannels, "pause?", Channels_s_pause_p, 1);
     rb_define_module_function(mChannels, "fading", Channels_s_fading, 1);
     rb_define_module_function(mChannels, "playing_chunk", Channels_s_playing_chunk, 1);
 
