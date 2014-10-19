@@ -17,7 +17,10 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Ruby/SDL2.  If not, see <http://www.gnu.org/licenses/>.
- */                                
+ */
+#ifndef RUBYSDL2_INTERNAL_H
+#define RUBYSDL2_INTERNAL_H
+
 #include <ruby.h>
 #include <ruby/encoding.h>
 #define SDL_MAIN_HANDLED
@@ -117,4 +120,4 @@ SDL2_EXTERN VALUE rubysdl2_eSDL2Error;
 #define INT2BOOLCSTR  rubysdl2_INT2BOOLCSTR 
 #define find_window_by_id rubysdl2_find_window_by_id
 
-
+#endif
