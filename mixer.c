@@ -102,6 +102,16 @@ static VALUE Mixer_s_query(VALUE self)
                        INT2NUM(channels), INT2NUM(num_opened));
 }
 
+static VALUE Channels_s_volume(VALUE self, VALUE channel)
+{
+    return INT2NUM(Mix_Volume(NUM2INT(channel), -1));
+}
+
+static VALUE Channels_s_set_volume(VALUE self, VALUE channel, VALUE volume)
+{
+    return INT2NUM(Mix_Volume(NUM2INT(channel), NUM2INT(volume)));
+}
+
 static void protect_playing_chunk_from_gc(int channel, VALUE chunk)
 {
     rb_ary_store(playing_chunks, channel, chunk);
@@ -426,6 +436,8 @@ void rubysdl2_init_mixer(void)
 
     
     mChannels = rb_define_module_under(mMixer, "Channels");
+    rb_define_module_function(mChannels, "volume", Channels_s_volume, 1);
+    rb_define_module_function(mChannels, "set_volume", Channels_s_set_volume, 2);
     rb_define_module_function(mChannels, "play", Channels_s_play, -1);
     rb_define_module_function(mChannels, "fade_in", Channels_s_fade_in, -1);
     rb_define_module_function(mChannels, "pause", Channels_s_pause, 1);
