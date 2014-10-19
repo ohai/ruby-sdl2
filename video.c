@@ -294,6 +294,12 @@ static VALUE SDL2_s_current_video_driver(VALUE self)
         return Qnil;
 }
 
+static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
+{
+    HANDLE_ERROR(SDL_VideoInit(StringValueCStr(driver_name)));
+    return Qnil;
+}
+
 /*
  * Document-class: SDL2::Window
  * 
@@ -1310,6 +1316,7 @@ void rubysdl2_init_video(void)
 {
     rb_define_module_function(mSDL2, "video_drivers", SDL2_s_video_drivers, 0);
     rb_define_module_function(mSDL2, "current_video_driver", SDL2_s_current_video_driver, 0);
+    rb_define_module_function(mSDL2, "video_init", SDL2_s_video_init, 1);
     
     cWindow = rb_define_class_under(mSDL2, "Window", rb_cObject);
     

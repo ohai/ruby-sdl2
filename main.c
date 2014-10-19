@@ -84,6 +84,7 @@ static void quit(VALUE unused)
 #ifdef HAVE_SDL_TTF_H
     TTF_Quit();
 #endif
+    SDL_VideoQuit();
     SDL_Quit();
     state = FINALIZED;
 }
