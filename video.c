@@ -1110,6 +1110,52 @@ static VALUE Surface_color_key(VALUE self)
         return UINT2NUM(key);
 }
 
+static VALUE Surface_w(VALUE self)
+{
+    return INT2NUM(Get_SDL_Surface(self)->w);
+}
+
+static VALUE Surface_h(VALUE self)
+{
+    return INT2NUM(Get_SDL_Surface(self)->h);
+}
+
+
+static VALUE Surface_s_blit(VALUE self, VALUE src, VALUE srcrect, VALUE dst, VALUE dstrect)
+{
+    HANDLE_ERROR(SDL_BlitSurface(Get_SDL_Surface(src),
+                                 Get_SDL_Rect_or_NULL(srcrect),
+                                 Get_SDL_Surface(dst),
+                                 Get_SDL_Rect_or_NULL(dstrect)));
+    return Qnil;
+}
+
+static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
+{
+    VALUE width, height, depth;
+    Uint32 Rmask, Gmask, Bmask, Amask;
+    SDL_Surface * surface;
+    
+    if  (argc == 3) {
+        rb_scan_args(argc, argv, "30", &width, &height, &depth);
+        Rmask = Gmask = Bmask = Amask = 0;
+    } else if (argc == 7) {
+        VALUE rm, gm, bm, am;
+        rb_scan_args(argc, argv, "70", &width, &height, &depth, &rm, &gm, &bm, &am);
+        Rmask = NUM2UINT(rm); Gmask = NUM2UINT(gm); 
+        Bmask = NUM2UINT(bm); Amask = NUM2UINT(am);
+    } else {
+        rb_raise(rb_eArgError, "wrong number of arguments (%d for 4 or 7)", argc);
+    }
+
+    surface = SDL_CreateRGBSurface(0, NUM2INT(width), NUM2INT(height), NUM2INT(depth),
+                                   Rmask, Gmask, Bmask, Amask);
+    if (!surface)
+        SDL_ERROR();
+
+    return Surface_new(surface);
+}
+
 #define FIELD_ACCESSOR(classname, typename, field)              \
     static VALUE classname##_##field(VALUE self)                \
     {                                                           \
@@ -1472,18 +1518,22 @@ void rubysdl2_init_video(void)
     
     rb_undef_alloc_func(cSurface);
     rb_define_singleton_method(cSurface, "load_bmp", Surface_s_load_bmp, 1);
+    rb_define_singleton_method(cSurface, "blit", Surface_s_blit, 4);
+    rb_define_singleton_method(cSurface, "new", Surface_s_new, -1);
     rb_define_method(cSurface, "destroy?", Surface_destroy_p, 0);
     rb_define_method(cSurface, "destroy", Surface_destroy, 0);
     DEFINE_C_ACCESSOR(Surface, cSurface, blend_mode);
     rb_define_method(cSurface, "must_lock?", Surface_must_lock_p, 0);
     rb_define_method(cSurface, "lock", Surface_lock, 0);
     rb_define_method(cSurface, "unlock", Surface_unlock, 0);
+    rb_define_method(cSurface, "w", Surface_w, 0);
+    rb_define_method(cSurface, "h", Surface_h, 0);
     rb_define_method(cSurface, "pixel", Surface_pixel, 2);
     rb_define_method(cSurface, "pixel_color", Surface_pixel_color, 2);
     rb_define_method(cSurface, "color_key", Surface_color_key, 0);
     rb_define_method(cSurface, "color_key=", Surface_set_color_key, 1);
     rb_define_method(cSurface, "unset_color_key", Surface_set_color_key, 0);
-    
+
     cRect = rb_define_class_under(mSDL2, "Rect", rb_cObject);
 
     rb_define_alloc_func(cRect, Rect_s_allocate);
