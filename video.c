@@ -1254,6 +1254,23 @@ FIELD_ACCESSOR(Rect, SDL_Rect, y);
 FIELD_ACCESSOR(Rect, SDL_Rect, w);
 FIELD_ACCESSOR(Rect, SDL_Rect, h);
 
+static VALUE Rect_intersection(VALUE self, VALUE other)
+{
+    VALUE result = Rect_s_allocate(cRect);
+    if (SDL_IntersectRect(Get_SDL_Rect(self), Get_SDL_Rect(other), Get_SDL_Rect(result))) {
+        return result;
+    } else {
+        return Qnil;
+    }
+}
+
+static VALUE Rect_union(VALUE self, VALUE other)
+{
+    VALUE result = Rect_s_allocate(cRect);
+    SDL_UnionRect(Get_SDL_Rect(self), Get_SDL_Rect(other), Get_SDL_Rect(result));
+    return result;
+}
+
 /* 
  * Document-class: SDL2::Point
  *
@@ -1544,7 +1561,8 @@ void rubysdl2_init_video(void)
     DEFINE_C_ACCESSOR(Rect, cRect, y);
     DEFINE_C_ACCESSOR(Rect, cRect, w);
     DEFINE_C_ACCESSOR(Rect, cRect, h);
-
+    rb_define_method(cRect, "union", Rect_union, 1);
+    rb_define_method(cRect, "intersection", Rect_intersection, 1);
     
     cPoint = rb_define_class_under(mSDL2, "Point", rb_cObject);
 
