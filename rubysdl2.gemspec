@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
     This library enables you to control audio, keyboard,
     mouse, joystick, 3D hardware via OpenGL, and 2D video
     using opengl or Direct3D.
-    Ruby/SDL is used by games and visual demos.
+    Ruby/SDL is used for games and visual demos.
   EOS
   spec.license = "LGPL v3"
   spec.author = "Ohbayashi Ippei"
