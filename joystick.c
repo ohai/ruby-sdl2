@@ -1,5 +1,6 @@
 #include "rubysdl2_internal.h"
 #include <SDL_joystick.h>
+#include <SDL_gamecontroller.h>
 
 static VALUE cJoystick;
 static VALUE cDeviceInfo;
@@ -56,6 +57,11 @@ static VALUE Joystick_s_open(VALUE self, VALUE device_index)
     if (!joystick)
         SDL_ERROR();
     return Joystick_new(joystick);
+}
+
+static VALUE Joystick_s_game_controller_p(VALUE self, VALUE index)
+{
+    return INT2BOOL(SDL_IsGameController(NUM2INT(index)));
 }
 
 static VALUE Joystick_attached_p(VALUE self)
@@ -145,6 +151,8 @@ void rubysdl2_init_joystick(void)
                                Joystick_s_num_connected_joysticks, 0);
     rb_define_singleton_method(cJoystick, "devices", Joystick_s_devices, 0);
     rb_define_singleton_method(cJoystick, "open", Joystick_s_open, 1);
+    rb_define_singleton_method(cJoystick, "game_controller?",
+                               Joystick_s_game_controller_p, 1);
     rb_define_method(cJoystick, "destroy?", Joystick_destroy_p, 0);
     rb_define_alias(cJoystick, "close?", "destroy?");
     rb_define_method(cJoystick, "attached?", Joystick_attached_p, 0);
@@ -161,7 +169,6 @@ void rubysdl2_init_joystick(void)
     rb_define_method(cJoystick, "ball", Joystick_ball, 1);
     rb_define_method(cJoystick, "button", Joystick_button, 1);
     rb_define_method(cJoystick, "hat", Joystick_hat, 1);
-    
     
     rb_define_attr(cDeviceInfo, "GUID", 1, 0);
     rb_define_attr(cDeviceInfo, "name", 1, 0);
