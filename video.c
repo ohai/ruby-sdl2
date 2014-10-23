@@ -422,6 +422,12 @@ static VALUE Window_gamma_ramp(VALUE self)
                        gamma_table_to_Array(b));
 }
 
+static VALUE Window_set_icon(VALUE self, VALUE icon)
+{
+    SDL_SetWindowIcon(Get_SDL_Window(self), Get_SDL_Surface(icon));
+    return icon;
+}
+
 /* Window_set_gamma_ramp */
 
 static VALUE Window_input_is_grabbed_p(VALUE self)
@@ -1423,6 +1429,7 @@ void rubysdl2_init_video(void)
     DEFINE_C_ACCESSOR(Window, cWindow, size);
     DEFINE_C_ACCESSOR(Window, cWindow, title);
     DEFINE_C_ACCESSOR(Window, cWindow, bordered);
+    rb_define_method(cWindow, "icon=", Window_set_icon, 1);
     rb_define_method(cWindow, "show", Window_show, 0);
     rb_define_method(cWindow, "hide", Window_hide, 0);
     rb_define_method(cWindow, "maximize", Window_maximize, 0);
