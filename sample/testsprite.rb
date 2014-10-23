@@ -35,11 +35,12 @@ end
                    
 
 class WindowData
-  def initialize(sdl_window, renderer, cycle, blend_mode)
+  def initialize(sdl_window, renderer, cycle, blend_mode, use_color_key)
     @sdl_window = sdl_window
     @renderer = renderer
     @cycle = cycle
     @blend_mode = blend_mode
+    @use_color_key = use_color_key
   end
 
   def setup(spritepath, num_sprites)
@@ -51,8 +52,8 @@ class WindowData
   end
   
   def load_sprite(fname)
-    bitmap = SDL2::Surface.load_bmp(fname)
-    bitmap.color_key = bitmap.pixel(0, 0)
+    bitmap = SDL2::Surface.load(fname)
+    bitmap.color_key = bitmap.pixel(0, 0) if @use_color_key
     @sprite = @renderer.create_texture_from(bitmap)
     bitmap.destroy
   end
@@ -138,6 +139,7 @@ class App
   def initialize
     @title = "testsprite"
     @window_flags = 0
+    @icon_path = nil
     @num_window = 1
     @window_x = @window_y = SDL2::Window::POS_UNDEFINED
     @window_w = 640
@@ -147,6 +149,7 @@ class App
     @num_sprites = 100
     @blend_mode = SDL2::BLENDMODE_BLEND
     @cycle = Cycle.new(false, false, rand(255), rand(255), [1,-1].sample, [1,-1].sample)
+    @use_color_key = true
   end
 
   def options
@@ -185,7 +188,7 @@ class App
 
     opts.on("-t", "--title TITLE", "Window title"){|title| @title = title }
 
-    opts.on("--icon ICON", "Window icon"){ raise NotImplementedError }
+    opts.on("--icon ICON", "Window icon"){|path| @icon_path = path }
 
     opts.on("--position X,Y", "Position of the window", Array){|x,y|
       @window_x = Integer(x); @window_y = Integer(y)
@@ -217,7 +220,8 @@ class App
     opts.on("--vsync", "Present is syncronized with the refresh rate") {
       @renderer_flags |= SDL2::Renderer::PRESENTVSYNC
     }
-    
+
+    opts.on("--use-color-key yes|no", TrueClass){|bool| @use_color_key = bool }
     opts
   end
 
@@ -226,12 +230,15 @@ class App
     @spritepath = argv.shift || @spritepath
     
     SDL2.init(SDL2::INIT_VIDEO)
+    icon = load_icon
     @windows = @num_window.times.map do |n|
       window = SDL2::Window.create("#{@title} #{n}",
                                    @window_x, @window_y, @window_w, @window_h,
                                    @window_flags)
       renderer = window.create_renderer(-1, @renderer_flags)
-      WindowData.new(window, renderer, @cycle, @blend_mode)
+      window.icon = icon if icon
+      
+      WindowData.new(window, renderer, @cycle, @blend_mode, @use_color_key)
     end
 
     @windows.each{|win| win.setup(@spritepath, @num_sprites) }
@@ -246,6 +253,11 @@ class App
     end
   end
 
+  def load_icon
+    return nil if @icon_path.nil?
+    SDL2::Surface.load(@icon_path)
+  end
+  
   def handle_event(event)
     case event
     when SDL2::Event::Quit
