@@ -6,6 +6,7 @@ TAGS
 local/
 mkmf.log
 sample/sample.wav
+*.gem
 .yardoc/
 doc/doc-*
 doc/po/rubysdl2.pot
