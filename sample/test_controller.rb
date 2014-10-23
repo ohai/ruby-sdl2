@@ -50,6 +50,8 @@ loop do
       p controller.button_pressed?(SDL2::GameController::BUTTON_B)
       p controller.button_pressed?(SDL2::GameController::BUTTON_X)
       p controller.button_pressed?(SDL2::GameController::BUTTON_Y)
+    when SDL2::Event::ControllerDevice
+      p event
     end
   end
 end

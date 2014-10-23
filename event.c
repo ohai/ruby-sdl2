@@ -29,10 +29,10 @@ static VALUE cEvControllerAxisMotion;
 static VALUE cEvControllerButton;
 static VALUE cEvControllerButtonDown;
 static VALUE cEvControllerButtonUp;
-/* static VALUE cEvControllerDevice; */
-/* static VALUE cEvControllerDeviceAdded; */
-/* static VALUE cEvControllerDeviceRemoved; */
-/* static VALUE cEvControllerDeviceRemapped; */
+static VALUE cEvControllerDevice;
+static VALUE cEvControllerDeviceAdded;
+static VALUE cEvControllerDeviceRemoved;
+static VALUE cEvControllerDeviceRemapped;
 /* static VALUE cEvUser; */
 /* static VALUE cEvDrop; */
 
@@ -379,6 +379,15 @@ static VALUE ControllerButton_inspect(VALUE self)
                       INT2BOOLCSTR(ev->cbutton.state));
 }
 
+EVENT_ACCESSOR_INT(ControllerDevice, which, cdevice.which);
+static VALUE ControllerDevice_inspect(VALUE self)
+{
+    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    return rb_sprintf("<%s: type=%u timestamp=%u which=%d>",
+                      rb_obj_classname(self), ev->common.type, ev->common.timestamp,
+                      ev->cdevice.which);
+}
+
 static void connect_event_class(SDL_EventType type, VALUE klass)
 {
     event_type_to_class[type] = klass;
@@ -411,6 +420,9 @@ static void init_event_type_to_class(void)
     connect_event_class(SDL_CONTROLLERAXISMOTION, cEvControllerAxisMotion);
     connect_event_class(SDL_CONTROLLERBUTTONDOWN, cEvControllerButtonDown);
     connect_event_class(SDL_CONTROLLERBUTTONUP, cEvControllerButtonUp);
+    connect_event_class(SDL_CONTROLLERDEVICEADDED, cEvControllerDeviceAdded);
+    connect_event_class(SDL_CONTROLLERDEVICEREMOVED, cEvControllerDeviceRemoved);
+    connect_event_class(SDL_CONTROLLERDEVICEREMAPPED, cEvControllerDeviceRemapped);
 }
 
 #define DEFINE_EVENT_READER(classname, classvar, name)                  \
@@ -459,6 +471,10 @@ void rubysdl2_init_event(void)
     cEvControllerButton = rb_define_class_under(cEvent, "ControllerButton", cEvent);
     cEvControllerButtonDown = rb_define_class_under(cEvent, "ControllerButtonDown", cEvControllerButton);
     cEvControllerButtonUp = rb_define_class_under(cEvent, "ControllerButtonUp", cEvControllerButton);
+    cEvControllerDevice = rb_define_class_under(cEvent, "ControllerDevice", cEvent);
+    cEvControllerDeviceAdded = rb_define_class_under(cEvent, "ControllerDeviceAdded", cEvControllerDevice);
+    cEvControllerDeviceRemoved = rb_define_class_under(cEvent, "ControllerDeviceRemoved", cEvControllerDevice);
+    cEvControllerDeviceRemapped = rb_define_class_under(cEvent, "ControllerDeviceRemapped", cEvControllerDevice);
     
     DEFINE_EVENT_READER(Event, cEvent, type);
     DEFINE_EVENT_ACCESSOR(Event, cEvent, timestamp);
@@ -568,6 +584,9 @@ void rubysdl2_init_event(void)
     DEFINE_EVENT_ACCESSOR(ControllerButton, cEvControllerButton, button);
     DEFINE_EVENT_ACCESSOR(ControllerButton, cEvControllerButton, pressed);
     rb_define_method(cEvControllerButton, "inspect", ControllerButton_inspect, 0);
-                     
+
+    DEFINE_EVENT_ACCESSOR(ControllerDevice, cEvControllerDevice, which);
+    rb_define_method(cEvControllerDevice, "inspect", ControllerDevice_inspect, 0);
+    
     init_event_type_to_class();
 }
