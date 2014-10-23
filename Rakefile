@@ -1,5 +1,5 @@
 
-SOURCE_FILES = "main.c *.c"
+SOURCE_FILES = "--main README.md main.c *.c"
 
 def yardoc(locale = nil)
   if locale

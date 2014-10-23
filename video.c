@@ -1254,6 +1254,15 @@ FIELD_ACCESSOR(Rect, SDL_Rect, y);
 FIELD_ACCESSOR(Rect, SDL_Rect, w);
 FIELD_ACCESSOR(Rect, SDL_Rect, h);
 
+/*
+ * @overload intersection(other)
+ *   Returns the intersection rect of self and other.
+ *
+ *   If there is no intersection, returns nil.
+ *   
+ *   @return [SDL2::Rect, nil]
+ *   @param [SDL2::Rect] other rectangle
+ */
 static VALUE Rect_intersection(VALUE self, VALUE other)
 {
     VALUE result = Rect_s_allocate(cRect);
@@ -1264,6 +1273,13 @@ static VALUE Rect_intersection(VALUE self, VALUE other)
     }
 }
 
+/*
+ * @overload union(other)
+ *   Returns the minimal rect containing self and other
+ *
+ *   @return [SDL2::Rect]
+ *   @param [SDL2::Rect] other rectangle
+ */
 static VALUE Rect_union(VALUE self, VALUE other)
 {
     VALUE result = Rect_s_allocate(cRect);
