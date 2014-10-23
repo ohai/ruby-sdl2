@@ -202,17 +202,17 @@ class App
 
     opts.on("--blend MODE", "none|blend|add|mod"){|blend_mode|
       @blend_mode = case blend_mode
-                   when "none"
-                     SDL2::BLENDMODE_NONE
-                   when "blend"
-                     SDL2::BLENDMODE_BLEND
-                   when "add"
-                     SDL2::BLENDMODE_ADD
-                   when "mod"
-                     SDL2::BLENDMODE_MOD
-                   end
+                    when "none"
+                      SDL2::BLENDMODE_NONE
+                    when "blend"
+                      SDL2::BLENDMODE_BLEND
+                    when "add"
+                      SDL2::BLENDMODE_ADD
+                    when "mod"
+                      SDL2::BLENDMODE_MOD
+                    end
     }
-
+    
     opts.on("--cycle-color"){ @cycle.cycle_color = true }
 
     opts.on("--cycle-alpha"){ @cycle.cycle_alpha = true }
@@ -221,7 +221,7 @@ class App
       @renderer_flags |= SDL2::Renderer::PRESENTVSYNC
     }
 
-    opts.on("--use-color-key yes|no", TrueClass){|bool| @use_color_key = bool }
+    opts.on("--use-color-key (yes|no)", TrueClass){|bool| @use_color_key = bool }
     opts
   end
 
