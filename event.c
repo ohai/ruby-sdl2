@@ -25,10 +25,10 @@ static VALUE cEvJoyHatMotion;
 static VALUE cEvJoyDevice;
 static VALUE cEvJoyDeviceAdded;
 static VALUE cEvJoyDeviceRemoved;
-/* static VALUE cEvControllerAxisMotion; */
-/* static VALUE cEvControllerButton; */
-/* static VALUE cEvControllerButtonDown; */
-/* static VALUE cEvControllerButtonUp; */
+static VALUE cEvControllerAxisMotion;
+static VALUE cEvControllerButton;
+static VALUE cEvControllerButtonDown;
+static VALUE cEvControllerButtonUp;
 /* static VALUE cEvControllerDevice; */
 /* static VALUE cEvControllerDeviceAdded; */
 /* static VALUE cEvControllerDeviceRemoved; */
@@ -352,6 +352,32 @@ static VALUE EvJoyDevice_inspect(VALUE self)
                       ev->jdevice.which);
 }
 
+EVENT_ACCESSOR_INT(ControllerAxis, which, caxis.which);
+EVENT_ACCESSOR_UINT8(ControllerAxis, axis, caxis.axis);
+EVENT_ACCESSOR_INT(ControllerAxis, value, caxis.value);
+static VALUE ControllerAxis_inspect(VALUE self)
+{
+    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    return rb_sprintf("<%s: type=%u timestamp=%u"
+                      " which=%d axis=%s value=%d>",
+                      rb_obj_classname(self), ev->common.type, ev->common.timestamp,
+                      ev->caxis.which, SDL_GameControllerGetStringForAxis(ev->caxis.axis),
+                      ev->caxis.value);
+}
+
+EVENT_ACCESSOR_INT(ControllerButton, which, cbutton.which);
+EVENT_ACCESSOR_UINT8(ControllerButton, button, cbutton.button);
+EVENT_ACCESSOR_BOOL(ControllerButton, pressed, cbutton.state);
+static VALUE ControllerButton_inspect(VALUE self)
+{
+    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    return rb_sprintf("<%s: type=%u timestamp=%u"
+                      " which=%d button=%s state=%s>",
+                      rb_obj_classname(self), ev->common.type, ev->common.timestamp,
+                      ev->cbutton.which,
+                      SDL_GameControllerGetStringForButton(ev->cbutton.button),
+                      INT2BOOLCSTR(ev->cbutton.state));
+}
 
 static void connect_event_class(SDL_EventType type, VALUE klass)
 {
@@ -382,6 +408,9 @@ static void init_event_type_to_class(void)
     connect_event_class(SDL_JOYDEVICEADDED, cEvJoyDeviceAdded);
     connect_event_class(SDL_JOYDEVICEREMOVED, cEvJoyDeviceRemoved);
     connect_event_class(SDL_JOYHATMOTION, cEvJoyHatMotion);
+    connect_event_class(SDL_CONTROLLERAXISMOTION, cEvControllerAxisMotion);
+    connect_event_class(SDL_CONTROLLERBUTTONDOWN, cEvControllerButtonDown);
+    connect_event_class(SDL_CONTROLLERBUTTONUP, cEvControllerButtonUp);
 }
 
 #define DEFINE_EVENT_READER(classname, classvar, name)                  \
@@ -426,7 +455,11 @@ void rubysdl2_init_event(void)
     cEvJoyDevice = rb_define_class_under(cEvent, "JoyDevice", cEvent);
     cEvJoyDeviceAdded = rb_define_class_under(cEvent, "JoyDeviceAdded", cEvJoyDevice);
     cEvJoyDeviceRemoved = rb_define_class_under(cEvent, "JoyDeviceRemoved", cEvJoyDevice);
-
+    cEvControllerAxisMotion = rb_define_class_under(cEvent, "ControllerAxisMotion", cEvent);
+    cEvControllerButton = rb_define_class_under(cEvent, "ControllerButton", cEvent);
+    cEvControllerButtonDown = rb_define_class_under(cEvent, "ControllerButtonDown", cEvControllerButton);
+    cEvControllerButtonUp = rb_define_class_under(cEvent, "ControllerButtonUp", cEvControllerButton);
+    
     DEFINE_EVENT_READER(Event, cEvent, type);
     DEFINE_EVENT_ACCESSOR(Event, cEvent, timestamp);
     rb_define_method(cEvent, "inspect", Event_inspect, 0);
@@ -525,6 +558,16 @@ void rubysdl2_init_event(void)
     
     DEFINE_EVENT_ACCESSOR(JoyDevice, cEvJoyDevice, which);
     rb_define_method(cEvJoyDevice, "inspect", EvJoyDevice_inspect, 0);
-    
+
+    DEFINE_EVENT_ACCESSOR(ControllerAxis, cEvControllerAxisMotion, which);
+    DEFINE_EVENT_ACCESSOR(ControllerAxis, cEvControllerAxisMotion, axis);
+    DEFINE_EVENT_ACCESSOR(ControllerAxis, cEvControllerAxisMotion, value);
+    rb_define_method(cEvControllerAxisMotion, "inspect", ControllerAxis_inspect, 0);
+
+    DEFINE_EVENT_ACCESSOR(ControllerButton, cEvControllerButton, which);
+    DEFINE_EVENT_ACCESSOR(ControllerButton, cEvControllerButton, button);
+    DEFINE_EVENT_ACCESSOR(ControllerButton, cEvControllerButton, pressed);
+    rb_define_method(cEvControllerButton, "inspect", ControllerButton_inspect, 0);
+                     
     init_event_type_to_class();
 }
