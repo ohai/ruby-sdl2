@@ -151,6 +151,9 @@ class App
 
   def options
     opts = OptionParser.new("Usage: testsprite [options] [SPRITE]")
+    opts.version = SDL2::VERSION
+    opts.release = nil
+    
     opts.on("-m", "--mode MODE", "fullscreen|fullscreen-desktop|window"){|mode|
       case mode
       when "fullscreen"
