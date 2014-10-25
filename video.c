@@ -1367,17 +1367,13 @@ static VALUE Rect_union(VALUE self, VALUE other)
  * This class represents a point in SDL library. 
  * Some method requires this method.
  *
- * @!method x
- *   Return x
+ * @!attribute [rw] x
+ *   X coordiante of the point.
+ *   @return [Integer]
  *
- * @!method x=(val)
- *   Set x to val
- *
- * @!method y
- *   Return y
- *   
- * @!method y=(val)
- *   Set y to val
+ * @!attribute [rw] y
+ *   Y coordiante of the point.
+ *   @return [Integer]
  */
 static VALUE Point_s_allocate(VALUE klass)
 {

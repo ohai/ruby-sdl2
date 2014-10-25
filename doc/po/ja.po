@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-25 22:44+0900\n"
+"POT-Creation-Date: 2014-10-25 22:51+0900\n"
 "PO-Revision-Date: 2014-10-16 18:10+0900\n"
 "Last-Translator: Ippei Obayashi <ohai@kmc.gr.jp>\n"
 "Language-Team: Japanese\n"
@@ -73,30 +73,30 @@ msgstr ""
 msgid "X coordiante of the left-top point of the rectangle"
 msgstr "長方形の左上の点のX座標"
 
+# SDL2::Rect#h
+#: ../../video.c:1247 ../../video.c:1298
+msgid "Height of the rectangle"
+msgstr "長方形の高さ"
+
 # SDL2::Rect#y
 #: ../../video.c:1247 ../../video.c:1298
 msgid "Y coordiante of the left-top point of the rectangle"
 msgstr "長方形の左上の点のY座標"
 
-# SDL2::Rect
+# SDL2::Rect.[]
 #: ../../video.c:1247
-msgid "This class represents a rectangle in SDL2."
-msgstr "このクラスは SDL2 上の長方形を表します"
+msgid "Alias of new. See {#initialize}."
+msgstr "new の別名。詳しくは {#initialize}参照。"
 
 # SDL2::Rect#w
 #: ../../video.c:1247 ../../video.c:1298
 msgid "Width of the rectangle"
 msgstr "長方形の幅"
 
-# SDL2::Rect#h
-#: ../../video.c:1247 ../../video.c:1298
-msgid "Height of the rectangle"
-msgstr "長方形の高さ"
-
-# SDL2::Rect.[]
+# SDL2::Rect
 #: ../../video.c:1247
-msgid "Alias of new. See {#initialize}."
-msgstr "new の別名。詳しくは {#initialize}参照。"
+msgid "This class represents a rectangle in SDL2."
+msgstr "このクラスは SDL2 上の長方形を表します"
 
 # SDL2::Rect
 #: ../../video.c:1249
@@ -110,21 +110,6 @@ msgstr "長方形は x, y (左上の x,y 座標)と w(幅), h(高さ) で表さ�
 msgid "Create a new SDL2::Rect object"
 msgstr "SDL2::Rect オブジェクトを生成します"
 
-# @param [Integer]
-#: ../../video.c:1298
-msgid "tag|param|x"
-msgstr ""
-
-# @param [Integer]
-#: ../../video.c:1298
-msgid "tag|param|y"
-msgstr ""
-
-# @param [Integer]
-#: ../../video.c:1298
-msgid "tag|param|h"
-msgstr ""
-
 # @overload
 #: ../../video.c:1298
 msgid "tag|overload|initialize"
@@ -137,7 +122,22 @@ msgstr ""
 
 # @param [Integer]
 #: ../../video.c:1298
+msgid "tag|param|x"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:1298
+msgid "tag|param|y"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:1298
 msgid "tag|param|w"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:1298
+msgid "tag|param|h"
 msgstr ""
 
 # SDL2::Rect#initialize
@@ -157,15 +157,15 @@ msgstr "デバッグ用文字列を返します"
 msgid "tag|param|other"
 msgstr ""
 
-# @overload
-#: ../../video.c:1340
-msgid "tag|overload|intersection"
-msgstr ""
-
 # @param [SDL2::Rect] other
 #: ../../video.c:1340 ../../video.c:1357
 msgid "rectangle"
 msgstr "長方形"
+
+# @overload
+#: ../../video.c:1340
+msgid "tag|overload|intersection"
+msgstr ""
 
 # SDL2::Rect#intersection
 #: ../../video.c:1341
@@ -187,30 +187,19 @@ msgstr ""
 msgid "Returns the minimal rect containing self and other"
 msgstr "self と other の両方を含む最小の長方形を返します．"
 
+# SDL2::Point#x
+#: ../../video.c:1365
+msgid "X coordiante of the point."
+msgstr "点のX座標"
+
+# SDL2::Point#y
+#: ../../video.c:1365
+msgid "Y coordiante of the point."
+msgstr "点のY座標"
+
 # SDL2::Point
 #: ../../video.c:1365
 msgid ""
 "This class represents a point in SDL library.\n"
 "Some method requires this method."
-msgstr "このクラスは点を表します．"
-"ruby/sdl2のメソッドにはこのクラスのインスタンスを要求するものがあります．"
-
-# SDL2::Point#x=
-#: ../../video.c:1365
-msgid "Set x to val"
-msgstr ""
-
-# SDL2::Point#x
-#: ../../video.c:1365
-msgid "Return x"
-msgstr ""
-
-# SDL2::Point#y=
-#: ../../video.c:1365
-msgid "Set y to val"
-msgstr ""
-
-# SDL2::Point#y
-#: ../../video.c:1365
-msgid "Return y"
-msgstr ""
+msgstr "このクラスは点を表します．ruby/sdl2のメソッドにはこのクラスのインスタンスを要求するものがあります．"
