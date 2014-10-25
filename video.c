@@ -1108,6 +1108,21 @@ static VALUE Surface_pixels(VALUE self)
     return rb_str_new(surface->pixels, size);
 }
 
+static VALUE Surface_pitch(VALUE self)
+{
+    return UINT2NUM(Get_SDL_Surface(self)->pitch);
+}
+
+static VALUE Surface_bits_per_pixel(VALUE self)
+{
+    return UCHAR2NUM(Get_SDL_Surface(self)->format->BitsPerPixel);
+}
+
+static VALUE Surface_bytes_per_pixel(VALUE self)
+{
+    return UCHAR2NUM(Get_SDL_Surface(self)->format->BytesPerPixel);
+}
+
 static VALUE Surface_pixel_color(VALUE self, VALUE x, VALUE y)
 {
     Uint32 pixel = NUM2UINT(Surface_pixel(self, x, y));
@@ -1628,7 +1643,9 @@ void rubysdl2_init_video(void)
     rb_define_method(cSurface, "color_key=", Surface_set_color_key, 1);
     rb_define_method(cSurface, "unset_color_key", Surface_set_color_key, 0);
     rb_define_method(cSurface, "pixels", Surface_pixels, 0);
-
+    rb_define_method(cSurface, "pitch", Surface_pitch, 0);
+    rb_define_method(cSurface, "bits_per_pixel", Surface_bits_per_pixel, 0);
+    rb_define_method(cSurface, "bytes_per_pixel", Surface_bytes_per_pixel, 0);
     
     cRect = rb_define_class_under(mSDL2, "Rect", rb_cObject);
 
