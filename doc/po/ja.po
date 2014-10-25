@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-16 22:24+0900\n"
+"POT-Creation-Date: 2014-10-25 22:44+0900\n"
 "PO-Revision-Date: 2014-10-16 18:10+0900\n"
 "Last-Translator: Ippei Obayashi <ohai@kmc.gr.jp>\n"
 "Language-Team: Japanese\n"
@@ -17,15 +17,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: ../../README.md:1
+msgid "# Ruby/SDL2"
+msgstr ""
+
+#: ../../README.md:3
+msgid "The simple ruby extension library for SDL 2.x."
+msgstr ""
+
+#: ../../README.md:5
+msgid "# License"
+msgstr ""
+
+#: ../../README.md:7
+msgid "LGPL v3 (see LGPL-3)."
+msgstr ""
+
+#: ../../README.md:9
+msgid "# Author"
+msgstr ""
+
+#: ../../README.md:11
+msgid "Ippei Obayashi <ohai@kmc.gr.jp>"
+msgstr ""
+
 # SDL2::Window
 # SDL2::Window.create
-#: ../../video.c:297
+#: ../../video.c:308
 msgid "This class represents a window."
 msgstr ""
 
 # SDL2::Window
 # SDL2::Window.create
-#: ../../video.c:299
+#: ../../video.c:310
 msgid ""
 "If you want to use graphical application using Ruby/SDL, first you need to\n"
 "create a window."
@@ -33,124 +57,160 @@ msgstr ""
 
 # SDL2::Window
 # SDL2::Window.create
-#: ../../video.c:302
+#: ../../video.c:313
 msgid ""
 "All of methods/class methods are available only after initializing video\n"
 "subsystem by {SDL2.init}."
 msgstr ""
 
 # SDL2::Window#input_is_grabbed?
-#: ../../video.c:419
+#: ../../video.c:436
 msgid "Window_set_gamma_ramp"
 msgstr ""
 
 # SDL2::Rect#x
-#: ../../video.c:1010 ../../video.c:1061
+#: ../../video.c:1247 ../../video.c:1298
 msgid "X coordiante of the left-top point of the rectangle"
 msgstr "長方形の左上の点のX座標"
 
 # SDL2::Rect#y
-#: ../../video.c:1010 ../../video.c:1061
+#: ../../video.c:1247 ../../video.c:1298
 msgid "Y coordiante of the left-top point of the rectangle"
 msgstr "長方形の左上の点のY座標"
 
+# SDL2::Rect
+#: ../../video.c:1247
+msgid "This class represents a rectangle in SDL2."
+msgstr "このクラスは SDL2 上の長方形を表します"
+
 # SDL2::Rect#w
-#: ../../video.c:1010 ../../video.c:1061
+#: ../../video.c:1247 ../../video.c:1298
 msgid "Width of the rectangle"
 msgstr "長方形の幅"
 
 # SDL2::Rect#h
-#: ../../video.c:1010 ../../video.c:1061
+#: ../../video.c:1247 ../../video.c:1298
 msgid "Height of the rectangle"
 msgstr "長方形の高さ"
 
 # SDL2::Rect.[]
-#: ../../video.c:1010
+#: ../../video.c:1247
 msgid "Alias of new. See {#initialize}."
 msgstr "new の別名。詳しくは {#initialize}参照。"
 
 # SDL2::Rect
-#: ../../video.c:1010
-msgid "This class represents a rectangle in SDL2."
-msgstr "このクラスは SDL2 上の長方形を表します"
-
-# SDL2::Rect
-#: ../../video.c:1012
+#: ../../video.c:1249
 msgid ""
 "Any rectanle is represented by four attributes x, y, w, and h,\n"
 "and these four attributes must be integer."
 msgstr "長方形は x, y (左上の x,y 座標)と w(幅), h(高さ) で表されます。これらの値はすべて整数でなければなりません。"
 
 # SDL2::Rect#initialize
-#: ../../video.c:1045 ../../video.c:1062
+#: ../../video.c:1282 ../../video.c:1299
 msgid "Create a new SDL2::Rect object"
 msgstr "SDL2::Rect オブジェクトを生成します"
 
 # @param [Integer]
-#: ../../video.c:1061
+#: ../../video.c:1298
 msgid "tag|param|x"
 msgstr ""
 
 # @param [Integer]
-#: ../../video.c:1061
+#: ../../video.c:1298
 msgid "tag|param|y"
 msgstr ""
 
 # @param [Integer]
-#: ../../video.c:1061
+#: ../../video.c:1298
 msgid "tag|param|h"
 msgstr ""
 
 # @overload
-#: ../../video.c:1061
+#: ../../video.c:1298
 msgid "tag|overload|initialize"
 msgstr ""
 
 # @overload
-#: ../../video.c:1061
+#: ../../video.c:1298
 msgid "tag|overload|initialze"
 msgstr ""
 
 # @param [Integer]
-#: ../../video.c:1061
+#: ../../video.c:1298
 msgid "tag|param|w"
 msgstr ""
 
 # SDL2::Rect#initialize
-#: ../../video.c:1062
+#: ../../video.c:1299
 msgid ""
 "Create a new SDL2::Rect object whose x, w, w, and h are all\n"
 "zero."
 msgstr "SDL2::Rect オブジェクトを生成します。x,y,w,h はすべて 0 で初期化されます。"
 
 # SDL2::Rect#inspect
-#: ../../video.c:1079
+#: ../../video.c:1316
 msgid "Inspection string for debug"
 msgstr "デバッグ用文字列を返します"
 
-# SDL2::Point#x
-#: ../../video.c:1095
-msgid "Return x"
+# @param [SDL2::Rect]
+#: ../../video.c:1340 ../../video.c:1357
+msgid "tag|param|other"
 msgstr ""
 
-# SDL2::Point#x=
-#: ../../video.c:1095
-msgid "Set x to val"
+# @overload
+#: ../../video.c:1340
+msgid "tag|overload|intersection"
 msgstr ""
 
-# SDL2::Point#y
-#: ../../video.c:1095
-msgid "Return y"
+# @param [SDL2::Rect] other
+#: ../../video.c:1340 ../../video.c:1357
+msgid "rectangle"
+msgstr "長方形"
+
+# SDL2::Rect#intersection
+#: ../../video.c:1341
+msgid "Returns the intersection rect of self and other."
+msgstr "self と other の共通部分の長方形を返します．"
+
+# SDL2::Rect#intersection
+#: ../../video.c:1343
+msgid "If there is no intersection, returns nil."
+msgstr "共通部分が存在しない場合は nil を返します．"
+
+# @overload
+#: ../../video.c:1357
+msgid "tag|overload|union"
 msgstr ""
 
-# SDL2::Point#y=
-#: ../../video.c:1095
-msgid "Set y to val"
-msgstr ""
+# SDL2::Rect#union
+#: ../../video.c:1358
+msgid "Returns the minimal rect containing self and other"
+msgstr "self と other の両方を含む最小の長方形を返します．"
 
 # SDL2::Point
-#: ../../video.c:1095
+#: ../../video.c:1365
 msgid ""
 "This class represents a point in SDL library.\n"
 "Some method requires this method."
+msgstr "このクラスは点を表します．"
+"ruby/sdl2のメソッドにはこのクラスのインスタンスを要求するものがあります．"
+
+# SDL2::Point#x=
+#: ../../video.c:1365
+msgid "Set x to val"
+msgstr ""
+
+# SDL2::Point#x
+#: ../../video.c:1365
+msgid "Return x"
+msgstr ""
+
+# SDL2::Point#y=
+#: ../../video.c:1365
+msgid "Set y to val"
+msgstr ""
+
+# SDL2::Point#y
+#: ../../video.c:1365
+msgid "Return y"
 msgstr ""
