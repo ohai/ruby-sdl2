@@ -1668,7 +1668,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cPixelFormat, "order", PixelFormat_order, 0);
     rb_define_method(cPixelFormat, "layout", PixelFormat_layout, 0);
     rb_define_method(cPixelFormat, "bits_per_pixel", PixelFormat_bits_per_pixel, 0);
-    rb_define_alias(cPixelFormat, "bps", "bits_per_pixel");
+    rb_define_alias(cPixelFormat, "bpp", "bits_per_pixel");
     rb_define_method(cPixelFormat, "bytes_per_pixel", PixelFormat_bytes_per_pixel, 0);
     rb_define_method(cPixelFormat, "indexed?", PixelFormat_indexed_p, 0);
     rb_define_method(cPixelFormat, "alpha?", PixelFormat_alpha_p, 0);
