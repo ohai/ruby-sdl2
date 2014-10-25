@@ -52,6 +52,7 @@ typedef struct Texture {
 
 typedef struct Surface {
     SDL_Surface* surface;
+    int need_to_free_pixels;
 } Surface;
 
 static void Renderer_free(Renderer*);
@@ -211,6 +212,8 @@ DEFINE_WRAPPER(SDL_Texture, Texture, texture, cTexture, "SDL2::Texture");
 static void Surface_free(Surface* s)
 {
     GC_LOG((stderr, "Surface free: %p\n", s));
+    if (s->need_to_free_pixels)
+        free(s->surface->pixels);
     if (s->surface && rubysdl2_is_active())
         SDL_FreeSurface(s->surface);
     free(s);
@@ -220,6 +223,7 @@ VALUE Surface_new(SDL_Surface* surface)
 {
     Surface* s = ALLOC(Surface);
     s->surface = surface;
+    s->need_to_free_pixels = 0;
     return Data_Wrap_Struct(cSurface, 0, Surface_free, s);
 }
 
@@ -996,9 +1000,51 @@ static VALUE Surface_s_load_bmp(VALUE self, VALUE fname)
     return Surface_new(surface);
 }
 
+static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
+{
+    VALUE string, width, height, depth, pitch, Rmask, Gmask, Bmask, Amask;
+    int w, h, d, p, r, g, b, a;
+    SDL_Surface* surface;
+    void* pixels;
+    Surface* s;
+    
+    rb_scan_args(argc, argv, "45", &string, &width, &height, &depth,
+                 &pitch, &Rmask, &Gmask, &Bmask, &Amask);
+    StringValue(string);
+    w = NUM2INT(width);
+    h = NUM2INT(height);
+    d = NUM2INT(depth);
+    p = (pitch == Qnil) ? d*w/8 : NUM2INT(pitch);
+    r = (Rmask == Qnil) ? 0 : NUM2UINT(Rmask);
+    g = (Gmask == Qnil) ? 0 : NUM2UINT(Gmask);
+    b = (Bmask == Qnil) ? 0 : NUM2UINT(Bmask);
+    a = (Amask == Qnil) ? 0 : NUM2UINT(Amask);
+
+    if (RSTRING_LEN(string) < p*h)
+        rb_raise(rb_eArgError, "String too short");
+    if (p < d*w/8 )
+        rb_raise(rb_eArgError, "pitch too small");
+
+    pixels = ruby_xmalloc(RSTRING_LEN(string));
+    memcpy(pixels, RSTRING_PTR(string), RSTRING_LEN(string));
+    surface = SDL_CreateRGBSurfaceFrom(pixels, w, h, d, p, r, g, b, a);
+    if (!surface)
+        SDL_ERROR();
+    
+    RB_GC_GUARD(string);
+
+    s = ALLOC(Surface);
+    s->surface = surface;
+    s->need_to_free_pixels = 1;
+    return Data_Wrap_Struct(cSurface, 0, Surface_free, s);
+}
+
 static VALUE Surface_destroy(VALUE self)
 {
     Surface* s = Get_Surface(self);
+    if (s->need_to_free_pixels)
+        free(s->surface->pixels);
+    s->need_to_free_pixels = 0;
     if (s->surface)
         SDL_FreeSurface(s->surface);
     s->surface = NULL;
@@ -1053,6 +1099,13 @@ static VALUE Surface_pixel(VALUE self, VALUE x_coord, VALUE y_coord)
     }
 
     return UINT2NUM(SDL_SwapLE32(pixel));
+}
+
+static VALUE Surface_pixels(VALUE self)
+{
+    SDL_Surface* surface = Get_SDL_Surface(self);
+    int size = surface->h * surface->pitch;
+    return rb_str_new(surface->pixels, size);
 }
 
 static VALUE Surface_pixel_color(VALUE self, VALUE x, VALUE y)
@@ -1560,6 +1613,7 @@ void rubysdl2_init_video(void)
     rb_define_singleton_method(cSurface, "load_bmp", Surface_s_load_bmp, 1);
     rb_define_singleton_method(cSurface, "blit", Surface_s_blit, 4);
     rb_define_singleton_method(cSurface, "new", Surface_s_new, -1);
+    rb_define_singleton_method(cSurface, "from_string", Surface_s_from_string, -1);
     rb_define_method(cSurface, "destroy?", Surface_destroy_p, 0);
     rb_define_method(cSurface, "destroy", Surface_destroy, 0);
     DEFINE_C_ACCESSOR(Surface, cSurface, blend_mode);
@@ -1573,7 +1627,9 @@ void rubysdl2_init_video(void)
     rb_define_method(cSurface, "color_key", Surface_color_key, 0);
     rb_define_method(cSurface, "color_key=", Surface_set_color_key, 1);
     rb_define_method(cSurface, "unset_color_key", Surface_set_color_key, 0);
+    rb_define_method(cSurface, "pixels", Surface_pixels, 0);
 
+    
     cRect = rb_define_class_under(mSDL2, "Rect", rb_cObject);
 
     rb_define_alloc_func(cRect, Rect_s_allocate);
