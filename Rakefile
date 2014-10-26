@@ -1,5 +1,5 @@
 
-SOURCE_FILES = "--main README.md --files COPYING.txt main.c *.c"
+SOURCE_FILES = "-m markdown --main README.md --files COPYING.txt main.c *.c"
 
 def yardoc(locale = nil)
   if locale

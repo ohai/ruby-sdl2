@@ -315,7 +315,7 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  * All of methods/class methods are available only after initializing video
  * subsystem by {SDL2.init}.
  *
- * = Flags
+ * # Flags
  *
  * OR'd bits of the following constants represents window states.
  * You can see a window state using {#flags} and create a window with a specified
@@ -348,7 +348,7 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  *   @param [Integer] y the y position of the left-top of the window
  *   @param [Integer] w the width of the window
  *   @param [Integer] h the height of the window
- *   @param [Integer] flags 0, or one or more {SDL2::Window Flags} masks OR'd together
+ *   @param [Integer] flags 0, or one or more [Window flag](#label-Flags) masks OR'd together
  *     
  *   @return [SDL2::Window] created window
  */
