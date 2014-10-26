@@ -314,8 +314,44 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  * 
  * All of methods/class methods are available only after initializing video
  * subsystem by {SDL2.init}.
+ *
+ * = Flags
+ *
+ * OR'd bits of the following constants represents window states.
+ * You can see a window state using {#flags} and create a window with a specified
+ * state using flag parameter of {.create}.
+ * 
+ * * {SDL2::Window::FULLSCREEN} - fullscreen window
+ * * {SDL2::Window::FULLSCREEN_DESKTOP} -
+ *   fullscreen window at the current desktop resolution
+ * * {SDL2::Window::OPENGL} - window usable with OpenGL context
+ * * {SDL2::Window::SHOWN} - window is visible
+ * * {SDL2::Window::HIDDEN} - window is not visible
+ * * {SDL2::Window::BORDERLESS} - no window decoration
+ * * {SDL2::Window::RESIZABLE} - window is resizable
+ * * {SDL2::Window::MINIMIZDED} - window is minimized
+ * * {SDL2::Window::MAXIMIZED} - window is maximized
+ * * {SDL2::Window::INPUT_GRABBED} - window has grabbed input focus
+ * * {SDL2::Window::INPUT_FOCUS} - window has input focus
+ * * {SDL2::Window::MOUSE_FOCUS} - window has mouse focus
+ * * {SDL2::Window::FOREIGN} - window is not created by SDL
+ * * {SDL2::Window::ALLOW_HIGHDPI} - window should be created in high-DPI mode if supported
+ * * {SDL2::Window::MOUSE_CAPTURE} - window has mouse captured
+ *
  */
 
+/*
+ * @overload create(title, x, y, w, h, flags)
+ *   Create a window with the specified position (x,y), dimensions (w,h) and flags.
+ *
+ *   @param [Integer] x the x position of the left-top of the window
+ *   @param [Integer] y the y position of the left-top of the window
+ *   @param [Integer] w the width of the window
+ *   @param [Integer] h the height of the window
+ *   @param [Integer] flags 0, or one or more {SDL2::Window Flags} masks OR'd together
+ *     
+ *   @return [SDL2::Window] created window
+ */
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
                              VALUE flags)
 {
