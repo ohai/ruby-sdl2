@@ -348,8 +348,8 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  *   @param [Integer] y the y position of the left-top of the window
  *   @param [Integer] w the width of the window
  *   @param [Integer] h the height of the window
- *   @param [Integer] flags 0, or one or more [Window flag](#label-Flags) masks OR'd together
- *     
+ *   @param [Integer] flags 0, or one or more [Window flag masks](#label-Flags) OR'd together
+ *   
  *   @return [SDL2::Window] created window
  */
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
@@ -384,12 +384,32 @@ VALUE find_window_by_id(Uint32 id)
     return Window_s_find_by_id(Qnil, UINT2NUM(id));
 }
 
+/*
+ * @overload destroy
+ *   Destroy window.
+ *
+ *   You cannot call almost all methods after calling this method.
+ *   The exception is {#destroy?}.
+ *   
+ *   @return [void]
+ */
 static VALUE Window_destroy(VALUE self)
 {
     Window_destroy_internal(Get_Window(self));
     return Qnil;
 }
 
+/*
+ * @overload create_renderer(index, flags)
+ *   Create a 2D rendering context for a window.
+ *
+ *   @param [Integer] index the index of the rendering driver to initialize,
+ *     or -1 to initialize the first one supporting the requested flags
+ *   @param [Integer] flags 0, or one or more [Renderer flag masks](SDL2) OR'd together;
+ *
+ *   @return [SDL2::Renderer] the created renderer (rendering context)
+ *   @raise [SDL2::Error] raises when an error occurs.
+ */
 static VALUE Window_create_renderer(VALUE self, VALUE index, VALUE flags)
 {
     SDL_Renderer* sdl_renderer;
@@ -404,6 +424,13 @@ static VALUE Window_create_renderer(VALUE self, VALUE index, VALUE flags)
     return renderer;
 }
 
+/*
+ * @overload renderer
+ *   Return the renderer associate with the window
+ *
+ *   @return [SDL2::Renderer] the associated renderer
+ *   @return [nil] if no renderer is created yet
+ */
 static VALUE Window_renderer(VALUE self)
 {
     return rb_iv_get(self, "renderer");
@@ -698,6 +725,32 @@ static VALUE DisplayMode_inspect(VALUE self)
                       
 }
 
+/*
+ * Document-class: SDL2::Renderer
+ *
+ * This class represents a 2D rendering context for a window.
+ *
+ * You can create a renderer using {SDL2::Window#create_renderer} and
+ * use it to draw figures on the window.
+ *
+ * # Flags
+ * You can specify the OR'd bits of the following constants
+ * {SDL2::Window#create_renderer when you create a new renderer}.
+ *
+ * * SDL2::Renderer::SOFTWARE - the renderer is a software fallback
+ * * SDL2::Renderer::ACCELERATED - the renderer uses hardware acceleration
+ * * SDL2::Renderer::PRESENTVSYNC - present is synchronized with the refresh rate
+ * * SDL2::Renderer::TARGETTEXTURE - the renderer supports rendering to texture
+ *
+ * No flags(==0) gives priority to available ACCELERATED renderers
+ */
+
+
+/*
+ * @overload drivers_info
+ *   Return information of all available rendering contexts.
+ *   @return [Array<SDL2::Renderer::Info>] information about rendering contexts
+ */
 static VALUE Renderer_s_drivers_info(VALUE self)
 {
     int num_drivers = SDL_GetNumRenderDrivers();
@@ -717,6 +770,22 @@ static VALUE Renderer_destroy(VALUE self)
     return Qnil;
 }
 
+/*
+ * @overload create_texture(format, access, w, h)
+ *   Create a new texture for the rendering context.
+ *
+ *   @param [SDL2::PixelFormat,Integer] format format of the texture
+ *   @param [Integer] access texture access pattern, one of the following
+ *     * SDL2::Texture::ACCESS_STATIC
+ *     * SDL2::Texture::ACCESS_STREAMING
+ *     * SDL2::Texture::ACCESS_TARGET
+ *   @param [Integer] w the width ofthe texture in pixels
+ *   @param [Integer] h the height ofthe texture in pixels
+ *   
+ *   @return [SDL2::Texture] the created texture
+ *
+ *   @raise [SDL2::Error] raised when the texuture cannot be created
+ */
 static VALUE Renderer_create_texture(VALUE self, VALUE format, VALUE access,
                                      VALUE w, VALUE h)
 {
@@ -728,6 +797,15 @@ static VALUE Renderer_create_texture(VALUE self, VALUE format, VALUE access,
     return Texture_new(texture, Get_Renderer(self));
 }
 
+/*
+ * @overload create_texture_from(surface)
+ *   Create a texture from an existing surface.
+ *
+ *   @param [SDL2::Surface] surface the surface containing pixels for the texture
+ *   @return [SDL2::Texture] the created texture
+ *
+ *   @raise [SDL2::Error] raised when the texuture cannot be created
+ */
 static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
 {
     SDL_Texture* texture = SDL_CreateTextureFromSurface(Get_SDL_Renderer(self),
@@ -748,6 +826,18 @@ static SDL_Point* Get_SDL_Point_or_NULL(VALUE point)
     return point == Qnil ? NULL : Get_SDL_Point(point);
 }
 
+/*
+ * @overload copy(texture, srcrect, dstrect)
+ *   Copy a portion of the texture to the current rendering target.
+ *
+ *   @param [SDL2::Texture] texture the source texture
+ *   @param [SDL2::Rect,nil] srcrect the source rectangle, or nil for the entire texture
+ *   @param [SDL2::Rect,nil] dstrect the destination rectangle, or nil for the entire
+ *     rendering target; the texture will be stretched to fill the given rectangle
+ *
+ *   @return [void]
+ *   @raise [SDL2::Error] raised when copy is failed
+ */
 static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstrect)
 {
     HANDLE_ERROR(SDL_RenderCopy(Get_SDL_Renderer(self),
@@ -757,6 +847,32 @@ static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstre
     return Qnil;
 }
 
+/*
+ * @overload copy_ex(texture, srcrect, dstrect, angle, center, flip)
+ *   Copy a portion of the texture to the current rendering target,
+ *   rotating it by angle around the given center and also flipping
+ *   it top-bottom and/or left-right.
+ *
+ *   You can use the following constants to specify the horizontal/vertical flip:
+ *   
+ *   * SDL2::Renderer::FLIP_HORIZONTAL - flip horizontally
+ *   * SDL2::Renderer::FLIP_VERTICAL - flip vertically
+ *   * SDL2::Renderer::FLIP_NONE - do not flip, equal to zero
+ *
+ *   
+ *   @param [SDL2::Texture] texture the source texture
+ *   @param [SDL2::Rect,nil] srcrect the source rectangle, or nil for the entire texture
+ *   @param [SDL2::Rect,nil] dstrect the destination rectangle, or nil for the entire
+ *     rendering target; the texture will be stretched to fill the given rectangle
+ *   @param [Float] angle an angle in degree indicating the rotation
+ *     that will be applied to dstrect
+ *   @param [SDL2::Point,nil] center the point around which dstrect will be rotated,
+ *     (if nil, rotation will be done around the center of dstrect)
+ *   @param [Integer] flip bits OR'd of the flip consntants
+ *
+ *   @return [void]
+ *   @raise [SDL2::Error] raised when copy is failed
+ */
 static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE dstrect,
                               VALUE angle, VALUE center, VALUE flip)
 {
@@ -770,18 +886,32 @@ static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE ds
     return Qnil;
 }
 
+/*
+ * Update the screen with rendering performed
+ * @return [nil]
+ */
 static VALUE Renderer_present(VALUE self)
 {
     SDL_RenderPresent(Get_SDL_Renderer(self));
     return Qnil;
 }
 
+/*
+ * Crear the rendering target with the drawing color.
+ * @return [nil]
+ */
 static VALUE Renderer_clear(VALUE self)
 {
     HANDLE_ERROR(SDL_RenderClear(Get_SDL_Renderer(self)));
     return Qnil;
 }
 
+/* 
+ * Get the color used for drawing operations
+ * @return [[Integer,Integer,Integer,Integer]]
+ *   red, green, blue, and alpha components of the drawing color
+ *   (all components are more than or equal to 0 and less than and equal to 255)
+ */
 static VALUE Renderer_draw_color(VALUE self)
 {
     Uint8 r, g, b, a;
@@ -789,6 +919,20 @@ static VALUE Renderer_draw_color(VALUE self)
     return rb_ary_new3(4, INT2FIX(r), INT2FIX(g), INT2FIX(b), INT2FIX(a));
 }
 
+/*
+ * @overload draw_color=(color)
+ *   Set the color used for drawing operations
+ *
+ *   All color components (including alpha) must be more than or equal to 0
+ *   and less than and equal to 255
+ *   
+ *   @param [[Integer, Integer, Integer]] color
+ *     red, green, and blue components used for drawing
+ *   @param [[Integer, Integer, Integer, Integer]] color
+ *     red, green, blue, and alpha components used for drawing
+ *
+ *   @return [color]
+ */
 static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
 {
     SDL_Color color = Array_to_SDL_Color(rgba);
@@ -796,10 +940,20 @@ static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
     HANDLE_ERROR(SDL_SetRenderDrawColor(Get_SDL_Renderer(self),
                                         color.r, color.g, color.b, color.a));
                                         
-    return Qnil;
+    return rgba;
 }
 
-
+/*
+ * @overload draw_line(x1, y1, x2, y2)
+ *   Draw a line from (x1, y1) to (x2, y2) using drawing color given by
+ *   {#draw_color=}.
+ *
+ *   @param [Integer] x1 the x coordinate of the start point
+ *   @param [Integer] y1 the y coordinate of the start point
+ *   @param [Integer] x2 the x coordinate of the end point
+ *   @param [Integer] y2 the y coordinate of the end point
+ *   @return [nil]
+ */
 static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
 {
     HANDLE_ERROR(SDL_RenderDrawLine(Get_SDL_Renderer(self),
@@ -807,24 +961,54 @@ static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE 
     return Qnil;
 }
 
+/*
+ * @overload draw_point(x, y)
+ *   Draw a point at (x, y) using drawing color given by {#draw_color=}.
+ *
+ *   @param [Integer] x the x coordinate of the point
+ *   @param [Integer] y the y coordinate of the point
+ *
+ *   @return [nil]
+ */
 static VALUE Renderer_draw_point(VALUE self, VALUE x, VALUE y)
 {
     HANDLE_ERROR(SDL_RenderDrawPoint(Get_SDL_Renderer(self), NUM2INT(x), NUM2INT(y)));
     return Qnil;
 }
 
+/*
+ * @overload draw_rect(rect)
+ *   Draw a rectangle using drawing color given by {#draw_color=}.
+ *
+ *   @param [SDL2::Rect] rect the drawing rectangle
+ *   
+ *   @return [nil]
+ */
 static VALUE Renderer_draw_rect(VALUE self, VALUE rect)
 {
     HANDLE_ERROR(SDL_RenderDrawRect(Get_SDL_Renderer(self), Get_SDL_Rect(rect)));
     return Qnil;
 }
 
+/*
+ * @overload fill_rect(rect)
+ *   Draw a filled rectangle using drawing color given by {#draw_color=}.
+ *
+ *   @param [SDL2::Rect] rect the drawing rectangle
+ *   
+ *   @return [nil]
+ */
 static VALUE Renderer_fill_rect(VALUE self, VALUE rect)
 {
     HANDLE_ERROR(SDL_RenderFillRect(Get_SDL_Renderer(self), Get_SDL_Rect(rect)));
     return Qnil;
 }
 
+/*
+ * Get information about _self_ rendering context .
+ *
+ * @return [SDL2::Renderer::Info] rendering information
+ */
 static VALUE Renderer_info(VALUE self)
 {
     SDL_RendererInfo info;
