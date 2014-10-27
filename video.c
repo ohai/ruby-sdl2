@@ -1758,7 +1758,7 @@ void rubysdl2_init_video(void)
     cDisplayMode = rb_define_class_under(cDisplay, "Mode", rb_cObject);
 
     rb_define_alloc_func(cDisplayMode, DisplayMode_s_allocate);
-    rb_define_private_method(cDisplayMode, "initialize", DisplayMode_initialize, 4);
+    rb_define_method(cDisplayMode, "initialize", DisplayMode_initialize, 4);
     rb_define_method(cDisplayMode, "inspect", DisplayMode_inspect, 0);
 
     
@@ -1879,7 +1879,7 @@ void rubysdl2_init_video(void)
     cPoint = rb_define_class_under(mSDL2, "Point", rb_cObject);
 
     rb_define_alloc_func(cPoint, Point_s_allocate);
-    rb_define_private_method(cPoint, "initialize", Point_initialize, -1);
+    rb_define_method(cPoint, "initialize", Point_initialize, -1);
     rb_define_alias(rb_singleton_class(cPoint), "[]", "new");
     rb_define_method(cPoint, "inspect", Point_inspect, 0);
     DEFINE_C_ACCESSOR(Point, cPoint, x);
@@ -1893,7 +1893,7 @@ void rubysdl2_init_video(void)
     
     cPixelFormat = rb_define_class_under(mSDL2, "PixelFormat", rb_cObject);
     
-    rb_define_private_method(cPixelFormat, "initialize", PixelForamt_initialize, 1);
+    rb_define_method(cPixelFormat, "initialize", PixelForamt_initialize, 1);
     rb_define_attr(cPixelFormat, "format", 1, 0);
     rb_define_method(cPixelFormat, "name", PixelFormat_name, 0);
     rb_define_method(cPixelFormat, "inspect", PixelFormat_inspect, 0);
