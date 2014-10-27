@@ -1601,6 +1601,19 @@ static VALUE Point_s_allocate(VALUE klass)
     return Data_Make_Struct(klass, SDL_Point, 0, free, point);
 }
 
+/*
+ * Create a new point object.
+ * 
+ * @overload initialize(x, y)
+ *   @param x the x coordinate of the point
+ *   @param y the y coordinate of the point
+ *   
+ * @overload initialize
+ *   x and y of the created point object are initialized by 0
+ *
+ * @return [SDL2::Point]
+ * 
+ */
 static VALUE Point_initialize(int argc, VALUE* argv, VALUE self)
 {
     VALUE x, y;
@@ -1611,6 +1624,10 @@ static VALUE Point_initialize(int argc, VALUE* argv, VALUE self)
     return Qnil;
 }
 
+/*
+ * Return inspection string.
+ * @return [String]
+ */
 static VALUE Point_inspect(VALUE self)
 {
     SDL_Point* point = Get_SDL_Point(self);
