@@ -1,4 +1,6 @@
 module SDL2
+  # Version string of Ruby/SDL2
   VERSION = "0.1.0"
+  # Version of Ruby/SDL2, [major, minor, patch level] 
   VERSION_NUMBER = [0, 1, 0]
 end

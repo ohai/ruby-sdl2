@@ -89,6 +89,25 @@ static void quit(VALUE unused)
     state = FINALIZED;
 }
 
+/*
+ * @overload init(flags) 
+ *   Initialize SDL.
+ *   You must call this function before using any other Ruby/SDL2 methods.
+ *
+ *   You can specify initialized subsystem by flags which is
+ *   bitwise OR of the following constants:
+ *
+ *   * SDL2::INIT_TIMER - timer subsystem
+ *   * SDL2::INIT_AUDIO - audio subsystem
+ *   * SDL2::INIT_VIDEO - video subsystem
+ *   * SDL2::INIT_JOYSTICK - joystick subsystem
+ *   * SDL2::INIT_HAPTIC - haptic (force feedback) subsystem
+ *       (interface is not implemented yet)
+ *   * SDL2::INIT_GAMECONTROLLER - controller subsystem
+ *   * SDL2::INIT_EVENTS - events subsystem
+ *   * SDL2::INIT_EVERYTHING - all of the above flags
+ *   * SDL2::INIT_NOPARACHUTE - this flag is ignored; for compatibility
+ */
 static VALUE SDL2_s_init(VALUE self, VALUE flags)
 {
     SDL_SetMainReady();
@@ -126,6 +145,21 @@ static VALUE libsdl_revision_number(void)
     return INT2NUM(SDL_GetRevisionNumber());
 }
 
+/*
+ * Document-module: SDL2
+ *
+ * Namespace module for Ruby/SDL2.
+ *
+ */
+
+/*
+ * Document-class: SDL2::Error
+ *
+ * An exception class for all Ruby/SDL2 specific errors.
+ *
+ * @attribute [r] error_code
+ *   @return [Integer] error code sent from SDL library
+ */
 void Init_sdl2_ext(void)
 {
     mSDL2 = rb_define_module("SDL2");

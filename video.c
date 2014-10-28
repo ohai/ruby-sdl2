@@ -774,17 +774,22 @@ static VALUE Renderer_destroy(VALUE self)
  * @overload create_texture(format, access, w, h)
  *   Create a new texture for the rendering context.
  *
+ *   You can use the following constants to specify access pattern
+ *   
+ *   * SDL2::Texture::ACCESS_STATIC - changes rarely, not lockable
+ *   * SDL2::Texture::ACCESS_STREAMING - changes frequently, lockable
+ *   * SDL2::Texture::ACCESS_TARGET - can be used as a render target
+ *     
  *   @param [SDL2::PixelFormat,Integer] format format of the texture
- *   @param [Integer] access texture access pattern, one of the following
- *     * SDL2::Texture::ACCESS_STATIC
- *     * SDL2::Texture::ACCESS_STREAMING
- *     * SDL2::Texture::ACCESS_TARGET
+ *   @param [Integer] access texture access pattern
  *   @param [Integer] w the width ofthe texture in pixels
  *   @param [Integer] h the height ofthe texture in pixels
  *   
  *   @return [SDL2::Texture] the created texture
  *
  *   @raise [SDL2::Error] raised when the texuture cannot be created
+ *
+ *   @see #create_texture_from
  */
 static VALUE Renderer_create_texture(VALUE self, VALUE format, VALUE access,
                                      VALUE w, VALUE h)
@@ -805,6 +810,8 @@ static VALUE Renderer_create_texture(VALUE self, VALUE format, VALUE access,
  *   @return [SDL2::Texture] the created texture
  *
  *   @raise [SDL2::Error] raised when the texuture cannot be created
+ *
+ *   @see #create_texture
  */
 static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
 {
@@ -837,6 +844,8 @@ static SDL_Point* Get_SDL_Point_or_NULL(VALUE point)
  *
  *   @return [void]
  *   @raise [SDL2::Error] raised when copy is failed
+ *
+ *   @see #copy_ex
  */
 static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstrect)
 {
@@ -872,6 +881,8 @@ static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstre
  *
  *   @return [void]
  *   @raise [SDL2::Error] raised when copy is failed
+ *
+ *   @see #copy
  */
 static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE dstrect,
                               VALUE angle, VALUE center, VALUE flip)
@@ -911,6 +922,7 @@ static VALUE Renderer_clear(VALUE self)
  * @return [[Integer,Integer,Integer,Integer]]
  *   red, green, blue, and alpha components of the drawing color
  *   (all components are more than or equal to 0 and less than and equal to 255)
+ * @see #draw_color=
  */
 static VALUE Renderer_draw_color(VALUE self)
 {
@@ -932,6 +944,8 @@ static VALUE Renderer_draw_color(VALUE self)
  *     red, green, blue, and alpha components used for drawing
  *
  *   @return [color]
+ *   
+ *   @see #draw_color
  */
 static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
 {
@@ -1076,14 +1090,41 @@ static VALUE Renderer_output_size(VALUE self)
     return rb_ary_new3(2, INT2FIX(w), INT2FIX(h));
 }
 
+/*
+ * @overload render_target=(target)
+ *  Set a texture as the current render target.
+ *  
+ *  Some renderers have ability to render to a texture instead of a screen.
+ *  You can judge whether your renderer has this ability using
+ *  {#support_render_target?}.
+ *  
+ *  The target texture musbe be {#create_texture created} with the
+ *  SDL2::Texture::ACCESS_TARGET flag.
+ *  
+ *  @param [SDL2::Texture,nil] target the targeted texture, or nil
+ *    for the default render target(i.e. screen)
+ *
+ *  @return [target]
+ *
+ *  @see #render_target
+ */
 static VALUE Renderer_set_render_target(VALUE self, VALUE target)
 {
     HANDLE_ERROR(SDL_SetRenderTarget(Get_SDL_Renderer(self),
                                      (target == Qnil) ? NULL : Get_SDL_Texture(target)));
     rb_iv_set(self, "render_target", target);
-    return Qnil;
+    return target;
 }
 
+/*
+ * Get the current render target.
+ *
+ * @return [SDL2::Texture] the current rendering target
+ * @return [nil] for the default render target (i.e. screen)
+ *
+ * @see #render_target=
+ * @see #support_render_target?
+ */
 static VALUE Renderer_render_target(VALUE self)
 {
     return rb_iv_get(self, "render_target");
@@ -1987,6 +2028,26 @@ void rubysdl2_init_video(void)
 
 static VALUE mIMG;
 
+/*
+ * @overload init(flags)
+ *   Initialize SDL_image. 
+ *   
+ *   You can specify the supporting image formats by bitwise OR'd of the
+ *   following constants.
+ *
+ *   * {SDL2::IMG::INIT_JPG}
+ *   * {SDL2::IMG::INIT_PNG}
+ *   * {SDL2::IMG::INIT_TIF}
+ *
+ *   You need to initialize SDL_image to check whether specified format
+ *   is supported by your environment. If your environment does not
+ *   support required support format, you have a {SDL2::Error} exception.
+ *   
+ *   @param [Integer] flags submodule bits
+ *   @return [nil]
+ *
+ *   @raise [SDL2::Error] raised when initializing is failed.
+ */
 static VALUE IMG_s_init(VALUE self, VALUE f)
 {
     int flags = NUM2INT(f);
@@ -1995,6 +2056,22 @@ static VALUE IMG_s_init(VALUE self, VALUE f)
     return Qnil;
 }
 
+/*
+ * @overload load(file) 
+ *   Load file and create a new {SDL2::Surface}.
+ *
+ *   This method uses SDL_image. SDL_image supports following formats:
+ *   BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.
+ *   
+ *   @param [String] file the image file name to load a surface from
+ *   @return [SDL2::Surface] Created surface
+ *
+ *   @raise [SDL2::Error] raised when you fail to load (for example,
+ *     you have a wrong file name, or the file is broken)
+ *
+ *   @see SDL2::IMG.init
+ *   @see SDL2::Renderer#load_texture
+ */
 static VALUE Surface_s_load(VALUE self, VALUE fname)
 {
     SDL_Surface* surface = IMG_Load(StringValueCStr(fname));
@@ -2005,6 +2082,23 @@ static VALUE Surface_s_load(VALUE self, VALUE fname)
     return Surface_new(surface);
 }
 
+/*
+ * @overload load_texture(file)
+ *
+ *   Load file and create a new {SDL2::Texture}.
+ *
+ *   This method uses SDL_image. SDL_image supports following formats:
+ *   BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.
+ *
+ *   @param [String] file the image file name to load a texture from
+ *   @return [SDL2::Texture] Created texture
+ *
+ *   @raise [SDL2::Error] raised when you fail to load (for example,
+ *     you have a wrong file name, or the file is broken)
+ *
+ *   @see SDL2::IMG.init
+ *   @see SDL2::Surface.load
+ */
 static VALUE Renderer_load_texture(VALUE self, VALUE fname)
 {
     SDL_Texture* texture = IMG_LoadTexture(Get_SDL_Renderer(self), StringValueCStr(fname));
