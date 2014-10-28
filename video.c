@@ -1929,7 +1929,7 @@ void rubysdl2_init_video(void)
         rb_define_const(cPixelFormat, "FORMATS", formats);
 #define DEFINE_PIXELFORMAT_CONST(t)                                     \
         do {                                                            \
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_##t);  \
+            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_##t);        \
             rb_define_const(cPixelFormat, #t, format);                  \
             rb_ary_push(formats, format);                               \
         } while (0)
