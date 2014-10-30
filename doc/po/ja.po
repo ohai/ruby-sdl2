@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-25 22:51+0900\n"
+"POT-Creation-Date: 2014-10-29 03:23+0900\n"
 "PO-Revision-Date: 2014-10-16 18:10+0900\n"
 "Last-Translator: Ippei Obayashi <ohai@kmc.gr.jp>\n"
 "Language-Team: Japanese\n"
@@ -16,6 +16,274 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../../COPYING.txt:1
+msgid ""
+"                   GNU LESSER GENERAL PUBLIC LICENSE\n"
+"                       Version 3, 29 June 2007"
+msgstr ""
+
+#: ../../COPYING.txt:4
+msgid ""
+" Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>\n"
+" Everyone is permitted to copy and distribute verbatim copies\n"
+" of this license document, but changing it is not allowed."
+msgstr ""
+
+#: ../../COPYING.txt:9
+msgid ""
+"  This version of the GNU Lesser General Public License incorporates\n"
+"the terms and conditions of version 3 of the GNU General Public\n"
+"License, supplemented by the additional permissions listed below."
+msgstr ""
+
+#: ../../COPYING.txt:13
+msgid "  0. Additional Definitions."
+msgstr ""
+
+#: ../../COPYING.txt:15
+msgid ""
+"  As used herein, \"this License\" refers to version 3 of the GNU Lesser\n"
+"General Public License, and the \"GNU GPL\" refers to version 3 of the GNU\n"
+"General Public License."
+msgstr ""
+
+#: ../../COPYING.txt:19
+msgid ""
+"  \"The Library\" refers to a covered work governed by this License,\n"
+"other than an Application or a Combined Work as defined below."
+msgstr ""
+
+#: ../../COPYING.txt:22
+msgid ""
+"  An \"Application\" is any work that makes use of an interface provided\n"
+"by the Library, but which is not otherwise based on the Library.\n"
+"Defining a subclass of a class defined by the Library is deemed a mode\n"
+"of using an interface provided by the Library."
+msgstr ""
+
+#: ../../COPYING.txt:27
+msgid ""
+"  A \"Combined Work\" is a work produced by combining or linking an\n"
+"Application with the Library.  The particular version of the Library\n"
+"with which the Combined Work was made is also called the \"Linked\n"
+"Version\"."
+msgstr ""
+
+#: ../../COPYING.txt:32
+msgid ""
+"  The \"Minimal Corresponding Source\" for a Combined Work means the\n"
+"Corresponding Source for the Combined Work, excluding any source code\n"
+"for portions of the Combined Work that, considered in isolation, are\n"
+"based on the Application, and not on the Linked Version."
+msgstr ""
+
+#: ../../COPYING.txt:37
+msgid ""
+"  The \"Corresponding Application Code\" for a Combined Work means the\n"
+"object code and/or source code for the Application, including any data\n"
+"and utility programs needed for reproducing the Combined Work from the\n"
+"Application, but excluding the System Libraries of the Combined Work."
+msgstr ""
+
+#: ../../COPYING.txt:42
+msgid "  1. Exception to Section 3 of the GNU GPL."
+msgstr ""
+
+#: ../../COPYING.txt:44
+msgid ""
+"  You may convey a covered work under sections 3 and 4 of this License\n"
+"without being bound by section 3 of the GNU GPL."
+msgstr ""
+
+#: ../../COPYING.txt:47
+msgid "  2. Conveying Modified Versions."
+msgstr ""
+
+#: ../../COPYING.txt:49
+msgid ""
+"  If you modify a copy of the Library, and, in your modifications, a\n"
+"facility refers to a function or data to be supplied by an Application\n"
+"that uses the facility (other than as an argument passed when the\n"
+"facility is invoked), then you may convey a copy of the modified\n"
+"version:"
+msgstr ""
+
+#: ../../COPYING.txt:55
+msgid ""
+"   a) under this License, provided that you make a good faith effort to\n"
+"   ensure that, in the event an Application does not supply the\n"
+"   function or data, the facility still operates, and performs\n"
+"   whatever part of its purpose remains meaningful, or"
+msgstr ""
+
+#: ../../COPYING.txt:60
+msgid ""
+"   b) under the GNU GPL, with none of the additional permissions of\n"
+"   this License applicable to that copy."
+msgstr ""
+
+#: ../../COPYING.txt:63
+msgid "  3. Object Code Incorporating Material from Library Header Files."
+msgstr ""
+
+#: ../../COPYING.txt:65
+msgid ""
+"  The object code form of an Application may incorporate material from\n"
+"a header file that is part of the Library.  You may convey such object\n"
+"code under terms of your choice, provided that, if the incorporated\n"
+"material is not limited to numerical parameters, data structure\n"
+"layouts and accessors, or small macros, inline functions and templates\n"
+"(ten or fewer lines in length), you do both of the following:"
+msgstr ""
+
+#: ../../COPYING.txt:72
+msgid ""
+"   a) Give prominent notice with each copy of the object code that the\n"
+"   Library is used in it and that the Library and its use are\n"
+"   covered by this License."
+msgstr ""
+
+#: ../../COPYING.txt:76
+msgid ""
+"   b) Accompany the object code with a copy of the GNU GPL and this license\n"
+"   document."
+msgstr ""
+
+#: ../../COPYING.txt:79
+msgid "  4. Combined Works."
+msgstr ""
+
+#: ../../COPYING.txt:81
+msgid ""
+"  You may convey a Combined Work under terms of your choice that,\n"
+"taken together, effectively do not restrict modification of the\n"
+"portions of the Library contained in the Combined Work and reverse\n"
+"engineering for debugging such modifications, if you also do each of\n"
+"the following:"
+msgstr ""
+
+#: ../../COPYING.txt:87
+msgid ""
+"   a) Give prominent notice with each copy of the Combined Work that\n"
+"   the Library is used in it and that the Library and its use are\n"
+"   covered by this License."
+msgstr ""
+
+#: ../../COPYING.txt:91
+msgid ""
+"   b) Accompany the Combined Work with a copy of the GNU GPL and this license\n"
+"   document."
+msgstr ""
+
+#: ../../COPYING.txt:94
+msgid ""
+"   c) For a Combined Work that displays copyright notices during\n"
+"   execution, include the copyright notice for the Library among\n"
+"   these notices, as well as a reference directing the user to the\n"
+"   copies of the GNU GPL and this license document."
+msgstr ""
+
+#: ../../COPYING.txt:99
+msgid "   d) Do one of the following:"
+msgstr ""
+
+#: ../../COPYING.txt:101
+msgid ""
+"       0) Convey the Minimal Corresponding Source under the terms of this\n"
+"       License, and the Corresponding Application Code in a form\n"
+"       suitable for, and under terms that permit, the user to\n"
+"       recombine or relink the Application with a modified version of\n"
+"       the Linked Version to produce a modified Combined Work, in the\n"
+"       manner specified by section 6 of the GNU GPL for conveying\n"
+"       Corresponding Source."
+msgstr ""
+
+#: ../../COPYING.txt:109
+msgid ""
+"       1) Use a suitable shared library mechanism for linking with the\n"
+"       Library.  A suitable mechanism is one that (a) uses at run time\n"
+"       a copy of the Library already present on the user's computer\n"
+"       system, and (b) will operate properly with a modified version\n"
+"       of the Library that is interface-compatible with the Linked\n"
+"       Version."
+msgstr ""
+
+#: ../../COPYING.txt:116
+msgid ""
+"   e) Provide Installation Information, but only if you would otherwise\n"
+"   be required to provide such information under section 6 of the\n"
+"   GNU GPL, and only to the extent that such information is\n"
+"   necessary to install and execute a modified version of the\n"
+"   Combined Work produced by recombining or relinking the\n"
+"   Application with a modified version of the Linked Version. (If\n"
+"   you use option 4d0, the Installation Information must accompany\n"
+"   the Minimal Corresponding Source and Corresponding Application\n"
+"   Code. If you use option 4d1, you must provide the Installation\n"
+"   Information in the manner specified by section 6 of the GNU GPL\n"
+"   for conveying Corresponding Source.)"
+msgstr ""
+
+#: ../../COPYING.txt:128
+msgid "  5. Combined Libraries."
+msgstr ""
+
+#: ../../COPYING.txt:130
+msgid ""
+"  You may place library facilities that are a work based on the\n"
+"Library side by side in a single library together with other library\n"
+"facilities that are not Applications and are not covered by this\n"
+"License, and convey such a combined library under terms of your\n"
+"choice, if you do both of the following:"
+msgstr ""
+
+#: ../../COPYING.txt:136
+msgid ""
+"   a) Accompany the combined library with a copy of the same work based\n"
+"   on the Library, uncombined with any other library facilities,\n"
+"   conveyed under the terms of this License."
+msgstr ""
+
+#: ../../COPYING.txt:140
+msgid ""
+"   b) Give prominent notice with the combined library that part of it\n"
+"   is a work based on the Library, and explaining where to find the\n"
+"   accompanying uncombined form of the same work."
+msgstr ""
+
+#: ../../COPYING.txt:144
+msgid "  6. Revised Versions of the GNU Lesser General Public License."
+msgstr ""
+
+#: ../../COPYING.txt:146
+msgid ""
+"  The Free Software Foundation may publish revised and/or new versions\n"
+"of the GNU Lesser General Public License from time to time. Such new\n"
+"versions will be similar in spirit to the present version, but may\n"
+"differ in detail to address new problems or concerns."
+msgstr ""
+
+#: ../../COPYING.txt:151
+msgid ""
+"  Each version is given a distinguishing version number. If the\n"
+"Library as you received it specifies that a certain numbered version\n"
+"of the GNU Lesser General Public License \"or any later version\"\n"
+"applies to it, you have the option of following the terms and\n"
+"conditions either of that published version or of any later version\n"
+"published by the Free Software Foundation. If the Library as you\n"
+"received it does not specify a version number of the GNU Lesser\n"
+"General Public License, you may choose any version of the GNU Lesser\n"
+"General Public License ever published by the Free Software Foundation."
+msgstr ""
+
+#: ../../COPYING.txt:161
+msgid ""
+"  If the Library as you received it specifies that a proxy can decide\n"
+"whether future versions of the GNU Lesser General Public License shall\n"
+"apply, that proxy's public statement of acceptance of any version is\n"
+"permanent authorization for you to choose that version for the\n"
+"Library."
+msgstr ""
 
 #: ../../README.md:1
 msgid "# Ruby/SDL2"
@@ -26,26 +294,132 @@ msgid "The simple ruby extension library for SDL 2.x."
 msgstr ""
 
 #: ../../README.md:5
+msgid ""
+"# Install\n"
+"Before installing Ruby/SDL2, you need to install:"
+msgstr ""
+
+#: ../../README.md:8
+msgid ""
+"* [SDL 2.x](http://www.libsdl.org/download-2.0.php)\n"
+"* [SDL_image](https://www.libsdl.org/projects/SDL_image/)\n"
+"* [SDL_mixer](https://www.libsdl.org/projects/SDL_mixer/)\n"
+"* [SDL_ttf](https://www.libsdl.org/projects/SDL_ttf/)"
+msgstr ""
+
+#: ../../README.md:13
+msgid ""
+"After installing these libraries, you can install Ruby/SDL2\n"
+"from github"
+msgstr ""
+
+#: ../../README.md:16
+msgid ""
+"    git clone https://github.com/ohai/ruby-sdl2.git\n"
+"    cd ruby-sdl2\n"
+"    gem build rubysdl2.gem\n"
+"    gem install ruby-sdl2-x.y.z.gem"
+msgstr ""
+
+#: ../../README.md:21
+msgid ""
+"## Install on Windows\n"
+"Please write this."
+msgstr ""
+
+#: ../../README.md:24
 msgid "# License"
 msgstr ""
 
-#: ../../README.md:7
-msgid "LGPL v3 (see LGPL-3)."
+#: ../../README.md:26
+msgid "LGPL v3 (see {file:COPYING.txt})."
 msgstr ""
 
-#: ../../README.md:9
+#: ../../README.md:28
 msgid "# Author"
 msgstr ""
 
-#: ../../README.md:11
+#: ../../README.md:30
 msgid "Ippei Obayashi <ohai@kmc.gr.jp>"
+msgstr "大林一平 <ohai@kmc.gr.jp>"
+
+# SDL2::VERSION
+#: ../../lib/sdl2/version.rb:3
+msgid "Version string of Ruby/SDL2"
+msgstr "Ruby/SDL2 のバージョン文字列"
+
+# SDL2::VERSION_NUMBER
+#: ../../lib/sdl2/version.rb:5
+msgid "Version of Ruby/SDL2, [major, minor, patch level]"
+msgstr "Ruby/SDL2 のバージョン, [major, minor, patch level]"
+
+# SDL2
+#: ../../lib/sdl2/version.rb:149 ../../main.c:149
+msgid "Namespace module for Ruby/SDL2."
 msgstr ""
+
+# @overload
+#: ../../main.c:111 ../../video.c:2051
+msgid "tag|overload|init"
+msgstr ""
+
+# SDL2.init
+#: ../../main.c:112
+msgid ""
+"Initialize SDL.\n"
+"You must call this function before using any other Ruby/SDL2 methods."
+msgstr ""
+"SDLを初期化します．\n"
+"Ruby/SDL2の他のメソッドを呼ぶ前にこれを呼びだす必要があります．"
+
+# SDL2.init
+#: ../../main.c:115
+msgid ""
+"You can specify initialized subsystem by flags which is\n"
+"bitwise OR of the following constants:"
+msgstr ""
+"初期化するサブシステムを以下の定数のビットORでflagsに指定します．"
+
+# SDL2.init
+#: ../../main.c:118
+msgid ""
+"* SDL2::INIT_TIMER - timer subsystem\n"
+"* SDL2::INIT_AUDIO - audio subsystem\n"
+"* SDL2::INIT_VIDEO - video subsystem\n"
+"* SDL2::INIT_JOYSTICK - joystick subsystem\n"
+"* SDL2::INIT_HAPTIC - haptic (force feedback) subsystem\n"
+"    (interface is not implemented yet)\n"
+"* SDL2::INIT_GAMECONTROLLER - controller subsystem\n"
+"* SDL2::INIT_EVENTS - events subsystem\n"
+"* SDL2::INIT_EVERYTHING - all of the above flags\n"
+"* SDL2::INIT_NOPARACHUTE - this flag is ignored; for compatibility"
+msgstr ""
+"* SDL2::INIT_TIMER - タイマサブシステム\n"
+"* SDL2::INIT_AUDIO - オーディオサブシステム\n"
+"* SDL2::INIT_VIDEO - ビデオサブシステム\n"
+"* SDL2::INIT_JOYSTICK - ジョイステッック\n"
+"* SDL2::INIT_HAPTIC - haptic (force feedback) subsystem\n"
+"    (interface is not implemented yet)\n"
+"* SDL2::INIT_GAMECONTROLLER - コントローラサブシステム\n"
+"* SDL2::INIT_EVENTS - イベントサブシステム\n"
+"* SDL2::INIT_EVERYTHING - 以上のサブシステムすべて\n"
+"* SDL2::INIT_NOPARACHUTE - 1.x との互換性のためのフラグで，無視される"
+
+# @return [Integer]
+#: ../../main.c:155
+msgid "error code sent from SDL library"
+msgstr "SDL ライブラリからのエラーコード(普通は-1)"
+
+# SDL2::Error
+#: ../../main.c:156
+msgid "An exception class for all Ruby/SDL2 specific errors."
+msgstr "Ruby/SDL2 特有のエラーのための例外クラス"
 
 # SDL2::Window
 # SDL2::Window.create
 #: ../../video.c:308
 msgid "This class represents a window."
-msgstr ""
+msgstr "このクラスは画面上のウインドウを表します．"
 
 # SDL2::Window
 # SDL2::Window.create
@@ -62,144 +436,977 @@ msgid ""
 "All of methods/class methods are available only after initializing video\n"
 "subsystem by {SDL2.init}."
 msgstr ""
+"{SDL2.init}を呼び出してからでないとビデオサブシステムのメソッドを使う\n"
+"ことはできません．"
+
+# SDL2::Window
+#: ../../video.c:316
+msgid "# Flags"
+msgstr "# ウィンドウフラグ"
+
+# SDL2::Window
+#: ../../video.c:318
+msgid ""
+"OR'd bits of the following constants represents window states.\n"
+"You can see a window state using {#flags} and create a window with a specified"
+"\n"
+"state using flag parameter of {.create}."
+msgstr ""
+
+# SDL2::Window
+#: ../../video.c:322
+msgid ""
+"* {SDL2::Window::FULLSCREEN} - fullscreen window\n"
+"* {SDL2::Window::FULLSCREEN_DESKTOP} -\n"
+"  fullscreen window at the current desktop resolution\n"
+"* {SDL2::Window::OPENGL} - window usable with OpenGL context\n"
+"* {SDL2::Window::SHOWN} - window is visible\n"
+"* {SDL2::Window::HIDDEN} - window is not visible\n"
+"* {SDL2::Window::BORDERLESS} - no window decoration\n"
+"* {SDL2::Window::RESIZABLE} - window is resizable\n"
+"* {SDL2::Window::MINIMIZDED} - window is minimized\n"
+"* {SDL2::Window::MAXIMIZED} - window is maximized\n"
+"* {SDL2::Window::INPUT_GRABBED} - window has grabbed input focus\n"
+"* {SDL2::Window::INPUT_FOCUS} - window has input focus\n"
+"* {SDL2::Window::MOUSE_FOCUS} - window has mouse focus\n"
+"* {SDL2::Window::FOREIGN} - window is not created by SDL\n"
+"* {SDL2::Window::ALLOW_HIGHDPI} - window should be created in high-DPI mode if"
+" supported\n"
+"* {SDL2::Window::MOUSE_CAPTURE} - window has mouse captured"
+msgstr ""
+
+# @overload
+#: ../../video.c:355
+msgid "tag|overload|create"
+msgstr ""
+
+# @param [Integer] h
+#: ../../video.c:355
+msgid "the height of the window"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:355 ../../video.c:413 ../../video.c:2051
+msgid "tag|param|flags"
+msgstr ""
+
+# @param [Integer] x
+#: ../../video.c:355
+msgid "the x position of the left-top of the window"
+msgstr ""
+
+# @param [Integer] w
+#: ../../video.c:355
+msgid "the width of the window"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:355 ../../video.c:794 ../../video.c:1559
+msgid "tag|param|h"
+msgstr ""
+
+# @param [Integer] flags
+#: ../../video.c:355
+msgid "0, or one or more [Window flag masks](#label-Flags) OR'd together"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:355 ../../video.c:794 ../../video.c:1559
+msgid "tag|param|w"
+msgstr ""
+
+# @param [Integer] y
+#: ../../video.c:355
+msgid "the y position of the left-top of the window"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:355 ../../video.c:987 ../../video.c:1559 ../../video.c:1658
+msgid "tag|param|x"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:355 ../../video.c:987 ../../video.c:1559 ../../video.c:1658
+msgid "tag|param|y"
+msgstr ""
+
+# @return [SDL2::Window]
+#: ../../video.c:355
+msgid "created window"
+msgstr ""
+
+# SDL2::Window.create
+#: ../../video.c:356
+msgid "Create a window with the specified position (x,y), dimensions (w,h) and flags."
+msgstr ""
+
+# @overload
+#: ../../video.c:396
+msgid "tag|overload|destroy"
+msgstr ""
+
+# SDL2::Window#destroy
+#: ../../video.c:397
+msgid "Destroy window."
+msgstr ""
+
+# SDL2::Window#destroy
+#: ../../video.c:399
+msgid ""
+"You cannot call almost all methods after calling this method.\n"
+"The exception is {#destroy?}."
+msgstr ""
+
+# @raise [SDL2::Error]
+#: ../../video.c:413
+msgid "raises when an error occurs."
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:413
+msgid "tag|param|index"
+msgstr ""
+
+# @overload
+#: ../../video.c:413
+msgid "tag|overload|create_renderer"
+msgstr ""
+
+# @param [Integer] index
+#: ../../video.c:413
+msgid ""
+"the index of the rendering driver to initialize,\n"
+"or -1 to initialize the first one supporting the requested flags"
+msgstr ""
+
+# @param [Integer] flags
+#: ../../video.c:413
+msgid "0, or one or more [Renderer flag masks](SDL2) OR'd together;"
+msgstr ""
+
+# @return [SDL2::Renderer]
+#: ../../video.c:413
+msgid "the created renderer (rendering context)"
+msgstr ""
+
+# SDL2::Window#create_renderer
+#: ../../video.c:414
+msgid "Create a 2D rendering context for a window."
+msgstr ""
+
+# @return [nil]
+#: ../../video.c:434
+msgid "if no renderer is created yet"
+msgstr ""
+
+# @return [SDL2::Renderer]
+#: ../../video.c:434
+msgid "the associated renderer"
+msgstr ""
+
+# @overload
+#: ../../video.c:434
+msgid "tag|overload|renderer"
+msgstr ""
+
+# SDL2::Window#renderer
+#: ../../video.c:435
+msgid "Return the renderer associate with the window"
+msgstr ""
 
 # SDL2::Window#input_is_grabbed?
-#: ../../video.c:436
+#: ../../video.c:499
 msgid "Window_set_gamma_ramp"
 msgstr ""
 
-# SDL2::Rect#x
-#: ../../video.c:1247 ../../video.c:1298
-msgid "X coordiante of the left-top point of the rectangle"
-msgstr "長方形の左上の点のX座標"
+# SDL2::Renderer
+#: ../../video.c:729
+msgid "This class represents a 2D rendering context for a window."
+msgstr ""
+
+# SDL2::Renderer
+#: ../../video.c:731
+msgid ""
+"You can create a renderer using {SDL2::Window#create_renderer} and\n"
+"use it to draw figures on the window."
+msgstr ""
+
+# SDL2::Renderer
+#: ../../video.c:734
+msgid ""
+"# Flags\n"
+"You can specify the OR'd bits of the following constants\n"
+"{SDL2::Window#create_renderer when you create a new renderer}."
+msgstr ""
+
+# SDL2::Renderer
+#: ../../video.c:738
+msgid ""
+"* SDL2::Renderer::SOFTWARE - the renderer is a software fallback\n"
+"* SDL2::Renderer::ACCELERATED - the renderer uses hardware acceleration\n"
+"* SDL2::Renderer::PRESENTVSYNC - present is synchronized with the refresh rate"
+"\n"
+"* SDL2::Renderer::TARGETTEXTURE - the renderer supports rendering to texture"
+msgstr ""
+
+# SDL2::Renderer
+#: ../../video.c:743
+msgid "No flags(==0) gives priority to available ACCELERATED renderers"
+msgstr ""
+
+# @overload
+#: ../../video.c:754
+msgid "tag|overload|drivers_info"
+msgstr ""
+
+# @return [Array<SDL2::Renderer::Info>]
+#: ../../video.c:754
+msgid "information about rendering contexts"
+msgstr ""
+
+# SDL2::Renderer.drivers_info
+#: ../../video.c:755
+msgid "Return information of all available rendering contexts."
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:794
+msgid "tag|param|access"
+msgstr ""
+
+# @raise [SDL2::Error]
+#: ../../video.c:794 ../../video.c:816
+msgid "raised when the texuture cannot be created"
+msgstr ""
+
+# @param [SDL2::PixelFormat, Integer]
+#: ../../video.c:794
+msgid "tag|param|format"
+msgstr ""
 
 # SDL2::Rect#h
-#: ../../video.c:1247 ../../video.c:1298
+#: ../../video.c:794
+#, fuzzy
+msgid "format of the texture"
+msgstr "長方形の高さ"
+
+# @see
+#: ../../video.c:794
+msgid "tag|see|#create_texture_from"
+msgstr ""
+
+# @param [Integer] access
+#: ../../video.c:794
+msgid "texture access pattern"
+msgstr ""
+
+# @param [Integer] w
+#: ../../video.c:794
+msgid "the width ofthe texture in pixels"
+msgstr ""
+
+# @param [Integer] h
+#: ../../video.c:794
+msgid "the height ofthe texture in pixels"
+msgstr ""
+
+# @overload
+#: ../../video.c:794
+msgid "tag|overload|create_texture"
+msgstr ""
+
+# @return [SDL2::Texture]
+#: ../../video.c:794 ../../video.c:816
+msgid "the created texture"
+msgstr ""
+
+# SDL2::Renderer#create_texture
+#: ../../video.c:795
+msgid "Create a new texture for the rendering context."
+msgstr ""
+
+# SDL2::Renderer#create_texture
+#: ../../video.c:797
+msgid "You can use the following constants to specify access pattern"
+msgstr ""
+
+# SDL2::Renderer#create_texture
+#: ../../video.c:799
+msgid ""
+"* SDL2::Texture::ACCESS_STATIC - changes rarely, not lockable\n"
+"* SDL2::Texture::ACCESS_STREAMING - changes frequently, lockable\n"
+"* SDL2::Texture::ACCESS_TARGET - can be used as a render target"
+msgstr ""
+
+# @overload
+#: ../../video.c:816
+msgid "tag|overload|create_texture_from"
+msgstr ""
+
+# @see
+#: ../../video.c:816
+msgid "tag|see|#create_texture"
+msgstr ""
+
+# @param [SDL2::Surface]
+#: ../../video.c:816
+msgid "tag|param|surface"
+msgstr ""
+
+# @param [SDL2::Surface] surface
+#: ../../video.c:816
+msgid "the surface containing pixels for the texture"
+msgstr ""
+
+# SDL2::Renderer#create_texture_from
+#: ../../video.c:817
+msgid "Create a texture from an existing surface."
+msgstr ""
+
+# @param [SDL2::Texture]
+#: ../../video.c:850 ../../video.c:887
+msgid "tag|param|texture"
+msgstr ""
+
+# @overload
+#: ../../video.c:850
+msgid "tag|overload|copy"
+msgstr ""
+
+# @see
+#: ../../video.c:850
+msgid "tag|see|#copy_ex"
+msgstr ""
+
+# @param [SDL2::Texture] texture
+#: ../../video.c:850 ../../video.c:887
+msgid "the source texture"
+msgstr ""
+
+# @raise [SDL2::Error]
+#: ../../video.c:850 ../../video.c:887
+msgid "raised when copy is failed"
+msgstr ""
+
+# @param [SDL2::Rect, nil] srcrect
+#: ../../video.c:850 ../../video.c:887
+msgid "the source rectangle, or nil for the entire texture"
+msgstr ""
+
+# @param [SDL2::Rect, nil]
+#: ../../video.c:850 ../../video.c:887
+msgid "tag|param|dstrect"
+msgstr ""
+
+# @param [SDL2::Rect, nil] dstrect
+#: ../../video.c:850 ../../video.c:887
+msgid ""
+"the destination rectangle, or nil for the entire\n"
+"rendering target; the texture will be stretched to fill the given rectangle"
+msgstr ""
+
+# @param [SDL2::Rect, nil]
+#: ../../video.c:850 ../../video.c:887
+msgid "tag|param|srcrect"
+msgstr ""
+
+# SDL2::Renderer#copy
+#: ../../video.c:851
+msgid "Copy a portion of the texture to the current rendering target."
+msgstr ""
+
+# @param [Integer] flip
+#: ../../video.c:887
+msgid "bits OR'd of the flip consntants"
+msgstr ""
+
+# @param [Float]
+#: ../../video.c:887
+msgid "tag|param|angle"
+msgstr ""
+
+# @see
+#: ../../video.c:887
+msgid "tag|see|#copy"
+msgstr ""
+
+# @overload
+#: ../../video.c:887
+msgid "tag|overload|copy_ex"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:887
+msgid "tag|param|flip"
+msgstr ""
+
+# @param [SDL2::Point, nil] center
+#: ../../video.c:887
+msgid ""
+"the point around which dstrect will be rotated,\n"
+"(if nil, rotation will be done around the center of dstrect)"
+msgstr ""
+
+# @param [Float] angle
+#: ../../video.c:887
+msgid ""
+"an angle in degree indicating the rotation\n"
+"that will be applied to dstrect"
+msgstr ""
+
+# @param [SDL2::Point, nil]
+#: ../../video.c:887
+msgid "tag|param|center"
+msgstr ""
+
+# SDL2::Renderer#copy_ex
+#: ../../video.c:888
+msgid ""
+"Copy a portion of the texture to the current rendering target,\n"
+"rotating it by angle around the given center and also flipping\n"
+"it top-bottom and/or left-right."
+msgstr ""
+
+# SDL2::Renderer#copy_ex
+#: ../../video.c:892
+msgid "You can use the following constants to specify the horizontal/vertical flip:"
+msgstr ""
+
+# SDL2::Renderer#copy_ex
+#: ../../video.c:894
+msgid ""
+"* SDL2::Renderer::FLIP_HORIZONTAL - flip horizontally\n"
+"* SDL2::Renderer::FLIP_VERTICAL - flip vertically\n"
+"* SDL2::Renderer::FLIP_NONE - do not flip, equal to zero"
+msgstr ""
+
+# SDL2::Renderer#present
+#: ../../video.c:901
+msgid "Update the screen with rendering performed"
+msgstr ""
+
+# SDL2::Renderer#clear
+#: ../../video.c:911
+msgid "Crear the rendering target with the drawing color."
+msgstr ""
+
+# SDL2::Renderer#draw_color
+#: ../../video.c:921
+msgid "Get the color used for drawing operations"
+msgstr ""
+
+# @return [[Integer,Integer,Integer,Integer]]
+#: ../../video.c:927
+msgid ""
+"red, green, blue, and alpha components of the drawing color\n"
+"(all components are more than or equal to 0 and less than and equal to 255)"
+msgstr ""
+
+# @see
+#: ../../video.c:927
+msgid "tag|see|#draw_color="
+msgstr ""
+
+# @overload
+#: ../../video.c:950
+msgid "tag|overload|draw_color="
+msgstr ""
+
+# @see
+#: ../../video.c:950
+msgid "tag|see|#draw_color"
+msgstr ""
+
+# @param [[Integer, Integer, Integer, Integer]]
+# @param [[Integer, Integer, Integer]]
+#: ../../video.c:950
+msgid "tag|param|color"
+msgstr ""
+
+# @param [[Integer, Integer, Integer, Integer]] color
+#: ../../video.c:950
+msgid "red, green, blue, and alpha components used for drawing"
+msgstr ""
+
+# @param [[Integer, Integer, Integer]] color
+#: ../../video.c:950
+msgid "red, green, and blue components used for drawing"
+msgstr ""
+
+# SDL2::Renderer#draw_color=
+#: ../../video.c:951
+msgid "Set the color used for drawing operations"
+msgstr ""
+
+# SDL2::Renderer#draw_color=
+#: ../../video.c:953
+msgid ""
+"All color components (including alpha) must be more than or equal to 0\n"
+"and less than and equal to 255"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:971
+msgid "tag|param|y1"
+msgstr ""
+
+# @param [Integer]
+#: ../../video.c:971
+msgid "tag|param|x1"
+msgstr ""
+
+# SDL2::Point#x
+#: ../../video.c:971
+#, fuzzy
+msgid "the x coordinate of the start point"
+msgstr "点のX座標"
+
+# @overload
+#: ../../video.c:971
+msgid "tag|overload|draw_line"
+msgstr ""
+
+# SDL2::Point#x
+#: ../../video.c:971
+#, fuzzy
+msgid "the y coordinate of the start point"
+msgstr "点のX座標"
+
+# SDL2::Point#x
+#: ../../video.c:971
+#, fuzzy
+msgid "the x coordinate of the end point"
+msgstr "点のX座標"
+
+# @param [Integer]
+#: ../../video.c:971
+msgid "tag|param|y2"
+msgstr ""
+
+# SDL2::Point#x
+#: ../../video.c:971
+#, fuzzy
+msgid "the y coordinate of the end point"
+msgstr "点のX座標"
+
+# @param [Integer]
+#: ../../video.c:971
+msgid "tag|param|x2"
+msgstr ""
+
+# SDL2::Renderer#draw_line
+#: ../../video.c:972
+msgid ""
+"Draw a line from (x1, y1) to (x2, y2) using drawing color given by\n"
+"{#draw_color=}."
+msgstr ""
+
+# @overload
+#: ../../video.c:987
+msgid "tag|overload|draw_point"
+msgstr ""
+
+# SDL2::Point#x
+#: ../../video.c:987 ../../video.c:1658
+#, fuzzy
+msgid "the x coordinate of the point"
+msgstr "点のX座標"
+
+# SDL2::Point#x
+#: ../../video.c:987 ../../video.c:1658
+#, fuzzy
+msgid "the y coordinate of the point"
+msgstr "点のX座標"
+
+# SDL2::Renderer#draw_point
+#: ../../video.c:988
+msgid "Draw a point at (x, y) using drawing color given by {#draw_color=}."
+msgstr ""
+
+# @overload
+#: ../../video.c:1001
+msgid "tag|overload|draw_rect"
+msgstr ""
+
+# @param [SDL2::Rect] rect
+#: ../../video.c:1001 ../../video.c:1015
+msgid "the drawing rectangle"
+msgstr ""
+
+# @param [SDL2::Rect]
+#: ../../video.c:1001 ../../video.c:1015
+msgid "tag|param|rect"
+msgstr ""
+
+# SDL2::Renderer#draw_rect
+#: ../../video.c:1002
+msgid "Draw a rectangle using drawing color given by {#draw_color=}."
+msgstr ""
+
+# @overload
+#: ../../video.c:1015
+msgid "tag|overload|fill_rect"
+msgstr ""
+
+# SDL2::Renderer#fill_rect
+#: ../../video.c:1016
+msgid "Draw a filled rectangle using drawing color given by {#draw_color=}."
+msgstr ""
+
+# SDL2::Renderer#info
+#: ../../video.c:1022
+msgid "Get information about _self_ rendering context ."
+msgstr ""
+
+# @return [SDL2::Renderer::Info]
+#: ../../video.c:1026
+msgid "rendering information"
+msgstr ""
+
+# @param [SDL2::Texture, nil]
+#: ../../video.c:1111
+msgid "tag|param|target"
+msgstr ""
+
+# @see
+#: ../../video.c:1111
+msgid "tag|see|#render_target"
+msgstr ""
+
+# @param [SDL2::Texture, nil] target
+#: ../../video.c:1111
+msgid ""
+"the targeted texture, or nil\n"
+"for the default render target(i.e. screen)"
+msgstr ""
+
+# @overload
+#: ../../video.c:1111
+msgid "tag|overload|render_target="
+msgstr ""
+
+# SDL2::Renderer#render_target=
+#: ../../video.c:1112
+msgid "Set a texture as the current render target."
+msgstr ""
+
+# SDL2::Renderer#render_target=
+#: ../../video.c:1114
+msgid ""
+"Some renderers have ability to render to a texture instead of a screen.\n"
+"You can judge whether your renderer has this ability using\n"
+"{#support_render_target?}."
+msgstr ""
+
+# SDL2::Renderer#render_target=
+#: ../../video.c:1118
+msgid ""
+"The target texture musbe be {#create_texture created} with the\n"
+"SDL2::Texture::ACCESS_TARGET flag."
+msgstr ""
+
+# SDL2::Renderer#render_target
+#: ../../video.c:1120
+msgid "Get the current render target."
+msgstr ""
+
+# @see
+#: ../../video.c:1128
+msgid "tag|see|#support_render_target?"
+msgstr ""
+
+# @see
+#: ../../video.c:1128
+msgid "tag|see|#render_target="
+msgstr ""
+
+# @return [nil]
+#: ../../video.c:1128
+msgid "for the default render target (i.e. screen)"
+msgstr ""
+
+# @return [SDL2::Texture]
+#: ../../video.c:1128
+msgid "the current rendering target"
+msgstr ""
+
+# SDL2::Rect#h
+#: ../../video.c:1508 ../../video.c:1559
 msgid "Height of the rectangle"
 msgstr "長方形の高さ"
 
-# SDL2::Rect#y
-#: ../../video.c:1247 ../../video.c:1298
-msgid "Y coordiante of the left-top point of the rectangle"
-msgstr "長方形の左上の点のY座標"
+# SDL2::Rect
+#: ../../video.c:1508
+msgid "This class represents a rectangle in SDL2."
+msgstr "このクラスは SDL2 上の長方形を表します"
+
+# SDL2::Rect#x
+#: ../../video.c:1508 ../../video.c:1559
+msgid "X coordiante of the left-top point of the rectangle"
+msgstr "長方形の左上の点のX座標"
 
 # SDL2::Rect.[]
-#: ../../video.c:1247
+#: ../../video.c:1508
 msgid "Alias of new. See {#initialize}."
 msgstr "new の別名。詳しくは {#initialize}参照。"
 
+# SDL2::Rect#y
+#: ../../video.c:1508 ../../video.c:1559
+msgid "Y coordiante of the left-top point of the rectangle"
+msgstr "長方形の左上の点のY座標"
+
 # SDL2::Rect#w
-#: ../../video.c:1247 ../../video.c:1298
+#: ../../video.c:1508 ../../video.c:1559
 msgid "Width of the rectangle"
 msgstr "長方形の幅"
 
 # SDL2::Rect
-#: ../../video.c:1247
-msgid "This class represents a rectangle in SDL2."
-msgstr "このクラスは SDL2 上の長方形を表します"
-
-# SDL2::Rect
-#: ../../video.c:1249
+#: ../../video.c:1510
 msgid ""
 "Any rectanle is represented by four attributes x, y, w, and h,\n"
 "and these four attributes must be integer."
 msgstr "長方形は x, y (左上の x,y 座標)と w(幅), h(高さ) で表されます。これらの値はすべて整数でなければなりません。"
 
 # SDL2::Rect#initialize
-#: ../../video.c:1282 ../../video.c:1299
+#: ../../video.c:1543 ../../video.c:1560
 msgid "Create a new SDL2::Rect object"
 msgstr "SDL2::Rect オブジェクトを生成します"
 
 # @overload
-#: ../../video.c:1298
+#: ../../video.c:1559 ../../video.c:1658
 msgid "tag|overload|initialize"
 msgstr ""
 
 # @overload
-#: ../../video.c:1298
+#: ../../video.c:1559
 msgid "tag|overload|initialze"
 msgstr ""
 
-# @param [Integer]
-#: ../../video.c:1298
-msgid "tag|param|x"
-msgstr ""
-
-# @param [Integer]
-#: ../../video.c:1298
-msgid "tag|param|y"
-msgstr ""
-
-# @param [Integer]
-#: ../../video.c:1298
-msgid "tag|param|w"
-msgstr ""
-
-# @param [Integer]
-#: ../../video.c:1298
-msgid "tag|param|h"
-msgstr ""
-
 # SDL2::Rect#initialize
-#: ../../video.c:1299
+#: ../../video.c:1560
 msgid ""
 "Create a new SDL2::Rect object whose x, w, w, and h are all\n"
 "zero."
 msgstr "SDL2::Rect オブジェクトを生成します。x,y,w,h はすべて 0 で初期化されます。"
 
 # SDL2::Rect#inspect
-#: ../../video.c:1316
+#: ../../video.c:1577
 msgid "Inspection string for debug"
 msgstr "デバッグ用文字列を返します"
 
-# @param [SDL2::Rect]
-#: ../../video.c:1340 ../../video.c:1357
-msgid "tag|param|other"
-msgstr ""
-
 # @param [SDL2::Rect] other
-#: ../../video.c:1340 ../../video.c:1357
+#: ../../video.c:1601 ../../video.c:1618
 msgid "rectangle"
 msgstr "長方形"
 
+# @param [SDL2::Rect]
+#: ../../video.c:1601 ../../video.c:1618
+msgid "tag|param|other"
+msgstr ""
+
 # @overload
-#: ../../video.c:1340
+#: ../../video.c:1601
 msgid "tag|overload|intersection"
 msgstr ""
 
 # SDL2::Rect#intersection
-#: ../../video.c:1341
+#: ../../video.c:1602
 msgid "Returns the intersection rect of self and other."
 msgstr "self と other の共通部分の長方形を返します．"
 
 # SDL2::Rect#intersection
-#: ../../video.c:1343
+#: ../../video.c:1604
 msgid "If there is no intersection, returns nil."
 msgstr "共通部分が存在しない場合は nil を返します．"
 
 # @overload
-#: ../../video.c:1357
+#: ../../video.c:1618
 msgid "tag|overload|union"
 msgstr ""
 
 # SDL2::Rect#union
-#: ../../video.c:1358
+#: ../../video.c:1619
 msgid "Returns the minimal rect containing self and other"
 msgstr "self と other の両方を含む最小の長方形を返します．"
 
 # SDL2::Point#x
-#: ../../video.c:1365
+#: ../../video.c:1626
 msgid "X coordiante of the point."
 msgstr "点のX座標"
 
 # SDL2::Point#y
-#: ../../video.c:1365
+#: ../../video.c:1626
 msgid "Y coordiante of the point."
 msgstr "点のY座標"
 
 # SDL2::Point
-#: ../../video.c:1365
+#: ../../video.c:1626
 msgid ""
 "This class represents a point in SDL library.\n"
 "Some method requires this method."
 msgstr "このクラスは点を表します．ruby/sdl2のメソッドにはこのクラスのインスタンスを要求するものがあります．"
+
+# SDL2::Rect#initialize
+#: ../../video.c:1646
+#, fuzzy
+msgid "Create a new point object."
+msgstr "SDL2::Rect オブジェクトを生成します"
+
+# SDL2::Point#initialize
+#: ../../video.c:1659
+msgid "x and y of the created point object are initialized by 0"
+msgstr ""
+
+# SDL2::Point#inspect
+#: ../../video.c:1669
+msgid "Return inspection string."
+msgstr ""
+
+# @param [Integer] flags
+#: ../../video.c:2051
+msgid "submodule bits"
+msgstr ""
+
+# @raise [SDL2::Error]
+#: ../../video.c:2051
+msgid "raised when initializing is failed."
+msgstr ""
+
+# SDL2::IMG#init
+# SDL2::IMG.init
+#: ../../video.c:2052
+msgid "Initialize SDL_image."
+msgstr ""
+
+# SDL2::IMG#init
+#: ../../video.c:2054
+msgid ""
+"  You can specify the supporting image formats by bitwise OR'd of the\n"
+"  following constants."
+msgstr ""
+
+# SDL2::IMG.init
+#: ../../video.c:2054
+msgid ""
+"You can specify the supporting image formats by bitwise OR'd of the\n"
+"following constants."
+msgstr ""
+
+# SDL2::IMG.init
+#: ../../video.c:2057
+msgid ""
+"* {SDL2::IMG::INIT_JPG}\n"
+"* {SDL2::IMG::INIT_PNG}\n"
+"* {SDL2::IMG::INIT_TIF}"
+msgstr ""
+
+# SDL2::IMG#init
+#: ../../video.c:2057
+msgid ""
+"  * {SDL2::IMG::INIT_JPG}\n"
+"  * {SDL2::IMG::INIT_PNG}\n"
+"  * {SDL2::IMG::INIT_TIF}"
+msgstr ""
+
+# SDL2::IMG.init
+#: ../../video.c:2061
+msgid ""
+"You need to initialize SDL_image to check whether specified format\n"
+"is supported by your environment. If your environment does not\n"
+"support required support format, you have a {SDL2::Error} exception."
+msgstr ""
+
+# SDL2::IMG#init
+#: ../../video.c:2061
+msgid ""
+"  You need to initialize SDL_image to check whether specified format\n"
+"  is supported by your environment. If your environment does not\n"
+"  support required support format, you have a {SDL2::Error} exception."
+msgstr ""
+
+# SDL2::IMG#init
+#: ../../video.c:2065
+msgid ""
+"  @param [Integer] flags submodule bits\n"
+"  @return [nil]"
+msgstr ""
+
+# SDL2::IMG#init
+#: ../../video.c:2068
+msgid "  @raise [SDL2::Error] raised when initializing is failed."
+msgstr ""
+
+# @param [String] file
+#: ../../video.c:2075
+msgid "the image file name to load a surface from"
+msgstr ""
+
+# @see
+#: ../../video.c:2075
+msgid "tag|see|SDL2::Renderer#load_texture"
+msgstr ""
+
+# @return [SDL2::Surface]
+#: ../../video.c:2075
+msgid "Created surface"
+msgstr ""
+
+# @see
+#: ../../video.c:2075 ../../video.c:2102
+msgid "tag|see|SDL2::IMG.init"
+msgstr ""
+
+# @param [String]
+#: ../../video.c:2075 ../../video.c:2102
+msgid "tag|param|file"
+msgstr ""
+
+# @overload
+#: ../../video.c:2075
+msgid "tag|overload|load"
+msgstr ""
+
+# @raise [SDL2::Error]
+#: ../../video.c:2075 ../../video.c:2102
+msgid ""
+"raised when you fail to load (for example,\n"
+"you have a wrong file name, or the file is broken)"
+msgstr ""
+
+# SDL2::Surface.load
+#: ../../video.c:2076
+msgid "Load file and create a new {SDL2::Surface}."
+msgstr ""
+
+# SDL2::Renderer#load_texture
+# SDL2::Surface.load
+#: ../../video.c:2078 ../../video.c:2105
+msgid ""
+"This method uses SDL_image. SDL_image supports following formats:\n"
+"BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV."
+msgstr ""
+
+# @overload
+#: ../../video.c:2102
+msgid "tag|overload|load_texture"
+msgstr ""
+
+# @param [String] file
+#: ../../video.c:2102
+msgid "the image file name to load a texture from"
+msgstr ""
+
+# @return [SDL2::Texture]
+#: ../../video.c:2102
+msgid "Created texture"
+msgstr ""
+
+# @see
+#: ../../video.c:2102
+msgid "tag|see|SDL2::Surface.load"
+msgstr ""
+
+# SDL2::Renderer#load_texture
+#: ../../video.c:2103
+msgid "Load file and create a new {SDL2::Texture}."
+msgstr ""
