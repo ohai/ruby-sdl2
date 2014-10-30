@@ -315,7 +315,7 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  * All of methods/class methods are available only after initializing video
  * subsystem by {SDL2.init}.
  *
- * # Flags
+ * # Window Flags
  *
  * OR'd bits of the following constants represents window states.
  * You can see a window state using {#flags} and create a window with a specified

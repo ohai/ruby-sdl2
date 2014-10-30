@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-29 03:23+0900\n"
+"POT-Creation-Date: 2014-10-30 20:26+0900\n"
 "PO-Revision-Date: 2014-10-16 18:10+0900\n"
 "Last-Translator: Ippei Obayashi <ohai@kmc.gr.jp>\n"
 "Language-Team: Japanese\n"
@@ -365,6 +365,16 @@ msgstr ""
 
 # SDL2.init
 #: ../../main.c:112
+#, fuzzy
+msgid ""
+"Initialize SDL.\n"
+"  You must call this function before using any other Ruby/SDL2 methods."
+msgstr ""
+"SDLを初期化します．\n"
+"Ruby/SDL2の他のメソッドを呼ぶ前にこれを呼びだす必要があります．"
+
+# SDL2.init
+#: ../../main.c:112
 msgid ""
 "Initialize SDL.\n"
 "You must call this function before using any other Ruby/SDL2 methods."
@@ -377,8 +387,30 @@ msgstr ""
 msgid ""
 "You can specify initialized subsystem by flags which is\n"
 "bitwise OR of the following constants:"
+msgstr "初期化するサブシステムを以下の定数のビットORでflagsに指定します．"
+
+# SDL2.init
+#: ../../main.c:115
+#, fuzzy
+msgid ""
+"  You can specify initialized subsystem by flags which is\n"
+"  bitwise OR of the following constants:"
+msgstr "初期化するサブシステムを以下の定数のビットORでflagsに指定します．"
+
+# SDL2#init
+#: ../../main.c:118
+msgid ""
+"  * SDL2::INIT_TIMER - timer subsystem\n"
+"  * SDL2::INIT_AUDIO - audio subsystem\n"
+"  * SDL2::INIT_VIDEO - video subsystem\n"
+"  * SDL2::INIT_JOYSTICK - joystick subsystem\n"
+"  * SDL2::INIT_HAPTIC - haptic (force feedback) subsystem\n"
+"      (interface is not implemented yet)\n"
+"  * SDL2::INIT_GAMECONTROLLER - controller subsystem\n"
+"  * SDL2::INIT_EVENTS - events subsystem\n"
+"  * SDL2::INIT_EVERYTHING - all of the above flags\n"
+"  * SDL2::INIT_NOPARACHUTE - this flag is ignored; for compatibility"
 msgstr ""
-"初期化するサブシステムを以下の定数のビットORでflagsに指定します．"
 
 # SDL2.init
 #: ../../main.c:118
@@ -441,7 +473,7 @@ msgstr ""
 
 # SDL2::Window
 #: ../../video.c:316
-msgid "# Flags"
+msgid "# Window Flags"
 msgstr "# ウィンドウフラグ"
 
 # SDL2::Window
@@ -1410,3 +1442,4 @@ msgstr ""
 #: ../../video.c:2103
 msgid "Load file and create a new {SDL2::Texture}."
 msgstr ""
+
