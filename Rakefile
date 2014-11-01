@@ -1,5 +1,5 @@
-
-SOURCE_FILES = "-m markdown --main README.md --files COPYING.txt main.c *.c lib/**/*.rb"
+POT_SOURCES = "main.c *.c lib/**/*.rb"
+SOURCE_FILES = "-m markdown --main README.md --files COPYING.txt #{POT_SOURCES}"
 
 def yardoc(locale = nil)
   if locale
@@ -10,7 +10,7 @@ def yardoc(locale = nil)
 end
 
 task "pot" do
-  sh "yard i18n -o doc/po/rubysdl2.pot #{SOURCE_FILES}"
+  sh "yard i18n -o doc/po/rubysdl2.pot #{POT_SOURCES}"
 end
 
 task "init-po",["locale"] do |_, args|
