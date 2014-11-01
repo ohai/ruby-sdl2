@@ -90,23 +90,28 @@ static void quit(VALUE unused)
 }
 
 /*
- * @overload init(flags) 
- *   Initialize SDL.
- *   You must call this function before using any other Ruby/SDL2 methods.
+ * Initialize SDL.
+ * You must call this function before using any other Ruby/SDL2 methods.
+ * 
+ * You can specify initialized subsystem by flags which is
+ * bitwise OR of the following constants:
+ * 
+ * * SDL2::INIT_TIMER - timer subsystem
+ * * SDL2::INIT_AUDIO - audio subsystem
+ * * SDL2::INIT_VIDEO - video subsystem
+ * * SDL2::INIT_JOYSTICK - joystick subsystem
+ * * SDL2::INIT_HAPTIC - haptic (force feedback) subsystem
+ *     (interface is not implemented yet)
+ * * SDL2::INIT_GAMECONTROLLER - controller subsystem
+ * * SDL2::INIT_EVENTS - events subsystem
+ * * SDL2::INIT_EVERYTHING - all of the above flags
+ * * SDL2::INIT_NOPARACHUTE - this flag is ignored; for compatibility
  *
- *   You can specify initialized subsystem by flags which is
- *   bitwise OR of the following constants:
- *
- *   * SDL2::INIT_TIMER - timer subsystem
- *   * SDL2::INIT_AUDIO - audio subsystem
- *   * SDL2::INIT_VIDEO - video subsystem
- *   * SDL2::INIT_JOYSTICK - joystick subsystem
- *   * SDL2::INIT_HAPTIC - haptic (force feedback) subsystem
- *       (interface is not implemented yet)
- *   * SDL2::INIT_GAMECONTROLLER - controller subsystem
- *   * SDL2::INIT_EVENTS - events subsystem
- *   * SDL2::INIT_EVERYTHING - all of the above flags
- *   * SDL2::INIT_NOPARACHUTE - this flag is ignored; for compatibility
+ * @overload init(flags)
+ * 
+ *   @param [Integer] flags initializing subsystems
+ *   
+ * @return [nil]
  */
 static VALUE SDL2_s_init(VALUE self, VALUE flags)
 {
