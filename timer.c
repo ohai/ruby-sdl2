@@ -38,7 +38,7 @@ static VALUE SDL_s_get_ticks(VALUE self)
  */
 static VALUE SDL_s_get_performance_counter(VALUE self)
 {
-    return UINT2NUM(SDL_GetPerformanceCounter());
+    return ULL2NUM(SDL_GetPerformanceCounter());
 }
 
 /*
@@ -49,7 +49,7 @@ static VALUE SDL_s_get_performance_counter(VALUE self)
  */
 static VALUE SDL_s_get_performance_frequency(VALUE self)
 {
-    return UINT2NUM(SDL_GetPerformanceFrequency());
+    return ULL2NUM(SDL_GetPerformanceFrequency());
 }
 
 void rubysdl2_init_timer(void)
