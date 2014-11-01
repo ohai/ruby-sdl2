@@ -52,6 +52,36 @@ static VALUE cEvControllerDeviceRemapped;
 
 static VALUE event_type_to_class[SDL_LASTEVENT];
 
+/*
+ * Document-class: SDL2::Event
+ *
+ * This class represents SDL's events.
+ *
+ * All events are represented by the instance of subclasses of this class.
+ *
+ * # Introduction of event subsystem
+ * Event handling allows your application to receive input from the user. Event handling is
+ * initialized (along with video) with a call to:
+ *
+ *     SDL2.init(SDL2::INIT_VIDEO|SDL2::INIT_EVENTS)
+ *
+ * Internally, SDL stores all the events waiting to be handled in an event queue.
+ * Using methods like {SDL2::Event.poll}, you can observe and handle input events.
+ *
+ * The queue is conceptually a sequence of objects of SDL2::Event.
+ * You can read an event from the queue with {SDL2::Event.poll} and
+ * you can process the information from the object.
+ * 
+ * Note: peep and wait will be implemented later.
+ *
+ * @attribute [rw] type
+ *   SDL's internal event type enum
+ *   @return [Integer] 
+ *
+ * @attribute [rw] timestamp
+ *   timestamp of the event
+ *   @return [Integer] 
+ */
 static VALUE Event_new(SDL_Event* ev)
 {
     SDL_Event* e = ALLOC(SDL_Event);
@@ -72,6 +102,12 @@ static VALUE Event_s_allocate(VALUE klass)
     return Data_Wrap_Struct(klass, 0, free, e);
 }
 
+/*
+ * Poll for currently pending events.
+ *
+ * @return [SDL2::Event] next event from the queue
+ * @return [nil] the queue is empty
+ */
 static VALUE Event_s_poll(VALUE self)
 {
     SDL_Event ev;
@@ -82,6 +118,14 @@ static VALUE Event_s_poll(VALUE self)
     }
 }
 
+/*
+ * Get whether the event is enabled.
+ *
+ * This method is available for subclasses of SDL2::Event corresponding to
+ * SDL's event types.
+ *
+ * @see .enabled= 
+ */
 static VALUE Event_s_enabled_p(VALUE self)
 {
     VALUE event_type = rb_iv_get(self, "event_type");
@@ -92,6 +136,17 @@ static VALUE Event_s_enabled_p(VALUE self)
     return INT2BOOL(SDL_EventState(NUM2INT(event_type), SDL_QUERY) == SDL_ENABLE);
 }
 
+/*
+ * @overload enabled=(bool)
+ *   Set wheter the event is enable
+ *   
+ *   This method is only available for subclasses of SDL2::Event corresponding to
+ *   SDL's event types.
+ *  
+ *   @param [Boolean] bool true for enabling the event.
+ *   @return [bool]
+ *   @see SDL2::Event.enabled?
+ */
 static VALUE Event_s_set_enable(VALUE self, VALUE val)
 {
     VALUE event_type = rb_iv_get(self, "event_type");
@@ -145,6 +200,9 @@ static void set_string(char* field, VALUE str, int maxlength)
 
 EVENT_READER(Event, type, common.type, INT2NUM);
 EVENT_ACCESSOR_UINT(Event, timestamp, common.timestamp);
+/*
+ * @return [String]
+ */
 static VALUE Event_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -152,16 +210,76 @@ static VALUE Event_inspect(VALUE self)
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp);
 }
 
+/*
+ * Return the object of {SDL2::Window} corresponding to the window_id attribute.
+ *
+ * Some subclasses of SDL2::Event have window_id attribute to point the
+ * window which creates the event. The type of the window_id attribute
+ * is integer, and you need to convert it with {SDL2::Window.find_by_id}
+ * to get the {SDL2::Window} object. This method returns the {SDL2::Window}
+ * object.
+ *
+ * @return [SDL2::Window] the window which creates the event.
+ */
 static VALUE Event_window(VALUE self)
 {
     VALUE window_id = rb_funcall(self, rb_intern("window_id"), 0, 0);
     return find_window_by_id(NUM2UINT(window_id));
 }
 
+/*
+ * Document-class: SDL2::Event::Window
+ *
+ * This class represents window event. This type of event occurs when
+ * window state is changed.
+ * 
+ * @attribute [rw] window_id
+ *   the associate window
+ *   @return [Integer]
+ *
+ * @attribute [rw] event
+ *   event type, one of the following:
+ *
+ *   * SDL2::Event::Window::NONE - (never used)
+ *   * SDL2::Event::Window::SHOWN - window has been shown
+ *   * SDL2::Event::Window::HIDDEN - window has been hidden
+ *   * SDL2::Event::Window::EXPOSED - window has been exposed and should be redrawn
+ *   * SDL2::Event::Window::MOVED - window has been moved to data1, data2
+ *   * SDL2::Event::Window::RESIZED - window has been resized to data1xdata2;
+ *       this is event is always preceded by SIZE_CHANGED
+ *   * SDL2::Event::Window::SIZE_CHANGED -
+ *       window size has changed, either as a result of an API call or through
+ *       the system or user changing the window size;
+ *       this event is followed by
+ *       RESIZED if the size was changed by an external event,
+ *       i.e. the user or the window manager
+ *   * SDL2::Event::Window::MINIMIZED - window has been minimized
+ *   * SDL2::Event::Window::MAXIMIZED - window has been maximized
+ *   * SDL2::Event::Window::RESTORED - window has been restored to normal size and position
+ *   * SDL2::Event::Window::ENTER - window has gained mouse focus
+ *   * SDL2::Event::Window::LEAVE - window has lost mouse focus
+ *   * SDL2::Event::Window::FOCUS_GAINED - window has gained keyboard focus
+ *   * SDL2::Event::Window::FOCUS_LOST -window has lost keyboard focus
+ *   * SDL2::Event::Window::CLOSE - 
+ *       the window manager requests that the window be closed
+ *   
+ *   @return [Integer]
+ *
+ * @attribute data1
+ *   event dependent data
+ *   @return [Integer]
+ *
+ * @attribute data2
+ *   event dependent data
+ *   @return [Integer]
+ *
+ */
 EVENT_ACCESSOR_UINT(Window, window_id, window.windowID);
 EVENT_ACCESSOR_UINT(Window, event, window.event);
 EVENT_ACCESSOR_INT(Window, data1, window.data1);
 EVENT_ACCESSOR_INT(Window, data2, window.data2);
+
+/* @return [String] inspection string */
 static VALUE EvWindow_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -171,12 +289,50 @@ static VALUE EvWindow_inspect(VALUE self)
                       ev->window.data1, ev->window.data2);
 }
 
+/*
+ * Document-class: SDL2::Event::Keyboard
+ *
+ * This class represents keyboard event. You don't handle the instance 
+ * of this class directly, but you handle the instances of 
+ * two subclasses of this subclasses:
+ * {SDL2::Event::KeyDown} and {SDL2::Event::KeyUp}.
+ *
+ * @attribute [rw] window_id
+ *   the associate window
+ *   @return [Integer]
+ *
+ * @attribute state
+ *   the state of the key 
+ *   @return [Integer]
+ *   @todo change to boolean
+ *
+ * @attribute repeat
+ *   key repeat
+ *   @return [Integer]
+ *   @todo change to boolean
+ *   
+ * @attribute scancode
+ *   physical key code
+ *   @return [Integer]
+ *   @see SDL2::Key::Scan
+ *
+ * @attribute sym
+ *   virtual key code
+ *   @return [Integer]
+ *   @see SDL2::Key
+ *
+ * @attribute mod
+ *   current key modifier
+ *   @see SDL2::Key::Mod
+ *   
+ */
 EVENT_ACCESSOR_UINT(Keyboard, window_id, key.windowID);
 EVENT_ACCESSOR_UINT(Keyboard, state, key.state);
 EVENT_ACCESSOR_UINT8(Keyboard, repeat, key.repeat);
 EVENT_ACCESSOR_UINT8(Keyboard, scancode, key.keysym.scancode);
 EVENT_ACCESSOR_UINT(Keyboard, sym, key.keysym.sym);
 EVENT_ACCESSOR_UINT(Keyboard, mod, key.keysym.mod);
+/* @return [String] inspection string */
 static VALUE EvKeyboard_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
