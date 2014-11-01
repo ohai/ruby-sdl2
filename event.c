@@ -327,9 +327,9 @@ static VALUE EvWindow_inspect(VALUE self)
  *   
  */
 EVENT_ACCESSOR_UINT(Keyboard, window_id, key.windowID);
-EVENT_ACCESSOR_UINT(Keyboard, state, key.state);
-EVENT_ACCESSOR_UINT8(Keyboard, repeat, key.repeat);
-EVENT_ACCESSOR_UINT8(Keyboard, scancode, key.keysym.scancode);
+EVENT_ACCESSOR_BOOL(Keyboard, pressed, key.state);
+EVENT_ACCESSOR_BOOL(Keyboard, repeat, key.repeat);
+EVENT_ACCESSOR_UINT(Keyboard, scancode, key.keysym.scancode);
 EVENT_ACCESSOR_UINT(Keyboard, sym, key.keysym.sym);
 EVENT_ACCESSOR_UINT(Keyboard, mod, key.keysym.mod);
 /* @return [String] inspection string */
@@ -662,11 +662,13 @@ void rubysdl2_init_event(void)
     
                     
     DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, window_id);
-    DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, state);
+    DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, pressed);
     DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, repeat);
     DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, scancode);
     DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, sym);
     DEFINE_EVENT_ACCESSOR(Keyboard, cEvKeyboard, mod);
+    rb_define_alias(cEvKeyboard, "pressed?", "pressed");
+    rb_define_alias(cEvKeyboard, "repeat?", "repeat");
     rb_define_method(cEvKeyboard, "inspect", EvKeyboard_inspect, 0);
     
     DEFINE_EVENT_ACCESSOR(TextEditing, cEvTextEditing, window_id);
