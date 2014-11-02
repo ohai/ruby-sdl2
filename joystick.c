@@ -169,7 +169,20 @@ void rubysdl2_init_joystick(void)
     rb_define_method(cJoystick, "ball", Joystick_ball, 1);
     rb_define_method(cJoystick, "button", Joystick_button, 1);
     rb_define_method(cJoystick, "hat", Joystick_hat, 1);
+#define DEFINE_JOY_HAT_CONST(state) \
+    rb_define_const(cJoystick, "HAT_" #state, INT2NUM(SDL_HAT_##state))
+    DEFINE_JOY_HAT_CONST(CENTERED);
+    DEFINE_JOY_HAT_CONST(UP);
+    DEFINE_JOY_HAT_CONST(RIGHT);
+    DEFINE_JOY_HAT_CONST(DOWN);
+    DEFINE_JOY_HAT_CONST(LEFT);
+    DEFINE_JOY_HAT_CONST(RIGHTUP);
+    DEFINE_JOY_HAT_CONST(RIGHTDOWN);
+    DEFINE_JOY_HAT_CONST(LEFTUP);
+    DEFINE_JOY_HAT_CONST(LEFTDOWN);
     
     rb_define_attr(cDeviceInfo, "GUID", 1, 0);
     rb_define_attr(cDeviceInfo, "name", 1, 0);
+
+    
 }
