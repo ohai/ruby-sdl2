@@ -220,6 +220,7 @@ static VALUE Event_inspect(VALUE self)
  * object.
  *
  * @return [SDL2::Window] the window which creates the event.
+ * @raise [NoMethodError] raised if the window_id attribute is not present.
  */
 static VALUE Event_window(VALUE self)
 {
@@ -234,7 +235,7 @@ static VALUE Event_window(VALUE self)
  * window state is changed.
  * 
  * @attribute [rw] window_id
- *   the associate window
+ *   the associate window id
  *   @return [Integer]
  *
  * @attribute [rw] event
@@ -292,24 +293,24 @@ static VALUE EvWindow_inspect(VALUE self)
 /*
  * Document-class: SDL2::Event::Keyboard
  *
- * This class represents keyboard event. You don't handle the instance 
+ * This class represents keyboard event.
+ *
+ * You don't handle the instance 
  * of this class directly, but you handle the instances of 
  * two subclasses of this subclasses:
  * {SDL2::Event::KeyDown} and {SDL2::Event::KeyUp}.
  *
  * @attribute [rw] window_id
- *   the associate window
+ *   the associate window id
  *   @return [Integer]
  *
- * @attribute state
- *   the state of the key 
+ * @attribute pressed
+ *   key is pressed
  *   @return [Integer]
- *   @todo change to boolean
  *
  * @attribute repeat
  *   key repeat
  *   @return [Integer]
- *   @todo change to boolean
  *   
  * @attribute scancode
  *   physical key code
@@ -323,6 +324,7 @@ static VALUE EvWindow_inspect(VALUE self)
  *
  * @attribute mod
  *   current key modifier
+ *   @return [Integer]
  *   @see SDL2::Key::Mod
  *   
  */
@@ -345,6 +347,39 @@ static VALUE EvKeyboard_inspect(VALUE self)
 }
 
 
+/*
+ * Document-class: SDL2::Event::KeyDown
+ *
+ * This class represents a key down event.
+ */
+
+/*
+ * Document-class: SDL2::Event::KeyUp
+ *
+ * This class represents a key up event.
+ */
+
+/*
+ * Document-class: SDL2::Event::TextEditing
+ *
+ * This class represents text editing event.
+ *
+ * @attribute window_id
+ *   the associate window id
+ *   @return [Integer]
+ *
+ * @attribute text
+ *   the editing text
+ *   @return [String]
+ *
+ * @attribute start
+ *   the start cursor of selected editing text
+ *   @return [Integer]
+ *
+ * @attribute length
+ *   the length of selected editing text
+ *   @return [Integer]
+ */
 EVENT_ACCESSOR_UINT(TextEditing, window_id, edit.windowID);
 EVENT_ACCESSOR_INT(TextEditing, start, edit.start);
 EVENT_ACCESSOR_INT(TextEditing, length, edit.length);
@@ -357,6 +392,7 @@ static VALUE EvTextEditing_set_text(VALUE self, VALUE str)
     return str;
 }
 
+/* @return [String] inspection string */
 static VALUE EvTextEditing_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -367,6 +403,19 @@ static VALUE EvTextEditing_inspect(VALUE self)
 }
 
 
+/*
+ * Document-class: SDL2::Event::TextInput
+ *
+ * This class represents text input events.
+ *
+ * @attribute window_id
+ *   the associate window id
+ *   @return [Integer]
+ *
+ * @attribute text
+ *   the input text
+ *   @return [String]
+ */
 EVENT_ACCESSOR_UINT(TextInput, window_id, text.windowID);
 EVENT_READER(TextInput, text, text.text, utf8str_new_cstr);
 static VALUE EvTextInput_set_text(VALUE self, VALUE str)
@@ -377,6 +426,7 @@ static VALUE EvTextInput_set_text(VALUE self, VALUE str)
     return str;
 }
 
+/* @return [String] inspection string */
 static VALUE EvTextInput_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -385,7 +435,46 @@ static VALUE EvTextInput_inspect(VALUE self)
                       ev->text.windowID, ev->text.text);
 }
 
-
+/*
+ * Document-class: SDL2::Event::MouseButton
+ *
+ * This class represents mouse button events.
+ * 
+ * You don't handle the instance 
+ * of this class directly, but you handle the instances of 
+ * two subclasses of this subclasses:
+ * {SDL2::Event::MouseButtonDown} and {SDL2::Event::MouseButtonUp}.
+ *
+ * @attribute window_id
+ *   the window id with mouse focus
+ *   @return [Integer]
+ *
+ * @attribute which
+ *   the mouse index
+ *   @return [Integer]
+ *
+ * @attribute button
+ *   the mouse button index
+ *   @return [Integer]
+ *
+ * @attribute pressed
+ *   button is pressed or not
+ *   @return [Boolean]
+ *
+ * @attribute clicks
+ *   1 for single click, 2 for double click
+ *   
+ *   This attribute is available after SDL 2.0.2
+ *   @return [Integer]
+ *
+ * @attribute x
+ *   the x coordinate of the mouse pointer, relative to window
+ *   @return [Integer]
+ *
+ * @attribute y
+ *   the y coordinate of the mouse pointer, relative to window
+ *   @return [Integer]
+ */
 EVENT_ACCESSOR_UINT(MouseButton, window_id, button.windowID);
 EVENT_ACCESSOR_UINT(MouseButton, which, button.which);
 EVENT_ACCESSOR_UINT8(MouseButton, button, button.button);
@@ -395,6 +484,7 @@ EVENT_ACCESSOR_UINT8(MouseButton, clicks, button.clicks);
 #endif
 EVENT_ACCESSOR_INT(MouseButton, x, button.x);
 EVENT_ACCESSOR_INT(MouseButton, y, button.y);
+/* @return [String] inspection string */
 static VALUE EvMouseButton_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -413,7 +503,49 @@ static VALUE EvMouseButton_inspect(VALUE self)
                       ev->button.x, ev->button.y);
 }
 
+/*
+ * Document-class: SDL2::Event::MouseButtonDown
+ * This class represents mouse button press events.
+ */
+/*
+ * Document-class: SDL2::Event::MouseButtonUp
+ * This class represents mouse button release events.
+ */
 
+/*
+ * Document-class: SDL2::Event::MouseMotion
+ *
+ * This class represents mouse motion events.
+ *
+ * @attribute window_id
+ *   the window id with mouse focus
+ *   @return [Integer]
+ *
+ * @attribute which
+ *   the mouse index 
+ *   @return [Integer]
+ *
+ * @attribute state
+ *   the current mouse state
+ *   @return [Integer]
+ *   @todo use SDL2::Mouse::State
+ *   
+ * @attribute x
+ *   the x coordinate of the mouse pointer, relative to window
+ *   @return [Integer]
+ *
+ * @attribute y
+ *   the y coordinate of the mouse pointer, relative to window
+ *   @return [Integer]
+ *
+ * @attribute xrel
+ *   the relative motion in the x direction
+ *   @return [Integer]
+ *
+ * @attribute yrel
+ *   the relative motion in the y direction
+ *   @return [Integer]
+ */
 EVENT_ACCESSOR_UINT(MouseMotion, window_id, motion.windowID);
 EVENT_ACCESSOR_UINT(MouseMotion, which, motion.which);
 EVENT_ACCESSOR_UINT(MouseMotion, state, motion.state);
@@ -421,6 +553,7 @@ EVENT_ACCESSOR_INT(MouseMotion, x, motion.x);
 EVENT_ACCESSOR_INT(MouseMotion, y, motion.y);
 EVENT_ACCESSOR_INT(MouseMotion, xrel, motion.xrel);
 EVENT_ACCESSOR_INT(MouseMotion, yrel, motion.yrel);
+/* @return [String] inspection string */
 static VALUE EvMouseMotion_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -432,11 +565,34 @@ static VALUE EvMouseMotion_inspect(VALUE self)
                       ev->motion.x, ev->motion.y, ev->motion.xrel, ev->motion.yrel);
 }
 
-
+/*
+ * Document-class: SDL2::Event::MouseWheel
+ *
+ * This class represents mouse wheel events.
+ *
+ * @attribute window_id
+ *   the window id with mouse focus
+ *   @return [Integer]
+ *
+ * @attribute which
+ *   the mouse index 
+ *   @return [Integer]
+ *
+ * @attribute x
+ *   the amount of scrolled horizontally, positive to the right and negative
+ *   to the left
+ *   @return [Integer]
+ *
+ * @attribute y
+ *   the amount of scrolled vertically, positve away from the user and negative
+ *   toward the user
+ *   @return [Integer]
+ */
 EVENT_ACCESSOR_UINT(MouseWheel, window_id, wheel.windowID);
 EVENT_ACCESSOR_UINT(MouseWheel, which, wheel.which);
 EVENT_ACCESSOR_INT(MouseWheel, x, wheel.x);
 EVENT_ACCESSOR_INT(MouseWheel, y, wheel.y);
+/* @return [String] inspection string */
 static VALUE EvMouseWheel_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
