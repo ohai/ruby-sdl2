@@ -169,6 +169,7 @@ msgid ""
 "If you want to use graphical application using Ruby/SDL, first you need to\n"
 "create a window."
 msgstr ""
+""
 
 # SDL2::Window
 # SDL2::Window.create

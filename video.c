@@ -309,7 +309,7 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  * 
  * This class represents a window.
  *
- * If you want to use graphical application using Ruby/SDL, first you need to
+ * If you want to create graphical application using Ruby/SDL, first you need to
  * create a window.
  * 
  * All of methods/class methods are available only after initializing video
