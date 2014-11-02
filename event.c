@@ -231,6 +231,12 @@ static VALUE Event_window(VALUE self)
 }
 
 /*
+ * Document-class: SDL2::Event::Quit
+ *
+ * This class represents the quit requested event.
+ */
+
+/*
  * Document-class: SDL2::Event::Window
  *
  * This class represents window event. This type of event occurs when
