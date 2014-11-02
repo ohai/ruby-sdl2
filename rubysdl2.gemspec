@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.author = "Ohbayashi Ippei"
   spec.email = "ohai@kmc.gr.jp"
   spec.homepage = "https://github.com/ohai/ruby-sdl2"
-  spec.files = `git ls-files`.split(/\n/)
+  spec.files = `git ls-files`.split(/\n/) + ["key.c"]
   spec.test_files = []
   spec.extensions = ["extconf.rb"]
   spec.has_rdoc = false

@@ -35,3 +35,14 @@ task "doc", ["locale"] do |_, args|
   end
 end
 
+file "key.c" => "key.c.m4" do
+  sh "m4 key.c.m4 > key.c"
+end
+
+task "build" => ["key.c"] do
+  sh "make"
+end
+
+task "gem" => ["build"] do
+  sh "gem build rubysdl2.gemspec"
+end

@@ -1,3 +1,4 @@
+/* -*- C -*- */
 #include "rubysdl2_internal.h"
 #include <SDL_events.h>
 #include <SDL_keyboard.h>
@@ -89,6 +90,12 @@ static VALUE TextInput_s_set_rect(VALUE self, VALUE rect)
     return rect;
 }
 
+/*
+define(`DEFINE_SCANCODE',`ifelse(`$#',`2',`$2
+    ',)'`rb_define_const(mScan, "$1", INT2NUM(SDL_SCANCODE_$1))')
+define(`DEFINE_SCANCODE_NUMBER',`/$8* Number key $1 (not on keypad) *$8/
+    rb_define_const(mScan, "K$1", INT2NUM(SDL_SCANCODE_$1))')')
+*/
 void rubysdl2_init_key(void)
 {
     mKey = rb_define_module_under(mSDL2, "Key");
@@ -110,12 +117,7 @@ void rubysdl2_init_key(void)
     rb_define_module_function(mTextInput, "stop", TextInput_s_stop, 0);
     rb_define_module_function(mTextInput, "rect=", TextInput_s_set_rect, 1);
     
-#define DEFINE_SCANCODE(name) \
-    rb_define_const(mScan, #name, INT2NUM(SDL_SCANCODE_##name))
-#define DEFINE_SCANCODE_NUMBER(name)                                    \
-    rb_define_const(mScan, "K" #name, INT2NUM(SDL_SCANCODE_##name))
-
-    DEFINE_SCANCODE(UNKNOWN);
+    DEFINE_SCANCODE(UNKNOWN,/* Unused scancode */);
     DEFINE_SCANCODE(A);
     DEFINE_SCANCODE(B);
     DEFINE_SCANCODE(C);
