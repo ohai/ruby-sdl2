@@ -606,10 +606,33 @@ static VALUE EvMouseWheel_inspect(VALUE self)
                       ev->wheel.windowID, ev->wheel.which, ev->wheel.x, ev->wheel.y);
 }
 
-
+/*
+ * Document-class: SDL2::Event::JoyButton
+ *
+ * This class represents joystick button events.
+ *
+ * You don't handle the instance 
+ * of this class directly, but you handle the instances of 
+ * two subclasses of this subclasses:
+ * {SDL2::Event::JoyButtonDown} and {SDL2::Event::JoyButtonUp}.
+ *
+ * @attribute which
+ *   the joystick index
+ *   @return [Integer]
+ *
+ * @attribute button
+ *   the joystick button index
+ *   @return [Integer]
+ *
+ * @attribute pressed
+ *   button is pressed or not
+ *   @return [Integer]
+ * 
+ */
 EVENT_ACCESSOR_INT(JoyButton, which, jbutton.which);
 EVENT_ACCESSOR_UINT8(JoyButton, button, jbutton.button);
 EVENT_ACCESSOR_BOOL(JoyButton, pressed, jbutton.state)
+/* @return [Stirng] inspection string */
 static VALUE EvJoyButton_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -619,11 +642,39 @@ static VALUE EvJoyButton_inspect(VALUE self)
                       ev->jbutton.which, ev->jbutton.button,
                       INT2BOOLCSTR(ev->jbutton.state));
 }
+/*
+ * Document-class: SDL2::Event::JoyButtonDown
+ *
+ * This class represents the joystick button press events.
+ */
 
+/*
+ * Document-class: SDL2::Event::JoyButtonUp
+ *
+ * This class represents the joystick button release events.
+ */
 
+/*
+ * Document-class: SDL2::Event::JoyAxisMotion
+ *
+ * This class represents the joystick axis motion events.
+ *
+ * @attribute which
+ *   the joystick index
+ *   @return [Integer]
+ *
+ * @attribute axis
+ *   the axis index
+ *   @return [Integer]
+ *
+ * @attribute value
+ *   the axis value (range: -32768 to -32767, 0 for newtral)
+ *   @return [Integer]
+ */
 EVENT_ACCESSOR_INT(JoyAxisMotion, which, jaxis.which);
 EVENT_ACCESSOR_UINT8(JoyAxisMotion, axis, jaxis.axis);
 EVENT_ACCESSOR_INT(JoyAxisMotion, value, jaxis.value);
+/* @return [Stirng] inspection string */
 static VALUE EvJoyAxisMotion_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -633,11 +684,32 @@ static VALUE EvJoyAxisMotion_inspect(VALUE self)
                       ev->jaxis.which, ev->jaxis.axis, ev->jaxis.value);
 }
 
-
+/*
+ * Document-class: SDL2::Event::JoyBallMotion
+ *
+ * This class represents the joystick trackball motion events.
+ *
+ * @attribute which
+ *   the joystick index
+ *   @return [Integer]
+ *
+ * @attribute ball
+ *   the joystick trackball index
+ *   @return [Integer]
+ *
+ * @attribute xrel
+ *   the relative motion in the x direction
+ *   @return [Integer]
+ *
+ * @attribute yrel
+ *   the relative motion in the y direction
+ *   @return [Integer]
+ */
 EVENT_ACCESSOR_INT(JoyBallMotion, which, jball.which);
 EVENT_ACCESSOR_UINT8(JoyBallMotion, ball, jball.ball);
 EVENT_ACCESSOR_INT(JoyBallMotion, xrel, jball.xrel);
 EVENT_ACCESSOR_INT(JoyBallMotion, yrel, jball.yrel);
+/* @return [String] inspection string */
 static VALUE EvJoyBallMotion_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -647,10 +719,27 @@ static VALUE EvJoyBallMotion_inspect(VALUE self)
                       ev->jball.which, ev->jball.ball, ev->jball.xrel, ev->jball.yrel);
 }
 
-
+/*
+ * Document-class: SDL2::Event::JoyHatMotion
+ *
+ * This class represents the joystick hat position change events.
+ *
+ * @attribute which
+ *   the joystick index
+ *   @return [Integer]
+ *
+ * @attribute hat
+ *   the joystick hat index
+ *   @return [Integer]
+ *
+ * @attribute value
+ *   the hat position value, same value as {SDL2::Joystick#hat}.
+ *   @return [Integer]
+ */
 EVENT_ACCESSOR_INT(JoyHatMotion, which, jhat.which);
 EVENT_ACCESSOR_UINT8(JoyHatMotion, hat, jhat.hat);
 EVENT_ACCESSOR_UINT8(JoyHatMotion, value, jhat.value);
+/* @return [String] inspection string */
 static VALUE EvJoyHatMotion_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -659,6 +748,13 @@ static VALUE EvJoyHatMotion_inspect(VALUE self)
                       ev->jhat.which, ev->jhat.hat, ev->jhat.value);
 }
 
+/*
+ * Document-class: SDL2::Event::JoyDevice
+ *
+ * This class represents joystick device events
+ * ({SDL2::Event::JoyDeviceAdded joystick connected events} and
+ *  {SDL2::Event::JoyDeviceRemoved joystick disconnected events}).
+ */
 EVENT_ACCESSOR_INT(JoyDevice, which, jdevice.which);
 static VALUE EvJoyDevice_inspect(VALUE self)
 {
@@ -667,6 +763,18 @@ static VALUE EvJoyDevice_inspect(VALUE self)
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
                       ev->jdevice.which);
 }
+
+/*
+ * Document-class: SDL2::Event::JoyDeviceAdded
+ *
+ * This class represents joystick device connected events.
+ */
+/*
+ * Document-class: SDL2::Event::JoyDeviceRemoved
+ *
+ * This class represents joystick device disconnected events.
+ */
+
 
 EVENT_ACCESSOR_INT(ControllerAxis, which, caxis.which);
 EVENT_ACCESSOR_UINT8(ControllerAxis, axis, caxis.axis);
