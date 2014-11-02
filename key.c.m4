@@ -92,20 +92,23 @@ static VALUE TextInput_s_set_rect(VALUE self, VALUE rect)
 
 /*
 define(`DEFINE_SCANCODE',`ifelse(`$#',`2',`$2
-    ',`/$8* scancode for $1 key *$8/
+    ',`/$8* scancode for "$1" key *$8/
     ')rb_define_const(mScan, "$1", INT2NUM(SDL_SCANCODE_$1))')
     
-define(`DEFINE_SCANCODE_NUMBER',`/$8* scancode for number key $1 (not on keypad) *$8/
+define(`DEFINE_SCANCODE_NUMBER',`/$8* scancode for number key "$1" (not on keypad) *$8/
     rb_define_const(mScan, "K$1", INT2NUM(SDL_SCANCODE_$1))')
-    
+
+define(`DEFINE_SCANCODE_ALPH',`/$8* scancode for alphabet key "$1" *$8/
+    rb_define_const(mScan, "$1", INT2NUM(SDL_SCANCODE_$1))')
+
 define(`DEFINE_KEYCODE', `ifelse(`$#',`2',`$2
-    ',`/$8* keycode for $1 key *$8/
+    ',`/$8* keycode for "$1" key *$8/
     ')rb_define_const(mKey, "$1", INT2NUM(SDLK_$1))')
     
-define(`DEFINE_KEYCODE_NUMBER',`/$8* keycode for number key $1 (not on keypad) *$8/
+define(`DEFINE_KEYCODE_NUMBER',`/$8* keycode for number key "$1" (not on keypad) *$8/
     rb_define_const(mKey, "K$1", INT2NUM(SDLK_$1))')
     
-define(`DEFINE_KEYCODE_ALPH',`/$8* keycode for alphabet "$1" *$8/
+define(`DEFINE_KEYCODE_ALPH',`/$8* keycode for alphabet key "$1" *$8/
     rb_define_const(mKey, "translit($1,`a-z',`A-Z')", INT2NUM(SDLK_$1))')
 
 define(`DEFINE_KEYMOD',`rb_define_const(mMod, "$1", INT2NUM(KMOD_$1))')
@@ -132,32 +135,32 @@ void rubysdl2_init_key(void)
     rb_define_module_function(mTextInput, "rect=", TextInput_s_set_rect, 1);
     
     DEFINE_SCANCODE(UNKNOWN,/* Unused scancode */);
-    DEFINE_SCANCODE(A);
-    DEFINE_SCANCODE(B);
-    DEFINE_SCANCODE(C);
-    DEFINE_SCANCODE(D);
-    DEFINE_SCANCODE(E);
-    DEFINE_SCANCODE(F);
-    DEFINE_SCANCODE(G);
-    DEFINE_SCANCODE(H);
-    DEFINE_SCANCODE(I);
-    DEFINE_SCANCODE(J);
-    DEFINE_SCANCODE(K);
-    DEFINE_SCANCODE(L);
-    DEFINE_SCANCODE(M);
-    DEFINE_SCANCODE(N);
-    DEFINE_SCANCODE(O);
-    DEFINE_SCANCODE(P);
-    DEFINE_SCANCODE(Q);
-    DEFINE_SCANCODE(R);
-    DEFINE_SCANCODE(S);
-    DEFINE_SCANCODE(T);
-    DEFINE_SCANCODE(U);
-    DEFINE_SCANCODE(V);
-    DEFINE_SCANCODE(W);
-    DEFINE_SCANCODE(X);
-    DEFINE_SCANCODE(Y);
-    DEFINE_SCANCODE(Z);
+    DEFINE_SCANCODE_ALPH(A);
+    DEFINE_SCANCODE_ALPH(B);
+    DEFINE_SCANCODE_ALPH(C);
+    DEFINE_SCANCODE_ALPH(D);
+    DEFINE_SCANCODE_ALPH(E);
+    DEFINE_SCANCODE_ALPH(F);
+    DEFINE_SCANCODE_ALPH(G);
+    DEFINE_SCANCODE_ALPH(H);
+    DEFINE_SCANCODE_ALPH(I);
+    DEFINE_SCANCODE_ALPH(J);
+    DEFINE_SCANCODE_ALPH(K);
+    DEFINE_SCANCODE_ALPH(L);
+    DEFINE_SCANCODE_ALPH(M);
+    DEFINE_SCANCODE_ALPH(N);
+    DEFINE_SCANCODE_ALPH(O);
+    DEFINE_SCANCODE_ALPH(P);
+    DEFINE_SCANCODE_ALPH(Q);
+    DEFINE_SCANCODE_ALPH(R);
+    DEFINE_SCANCODE_ALPH(S);
+    DEFINE_SCANCODE_ALPH(T);
+    DEFINE_SCANCODE_ALPH(U);
+    DEFINE_SCANCODE_ALPH(V);
+    DEFINE_SCANCODE_ALPH(W);
+    DEFINE_SCANCODE_ALPH(X);
+    DEFINE_SCANCODE_ALPH(Y);
+    DEFINE_SCANCODE_ALPH(Z);
     
     DEFINE_SCANCODE_NUMBER(1);
     DEFINE_SCANCODE_NUMBER(2);
