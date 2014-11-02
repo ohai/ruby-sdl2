@@ -234,6 +234,11 @@ static VALUE Event_window(VALUE self)
  * Document-class: SDL2::Event::Quit
  *
  * This class represents the quit requested event.
+ *
+ * This event occurs when a user try to close window, command-Q on OS X,
+ * or any other quit request by a user. Normally if your application
+ * receive this event, the application should exit. But the application
+ * can query something to the users like "save", or ignore it.
  */
 
 /*
