@@ -32,6 +32,10 @@ DEFINE_WRAPPER(SDL_Joystick, Joystick, joystick, cJoystick, "SDL2::Joystick");
  *
  * In order to use joystick subsystem, {SDL2.init} must have been called
  * with the SDL2::INIT_JOYSTICK flag.
+ *
+ * @!method destroy?
+ *   Return true if the device is alread closed.
+ *   @see #destroy
  */
 
 /*
@@ -87,6 +91,15 @@ static VALUE Joystick_s_open(VALUE self, VALUE device_index)
     return Joystick_new(joystick);
 }
 
+/*
+ * @overload game_controller?(index)
+ *   Return true if the joystick of given index supports the game controller
+ *   interface.
+ *
+ *   @param [Integer] index the joystick device index
+ *   @see SDL2::GameController
+ * 
+ */
 static VALUE Joystick_s_game_controller_p(VALUE self, VALUE index)
 {
     return INT2BOOL(SDL_IsGameController(NUM2INT(index)));
@@ -131,6 +144,7 @@ static VALUE Joystick_index(VALUE self)
  * Close a joystick device.
  * 
  * @return [nil]
+ * @see #destroy?
  */
 static VALUE Joystick_destroy(VALUE self)
 {
@@ -154,6 +168,7 @@ static VALUE Joystick_name(VALUE self)
 /*
  * Get the number of general axis controls on a joystick.
  * @return [Integer]
+ * @see #axis
  */
 static VALUE Joystick_num_axes(VALUE self)
 {
@@ -163,6 +178,7 @@ static VALUE Joystick_num_axes(VALUE self)
 /*
  * Get the number of trackball on a joystick
  * @return [Integer]
+ * @see #ball
  */
 static VALUE Joystick_num_balls(VALUE self)
 {
@@ -172,6 +188,7 @@ static VALUE Joystick_num_balls(VALUE self)
 /*
  * Get the number of button on a joystick
  * @return [Integer]
+ * @see #button
  */
 static VALUE Joystick_num_buttons(VALUE self)
 {
@@ -181,6 +198,7 @@ static VALUE Joystick_num_buttons(VALUE self)
 /*
  * Get the number of POV hats on a joystick
  * @return [Integer]
+ * @see #hat
  */
 static VALUE Joystick_num_hats(VALUE self)
 {
@@ -193,6 +211,7 @@ static VALUE Joystick_num_hats(VALUE self)
  *   
  *   @param [Integer] which an index of an axis, started at index 0
  *   @return [Integer] state value, ranging from -32768 to 32767.
+ *   @see #num_axes
  */
 static VALUE Joystick_axis(VALUE self, VALUE which)
 {
@@ -205,6 +224,7 @@ static VALUE Joystick_axis(VALUE self, VALUE which)
  *   
  *   @param [Integer] which an index of a trackball, started at index 0
  *   @return [[Integer,Integer]] dx and dy
+ *   @see #num_balls
  */
 static VALUE Joystick_ball(VALUE self, VALUE which)
 {
@@ -219,6 +239,7 @@ static VALUE Joystick_ball(VALUE self, VALUE which)
  *
  *   @param [Integer] which an index of a button, started at index 0
  *   @return [Boolean] true if the button is pressed
+ *   @see #num_buttons
  */
 static VALUE Joystick_button(VALUE self, VALUE which)
 {
@@ -231,6 +252,7 @@ static VALUE Joystick_button(VALUE self, VALUE which)
  *
  *   @param [Integer] which an index of a hat, started at index 0
  *   @return [Integer] hat state
+ *   @see #num_hats
  */
 static VALUE Joystick_hat(VALUE self, VALUE which)
 {
@@ -241,7 +263,8 @@ static VALUE Joystick_hat(VALUE self, VALUE which)
  * Document-class: SDL2::Joystick::DeviceInfo
  *
  * This class represents joystick device information, its name and GUID.
- * 
+ *
+ * You can get the information with {SDL2::Joystick.devices}.
  */
 void rubysdl2_init_joystick(void)
 {
