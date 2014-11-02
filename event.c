@@ -142,10 +142,14 @@ static VALUE Event_s_enabled_p(VALUE self)
  *   
  *   This method is only available for subclasses of SDL2::Event corresponding to
  *   SDL's event types.
- *  
+ *
+ *   @example disable mouse wheel events
+ *     SDL2::Event::MouseWheel.enable = false
+ *   
  *   @param [Boolean] bool true for enabling the event.
  *   @return [bool]
  *   @see SDL2::Event.enabled?
+ *
  */
 static VALUE Event_s_set_enable(VALUE self, VALUE val)
 {
