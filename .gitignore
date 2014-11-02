@@ -2,6 +2,7 @@
 *~
 Makefile
 *.so
+key.c
 TAGS
 local/
 mkmf.log
