@@ -10,21 +10,63 @@ static VALUE mScan;
 static VALUE mMod;
 static VALUE mTextInput;
 
+/*
+ * Document-module: SDL2::Key
+ *
+ * This module has "virtual" keycode constants and some
+ * keyboard input handling functions.
+ *
+ */
+
+/*
+ * @overload name_of(code)
+ *   @param [Integer] code keycode
+ *
+ * Get a human-readable name for a key
+ * 
+ * @return [String] the name of given keycode
+ * @see .keycode_from_name
+ * @see SDL2::Key::Scan.name_of
+ */
 static VALUE Key_s_name_of(VALUE self, VALUE code)
 {
     return utf8str_new_cstr(SDL_GetKeyName(NUM2INT(code)));
 }
 
+/*
+ * @overload keycode_from_name(name)
+ *   @param [String] name name of a key
+ *
+ * Get a key code from given name
+ * @return [Integer] keycode
+ * @see .name_of
+ * @see SDL2::Key::Scan.from_name
+ */
 static VALUE Key_s_keycode_from_name(VALUE self, VALUE name)
 {
     return INT2NUM(SDL_GetKeyFromName(StringValueCStr(name)));
 }
 
+/*
+ * @overload keycode_from_scancode(scancode)
+ *   @param [Integer] scancode scancode
+ *
+ * Convert a scancode to the corresponding keycode
+ * 
+ * @return [Integer]
+ * @see SDL2::Key::Scan.from_keycode
+ */
 static VALUE Key_s_keycode_from_scancode(VALUE self, VALUE scancode)
 {
     return INT2NUM(SDL_GetKeyFromScancode(NUM2INT(scancode)));
 }
 
+/*
+ * @overload pressed?(code)
+ *   @param [Integer] code scancode
+ *
+ * Get whether the key of the given scancode is pressed or not.
+ */
 static VALUE Key_s_pressed_p(VALUE self, VALUE code)
 {
     const Uint8* state = SDL_GetKeyboardState(NULL);
@@ -42,26 +84,84 @@ static VALUE Key_s_pressed_p(VALUE self, VALUE code)
     return INT2BOOL(state[scancode]);
 }
 
+/*
+ * Document-module: SDL2::Key::Scan
+ *
+ * This module has "physical" key scancode constants and some
+ * scancode handling functions.
+ */
+
+/*
+ * @overload name_of(code)
+ *   @param [Integer] code scancode
+ *
+ * Get a human-readable name of the given scancode
+ * @return [String]
+ * @see SDL2::Key.name_of
+ * @see .from_name
+ */
 static VALUE Scan_s_name_of(VALUE self, VALUE code)
 {
     return utf8str_new_cstr(SDL_GetScancodeName(NUM2INT(code)));
 }
 
+/*
+ * @overload from_name(name)
+ *   @param [String] name name of a key
+ *
+ * Get a scancode from the key of the given name
+ * @return [String]
+ * @see .name_of
+ * @see SDL2::Key.keycode_from_name
+ */
 static VALUE Scan_s_from_name(VALUE self, VALUE name)
 {
     return INT2NUM(SDL_GetScancodeFromName(StringValueCStr(name)));
 }
 
+/*
+ * @overload from_keycode(keycode)
+ *   @param [Integer] keycode keycode
+ *
+ * Get a keycode corresponding to the given keycode
+ * @return [Integer] keycode
+ * @see SDL2::Key.keycode_from_scancode
+ */
 static VALUE Scan_s_from_keycode(VALUE self, VALUE keycode)
 {
     return INT2NUM(SDL_GetScancodeFromKey(NUM2INT(keycode)));
 }
 
+/*
+ * Document-module: SDL2::Key::Mod
+ *
+ * This module has key modifier bitmask constants and
+ * some functions to handle key modifier states.
+ */
+
+/*
+ * Get the current key modifier state
+ * 
+ * You can examine whether the modifier key is pressed
+ * using bitmask constants of {SDL2::Key::Mod}.
+ * 
+ * @return [Integer] key state
+ */
 static VALUE Mod_s_state(VALUE self)
 {
     return UINT2NUM(SDL_GetModState());
 }
 
+/*
+ * @overload state=(keymod)
+ *   @param [Integer] keymod key modifier flags (bits)
+ *   
+ * Set the current key modifier state
+ * 
+ * @note This does not change the keyboard state, only the key modifier flags.
+ * @return [keymod]
+ * @see .state
+ */
 static VALUE Mod_s_set_state(VALUE self, VALUE keymod)
 {
     SDL_SetModState(NUM2UINT(keymod));
