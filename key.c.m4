@@ -92,9 +92,23 @@ static VALUE TextInput_s_set_rect(VALUE self, VALUE rect)
 
 /*
 define(`DEFINE_SCANCODE',`ifelse(`$#',`2',`$2
-    ',)'`rb_define_const(mScan, "$1", INT2NUM(SDL_SCANCODE_$1))')
-define(`DEFINE_SCANCODE_NUMBER',`/$8* Number key $1 (not on keypad) *$8/
-    rb_define_const(mScan, "K$1", INT2NUM(SDL_SCANCODE_$1))')')
+    ',`/$8* scancode for $1 key *$8/
+    ')rb_define_const(mScan, "$1", INT2NUM(SDL_SCANCODE_$1))')
+    
+define(`DEFINE_SCANCODE_NUMBER',`/$8* scancode for number key $1 (not on keypad) *$8/
+    rb_define_const(mScan, "K$1", INT2NUM(SDL_SCANCODE_$1))')
+    
+define(`DEFINE_KEYCODE', `ifelse(`$#',`2',`$2
+    ',`/$8* keycode for $1 key *$8/
+    ')rb_define_const(mKey, "$1", INT2NUM(SDLK_$1))')
+    
+define(`DEFINE_KEYCODE_NUMBER',`/$8* keycode for number key $1 (not on keypad) *$8/
+    rb_define_const(mKey, "K$1", INT2NUM(SDLK_$1))')
+    
+define(`DEFINE_KEYCODE_ALPH',`/$8* keycode for alphabet "$1" *$8/
+    rb_define_const(mKey, "translit($1,`a-z',`A-Z')", INT2NUM(SDLK_$1))')
+
+define(`DEFINE_KEYMOD',`rb_define_const(mMod, "$1", INT2NUM(KMOD_$1))')
 */
 void rubysdl2_init_key(void)
 {
@@ -384,15 +398,7 @@ void rubysdl2_init_key(void)
     DEFINE_SCANCODE(APP1);
     DEFINE_SCANCODE(APP2);
 
-#define DEFINE_KEYCODE(name)                            \
-    rb_define_const(mKey, #name, INT2NUM(SDLK_##name))
-#define DEFINE_KEYCODE_NUMBER(name)                             \
-    rb_define_const(mKey, "K" #name, INT2NUM(SDLK_##name))
-#define DEFINE_KEYCODE_LETTER(lower, upper)                       \
-    rb_define_const(mKey, #upper, INT2NUM(SDLK_##lower))
-
-    DEFINE_KEYCODE(UNKNOWN);
-
+    DEFINE_KEYCODE(UNKNOWN,/* Unused keycode */);
     DEFINE_KEYCODE(RETURN);
     DEFINE_KEYCODE(ESCAPE);
     DEFINE_KEYCODE(BACKSPACE);
@@ -440,32 +446,32 @@ void rubysdl2_init_key(void)
     DEFINE_KEYCODE(UNDERSCORE);
     DEFINE_KEYCODE(BACKQUOTE);
     
-    DEFINE_KEYCODE_LETTER(a,A);
-    DEFINE_KEYCODE_LETTER(b,B);
-    DEFINE_KEYCODE_LETTER(c,C);
-    DEFINE_KEYCODE_LETTER(d,D);
-    DEFINE_KEYCODE_LETTER(e,E);
-    DEFINE_KEYCODE_LETTER(f,F);
-    DEFINE_KEYCODE_LETTER(g,G);
-    DEFINE_KEYCODE_LETTER(h,H);
-    DEFINE_KEYCODE_LETTER(i,I);
-    DEFINE_KEYCODE_LETTER(j,J);
-    DEFINE_KEYCODE_LETTER(k,K);
-    DEFINE_KEYCODE_LETTER(l,L);
-    DEFINE_KEYCODE_LETTER(m,M);
-    DEFINE_KEYCODE_LETTER(n,N);
-    DEFINE_KEYCODE_LETTER(o,O);
-    DEFINE_KEYCODE_LETTER(p,P);
-    DEFINE_KEYCODE_LETTER(q,Q);
-    DEFINE_KEYCODE_LETTER(r,R);
-    DEFINE_KEYCODE_LETTER(s,S);
-    DEFINE_KEYCODE_LETTER(t,T);
-    DEFINE_KEYCODE_LETTER(u,U);
-    DEFINE_KEYCODE_LETTER(v,V);
-    DEFINE_KEYCODE_LETTER(w,W);
-    DEFINE_KEYCODE_LETTER(x,X);
-    DEFINE_KEYCODE_LETTER(y,Y);
-    DEFINE_KEYCODE_LETTER(z,Z);
+    DEFINE_KEYCODE_ALPH(a);
+    DEFINE_KEYCODE_ALPH(b);
+    DEFINE_KEYCODE_ALPH(c);
+    DEFINE_KEYCODE_ALPH(d);
+    DEFINE_KEYCODE_ALPH(e);
+    DEFINE_KEYCODE_ALPH(f);
+    DEFINE_KEYCODE_ALPH(g);
+    DEFINE_KEYCODE_ALPH(h);
+    DEFINE_KEYCODE_ALPH(i);
+    DEFINE_KEYCODE_ALPH(j);
+    DEFINE_KEYCODE_ALPH(k);
+    DEFINE_KEYCODE_ALPH(l);
+    DEFINE_KEYCODE_ALPH(m);
+    DEFINE_KEYCODE_ALPH(n);
+    DEFINE_KEYCODE_ALPH(o);
+    DEFINE_KEYCODE_ALPH(p);
+    DEFINE_KEYCODE_ALPH(q);
+    DEFINE_KEYCODE_ALPH(r);
+    DEFINE_KEYCODE_ALPH(s);
+    DEFINE_KEYCODE_ALPH(t);
+    DEFINE_KEYCODE_ALPH(u);
+    DEFINE_KEYCODE_ALPH(v);
+    DEFINE_KEYCODE_ALPH(w);
+    DEFINE_KEYCODE_ALPH(x);
+    DEFINE_KEYCODE_ALPH(y);
+    DEFINE_KEYCODE_ALPH(z);
 
     DEFINE_KEYCODE(CAPSLOCK);
 
@@ -648,24 +654,38 @@ void rubysdl2_init_key(void)
     DEFINE_KEYCODE(EJECT);
     DEFINE_KEYCODE(SLEEP);
 
-#define DEFINE_KEYMOD(name) \
-    rb_define_const(mMod, #name, INT2NUM(KMOD_##name))
-    
+    /* 0 (no modifier is applicable) */
     DEFINE_KEYMOD(NONE);
+    /* the modifier key bit mask for the left shift key */
     DEFINE_KEYMOD(LSHIFT);
+    /* the modifier key bit mask for the right shift key */
     DEFINE_KEYMOD(RSHIFT);
+    /* the modifier key bit mask for the left control key */
     DEFINE_KEYMOD(LCTRL);
+    /* the modifier key bit mask for the right control key */
     DEFINE_KEYMOD(RCTRL);
+    /* the modifier key bit mask for the left alt key */
     DEFINE_KEYMOD(LALT);
+    /* the modifier key bit mask for the right alt key */
     DEFINE_KEYMOD(RALT);
+    /* the modifier key bit mask for the left GUI key (often the window key) */
     DEFINE_KEYMOD(LGUI);
+    /* the modifier key bit mask for the right GUI key (often the window key) */
     DEFINE_KEYMOD(RGUI);
+    /* the modifier key bit mask for the numlock key */
     DEFINE_KEYMOD(NUM);
+    /* the modifier key bit mask for the capslock key */
     DEFINE_KEYMOD(CAPS);
+    /* the modifier key bit mask for the mode key (AltGr) */
     DEFINE_KEYMOD(MODE);
+    /* the modifier key bit mask for the left and right control key */
     DEFINE_KEYMOD(CTRL);
+    /* the modifier key bit mask for the left and right shift key */
     DEFINE_KEYMOD(SHIFT);
+    /* the modifier key bit mask for the left and right alt key */
     DEFINE_KEYMOD(ALT);
+    /* the modifier key bit mask for the left and right GUI key */
     DEFINE_KEYMOD(GUI);
+    /* reserved for future use */
     DEFINE_KEYMOD(RESERVED);
 }
