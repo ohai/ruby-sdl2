@@ -204,9 +204,7 @@ static void set_string(char* field, VALUE str, int maxlength)
 
 EVENT_READER(Event, type, common.type, INT2NUM);
 EVENT_ACCESSOR_UINT(Event, timestamp, common.timestamp);
-/*
- * @return [String]
- */
+/* @return [String] inspection string */
 static VALUE Event_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
