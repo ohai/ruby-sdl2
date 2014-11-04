@@ -12,6 +12,34 @@ static inline SDL_Window* Get_SDL_Window_or_NULL(VALUE win)
         return Get_SDL_Window(win);
 }
 
+/*
+ * @overload show_simple_message_box(flag, title, message, parent)
+ *   Create a simple modal message box.
+ *
+ *   This function pauses all ruby's threads and
+ *   the threads are resumed when modal dialog is closed.
+ *   
+ *   You can create a message box before calling {SDL2.init}.
+ *   
+ *   You specify one of the following constants as flag
+ *
+ *   * {SDL2::MESSAGEBOX_ERROR}
+ *   * {SDL2::MESSAGEBOX_WARNING}
+ *   * {SDL2::MESSAGEBOX_INFORMATION}
+ *
+ *   @example show warning dialog
+ *   
+ *       SDL2.show_simple_message_box(SDL2::MESSAGEBOX_WARNING, "warning!",
+ *                                    "Somewhat special warning message!!", nil)
+ *                                
+ *   @param [Integer] flag one of the above flags
+ *   @param [String] title title text
+ *   @param [String] message message text
+ *   @param [SDL2::Window,nil] parent the parent window, or nil for no parent
+ *   @return [nil]
+ *   
+ *   @see .show_message_box
+ */
 static VALUE SDL2_s_show_simple_message_box(VALUE self, VALUE flag, VALUE title,
                                             VALUE message, VALUE parent)
 {
@@ -33,6 +61,77 @@ static void set_color_scheme(VALUE colors, VALUE sym, SDL_MessageBoxColor* color
     color->b = NUM2UCHAR(rb_ary_entry(c, 2));
 }
 
+/*
+ * @overload show_message_box(flag:, window: nil, title:, message:, buttons:, color_scheme: nil)
+ *   Create a model message box.
+ *
+ *   You specify one of the following constants as flag
+ *
+ *   * {SDL2::MESSAGEBOX_ERROR}
+ *   * {SDL2::MESSAGEBOX_WARNING}
+ *   * {SDL2::MESSAGEBOX_INFORMATION}
+ *
+ *   One button in the dialog represents a hash with folloing elements.
+ *   
+ *       { flags: 0, SDL2::MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT, or
+ *                SDL2::MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT,
+ *                you can ignore it for 0,
+ *         text: text of a button,
+ *         id: index of the button
+ *       }
+ *
+ *   and buttons is an array of above button hashes.
+ *
+ *   You can specify the color of message box by color_scheme.
+ *   color_scheme is an hash whose keys are :bg, :text, :button_border, :button_bg,
+ *   and :button_selected and values are array of three integers representing
+ *   color.
+ *   You can also use default color scheme by giving nil.
+ *   
+ *   
+ *   This function pauses all ruby's threads until
+ *   the modal dialog is closed.
+ *   
+ *   You can create a message box before calling {SDL2.init}.
+ *
+ *   @example show a dialog with 3 buttons
+ *       button = SDL2.show_message_box(flags: SDL2::MESSAGEBOX_WARNING,
+ *                                      window: nil,
+ *                                      title: "Warning window",
+ *                                      message: "Here is the warning message",
+ *                                      buttons: [ { # flags is ignored
+ *                                                  id: 0, 
+ *                                                  text: "No",
+ *                                                 }, 
+ *                                                 {flags: SDL2::MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT,
+ *                                                  id: 1,
+ *                                                  text: "Yes",
+ *                                                 },
+ *                                                 {flags: SDL2::MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT,
+ *                                                  id: 2,
+ *                                                  text: "Cancel",
+ *                                                 },
+ *                                               ],
+ *                                      color_scheme: {
+ *                                                     bg: [255, 0, 0],
+ *                                                     text: [0, 255, 0],
+ *                                                     button_border: [255, 0, 0],
+ *                                                     button_bg: [0, 0, 255],
+ *                                                     button_selected: [255, 0, 0]
+ *                                                    }
+ *                                     )
+ *                                 
+ *   @param [Integer] flags message box type flag
+ *   @param [SDL2::Window,nil] window the parent window, or nil for no parent
+ *   @param [String] title the title text
+ *   @param [String] message the message text
+ *   @param [Array<Hash<Symbol => Object>>] buttons array of buttons
+ *   @param [Hash<Symbol=>[Integer,Integer,Integer]> nil] color_scheme
+ *       color scheme, or nil for the default color scheme
+ *   @return [Integer] pressed button id
+ *   
+ *   @see .show_simple_message_box
+ */
 static VALUE SDL2_s_show_message_box(VALUE self, VALUE params)
 {
     SDL_MessageBoxData mb_data;
@@ -93,9 +192,9 @@ static VALUE SDL2_s_show_message_box(VALUE self, VALUE params)
 
 void rubysdl2_init_messagebox(void)
 {
-    rb_define_module_function(mSDL2, "show_simple_message_box",
-                              SDL2_s_show_simple_message_box, 4);
-    rb_define_module_function(mSDL2, "show_message_box", SDL2_s_show_message_box, 1);
+    rb_define_singleton_method(mSDL2, "show_simple_message_box",
+                               SDL2_s_show_simple_message_box, 4);
+    rb_define_singleton_method(mSDL2, "show_message_box", SDL2_s_show_message_box, 1);
     rb_define_const(mSDL2, "MESSAGEBOX_ERROR", INT2NUM(SDL_MESSAGEBOX_ERROR));
     rb_define_const(mSDL2, "MESSAGEBOX_WARNING", INT2NUM(SDL_MESSAGEBOX_WARNING));
     rb_define_const(mSDL2, "MESSAGEBOX_INFORMATION", INT2NUM(SDL_MESSAGEBOX_INFORMATION));
