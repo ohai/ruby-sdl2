@@ -195,11 +195,24 @@ void rubysdl2_init_messagebox(void)
     rb_define_singleton_method(mSDL2, "show_simple_message_box",
                                SDL2_s_show_simple_message_box, 4);
     rb_define_singleton_method(mSDL2, "show_message_box", SDL2_s_show_message_box, 1);
+    /* This flag means that the message box shows an error message in
+     * {SDL2.show_simple_message_box} and {SDL2.show_message_box}.
+     */
     rb_define_const(mSDL2, "MESSAGEBOX_ERROR", INT2NUM(SDL_MESSAGEBOX_ERROR));
+    /* This flag means that the message box shows a warning message in
+     * {SDL2.show_simple_message_box} and {SDL2.show_message_box}.
+     */
     rb_define_const(mSDL2, "MESSAGEBOX_WARNING", INT2NUM(SDL_MESSAGEBOX_WARNING));
+    /* This flag means that the message box shows an informational message in
+     * {SDL2.show_simple_message_box} and {SDL2.show_message_box}.
+     */
     rb_define_const(mSDL2, "MESSAGEBOX_INFORMATION", INT2NUM(SDL_MESSAGEBOX_INFORMATION));
+    /* This flag represents the button is selected when return key is pressed in
+     * {SDL2.show_message_box}. */
     rb_define_const(mSDL2, "MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT",
                     INT2NUM(SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT));
+    /* This flag represents the button is selected when escape key is pressed in
+     * {SDL2.show_message_box}. */
     rb_define_const(mSDL2, "MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT",
                     INT2NUM(SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT));
 
