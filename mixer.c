@@ -56,6 +56,70 @@ static VALUE Music_new(Mix_Music* music)
                             
 DEFINE_WRAPPER(Mix_Music, Music, music, cMusic, "SDL2::Mixer::Music");
 
+/*
+ * Document-module: SDL::Mixer
+ *
+ * Sound mixing module.
+ *
+ * With this module, you can play many kinds of sound files such as:
+ *
+ * * WAVE/RIFF (.wav)
+ * * AIFF (.aiff)
+ * * VOC (.voc)
+ * * MOD (.mod .xm .s3m .669 .it .med etc.)
+ * * MIDI (.mid)
+ * * OggVorbis (.ogg)
+ * * MP3 (.mp3)
+ * * FLAC (.flac)
+ *
+ * Before playing sounds, 
+ * you need to initialize this module by {.init} and
+ * open a sound device by {.open}. 
+ *
+ * This module mixes multiple sound sources in parallel.
+ * To play a sound source, you assign the source to a "channel"
+ * and this module mixes all sound sources assigned to the channels.
+ * 
+ * In this module, there are two types of sound sources:
+ * {SDL2::Mixer::Chunk} and {SDL2::Mixer::Music}.
+ * And there are two corresponding types of channels:
+ * {SDL2::Mixer::Channels} and {SDL2::Mixer::MusicChannel}.
+ *
+ * {SDL2::Mixer::Channels} module plays {SDL2::Mixer::Chunk} objects,
+ * through multiple (default eight) channels. This module is suitable
+ * for the sound effects.
+ * The number of channels is variable with {SDL2::Mixer::Channels.allocate}.
+ * 
+ * {SDL2::Mixer::MusicChannel} module plays {SDL2::Mixer::Music} objects.
+ * This module has only one playing channel, and you cannot play
+ * multiple music in parallel. However an {SDL2::Mixer::Music} object
+ * is more efficient for memory, and this module supports more file formats
+ * than {SDL2::Mixer::Channels}.
+ * This module is suitable for playing "BGMs" of your application.
+ * 
+ */
+
+/*
+ * @overload init(flags)
+ *   Initialize the mixer library.
+ *
+ *   This module function load dynamically-linked libraries for sound file
+ *   formats such as ogg and flac.
+ *
+ *   You can give the initialized libraries (file formats) with OR'd bits of the
+ *   following constants:
+ *
+ *   * SDL2::Mixer::INIT_FLAC
+ *   * SDL2::Mixer::INIT_MOD
+ *   * SDL2::Mixer::INIT_MODPLUG
+ *   * SDL2::Mixer::INIT_MP3
+ *   * SDL2::Mixer::INIT_OGG
+ *   * SDL2::Mixer::INIT_FLUIDSYNTH
+ *   
+ *   @param flags [Integer] intialized sublibraries
+ *   @return [nil]
+ * 
+ */
 static VALUE Mixer_s_init(VALUE self, VALUE f)
 {
     int flags = NUM2INT(f);
@@ -74,6 +138,31 @@ static void check_channel(VALUE ch, int allow_minus_1)
         rb_raise(rb_eArgError, "negative number of channel is not allowed");
 }
 
+/*
+ * @overload open(freq=22050, format=SDL2::Mixer::DEFAULT_FORMAT, channels=2, chunksize=1024)
+ *   Open a sound device.
+ *
+ *   Before calling loading/playing methods in the mixer module,
+ *   this method must be called.
+ *   Before calling this method,
+ *   {SDL2.init} must be called with SDL2::INIT_AUDIO.
+ *
+ *   @param freq [Integer] output sampling frequency in Hz.
+ *     Normally 22050 or 44100 is used.
+ *     44100 is CD audio rate. SDL2::Mixer::DEFAULT_FREQUENCY(22050) is best for
+ *     many kinds of game because 44100 requires too much CPU power on older computers.
+ *   @param format [Integer] output sample format
+ *   @param channels 1 is for mono, and 2 is for stereo.
+ *   @param chunksize bytes used per output sample
+ *
+ *   @return [nil]
+ *
+ *   @raise [SDL2::Error] raised when a device cannot be opened
+ *   
+ *   @see .init   
+ *   @see .close
+ *   @see .query
+ */
 static VALUE Mixer_s_open(int argc, VALUE* argv, VALUE self)
 {
     VALUE freq, format, channels, chunksize;
@@ -86,12 +175,29 @@ static VALUE Mixer_s_open(int argc, VALUE* argv, VALUE self)
     return Qnil;
 }
 
+/*
+ * Close the audio device.
+ *
+ * @return [nil]
+ */
 static VALUE Mixer_s_close(VALUE self)
 {
     Mix_CloseAudio();
     return Qnil;
 }
 
+
+/*
+ * Query a sound device spec.
+ *
+ * This method returns the most suitable setting for {.open} the device.
+ *
+ * @return [[Integer, Integer, Integer, Integer]]
+ *   the suitable frequency in Hz, the suitable format,
+ *   the suitable number of channels (1 for mono, 2 for stereo),
+ *   and the number of call of {.open}.
+ *
+ */
 static VALUE Mixer_s_query(VALUE self)
 {
     int frequency = 0, channels = 0, num_opened;
@@ -102,21 +208,67 @@ static VALUE Mixer_s_query(VALUE self)
                        INT2NUM(channels), INT2NUM(num_opened));
 }
 
+/*
+ * Document-module: SDL2::Mixer::Channels
+ *
+ * This module plays {SDL2::Mixer::Chunk} objects in parallel.
+ *
+ * Each virtual sound output device is called channel, and
+ * the number of channels determines the f
+ */
+
+/*
+ * @overload allocate(num_channels)
+ *   Set the number of channels being mixed.
+ *
+ *   @param num_channels [Integer] Number of channels prepared for mixing.
+ *
+ *   @return [Integer] the number of prepared channels.
+ */
 static VALUE Channels_s_allocate(VALUE self, VALUE num_channels)
 {
     return INT2NUM(Mix_AllocateChannels(NUM2INT(num_channels)));
 }
 
+/*
+ * @overload reserve(num)
+ *   @param num [Integer]
+ *   @return [Integer]
+ */
 static VALUE Channels_s_reserve(VALUE self, VALUE num)
 {
     return INT2NUM(Mix_ReserveChannels(NUM2INT(num)));
 }
 
+/*
+ * @overload volume(channel)
+ *   Get the volume of specified channel.
+ *
+ *   @param channel [Integer] the channel to get volume for.
+ *     If the specified channel is -1, this method returns
+ *     the average volume of all channels.
+ *   @return [Integer] the volume, 0-128
+ *
+ *   @see .set_volume
+ */ 
 static VALUE Channels_s_volume(VALUE self, VALUE channel)
 {
     return INT2NUM(Mix_Volume(NUM2INT(channel), -1));
 }
 
+/*
+ * @overload set_volume(channel, volume)
+ *   Set the volume of specified channel.
+ *
+ *   The volume should be from 0 to {SDL2::Mixer::MAX_VOLUME}(128).
+ *   If the specified channel is -1, set volume for all channels.
+ *
+ *   @param channel [Integer] the channel to set volume for.
+ *   @param volume [Integer] the volume to use
+ *   @return [void]
+ *
+ *   @see .volume
+ */
 static VALUE Channels_s_set_volume(VALUE self, VALUE channel, VALUE volume)
 {
     return INT2NUM(Mix_Volume(NUM2INT(channel), NUM2INT(volume)));
@@ -127,6 +279,28 @@ static void protect_playing_chunk_from_gc(int channel, VALUE chunk)
     rb_ary_store(playing_chunks, channel, chunk);
 }
 
+/*
+ * @overload play(channel, chunk, loops, ticks = -1)
+ *   Play a {SDL2::Mixer::Chunk} on **channel**.
+ *   
+ *   @param channel [Integer] the channel to play, or -1 for the first free unreserved
+ *     channel
+ *   @param chunk [SDL2::Mixer::Chunk] the chunk to play
+ *   @param loops [Integer] the number of loops, or -1 for infite loops.
+ *     passing 1 plays the sample twice (1 loop).
+ *   @param ticks [Integer] milliseconds limit to play, at most.
+ *     If the chunk is long enough and **loops** is large enough,
+ *     the play will stop after **ticks** milliseconds.
+ *     Otherwise, the play will stop when  the loop ends.
+ *     -1 means infinity.
+ *   @return [Integer] the channel that plays the chunk.
+ *
+ *   @raise [SDL2::Error] raised on a playing error. For example,
+ *     **channel** is out of the allocated channels, or
+ *     there is no free channels when **channel** is -1.
+ *
+ *   @see .fade_in
+ */
 static VALUE Channels_s_play(int argc, VALUE* argv, VALUE self)
 {
     VALUE channel, chunk, loops, ticks;
@@ -142,6 +316,30 @@ static VALUE Channels_s_play(int argc, VALUE* argv, VALUE self)
     return INT2FIX(ch);
 }
 
+/*
+ * @overload fade_in(channel, chunk, loops, ms, ticks = -1)
+ *   Play a {SDL2::Mixer::Chunk} on **channel** with fading in.
+ *   
+ *   @param channel [Integer] the channel to play, or -1 for the first free unreserved
+ *     channel
+ *   @param chunk [SDL2::Mixer::Chunk] the chunk to play
+ *   @param loops [Integer] the number of loops, or -1 for infite loops.
+ *     passing 1 plays the sample twice (1 loop).
+ *   @param ms [Integer] milliseconds of time of fade-in effect.
+ *   @param ticks [Integer] milliseconds limit to play, at most.
+ *     If the chunk is long enough and **loops** is large enough,
+ *     the play will stop after **ticks** milliseconds.
+ *     Otherwise, the play will stop when  the loop ends.
+ *     -1 means infinity.
+ *   @return [Integer] the channel that plays the chunk.
+ *
+ *   @raise [SDL2::Error] raised on a playing error. For example,
+ *     **channel** is out of the allocated channels, or
+ *     there is no free channels when **channel** is -1.
+ *
+ *   @see .play
+ *   @see .fade_out
+ */
 static VALUE Channels_s_fade_in(int argc, VALUE* argv, VALUE self)
 {
     VALUE channel, chunk, loops, ms, ticks;
@@ -157,6 +355,16 @@ static VALUE Channels_s_fade_in(int argc, VALUE* argv, VALUE self)
     return INT2FIX(ch);
 }
 
+/*
+ * @overload pause(channel)
+ *   Pause a specified channel.
+ *
+ *   @param channel [Integer] the channel to pause, or -1 for all channels.
+ *   @return [nil]
+ *   
+ *   @see .resume
+ *   @see .pause?
+ */
 static VALUE Channels_s_pause(VALUE self, VALUE channel)
 {
     check_channel(channel, 1);
@@ -164,6 +372,17 @@ static VALUE Channels_s_pause(VALUE self, VALUE channel)
     return Qnil;
 }
 
+/*
+ * @overload resume(channel)
+ *   Resume a specified channel that already pauses.
+ *
+ *   @note This method has no effect to unpaused channels.
+ *   @param channel [Integer] the channel to be resumed, or -1 for all channels.
+ *   @return [nil]
+ *
+ *   @see .pause
+ *   @see .pause?
+ */
 static VALUE Channels_s_resume(VALUE self, VALUE channel)
 {
     check_channel(channel, 1);
@@ -171,6 +390,17 @@ static VALUE Channels_s_resume(VALUE self, VALUE channel)
     return Qnil;
 }
 
+/*
+ * @overload halt(channel)
+ *   Halt playing of a specified channel.
+ *   
+ *   @param channel [Integer] the channel to be halted, or -1 for all channels.
+ *   @return [nil]
+ *
+ *   @see .expire
+ *   @see .fade_out
+ *   @see .play?
+ */
 static VALUE Channels_s_halt(VALUE self, VALUE channel)
 {
     check_channel(channel, 1);
@@ -178,6 +408,18 @@ static VALUE Channels_s_halt(VALUE self, VALUE channel)
     return Qnil;
 }
 
+/*
+ * @overload expire(channel, ticks)
+ *   Halt playing of a specified channel after **ticks** milliseconds.
+ *
+ *   @param channel [Integer] the channel to be halted, or -1 for all channels.
+ *   @param ticks [Integer] milliseconds untils the channel halts playback.
+ *   @return [nil]
+ *
+ *   @see .halt
+ *   @see .fade_out
+ *   @see .play?
+ */
 static VALUE Channels_s_expire(VALUE self, VALUE channel, VALUE ticks)
 {
     check_channel(channel, 1);
@@ -185,6 +427,19 @@ static VALUE Channels_s_expire(VALUE self, VALUE channel, VALUE ticks)
     return Qnil;
 }
 
+/*
+ * @overload fade_out(channel, ms)
+ *   Halt playing of a specified channel with fade-out effect.
+ *
+ *   @param channel [Integer] the channel to be halted, or -1 for all channels.
+ *   @param ms [Integer] milliseconds of fade-out effect
+ *   @return [nil]
+ *
+ *   @see .halt
+ *   @see .expire
+ *   @see .play?
+ *   @see .fade_in
+ */
 static VALUE Channels_s_fade_out(VALUE self, VALUE channel, VALUE ms)
 {
     check_channel(channel, 1);
@@ -192,24 +447,73 @@ static VALUE Channels_s_fade_out(VALUE self, VALUE channel, VALUE ms)
     return Qnil;
 }
 
+/*
+ * @overload play?(channel)
+ *   Return true if a specified channel is playing.
+ *   
+ *   @param channel [Integer] channel to test
+ *   @see .pause?
+ *   @see .fading
+ */
 static VALUE Channels_s_play_p(VALUE self, VALUE channel)
 {
     check_channel(channel, 0);
     return INT2BOOL(Mix_Playing(NUM2INT(channel)));
 }
 
+/*
+ * @overload pause?(channel)
+ *   Return true if a specified channel is paused.
+ *
+ *   @note This method returns true if a paused channel is halted by {.halt}, or any
+ *     other halting methods.
+ *   
+ *   @param channel [Integer] channel to test
+ *
+ *   @see .play?
+ *   @see .fading
+ */
 static VALUE Channels_s_pause_p(VALUE self, VALUE channel)
 {
     check_channel(channel, 0);
     return INT2BOOL(Mix_Paused(NUM2INT(channel)));
 }
 
+/*
+ * @overload fading(channel)
+ *   Return the fading state of a specified channel.
+ *
+ *   The return value is one of the following:
+ *
+ *   * {SDL2::Mixer::NO_FADING} - **channel** is not fading in, and fading out
+ *   * {SDL2::Mixer::FADING_IN} - **channel** is fading in
+ *   * {SDL2::Mixer::FADING_OUT} - **channel** is fading out
+ *
+ *   @param channel [Integer] channel to test
+ *   
+ *   @return [Integer]
+ *
+ *   @see .play?
+ *   @see .pause?
+ *   @see .fade_in
+ *   @see .fade_out
+ */
 static VALUE Channels_s_fading(VALUE self, VALUE which)
 {
     check_channel(which, 0);
     return INT2FIX(Mix_FadingChannel(NUM2INT(which)));
 }
 
+/*
+ * @overload playing_chunk(channel)
+ *   Get the {SDL2::Mixer::Chunk} object most recently playing on **channel**.
+ *
+ *   If **channel** is out of allocated channels, or
+ *   no chunk is played yet on **channel**, this method returns nil.
+ *   
+ *   @param channel [Integer] the channel to get the chunk object
+ *   @return [SDL2::Mixer::Chunk,nil]
+ */
 static VALUE Channels_s_playing_chunk(VALUE self, VALUE channel)
 {
     check_channel(channel, 0);
@@ -279,6 +583,22 @@ static VALUE Group_halt(VALUE self)
     return Qnil;
 }
 
+/*
+ * @overload play(music, loops)
+ *    Play **music** **loops** times.
+ *
+ *    @note the meaning of **loop** is different from {SDL2::Mixer::Channels.play}.
+ *
+ *    @param music [SDL2::Mixer::Music] music to play
+ *    @param loops [Integer] number of times to play the music.
+ *      0 plays the music zero times.
+ *      -1 plays the music forever.
+ *
+ *    @return [nil]
+ *    
+ *    @see {.fade_in}
+ *    
+ */
 static VALUE MusicChannel_s_play(VALUE self, VALUE music, VALUE loops)
 {
     HANDLE_MIX_ERROR(Mix_PlayMusic(Get_Mix_Music(music), NUM2INT(loops)));
@@ -286,6 +606,24 @@ static VALUE MusicChannel_s_play(VALUE self, VALUE music, VALUE loops)
     return Qnil;
 }
 
+/*
+ * @overload fade_in(music, loops, ms, pos=0)
+ *    Play **music** **loops** times with fade-in effect.
+ *
+ *    @note the meaning of **loop** is different from {SDL2::Mixer::Channels.play}.
+ *
+ *    @param music [SDL2::Mixer::Music] music to play
+ *    @param loops [Integer] number of times to play the music.
+ *      0 plays the music zero times.
+ *      -1 plays the music forever.
+ *    @param ms [Integer] milliseconds for the fade-in effect
+ *    @param pos [Float] the position to play from.
+ *      The meaning of "position" is different for the type of music sources.
+ *
+ *    @return [nil]
+ *    
+ *    @see {.play}
+ */
 static VALUE MusicChannel_s_fade_in(int argc, VALUE* argv, VALUE self)
 {
     VALUE music, loops, fade_in_ms, pos;
@@ -297,68 +635,176 @@ static VALUE MusicChannel_s_fade_in(int argc, VALUE* argv, VALUE self)
     return Qnil;
 }
 
+/*
+ * Get the volume of the music channel.
+ * 
+ * @return [Integer]
+ *
+ * @see .volume=
+ */
 static VALUE MusicChannel_s_volume(VALUE self)
 {
     return INT2FIX(Mix_VolumeMusic(-1));
 }
 
+/*
+ * @overload volume=(vol)
+ *   Set the volume of the music channel.
+ *
+ *   @param vol [Integer] the volume for mixing,
+ *     from 0 to {SDL2::Mixer::MAX_VOLUME}(128).
+ *   @return [vol]
+ *   
+ *   @see .volume
+ */
 static VALUE MusicChannel_s_set_volume(VALUE self, VALUE volume)
 {
     Mix_VolumeMusic(NUM2INT(volume));
     return volume;
 }
 
+/*
+ * Pause the playback of the music channel.
+ *
+ * @return [nil]
+ * 
+ * @see .resume
+ * @see .pause?
+ */
 static VALUE MusicChannel_s_pause(VALUE self)
 {
     Mix_PauseMusic(); return Qnil;
 }
 
+/*
+ * Resume the playback of the music channel.
+ *
+ * @return [nil]
+ * 
+ * @see .pause
+ * @see .pause?
+ */
 static VALUE MusicChannel_s_resume(VALUE self)
 {
     Mix_ResumeMusic(); return Qnil;
 }
 
+/*
+ * Rewind the music to the start.
+ *
+ * @return [nil]
+ */
 static VALUE MusicChannel_s_rewind(VALUE self)
 {
     Mix_RewindMusic(); return Qnil;
 }
 
+/*
+ * @overload set_position(position)
+ *   Set the position of the currently playing music.
+ *
+ *   @param position [Float] the position to play from.
+ *   @return [nil]
+ */
 static VALUE MusicChannel_s_set_position(VALUE self, VALUE position)
 {
     HANDLE_MIX_ERROR(Mix_SetMusicPosition(NUM2DBL(position)));
     return Qnil;
 }
 
+/*
+ * Halt the music playback.
+ *
+ * @return [nil]
+ */
 static VALUE MusicChannel_s_halt(VALUE self)
 {
     Mix_HaltMusic(); return Qnil;
 }
 
+/*
+ * @overload fade_out(ms)
+ *   Halt the music playback with fade-out effect.
+ *
+ *   @return [nil]
+ */
 static VALUE MusicChannel_s_fade_out(VALUE self, VALUE fade_out_ms)
 {
     Mix_FadeOutMusic(NUM2INT(fade_out_ms)); return Qnil;
 }
 
+/*
+ * Return true if a music is playing.
+ */
 static VALUE MusicChannel_s_play_p(VALUE self)
 {
     return INT2BOOL(Mix_PlayingMusic());
 }
 
+/*
+ * Return true if a music playback is paused.
+ */
 static VALUE MusicChannel_s_pause_p(VALUE self)
 {
     return INT2BOOL(Mix_PausedMusic());
 }
 
+/*
+ * Get the fading state of the music playback.
+ *
+ * The return value is one of the following:
+ *
+ * * {SDL2::Mixer::NO_FADING} - not fading in, and fading out
+ * * {SDL2::Mixer::FADING_IN} - fading in
+ * * {SDL2::Mixer::FADING_OUT} - fading out
+ *
+ * @return [Integer]
+ * 
+ * @see .fade_in
+ * @see .fade_out
+ * 
+ */
 static VALUE MusicChannel_s_fading(VALUE self)
 {
     return INT2NUM(Mix_FadingMusic());
 }
 
+/*
+ * Get the {SDL2::Mixer::Music} object that most recently played.
+ *
+ * Return nil if no music object is played yet.
+ *
+ * @return [SDL2::Mixer::Music,nil]
+ */
 static VALUE MusicChannel_s_playing_music(VALUE self)
 {
     return playing_music;
 }
 
+/*
+ * Document-class: SDL2::Mixer::Chunk
+ *
+ * This class represents a sound sample, a kind of sound sources.
+ * 
+ * Chunk objects is playable on {SDL2::Mixer::Channels}.
+ *
+ * @!method destroy?
+ *   Return true if the memory is deallocated by {#destroy}.
+ */
+
+/*
+ * @overload load(path)
+ *   Load a sample from file.
+ *
+ *   This can load WAVE, AIFF, RIFF, OGG, and VOC files.
+ *
+ *   @note {SDL2::Mixer.open} must be called before calling this method.
+ *
+ *   @param path [String] the fine name
+ *   @return [SDL2::Mixer::Chunk]
+ *
+ *   @raise [SDL2::Error] raised when failing to load
+ */
 static VALUE Chunk_s_load(VALUE self, VALUE fname)
 {
     Mix_Chunk* chunk = Mix_LoadWAV(StringValueCStr(fname));
@@ -370,6 +816,11 @@ static VALUE Chunk_s_load(VALUE self, VALUE fname)
     return c;
 }
 
+/*
+ * Get the names of the sample decoders.
+ *
+ * @return [Array<String>] the names of decoders, such as: "WAVE", "OGG", etc.
+ */
 static VALUE Chunk_s_decoders(VALUE self)
 {
     int i;
@@ -380,6 +831,14 @@ static VALUE Chunk_s_decoders(VALUE self)
     return ary;
 }
 
+/*
+ * Deallocate the sample memory.
+ *
+ * Normally, the memory is deallocated by ruby's GC, but 
+ * you can surely deallocate the memory with this method at any time.
+ * 
+ * @return [nil]
+ */
 static VALUE Chunk_destroy(VALUE self)
 {
     Chunk* c = Get_Chunk(self);
@@ -388,16 +847,33 @@ static VALUE Chunk_destroy(VALUE self)
     return Qnil;
 }
 
+/*
+ * Get the volume of the sample.
+ *
+ * @return [Integer] the volume from 0 to {SDL2::Mixer::MAX_VOLUME}.
+ *
+ * @see #volume=
+ */
 static VALUE Chunk_volume(VALUE self)
 {
     return INT2NUM(Mix_VolumeChunk(Get_Mix_Chunk(self), -1));
 }
 
+/*
+ * @overload volume=(vol)
+ *   Set the volume of the sample.
+ *
+ *   @param vol [Integer] the new volume
+ *   @return [vol]
+ *
+ *   @see #volume
+ */
 static VALUE Chunk_set_volume(VALUE self, VALUE vol)
 {
     return INT2NUM(Mix_VolumeChunk(Get_Mix_Chunk(self), NUM2INT(vol)));
 }
 
+/* @return [String] inspection string */
 static VALUE Chunk_inspect(VALUE self)
 {
     VALUE filename = rb_iv_get(self, "@filename");
@@ -410,6 +886,23 @@ static VALUE Chunk_inspect(VALUE self)
                       Mix_VolumeChunk(Get_Mix_Chunk(self), -1));
 }
 
+/*
+ * Document-class: SDL2::Mixer::Music
+ *
+ * This class represents music, a kind of sound sources.
+ *
+ * Music is playable on {SDL2::Mixer::MusicChannel}, not on {SDL2::Mixer::Channels}.
+ *
+ * @!method destroy?
+ *   Return true if the memory is deallocated by {#destroy}.
+ */
+
+/*
+ * Get the names of music decoders.
+ *
+ * @return [Array<String>] the names of decorders (supported sound formats),
+ *   such as: "OGG", "WAVE", "MP3"
+ */
 static VALUE Music_s_decoders(VALUE self)
 {
     int num_decoders = Mix_GetNumMusicDecoders();
@@ -420,7 +913,15 @@ static VALUE Music_s_decoders(VALUE self)
     return decoders;
 }
 
-
+/*
+ * @overload load(path)
+ *   Load a music from file.
+ *
+ *   @param path [String] the file path
+ *   @return [SDL2::Mixer::Music]
+ *
+ *   @raise [SDL2::Error] raised when failing to load.
+ */
 static VALUE Music_s_load(VALUE self, VALUE fname)
 {
     Mix_Music* music = Mix_LoadMUS(StringValueCStr(fname));
@@ -431,6 +932,14 @@ static VALUE Music_s_load(VALUE self, VALUE fname)
     return mus;
 }
 
+/*
+ * Deallocate the music memory.
+ *
+ * Normally, the memory is deallocated by ruby's GC, but 
+ * you can surely deallocate the memory with this method at any time.
+ * 
+ * @return [nil]
+ */
 static VALUE Music_destroy(VALUE self)
 {
     Music* c = Get_Music(self);
@@ -439,6 +948,7 @@ static VALUE Music_destroy(VALUE self)
     return Qnil;
 }
 
+/* @return [String] inspection string */
 static VALUE Music_inspect(VALUE self)
 {
     VALUE filename = rb_iv_get(self, "@filename");
@@ -479,6 +989,7 @@ void rubysdl2_init_mixer(void)
     DEFINE_MIX_FORMAT(S16MSB);
     DEFINE_MIX_FORMAT(U16SYS);
     DEFINE_MIX_FORMAT(S16SYS);
+    rb_define_const(mMixer, "DEFAULT_FREQUENCY", UINT2NUM(MIX_DEFAULT_FREQUENCY));
     rb_define_const(mMixer, "DEFAULT_FORMAT", UINT2NUM(MIX_DEFAULT_FORMAT));
     rb_define_const(mMixer, "DEFAULT_CHANNELS", INT2FIX(MIX_DEFAULT_CHANNELS));
     rb_define_const(mMixer, "MAX_VOLUME", INT2FIX(MIX_MAX_VOLUME));
