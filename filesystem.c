@@ -9,7 +9,7 @@ static VALUE SDL2_s_base_path(VALUE self)
     if (!path)
         SDL_ERROR();
     str = utf8str_new_cstr(path);
-    SDL_Free(path);
+    SDL_free(path);
     return str;
 }
 
@@ -20,7 +20,7 @@ static VALUE SDL2_s_preference_path(VALUE self, VALUE org, VALUE app)
     if (!path)
         SDL_ERROR();
     str = utf8str_new_cstr(path);
-    SDL_Free(path);
+    SDL_free(path);
     return str;
 }
 
