@@ -26,9 +26,24 @@ def config(pkg_config, header, libnames)
   have_header(header)
 end
 
-sdl2_config = with_config('sdl2-config', 'sdl2-config')
-add_cflags(run_config_program(sdl2_config, "--cflags"))
-add_libs(run_config_program(sdl2_config, "--libs"))
+def sdl2config_with_command
+  sdl2_config = with_config('sdl2-config', 'sdl2-config')
+  add_cflags(run_config_program(sdl2_config, "--cflags"))
+  add_libs(run_config_program(sdl2_config, "--libs"))
+end
+
+def sdl2config_on_mingw
+  have_library("mingw32")
+  have_library("SDL2")
+  add_libs("-mwindows")
+end
+
+case RbConfig::CONFIG["arch"]
+when /mingw/
+  sdl2config_on_mingw
+else
+  sdl2config_with_command
+end
 
 config("SDL2_image", "SDL_image.h", ["SDL2_image", "SDL_image"])
 config("SDL2_mixer", "SDL_mixer.h", ["SDL2_mixer", "SDL_mixer"])
