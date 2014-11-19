@@ -436,11 +436,21 @@ static VALUE Window_renderer(VALUE self)
     return rb_iv_get(self, "renderer");
 }
 
+/*
+ * Get the ID of the window.
+ *
+ * @return [Integer]
+ */
 static VALUE Window_window_id(VALUE self)
 {
     return UINT2NUM(SDL_GetWindowID(Get_SDL_Window(self)));
 }
 
+/*
+ * Get information about the window.
+ *
+ * @return [SDL2::Window::Mode]
+ */
 static VALUE Window_display_mode(VALUE self)
 {
     SDL_DisplayMode mode;
@@ -448,23 +458,48 @@ static VALUE Window_display_mode(VALUE self)
     return DisplayMode_new(&mode);
 }
 
+/*
+ * Get the display associated with the window.
+ *
+ * @return [SDL2::Display]
+ */
 static VALUE Window_display(VALUE self)
 {
     int display_index = HANDLE_ERROR(SDL_GetWindowDisplayIndex(Get_SDL_Window(self)));
     return Display_new(display_index);
 }
 
+/*
+ * Get the brightness (gamma correction) of the window.
+ *
+ * @return [Float] the brightness
+ * @see #brightness=
+ */
 static VALUE Window_brightness(VALUE self)
 {
     return DBL2NUM(SDL_GetWindowBrightness(Get_SDL_Window(self)));
 }
 
+/*
+ * @overload brightness=(brightness)
+ *   Set the brightness (gamma correction) of the window.
+ *
+ *   @param brightness [Float] the brightness, 0.0 means complete dark and 1.0 means
+ *     normal brightness.
+ *   @see #brightness
+ */
 static VALUE Window_set_brightness(VALUE self, VALUE brightness)
 {
     HANDLE_ERROR(SDL_SetWindowBrightness(Get_SDL_Window(self), NUM2DBL(brightness)));
     return brightness;
 }
 
+/*
+ * Get the [Window flag masks](#label-Window+Flags) of the window.
+ *
+ * @return [Integer] flags
+ * @see .create
+ */
 static VALUE Window_flags(VALUE self)
 {
     return UINT2NUM(SDL_GetWindowFlags(Get_SDL_Window(self)));
@@ -479,6 +514,15 @@ static VALUE gamma_table_to_Array(Uint16 r[])
     return ary;
 }
 
+/*
+ * Get the gamma ramp for a window
+ *
+ * @return [Array<Array<Integer>>] the gamma ramp,
+ *   return value is red, green, and blue gamma tables and each gamma table
+ *   has 256 Integers of 0-65535.
+ *
+ * @raise [SDL2::Error] raised on failure
+ */
 static VALUE Window_gamma_ramp(VALUE self)
 {
     Uint16 r[256], g[256], b[256];
@@ -489,19 +533,39 @@ static VALUE Window_gamma_ramp(VALUE self)
                        gamma_table_to_Array(b));
 }
 
+/*
+ * @overload icon=(icon)
+ *
+ *   Set the window icon.
+ *   
+ *   @param icon [SDL2::Surface] the icon for the window
+ *   @return [icon]
+ */
 static VALUE Window_set_icon(VALUE self, VALUE icon)
 {
     SDL_SetWindowIcon(Get_SDL_Window(self), Get_SDL_Surface(icon));
     return icon;
 }
 
-/* Window_set_gamma_ramp */
-
+/*
+ *  Return true if the input is grabbed to the window.
+ *
+ *  @see #input_is_grabbed=
+ */
 static VALUE Window_input_is_grabbed_p(VALUE self)
 {
     return INT2BOOL(SDL_GetWindowGrab(Get_SDL_Window(self)));
 }
 
+/*
+ * @overload input_is_grabbed=(grabbed) 
+ *   Set the window's input grab mode.
+ *
+ *   @param grabbed [Boolean] true to grub input, and false to release input
+ *   @return [grabbed]
+ *
+ *   @see #input_is_grabbed?
+ */
 static VALUE Window_set_input_is_grabbed(VALUE self, VALUE grabbed)
 {
     SDL_SetWindowGrab(Get_SDL_Window(self), RTEST(grabbed));
@@ -524,56 +588,153 @@ static VALUE Window_set_int_int(void (*func)(SDL_Window*, int, int), VALUE windo
     return Qnil;
 }
 
+/*
+ * Get the maximum size of the window's client area.
+ *
+ * @return [Integer,Integer] maximum width and maximum height.
+ *
+ * @see #maximum_size=
+ */
 static VALUE Window_maximum_size(VALUE self)
 {
     return Window_get_int_int(SDL_GetWindowMaximumSize, self);
 }
 
+/*
+ * @overload maximum_size=(size) 
+ *   Set the maximum size of the window's client area.
+ *
+ *   @param size [[Integer, Integer]] maximum width and maximum height,
+ *     the both must be positive.
+ *
+ *   @return [size]
+ *
+ *   @see #maximum_size
+ */
 static VALUE Window_set_maximum_size(VALUE self, VALUE max_size)
 {
     return Window_set_int_int(SDL_SetWindowMaximumSize, self, max_size);
 }
 
+/*
+ * Get the minimum size of the window's client area.
+ *
+ * @return [Integer,Integer] minimum width and minimum height.
+ *
+ * @see #minimum_size=
+ */
 static VALUE Window_minimum_size(VALUE self)
 {
     return Window_get_int_int(SDL_GetWindowMinimumSize, self);
 }
 
+/*
+ * @overload minimum_size=(size) 
+ *   Set the minimum size of the window's client area.
+ *
+ *   @param size [[Integer, Integer]] minimum width and minimum height,
+ *     the both must be positive.
+ *
+ *   @return [size]
+ *
+ *   @see #minimum_size
+ */
 static VALUE Window_set_minimum_size(VALUE self, VALUE min_size)
 {
     return Window_set_int_int(SDL_SetWindowMinimumSize, self, min_size);
 }
 
+/*
+ * Get the position of the window.
+ *
+ * @return [Integer,Integer] the x position and the y position
+ *
+ * @see #position=
+ */
 static VALUE Window_position(VALUE self)
 {
     return Window_get_int_int(SDL_GetWindowPosition, self);
 }
 
+/*
+ * @overload position=(xy) 
+ *   Set the position of the window
+ *
+ *   @param xy [[Integer, Integer]] the x position and the y position,
+ *     {SDL2::Window::POS_CENTERED} and {SDL2::Window::POS_UNDEFINED}
+ *     are available.
+ *
+ *   @return [size]
+ *
+ *   @see #position
+ */
 static VALUE Window_set_position(VALUE self, VALUE xy)
 {
     return Window_set_int_int(SDL_SetWindowPosition, self, xy);
 }
 
+/*
+ * Get the size of the window.
+ *
+ * @return [[Integer, Integer]] the width and the height
+ * 
+ * @see size=
+ */
 static VALUE Window_size(VALUE self)
 {
     return Window_get_int_int(SDL_GetWindowSize, self);
 }
 
+/*
+ * @overload size=(size)
+ *   Set the size of the window.
+ *
+ *   @param wh [[Integer, Integer]] new width and new height
+ *
+ *   @return [size]
+ *   
+ *   @see #size
+ */
 static VALUE Window_set_size(VALUE self, VALUE size)
 {
     return Window_set_int_int(SDL_SetWindowSize, self, size);
 }
 
+/*
+ * Get the title of the window
+ *
+ * @return [String] the title, in UTF-8 encoding
+ *
+ * @see #title=
+ */
 static VALUE Window_title(VALUE self)
 {
     return utf8str_new_cstr(SDL_GetWindowTitle(Get_SDL_Window(self)));
 }
 
+/*
+ * Return true if the window is bordered
+ *
+ * @return [Boolean]
+ *
+ * @see #bordered=
+ */
 static VALUE Window_bordered(VALUE self)
 {
     return INT2BOOL(!(SDL_GetWindowFlags(Get_SDL_Window(self)) & SDL_WINDOW_BORDERLESS));
 }
 
+/*
+ * @overload bordered=(bordered) 
+ *   Set the border state of the window.
+ *
+ *   @param bordered [Boolean] true for bordered window, anad false for
+ *     borderless window
+ *
+ *   @return [bordered]
+ *
+ *   @see #bordered
+ */
 static VALUE Window_set_bordered(VALUE self, VALUE bordered)
 {
     SDL_SetWindowBordered(Get_SDL_Window(self), RTEST(bordered));
