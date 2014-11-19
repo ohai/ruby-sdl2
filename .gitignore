@@ -11,3 +11,4 @@ sample/sample.wav
 .yardoc/
 doc/doc-*
 doc/po/rubysdl2.pot
+extconf-options.txt

@@ -9,6 +9,17 @@ def yardoc(locale = nil)
   end
 end
 
+def extconf_options
+  return ENV["RUBYSDL2_EXTCONF_OPTS"] if ENV["RUBYSDL2_EXTCONF_OPTS"]
+  return ENV["EXTCONF_OPTS"] if ENV["EXTCONF_OPTS"]
+  
+  begin
+    return File.readlines("extconf-options.txt").map(&:chomp).join(" ")
+  rescue Errno::ENOENT
+    return ""
+  end
+end
+
 task "pot" do
   sh "yard i18n -o doc/po/rubysdl2.pot #{POT_SOURCES}"
 end
@@ -39,7 +50,11 @@ file "key.c" => "key.c.m4" do
   sh "m4 key.c.m4 > key.c"
 end
 
-task "build" => ["key.c"] do
+file "Makefile" => "extconf.rb" do
+  sh "ruby extconf.rb #{extconf_options()}"
+end
+
+task "build" => ["key.c", "Makefile"] do
   sh "make"
 end
 
