@@ -3,16 +3,10 @@ C_FROM_M4_FILES = C_M4_FILES.map{|path| path.gsub(/\.c\.m4\Z/, ".c") }
 C_FILES = Dir.glob("*.c") | C_FROM_M4_FILES
 RB_FILES = Dir.glob("lib/**/*.rb")
 
-POT_FILES = ["main.c"] + (C_FILES - ["main.c"]) + RB_FILES
-YARD_SOURCES = "-m markdown --main README.md --files COPYING.txt #{POT_FILES.join(" ")}"
+POT_SOURCES = ["main.c"] + (C_FILES - ["main.c"]) + RB_FILES
+YARD_SOURCES = "-m markdown --main README.md --files COPYING.txt #{POT_SOURCES.join(" ")}"
 
-def yardoc(locale = nil)
-  if locale
-    sh "yard doc -o doc/doc-#{locale} --locale #{locale} --po-dir doc/po #{YARD_SOURCES}"
-  else
-    sh "yard doc -o doc/doc-en #{YARD_SOURCES}"
-  end
-end
+locale = ENV["YARD_LOCALE"]
 
 def extconf_options
   return ENV["RUBYSDL2_EXTCONF_OPTS"] if ENV["RUBYSDL2_EXTCONF_OPTS"]
@@ -26,31 +20,32 @@ def extconf_options
 end
 
 task "pot" => "doc/po/rubysdl2.pot"
-file "doc/po/rubysdl2.pot" => POT_FILES do |t|
-  sh "yard i18n -o #{t.name} #{POT_FILES.join(" ")}"
+file "doc/po/rubysdl2.pot" => POT_SOURCES do |t|
+  sh "yard i18n -o #{t.name} #{POT_SOURCES.join(" ")}"
 end
 
-
-task "init-po",["locale"] do |_, args|
-  locale = args.locale || "ja"
-  sh "rmsginit -i doc/po/rubysdl2.pot -o doc/po/#{locale}.po -l #{locale}"
-end
-
-task "merge-po",["locale"] do |_, args|
-  locale = args.locale || "ja"
-  sh "rmsgmerge -o doc/po/#{locale}.po doc/po/#{locale}.po doc/po/rubysdl2.pot"
-end
-
-task "doc", ["locale"] do |_, args|
-  locale = args.locale
-  if locale == "all"
-    yardoc
-    yardoc("ja")
-  elsif locale
-    yardoc(locale)
-  else
-    yardoc
+if locale
+  PO_FILE = "doc/po/#{locale}.po"
+  
+  task "init-po" do
+    sh "rmsginit -i doc/po/rubysdl2.pot -o #{PO_FILE} -l #{locale}"
   end
+
+  task "merge-po" do
+    sh "rmsgmerge -o #{PO_FILE} #{PO_FILE} doc/po/rubysdl2.pot"
+  end
+
+  task "doc" => [PO_FILE] do
+    sh "yard doc -o doc/doc-#{locale} --locale #{locale} --po-dir doc/po #{YARD_SOURCES}"
+  end
+else
+  task "doc" => POT_SOURCES do
+    sh "yard doc -o doc/doc-en #{YARD_SOURCES}"
+  end
+end
+
+task "doc-all" do
+  raise "Not yet implemented"
 end
 
 rule ".c" => ".c.m4" do |t|
