@@ -1,3 +1,4 @@
+/* -*- mode: C -*- */
 #include "rubysdl2_internal.h"
 #include <SDL_video.h>
 #include <SDL_version.h>
@@ -1896,9 +1897,10 @@ static VALUE ScreenSaver_enabled_p(VALUE self)
     return INT2BOOL(SDL_IsScreenSaverEnabled());
 }
 
-#define DEFINE_C_ACCESSOR(classname, classvar, field)               \
-    rb_define_method(classvar, #field, classname##_##field, 0);         \
-    rb_define_method(classvar, #field "=", classname##_set_##field, 1);
+/*
+define(`DEFINE_C_ACCESSOR',`rb_define_method($2, "$3", $1_$3, 0);
+    rb_define_method($2, "$3=", $1_set_$3, 1)')
+ */
     
 void rubysdl2_init_video(void)
 {

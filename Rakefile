@@ -46,6 +46,10 @@ task "doc", ["locale"] do |_, args|
   end
 end
 
+rule ".c" => ".c.m4" do |t|
+  sh "m4 #{t.prerequisites[0]} > #{t.name}"
+end
+
 file "key.c" => "key.c.m4" do
   sh "m4 key.c.m4 > key.c"
 end
@@ -54,7 +58,7 @@ file "Makefile" => "extconf.rb" do
   sh "ruby extconf.rb #{extconf_options()}"
 end
 
-task "build" => ["key.c", "Makefile"] do
+task "build" => ["key.c", "video.c", "Makefile"] do
   sh "make"
 end
 
