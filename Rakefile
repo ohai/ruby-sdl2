@@ -1,11 +1,16 @@
-POT_SOURCES = "main.c *.c lib/**/*.rb"
-SOURCE_FILES = "-m markdown --main README.md --files COPYING.txt #{POT_SOURCES}"
+C_M4_FILES = Dir.glob("*.c.m4")
+C_FROM_M4_FILES = C_M4_FILES.map{|path| path.gsub(/\.c\.m4\Z/, ".c") }
+C_FILES = Dir.glob("*.c") | C_FROM_M4_FILES
+RB_FILES = Dir.glob("lib/**/*.rb")
+
+POT_FILES = ["main.c"] + (C_FILES - ["main.c"]) + RB_FILES
+YARD_SOURCES = "-m markdown --main README.md --files COPYING.txt #{POT_FILES.join(" ")}"
 
 def yardoc(locale = nil)
   if locale
-    sh "yard doc -o doc/doc-#{locale} --locale #{locale} --po-dir doc/po #{SOURCE_FILES}"
+    sh "yard doc -o doc/doc-#{locale} --locale #{locale} --po-dir doc/po #{YARD_SOURCES}"
   else
-    sh "yard doc -o doc/doc-en #{SOURCE_FILES}"
+    sh "yard doc -o doc/doc-en #{YARD_SOURCES}"
   end
 end
 
@@ -20,9 +25,11 @@ def extconf_options
   end
 end
 
-task "pot" do
-  sh "yard i18n -o doc/po/rubysdl2.pot #{POT_SOURCES}"
+task "pot" => "doc/po/rubysdl2.pot"
+file "doc/po/rubysdl2.pot" => POT_FILES do |t|
+  sh "yard i18n -o #{t.name} #{POT_FILES.join(" ")}"
 end
+
 
 task "init-po",["locale"] do |_, args|
   locale = args.locale || "ja"
@@ -50,18 +57,14 @@ rule ".c" => ".c.m4" do |t|
   sh "m4 #{t.prerequisites[0]} > #{t.name}"
 end
 
-file "key.c" => "key.c.m4" do
-  sh "m4 key.c.m4 > key.c"
-end
-
 file "Makefile" => "extconf.rb" do
   sh "ruby extconf.rb #{extconf_options()}"
 end
 
-task "build" => ["key.c", "video.c", "Makefile"] do
+task "build" => C_FILES + ["Makefile"] do
   sh "make"
 end
 
-task "gem" => ["build"] do
+task "gem" => C_FILES do
   sh "gem build rubysdl2.gemspec"
 end
