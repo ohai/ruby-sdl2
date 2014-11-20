@@ -339,6 +339,9 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  * * {SDL2::Window::ALLOW_HIGHDPI} - window should be created in high-DPI mode if supported
  * * {SDL2::Window::MOUSE_CAPTURE} - window has mouse captured
  *
+ *
+ * @!method destroy?
+ *   Return true if the window is already destroyed.
  */
 
 /*
@@ -487,6 +490,7 @@ static VALUE Window_brightness(VALUE self)
  *
  *   @param brightness [Float] the brightness, 0.0 means complete dark and 1.0 means
  *     normal brightness.
+ *   @return [brightness]
  *   @see #brightness
  */
 static VALUE Window_set_brightness(VALUE self, VALUE brightness)
@@ -742,6 +746,15 @@ static VALUE Window_set_bordered(VALUE self, VALUE bordered)
     return bordered;
 }
 
+/*
+ * @overload title=(title)
+ *   Set the title of the window.
+ *
+ *   @param title [String] the title
+ *   @return [title]
+ *
+ *   @see #title
+ */
 static VALUE Window_set_title(VALUE self, VALUE title)
 {
     title = rb_str_export_to_enc(title, rb_utf8_encoding());
@@ -749,31 +762,96 @@ static VALUE Window_set_title(VALUE self, VALUE title)
     return Qnil;
 }
 
-#define SIMPLE_WINDOW_METHOD(SDL_name, name)                            \
-    static VALUE Window_##name(VALUE self)                              \
-    {                                                                   \
-        SDL_##SDL_name##Window(Get_SDL_Window(self)); return Qnil;      \
-    }
+/*
+define(`SIMPLE_WINDOW_METHOD',`static VALUE Window_$2(VALUE self)
+{
+    SDL_$1Window(Get_SDL_Window(self)); return Qnil;
+}')
 
+/*
+ * Show the window.
+ *
+ * @return [nil]
+ * @see #hide
+ */
 SIMPLE_WINDOW_METHOD(Show, show);
+
+/*
+ * Hide the window.
+ *
+ * @return [nil]
+ * @see #show
+ */
 SIMPLE_WINDOW_METHOD(Hide, hide);
+
+/*
+ * Maximize the window.
+ *
+ * @return [nil]
+ * @see #minimize
+ * @see #restore
+ */
 SIMPLE_WINDOW_METHOD(Maximize, maximize);
+
+/*
+ * Minimize the window.
+ *
+ * @return [nil]
+ * @see #maximize
+ * @see #restore
+ */
 SIMPLE_WINDOW_METHOD(Minimize, minimize);
+
+/*
+ * Raise the window above other windows and set the input focus.
+ *
+ * @return [nil]
+ */
 SIMPLE_WINDOW_METHOD(Raise, raise);
+
+/*
+ * Restore the size and position of a minimized or maixmized window.
+ *
+ * @return [nil]
+ * @see #minimize
+ * @see #maximize
+ */
 SIMPLE_WINDOW_METHOD(Restore, restore);
 
+/*
+ * Get the fullscreen stete of the window
+ *
+ * @return [Integer] 0 for window mode, SDL2::Window::FULLSCREEN for 
+ *   fullscreen mode, and SDL2::Window::FULLSCREEN_DESKTOP for fullscreen
+ *   at the current desktop resolution.
+ *
+ * @see #fullscreen_mode=
+ * @see #flags
+ */
 static VALUE Window_fullscreen_mode(VALUE self)
 {
     Uint32 flags = SDL_GetWindowFlags(Get_SDL_Window(self));
     return UINT2NUM(flags & (SDL_WINDOW_FULLSCREEN|SDL_WINDOW_FULLSCREEN_DESKTOP));
 }
 
+/*
+ * @overload fullscreen_mode=(flag)
+ *   Set the fullscreen state of the window
+ *
+ *   @param flag [Integer] 0 for window mode, SDL2::Window::FULLSCREEN for 
+ *     fullscreen mode, and SDL2::Window::FULLSCREEN_DESKTOP for fullscreen
+ *     at the current desktop resolution.
+ *   @return [flag]
+ *
+ *   @see #fullscreen_mode
+ */
 static VALUE Window_set_fullscreen_mode(VALUE self, VALUE flags)
 {
     HANDLE_ERROR(SDL_SetWindowFullscreen(Get_SDL_Window(self), NUM2UINT(flags)));
     return flags;
 }
 
+/* @return [String] inspection string */
 static VALUE Window_inspect(VALUE self)
 {
     Window* w = Get_Window(self);
@@ -784,6 +862,7 @@ static VALUE Window_inspect(VALUE self)
         return rb_sprintf("<%s:%p (destroyed)>", rb_obj_classname(self), (void*)self);
 }
 
+/* @return [Hash] (GC) debug information */
 static VALUE Window_debug_info(VALUE self)
 {
     Window* w = Get_Window(self);
