@@ -280,6 +280,16 @@ SDL_Color Array_to_SDL_Color(VALUE ary)
     return color;
 }
 
+/*
+ * Get the names of all video drivers.
+ *
+ * You can use the name as an argument of {.video_init}.
+ * 
+ * @return [Array<String>]
+ * @macro SDL_Error
+ *
+ * 
+ */
 static VALUE SDL2_s_video_drivers(VALUE self)
 {
     int num_drivers = HANDLE_ERROR(SDL_GetNumVideoDrivers());
@@ -290,6 +300,12 @@ static VALUE SDL2_s_video_drivers(VALUE self)
     return drivers;
 }
 
+/*
+ * Get the name of current video driver
+ *
+ * @return [String] the name of the current video driver
+ * @return [nil] when the video is not initialized
+ */
 static VALUE SDL2_s_current_video_driver(VALUE self)
 {
     const char* name = SDL_GetCurrentVideoDriver();
@@ -299,6 +315,19 @@ static VALUE SDL2_s_current_video_driver(VALUE self)
         return Qnil;
 }
 
+/*
+ * @overload video_init(driver_name) 
+ *   Initialize the video subsystem, specifying a video driver.
+ *   
+ *   {.init} cannot specify a video driver, so you need to use
+ *   this method to specify a driver.
+ *   
+ *   @param driver_name [String]
+ *   @return [nil]
+ *   @macro SDL_Error
+ *
+ *   @see .init
+ */
 static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
 {
     HANDLE_ERROR(SDL_VideoInit(StringValueCStr(driver_name)));
@@ -355,6 +384,7 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  *   @param [Integer] flags 0, or one or more [Window flag masks](#label-Flags) OR'd together
  *   
  *   @return [SDL2::Window] created window
+ *   @macro SDL_Error
  */
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
                              VALUE flags)
@@ -373,11 +403,26 @@ static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w,
     return win;
 }
 
+/*
+ * Get all windows under SDL.
+ *
+ * @return [Hash<Integer => SDL2::Window>]
+ *   the hash from window id to the {SDL2::Window} objects.
+ */
 static VALUE Window_s_all_windows(VALUE self)
 {
     return rb_hash_dup(hash_windowid_to_window);
 }
 
+/*
+ * @overload find_by_id(id)
+ *   Get the window from ID.
+ *
+ *   @param id [Integer] the window id you want to find
+ *   @return [SDL2::Window] the window associated with **id**
+ *   @return [nil] when no window is associated with **id**
+ *
+ */
 static VALUE Window_s_find_by_id(VALUE self, VALUE id)
 {
     return rb_hash_aref(hash_windowid_to_window, id);
@@ -412,7 +457,7 @@ static VALUE Window_destroy(VALUE self)
  *   @param [Integer] flags 0, or one or more [Renderer flag masks](SDL2) OR'd together;
  *
  *   @return [SDL2::Renderer] the created renderer (rendering context)
- *   @raise [SDL2::Error] raises when an error occurs.
+ *   @macro SDL_Error
  */
 static VALUE Window_create_renderer(VALUE self, VALUE index, VALUE flags)
 {
@@ -441,7 +486,7 @@ static VALUE Window_renderer(VALUE self)
 }
 
 /*
- * Get the ID of the window.
+ * Get the numeric ID of the window.
  *
  * @return [Integer]
  */
@@ -454,6 +499,7 @@ static VALUE Window_window_id(VALUE self)
  * Get information about the window.
  *
  * @return [SDL2::Window::Mode]
+ * @macro SDL_Error
  */
 static VALUE Window_display_mode(VALUE self)
 {
@@ -466,6 +512,7 @@ static VALUE Window_display_mode(VALUE self)
  * Get the display associated with the window.
  *
  * @return [SDL2::Display]
+ * @macro SDL_Error
  */
 static VALUE Window_display(VALUE self)
 {
@@ -491,6 +538,7 @@ static VALUE Window_brightness(VALUE self)
  *   @param brightness [Float] the brightness, 0.0 means complete dark and 1.0 means
  *     normal brightness.
  *   @return [brightness]
+ *   @macro SDL_Error
  *   @see #brightness
  */
 static VALUE Window_set_brightness(VALUE self, VALUE brightness)
@@ -526,7 +574,7 @@ static VALUE gamma_table_to_Array(Uint16 r[])
  *   return value is red, green, and blue gamma tables and each gamma table
  *   has 256 Integers of 0-65535.
  *
- * @raise [SDL2::Error] raised on failure
+ * @macro SDL_Error
  */
 static VALUE Window_gamma_ramp(VALUE self)
 {
@@ -767,7 +815,7 @@ define(`SIMPLE_WINDOW_METHOD',`static VALUE Window_$2(VALUE self)
 {
     SDL_$1Window(Get_SDL_Window(self)); return Qnil;
 }')
-
+*/
 /*
  * Show the window.
  *
@@ -842,6 +890,7 @@ static VALUE Window_fullscreen_mode(VALUE self)
  *     fullscreen mode, and SDL2::Window::FULLSCREEN_DESKTOP for fullscreen
  *     at the current desktop resolution.
  *   @return [flag]
+ *   @macro SDL_Error
  *
  *   @see #fullscreen_mode
  */
@@ -880,10 +929,27 @@ static VALUE Window_debug_info(VALUE self)
     return info;
 }
 
+/*
+ * Document-class: SDL2::Display
+ *
+ * This class represents displays, screens, or monitors.
+ *
+ * This means that if you use dual screen, {.displays} returns two displays.
+ *
+ * This class handles color depth, resolution, and refresh rate of displays.
+ * 
+ */
+
+/*
+ * Get all connected displays.
+ *
+ * @return [Array<SDL2::Display>]
+ * @macro SDL_Error
+ */
 static VALUE Display_s_displays(VALUE self)
 {
     int i;
-    int num_displays = SDL_GetNumVideoDisplays();
+    int num_displays = HANDLE_ERROR(SDL_GetNumVideoDisplays());
     VALUE displays = rb_ary_new2(num_displays);
     for (i=0; i<num_displays; ++i)
         rb_ary_push(displays, Display_new(i));
@@ -895,6 +961,12 @@ static int Display_index_int(VALUE display)
     return NUM2INT(rb_iv_get(display, "@index"));
 }
 
+/*
+ * Get available display modes of the display.
+ *
+ * @return [Array<SDL2::Display::Mode>]
+ * @macro SDL_Error
+ */
 static VALUE Display_modes(VALUE self)
 {
     int i;
@@ -909,6 +981,12 @@ static VALUE Display_modes(VALUE self)
     return modes;
 }
 
+/*
+ * Get the current display mode.
+ *
+ * @return [SDL2::Display::Mode]
+ * @macro SDL_Error
+ */
 static VALUE Display_current_mode(VALUE self)
 {
     SDL_DisplayMode mode;
@@ -916,6 +994,13 @@ static VALUE Display_current_mode(VALUE self)
     return DisplayMode_new(&mode);
 }
 
+/*
+ * Get the desktop display mode.
+ *
+ * Normally, the return value of this method is
+ * same as {#current_mode}, but
+ * if the 
+ */
 static VALUE Display_desktop_mode(VALUE self)
 {
     SDL_DisplayMode mode;
@@ -984,6 +1069,31 @@ static VALUE DisplayMode_inspect(VALUE self)
  * * SDL2::Renderer::TARGETTEXTURE - the renderer supports rendering to texture
  *
  * No flags(==0) gives priority to available ACCELERATED renderers
+ *
+ * # Blending modes
+ * You can use 4 types of blending mode for rendering graphics
+ * using Renderer class.
+ *
+ * You can change the blending mode using
+ * {#draw_blend_mode=} and {SDL2::Texture#blend_mode=}.
+ * 
+ * In the backend of SDL, opengl or direct3d blending
+ * mechanism is used for blending operations.
+ * 
+ * * SDL2::BLENDMODE_NONE - no blending (dstRGBA = srcRGBA)
+ * * SDL2::BLENDMODE_BLEND - alpha blending
+ *     (dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA)),
+ *      dstA = srcA + (dstA * (1-srcA)))
+ * * SDL2::BLENDMODE_ADD - additive blending
+ *      (dstRGB = (srcRGB * srcA) + dstRGB,
+ *       dstA = dstA)
+ * * SDL2::BLENDMODE_MUL - color modulate
+ *      (dstRGB = srcRGB * dstRGB,
+ *       dstA = dstA)
+ *
+ * @!method destroy?
+ *   Return true if the renderer is {#destroy destroyed}.
+ *
  */
 
 
@@ -991,6 +1101,7 @@ static VALUE DisplayMode_inspect(VALUE self)
  * @overload drivers_info
  *   Return information of all available rendering contexts.
  *   @return [Array<SDL2::Renderer::Info>] information about rendering contexts
+ *   @macro SDL_Error
  */
 static VALUE Renderer_s_drivers_info(VALUE self)
 {
@@ -1005,6 +1116,12 @@ static VALUE Renderer_s_drivers_info(VALUE self)
     return info_ary;
 }
 
+/*
+ * Destroy the rendering context and free associated textures.
+ *
+ * @return [nil]
+ * @see #destroy?
+ */
 static VALUE Renderer_destroy(VALUE self)
 {
     Renderer_destroy_internal(Get_Renderer(self));
@@ -1028,7 +1145,7 @@ static VALUE Renderer_destroy(VALUE self)
  *   
  *   @return [SDL2::Texture] the created texture
  *
- *   @raise [SDL2::Error] raised when the texuture cannot be created
+ *   @raise [SDL2::Error] raised when the texture cannot be created
  *
  *   @see #create_texture_from
  */
@@ -1050,7 +1167,7 @@ static VALUE Renderer_create_texture(VALUE self, VALUE format, VALUE access,
  *   @param [SDL2::Surface] surface the surface containing pixels for the texture
  *   @return [SDL2::Texture] the created texture
  *
- *   @raise [SDL2::Error] raised when the texuture cannot be created
+ *   @raise [SDL2::Error] raised when the texture cannot be created
  *
  *   @see #create_texture
  */
@@ -1084,7 +1201,7 @@ static SDL_Point* Get_SDL_Point_or_NULL(VALUE point)
  *     rendering target; the texture will be stretched to fill the given rectangle
  *
  *   @return [void]
- *   @raise [SDL2::Error] raised when copy is failed
+ *   @macro SDL_Error
  *
  *   @see #copy_ex
  */
@@ -1121,7 +1238,7 @@ static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstre
  *   @param [Integer] flip bits OR'd of the flip consntants
  *
  *   @return [void]
- *   @raise [SDL2::Error] raised when copy is failed
+ *   @macro SDL_Error
  *
  *   @see #copy
  */
@@ -1151,6 +1268,9 @@ static VALUE Renderer_present(VALUE self)
 /*
  * Crear the rendering target with the drawing color.
  * @return [nil]
+ * @macro SDL_Error
+ * 
+ * @see #draw_color=
  */
 static VALUE Renderer_clear(VALUE self)
 {
@@ -1163,6 +1283,8 @@ static VALUE Renderer_clear(VALUE self)
  * @return [[Integer,Integer,Integer,Integer]]
  *   red, green, blue, and alpha components of the drawing color
  *   (all components are more than or equal to 0 and less than and equal to 255)
+ * @macro SDL_Error
+ * 
  * @see #draw_color=
  */
 static VALUE Renderer_draw_color(VALUE self)
@@ -1178,6 +1300,14 @@ static VALUE Renderer_draw_color(VALUE self)
  *
  *   All color components (including alpha) must be more than or equal to 0
  *   and less than and equal to 255
+ *
+ *   This method effects the following methods.
+ *   
+ *   * {#draw_line}
+ *   * {#draw_point}
+ *   * {#draw_rect}
+ *   * {#fill_rect}
+ *   * {#clear}
  *   
  *   @param [[Integer, Integer, Integer]] color
  *     red, green, and blue components used for drawing
@@ -1185,6 +1315,7 @@ static VALUE Renderer_draw_color(VALUE self)
  *     red, green, blue, and alpha components used for drawing
  *
  *   @return [color]
+ *   @macro SDL_Error
  *   
  *   @see #draw_color
  */
@@ -1208,6 +1339,7 @@ static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
  *   @param [Integer] x2 the x coordinate of the end point
  *   @param [Integer] y2 the y coordinate of the end point
  *   @return [nil]
+ *   @macro SDL_Error
  */
 static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
 {
@@ -1224,6 +1356,7 @@ static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE 
  *   @param [Integer] y the y coordinate of the point
  *
  *   @return [nil]
+ *   @macro SDL_Error
  */
 static VALUE Renderer_draw_point(VALUE self, VALUE x, VALUE y)
 {
@@ -1238,6 +1371,7 @@ static VALUE Renderer_draw_point(VALUE self, VALUE x, VALUE y)
  *   @param [SDL2::Rect] rect the drawing rectangle
  *   
  *   @return [nil]
+ *   @macro SDL_Error
  */
 static VALUE Renderer_draw_rect(VALUE self, VALUE rect)
 {
@@ -1252,6 +1386,7 @@ static VALUE Renderer_draw_rect(VALUE self, VALUE rect)
  *   @param [SDL2::Rect] rect the drawing rectangle
  *   
  *   @return [nil]
+ *   @macro SDL_Error
  */
 static VALUE Renderer_fill_rect(VALUE self, VALUE rect)
 {
@@ -1263,6 +1398,7 @@ static VALUE Renderer_fill_rect(VALUE self, VALUE rect)
  * Get information about _self_ rendering context .
  *
  * @return [SDL2::Renderer::Info] rendering information
+ * @macro SDL_Error
  */
 static VALUE Renderer_info(VALUE self)
 {
@@ -1271,6 +1407,17 @@ static VALUE Renderer_info(VALUE self)
     return RendererInfo_new(&info);
 }
 
+/*
+ * Get the blend mode used for drawing operations like
+ * {#fill_rect} and {#draw_line}.
+ *
+ * For the blending modes, see [blending modes](#label-Blending+modes)
+ *
+ * @return [Integer]
+ * @macro SDL_Error
+ * 
+ * @see #draw_blend_mode=
+ */
 static VALUE Renderer_draw_blend_mode(VALUE self)
 {
     SDL_BlendMode mode;
@@ -1278,12 +1425,37 @@ static VALUE Renderer_draw_blend_mode(VALUE self)
     return INT2FIX(mode);
 }
 
+/*
+ * @overload draw_blend_mode=(mode)
+ *   Set the blend mode used for drawing operations.
+ *
+ *   This method effects the following methods.
+ *   
+ *   * {#draw_line}
+ *   * {#draw_point}
+ *   * {#draw_rect}
+ *   * {#fill_rect}
+ *   * {#clear}
+ *
+ *   @param mode [Integer] the blending mode
+ *   @return mode
+ *   @macro SDL_Error
+ *
+ *   @see #draw_blend_mode
+ *
+ */
 static VALUE Renderer_set_draw_blend_mode(VALUE self, VALUE mode)
 {
     HANDLE_ERROR(SDL_SetRenderDrawBlendMode(Get_SDL_Renderer(self), NUM2INT(mode)));
     return mode;
 }
 
+/*
+ * Get the clip rectangle for the current target.
+ *
+ * @return [SDL2::Rect] the current clip rectangle
+ * 
+ */
 static VALUE Renderer_clip_rect(VALUE self)
 {
     VALUE rect = rb_obj_alloc(cRect);
@@ -1319,6 +1491,11 @@ static VALUE Renderer_viewport(VALUE self)
     return rect;
 }
 
+/*
+ * Return true if the renderer supports render target.
+ *
+ * @see #render_target=
+ */
 static VALUE Renderer_support_render_target_p(VALUE self)
 {
     return INT2BOOL(SDL_RenderTargetSupported(Get_SDL_Renderer(self)));
@@ -1346,7 +1523,8 @@ static VALUE Renderer_output_size(VALUE self)
  *    for the default render target(i.e. screen)
  *
  *  @return [target]
- *
+ *  @macro SDL_Error
+ *  
  *  @see #render_target
  */
 static VALUE Renderer_set_render_target(VALUE self, VALUE target)
@@ -1371,11 +1549,18 @@ static VALUE Renderer_render_target(VALUE self)
     return rb_iv_get(self, "render_target");
 }
 
+/*
+ * Reset the render target to the screen.
+ *
+ * @return [nil]
+ * @macro SDL_Error
+ */
 static VALUE Renderer_reset_render_target(VALUE self)
 {
     return Renderer_set_render_target(self, Qnil);
 }
 
+/* @return [Hash<String=>Object>] (GC) debug information */
 static VALUE Renderer_debug_info(VALUE self)
 {
     Renderer* r = Get_Renderer(self);
@@ -1394,12 +1579,35 @@ static VALUE Renderer_debug_info(VALUE self)
     return info;
 }
 
+/*
+ * Document-class: SDL2::Texture
+ *
+ * This class represents the texture associated with a renderer.
+ *
+ *
+ * @!method destroy?
+ *   Return true if the texture is {#destroy destroyed}.
+ */
+
+/*
+ * Destroy the texture and deallocate memory.
+ *
+ * @see #destroy?
+ */
 static VALUE Texture_destroy(VALUE self)
 {
     Texture_destroy_internal(Get_Texture(self));
     return Qnil;
 }
 
+/*
+ * Get the blending mode of the texture.
+ *
+ * @return [Integer] blend mode
+ * @macro SDL_Error
+ * 
+ * @see #blend_mode=
+ */
 static VALUE Texture_blend_mode(VALUE self)
 {
     SDL_BlendMode mode;
@@ -1407,12 +1615,30 @@ static VALUE Texture_blend_mode(VALUE self)
     return INT2FIX(mode);
 }
 
+/*
+ * @overload blend_mode=(mode)
+ *   Set the blending model of the texture.
+ *
+ *   @param mode [Integer] blending mode
+ *   @return [mode]
+ *   @macro SDL_Error
+ *
+ *   @see #blend_mode
+ */
 static VALUE Texture_set_blend_mode(VALUE self, VALUE mode)
 {
     HANDLE_ERROR(SDL_SetTextureBlendMode(Get_SDL_Texture(self), NUM2INT(mode)));
     return mode;
 }
 
+/*
+ * Get an additional alpha value used in render copy operations.
+ *
+ * @return [Integer] the current alpha value
+ * @macro SDL_Error
+ *
+ * @see #alpha_mod=
+ */
 static VALUE Texture_alpha_mod(VALUE self)
 {
     Uint8 alpha;
@@ -1420,12 +1646,30 @@ static VALUE Texture_alpha_mod(VALUE self)
     return INT2FIX(alpha);
 }
 
+/*
+ * @overload alpha_mod=(alpha) 
+ *   Set an additional alpha value used in render copy operations.
+ *
+ *   @param alpha [Integer] the alpha value multiplied into copy operation,
+ *     from 0 to 255
+ *   @return [alpha]
+ *   @macro SDL_Error
+ *
+ *   @see #alpha_mod
+ */
 static VALUE Texture_set_alpha_mod(VALUE self, VALUE alpha)
 {
     HANDLE_ERROR(SDL_SetTextureAlphaMod(Get_SDL_Texture(self), NUM2UCHAR(alpha)));
     return alpha;
 }
 
+/*
+ * Get an additional color value used in render copy operations.
+ *
+ * @return [[Integer, Integer, Integer]] the current red, green, and blue
+ *   color value.
+ * @macro SDL_Error
+ */
 static VALUE Texture_color_mod(VALUE self)
 {
     Uint8 r, g, b;
@@ -1433,14 +1677,29 @@ static VALUE Texture_color_mod(VALUE self)
     return rb_ary_new3(3, INT2FIX(r), INT2FIX(g), INT2FIX(b));
 }
 
+/*
+ * @overload color_mod=(rgb) 
+ *   Set an additional color value used in render copy operations.
+ *   
+ *   @param rgb [[Integer, Integer, Integer]] the red, green, and blue
+ *     color value multiplied into copy operations.
+ *   @return [rgb]
+ *   @macro SDL_Error
+ */
 static VALUE Texture_set_color_mod(VALUE self, VALUE rgb)
 {
     SDL_Color color = Array_to_SDL_Color(rgb);
     HANDLE_ERROR(SDL_SetTextureColorMod(Get_SDL_Texture(self),
                                         color.r, color.g, color.b));
-    return Qnil;
+    return rgb;
 }
 
+/*
+ * Get the format of the texture.
+ *
+ * @return [SDL2::PixelFormat]
+ * @macro SDL_Error
+ */
 static VALUE Texture_format(VALUE self)
 {
     Uint32 format;
@@ -1448,6 +1707,20 @@ static VALUE Texture_format(VALUE self)
     return PixelFormat_new(format);
 }
 
+/*
+ * Get the access pattern allowed for the texture.
+ *
+ * The return value is one of the following:
+ * 
+ * * SDL2::Texture::ACCESS_STATIC - changes rarely, not lockable
+ * * SDL2::Texture::ACCESS_STREAMING - changes frequently, lockable
+ * * SDL2::Texture::ACCESS_TARGET - can be used as a render target
+ *
+ * @return [Integer]
+ * @macro SDL_Error
+ * 
+ * @see SDL2::Renderer#create_texture
+ */
 static VALUE Texture_access_pattern(VALUE self)
 {
     int access;
@@ -1455,6 +1728,14 @@ static VALUE Texture_access_pattern(VALUE self)
     return INT2FIX(access);
 }
 
+/*
+ * Get the width of the texture.
+ *
+ * @return [Integer]
+ * @macro SDL_Error
+ * 
+ * @see SDL2::Renderer#create_texture
+ */
 static VALUE Texture_w(VALUE self)
 {
     int w;
@@ -1462,6 +1743,14 @@ static VALUE Texture_w(VALUE self)
     return INT2FIX(w);
 }
 
+/*
+ * Get the height of the texture.
+ *
+ * @return [Integer]
+ * @macro SDL_Error
+ * 
+ * @see SDL2::Renderer#create_texture
+ */
 static VALUE Texture_h(VALUE self)
 {
     int h;
@@ -1469,6 +1758,7 @@ static VALUE Texture_h(VALUE self)
     return INT2FIX(h);
 }
 
+/* @return [String] inspection string */
 static VALUE Texture_inspect(VALUE self)
 {
     Texture* t = Get_Texture(self);
@@ -1483,6 +1773,7 @@ static VALUE Texture_inspect(VALUE self)
                       access, w, h);
 }
 
+/* @return [Hash<String=>Object>] (GC) debugging information */
 static VALUE Texture_debug_info(VALUE self)
 {
     Texture* t = Get_Texture(self);
@@ -1492,6 +1783,36 @@ static VALUE Texture_debug_info(VALUE self)
     return info;
 }
 
+/*
+ * Document-class: SDL2::Surface
+ *
+ * This class represents bitmap images (collection of pixels).
+ *
+ * Normally in SDL2, this class is not used for drawing a image
+ * on a window. {SDL2::Texture} is used for the purpose.
+ *
+ * Mainly this class is for compatibility with SDL11, but the class
+ * is useful for simple pixel manipulation.
+ * For example, {SDL2::TTF} can create only surfaces, not textures.
+ * You can convert a surface to texture with
+ * {SDL2::Renderer#create_texture_from}.
+ *
+ * @!method destory?
+ *   Return true if the surface is {#destroy destroyed}.
+ *
+ */
+
+/*
+ * @overload load_bmp(path)
+ *   Load a surface from bmp file.
+ *
+ *   @param path [String] bmp file path
+ *   @return [SDL2::Surface]
+ *   @raise [SDL2::Error] raised when an error occurs.
+ *     For example, if there is no file or the file file
+ *     format is not Windows BMP.
+ *
+ */
 static VALUE Surface_s_load_bmp(VALUE self, VALUE fname)
 {
     SDL_Surface* surface = SDL_LoadBMP(StringValueCStr(fname));
@@ -1541,6 +1862,12 @@ static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
     return Data_Wrap_Struct(cSurface, 0, Surface_free, s);
 }
 
+/*
+ * Destroy the surface and deallocate the memory for pixels.
+ *
+ * @return [nil]
+ * @see #destroy?
+ */
 static VALUE Surface_destroy(VALUE self)
 {
     Surface* s = Get_Surface(self);

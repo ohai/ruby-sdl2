@@ -57,7 +57,7 @@ static VALUE Music_new(Mix_Music* music)
 DEFINE_WRAPPER(Mix_Music, Music, music, cMusic, "SDL2::Mixer::Music");
 
 /*
- * Document-module: SDL::Mixer
+ * Document-module: SDL2::Mixer
  *
  * Sound mixing module.
  *

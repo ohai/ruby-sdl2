@@ -3,7 +3,7 @@ C_FROM_M4_FILES = C_M4_FILES.map{|path| path.gsub(/\.c\.m4\Z/, ".c") }
 C_FILES = Dir.glob("*.c") | C_FROM_M4_FILES
 RB_FILES = Dir.glob("lib/**/*.rb")
 
-POT_SOURCES = ["main.c"] + (C_FILES - ["main.c"]) + RB_FILES
+POT_SOURCES = RB_FILES + ["main.c"] + (C_FILES - ["main.c"])
 YARD_SOURCES = "-m markdown --main README.md --files COPYING.txt #{POT_SOURCES.join(" ")}"
 
 locale = ENV["YARD_LOCALE"]
