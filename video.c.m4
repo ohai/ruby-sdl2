@@ -286,9 +286,6 @@ SDL_Color Array_to_SDL_Color(VALUE ary)
  * You can use the name as an argument of {.video_init}.
  * 
  * @return [Array<String>]
- * @macro SDL_Error
- *
- * 
  */
 static VALUE SDL2_s_video_drivers(VALUE self)
 {
@@ -324,7 +321,6 @@ static VALUE SDL2_s_current_video_driver(VALUE self)
  *   
  *   @param driver_name [String]
  *   @return [nil]
- *   @macro SDL_Error
  *
  *   @see .init
  */
@@ -384,7 +380,7 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  *   @param [Integer] flags 0, or one or more [Window flag masks](#label-Flags) OR'd together
  *   
  *   @return [SDL2::Window] created window
- *   @macro SDL_Error
+ *   
  */
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
                              VALUE flags)
@@ -457,7 +453,6 @@ static VALUE Window_destroy(VALUE self)
  *   @param [Integer] flags 0, or one or more [Renderer flag masks](SDL2) OR'd together;
  *
  *   @return [SDL2::Renderer] the created renderer (rendering context)
- *   @macro SDL_Error
  */
 static VALUE Window_create_renderer(VALUE self, VALUE index, VALUE flags)
 {
@@ -499,7 +494,6 @@ static VALUE Window_window_id(VALUE self)
  * Get information about the window.
  *
  * @return [SDL2::Window::Mode]
- * @macro SDL_Error
  */
 static VALUE Window_display_mode(VALUE self)
 {
@@ -512,7 +506,6 @@ static VALUE Window_display_mode(VALUE self)
  * Get the display associated with the window.
  *
  * @return [SDL2::Display]
- * @macro SDL_Error
  */
 static VALUE Window_display(VALUE self)
 {
@@ -538,7 +531,7 @@ static VALUE Window_brightness(VALUE self)
  *   @param brightness [Float] the brightness, 0.0 means complete dark and 1.0 means
  *     normal brightness.
  *   @return [brightness]
- *   @macro SDL_Error
+ *
  *   @see #brightness
  */
 static VALUE Window_set_brightness(VALUE self, VALUE brightness)
@@ -574,7 +567,6 @@ static VALUE gamma_table_to_Array(Uint16 r[])
  *   return value is red, green, and blue gamma tables and each gamma table
  *   has 256 Integers of 0-65535.
  *
- * @macro SDL_Error
  */
 static VALUE Window_gamma_ramp(VALUE self)
 {
@@ -890,8 +882,7 @@ static VALUE Window_fullscreen_mode(VALUE self)
  *     fullscreen mode, and SDL2::Window::FULLSCREEN_DESKTOP for fullscreen
  *     at the current desktop resolution.
  *   @return [flag]
- *   @macro SDL_Error
- *
+ *   
  *   @see #fullscreen_mode
  */
 static VALUE Window_set_fullscreen_mode(VALUE self, VALUE flags)
@@ -944,7 +935,7 @@ static VALUE Window_debug_info(VALUE self)
  * Get all connected displays.
  *
  * @return [Array<SDL2::Display>]
- * @macro SDL_Error
+ * 
  */
 static VALUE Display_s_displays(VALUE self)
 {
@@ -965,7 +956,7 @@ static int Display_index_int(VALUE display)
  * Get available display modes of the display.
  *
  * @return [Array<SDL2::Display::Mode>]
- * @macro SDL_Error
+ * 
  */
 static VALUE Display_modes(VALUE self)
 {
@@ -985,7 +976,8 @@ static VALUE Display_modes(VALUE self)
  * Get the current display mode.
  *
  * @return [SDL2::Display::Mode]
- * @macro SDL_Error
+ * 
+ * @see #desktop_mode
  */
 static VALUE Display_current_mode(VALUE self)
 {
@@ -998,8 +990,12 @@ static VALUE Display_current_mode(VALUE self)
  * Get the desktop display mode.
  *
  * Normally, the return value of this method is
- * same as {#current_mode}, but
- * if the 
+ * same as {#current_mode}. However, 
+ * when you use fullscreen and chagne the resolution,
+ * this method returns the previous native display mode,
+ * and not the current mode.
+ *
+ * @return [SDL2::Display::Mode]
  */
 static VALUE Display_desktop_mode(VALUE self)
 {
@@ -1008,6 +1004,14 @@ static VALUE Display_desktop_mode(VALUE self)
     return DisplayMode_new(&mode);
 }
 
+/*
+ * @overload closest_mode(mode) 
+ *   Get the available display mode closest match to **mode**.
+ *   
+ *   @param mode [SDL2::Display::Mode] the desired display mode
+ *   @return [SDL2::Display::Mode]
+ *   
+ */
 static VALUE Display_closest_mode(VALUE self, VALUE mode)
 {
     SDL_DisplayMode closest;
@@ -1017,6 +1021,12 @@ static VALUE Display_closest_mode(VALUE self, VALUE mode)
     return DisplayMode_new(&closest);
 }
 
+/*
+ * Get the desktop area represented by the display, with the primary
+ * display located at (0, 0).
+ *
+ * @return [Rect]
+ */
 static VALUE Display_bounds(VALUE self)
 {
     VALUE rect = rb_obj_alloc(cRect);
@@ -1032,6 +1042,25 @@ static Uint32 uint32_for_format(VALUE format)
         return NUM2UINT(format);
 }
 
+/*
+ * Document-class: SDL2::Display::Mode
+ *
+ * This class represents the display mode.
+ *
+ * An object of this class has information about color depth, refresh rate,
+ * and resolution of a display.
+ *
+ */
+
+/*
+ * @overload initialze(format, w, h, refresh_rate)
+ *   Create a new Display::Mode object.
+ *
+ *   @param format [SDL2::PixelFormat, Integer] pixel format
+ *   @param w [Integer] width
+ *   @param h [Integer] height
+ *   @param refresh_rate [Integer] refresh rate
+ */
 static VALUE DisplayMode_initialize(VALUE self, VALUE format, VALUE w, VALUE h,
                                     VALUE refresh_rate)
 {
@@ -1042,6 +1071,7 @@ static VALUE DisplayMode_initialize(VALUE self, VALUE format, VALUE w, VALUE h,
     return Qnil;
 }
 
+/* @return [String] inspection string */
 static VALUE DisplayMode_inspect(VALUE self)
 {
     SDL_DisplayMode* mode = Get_SDL_DisplayMode(self);
@@ -1101,7 +1131,7 @@ static VALUE DisplayMode_inspect(VALUE self)
  * @overload drivers_info
  *   Return information of all available rendering contexts.
  *   @return [Array<SDL2::Renderer::Info>] information about rendering contexts
- *   @macro SDL_Error
+ *   
  */
 static VALUE Renderer_s_drivers_info(VALUE self)
 {
@@ -1201,8 +1231,7 @@ static SDL_Point* Get_SDL_Point_or_NULL(VALUE point)
  *     rendering target; the texture will be stretched to fill the given rectangle
  *
  *   @return [void]
- *   @macro SDL_Error
- *
+ *   
  *   @see #copy_ex
  */
 static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstrect)
@@ -1238,7 +1267,6 @@ static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstre
  *   @param [Integer] flip bits OR'd of the flip consntants
  *
  *   @return [void]
- *   @macro SDL_Error
  *
  *   @see #copy
  */
@@ -1268,7 +1296,6 @@ static VALUE Renderer_present(VALUE self)
 /*
  * Crear the rendering target with the drawing color.
  * @return [nil]
- * @macro SDL_Error
  * 
  * @see #draw_color=
  */
@@ -1283,7 +1310,6 @@ static VALUE Renderer_clear(VALUE self)
  * @return [[Integer,Integer,Integer,Integer]]
  *   red, green, blue, and alpha components of the drawing color
  *   (all components are more than or equal to 0 and less than and equal to 255)
- * @macro SDL_Error
  * 
  * @see #draw_color=
  */
@@ -1315,7 +1341,6 @@ static VALUE Renderer_draw_color(VALUE self)
  *     red, green, blue, and alpha components used for drawing
  *
  *   @return [color]
- *   @macro SDL_Error
  *   
  *   @see #draw_color
  */
@@ -1339,7 +1364,6 @@ static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
  *   @param [Integer] x2 the x coordinate of the end point
  *   @param [Integer] y2 the y coordinate of the end point
  *   @return [nil]
- *   @macro SDL_Error
  */
 static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
 {
@@ -1356,7 +1380,6 @@ static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE 
  *   @param [Integer] y the y coordinate of the point
  *
  *   @return [nil]
- *   @macro SDL_Error
  */
 static VALUE Renderer_draw_point(VALUE self, VALUE x, VALUE y)
 {
@@ -1371,7 +1394,6 @@ static VALUE Renderer_draw_point(VALUE self, VALUE x, VALUE y)
  *   @param [SDL2::Rect] rect the drawing rectangle
  *   
  *   @return [nil]
- *   @macro SDL_Error
  */
 static VALUE Renderer_draw_rect(VALUE self, VALUE rect)
 {
@@ -1386,7 +1408,6 @@ static VALUE Renderer_draw_rect(VALUE self, VALUE rect)
  *   @param [SDL2::Rect] rect the drawing rectangle
  *   
  *   @return [nil]
- *   @macro SDL_Error
  */
 static VALUE Renderer_fill_rect(VALUE self, VALUE rect)
 {
@@ -1398,7 +1419,6 @@ static VALUE Renderer_fill_rect(VALUE self, VALUE rect)
  * Get information about _self_ rendering context .
  *
  * @return [SDL2::Renderer::Info] rendering information
- * @macro SDL_Error
  */
 static VALUE Renderer_info(VALUE self)
 {
@@ -1414,7 +1434,6 @@ static VALUE Renderer_info(VALUE self)
  * For the blending modes, see [blending modes](#label-Blending+modes)
  *
  * @return [Integer]
- * @macro SDL_Error
  * 
  * @see #draw_blend_mode=
  */
@@ -1439,7 +1458,6 @@ static VALUE Renderer_draw_blend_mode(VALUE self)
  *
  *   @param mode [Integer] the blending mode
  *   @return mode
- *   @macro SDL_Error
  *
  *   @see #draw_blend_mode
  *
@@ -1523,7 +1541,6 @@ static VALUE Renderer_output_size(VALUE self)
  *    for the default render target(i.e. screen)
  *
  *  @return [target]
- *  @macro SDL_Error
  *  
  *  @see #render_target
  */
@@ -1553,7 +1570,6 @@ static VALUE Renderer_render_target(VALUE self)
  * Reset the render target to the screen.
  *
  * @return [nil]
- * @macro SDL_Error
  */
 static VALUE Renderer_reset_render_target(VALUE self)
 {
@@ -1604,7 +1620,6 @@ static VALUE Texture_destroy(VALUE self)
  * Get the blending mode of the texture.
  *
  * @return [Integer] blend mode
- * @macro SDL_Error
  * 
  * @see #blend_mode=
  */
@@ -1621,7 +1636,6 @@ static VALUE Texture_blend_mode(VALUE self)
  *
  *   @param mode [Integer] blending mode
  *   @return [mode]
- *   @macro SDL_Error
  *
  *   @see #blend_mode
  */
@@ -1635,7 +1649,6 @@ static VALUE Texture_set_blend_mode(VALUE self, VALUE mode)
  * Get an additional alpha value used in render copy operations.
  *
  * @return [Integer] the current alpha value
- * @macro SDL_Error
  *
  * @see #alpha_mod=
  */
@@ -1653,7 +1666,6 @@ static VALUE Texture_alpha_mod(VALUE self)
  *   @param alpha [Integer] the alpha value multiplied into copy operation,
  *     from 0 to 255
  *   @return [alpha]
- *   @macro SDL_Error
  *
  *   @see #alpha_mod
  */
@@ -1668,7 +1680,6 @@ static VALUE Texture_set_alpha_mod(VALUE self, VALUE alpha)
  *
  * @return [[Integer, Integer, Integer]] the current red, green, and blue
  *   color value.
- * @macro SDL_Error
  */
 static VALUE Texture_color_mod(VALUE self)
 {
@@ -1684,7 +1695,6 @@ static VALUE Texture_color_mod(VALUE self)
  *   @param rgb [[Integer, Integer, Integer]] the red, green, and blue
  *     color value multiplied into copy operations.
  *   @return [rgb]
- *   @macro SDL_Error
  */
 static VALUE Texture_set_color_mod(VALUE self, VALUE rgb)
 {
@@ -1698,7 +1708,6 @@ static VALUE Texture_set_color_mod(VALUE self, VALUE rgb)
  * Get the format of the texture.
  *
  * @return [SDL2::PixelFormat]
- * @macro SDL_Error
  */
 static VALUE Texture_format(VALUE self)
 {
@@ -1717,7 +1726,6 @@ static VALUE Texture_format(VALUE self)
  * * SDL2::Texture::ACCESS_TARGET - can be used as a render target
  *
  * @return [Integer]
- * @macro SDL_Error
  * 
  * @see SDL2::Renderer#create_texture
  */
@@ -1732,7 +1740,6 @@ static VALUE Texture_access_pattern(VALUE self)
  * Get the width of the texture.
  *
  * @return [Integer]
- * @macro SDL_Error
  * 
  * @see SDL2::Renderer#create_texture
  */
@@ -1747,7 +1754,6 @@ static VALUE Texture_w(VALUE self)
  * Get the height of the texture.
  *
  * @return [Integer]
- * @macro SDL_Error
  * 
  * @see SDL2::Renderer#create_texture
  */
@@ -1797,7 +1803,7 @@ static VALUE Texture_debug_info(VALUE self)
  * You can convert a surface to texture with
  * {SDL2::Renderer#create_texture_from}.
  *
- * @!method destory?
+ * @!method destroy?
  *   Return true if the surface is {#destroy destroyed}.
  *
  */
@@ -2254,7 +2260,7 @@ static VALUE PixelForamt_initialize(VALUE self, VALUE format)
 
 static VALUE PixelFormat_type(VALUE self)
 {
-    return UINT2NUM(SDL_PIXELTYPE(rb_iv_get(self, "@format")));
+    return UINT2NUM(SDL_PIXELTYPE(NUM2UINT(rb_iv_get(self, "@format"))));
 }
 
 #define PIXELFORMAT_ATTR_READER(field, extractor, c2ruby)               \
@@ -2271,6 +2277,14 @@ PIXELFORMAT_ATTR_READER(bytes_per_pixel,  SDL_BYTESPERPIXEL, INT2NUM);
 PIXELFORMAT_ATTR_READER(indexed_p,  SDL_ISPIXELFORMAT_INDEXED, INT2BOOL);
 PIXELFORMAT_ATTR_READER(alpha_p,  SDL_ISPIXELFORMAT_ALPHA, INT2BOOL);
 PIXELFORMAT_ATTR_READER(fourcc_p,  SDL_ISPIXELFORMAT_FOURCC, INT2BOOL);
+
+static VALUE PixelFormat_eq(VALUE self, VALUE other)
+{
+    if (!rb_obj_is_kind_of(other, cPixelFormat))
+        return Qfalse;
+
+    return INT2BOOL(rb_iv_get(self, "@format") == rb_iv_get(other, "@format"));
+}
 
 static VALUE PixelFormat_inspect(VALUE self)
 {
@@ -2387,7 +2401,7 @@ void rubysdl2_init_video(void)
     rb_define_alloc_func(cDisplayMode, DisplayMode_s_allocate);
     rb_define_method(cDisplayMode, "initialize", DisplayMode_initialize, 4);
     rb_define_method(cDisplayMode, "inspect", DisplayMode_inspect, 0);
-
+    /* attr format, w, h, refresh_rate */
     
     cRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
     
@@ -2533,7 +2547,8 @@ void rubysdl2_init_video(void)
     rb_define_method(cPixelFormat, "indexed?", PixelFormat_indexed_p, 0);
     rb_define_method(cPixelFormat, "alpha?", PixelFormat_alpha_p, 0);
     rb_define_method(cPixelFormat, "fourcc?", PixelFormat_fourcc_p, 0);
-
+    rb_define_method(cPixelFormat, "==", PixelFormat_eq, 1);
+    
     {
         VALUE formats = rb_ary_new();
         rb_define_const(cPixelFormat, "FORMATS", formats);
