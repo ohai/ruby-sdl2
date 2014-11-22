@@ -1081,6 +1081,30 @@ static VALUE DisplayMode_inspect(VALUE self)
                       
 }
 
+/* @return [SDL2::PixelFormat] the pixel format of the display mode */
+static VALUE DisplayMode_format(VALUE self)
+{
+    return PixelFormat_new(Get_SDL_DisplayMode(self)->format);
+}
+
+/* @return [Integer] the width of the screen of the display mode */
+static VALUE DisplayMode_w(VALUE self)
+{
+    return INT2NUM(Get_SDL_DisplayMode(self)->w);
+}
+
+/* @return [Integer] the height of the screen of the display mode */
+static VALUE DisplayMode_h(VALUE self)
+{
+    return INT2NUM(Get_SDL_DisplayMode(self)->h);
+}
+
+/* @return [Integer] the refresh rate of the display mode */
+static VALUE DisplayMode_refresh_rate(VALUE self)
+{
+    return INT2NUM(Get_SDL_DisplayMode(self)->refresh_rate);
+}
+
 /*
  * Document-class: SDL2::Renderer
  *
@@ -2562,6 +2586,10 @@ void rubysdl2_init_video(void)
     rb_define_alloc_func(cDisplayMode, DisplayMode_s_allocate);
     rb_define_method(cDisplayMode, "initialize", DisplayMode_initialize, 4);
     rb_define_method(cDisplayMode, "inspect", DisplayMode_inspect, 0);
+    rb_define_method(cDisplayMode, "format", DisplayMode_format, 0);
+    rb_define_method(cDisplayMode, "w", DisplayMode_w, 0);
+    rb_define_method(cDisplayMode, "h", DisplayMode_h, 0);
+    rb_define_method(cDisplayMode, "refresh_rate", DisplayMode_refresh_rate, 0);
     /* attr format, w, h, refresh_rate */
     
     cRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
