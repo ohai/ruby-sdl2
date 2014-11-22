@@ -1057,8 +1057,8 @@ static Uint32 uint32_for_format(VALUE format)
  *   Create a new Display::Mode object.
  *
  *   @param format [SDL2::PixelFormat, Integer] pixel format
- *   @param w [Integer] width
- *   @param h [Integer] height
+ *   @param w [Integer] the width
+ *   @param h [Integer] the height
  *   @param refresh_rate [Integer] refresh rate
  */
 static VALUE DisplayMode_initialize(VALUE self, VALUE format, VALUE w, VALUE h,
@@ -1797,7 +1797,7 @@ static VALUE Texture_debug_info(VALUE self)
  * Normally in SDL2, this class is not used for drawing a image
  * on a window. {SDL2::Texture} is used for the purpose.
  *
- * Mainly this class is for compatibility with SDL11, but the class
+ * Mainly this class is for compatibility with SDL1, but the class
  * is useful for simple pixel manipulation.
  * For example, {SDL2::TTF} can create only surfaces, not textures.
  * You can convert a surface to texture with
@@ -1829,6 +1829,28 @@ static VALUE Surface_s_load_bmp(VALUE self, VALUE fname)
     return Surface_new(surface);
 }
 
+/*
+ * @overload from_string(string, width, heigth, depth, pitch=nil, rmask=nil, gmask=nil, bmask=nil, amask=nil)
+ *
+ *   Create a RGB surface from pixel data as String object.
+ *
+ *   If rmask, gmask, bmask are omitted, the default masks are used.
+ *   If amask is omitted, alpha mask is considered to be zero.
+ *   
+ *   @param string [String] the pixel data
+ *   @param width [Integer] the width of the creating surface
+ *   @param height [Integer] the height of the creating surface
+ *   @param depth [Integer] the color depth (in bits) of the creating surface
+ *   @param pitch [Integer] the number of bytes of one scanline
+ *     if this argument is omitted, width*depth/8 is used.
+ *   @param rmask [Integer] the red mask of a pixel
+ *   @param gmask [Integer] the green mask of a pixel
+ *   @param bmask [Integer] the blue mask of a pixel
+ *   @param amask [Integer] the alpha mask of a pixel
+ *   @return [SDL2::Surface] a new surface
+ *   @raise [SDL2::Error] raised when an error occurs in C SDL library
+ *   
+ */
 static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
 {
     VALUE string, width, height, depth, pitch, Rmask, Gmask, Bmask, Amask;
@@ -1886,6 +1908,12 @@ static VALUE Surface_destroy(VALUE self)
     return Qnil;
 }
 
+/*
+ * Get the blending mode of the surface used for blit operations.
+ *
+ * @return [Integer]
+ * @see #blend_mode=
+ */
 static VALUE Surface_blend_mode(VALUE self)
 {
     SDL_BlendMode mode;
@@ -1893,29 +1921,69 @@ static VALUE Surface_blend_mode(VALUE self)
     return INT2FIX(mode);
 }
 
+/*
+ * @overload blend_mode=(mode)
+ *   Set the blending mode of the surface used for blit operations.
+ *
+ *   @param mode [Integer] the blending mode
+ *   @return [mode]
+ *   @see #blend_mode
+ */
 static VALUE Surface_set_blend_mode(VALUE self, VALUE mode)
 {
     HANDLE_ERROR(SDL_SetSurfaceBlendMode(Get_SDL_Surface(self), NUM2INT(mode)));
     return mode;
 }
 
+/*
+ * Return true if the surface need to lock when you get access to the
+ * pixel data of the surface.
+ *
+ * @see #lock
+ */
 static VALUE Surface_must_lock_p(VALUE self)
 {
     return INT2BOOL(SDL_MUSTLOCK(Get_SDL_Surface(self)));
 }
 
+/*
+ * Lock the surface.
+ *
+ * @return [nil]
+ * 
+ * @see #unlock
+ * @see #must_lock?
+ */
 static VALUE Surface_lock(VALUE self)
 {
     HANDLE_ERROR(SDL_LockSurface(Get_SDL_Surface(self)));
     return Qnil;
 }
 
+/*
+ * Unlock the surface.
+ *
+ * @return [nil]
+ * 
+ * @see #lock
+ */
 static VALUE Surface_unlock(VALUE self)
 {
     SDL_UnlockSurface(Get_SDL_Surface(self));
     return Qnil;
 }
 
+/*
+ * @overload pixel(x, y) 
+ *   Get a pixel data at (**x**, **y**)
+ *
+ *   @param x [Integer] the x coordinate
+ *   @param y [Integer] the y coordinate
+ *   @return [Integer] pixel data
+ *
+ *   @see #pixel_color
+ *   
+ */
 static VALUE Surface_pixel(VALUE self, VALUE x_coord, VALUE y_coord)
 {
     int x = NUM2INT(x_coord);
@@ -1936,6 +2004,12 @@ static VALUE Surface_pixel(VALUE self, VALUE x_coord, VALUE y_coord)
     return UINT2NUM(SDL_SwapLE32(pixel));
 }
 
+/*
+ * Get all pixel data of the surface as a string.
+ *
+ * @return [String]
+ *
+ */
 static VALUE Surface_pixels(VALUE self)
 {
     SDL_Surface* surface = Get_SDL_Surface(self);
@@ -1943,21 +2017,46 @@ static VALUE Surface_pixels(VALUE self)
     return rb_str_new(surface->pixels, size);
 }
 
+/*
+ * Get the pitch (bytes per horizontal line) of the surface.
+ *
+ * @return [Integer]
+ */
 static VALUE Surface_pitch(VALUE self)
 {
     return UINT2NUM(Get_SDL_Surface(self)->pitch);
 }
 
+/*
+ * Get bits per pixel of the surface.
+ *
+ * @return [Integer]
+ */
 static VALUE Surface_bits_per_pixel(VALUE self)
 {
     return UCHAR2NUM(Get_SDL_Surface(self)->format->BitsPerPixel);
 }
 
+/*
+ * Get bytes per pixel of the surface.
+ *
+ * @return [Integer]
+ */
 static VALUE Surface_bytes_per_pixel(VALUE self)
 {
     return UCHAR2NUM(Get_SDL_Surface(self)->format->BytesPerPixel);
 }
 
+/*
+ * @overload pixel_color(x, y)
+ *   Get the pixel color (r,g,b and a) at (**x**, **y**) of the surface.
+ *
+ *   @param x [Integer] the x coordinate
+ *   @param y [Integer] the y coordinate
+ *   @return [[Integer, Integer, Integer, Integer]]
+ *     the red, green, blue, and alpha component of the specified pixel.
+ *
+ */
 static VALUE Surface_pixel_color(VALUE self, VALUE x, VALUE y)
 {
     Uint32 pixel = NUM2UINT(Surface_pixel(self, x, y));
@@ -1993,12 +2092,32 @@ static Uint32 pixel_value(VALUE val, SDL_PixelFormat* format)
     return 0;
 }
 
+/*
+ * Unset the color key of the surface.
+ *
+ * @return [nil]
+ *
+ * @see #color_key=
+ */
 static VALUE Surface_unset_color_key(VALUE self)
 {
     HANDLE_ERROR(SDL_SetColorKey(Get_SDL_Surface(self), SDL_FALSE, 0));
     return Qnil;
 }
 
+/*
+ * @overload color_key=(key) 
+ *   Set the color key of the surface
+ *
+ *   @param key [Integer, Array<Integer>]
+ *     the color key, pixel value (see {#pixel}) or pixel color (array of
+ *     three or four integer elements).
+ *
+ *   @return [key]
+ *
+ *   @see #color_key
+ *   @see #unset_color_key
+ */
 static VALUE Surface_set_color_key(VALUE self, VALUE key)
 {
     SDL_Surface* surface = Get_SDL_Surface(self);
@@ -2010,6 +2129,14 @@ static VALUE Surface_set_color_key(VALUE self, VALUE key)
     return key;
 }
 
+/*
+ * Get the color key of the surface
+ *
+ * @return [Integer] the color key, as pixel value (see {#pixel})
+ *
+ * @see #color_key=
+ * @see #unset_color_key
+ */
 static VALUE Surface_color_key(VALUE self)
 {
     Uint32 key;
@@ -2019,17 +2146,43 @@ static VALUE Surface_color_key(VALUE self)
         return UINT2NUM(key);
 }
 
+/*
+ * Get the width of the surface.
+ *
+ * @return [Integer]
+ */
 static VALUE Surface_w(VALUE self)
 {
     return INT2NUM(Get_SDL_Surface(self)->w);
 }
 
+/*
+ * Get the height of the surface.
+ *
+ * @return [Integer]
+ */
 static VALUE Surface_h(VALUE self)
 {
     return INT2NUM(Get_SDL_Surface(self)->h);
 }
 
 
+/*
+ * @overload blit(src, srcrect, dst, dstrect)
+ *   Perform a fast blit from **src** surface to **dst** surface.
+ *
+ *   @param src [SDL2::Surface] the source surface
+ *   @param srcrect [SDL2::Rect,nil] the region in the source surface,
+ *     if nil is given, the whole source is used
+ *   @param dst [SDL2::Surface] the destination surface
+ *   @param dstrect [SDL2::Rect,nil] the region in the destination surface
+ *     if nil is given, the source image is copied to (0, 0) on
+ *     the destination surface.
+ *     **dstrect** is changed by this method to store the
+ *     actually copied region (since the surface has clipping functionality,
+ *     actually copied region may be different from given **dstrect**).
+ *   @return [nil]
+ */
 static VALUE Surface_s_blit(VALUE self, VALUE src, VALUE srcrect, VALUE dst, VALUE dstrect)
 {
     HANDLE_ERROR(SDL_BlitSurface(Get_SDL_Surface(src),
@@ -2039,6 +2192,14 @@ static VALUE Surface_s_blit(VALUE self, VALUE src, VALUE srcrect, VALUE dst, VAL
     return Qnil;
 }
 
+/*
+ * @overload new(width, height, depth)
+ * @overload new(width, height, depth, amask)
+ * @overload new(width, heigth, depth, rmask, gmask, bmask, amask)
+ *
+ * @param width [Integer] 
+ * @return [SDL2::Surface]
+ */
 static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
 {
     VALUE width, height, depth;
