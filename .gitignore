@@ -3,6 +3,7 @@
 Makefile
 *.so
 key.c
+video.c
 TAGS
 local/
 mkmf.log
