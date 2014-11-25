@@ -891,6 +891,33 @@ static VALUE Window_set_fullscreen_mode(VALUE self, VALUE flags)
     return flags;
 }
 
+
+/*
+ * Get the size of the drawable region.
+ *
+ * @return [[Integer, Integer]] the width and height of the region
+ */
+#if SDL_VERSION_ATLEAST(2,0,1)
+static VALUE Window_gl_drawable_size(VALUE self)
+{
+    int w, h;
+    SDL_GL_GetDrawableSize(Get_SDL_Window(self), &w, &h);
+    return rb_ary_new3(2, INT2NUM(w), INT2NUM(h));
+}
+#endif
+
+/*
+ * Swap the OpenGL buffers for the window, if double buffering
+ * is supported.
+ *
+ * @return [nil]
+ */
+static VALUE Window_gl_swap(VALUE self)
+{
+    SDL_GL_SwapWindow(Get_SDL_Window(self));
+    return Qnil;
+}
+
 /* @return [String] inspection string */
 static VALUE Window_inspect(VALUE self)
 {
@@ -2548,6 +2575,10 @@ void rubysdl2_init_video(void)
     rb_define_method(cWindow, "restore", Window_restore, 0);
     rb_define_method(cWindow, "fullscreen_mode", Window_fullscreen_mode, 0);
     rb_define_method(cWindow, "fullscreen_mode=", Window_set_fullscreen_mode, 1);
+#if SDL_VERSION_ATLEAST(2,0,1)
+    rb_define_method(cWindow, "gl_drawable_size", Window_gl_drawable_size, 0);
+#endif
+    rb_define_method(cWindow, "gl_swap", Window_gl_swap, 0);
     rb_define_const(cWindow, "POS_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
     rb_define_const(cWindow, "POS_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 #define DEFINE_SDL_WINDOW_FLAGS_CONST(n)                        \

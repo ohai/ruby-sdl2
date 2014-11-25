@@ -49,6 +49,7 @@ const char* rubysdl2_INT2BOOLCSTR(int);
 /** initialize interfaces */
 void rubysdl2_init_hints(void);
 void rubysdl2_init_video(void);
+void rubysdl2_init_gl(void);
 void rubysdl2_init_messagebox(void);
 void rubysdl2_init_event(void);
 void rubysdl2_init_key(void);
