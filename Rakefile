@@ -1,3 +1,7 @@
+require 'rubygems'
+require 'rubygems/package_task'
+require_relative "lib/sdl2/version"
+
 C_M4_FILES = Dir.glob("*.c.m4")
 C_FROM_M4_FILES = C_M4_FILES.map{|path| path.gsub(/\.c\.m4\Z/, ".c") }
 C_FILES = Dir.glob("*.c") | C_FROM_M4_FILES
@@ -16,6 +20,31 @@ def extconf_options
     return File.readlines("extconf-options.txt").map(&:chomp).join(" ")
   rescue Errno::ENOENT
     return ""
+  end
+end
+
+def gem_spec
+  Gem::Specification.new do |spec|
+    spec.name = "ruby-sdl2"
+    spec.version = SDL2::VERSION
+    spec.summary = "The simple ruby extension library for SDL 2.x"
+    spec.description = <<-EOS
+      Ruby/SDL2 is an extension library to use SDL 2.x
+      (Simple DirectMedia Layer). SDL 2.x is quite refined
+      from SDL 1.x and API is changed.
+      This library enables you to control audio, keyboard,
+      mouse, joystick, 3D hardware via OpenGL, and 2D video
+      using opengl or Direct3D.
+      Ruby/SDL is used for games and visual demos.
+    EOS
+    spec.license = "LGPL v3"
+    spec.author = "Ippei Obayashi"
+    spec.email = "ohai@kmc.gr.jp"
+    spec.homepage = "https://github.com/ohai/ruby-sdl2"
+    spec.files = `git ls-files`.split(/\n/) + C_FROM_M4_FILES
+    spec.test_files = []
+    spec.extensions = ["extconf.rb"]
+    spec.has_rdoc = false
   end
 end
 
@@ -60,6 +89,7 @@ task "build" => C_FILES + ["Makefile"] do
   sh "make"
 end
 
-task "gem" => C_FILES do
-  sh "gem build rubysdl2.gemspec"
+Gem::PackageTask.new(gem_spec) do |pkg|
 end
+
+rule ".gem" => C_FILES
