@@ -4,6 +4,8 @@ Makefile
 *.so
 key.c
 video.c
+gl.c
+pkg/
 TAGS
 local/
 mkmf.log
