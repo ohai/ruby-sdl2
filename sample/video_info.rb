@@ -48,7 +48,7 @@ p renderer.output_size
 
 p renderer.info.texture_formats
 renderer.info.texture_formats.each do |format|
-  p [format.format, format.name, format.type,  format.order, format.layout, format.bps, format.bytes_per_pixel,
+  p [format.format, format.name, format.type,  format.order, format.layout, format.bpp, format.bytes_per_pixel,
      format.indexed?, format.alpha?, format.fourcc?]
 
 end
