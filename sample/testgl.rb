@@ -15,7 +15,7 @@ SDL2::GL.set_attribute(SDL2::GL::BLUE_SIZE, 8)
 SDL2::GL.set_attribute(SDL2::GL::ALPHA_SIZE, 8)
 SDL2::GL.set_attribute(SDL2::GL::DOUBLEBUFFER, 1)
 
-window = SDL2::Window.create("testgl", 0, 0, WINDOW_W, WINDOW_H, SDL2::Window::OPENGL)
+window = SDL2::Window.create("testgl", 0, 0, WINDOW_W, WINDOW_H, SDL2::Window::Flags::OPENGL)
 context = SDL2::GL::Context.create(window)
 
 printf("OpenGL version %d.%d\n",
