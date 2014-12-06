@@ -147,7 +147,7 @@ class App
     @spritepath = "icon.bmp"
     @renderer_flags = 0
     @num_sprites = 100
-    @blend_mode = SDL2::BLENDMODE_BLEND
+    @blend_mode = SDL2::BlendMode::BLEND
     @cycle = Cycle.new(false, false, rand(255), rand(255), [1,-1].sample, [1,-1].sample)
     @use_color_key = true
   end
@@ -203,13 +203,13 @@ class App
     opts.on("--blend MODE", "none|blend|add|mod"){|blend_mode|
       @blend_mode = case blend_mode
                     when "none"
-                      SDL2::BLENDMODE_NONE
+                      SDL2::BlendMode::NONE
                     when "blend"
-                      SDL2::BLENDMODE_BLEND
+                      SDL2::BlendMode::BLEND
                     when "add"
-                      SDL2::BLENDMODE_ADD
+                      SDL2::BlendMode::ADD
                     when "mod"
-                      SDL2::BLENDMODE_MOD
+                      SDL2::BlendMode::MOD
                     end
     }
     

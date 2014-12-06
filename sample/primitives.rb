@@ -14,7 +14,7 @@ renderer.draw_point(200, 200)
 renderer.draw_color = [0, 255, 255]
 renderer.draw_rect(SDL2::Rect.new(500, 20, 40, 60))
 renderer.fill_rect(SDL2::Rect.new(20, 400, 60, 40))
-renderer.draw_blend_mode = SDL2::BLENDMODE_ADD
+renderer.draw_blend_mode = SDL2::BlendMode::ADD
 renderer.draw_color = [255, 0, 0]
 renderer.draw_rect(SDL2::Rect.new(40, 420, 60, 40))
 

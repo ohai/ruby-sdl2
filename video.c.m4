@@ -12,6 +12,8 @@ static VALUE mWindowFlags;
 static VALUE cDisplay;
 static VALUE cDisplayMode;
 static VALUE cRenderer;
+static VALUE mRendererFlags;
+static VALUE mBlendMode;
 static VALUE cTexture;
 static VALUE cRect;
 static VALUE cPoint;
@@ -1128,38 +1130,7 @@ static VALUE DisplayMode_refresh_rate(VALUE self)
  *
  * You can create a renderer using {SDL2::Window#create_renderer} and
  * use it to draw figures on the window.
- *
- * # Flags
- * You can specify the OR'd bits of the following constants
- * {SDL2::Window#create_renderer when you create a new renderer}.
- *
- * * SDL2::Renderer::SOFTWARE - the renderer is a software fallback
- * * SDL2::Renderer::ACCELERATED - the renderer uses hardware acceleration
- * * SDL2::Renderer::PRESENTVSYNC - present is synchronized with the refresh rate
- * * SDL2::Renderer::TARGETTEXTURE - the renderer supports rendering to texture
- *
- * No flags(==0) gives priority to available ACCELERATED renderers
- *
- * # Blending modes
- * You can use 4 types of blending mode for rendering graphics
- * using Renderer class.
- *
- * You can change the blending mode using
- * {#draw_blend_mode=} and {SDL2::Texture#blend_mode=}.
- * 
- * In the backend of SDL, opengl or direct3d blending
- * mechanism is used for blending operations.
- * 
- * * SDL2::BLENDMODE_NONE - no blending (dstRGBA = srcRGBA)
- * * SDL2::BLENDMODE_BLEND - alpha blending
- *     (dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA)),
- *      dstA = srcA + (dstA * (1-srcA)))
- * * SDL2::BLENDMODE_ADD - additive blending
- *      (dstRGB = (srcRGB * srcA) + dstRGB,
- *       dstA = dstA)
- * * SDL2::BLENDMODE_MUL - color modulate
- *      (dstRGB = srcRGB * dstRGB,
- *       dstA = dstA)
+ *      
  *
  * @!method destroy?
  *   Return true if the renderer is {#destroy destroyed}.
@@ -1204,9 +1175,9 @@ static VALUE Renderer_destroy(VALUE self)
  *
  *   You can use the following constants to specify access pattern
  *   
- *   * SDL2::Texture::ACCESS_STATIC - changes rarely, not lockable
- *   * SDL2::Texture::ACCESS_STREAMING - changes frequently, lockable
- *   * SDL2::Texture::ACCESS_TARGET - can be used as a render target
+ *   * {SDL2::Texture::ACCESS_STATIC}
+ *   * {SDL2::Texture::ACCESS_STREAMING}
+ *   * {SDL2::Texture::ACCESS_TARGET}
  *     
  *   @param [SDL2::PixelFormat,Integer] format format of the texture
  *   @param [Integer] access texture access pattern
@@ -1471,11 +1442,10 @@ static VALUE Renderer_info(VALUE self)
  * Get the blend mode used for drawing operations like
  * {#fill_rect} and {#draw_line}.
  *
- * For the blending modes, see [blending modes](#label-Blending+modes)
- *
  * @return [Integer]
  * 
  * @see #draw_blend_mode=
+ * @see SDL2::BlendMode
  */
 static VALUE Renderer_draw_blend_mode(VALUE self)
 {
@@ -1500,7 +1470,7 @@ static VALUE Renderer_draw_blend_mode(VALUE self)
  *   @return mode
  *
  *   @see #draw_blend_mode
- *
+ *   @see SDL2::BlendMode
  */
 static VALUE Renderer_set_draw_blend_mode(VALUE self, VALUE mode)
 {
@@ -1575,7 +1545,7 @@ static VALUE Renderer_output_size(VALUE self)
  *  {#support_render_target?}.
  *  
  *  The target texture musbe be {#create_texture created} with the
- *  SDL2::Texture::ACCESS_TARGET flag.
+ *  {SDL2::Texture::ACCESS_TARGET} flag.
  *  
  *  @param [SDL2::Texture,nil] target the targeted texture, or nil
  *    for the default render target(i.e. screen)
@@ -1634,6 +1604,30 @@ static VALUE Renderer_debug_info(VALUE self)
   
     return info;
 }
+
+/*
+ * Document-module: SDL2::Renderer::Flags
+ *
+ * The OR'd bits of the constants of this module represents
+ * the state of renderers.
+ * 
+ * You can use this flag
+ * {SDL2::Window#create_renderer when you create a new renderer}.
+ * No flags(==0) gives priority to available ACCELERATED renderers.
+ */
+
+/*
+ * Document-module: SDL2::BlendMode
+ *
+ * Constants represent blend mode for {SDL2::Renderer.copy} and
+ * drawing operations.
+ *
+ * You can change the blending mode using
+ * {SDL2::Renderer#draw_blend_mode=} and {SDL2::Texture#blend_mode=}.
+ *
+ * In the backend of SDL, opengl or direct3d blending
+ * mechanism is used for blending operations.
+ */
 
 /*
  * Document-class: SDL2::Texture
@@ -1761,9 +1755,9 @@ static VALUE Texture_format(VALUE self)
  *
  * The return value is one of the following:
  * 
- * * SDL2::Texture::ACCESS_STATIC - changes rarely, not lockable
- * * SDL2::Texture::ACCESS_STREAMING - changes frequently, lockable
- * * SDL2::Texture::ACCESS_TARGET - can be used as a render target
+ * * {SDL2::Texture::ACCESS_STATIC}
+ * * {SDL2::Texture::ACCESS_STREAMING}
+ * * {SDL2::Texture::ACCESS_TARGET}
  *
  * @return [Integer]
  * 
@@ -2487,6 +2481,7 @@ static VALUE PixelFormat_eq(VALUE self, VALUE other)
     return INT2BOOL(rb_iv_get(self, "@format") == rb_iv_get(other, "@format"));
 }
 
+/* @return [String] inspection string */
 static VALUE PixelFormat_inspect(VALUE self)
 {
     Uint32 format = NUM2UINT(rb_iv_get(self, "@format"));
@@ -2501,18 +2496,38 @@ static VALUE PixelFormat_inspect(VALUE self)
                       INT2BOOLCSTR(SDL_ISPIXELFORMAT_FOURCC(format)));
 }
 
+/*
+ * Enable screensaver.
+ *
+ * @return [nil]
+ * @see .disable
+ * @see .enabled?
+ */
 static VALUE ScreenSaver_enable(VALUE self)
 {
     SDL_EnableScreenSaver();
     return Qnil;
 }
 
+/*
+ * Disable screensaver.
+ *
+ * @return [nil]
+ * @see .enable
+ * @see .enabled?
+ */
 static VALUE ScreenSaver_disable(VALUE self)
 {
     SDL_DisableScreenSaver();
     return Qnil;
 }
 
+/*
+ * Return true if the screensaver is enabled.
+ *
+ * @see .enable
+ * @see .disable
+ */
 static VALUE ScreenSaver_enabled_p(VALUE self)
 {
     return INT2BOOL(SDL_IsScreenSaverEnabled());
@@ -2621,6 +2636,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cDisplay, "desktop_mode", Display_desktop_mode, 0);
     rb_define_method(cDisplay, "closest_mode", Display_closest_mode, 1);
     rb_define_method(cDisplay, "bounds", Display_bounds, 0);
+
     
     cDisplayMode = rb_define_class_under(cDisplay, "Mode", rb_cObject);
 
@@ -2631,7 +2647,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cDisplayMode, "w", DisplayMode_w, 0);
     rb_define_method(cDisplayMode, "h", DisplayMode_h, 0);
     rb_define_method(cDisplayMode, "refresh_rate", DisplayMode_refresh_rate, 0);
-    /* attr format, w, h, refresh_rate */
+    
     
     cRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
     
@@ -2668,24 +2684,35 @@ void rubysdl2_init_video(void)
     rb_define_method(cRenderer, "reset_render_target", Renderer_reset_render_target, 0);
     
     rb_define_method(cRenderer, "info", Renderer_info, 0);
-#define DEFINE_SDL_RENDERER_FLAGS_CONST(n)                      \
-    rb_define_const(cRenderer, #n, UINT2NUM(SDL_RENDERER_##n))
-    DEFINE_SDL_RENDERER_FLAGS_CONST(SOFTWARE);
-    DEFINE_SDL_RENDERER_FLAGS_CONST(ACCELERATED);
+
+    mRendererFlags = rb_define_module_under(cRenderer, "Flags");
+    
+    /* define(`DEFINE_RENDERER_FLAGS_CONST',`rb_define_const(mRendererFlags, "$1", UINT2NUM(SDL_RENDERER_$1))') */
+    /* the renderer is a software fallback */
+    DEFINE_RENDERER_FLAGS_CONST(SOFTWARE);
+    /* the renderer uses hardware acceleration */
+    DEFINE_RENDERER_FLAGS_CONST(ACCELERATED);
 #ifdef SDL_RENDERER_PRESENTVSYNC
-    DEFINE_SDL_RENDERER_FLAGS_CONST(PRESENTVSYNC);
+    /* present is synchronized with the refresh rate */
+    DEFINE_RENDERER_FLAGS_CONST(PRESENTVSYNC);
 #endif
-    DEFINE_SDL_RENDERER_FLAGS_CONST(TARGETTEXTURE);
+    /* the renderer supports rendering to texture */ 
+    DEFINE_RENDERER_FLAGS_CONST(TARGETTEXTURE);
 #define DEFINE_SDL_FLIP_CONST(t)                                        \
     rb_define_const(cRenderer, "FLIP_" #t, INT2FIX(SDL_FLIP_##t))
     DEFINE_SDL_FLIP_CONST(NONE);
     DEFINE_SDL_FLIP_CONST(HORIZONTAL);
     DEFINE_SDL_FLIP_CONST(VERTICAL);
-#define DEFINE_BLENDMODE_CONST(t)                                       \
-    rb_define_const(mSDL2, "BLENDMODE_" #t, INT2FIX(SDL_BLENDMODE_##t))
+    
+    mBlendMode = rb_define_module_under(mSDL2, "BlendMode");
+    /* define(`DEFINE_BLENDMODE_CONST',`rb_define_const(mBlendMode, "$1", INT2FIX(SDL_BLENDMODE_$1))') */
+    /* no blending (dstRGBA = srcRGBA) */
     DEFINE_BLENDMODE_CONST(NONE);
+    /* alpha blending (dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA), dstA = srcA + (dstA * (1-srcA)))*/
     DEFINE_BLENDMODE_CONST(BLEND);
+    /* additive blending (dstRGB = (srcRGB * srcA) + dstRGB, dstA = dstA) */
     DEFINE_BLENDMODE_CONST(ADD);
+    /* color modulate (multiplicative) (dstRGB = srcRGB * dstRGB, dstA = dstA) */
     DEFINE_BLENDMODE_CONST(MOD);
     
     cTexture = rb_define_class_under(mSDL2, "Texture", rb_cObject);
@@ -2702,10 +2729,12 @@ void rubysdl2_init_video(void)
     rb_define_method(cTexture, "h", Texture_h, 0);
     rb_define_method(cTexture, "inspect", Texture_inspect, 0);
     rb_define_method(cTexture, "debug_info", Texture_debug_info, 0);
-#define DEFINE_TEXTUREAH_ACCESS_CONST(t)                                \
-    rb_define_const(cTexture, "ACCESS_" #t, INT2NUM(SDL_TEXTUREACCESS_##t))
+    /* define(`DEFINE_TEXTUREAH_ACCESS_CONST', `rb_define_const(cTexture, "ACCESS_$1", INT2NUM(SDL_TEXTUREACCESS_$1))') */
+    /* texture access pattern - changes rarely, not lockable */
     DEFINE_TEXTUREAH_ACCESS_CONST(STATIC);
+    /* texture access pattern - changes frequently, lockable */
     DEFINE_TEXTUREAH_ACCESS_CONST(STREAMING);
+    /* texture access pattern - can be used as a render target */
     DEFINE_TEXTUREAH_ACCESS_CONST(TARGET);
 
     
@@ -2781,14 +2810,17 @@ void rubysdl2_init_video(void)
     
     {
         VALUE formats = rb_ary_new();
+        /* -: Array of all available formats */
         rb_define_const(cPixelFormat, "FORMATS", formats);
-#define DEFINE_PIXELFORMAT_CONST(t)                                     \
-        do {                                                            \
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_##t);        \
-            rb_define_const(cPixelFormat, #t, format);                  \
-            rb_ary_push(formats, format);                               \
-        } while (0)
-        DEFINE_PIXELFORMAT_CONST(UNKNOWN);
+        /* define(`DEFINE_PIXELFORMAT_CONST',`do {
+            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_$1);
+            $2
+            rb_define_const(cPixelFormat, "$1", format);
+            rb_ary_push(formats, format);
+        } while (0)')
+         */
+        
+        DEFINE_PIXELFORMAT_CONST(UNKNOWN, /* -: PixelFormat: Unused - reserved by SDL */);
         DEFINE_PIXELFORMAT_CONST(INDEX1LSB);
         DEFINE_PIXELFORMAT_CONST(INDEX1MSB);
         DEFINE_PIXELFORMAT_CONST(INDEX4LSB);

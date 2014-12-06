@@ -14,14 +14,14 @@ rect = SDL2::Rect.new(48, 128, 32, 32)
 renderer.copy(texture, nil, rect)
 renderer.copy_ex(texture, nil, SDL2::Rect[128, 256, 48, 48], 45, nil,
                  SDL2::Renderer::FLIP_NONE)
-texture.blend_mode = SDL2::BLENDMODE_ADD
+texture.blend_mode = SDL2::BlendMode::ADD
 renderer.copy(texture, nil, SDL2::Rect[128, 294, 48, 48])
 
-texture.blend_mode = SDL2::BLENDMODE_NONE
+texture.blend_mode = SDL2::BlendMode::NONE
 texture.color_mod = [128, 128, 255]
 renderer.copy(texture, nil, SDL2::Rect[300, 420, 48, 48])
 
-texture.blend_mode = SDL2::BLENDMODE_NONE
+texture.blend_mode = SDL2::BlendMode::NONE
 texture.color_mod = [255, 255, 255]
 
 if renderer.support_render_target?
