@@ -342,29 +342,6 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  * All of methods/class methods are available only after initializing video
  * subsystem by {SDL2.init}.
  *
- * # Window Flags
- *
- * OR'd bits of the following constants represents window states.
- * You can see a window state using {#flags} and create a window with a specified
- * state using flag parameter of {.create}.
- * 
- * * {SDL2::Window::FULLSCREEN} - fullscreen window
- * * {SDL2::Window::FULLSCREEN_DESKTOP} -
- *   fullscreen window at the current desktop resolution
- * * {SDL2::Window::OPENGL} - window usable with OpenGL context
- * * {SDL2::Window::SHOWN} - window is visible
- * * {SDL2::Window::HIDDEN} - window is not visible
- * * {SDL2::Window::BORDERLESS} - no window decoration
- * * {SDL2::Window::RESIZABLE} - window is resizable
- * * {SDL2::Window::MINIMIZDED} - window is minimized
- * * {SDL2::Window::MAXIMIZED} - window is maximized
- * * {SDL2::Window::INPUT_GRABBED} - window has grabbed input focus
- * * {SDL2::Window::INPUT_FOCUS} - window has input focus
- * * {SDL2::Window::MOUSE_FOCUS} - window has mouse focus
- * * {SDL2::Window::FOREIGN} - window is not created by SDL
- * * {SDL2::Window::ALLOW_HIGHDPI} - window should be created in high-DPI mode if supported
- * * {SDL2::Window::MOUSE_CAPTURE} - window has mouse captured
- *
  *
  * @!method destroy?
  *   Return true if the window is already destroyed.
@@ -378,7 +355,7 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  *   @param [Integer] y the y position of the left-top of the window
  *   @param [Integer] w the width of the window
  *   @param [Integer] h the height of the window
- *   @param [Integer] flags 0, or one or more [Window flag masks](#label-Flags) OR'd together
+ *   @param [Integer] flags 0, or one or more {Flags} OR'd together
  *   
  *   @return [SDL2::Window] created window
  *   
@@ -542,7 +519,7 @@ static VALUE Window_set_brightness(VALUE self, VALUE brightness)
 }
 
 /*
- * Get the [Window flag masks](#label-Window+Flags) of the window.
+ * Get the {SDL2::Window::Flags Window flag masks} of the window.
  *
  * @return [Integer] flags
  * @see .create
@@ -862,8 +839,8 @@ SIMPLE_WINDOW_METHOD(Restore, restore);
 /*
  * Get the fullscreen stete of the window
  *
- * @return [Integer] 0 for window mode, SDL2::Window::FULLSCREEN for 
- *   fullscreen mode, and SDL2::Window::FULLSCREEN_DESKTOP for fullscreen
+ * @return [Integer] 0 for window mode, {SDL2::Window::Flags::FULLSCREEN} for 
+ *   fullscreen mode, and {SDL2::Window::Flags::FULLSCREEN_DESKTOP} for fullscreen
  *   at the current desktop resolution.
  *
  * @see #fullscreen_mode=
@@ -879,8 +856,8 @@ static VALUE Window_fullscreen_mode(VALUE self)
  * @overload fullscreen_mode=(flag)
  *   Set the fullscreen state of the window
  *
- *   @param flag [Integer] 0 for window mode, SDL2::Window::FULLSCREEN for 
- *     fullscreen mode, and SDL2::Window::FULLSCREEN_DESKTOP for fullscreen
+ *   @param flag [Integer] 0 for window mode, {SDL2::Window::Flags::FULLSCREEN} for 
+ *     fullscreen mode, and {SDL2::Flags::Window::FULLSCREEN_DESKTOP} for fullscreen
  *     at the current desktop resolution.
  *   @return [flag]
  *   
@@ -947,6 +924,17 @@ static VALUE Window_debug_info(VALUE self)
   
     return info;
 }
+
+/*
+ * Document-module: SDL2::Window::Flags
+ *
+ * OR'd bits of the constants of this module represents window states.
+ * 
+ * You can see a window state using {SDL2::Window#flags}
+ * and create a window with a specified
+ * state using flag parameter of {SDL2::Window.create}.
+ *
+ */
 
 /*
  * Document-class: SDL2::Display
@@ -2588,23 +2576,40 @@ void rubysdl2_init_video(void)
 
     mWindowFlags = rb_define_module_under(cWindow, "Flags");
     /* define(`DEFINE_WINDOW_FLAGS_CONST',`rb_define_const(mWindowFlags, "$1", UINT2NUM(SDL_WINDOW_$1))') */
+    /* fullscreen window */ 
     DEFINE_WINDOW_FLAGS_CONST(FULLSCREEN);
+    /* fullscreen window at the current desktop resolution */
     DEFINE_WINDOW_FLAGS_CONST(FULLSCREEN_DESKTOP);
+    /* window usable with OpenGL context */ 
     DEFINE_WINDOW_FLAGS_CONST(OPENGL);
+    /* window is visible */
     DEFINE_WINDOW_FLAGS_CONST(SHOWN);
+    /* window is not visible */
     DEFINE_WINDOW_FLAGS_CONST(HIDDEN);
+    /* no window decoration */
     DEFINE_WINDOW_FLAGS_CONST(BORDERLESS);
+    /* window is resizable */ 
     DEFINE_WINDOW_FLAGS_CONST(RESIZABLE);
+    /* window is minimized */
     DEFINE_WINDOW_FLAGS_CONST(MINIMIZED);
+    /* window is maximized */
     DEFINE_WINDOW_FLAGS_CONST(MAXIMIZED);
+    /* window has grabbed input focus */
     DEFINE_WINDOW_FLAGS_CONST(INPUT_GRABBED);
+    /* window has input focus */
     DEFINE_WINDOW_FLAGS_CONST(INPUT_FOCUS);
+    /* window has mouse focus */
     DEFINE_WINDOW_FLAGS_CONST(MOUSE_FOCUS);
+    /* window is not created by SDL */
     DEFINE_WINDOW_FLAGS_CONST(FOREIGN);
 #ifdef SDL_WINDOW_ALLOW_HIGHDPI
+    /* window should be created in high-DPI mode if supported (>= SDL 2.0.1)*/
     DEFINE_WINDOW_FLAGS_CONST(ALLOW_HIGHDPI);
 #endif
-
+#ifdef SDL_WINDOW_MOSUE_CAPTURE
+    /* window has mouse caputred (>= SDL 2.0.4) */
+    DEFINE_WINDOW_FLAGS_CONST(MOUSE_CAPTURE);
+#endif
 
     cDisplay = rb_define_class_under(mSDL2, "Display", rb_cObject);
     
