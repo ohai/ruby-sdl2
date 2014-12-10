@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 require 'sdl2'
 
-SDL2.show_simple_message_box(SDL2::MESSAGEBOX_WARNING, "warning! warning!",
-                            "A huge battleship is approaching fast", nil)
+SDL2::MessageBox.show_simple_box(SDL2::MessageBox::ERROR, "Error",
+                                 "This is the error message box", nil)
 
-button = SDL2.show_message_box(flags: SDL2::MESSAGEBOX_WARNING,
+button = SDL2::MessageBox.show(flags: SDL2::MessageBox::WARNING,
                                window: nil,
                                title: "警告ウインドウ",
                                message: "ここに警告文が出ます",
@@ -12,11 +12,11 @@ button = SDL2.show_message_box(flags: SDL2::MESSAGEBOX_WARNING,
                                            id: 0, 
                                            text: "いいえ",
                                           }, 
-                                         {flags: SDL2::MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT,
+                                         {flags: SDL2::MessageBox::BUTTON_RETURNKEY_DEFAULT,
                                           id: 1,
                                           text: "はい",
                                          },
-                                         {flags: SDL2::MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT,
+                                         {flags: SDL2::MessageBox::BUTTON_ESCAPEKEY_DEFAULT,
                                           id: 2,
                                           text: "キャンセル",
                                          },

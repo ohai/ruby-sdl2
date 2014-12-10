@@ -4,6 +4,8 @@
 static VALUE sym_flags, sym_window, sym_title, sym_message, sym_buttons, sym_color_scheme,
     sym_id, sym_text, sym_bg, sym_button_border, sym_button_bg, sym_button_selected;
 
+static VALUE mMessageBox;
+
 static inline SDL_Window* Get_SDL_Window_or_NULL(VALUE win)
 {
     if (win == Qnil)
@@ -13,7 +15,7 @@ static inline SDL_Window* Get_SDL_Window_or_NULL(VALUE win)
 }
 
 /*
- * @overload show_simple_message_box(flag, title, message, parent)
+ * @overload show_simple_box(flag, title, message, parent)
  *   Create a simple modal message box.
  *
  *   This function pauses all ruby's threads and
@@ -23,13 +25,13 @@ static inline SDL_Window* Get_SDL_Window_or_NULL(VALUE win)
  *   
  *   You specify one of the following constants as flag
  *
- *   * {SDL2::MESSAGEBOX_ERROR}
- *   * {SDL2::MESSAGEBOX_WARNING}
- *   * {SDL2::MESSAGEBOX_INFORMATION}
+ *   * {SDL2::MessageBox::ERROR}
+ *   * {SDL2::MessageBox::WARNING}
+ *   * {SDL2::MessageBox::INFORMATION}
  *
  *   @example show warning dialog
  *   
- *       SDL2.show_simple_message_box(SDL2::MESSAGEBOX_WARNING, "warning!",
+ *       SDL2.show_simple_message_box(SDL2::MessageBox::WARNING, "warning!",
  *                                    "Somewhat special warning message!!", nil)
  *                                
  *   @param [Integer] flag one of the above flags
@@ -40,8 +42,8 @@ static inline SDL_Window* Get_SDL_Window_or_NULL(VALUE win)
  *   
  *   @see .show_message_box
  */
-static VALUE SDL2_s_show_simple_message_box(VALUE self, VALUE flag, VALUE title,
-                                            VALUE message, VALUE parent)
+static VALUE MessageBox_s_show_simple_box(VALUE self, VALUE flag, VALUE title,
+                                          VALUE message, VALUE parent)
 {
     title = rb_str_export_to_utf8(title);
     message = rb_str_export_to_utf8(message);
@@ -62,19 +64,19 @@ static void set_color_scheme(VALUE colors, VALUE sym, SDL_MessageBoxColor* color
 }
 
 /*
- * @overload show_message_box(flag:, window: nil, title:, message:, buttons:, color_scheme: nil)
+ * @overload show(flag:, window: nil, title:, message:, buttons:, color_scheme: nil)
  *   Create a model message box.
  *
  *   You specify one of the following constants as flag
  *
- *   * {SDL2::MESSAGEBOX_ERROR}
- *   * {SDL2::MESSAGEBOX_WARNING}
- *   * {SDL2::MESSAGEBOX_INFORMATION}
+ *   * {SDL2::MessageBox::ERROR}
+ *   * {SDL2::MessageBox::WARNING}
+ *   * {SDL2::MessageBox::INFORMATION}
  *
  *   One button in the dialog represents a hash with folloing elements.
  *   
- *       { flags: 0, SDL2::MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT, or
- *                SDL2::MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT,
+ *       { flags: 0, SDL2::MessageBox::BUTTON_ESCAPEKEY_DEFAULT, or
+ *                SDL2::MessageBox::BUTTON_RETURNKEY_DEFAULT,
  *                you can ignore it for 0,
  *         text: text of a button,
  *         id: index of the button
@@ -95,7 +97,7 @@ static void set_color_scheme(VALUE colors, VALUE sym, SDL_MessageBoxColor* color
  *   You can create a message box before calling {SDL2.init}.
  *
  *   @example show a dialog with 3 buttons
- *       button = SDL2.show_message_box(flags: SDL2::MESSAGEBOX_WARNING,
+ *       button = SDL2::MessageBox.show(flags: SDL2::MessageBox::WARNING,
  *                                      window: nil,
  *                                      title: "Warning window",
  *                                      message: "Here is the warning message",
@@ -103,11 +105,11 @@ static void set_color_scheme(VALUE colors, VALUE sym, SDL_MessageBoxColor* color
  *                                                  id: 0, 
  *                                                  text: "No",
  *                                                 }, 
- *                                                 {flags: SDL2::MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT,
+ *                                                 {flags: SDL2::MessageBox::BUTTON_RETURNKEY_DEFAULT,
  *                                                  id: 1,
  *                                                  text: "Yes",
  *                                                 },
- *                                                 {flags: SDL2::MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT,
+ *                                                 {flags: SDL2::MessageBox::BUTTON_ESCAPEKEY_DEFAULT,
  *                                                  id: 2,
  *                                                  text: "Cancel",
  *                                                 },
@@ -132,7 +134,7 @@ static void set_color_scheme(VALUE colors, VALUE sym, SDL_MessageBoxColor* color
  *   
  *   @see .show_simple_message_box
  */
-static VALUE SDL2_s_show_message_box(VALUE self, VALUE params)
+static VALUE MessageBox_s_show(VALUE self, VALUE params)
 {
     SDL_MessageBoxData mb_data;
     VALUE title, message, texts, buttons, color_scheme;
@@ -192,28 +194,22 @@ static VALUE SDL2_s_show_message_box(VALUE self, VALUE params)
 
 void rubysdl2_init_messagebox(void)
 {
-    rb_define_singleton_method(mSDL2, "show_simple_message_box",
-                               SDL2_s_show_simple_message_box, 4);
-    rb_define_singleton_method(mSDL2, "show_message_box", SDL2_s_show_message_box, 1);
-    /* This flag means that the message box shows an error message in
-     * {SDL2.show_simple_message_box} and {SDL2.show_message_box}.
-     */
-    rb_define_const(mSDL2, "MESSAGEBOX_ERROR", INT2NUM(SDL_MESSAGEBOX_ERROR));
-    /* This flag means that the message box shows a warning message in
-     * {SDL2.show_simple_message_box} and {SDL2.show_message_box}.
-     */
-    rb_define_const(mSDL2, "MESSAGEBOX_WARNING", INT2NUM(SDL_MESSAGEBOX_WARNING));
-    /* This flag means that the message box shows an informational message in
-     * {SDL2.show_simple_message_box} and {SDL2.show_message_box}.
-     */
-    rb_define_const(mSDL2, "MESSAGEBOX_INFORMATION", INT2NUM(SDL_MESSAGEBOX_INFORMATION));
-    /* This flag represents the button is selected when return key is pressed in
-     * {SDL2.show_message_box}. */
-    rb_define_const(mSDL2, "MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT",
+    mMessageBox = rb_define_module_under(mSDL2, "MessageBox");
+    
+    rb_define_singleton_method(mMessageBox, "show_simple_box",
+                               MessageBox_s_show_simple_box, 4);
+    rb_define_singleton_method(mMessageBox, "show", MessageBox_s_show, 1);
+    /* This flag means that the message box shows an error message */
+    rb_define_const(mMessageBox, "ERROR", INT2NUM(SDL_MESSAGEBOX_ERROR));
+    /* This flag means that the message box shows a warning message */
+    rb_define_const(mMessageBox, "WARNING", INT2NUM(SDL_MESSAGEBOX_WARNING));
+    /* This flag means that the message box shows an informational message */
+    rb_define_const(mMessageBox, "INFORMATION", INT2NUM(SDL_MESSAGEBOX_INFORMATION));
+    /* This flag represents the button is selected when return key is pressed */
+    rb_define_const(mMessageBox, "BUTTON_RETURNKEY_DEFAULT",
                     INT2NUM(SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT));
-    /* This flag represents the button is selected when escape key is pressed in
-     * {SDL2.show_message_box}. */
-    rb_define_const(mSDL2, "MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT",
+    /* This flag represents the button is selected when escape key is pressed */
+    rb_define_const(mMessageBox, "BUTTON_ESCAPEKEY_DEFAULT",
                     INT2NUM(SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT));
 
     sym_flags = ID2SYM(rb_intern("flags"));
