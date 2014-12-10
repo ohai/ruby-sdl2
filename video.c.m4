@@ -2227,11 +2227,23 @@ static VALUE Surface_s_blit(VALUE self, VALUE src, VALUE srcrect, VALUE dst, VAL
 }
 
 /*
+ * Create an empty RGB surface.
+ *
+ * If rmask, gmask, bmask are omitted, the default masks are used.
+ * If amask is omitted, alpha mask is considered to be zero.
+ *
  * @overload new(width, height, depth)
  * @overload new(width, height, depth, amask)
  * @overload new(width, heigth, depth, rmask, gmask, bmask, amask)
  *
- * @param width [Integer] 
+ * @param width [Integer] the width of the new surface
+ * @param height [Integer] the height of the new surface
+ * @param depth [Integer] the bit depth of the new surface
+ * @param rmask [Integer] the red mask of a pixel
+ * @param gmask [Integer] the green mask of a pixel
+ * @param bmask [Integer] the blue mask of a pixel
+ * @param amask [Integer] the alpha mask of a pixel
+ * 
  * @return [SDL2::Surface]
  */
 static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
@@ -2458,21 +2470,71 @@ static VALUE PixelFormat_type(VALUE self)
     return UINT2NUM(SDL_PIXELTYPE(NUM2UINT(rb_iv_get(self, "@format"))));
 }
 
-#define PIXELFORMAT_ATTR_READER(field, extractor, c2ruby)               \
-    static VALUE PixelFormat_##field(VALUE self)                        \
-    {                                                                   \
-        return c2ruby(extractor(NUM2UINT(rb_iv_get(self, "@format")))); \
-    }
+/*
+define(`PIXELFORMAT_ATTR_READER',
+`static VALUE PixelFormat_$1(VALUE self)
+{
+    return $3($2(NUM2UINT(rb_iv_get(self, "@format"))));
+}')
+ */
 
+/*
+ * Get the human readable name of the pixel format
+ * 
+ * @return [String]
+ */
 PIXELFORMAT_ATTR_READER(name, SDL_GetPixelFormatName, utf8str_new_cstr);
+
+/*
+ * Get the ordering of channels or bits in the pixel format.
+ *
+ * @return [Integer]
+ */
 PIXELFORMAT_ATTR_READER(order,  SDL_PIXELORDER, UINT2NUM);
+
+/*
+ * Get the channel bit pattern of the pixel format.
+ *
+ * @return [Integer]
+ */
 PIXELFORMAT_ATTR_READER(layout,  SDL_PIXELLAYOUT, UINT2NUM);
+
+/*
+ * Get the number of bits per pixel.
+ *
+ * @return [Integer]
+ */
 PIXELFORMAT_ATTR_READER(bits_per_pixel,  SDL_BITSPERPIXEL, INT2NUM);
+
+/*
+ * Get the number of bytes per pixel.
+ *
+ * @return [Integer]
+ */
 PIXELFORMAT_ATTR_READER(bytes_per_pixel,  SDL_BYTESPERPIXEL, INT2NUM);
+
+/*
+ * Return true if the pixel format have a palette.
+ */
 PIXELFORMAT_ATTR_READER(indexed_p,  SDL_ISPIXELFORMAT_INDEXED, INT2BOOL);
+
+/*
+ * Return true if the pixel format have an alpha channel.
+ */
 PIXELFORMAT_ATTR_READER(alpha_p,  SDL_ISPIXELFORMAT_ALPHA, INT2BOOL);
+
+/*
+ * Return true if the pixel format is not indexed, and not RGB(A),
+ * for example, the pixel format is YUV.
+ */
 PIXELFORMAT_ATTR_READER(fourcc_p,  SDL_ISPIXELFORMAT_FOURCC, INT2BOOL);
 
+/* 
+ * @overload ==(other)
+ *   Return true if two pixel format is the same format.
+ *
+ * @return [boolean]
+ */
 static VALUE PixelFormat_eq(VALUE self, VALUE other)
 {
     if (!rb_obj_is_kind_of(other, cPixelFormat))
