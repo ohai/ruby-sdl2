@@ -179,7 +179,7 @@ void rubysdl2_init_gl(void)
     rb_define_module_function(mGL, "swap_interval=", GL_s_set_swap_interval, 1);
     rb_define_module_function(mGL, "get_attribute", GL_s_get_attribute, 1);
     rb_define_module_function(mGL, "set_attribute", GL_s_set_attribute, 2);
-    
+
     /* define(`DEFINE_GL_ATTR_CONST',`rb_define_const(mGL, "$1", INT2NUM(SDL_GL_$1))') */
     /* OpenGL attribute - minimal bits of red channel in color buffer, default is 3 */
     DEFINE_GL_ATTR_CONST(RED_SIZE);
@@ -229,19 +229,10 @@ void rubysdl2_init_gl(void)
     DEFINE_GL_ATTR_CONST(CONTEXT_MINOR_VERSION);
     /* OpenGL attribute - the bit combination of following constants, or 0.
      * default is 0
-     * 
-     * * {SDL2::GL::CONTEXT_DEBUG_FLAG}
-     * * {SDL2::GL::CONTEXT_FORWARD_COMPATIBLE_FLAG}
-     * * {SDL2::GL::CONTEXT_ROBUST_ACCESS_FLAG}
-     * * {SDL2::GL::CONTEXT_RESET_ISOLATION_FLAG}
      */
     DEFINE_GL_ATTR_CONST(CONTEXT_FLAGS);
     /* OpenGL attribute - type of GL context, one of the following constants,
      * defaults depends on platform
-     *
-     * * {SDL2::GL::CONTEXT_PROFILE_CORE}
-     * * {SDL2::GL::CONTEXT_PROFILE_COMPATIBLITY}
-     * * {SDL2::GL::CONTEXT_PROFILE_ES}
      */
     DEFINE_GL_ATTR_CONST(CONTEXT_PROFILE_MASK);
     /* OpenGL attribute - OpenGL context sharing, default is 0 */
