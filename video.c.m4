@@ -2465,12 +2465,39 @@ static VALUE Point_inspect(VALUE self)
 FIELD_ACCESSOR(Point, SDL_Point, x);
 FIELD_ACCESSOR(Point, SDL_Point, y);
 
+
+/*
+ * Document-class: SDL2::PixelFormat
+ *
+ * This class represents pixel format of textures, windows, and displays.
+ *
+ * In C level, SDL use unsigned integers as pixel formats. This class
+ * wraps these integers. You can get the integers from {#format}.
+ *
+ * @!attribute [r] format
+ *    An integer representing the pixel format.
+ *
+ *    @return [Integer]
+ */
+
+/*
+ * @overload initialze(format)
+ *
+ *   Initialize pixel format from the given integer representing a fomrmat.
+ *   
+ *   @param format [Integer] an unsigned integer as a pixel formats
+ */
 static VALUE PixelForamt_initialize(VALUE self, VALUE format)
 {
     rb_iv_set(self, "@format", format);
     return Qnil;
 }
 
+/*
+ * Get the type of the format.
+ *
+ * @return [Integer] One of the constants of {Type} module.
+ */
 static VALUE PixelFormat_type(VALUE self)
 {
     return UINT2NUM(SDL_PIXELTYPE(NUM2UINT(rb_iv_get(self, "@format"))));
@@ -2494,14 +2521,14 @@ PIXELFORMAT_ATTR_READER(name, SDL_GetPixelFormatName, utf8str_new_cstr);
 /*
  * Get the ordering of channels or bits in the pixel format.
  *
- * @return [Integer]
+ * @return [Integer] One of the constants of {BitmapOrder} module or {PackedOrder} module.
  */
 PIXELFORMAT_ATTR_READER(order,  SDL_PIXELORDER, UINT2NUM);
 
 /*
  * Get the channel bit pattern of the pixel format.
  *
- * @return [Integer]
+ * @return [Integer] One of the constants of {PackedLayout} module.
  */
 PIXELFORMAT_ATTR_READER(layout,  SDL_PIXELLAYOUT, UINT2NUM);
 
