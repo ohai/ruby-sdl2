@@ -20,6 +20,12 @@ static VALUE cPoint;
 static VALUE cSurface;
 static VALUE cRendererInfo;
 static VALUE cPixelFormat; /* NOTE: This is related to SDL_PixelFormatEnum, not SDL_PixelFormat */
+static VALUE mPixelType;
+static VALUE mBitmapOrder;
+static VALUE mPackedOrder;
+static VALUE mArrayOrder;
+static VALUE mPackedLayout;
+
 static VALUE mScreenSaver;
 
 static VALUE hash_windowid_to_window = Qnil;
@@ -2869,6 +2875,60 @@ void rubysdl2_init_video(void)
     rb_define_method(cPixelFormat, "alpha?", PixelFormat_alpha_p, 0);
     rb_define_method(cPixelFormat, "fourcc?", PixelFormat_fourcc_p, 0);
     rb_define_method(cPixelFormat, "==", PixelFormat_eq, 1);
+
+    mPixelType = rb_define_module_under(cPixelFormat, "Type");
+    /* define(`DEFINE_PIXELTYPE_CONST',`rb_define_const(mPixelType, "$1", UINT2NUM(SDL_PIXELTYPE_$1))') */
+    DEFINE_PIXELTYPE_CONST(UNKNOWN);
+    DEFINE_PIXELTYPE_CONST(INDEX1);
+    DEFINE_PIXELTYPE_CONST(INDEX4);
+    DEFINE_PIXELTYPE_CONST(INDEX8);
+    DEFINE_PIXELTYPE_CONST(PACKED8);
+    DEFINE_PIXELTYPE_CONST(PACKED16);
+    DEFINE_PIXELTYPE_CONST(PACKED32);
+    DEFINE_PIXELTYPE_CONST(ARRAYU8);
+    DEFINE_PIXELTYPE_CONST(ARRAYU16);
+    DEFINE_PIXELTYPE_CONST(ARRAYU32);
+    DEFINE_PIXELTYPE_CONST(ARRAYF16);
+    DEFINE_PIXELTYPE_CONST(ARRAYF32);
+
+    mBitmapOrder = rb_define_module_under(cPixelFormat, "BitmapOrder");
+    rb_define_const(mBitmapOrder, "NONE", UINT2NUM(SDL_BITMAPORDER_NONE));
+    rb_define_const(mBitmapOrder, "O_1234", UINT2NUM(SDL_BITMAPORDER_1234));
+    rb_define_const(mBitmapOrder, "O_4321", UINT2NUM(SDL_BITMAPORDER_4321));
+    
+    mPackedOrder = rb_define_module_under(cPixelFormat, "PackedOrder");
+    /* define(`DEFINE_PACKEDORDER_CONST',`rb_define_const(mPackedOrder, "$1", UINT2NUM(SDL_PACKEDORDER_$1))') */
+    DEFINE_PACKEDORDER_CONST(NONE);
+    DEFINE_PACKEDORDER_CONST(XRGB);
+    DEFINE_PACKEDORDER_CONST(RGBX);
+    DEFINE_PACKEDORDER_CONST(ARGB);
+    DEFINE_PACKEDORDER_CONST(RGBA);
+    DEFINE_PACKEDORDER_CONST(XBGR);
+    DEFINE_PACKEDORDER_CONST(BGRX);
+    DEFINE_PACKEDORDER_CONST(ABGR);
+    DEFINE_PACKEDORDER_CONST(BGRA);
+
+    mArrayOrder = rb_define_module_under(cPixelFormat, "ArrayOrder");
+    /* define(`DEFINE_ARRAYORDER_CONST',`rb_define_const(mArrayOrder, "$1", UINT2NUM(SDL_ARRAYORDER_$1))') */
+    DEFINE_ARRAYORDER_CONST(NONE);
+    DEFINE_ARRAYORDER_CONST(RGB);
+    DEFINE_ARRAYORDER_CONST(RGBA);
+    DEFINE_ARRAYORDER_CONST(ARGB);
+    DEFINE_ARRAYORDER_CONST(BGR);
+    DEFINE_ARRAYORDER_CONST(BGRA);
+    DEFINE_ARRAYORDER_CONST(ABGR);
+
+    mPackedLayout = rb_define_module_under(cPixelFormat, "PackedLayout");
+    /* define(`DEFINE_PACKEDLAYOUT_CONST',`rb_define_const(mPackedLayout, "L_$1", UINT2NUM(SDL_PACKEDLAYOUT_$1))') */
+    rb_define_const(mPackedLayout, "NONE", UINT2NUM(SDL_PACKEDLAYOUT_NONE));
+    DEFINE_PACKEDLAYOUT_CONST(332);
+    DEFINE_PACKEDLAYOUT_CONST(4444);
+    DEFINE_PACKEDLAYOUT_CONST(1555);
+    DEFINE_PACKEDLAYOUT_CONST(5551);
+    DEFINE_PACKEDLAYOUT_CONST(565);
+    DEFINE_PACKEDLAYOUT_CONST(8888);
+    DEFINE_PACKEDLAYOUT_CONST(2101010);
+    DEFINE_PACKEDLAYOUT_CONST(1010102);
     
     {
         VALUE formats = rb_ary_new();
