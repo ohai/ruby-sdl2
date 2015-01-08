@@ -1,3 +1,4 @@
+/* -*- mode: C -*- */
 #ifdef HAVE_SDL_TTF_H
 #include "rubysdl2_internal.h"
 #include <SDL_ttf.h>
