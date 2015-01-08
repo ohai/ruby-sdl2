@@ -27,7 +27,7 @@ static VALUE cState;
  *
  * You can get a mouse state with {SDL2::Mouse.state}.
  *
- * @attribute x
+ * @!attribute [r] x
  *   the x coordinate of the mouse cursor.
  *
  *   For {SDL2::Mouse.state}, this attribute means the x coordinate
@@ -37,7 +37,7 @@ static VALUE cState;
  *   
  *   @return [Integer]
  *
- * @attribute y
+ * @!attribute [r] y
  *   the y coordinate of the mouse cursor
  *
  *   For {SDL2::Mouse.state}, this attribute means the y coordinate
@@ -47,7 +47,7 @@ static VALUE cState;
  *   
  *   @return [Integer]
  *
- * @attribute button_bits
+ * @!attribute [r] button_bits
  *   button bits
  *   @return [Integer]
  *   @see #pressed?
