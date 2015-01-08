@@ -77,6 +77,10 @@ task "doc-all" do
   raise "Not yet implemented"
 end
 
+task "doc-stat-undocumented" => POT_SOURCES do
+  sh "yard stats --list-undoc #{YARD_SOURCES}"
+end
+
 rule ".c" => ".c.m4" do |t|
   sh "m4 #{t.prerequisites[0]} > #{t.name}"
 end
