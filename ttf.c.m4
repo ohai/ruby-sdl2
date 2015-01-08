@@ -4,7 +4,9 @@
 #include <SDL_ttf.h>
 #include <ruby/encoding.h>
 
-VALUE cTTF;
+static VALUE cTTF;
+static VALUE mStyle;
+static VALUE mHinting;
 
 #define TTF_ERROR() do { HANDLE_ERROR(SDL_SetError(TTF_GetError())); } while (0)
 #define HANDLE_TTF_ERROR(code) \
@@ -237,6 +239,15 @@ static VALUE TTF_render_blended(VALUE self, VALUE text, VALUE fg)
     return render(render_blended, self, text, fg, Qnil);
 }
 
+/*
+ * Document-module: SDL2::TTF::Style
+ *
+ * Constants represents font styles.
+ * 
+ * Document-module: SDL2::TTF::Hinting
+ *
+ * Constants represents font hinting for FreeType.
+ */
 void rubysdl2_init_ttf(void)
 {
     cTTF = rb_define_class_under(mSDL2, "TTF", rb_cObject);
@@ -257,7 +268,7 @@ void rubysdl2_init_ttf(void)
     DEFINE_TTF_ATTRIBUTE(outline);
     DEFINE_TTF_ATTRIBUTE(hinting);
     DEFINE_TTF_ATTRIBUTE(kerning);
-    
+
 #define DEFINE_TTF_ATTR_READER(attr)                    \
     rb_define_method(cTTF, #attr, TTF_##attr, 0)
 
@@ -276,18 +287,29 @@ void rubysdl2_init_ttf(void)
     rb_define_method(cTTF, "render_shaded", TTF_render_shaded, 3);
     rb_define_method(cTTF, "render_blended", TTF_render_blended, 2);
 
-#define DEFINE_TTF_CONST(name)                  \
-    rb_define_const(cTTF, #name, INT2NUM((TTF_##name)))
-    DEFINE_TTF_CONST(STYLE_NORMAL);
-    DEFINE_TTF_CONST(STYLE_BOLD);
-    DEFINE_TTF_CONST(STYLE_ITALIC);
-    DEFINE_TTF_CONST(STYLE_UNDERLINE);
-    DEFINE_TTF_CONST(STYLE_STRIKETHROUGH);
+    mStyle = rb_define_module_under(cTTF, "Style");
+    /* define(`DEFINE_TTF_STYLE_CONST',`rb_define_const(mStyle, "$1", INT2NUM((TTF_STYLE_$1)))') */
+    /* normal style */
+    DEFINE_TTF_STYLE_CONST(NORMAL);
+    /* bold style */
+    DEFINE_TTF_STYLE_CONST(BOLD);
+    /* italic style */
+    DEFINE_TTF_STYLE_CONST(ITALIC);
+    /* underline style */
+    DEFINE_TTF_STYLE_CONST(UNDERLINE);
+    /* strikethrough style */
+    DEFINE_TTF_STYLE_CONST(STRIKETHROUGH);
 
-    DEFINE_TTF_CONST(HINTING_NORMAL);
-    DEFINE_TTF_CONST(HINTING_LIGHT);
-    DEFINE_TTF_CONST(HINTING_MONO);
-    DEFINE_TTF_CONST(HINTING_NONE);
+    mHinting = rb_define_module_under(cTTF, "Hinting");
+    /* define(`DEFINE_TTF_HINTING_CONST',`rb_define_const(mHinting, "$1", INT2NUM((TTF_HINTING_$1)))') */
+    /* normal hinting, default */
+    DEFINE_TTF_HINTING_CONST(NORMAL);
+    /*  lighter hinting for non-monochrome modes */
+    DEFINE_TTF_HINTING_CONST(LIGHT);
+    /* strong hinting only used for monochrome output */
+    DEFINE_TTF_HINTING_CONST(MONO);
+    /* no hinting */
+    DEFINE_TTF_HINTING_CONST(NONE);
 }
 
 #else /* HAVE_SDL_TTF_H */
