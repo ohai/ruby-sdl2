@@ -5,6 +5,7 @@ Makefile
 key.c
 video.c
 gl.c
+ttf.c
 pkg/
 TAGS
 local/
