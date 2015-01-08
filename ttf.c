@@ -49,12 +49,46 @@ static VALUE TTF_new(TTF_Font* font)
 
 DEFINE_WRAPPER(TTF_Font, TTF, font, cTTF, "SDL2::TTF");
 
+/*
+ * Document-Class: SDL2::TTF
+ *
+ * This class represents font information.
+ *
+ * You can render TrueType fonts using [SDL_ttf](https://www.libsdl.org/projects/SDL_ttf/)
+ * and this class.
+ *
+ */
+
+/*
+ * Initialize TrueType font rendering submodule.
+ *
+ * This function must be called before calling other methods/class methods
+ * of {TTF}.
+ *
+ * @return [nil]
+ */
 static VALUE TTF_s_init(VALUE self)
 {
     HANDLE_TTF_ERROR(TTF_Init());
     return Qnil;
 }
 
+/*
+ * Open a font data from file.
+ *
+ * @overload open(fname, ptsize, index=0)
+ *   @param fname [String] the path of the font file
+ *   @param ptsize [Integer] the point size of the font (72DPI).
+ *   @param index [Integer] the index of the font faces.
+ *     Some font files have multiple font faces, and you
+ *     can select one of them using **index**. 0 origin.
+ *     If a font have only one font face, 0 is the only
+ *     valid index.
+ *
+ * @return [SDL2::TTF] opened font information
+ * @raise [SDL2::Error] occurs when you fail to open a file.
+ *
+ */
 static VALUE TTF_s_open(int argc, VALUE* argv, VALUE self)
 {
     TTF_Font* font;
@@ -69,6 +103,11 @@ static VALUE TTF_s_open(int argc, VALUE* argv, VALUE self)
     return TTF_new(font);
 }
 
+/*
+ * Destroy the font data and release memory.
+ *
+ * @return [nil]
+ */
 static VALUE TTF_destroy(VALUE self)
 {
     TTF* f = Get_TTF(self);
@@ -91,6 +130,17 @@ TTF_ATTR_READER(face_is_fixed_width_p, FaceIsFixedWidth, INT2BOOL);
 TTF_ATTR_READER(face_family_name, FaceFamilyName, utf8str_new_cstr);
 TTF_ATTR_READER(face_style_name, FaceStyleName, utf8str_new_cstr);
 
+/*
+ * @overload size_text(text)
+ *   Calculate the size of rendered surface of **text** using the font.
+ *
+ *   @param text [String] the string to size up
+ *   
+ * @return [[Integer, Integer]] a pair of width and height of the rendered surface
+ *
+ * @raise [SDL2::Error] It is raised when an error occurs, such as a glyph ins the
+ *   string not being found.
+ */
 static VALUE TTF_size_text(VALUE self, VALUE text)
 {
     int w, h;
@@ -122,16 +172,65 @@ static VALUE render(SDL_Surface* (*renderer)(TTF_Font*, const char*, SDL_Color, 
     return Surface_new(surface);
 }
 
+/*
+ * @overload render_solid(text, fg)
+ *   Render **text** using the font with fg color on a new surface, using
+ *   *Solid* mode.
+ *
+ *   Solid mode rendering is quick but dirty.
+ *   
+ *   @param text [String] the text to render
+ *   @param fg [[Integer, Integer, Integer]]
+ *     the color to render. An array of r, g, and b components.
+ *     
+ * @return [SDL2::Surface]
+ *
+ * @raise [SDL2::Error] raised when the randering fails.
+ */
 static VALUE TTF_render_solid(VALUE self, VALUE text, VALUE fg)
 {
     return render(render_solid, self, text, fg, Qnil);
 }
 
+/*
+ * @overload render_shaded(text, fg, bg)
+ *   Render **text** using the font with fg color on a new surface, using
+ *   *Shaded* mode.
+ *
+ *   Shaded mode rendering is slow and nice, but with a solid box filled by
+ *   the background color.
+ *   
+ *   @param text [String] the text to render
+ *   @param fg [[Integer, Integer, Integer]]
+ *     the color to render. An array of r, g, and b components.
+ *   @param bg [[Integer, Integer, Integer]]
+ *     the background color. An array of r, g, and b components.
+ *     
+ * @return [SDL2::Surface]
+ *
+ * @raise [SDL2::Error] raised when the randering fails. 
+ */
 static VALUE TTF_render_shaded(VALUE self, VALUE text, VALUE fg, VALUE bg)
 {
     return render(TTF_RenderUTF8_Shaded, self, text, fg, bg);
 }
 
+/*
+ * @overload render_blended(text, fg)
+ *   Render **text** using the font with fg color on a new surface, using
+ *   *Blended* mode.
+ *
+ *   Blended mode rendering is very slow but very nice.
+ *   The rendered surface has an alpha channel, 
+ *   
+ *   @param text [String] the text to render
+ *   @param fg [[Integer, Integer, Integer]]
+ *     the color to render. An array of r, g, and b components.
+ *     
+ * @return [SDL2::Surface]
+ *
+ * @raise [SDL2::Error] raised when the randering fails. 
+ */
 static VALUE TTF_render_blended(VALUE self, VALUE text, VALUE fg)
 {
     return render(render_blended, self, text, fg, Qnil);
@@ -144,6 +243,7 @@ void rubysdl2_init_ttf(void)
 
     rb_define_singleton_method(cTTF, "init", TTF_s_init, 0);
     rb_define_singleton_method(cTTF, "open", TTF_s_open, -1);
+    /* Return true if the font is destroyed by {#destroy}. */
     rb_define_method(cTTF, "destroy?", TTF_destroy_p, 0);
     rb_define_method(cTTF, "destroy", TTF_destroy, 0);
     
@@ -165,6 +265,7 @@ void rubysdl2_init_ttf(void)
     DEFINE_TTF_ATTR_READER(descent);
     DEFINE_TTF_ATTR_READER(line_skip);
     DEFINE_TTF_ATTR_READER(num_faces);
+    /* Return true if the font is fixed width. */
     rb_define_method(cTTF, "face_is_fixed_width?", TTF_face_is_fixed_width_p, 0);
     DEFINE_TTF_ATTR_READER(face_family_name);
     DEFINE_TTF_ATTR_READER(face_style_name);
