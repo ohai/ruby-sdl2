@@ -870,8 +870,6 @@ EVENT_ACCESSOR_INT(TouchFinger, touch_id, tfinger.touchId);
 EVENT_ACCESSOR_INT(TouchFinger, finger_id, tfinger.fingerId);
 EVENT_ACCESSOR_DBL(TouchFinger, x, tfinger.x);
 EVENT_ACCESSOR_DBL(TouchFinger, y, tfinger.y);
-EVENT_ACCESSOR_DBL(TouchFinger, dx, tfinger.dx);
-EVENT_ACCESSOR_DBL(TouchFinger, dy, tfinger.dy);
 EVENT_ACCESSOR_DBL(TouchFinger, pressure, tfinger.pressure);
 /* @return [String] inspection string */
 static VALUE EvTouchFinger_inspect(VALUE self)
@@ -879,12 +877,10 @@ static VALUE EvTouchFinger_inspect(VALUE self)
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
                       " touch_id=%d finger_id=%d"
-                      " x=%f y=%f pressure=%f"
-                      " dy=%f dx=%f>",
+                      " x=%f y=%f pressure=%f>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
                       (int)ev->tfinger.touchId, (int)ev->tfinger.fingerId,
-                      ev->tfinger.x, ev->tfinger.y, ev->tfinger.pressure,
-                      ev->tfinger.dx, ev->tfinger.dx);
+                      ev->tfinger.x, ev->tfinger.y, ev->tfinger.pressure);
 }
 
 /*
@@ -1165,8 +1161,6 @@ void rubysdl2_init_event(void)
     DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, finger_id);
     DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, x); 
     DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, y);
-    DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, dx); 
-    DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, dy);
     DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, pressure);
     rb_define_method(cEvTouchFinger, "inspect", EvTouchFinger_inspect, 0);
 
