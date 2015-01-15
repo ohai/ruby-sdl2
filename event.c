@@ -33,6 +33,10 @@ static VALUE cEvControllerDevice;
 static VALUE cEvControllerDeviceAdded;
 static VALUE cEvControllerDeviceRemoved;
 static VALUE cEvControllerDeviceRemapped;
+static VALUE cEvTouchFinger;
+static VALUE cEvFingerDown;
+static VALUE cEvFingerUp;
+static VALUE cEvFingerMotion;
 /* static VALUE cEvUser; */
 /* static VALUE cEvDrop; */
 
@@ -197,6 +201,9 @@ static void set_string(char* field, VALUE str, int maxlength)
 
 #define EVENT_ACCESSOR_INT(classname, name, field) \
     EVENT_ACCESSOR(classname, name, field, NUM2INT, INT2NUM)
+
+#define EVENT_ACCESSOR_DBL(classname, name, field) \
+    EVENT_ACCESSOR(classname, name, field, NUM2DBL, DBL2NUM)
 
 #define EVENT_ACCESSOR_BOOL(classname, name, field)             \
     EVENT_ACCESSOR(classname, name, field, RTEST, INT2BOOL)
@@ -821,6 +828,128 @@ static VALUE ControllerDevice_inspect(VALUE self)
                       ev->cdevice.which);
 }
 
+/*
+ * Document-class: SDL2::Event::TouchFinger
+ *
+ * This class represents touch finger events.
+ * 
+ * You don't handle the instance 
+ * of this class directly, but you handle the instances of 
+ * two subclasses of this subclasses:
+ * {SDL2::Event::FingerMotion} and {SDL2::Event::MouseButtonUp}.
+ *
+ * @attribute touch_id
+ *   the touch device id
+ *   @return [Integer]
+ *
+ * @attribute finger_id
+ *   the finger id
+ *   @return [Integer]
+ *
+ * @attribute x
+ *   the x-axis location of the touch event, normalized (0...1)
+ *   @return [Float]
+ *
+ * @attribute y
+ *   the y-axis location of the touch event, normalized (0...1)
+ *   @return [Float]
+ *
+ * @attribute dx
+ *   the distance moved in the x-axis, normalized (0...1)
+ *   @return [Float]
+ *
+ * @attribute dy
+ *   the distance moved in the x-axis, normalized (0...1)
+ *   @return [Float]
+ *
+ * @attribute pressure
+ *   the quantity of pressure applied, normalized (0...1)
+ *   @return [Float]
+ */
+EVENT_ACCESSOR_INT(TouchFinger, touch_id, tfinger.touchId);
+EVENT_ACCESSOR_INT(TouchFinger, finger_id, tfinger.fingerId);
+EVENT_ACCESSOR_DBL(TouchFinger, x, tfinger.x);
+EVENT_ACCESSOR_DBL(TouchFinger, y, tfinger.y);
+EVENT_ACCESSOR_DBL(TouchFinger, dx, tfinger.dx);
+EVENT_ACCESSOR_DBL(TouchFinger, dy, tfinger.dy);
+EVENT_ACCESSOR_DBL(TouchFinger, pressure, tfinger.pressure);
+/* @return [String] inspection string */
+static VALUE EvTouchFinger_inspect(VALUE self)
+{
+    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    return rb_sprintf("<%s: type=%u timestamp=%u"
+                      " touch_id=%d finger_id=%d"
+                      " x=%f y=%f pressure=%f"
+                      " dy=%f dx=%f>",
+                      rb_obj_classname(self), ev->common.type, ev->common.timestamp,
+                      (int)ev->tfinger.touchId, (int)ev->tfinger.fingerId,
+                      ev->tfinger.x, ev->tfinger.y, ev->tfinger.pressure,
+                      ev->tfinger.dx, ev->tfinger.dx);
+}
+
+/*
+ * Document-class: SDL2::Event::FingerUp
+ * This class represents finger touch events.
+ */
+/*
+ * Document-class: SDL2::Event::FingerDown
+ * This class represents finger release events.
+ */
+
+/*
+ * Document-class: SDL2::Event::FingerMove
+ *
+ * This class represents touch move events.
+ *
+ * @attribute touch_id
+ *   the touch device id
+ *   @return [Integer]
+ *
+ * @attribute finger_id
+ *   the finger id
+ *   @return [Integer]
+ *
+ * @attribute x
+ *   the x-axis location of the touch event, normalized (0...1)
+ *   @return [Float]
+ *
+ * @attribute y
+ *   the y-axis location of the touch event, normalized (0...1)
+ *   @return [Float]
+ *
+ * @attribute dx
+ *   the distance moved in the x-axis, normalized (0...1)
+ *   @return [Float]
+ *
+ * @attribute dy
+ *   the distance moved in the x-axis, normalized (0...1)
+ *   @return [Float]
+ *
+ * @attribute pressure
+ *   the quantity of pressure applied, normalized (0...1)
+ *   @return [Float]
+ */
+EVENT_ACCESSOR_INT(FingerMotion, touch_id, tfinger.touchId);
+EVENT_ACCESSOR_INT(FingerMotion, finger_id, tfinger.fingerId);
+EVENT_ACCESSOR_DBL(FingerMotion, x, tfinger.x);
+EVENT_ACCESSOR_DBL(FingerMotion, y, tfinger.y);
+EVENT_ACCESSOR_DBL(FingerMotion, dx, tfinger.dx);
+EVENT_ACCESSOR_DBL(FingerMotion, dy, tfinger.dy);
+EVENT_ACCESSOR_DBL(FingerMotion, pressure, tfinger.pressure);
+/* @return [String] inspection string */
+static VALUE EvFingerMotion_inspect(VALUE self)
+{
+    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    return rb_sprintf("<%s: type=%u timestamp=%u"
+                      " touch_id=%d finger_id=%d"
+                      " x=%f y=%f pressure=%f"
+                      " dy=%f dx=%f>",
+                      rb_obj_classname(self), ev->common.type, ev->common.timestamp,
+                      (int) ev->tfinger.touchId, (int) ev->tfinger.fingerId,
+                      ev->tfinger.x, ev->tfinger.y, ev->tfinger.pressure,
+                      ev->tfinger.dx, ev->tfinger.dx);
+}
+
 static void connect_event_class(SDL_EventType type, VALUE klass)
 {
     event_type_to_class[type] = klass;
@@ -856,6 +985,9 @@ static void init_event_type_to_class(void)
     connect_event_class(SDL_CONTROLLERDEVICEADDED, cEvControllerDeviceAdded);
     connect_event_class(SDL_CONTROLLERDEVICEREMOVED, cEvControllerDeviceRemoved);
     connect_event_class(SDL_CONTROLLERDEVICEREMAPPED, cEvControllerDeviceRemapped);
+    connect_event_class(SDL_FINGERDOWN, cEvFingerDown);
+    connect_event_class(SDL_FINGERUP, cEvFingerUp);
+    connect_event_class(SDL_FINGERMOTION, cEvFingerMotion);
 }
 
 #define DEFINE_EVENT_READER(classname, classvar, name)                  \
@@ -908,6 +1040,12 @@ void rubysdl2_init_event(void)
     cEvControllerDeviceAdded = rb_define_class_under(cEvent, "ControllerDeviceAdded", cEvControllerDevice);
     cEvControllerDeviceRemoved = rb_define_class_under(cEvent, "ControllerDeviceRemoved", cEvControllerDevice);
     cEvControllerDeviceRemapped = rb_define_class_under(cEvent, "ControllerDeviceRemapped", cEvControllerDevice);
+    cEvTouchFinger = rb_define_class_under(cEvent, "TouchFinger", cEvent);
+    cEvFingerUp = rb_define_class_under(cEvent, "FingerUp", cEvTouchFinger);
+    cEvFingerDown = rb_define_class_under(cEvent, "FingerDown", cEvTouchFinger);
+    cEvFingerMotion = rb_define_class_under(cEvent, "FingerMotion", cEvTouchFinger);
+    
+    
     
     DEFINE_EVENT_READER(Event, cEvent, type);
     DEFINE_EVENT_ACCESSOR(Event, cEvent, timestamp);
@@ -1022,6 +1160,24 @@ void rubysdl2_init_event(void)
 
     DEFINE_EVENT_ACCESSOR(ControllerDevice, cEvControllerDevice, which);
     rb_define_method(cEvControllerDevice, "inspect", ControllerDevice_inspect, 0);
+
+    DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, touch_id);
+    DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, finger_id);
+    DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, x); 
+    DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, y);
+    DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, dx); 
+    DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, dy);
+    DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, pressure);
+    rb_define_method(cEvTouchFinger, "inspect", EvTouchFinger_inspect, 0);
+
+    DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, touch_id);
+    DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, finger_id);
+    DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, x); 
+    DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, y);
+    DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, dx); 
+    DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, dy);
+    DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, pressure);
+    rb_define_method(cEvFingerMotion, "inspect", EvFingerMotion_inspect, 0);
     
     init_event_type_to_class();
 }
