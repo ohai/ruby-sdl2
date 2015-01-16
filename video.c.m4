@@ -952,7 +952,16 @@ static VALUE Window_debug_info(VALUE self)
  * This means that if you use dual screen, {.displays} returns two displays.
  *
  * This class handles color depth, resolution, and refresh rate of displays.
- * 
+ *
+ *
+ * @!attribute [r] index
+ *   The index of the display, 0 origin
+ *   @return [Integer]
+ *
+ * @!attribute [r] name
+ *   The name of the display
+ *   @return [Stirng]
+ *
  */
 
 /*
@@ -1073,6 +1082,7 @@ static Uint32 uint32_for_format(VALUE format)
  *
  * An object of this class has information about color depth, refresh rate,
  * and resolution of a display.
+ *
  *
  */
 

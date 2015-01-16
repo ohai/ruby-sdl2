@@ -27,6 +27,14 @@ static VALUE GLContext_new(SDL_GLContext context)
     c->context = context;
     return Data_Wrap_Struct(cGLContext, 0, GLContext_free, c);
 }
+
+/*
+ * Document-module: SDL2::GL
+ *
+ * This module provides the initialize/shutdown functions of OpenGL.
+ *
+ */
+
 /*
  * @overload create(window)
  *   Create an OpenGL context for use with an OpenGL window, and make it
@@ -36,6 +44,22 @@ static VALUE GLContext_new(SDL_GLContext context)
  *   @return [SDL2::GL::Context]
  *
  *   @see #delete
+ *
+ *   @example
+ *
+ *     SDL2.init(SDL2::INIT_EVERYTHING)
+ *     # You need to create a window with `OPENGL' flag
+ *     window = SDL2::Window.create("testgl", 0, 0, WINDOW_W, WINDOW_H,
+ *                                  SDL2::Window::Flags::OPENGL)
+ *                                  
+ *     # Create a OpenGL context attached to the window
+ *     context = SDL2::GL::Context.create(window)
+ *
+ *     # You can use OpenGL functions
+ *          :
+ *          
+ *     # Delete the context after using OpenGL functions
+ *     context.destroy
  */
 static VALUE GLContext_s_create(VALUE self, VALUE window)
 {
