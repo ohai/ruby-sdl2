@@ -854,14 +854,6 @@ static VALUE ControllerDevice_inspect(VALUE self)
  *   the y-axis location of the touch event, normalized (0...1)
  *   @return [Float]
  *
- * @attribute dx
- *   the distance moved in the x-axis, normalized (0...1)
- *   @return [Float]
- *
- * @attribute dy
- *   the distance moved in the x-axis, normalized (0...1)
- *   @return [Float]
- *
  * @attribute pressure
  *   the quantity of pressure applied, normalized (0...1)
  *   @return [Float]
@@ -897,22 +889,6 @@ static VALUE EvTouchFinger_inspect(VALUE self)
  *
  * This class represents touch move events.
  *
- * @attribute touch_id
- *   the touch device id
- *   @return [Integer]
- *
- * @attribute finger_id
- *   the finger id
- *   @return [Integer]
- *
- * @attribute x
- *   the x-axis location of the touch event, normalized (0...1)
- *   @return [Float]
- *
- * @attribute y
- *   the y-axis location of the touch event, normalized (0...1)
- *   @return [Float]
- *
  * @attribute dx
  *   the distance moved in the x-axis, normalized (0...1)
  *   @return [Float]
@@ -921,17 +897,9 @@ static VALUE EvTouchFinger_inspect(VALUE self)
  *   the distance moved in the x-axis, normalized (0...1)
  *   @return [Float]
  *
- * @attribute pressure
- *   the quantity of pressure applied, normalized (0...1)
- *   @return [Float]
  */
-EVENT_ACCESSOR_INT(FingerMotion, touch_id, tfinger.touchId);
-EVENT_ACCESSOR_INT(FingerMotion, finger_id, tfinger.fingerId);
-EVENT_ACCESSOR_DBL(FingerMotion, x, tfinger.x);
-EVENT_ACCESSOR_DBL(FingerMotion, y, tfinger.y);
 EVENT_ACCESSOR_DBL(FingerMotion, dx, tfinger.dx);
 EVENT_ACCESSOR_DBL(FingerMotion, dy, tfinger.dy);
-EVENT_ACCESSOR_DBL(FingerMotion, pressure, tfinger.pressure);
 /* @return [String] inspection string */
 static VALUE EvFingerMotion_inspect(VALUE self)
 {
@@ -1164,13 +1132,8 @@ void rubysdl2_init_event(void)
     DEFINE_EVENT_ACCESSOR(TouchFinger, cEvTouchFinger, pressure);
     rb_define_method(cEvTouchFinger, "inspect", EvTouchFinger_inspect, 0);
 
-    DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, touch_id);
-    DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, finger_id);
-    DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, x); 
-    DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, y);
     DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, dx); 
     DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, dy);
-    DEFINE_EVENT_ACCESSOR(FingerMotion, cEvFingerMotion, pressure);
     rb_define_method(cEvFingerMotion, "inspect", EvFingerMotion_inspect, 0);
     
     init_event_type_to_class();
