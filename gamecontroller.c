@@ -2,6 +2,8 @@
 #include <SDL_gamecontroller.h>
 
 static VALUE cGameController;
+static VALUE mAxis;
+static VALUE mButton;
 
 typedef struct GameController {
     SDL_GameController* controller;
@@ -235,8 +237,12 @@ void rubysdl2_init_gamecontorller(void)
     rb_define_method(cGameController, "mapping", GameController_mapping, 0);
     rb_define_method(cGameController, "axis", GameController_axis, 1);
     rb_define_method(cGameController, "button_pressed?", GameController_button_pressed_p, 1);
+
+    mAxis = rb_define_module_under(cGameController, "Axis");
+    mButton = rb_define_module_under(cGameController, "Button");
+    
 #define DEFINE_CONTROLLER_AXIS_CONST(type) \
-    rb_define_const(cGameController, "AXIS_" #type, INT2NUM(SDL_CONTROLLER_AXIS_##type))
+    rb_define_const(mAxis, #type, INT2NUM(SDL_CONTROLLER_AXIS_##type))
     DEFINE_CONTROLLER_AXIS_CONST(INVALID);
     DEFINE_CONTROLLER_AXIS_CONST(LEFTX);
     DEFINE_CONTROLLER_AXIS_CONST(LEFTY);
@@ -246,7 +252,7 @@ void rubysdl2_init_gamecontorller(void)
     DEFINE_CONTROLLER_AXIS_CONST(TRIGGERRIGHT);
     DEFINE_CONTROLLER_AXIS_CONST(MAX);
 #define DEFINE_CONTROLLER_BUTTON_CONST(type) \
-    rb_define_const(cGameController, "BUTTON_" #type, INT2NUM(SDL_CONTROLLER_BUTTON_##type))
+    rb_define_const(mButton, #type, INT2NUM(SDL_CONTROLLER_BUTTON_##type))
     DEFINE_CONTROLLER_BUTTON_CONST(INVALID);
     DEFINE_CONTROLLER_BUTTON_CONST(A);
     DEFINE_CONTROLLER_BUTTON_CONST(B);
