@@ -30,10 +30,11 @@ static VALUE Clipboard_s_text(VALUE self)
 }
 
 /*
- * Set the text in the clipboard.
- *
- * @param text [String] a new text
- * @return [String] text
+ * @overload text=(text) 
+ *   Set the text in the clipboard.
+ *   
+ *   @param text [String] a new text
+ *   @return [String] text
  */
 static VALUE Clipboard_s_set_text(VALUE self, VALUE text)
 {
