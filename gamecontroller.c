@@ -14,6 +14,45 @@ static void GameController_free(GameController* g)
     free(g);
 }
 
+/*
+ * Document-class: SDL2::GameController
+ *
+ * This class represents a "Game Controller".
+ *
+ * In SDL2, there is a gamecontroller framework to
+ * hide the details of joystick types. This framework
+ * is built on the existing joystick API.
+ * 
+ * The framework consists of two parts:
+ *
+ * * Mapping joysticks to game controllers
+ * * Aquire input from game controllers
+ *
+ * Mapping information is a string, and described as:
+ *
+ *    GUID,name,mapping
+ *
+ * GUID is a unique ID of a type of joystick and
+ * given by {Joystick#GUID}. name is the human readable
+ * string for the device, and mappings are contorller mappings
+ * to joystick ones.
+ * 
+ * This mappings abstract the details of joysticks, for exmaple,
+ * the number of buttons, the number of axes, and the position
+ * of these buttons a on pad.
+ * You can use unified interface 
+ * with this framework theoretically.
+ * Howerver, we need to prepare the
+ * database of many joysticks that users will use. A database
+ * is available at https://github.com/gabomdq/SDL_GameControllerDB,
+ * but perhaps is is not sufficient for your usage.
+ * In fact, Steam prepares its own database for Steam games,
+ * so if you will create a game for Steam, this framework is
+ * useful. Otherwise, it is a better way to use joystick API
+ * directly.
+ * 
+ */
+
 static VALUE GameController_new(SDL_GameController* controller)
 {
     GameController* g = ALLOC(GameController);
@@ -25,12 +64,46 @@ DEFINE_WRAPPER(SDL_GameController, GameController, controller, cGameController,
                "SDL2::GameController");
 
 
+/*
+ * @overload add_mapping(string)
+ *
+ *   Add suuport for controolers that SDL is unaware of or to cause an
+ *   existing controller to have a different binding.
+ *
+ *   "GUID,name,mapping", where GUID is
+ *   the string value from SDL_JoystickGetGUIDString(), name is the human
+ *   readable string for the device and mappings are controller mappings to
+ *   joystick ones. Under Windows there is a reserved GUID of "xinput" that
+ *   covers all XInput devices. The mapping format for joystick is:
+ * 
+ *   * bX:   a joystick button, index X
+ *   * hX.Y: hat X with value Y
+ *   * aX:   axis X of the joystick
+ *
+ *   Buttons can be used as a controller axes and vice versa.
+ *
+ *   This string shows an example of a valid mapping for a controller:
+ *   "341a3608000000000000504944564944,Afterglow PS3 Controller,a:b1,b:b2,y:b3,x:b0,start:b9,guide:b12,back:b8,dpup:h0.1,dpleft:h0.8,dpdown:h0.4,dpright:h0.2,leftshoulder:b4,,rightshoulder:b5,leftstick:b10,rightstick:b11,leftx:a0,lefty:a1,rightx:a2,righty:a3,lefttrigger:b6,righttrigger:b7"
+ *   
+ *   @param string [String] mapping string
+ *   @return [Integer] 1 if a new mapping, 0 if an existing mapping is updated.
+ */
 static VALUE GameController_s_add_mapping(VALUE self, VALUE string)
 {
     int ret = HANDLE_ERROR(SDL_GameControllerAddMapping(StringValueCStr(string)));
     return INT2NUM(ret);
 }
 
+/*
+ * @overload axis_name_of(axis)
+ *
+ *   Get a string representing **axis**.
+ *
+ *   **axis** should be one of the following:
+ *
+ *   @param axis [Integer] axis constant
+ *   @return [String]
+ */
 static VALUE GameController_s_axis_name_of(VALUE self, VALUE axis)
 {
     const char* name = SDL_GameControllerGetStringForAxis(NUM2INT(axis));
