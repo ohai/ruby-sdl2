@@ -9,7 +9,7 @@ static VALUE cState;
 /*
  * Document-module: SDL2::Mouse
  *
- * This module have mouse input handling functions.
+ * This module has mouse input handling functions.
  * 
  */
 
