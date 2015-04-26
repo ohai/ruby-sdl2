@@ -42,6 +42,9 @@ static VALUE GLContext_new(SDL_GLContext context)
  *
  * You must create a new OpenGL context before using
  * OpenGL functions.
+ *
+ * @!method destroy?
+ *   Return true if the context is {#destroy destroyed}.
  */
 
 /*
