@@ -36,6 +36,15 @@ static VALUE GLContext_new(SDL_GLContext context)
  */
 
 /*
+ * Document-class: SDL2::GL::Context
+ *
+ * This class represents an OpenGL context.
+ *
+ * You must create a new OpenGL context before using
+ * OpenGL functions.
+ */
+
+/*
  * @overload create(window)
  *   Create an OpenGL context for use with an OpenGL window, and make it
  *   current.
