@@ -251,12 +251,33 @@ void rubysdl2_init_gl(void)
     DEFINE_GL_ATTR_CONST(CONTEXT_MAJOR_VERSION);
     /* OpenGL attribute - OpenGL context minor version */
     DEFINE_GL_ATTR_CONST(CONTEXT_MINOR_VERSION);
-    /* OpenGL attribute - the bit combination of following constants, or 0.
+    /*
+     * INT2NUM(SDL_GL_CONTEXT_FLAGS):
+     * 
+     * OpenGL attribute - the bit combination of following constants, or 0.
      * default is 0
+     *
+     * * {SDL2::GL::CONTEXT_DEBUG_FLAG}
+     * * {SDL2::GL::CONTEXT_FORWARD_COMPATIBLE_FLAG}
+     * * {SDL2::GL::CONTEXT_ROBUST_ACCESS_FLAG}
+     * * {SDL2::GL::CONTEXT_RESET_ISOLATION_FLAG}
+     *
+     * These flags are mapped to some OpenGL extensions. Please see
+     * the documentation of each constant for more details.
+     *
+     * https://wiki.libsdl.org/SDL_GLcontextFlag
      */
     DEFINE_GL_ATTR_CONST(CONTEXT_FLAGS);
-    /* OpenGL attribute - type of GL context, one of the following constants,
+    /* INT2NUM(SDL_GL_CONTEXT_PROFILE_MASK):
+     *
+     * OpenGL attribute - type of GL context, one of the following constants,
      * defaults depends on platform
+     *
+     * * {CONTEXT_PROFILE_CORE}
+     * * {CONTEXT_PROFILE_COMPATIBILITY}
+     * * {CONTEXT_PROFILE_ES}
+     *
+     * https://wiki.libsdl.org/SDL_GLprofile
      */
     DEFINE_GL_ATTR_CONST(CONTEXT_PROFILE_MASK);
     /* OpenGL attribute - OpenGL context sharing, default is 0 */
@@ -269,13 +290,49 @@ void rubysdl2_init_gl(void)
     DEFINE_GL_ATTR_CONST(CONTEXT_EGL);
 
     /* define(`DEFINE_GL_CONTEXT_CONST',`rb_define_const(mGL, "CONTEXT_$1", INT2NUM(SDL_GL_CONTEXT_$1))') */
+
+    /* This flag maps to GLX_CONTEXT_DEBUG_BIT_ARB in
+     * the GLX_ARB_create_context extension for X11
+     * and WGL_CONTEXT_DEBUG_BIT_ARB in the WGL_ARB_create_context
+     * extension for Windows.
+     */
     DEFINE_GL_CONTEXT_CONST(DEBUG_FLAG);
+    /*
+     * This flag maps to GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB in the
+     * GLX_ARB_create_context extension for X11 and
+     * WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB in the WGL_ARB_create_context
+     * extension for Windows.
+     */
     DEFINE_GL_CONTEXT_CONST(FORWARD_COMPATIBLE_FLAG);
+    /*
+     * This flag maps to GLX_CONTEXT_ROBUST_ACCESS_BIT_ARB in the
+     * GLX_ARB_create_context_robustness extension for X11 and
+     * WGL_CONTEXT_ROBUST_ACCESS_BIT_ARB in the WGL_ARB_create_context_robustness
+     * extension for Windows. 
+     */
     DEFINE_GL_CONTEXT_CONST(ROBUST_ACCESS_FLAG);
+    /*
+     * This flag maps to GLX_CONTEXT_RESET_ISOLATION_BIT_ARB in the
+     * GLX_ARB_robustness_isolation extension for X11 and
+     * WGL_CONTEXT_RESET_ISOLATION_BIT_ARB in the WGL_ARB_create_context_robustness
+     * extension for Windows.
+     */
     DEFINE_GL_CONTEXT_CONST(RESET_ISOLATION_FLAG);
-    
+
+    /*
+     * OpenGL core profile - deprecated
+     * functions are disabled
+     */
     DEFINE_GL_CONTEXT_CONST(PROFILE_CORE);
+    /*
+     * OpenGL compatibility profile -
+     * deprecated functions are allowed
+     */
     DEFINE_GL_CONTEXT_CONST(PROFILE_COMPATIBILITY);
+    /*
+     * OpenGL ES profile - only a subset of the
+     * base OpenGL functionality is available
+     */
     DEFINE_GL_CONTEXT_CONST(PROFILE_ES);
     
     rb_gc_register_address(&current_context);
