@@ -1,3 +1,4 @@
+/* -*- mode: C -*- */
 #include "rubysdl2_internal.h"
 #include <SDL_gamecontroller.h>
 
@@ -101,9 +102,7 @@ static VALUE GameController_s_add_mapping(VALUE self, VALUE string)
  *
  *   Get a string representing **axis**.
  *
- *   **axis** should be one of the following:
- *
- *   @param axis [Integer] axis constant
+ *   @param axis [Integer] axis constant in {Axis}
  *   @return [String]
  */
 static VALUE GameController_s_axis_name_of(VALUE self, VALUE axis)
@@ -116,6 +115,14 @@ static VALUE GameController_s_axis_name_of(VALUE self, VALUE axis)
     return utf8str_new_cstr(name);
 }
 
+/*
+ * @overload button_name_of(button)
+ *
+ *   Get a string representing **button**.
+ *
+ *   @param button [Integer] button constant in {Button}
+ *   @return [String]
+ */
 static VALUE GameController_s_button_name_of(VALUE self, VALUE button)
 {
     const char* name = SDL_GameControllerGetStringForButton(NUM2INT(button));
@@ -126,6 +133,17 @@ static VALUE GameController_s_button_name_of(VALUE self, VALUE button)
     return utf8str_new_cstr(name);
 }
 
+/*
+ * @overload axis_from_name(name)
+ *
+ *   Get a integer representation of the axis
+ *   whose string representation is **name**.
+ *
+ *   The return value is the value of one of the constants in {Axis}
+ *
+ *   @param name [String] a string representing an axis
+ *   @return [Integer]
+ */
 static VALUE GameController_s_axis_from_name(VALUE self, VALUE name)
 {
     int axis = SDL_GameControllerGetAxisFromString(StringValueCStr(name));
@@ -136,6 +154,17 @@ static VALUE GameController_s_axis_from_name(VALUE self, VALUE name)
     return INT2FIX(axis);
 }
 
+/*
+ * @overload button_from_name(name)
+ *
+ *   Get a integer representation of the button
+ *   whose string representation is **name**.
+ *
+ *   The return value is the value of one of the constants in {Button}
+ *
+ *   @param name [String] a string representing a button
+ *   @return [Integer]
+ */
 static VALUE GameController_s_button_from_name(VALUE self, VALUE name)
 {
     int button = SDL_GameControllerGetButtonFromString(StringValueCStr(name));
@@ -146,6 +175,15 @@ static VALUE GameController_s_button_from_name(VALUE self, VALUE name)
     return INT2FIX(button);
 }
 
+/*
+ * Get the implementation dependent name for the game controllers
+ * connected to the machine.
+ * 
+ * The number of elements of returning array is same as
+ * {Joystick.num_connected_joysticks}.
+ * 
+ * @return [Array<String,nil>]
+ */
 static VALUE GameController_s_device_names(VALUE self)
 {
     int num_joysticks = SDL_NumJoysticks();
@@ -161,12 +199,28 @@ static VALUE GameController_s_device_names(VALUE self)
     return device_names;
 }
 
+/*
+ * Get the game controller mapping string for a given GUID.
+ *
+ * @param guid_string [String] GUID string
+ * 
+ * @return [String] 
+ */
 static VALUE GameController_s_mapping_for(VALUE self, VALUE guid_string)
 {
     SDL_JoystickGUID guid = SDL_JoystickGetGUIDFromString(StringValueCStr(guid_string));
     return utf8str_new_cstr(SDL_GameControllerMappingForGUID(guid));
 }
 
+/*
+ * Open a game controller and return the opened GameController object.
+ *
+ * @param index [Integer] device index, up to the return value of {Joystick.num_connected_joysticks}.
+ * @return [SDL2::GameController]
+ *
+ * @raise [SDL2::Error] raised when device open is failed.
+ *   For exmaple, **index** is out of range.
+ */
 static VALUE GameController_s_open(VALUE self, VALUE index)
 {
     SDL_GameController* controller = SDL_GameControllerOpen(NUM2INT(index));
@@ -175,6 +229,11 @@ static VALUE GameController_s_open(VALUE self, VALUE index)
     return GameController_new(controller);
 }
 
+/*
+ * Get the name of an opened game controller.
+ *
+ * @return [String]
+ */
 static VALUE GameController_name(VALUE self)
 {
     return utf8str_new_cstr(SDL_GameControllerName(Get_SDL_GameController(self)));
