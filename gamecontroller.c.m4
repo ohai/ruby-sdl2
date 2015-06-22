@@ -53,7 +53,9 @@ static void GameController_free(GameController* g)
  * so if you will create a game for Steam, this framework is
  * useful. Otherwise, it is a better way to use joystick API
  * directly.
- * 
+ *
+ * @!method destroy?
+ *   Return true if the gamecontroller is already closed.
  */
 
 static VALUE GameController_new(SDL_GameController* controller)
@@ -243,11 +245,19 @@ static VALUE GameController_name(VALUE self)
     return utf8str_new_cstr(name);
 }
 
+/*
+ * Return true if **self** is opened and attached.
+ */
 static VALUE GameController_attached_p(VALUE self)
 {
     return INT2BOOL(SDL_GameControllerGetAttached(Get_SDL_GameController(self)));
 }
 
+/*
+ * Close the game controller.
+ * 
+ * @return nil
+ */
 static VALUE GameController_destroy(VALUE self)
 {
     GameController* g = Get_GameController(self);
@@ -257,23 +267,56 @@ static VALUE GameController_destroy(VALUE self)
     return Qnil;
 }
 
+/*
+ * Get the mapping string of **self**.
+ *
+ * @return [String]
+ * @see .add_mapping
+ * @see .mapping_for
+ */
 static VALUE GameController_mapping(VALUE self)
 {
     return utf8str_new_cstr(SDL_GameControllerMapping(Get_SDL_GameController(self)));
 }
 
+/*
+ * Get the state of an axis control. 
+ * The state is an integer from -32768 to 32767. 
+ * The state of trigger never returns negative value (from 0 to 32767).
+ *
+ * @param axis [Integer] the index of an axis, one of the constants in {Axis}
+ * @return [Integer]
+ */
 static VALUE GameController_axis(VALUE self, VALUE axis)
 {
     return INT2FIX(SDL_GameControllerGetAxis(Get_SDL_GameController(self),
                                              NUM2INT(axis)));
 }
 
+/*
+ * Return true if a button is pressed.
+ *
+ * @param button [Integer] the index of a button, one of the constants in {Button}
+ */
 static VALUE GameController_button_pressed_p(VALUE self, VALUE button)
 {
     return INT2BOOL(SDL_GameControllerGetButton(Get_SDL_GameController(self),
                                                 NUM2INT(button)));
 }
 
+/*
+ * Document-module: SDL2::GameController::Axis
+ *
+ * This module provides constants of gamecontroller's axis indices used by
+ * {SDL2::GameController} class.
+ */
+
+/*
+ * Document-module: SDL2::GameController::Button
+ *
+ * This module provides constants of gamecontroller's button indices used by
+ * {SDL2::GameController} class.
+ */
 void rubysdl2_init_gamecontorller(void)
 {
     cGameController = rb_define_class_under(mSDL2, "GameController", rb_cObject);
@@ -303,34 +346,58 @@ void rubysdl2_init_gamecontorller(void)
 
     mAxis = rb_define_module_under(cGameController, "Axis");
     mButton = rb_define_module_under(cGameController, "Button");
-    
-#define DEFINE_CONTROLLER_AXIS_CONST(type) \
-    rb_define_const(mAxis, #type, INT2NUM(SDL_CONTROLLER_AXIS_##type))
+
+    /* define(`DEFINE_CONTROLLER_AXIS_CONST',`rb_define_const(mAxis, "$1", INT2NUM(SDL_CONTROLLER_AXIS_$1))') */
+    /* Invalid axis index */
     DEFINE_CONTROLLER_AXIS_CONST(INVALID);
+    /* Left X axis */
     DEFINE_CONTROLLER_AXIS_CONST(LEFTX);
+    /* Left Y axis */
     DEFINE_CONTROLLER_AXIS_CONST(LEFTY);
+    /* Right X axis */
     DEFINE_CONTROLLER_AXIS_CONST(RIGHTX);
+    /* Right Y axis */
     DEFINE_CONTROLLER_AXIS_CONST(RIGHTY);
+    /* Left trigger axis */
     DEFINE_CONTROLLER_AXIS_CONST(TRIGGERLEFT);
+    /* Right trigger axis */
     DEFINE_CONTROLLER_AXIS_CONST(TRIGGERRIGHT);
+    /* The max of an axis index */
     DEFINE_CONTROLLER_AXIS_CONST(MAX);
-#define DEFINE_CONTROLLER_BUTTON_CONST(type) \
-    rb_define_const(mButton, #type, INT2NUM(SDL_CONTROLLER_BUTTON_##type))
+
+    /* define(`DEFINE_CONTROLLER_BUTTON_CONST',`rb_define_const(mButton, "$1", INT2NUM(SDL_CONTROLLER_BUTTON_$1))') */
+    /* Invalid button index */
     DEFINE_CONTROLLER_BUTTON_CONST(INVALID);
+    /* Button A */
     DEFINE_CONTROLLER_BUTTON_CONST(A);
+    /* Button B */
     DEFINE_CONTROLLER_BUTTON_CONST(B);
+    /* Button X */
     DEFINE_CONTROLLER_BUTTON_CONST(X);
+    /* Button Y */
     DEFINE_CONTROLLER_BUTTON_CONST(Y);
+    /* Back Button */
     DEFINE_CONTROLLER_BUTTON_CONST(BACK);
+    /* Guide Button */
     DEFINE_CONTROLLER_BUTTON_CONST(GUIDE);
+    /* Start Button */
     DEFINE_CONTROLLER_BUTTON_CONST(START);
+    /* Left stick Button */
     DEFINE_CONTROLLER_BUTTON_CONST(LEFTSTICK);
+    /* Right stick Button */
     DEFINE_CONTROLLER_BUTTON_CONST(RIGHTSTICK);
+    /* Left shoulder Button */
     DEFINE_CONTROLLER_BUTTON_CONST(LEFTSHOULDER);
+    /* Right shoulder Button */
     DEFINE_CONTROLLER_BUTTON_CONST(RIGHTSHOULDER);
+    /* D-pad UP Button */
     DEFINE_CONTROLLER_BUTTON_CONST(DPAD_UP);
+    /* D-pad DOWN Button */
     DEFINE_CONTROLLER_BUTTON_CONST(DPAD_DOWN);
+    /* D-pad LEFT Button */
     DEFINE_CONTROLLER_BUTTON_CONST(DPAD_LEFT);
+    /* D-pad RIGHT Button */
     DEFINE_CONTROLLER_BUTTON_CONST(DPAD_RIGHT);
+    /* The max of a button index */
     DEFINE_CONTROLLER_BUTTON_CONST(MAX);
 }
