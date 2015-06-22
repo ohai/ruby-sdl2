@@ -236,7 +236,11 @@ static VALUE GameController_s_open(VALUE self, VALUE index)
  */
 static VALUE GameController_name(VALUE self)
 {
-    return utf8str_new_cstr(SDL_GameControllerName(Get_SDL_GameController(self)));
+    const char* name = SDL_GameControllerName(Get_SDL_GameController(self));
+    if (!name)
+        SDL_ERROR();
+
+    return utf8str_new_cstr(name);
 }
 
 static VALUE GameController_attached_p(VALUE self)
