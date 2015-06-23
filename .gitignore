@@ -6,6 +6,8 @@ key.c
 video.c
 gl.c
 ttf.c
+mixer.c
+gamecontroller.c
 pkg/
 TAGS
 local/
