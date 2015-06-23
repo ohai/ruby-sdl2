@@ -233,6 +233,9 @@ static VALUE Channels_s_allocate(VALUE self, VALUE num_channels)
 
 /*
  * @overload reserve(num)
+ *   Reserve channel from 0 to num-1 and reserved channels are not used by
+ *   {Channels.play} and {Channels.fade_in} with **channels**==-1.
+ *   
  *   @param num [Integer]
  *   @return [Integer]
  */
@@ -521,29 +524,73 @@ static VALUE Channels_s_playing_chunk(VALUE self, VALUE channel)
     return rb_ary_entry(playing_chunks, NUM2INT(channel));
 }
 
+/*
+ * Document-class: SDL2::Mixer::Channels::Group
+ *
+ * This class represents a channel group. A channel group is
+ * a set of channels and you can stop playing and fade out playing
+ * channels of an group at the same time.
+ *
+ * Each channel group is identified by an integer called tag.
+ */
+
+/*
+ * Initialize the channel with given **tag**.
+ *
+ * Groups with a common tag are identified.
+ */
 static VALUE Group_initialize(VALUE self, VALUE tag)
 {
     rb_iv_set(self, "@tag", tag);
     return Qnil;
 }
 
+/*
+ * Get the default channel group.
+ *
+ * The default channel group refers all channels in the mixer system.
+ * 
+ * @return [SDL2::Mixer::Channels::Group]
+ */
 static VALUE Group_s_default(VALUE self)
 {
     VALUE tag = INT2FIX(-1);
     return rb_class_new_instance(1, &tag, self);
 }
 
+/*
+ * Get the tag of the group.
+ *
+ * @return [Integer]
+ */
 inline static int Group_tag(VALUE group)
 {
     return NUM2INT(rb_iv_get(group, "@tag"));
 }
 
+/*
+ * @overload ==(other) 
+ *   Return true if **self** and **other** are same.
+ *   
+ *   **self** and **other** are considered to be same
+ *   if they have the same tag.
+ *   
+ *   @param other [SDL2::Mixer::Channel::Group] a compared object
+ *   @return [Boolean]
+ */
 static VALUE Group_eq(VALUE self, VALUE other)
 {
     return INT2BOOL(rb_obj_is_instance_of(other, cGroup) &&
                     Group_tag(self) == Group_tag(other));
 }
 
+/*
+ * @overload add(which) 
+ *   Add a channel to the group.
+ *   
+ *   @param which [Integer] a channel id
+ *   @return [nil]
+ */
 static VALUE Group_add(VALUE self, VALUE which)
 {
     if (!Mix_GroupChannel(NUM2INT(which), Group_tag(self))) {
@@ -553,36 +600,84 @@ static VALUE Group_add(VALUE self, VALUE which)
     return Qnil;
 }
 
+/*
+ * Get the number of channels belong to the group.
+ *
+ * @return [Integer]
+ */
 static VALUE Group_count(VALUE self)
 {
     return INT2NUM(Mix_GroupCount(Group_tag(self)));
 }
 
+/*
+ * Return the first available channel in the group.
+ *
+ * Return -1 if no channel is available.
+ * 
+ * @return [Integer]
+ */
 static VALUE Group_available(VALUE self)
 {
     return INT2NUM(Mix_GroupAvailable(Group_tag(self)));
 }
 
+/*
+ * Return the oldest cahnnel in the group.
+ * 
+ * Return -1 if no channel is available.
+ * 
+ * @return [Integer]
+ */
 static VALUE Group_oldest(VALUE self)
 {
     return INT2NUM(Mix_GroupOldest(Group_tag(self)));
 }
 
+/*
+ * Return the newer cahnnel in the group.
+ * 
+ * Return -1 if no channel is available.
+ * 
+ * @return [Integer]
+ */
 static VALUE Group_newer(VALUE self)
 {
     return INT2NUM(Mix_GroupNewer(Group_tag(self)));
 }
 
+/*
+ * @overload fade_out(ms)
+ *   Halt playing of all channels in the group with fade-out effect.
+ *   
+ *   @param ms [Integer] milliseconds of fade-out effect
+ *   @return [Integer] the number of channels affected by this method
+ *   @see Channels.fade_out
+ *   @see .halt
+ */
 static VALUE Group_fade_out(VALUE self, VALUE ms)
 {
     return INT2NUM(Mix_FadeOutGroup(Group_tag(self), NUM2INT(ms)));
 }
 
+/*
+ * Halt playing of all channels in the group.
+ *
+ * @return [nil]
+ * @see Channels.halt
+ * @see .fade_out
+ */
 static VALUE Group_halt(VALUE self)
 {
     Mix_HaltGroup(Group_tag(self));
     return Qnil;
 }
+
+/*
+ * Document-module: SDL2::Mixer::MusicChannel
+ *
+ * This module provides the functions to play {SDL2::Mixer::Music}.
+ */
 
 /*
  * @overload play(music, loops)
@@ -971,31 +1066,50 @@ void rubysdl2_init_mixer(void)
     rb_define_module_function(mMixer, "close", Mixer_s_close, 0);
     rb_define_module_function(mMixer, "query", Mixer_s_query, 0);
     
-#define DEFINE_MIX_INIT(t) \
-    rb_define_const(mMixer, "INIT_" #t, UINT2NUM(MIX_INIT_##t))
+    /* define(`DEFINE_MIX_INIT',`rb_define_const(mMixer, "INIT_$1", UINT2NUM(MIX_INIT_$1))') */
+    /* Initialize Ogg flac loader */
     DEFINE_MIX_INIT(FLAC);
+    /* Initialize MOD loader */
     DEFINE_MIX_INIT(MOD);
+    /* Initialize libmodplug */
     DEFINE_MIX_INIT(MODPLUG);
+    /* Initialize MP3 loader */
     DEFINE_MIX_INIT(MP3);
+    /* Initialize Ogg vorbis loader */
     DEFINE_MIX_INIT(OGG);
+    /* Initialize fluidsynth */
     DEFINE_MIX_INIT(FLUIDSYNTH);
 
-#define DEFINE_MIX_FORMAT(t) \
-    rb_define_const(mMixer, "FORMAT_" #t, UINT2NUM(AUDIO_##t))
+    /* define(`DEFINE_MIX_FORMAT',`rb_define_const(mMixer, "FORMAT_$1", UINT2NUM(AUDIO_$1))') */
+    /* Unsiged 8-bit sample format. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(U8);
+    /* Siged 8-bit sample format. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(S8);
+    /* Unsiged 16-bit little-endian sample format. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(U16LSB);
+    /* Siged 16-bit little-endian sample format. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(S16LSB);
+    /* Unsiged 16-bit big-endian sample format. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(U16MSB);
+    /* Unsiged 16-bit big-endian sample format. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(S16MSB);
+    /* Unsiged 16-bit sample format. Endian is same as system byte order. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(U16SYS);
+    /* Siged 16-bit sample format. Endian is same as system byte order. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(S16SYS);
+    /* Default frequency. 22050 (Hz) */
     rb_define_const(mMixer, "DEFAULT_FREQUENCY", UINT2NUM(MIX_DEFAULT_FREQUENCY));
+    /* Default sample format. Same as {Mixer::FORMAT_S16SYS}. */
     rb_define_const(mMixer, "DEFAULT_FORMAT", UINT2NUM(MIX_DEFAULT_FORMAT));
+    /* Default number of channels. 2. */
     rb_define_const(mMixer, "DEFAULT_CHANNELS", INT2FIX(MIX_DEFAULT_CHANNELS));
+    /* Max volume value. 128. */
     rb_define_const(mMixer, "MAX_VOLUME", INT2FIX(MIX_MAX_VOLUME));
+    /* This constants represents that the channel is not fading in and fading out. */
     rb_define_const(mMixer, "NO_FADING", INT2FIX(MIX_NO_FADING));
+    /* This constants represents that the channel is fading out. */
     rb_define_const(mMixer, "FADING_OUT", INT2FIX(MIX_FADING_OUT));
+    /* This constants represents that the channel is fading in. */
     rb_define_const(mMixer, "FADING_IN", INT2FIX(MIX_FADING_IN));
 
     
@@ -1008,6 +1122,7 @@ void rubysdl2_init_mixer(void)
     rb_define_method(cChunk, "volume", Chunk_volume, 0);
     rb_define_method(cChunk, "volume=", Chunk_set_volume, 1);
     rb_define_method(cChunk, "inspect", Chunk_inspect, 0);
+    /* @return [String] The file name of the file from which the sound is loaded. */
     rb_define_attr(cChunk, "filename", 1, 0);
 
     
@@ -1041,6 +1156,7 @@ void rubysdl2_init_mixer(void)
     cGroup = rb_define_class_under(mChannels, "Group", rb_cObject);
     rb_define_method(cGroup, "initialize", Group_initialize, 1);
     rb_define_singleton_method(cGroup, "default", Group_s_default, 0);
+    /* @return [Integer] tag id */
     rb_define_attr(cGroup, "tag", 1, 0);
     rb_define_method(cGroup, "==", Group_eq, 1);
     rb_define_method(cGroup, "add", Group_add, 1);
