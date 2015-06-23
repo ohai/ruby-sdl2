@@ -53,7 +53,7 @@ static VALUE TTF_new(TTF_Font* font)
 DEFINE_WRAPPER(TTF_Font, TTF, font, cTTF, "SDL2::TTF");
 
 /*
- * Document-Class: SDL2::TTF
+ * Document-class: SDL2::TTF
  *
  * This class represents font information.
  *
