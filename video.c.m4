@@ -3034,6 +3034,16 @@ void rubysdl2_init_video(void)
 static VALUE mIMG;
 
 /*
+ * Document-module: SDL2::IMG
+ *
+ * This module provides the interface to SDL_image. You can load
+ * many kinds of image files using this modules.
+ * 
+ * This module provides only initialization interface {SDL2::IMG.init}.
+ * After calling init, you can load image files using {SDL2::Surface.load}.
+ */
+
+/*
  * @overload init(flags)
  *   Initialize SDL_image. 
  *   
@@ -3043,6 +3053,7 @@ static VALUE mIMG;
  *   * {SDL2::IMG::INIT_JPG}
  *   * {SDL2::IMG::INIT_PNG}
  *   * {SDL2::IMG::INIT_TIF}
+ *   * {SDL2::IMG::INIT_WEBP}
  *
  *   You need to initialize SDL_image to check whether specified format
  *   is supported by your environment. If your environment does not
@@ -3122,10 +3133,14 @@ void rubysdl2_init_image(void)
     rb_define_singleton_method(cSurface, "load", Surface_s_load, 1);
     rb_define_method(cRenderer, "load_texture", Renderer_load_texture, 1);
                      
-    
+
+    /* Initialize the JPEG loader */
     rb_define_const(mIMG, "INIT_JPG", INT2NUM(IMG_INIT_JPG));
+    /* Initialize the PNG loader */
     rb_define_const(mIMG, "INIT_PNG", INT2NUM(IMG_INIT_PNG));
+    /* Initialize the TIF loader */
     rb_define_const(mIMG, "INIT_TIF", INT2NUM(IMG_INIT_TIF));
+    /* Initialize the WEBP loader */
     rb_define_const(mIMG, "INIT_WEBP", INT2NUM(IMG_INIT_WEBP));
 }
 
