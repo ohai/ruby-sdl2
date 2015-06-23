@@ -1,3 +1,4 @@
+/* -*- mode: C -*- */
 #ifdef HAVE_SDL_MIXER_H
 #include "rubysdl2_internal.h"
 #include <SDL_mixer.h>
