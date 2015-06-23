@@ -202,11 +202,12 @@ static VALUE GameController_s_device_names(VALUE self)
 }
 
 /*
- * Get the game controller mapping string for a given GUID.
- *
- * @param guid_string [String] GUID string
- * 
- * @return [String] 
+ * @overload mapping_for(guid_string)
+ *   Get the game controller mapping string for a given GUID.
+ *   
+ *   @param guid_string [String] GUID string
+ *   
+ *   @return [String] 
  */
 static VALUE GameController_s_mapping_for(VALUE self, VALUE guid_string)
 {
@@ -215,13 +216,14 @@ static VALUE GameController_s_mapping_for(VALUE self, VALUE guid_string)
 }
 
 /*
- * Open a game controller and return the opened GameController object.
- *
- * @param index [Integer] device index, up to the return value of {Joystick.num_connected_joysticks}.
- * @return [SDL2::GameController]
- *
- * @raise [SDL2::Error] raised when device open is failed.
- *   For exmaple, **index** is out of range.
+ * @overload open(index) 
+ *   Open a game controller and return the opened GameController object.
+ *   
+ *   @param index [Integer] device index, up to the return value of {Joystick.num_connected_joysticks}.
+ *   @return [SDL2::GameController]
+ *   
+ *   @raise [SDL2::Error] raised when device open is failed.
+ *     For exmaple, **index** is out of range.
  */
 static VALUE GameController_s_open(VALUE self, VALUE index)
 {
@@ -280,12 +282,14 @@ static VALUE GameController_mapping(VALUE self)
 }
 
 /*
- * Get the state of an axis control. 
- * The state is an integer from -32768 to 32767. 
- * The state of trigger never returns negative value (from 0 to 32767).
- *
- * @param axis [Integer] the index of an axis, one of the constants in {Axis}
- * @return [Integer]
+ * @overload axis(axis)
+ *   Get the state of an axis control.
+ *   
+ *   The state is an integer from -32768 to 32767. 
+ *   The state of trigger never returns negative value (from 0 to 32767).
+ *   
+ *   @param axis [Integer] the index of an axis, one of the constants in {Axis}
+ *   @return [Integer]
  */
 static VALUE GameController_axis(VALUE self, VALUE axis)
 {
@@ -294,9 +298,10 @@ static VALUE GameController_axis(VALUE self, VALUE axis)
 }
 
 /*
- * Return true if a button is pressed.
- *
- * @param button [Integer] the index of a button, one of the constants in {Button}
+ * @overload button_pressed?(button) 
+ *   Return true if a button is pressed.
+ *   
+ *   @param button [Integer] the index of a button, one of the constants in {Button}
  */
 static VALUE GameController_button_pressed_p(VALUE self, VALUE button)
 {
