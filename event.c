@@ -642,7 +642,7 @@ static VALUE EvMouseWheel_inspect(VALUE self)
  *
  * @attribute pressed
  *   button is pressed or not
- *   @return [Integer]
+ *   @return [boolean]
  * 
  */
 EVENT_ACCESSOR_INT(JoyButton, which, jbutton.which);
@@ -792,9 +792,27 @@ static VALUE EvJoyDevice_inspect(VALUE self)
  */
 
 
+/*
+ * Document-class: SDL2::Event::ControllerAxisMotion
+ *
+ * This class represents the {SDL2::GameController controller} axis motion events.
+ *
+ * @attribute which
+ *   the controller index
+ *   @return [Integer]
+ *
+ * @attribute axis
+ *   the axis index
+ *   @return [Integer]
+ *
+ * @attribute value
+ *   the axis value (range: -32768 to -32767, 0 for newtral)
+ *   @return [Integer]
+ */
 EVENT_ACCESSOR_INT(ControllerAxis, which, caxis.which);
 EVENT_ACCESSOR_UINT8(ControllerAxis, axis, caxis.axis);
 EVENT_ACCESSOR_INT(ControllerAxis, value, caxis.value);
+/* @return [String] inspection string */
 static VALUE ControllerAxis_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -805,9 +823,33 @@ static VALUE ControllerAxis_inspect(VALUE self)
                       ev->caxis.value);
 }
 
+/*
+ * Document-class: SDL2::Event::ControllerButton
+ *
+ * This class represents the {SDL2::GameController controller} button events.
+ *
+ * You don't handle the instance 
+ * of this class directly, but you handle the instances of 
+ * two subclasses of this subclasses:
+ * {SDL2::Event::ControllerButtonDown} and {SDL2::Event::ControllerButtonUp}.
+ *
+ * @attribute which
+ *   the controller index
+ *   @return [Integer]
+ *
+ * @attribute button
+ *   the controller button index
+ *   @return [Integer]
+ *
+ * @attribute pressed
+ *   button is pressed or not
+ *   @return [boolean]
+ *
+ */
 EVENT_ACCESSOR_INT(ControllerButton, which, cbutton.which);
 EVENT_ACCESSOR_UINT8(ControllerButton, button, cbutton.button);
 EVENT_ACCESSOR_BOOL(ControllerButton, pressed, cbutton.state);
+/* @return [String] inspection string */
 static VALUE ControllerButton_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -818,8 +860,36 @@ static VALUE ControllerButton_inspect(VALUE self)
                       SDL_GameControllerGetStringForButton(ev->cbutton.button),
                       INT2BOOLCSTR(ev->cbutton.state));
 }
+/*
+ * Document-class: SDL2::Event::ControllerButtonDown
+ *
+ * This class represents the {SDL2::GameController controller} button press events.
+ */
 
+/*
+ * Document-class: SDL2::Event::ControllerButtonUp
+ *
+ * This class represents the {SDL2::GameController controller} button release events.
+ */
+
+/*
+ * Document-class: SDL2::Event::ControllerDevice
+ *
+ * This class represents {SDL2::GameController controller} device events (connected/disconnected/remapped).
+ *
+ * The event of this event doesn't occur. Only the event of the following subclasses
+ * occur in Ruby/SDL2.
+ *
+ *   * {SDL2::Event::ControllerDeviceAdded}
+ *   * {SDL2::Event::ControllerDeviceRemoved}
+ *   * {SDL2::Event::ControllerDeviceRemapped}
+ *
+ * @attribute which
+ *   the controller index
+ *   @return [Integer]
+ */
 EVENT_ACCESSOR_INT(ControllerDevice, which, cdevice.which);
+/* @return [String] inspection string */
 static VALUE ControllerDevice_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -827,6 +897,22 @@ static VALUE ControllerDevice_inspect(VALUE self)
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
                       ev->cdevice.which);
 }
+
+/*
+ * Document-class: SDL2::Event::ControllerDeviceAdded
+ *
+ * This class represents {SDL2::GameController controller} device connected events.
+ */
+/*
+ * Document-class: SDL2::Event::ControllerDeviceRemoved
+ *
+ * This class represents {SDL2::GameController controller} device disconnected events.
+ */
+/*
+ * Document-class: SDL2::Event::ControllerDeviceRemapped
+ *
+ * This class represents {SDL2::GameController controller} device remapped events.
+ */
 
 /*
  * Document-class: SDL2::Event::TouchFinger
