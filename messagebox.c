@@ -15,6 +15,12 @@ static inline SDL_Window* Get_SDL_Window_or_NULL(VALUE win)
 }
 
 /*
+ * Document-module: SDL2::MessageBox
+ *
+ * This module provides functions to show a modal message box.
+ */
+
+/*
  * @overload show_simple_box(flag, title, message, parent)
  *   Create a simple modal message box.
  *
