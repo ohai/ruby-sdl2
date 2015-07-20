@@ -141,7 +141,7 @@ static VALUE Event_s_enabled_p(VALUE self)
 }
 
 /*
- * @overload enabled=(bool)
+ * @overload enable=(bool)
  *   Set wheter the event is enable
  *   
  *   This method is only available for subclasses of SDL2::Event corresponding to
