@@ -1622,6 +1622,24 @@ static VALUE Renderer_debug_info(VALUE self)
 }
 
 /*
+ * Document-class: SDL2::Renderer::Info
+ *
+ * This class contains information of a rendering context.
+ *
+ * @!attribute [r] name
+ *   @return [String] the name of the renderer
+ *
+ * @!attribute [r] texture_formats
+ *   @return [Array<SDL2::PixelFormat>] available texture formats
+ *
+ * @!attribute [r] max_texture_width
+ *   @return [Integer] maximum texture width
+ *   
+ * @!attribute [r] max_texture_height
+ *   @return [Integer] maximum texture height
+ */
+
+/*
  * Document-module: SDL2::Renderer::Flags
  *
  * The OR'd bits of the constants of this module represents
