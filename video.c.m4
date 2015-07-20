@@ -2620,6 +2620,12 @@ static VALUE PixelFormat_inspect(VALUE self)
 }
 
 /*
+ * Document-module: SDL2::ScreenSaver
+ *
+ * This module provides functions to disable and enable a screensaver.
+ */
+
+/*
  * Enable screensaver.
  *
  * @return [nil]
