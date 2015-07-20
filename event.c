@@ -647,8 +647,8 @@ static VALUE EvMouseWheel_inspect(VALUE self)
  */
 EVENT_ACCESSOR_INT(JoyButton, which, jbutton.which);
 EVENT_ACCESSOR_UINT8(JoyButton, button, jbutton.button);
-EVENT_ACCESSOR_BOOL(JoyButton, pressed, jbutton.state)
-/* @return [Stirng] inspection string */
+EVENT_ACCESSOR_BOOL(JoyButton, pressed, jbutton.state);
+/* @return [String] inspection string */
 static VALUE EvJoyButton_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -772,6 +772,7 @@ static VALUE EvJoyHatMotion_inspect(VALUE self)
  *  {SDL2::Event::JoyDeviceRemoved joystick disconnected events}).
  */
 EVENT_ACCESSOR_INT(JoyDevice, which, jdevice.which);
+/* @return [String] inspection string */
 static VALUE EvJoyDevice_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
@@ -971,7 +972,7 @@ static VALUE EvTouchFinger_inspect(VALUE self)
  */
 
 /*
- * Document-class: SDL2::Event::FingerMove
+ * Document-class: SDL2::Event::FingerMotion
  *
  * This class represents touch move events.
  *
@@ -1000,6 +1001,17 @@ static VALUE EvFingerMotion_inspect(VALUE self)
                       ev->tfinger.dx, ev->tfinger.dx);
 }
 
+/*
+ * Document-class: SDL2::Event::SysWM
+ *
+ * This class represents video driver dependent system events.
+ *
+ * This event is disabled by default. You can enable it with {SDL2::Event.enable=}.
+ * This event is now useless because now there is no way to get
+ * driver dependent information from this event class.
+ * You are encouraged to avoid this event.
+ * 
+ */
 static void connect_event_class(SDL_EventType type, VALUE klass)
 {
     event_type_to_class[type] = klass;
