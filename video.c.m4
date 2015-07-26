@@ -1507,6 +1507,12 @@ static VALUE Renderer_clip_rect(VALUE self)
     return rect;
 }
 
+static VALUE Renderer_set_clip_rect(VALUE self, VALUE rect)
+{
+    HANDLE_ERROR(SDL_RenderSetClipRect(Get_SDL_Renderer(self), Get_SDL_Rect(rect)));
+    return rect;
+}
+
 #if SDL_VERSION_ATLEAST(2,0,4)
 static VALUE Render_clip_enabled_p(VALUE self)
 {
@@ -1514,11 +1520,24 @@ static VALUE Render_clip_enabled_p(VALUE self)
 }
 #endif
 
+/*
+ * Get device indepndent resolution for rendering.
+ *
+ * @return [[Integer, Integer]] the logical width and height 
+ */
 static VALUE Renderer_logical_size(VALUE self)
 {
     int w, h;
     SDL_RenderGetLogicalSize(Get_SDL_Renderer(self), &w, &h);
     return rb_ary_new3(2, INT2FIX(w), INT2FIX(h));
+}
+
+static VALUE Renderer_set_logical_size(VALUE self, VALUE wh)
+{
+    HANDLE_ERROR(SDL_RenderSetLogicalSize(Get_SDL_Renderer(self),
+                                          NUM2DBL(rb_ary_entry(wh, 0)),
+                                          NUM2DBL(rb_ary_entry(wh, 1))));
+    return wh;
 }
 
 static VALUE Renderer_scale(VALUE self)
@@ -1528,10 +1547,25 @@ static VALUE Renderer_scale(VALUE self)
     return rb_ary_new3(2, DBL2NUM(scaleX), DBL2NUM(scaleY));
 }
 
+static VALUE Renderer_set_scale(VALUE self, VALUE xy)
+{
+    float scaleX, scaleY;
+    scaleX = NUM2DBL(rb_ary_entry(xy, 0));
+    scaleY = NUM2DBL(rb_ary_entry(xy, 1));
+    HANDLE_ERROR(SDL_RenderSetScale(Get_SDL_Renderer(self), scaleX, scaleY));
+    return xy;
+}
+
 static VALUE Renderer_viewport(VALUE self)
 {
     VALUE rect = rb_obj_alloc(cRect);
     SDL_RenderGetViewport(Get_SDL_Renderer(self), Get_SDL_Rect(rect));
+    return rect;
+}
+
+static VALUE Renderer_set_viewport(VALUE self, VALUE rect)
+{
+    HANDLE_ERROR(SDL_RenderSetClipRect(Get_SDL_Renderer(self), Get_SDL_Rect(rect)));
     return rect;
 }
 
@@ -2800,12 +2834,16 @@ void rubysdl2_init_video(void)
     rb_define_method(cRenderer, "draw_blend_mode", Renderer_draw_blend_mode, 0);
     rb_define_method(cRenderer, "draw_blend_mode=", Renderer_set_draw_blend_mode, 1);
     rb_define_method(cRenderer, "clip_rect", Renderer_clip_rect, 0);
+    rb_define_method(cRenderer, "clip_rect=", Renderer_set_clip_rect, 1);
 #if SDL_VERSION_ATLEAST(2,0,4)
     rb_define_method(cRenderer, "clip_enabled?", Render_clip_enabled_p, 0);
 #endif
     rb_define_method(cRenderer, "logical_size", Renderer_logical_size, 0);
+    rb_define_method(cRenderer, "logical_size=", Renderer_set_logical_size, 1);
     rb_define_method(cRenderer, "scale", Renderer_scale, 0);
+    rb_define_method(cRenderer, "scale=", Renderer_set_scale, 1);
     rb_define_method(cRenderer, "viewport", Renderer_viewport, 0);
+    rb_define_method(cRenderer, "viewport=", Renderer_set_viewport, 1);
     rb_define_method(cRenderer, "support_render_target?", Renderer_support_render_target_p, 0);
     rb_define_method(cRenderer, "output_size", Renderer_output_size, 0);
     rb_define_method(cRenderer, "render_target", Renderer_render_target, 0);
