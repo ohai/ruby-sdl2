@@ -877,13 +877,12 @@ static VALUE Window_set_fullscreen_mode(VALUE self, VALUE flags)
     return flags;
 }
 
-
+#if SDL_VERSION_ATLEAST(2,0,1)
 /*
  * Get the size of the drawable region.
  *
  * @return [[Integer, Integer]] the width and height of the region
  */
-#if SDL_VERSION_ATLEAST(2,0,1)
 static VALUE Window_gl_drawable_size(VALUE self)
 {
     int w, h;
@@ -1278,9 +1277,9 @@ static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstre
  *
  *   You can use the following constants to specify the horizontal/vertical flip:
  *   
- *   * SDL2::Renderer::FLIP_HORIZONTAL - flip horizontally
- *   * SDL2::Renderer::FLIP_VERTICAL - flip vertically
- *   * SDL2::Renderer::FLIP_NONE - do not flip, equal to zero
+ *   * {SDL2::Renderer::FLIP_HORIZONTAL} - flip horizontally
+ *   * {SDL2::Renderer::FLIP_VERTICAL} - flip vertically
+ *   * {SDL2::Renderer::FLIP_NONE} - do not flip, equal to zero
  *
  *   
  *   @param [SDL2::Texture] texture the source texture
@@ -1498,7 +1497,7 @@ static VALUE Renderer_set_draw_blend_mode(VALUE self, VALUE mode)
  * Get the clip rectangle for the current target.
  *
  * @return [SDL2::Rect] the current clip rectangle
- * 
+ * @see {#clip_rect=}
  */
 static VALUE Renderer_clip_rect(VALUE self)
 {
@@ -1507,6 +1506,14 @@ static VALUE Renderer_clip_rect(VALUE self)
     return rect;
 }
 
+/*
+ * @overload clip_rect=(rect)
+ *
+ *   Set the clip rectangle for the current target.
+ *
+ *   @return [rect]
+ *   @see #clip_rect
+ */
 static VALUE Renderer_set_clip_rect(VALUE self, VALUE rect)
 {
     HANDLE_ERROR(SDL_RenderSetClipRect(Get_SDL_Renderer(self), Get_SDL_Rect(rect)));
@@ -1514,6 +1521,11 @@ static VALUE Renderer_set_clip_rect(VALUE self, VALUE rect)
 }
 
 #if SDL_VERSION_ATLEAST(2,0,4)
+/*
+ * Get whether clipping is enabled on the renderer.
+ *
+ * @note This method is available since SDL 2.0.4.
+ */
 static VALUE Render_clip_enabled_p(VALUE self)
 {
     return INT2BOOL(SDL_RenderIsClipEnabled(Get_SDL_Renderer(self)));
@@ -1523,7 +1535,8 @@ static VALUE Render_clip_enabled_p(VALUE self)
 /*
  * Get device indepndent resolution for rendering.
  *
- * @return [[Integer, Integer]] the logical width and height 
+ * @return [[Integer, Integer]] the logical width and height
+ * @see #logical_size=
  */
 static VALUE Renderer_logical_size(VALUE self)
 {
@@ -1532,6 +1545,15 @@ static VALUE Renderer_logical_size(VALUE self)
     return rb_ary_new3(2, INT2FIX(w), INT2FIX(h));
 }
 
+/*
+ * @overload logical_size=(w_and_h)
+ *
+ *   Set a device indepndent resolution for rendering.
+ *   
+ *   @param w_and_h [[Integer, Integer]] the width and height of the logical resolution
+ *   @return [w_and_h]
+ *   @see #logical_size
+ */
 static VALUE Renderer_set_logical_size(VALUE self, VALUE wh)
 {
     HANDLE_ERROR(SDL_RenderSetLogicalSize(Get_SDL_Renderer(self),
@@ -1540,6 +1562,12 @@ static VALUE Renderer_set_logical_size(VALUE self, VALUE wh)
     return wh;
 }
 
+/*
+ * Get the drawing scale for the current target.
+ *
+ * @return [[Integer, Integer]] horizontal and vertical scale factor
+ * @see #scale=
+ */
 static VALUE Renderer_scale(VALUE self)
 {
     float scaleX, scaleY;
@@ -1547,6 +1575,22 @@ static VALUE Renderer_scale(VALUE self)
     return rb_ary_new3(2, DBL2NUM(scaleX), DBL2NUM(scaleY));
 }
 
+/*
+ * @overload scale=(scaleX_and_scaleY)
+ *
+ *   Set the drawing scale for rendering.
+ *
+ *   The drawing coordinates are scaled by the x/y scaling factors before they are used by the renderer.
+ *   This allows resolution independent drawing with a single coordinate system.
+ *   
+ *   If this results in scaling or subpixel drawing by the rendering backend,
+ *   it will be handled using the appropriate
+ *   quality hints. For best results use integer scaling factors.
+ *
+ *   @param scaleX_and_scaleY [[Float, Float]] the horizontal and vertical scaling factors
+ *   @return [scaleX_and_scaleY]
+ *   @see #scale
+ */
 static VALUE Renderer_set_scale(VALUE self, VALUE xy)
 {
     float scaleX, scaleY;
@@ -1556,6 +1600,12 @@ static VALUE Renderer_set_scale(VALUE self, VALUE xy)
     return xy;
 }
 
+/*
+ * Get the drawing area for the current target.
+ *
+ * @return [SDL2::Rect] the current drawing area
+ * @see #viewport=
+ */
 static VALUE Renderer_viewport(VALUE self)
 {
     VALUE rect = rb_obj_alloc(cRect);
@@ -1563,9 +1613,17 @@ static VALUE Renderer_viewport(VALUE self)
     return rect;
 }
 
+/*
+ * @overload viewport=(area) 
+ *   Set the drawing area for rendering on the current target.
+ *
+ *   @param area [SDL2::Rect,nil] the drawing area, or nil to set the viewport to the entire target
+ *   @return [area]
+ *   @see #viewport
+ */
 static VALUE Renderer_set_viewport(VALUE self, VALUE rect)
 {
-    HANDLE_ERROR(SDL_RenderSetClipRect(Get_SDL_Renderer(self), Get_SDL_Rect(rect)));
+    HANDLE_ERROR(SDL_RenderSetClipRect(Get_SDL_Renderer(self), Get_SDL_Rect_or_NULL(rect)));
     return rect;
 }
 
@@ -1579,6 +1637,11 @@ static VALUE Renderer_support_render_target_p(VALUE self)
     return INT2BOOL(SDL_RenderTargetSupported(Get_SDL_Renderer(self)));
 }
 
+/*
+ * Get the output size of a rendering context.
+ *
+ * @return [[Integer, Integer]] the width and the height
+ */
 static VALUE Renderer_output_size(VALUE self)
 {
     int w, h;
@@ -2865,10 +2928,12 @@ void rubysdl2_init_video(void)
 #endif
     /* the renderer supports rendering to texture */ 
     DEFINE_RENDERER_FLAGS_CONST(TARGETTEXTURE);
-#define DEFINE_SDL_FLIP_CONST(t)                                        \
-    rb_define_const(cRenderer, "FLIP_" #t, INT2FIX(SDL_FLIP_##t))
+    /* define(`DEFINE_SDL_FLIP_CONST',`rb_define_const(cRenderer, "FLIP_$1", INT2FIX(SDL_FLIP_$1))') */
+    /* Do not flip, used in {Renderer#copy_ex} */
     DEFINE_SDL_FLIP_CONST(NONE);
+    /* Flip horizontally, used in {Renderer#copy_ex} */
     DEFINE_SDL_FLIP_CONST(HORIZONTAL);
+    /* Flip vertically, used in {Renderer#copy_ex} */
     DEFINE_SDL_FLIP_CONST(VERTICAL);
     
     mBlendMode = rb_define_module_under(mSDL2, "BlendMode");
