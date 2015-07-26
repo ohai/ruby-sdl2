@@ -48,7 +48,7 @@ static void GameController_free(GameController* g)
  * Howerver, we need to prepare the
  * database of many joysticks that users will use. A database
  * is available at https://github.com/gabomdq/SDL_GameControllerDB,
- * but perhaps is is not sufficient for your usage.
+ * but perhaps this is not sufficient for your usage.
  * In fact, Steam prepares its own database for Steam games,
  * so if you will create a game for Steam, this framework is
  * useful. Otherwise, it is a better way to use joystick API
