@@ -692,7 +692,7 @@ static VALUE Group_halt(VALUE self)
  *
  *    @return [nil]
  *    
- *    @see {.fade_in}
+ *    @see .fade_in
  *    
  */
 static VALUE MusicChannel_s_play(VALUE self, VALUE music, VALUE loops)
@@ -718,7 +718,7 @@ static VALUE MusicChannel_s_play(VALUE self, VALUE music, VALUE loops)
  *
  *    @return [nil]
  *    
- *    @see {.play}
+ *    @see .play
  */
 static VALUE MusicChannel_s_fade_in(int argc, VALUE* argv, VALUE self)
 {
