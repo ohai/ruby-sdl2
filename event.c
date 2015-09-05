@@ -151,7 +151,7 @@ static VALUE Event_s_enabled_p(VALUE self)
  *     SDL2::Event::MouseWheel.enable = false
  *   
  *   @param [Boolean] bool true for enabling the event.
- *   @return [bool]
+ *   @return [Boolean]
  *   @see SDL2::Event.enabled?
  *
  */
@@ -642,7 +642,7 @@ static VALUE EvMouseWheel_inspect(VALUE self)
  *
  * @attribute pressed
  *   button is pressed or not
- *   @return [boolean]
+ *   @return [Boolean]
  * 
  */
 EVENT_ACCESSOR_INT(JoyButton, which, jbutton.which);
@@ -844,7 +844,7 @@ static VALUE ControllerAxis_inspect(VALUE self)
  *
  * @attribute pressed
  *   button is pressed or not
- *   @return [boolean]
+ *   @return [Boolean]
  *
  */
 EVENT_ACCESSOR_INT(ControllerButton, which, cbutton.which);

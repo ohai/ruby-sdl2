@@ -56,7 +56,7 @@ static VALUE Hints_s_aref(VALUE self, VALUE name)
  *     {DEFAULT}, {NORMAL}, or {OVERRIDE}.
  *   @param value [String] the value of the hint varaible
  *   
- * @return [bool] return true if the hint was set
+ * @return [Boolean] return true if the hint was set
  *
  * @example
  *   SDL2::Hints["SDL_HINT_XINPUT_ENABLED", priority: SDL2::Hints::OVERRIDE] = "0"

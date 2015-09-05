@@ -122,7 +122,7 @@ static VALUE Mouse_s_relative_mode_p(VALUE self)
  *
  * @note This function will flush any pending mouse motion.
  * 
- * @return [bool]
+ * @return [Boolean]
  * @see .relative_mode?
  */
 static VALUE Mouse_s_set_relative_mode(VALUE self, VALUE enabled)

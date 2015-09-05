@@ -2691,7 +2691,7 @@ PIXELFORMAT_ATTR_READER(fourcc_p,  SDL_ISPIXELFORMAT_FOURCC, INT2BOOL);
  * @overload ==(other)
  *   Return true if two pixel format is the same format.
  *
- * @return [boolean]
+ * @return [Boolean]
  */
 static VALUE PixelFormat_eq(VALUE self, VALUE other)
 {
