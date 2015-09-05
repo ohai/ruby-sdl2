@@ -60,6 +60,60 @@ DEFINE_WRAPPER(TTF_Font, TTF, font, cTTF, "SDL2::TTF");
  * You can render TrueType fonts using [SDL_ttf](https://www.libsdl.org/projects/SDL_ttf/)
  * and this class.
  *
+ * @!attribute style
+ *   Font style.
+ *   The OR'd bits of the constants of {SDL2::TTF::Style}.
+ *   @return [Integer]
+ *   
+ * @!attribute outline
+ *   The outline pixel width of the font.
+ *   @return [Integer]
+ *   
+ * @!attribute hinting
+ *   Font hinting.
+ *   One of the constants of {SDL2::TTF::Hinting}.
+ *   @return [Integer]
+ *   
+ * @!attribute kerning
+ *   True if kerning is enabled.
+ *   @return [Booelan]
+ *   
+ * @!attribute [r] height
+ *   The maximum pixel height of all glyphs of the font.
+ *   You can use this height to render text as close together vertically
+ *   as possible.
+ *   @return [Integer]
+ *   @see #line_skip
+ *   
+ * @!attribute [r] ascent
+ *   The maximum pixel ascent of all glyphs of the font.
+ *   The distance from the top of the font to the baseline.
+ *   @return [Integer]
+ *   @see #descent
+ *
+ * @!attribute [r] descent
+ *   The maximum pixel descent of all glyphs of the font.
+ *   The distance from the bottom of the font to the baseline.
+ *   @return [Integer]
+ *   @see #ascent
+ * 
+ * @!attribute [r] line_skip
+ *   The recommended pixel height of rendered line of text
+ *   of the font. Normally, this value is larger than {#height}.
+ *   @return [Integer]
+ *   
+ * @!attribute [r] num_faces
+ *   The number of faces available in the font.
+ *   @return [Integer]
+ *   
+ * @!attribute [r] face_family_name
+ *   The current font face family name of the font.
+ *   @return [String]
+ *   
+ * @!attribute [r] face_style_name
+ *   The current font face style name of the font.
+ *   @return [String]
+ *   
  */
 
 /*
