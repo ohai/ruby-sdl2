@@ -243,8 +243,9 @@ static VALUE TTF_render_blended(VALUE self, VALUE text, VALUE fg)
  * Document-module: SDL2::TTF::Style
  *
  * Constants represents font styles.
- * 
- * Document-module: SDL2::TTF::Hinting
+ */
+
+/* Document-module: SDL2::TTF::Hinting
  *
  * Constants represents font hinting for FreeType.
  */
