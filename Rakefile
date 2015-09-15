@@ -10,6 +10,8 @@ RB_FILES = Dir.glob("lib/**/*.rb")
 POT_SOURCES = RB_FILES + ["main.c"] + (C_FILES - ["main.c"])
 YARD_SOURCES = "-m markdown --main README.md --files COPYING.txt #{POT_SOURCES.join(" ")}"
 
+WATCH_TARGETS = (C_FILES - C_FROM_M4_FILES) + C_M4_FILES + ["README.md"]
+  
 locale = ENV["YARD_LOCALE"]
 
 def extconf_options
@@ -77,8 +79,9 @@ task "doc-all" do
   raise "Not yet implemented"
 end
 
+desc "List undocumented classes/modules/methods/constants"
 task "doc-stat-undocumented" => POT_SOURCES do
-  sh "yard stats --list-undoc #{YARD_SOURCES}"
+  sh "yard stats --list-undoc --compact #{YARD_SOURCES}"
 end
 
 rule ".c" => ".c.m4" do |t|
@@ -97,3 +100,9 @@ Gem::PackageTask.new(gem_spec) do |pkg|
 end
 
 rule ".gem" => C_FILES
+
+task "watch-doc" do
+  loop do
+    sh "inotifywait -e modify #{WATCH_TARGETS.join(" ")} && rake doc && notify-send -u low \"Ruby/SDL2 build doc OK\""
+  end
+end
