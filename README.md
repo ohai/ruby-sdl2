@@ -19,7 +19,11 @@ from github:
     cd ruby-sdl2
     rake gem
     gem install pkg/ruby-sdl2-x.y.z.gem
-    
+
+# Document
+
+* [English Reference manual](http://ohai.github.io/ruby-sdl2/doc-en/)
+
 # License
 
 LGPL v3 (see {file:COPYING.txt}).
