@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: SDL2::Mixer::Channels
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "SDL2::Mixer::Channels";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../SDL2.html" title="SDL2 (module)">SDL2</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Mixer.html" title="SDL2::Mixer (module)">Mixer</a></span></span>
+     &raquo; 
+    <span class="title">Channels</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <iframe id="search_frame" src="../../class_list.html"></iframe>
+
+      <div id="content"><h1>Module: SDL2::Mixer::Channels
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>mixer.c<span class="defines">,<br />
+  mixer.c</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This module plays <span class='object_link'><a href="Chunk.html" title="SDL2::Mixer::Chunk (class)">Chunk</a></span> objects in parallel.</p>
+
+<p>Each virtual sound output device is called channel, and the number of
+channels determines the f</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Channels/Group.html" title="SDL2::Mixer::Channels::Group (class)">Group</a></span>
+    
+  
+</p>
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#allocate-class_method" title="allocate (class method)">.<strong>allocate</strong>(num_channels)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set the number of channels being mixed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#expire-class_method" title="expire (class method)">.<strong>expire</strong>(channel, ticks)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Halt playing of a specified channel after <strong>ticks</strong>
+milliseconds.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fade_in-class_method" title="fade_in (class method)">.<strong>fade_in</strong>(channel, chunk, loops, ms, ticks = -1)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Play a <span class='object_link'><a href="Chunk.html" title="SDL2::Mixer::Chunk (class)">Chunk</a></span> on <strong>channel</strong> with fading in.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fade_out-class_method" title="fade_out (class method)">.<strong>fade_out</strong>(channel, ms)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Halt playing of a specified channel with fade-out effect.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fading-class_method" title="fading (class method)">.<strong>fading</strong>(channel)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return the fading state of a specified channel.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#halt-class_method" title="halt (class method)">.<strong>halt</strong>(channel)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Halt playing of a specified channel.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pause-class_method" title="pause (class method)">.<strong>pause</strong>(channel)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Pause a specified channel.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pause%3F-class_method" title="pause? (class method)">.<strong>pause?</strong>(channel)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if a specified channel is paused.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#play-class_method" title="play (class method)">.<strong>play</strong>(channel, chunk, loops, ticks = -1)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Play a <span class='object_link'><a href="Chunk.html" title="SDL2::Mixer::Chunk (class)">Chunk</a></span> on <strong>channel</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#play%3F-class_method" title="play? (class method)">.<strong>play?</strong>(channel)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if a specified channel is playing.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#playing_chunk-class_method" title="playing_chunk (class method)">.<strong>playing_chunk</strong>(channel)  &#x21d2; SDL2::Mixer::Chunk<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the <span class='object_link'><a href="Chunk.html" title="SDL2::Mixer::Chunk (class)">Chunk</a></span> object most recently playing on
+<strong>channel</strong>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reserve-class_method" title="reserve (class method)">.<strong>reserve</strong>(num)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reserve channel from 0 to num-1 and reserved channels are not used by
+<span class='object_link'><a href="#play-class_method" title="SDL2::Mixer::Channels.play (method)">Channels.play</a></span> and <span class='object_link'><a href="#fade_in-class_method" title="SDL2::Mixer::Channels.fade_in (method)">Channels.fade_in</a></span> with <strong>channels</strong>==-1.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resume-class_method" title="resume (class method)">.<strong>resume</strong>(channel)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Resume a specified channel that already pauses.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_volume-class_method" title="set_volume (class method)">.<strong>set_volume</strong>(channel, volume)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set the volume of specified channel.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#volume-class_method" title="volume (class method)">.<strong>volume</strong>(channel)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the volume of specified channel.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="allocate-class_method">
+  
+    .<strong>allocate</strong>(num_channels)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Set the number of channels being mixed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>num_channels</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Number of channels prepared for mixing.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of prepared channels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+229
+230
+231
+232</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 229</span>
+
+static VALUE Channels_s_allocate(VALUE self, VALUE num_channels)
+{
+    return INT2NUM(Mix_AllocateChannels(NUM2INT(num_channels)));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="expire-class_method">
+  
+    .<strong>expire</strong>(channel, ticks)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Halt playing of a specified channel after <strong>ticks</strong>
+milliseconds.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the channel to be halted, or -1 for all channels.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ticks</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>milliseconds untils the channel halts playback.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#halt-class_method" title="SDL2::Mixer::Channels.halt (method)">halt</a></span></li>
+    
+      <li><span class='object_link'><a href="#fade_out-class_method" title="SDL2::Mixer::Channels.fade_out (method)">fade_out</a></span></li>
+    
+      <li><span class='object_link'><a href="#play%3F-class_method" title="SDL2::Mixer::Channels.play? (method)">play?</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+427
+428
+429
+430
+431
+432</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 427</span>
+
+static VALUE Channels_s_expire(VALUE self, VALUE channel, VALUE ticks)
+{
+    check_channel(channel, 1);
+    Mix_ExpireChannel(NUM2INT(channel), NUM2INT(ticks));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fade_in-class_method">
+  
+    .<strong>fade_in</strong>(channel, chunk, loops, ms, ticks = -1)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Play a <span class='object_link'><a href="Chunk.html" title="SDL2::Mixer::Chunk (class)">SDL2::Mixer::Chunk</a></span> on <strong>channel</strong> with fading in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the channel to play, or -1 for the first free unreserved channel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>chunk</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Chunk.html" title="SDL2::Mixer::Chunk (class)">SDL2::Mixer::Chunk</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the chunk to play</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>loops</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of loops, or -1 for infite loops. passing 1 plays the sample
+twice (1 loop).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ms</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>milliseconds of time of fade-in effect.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ticks</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>-1</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>milliseconds limit to play, at most. If the chunk is long enough and
+<strong>loops</strong> is large enough, the play will stop after
+<strong>ticks</strong> milliseconds. Otherwise, the play will stop when the
+loop ends. -1 means infinity.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the channel that plays the chunk.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Error.html" title="SDL2::Error (class)">SDL2::Error</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>raised on a playing error. For example, <strong>channel</strong> is out of
+the allocated channels, or there is no free channels when
+<strong>channel</strong> is -1.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#play-class_method" title="SDL2::Mixer::Channels.play (method)">play</a></span></li>
+    
+      <li><span class='object_link'><a href="#fade_out-class_method" title="SDL2::Mixer::Channels.fade_out (method)">fade_out</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 347</span>
+
+static VALUE Channels_s_fade_in(int argc, VALUE* argv, VALUE self)
+{
+    VALUE channel, chunk, loops, ms, ticks;
+    int ch;
+    rb_scan_args(argc, argv, &quot;41&quot;, &amp;channel, &amp;chunk, &amp;loops, &amp;ms, &amp;ticks);
+    if (ticks == Qnil)
+        ticks = INT2FIX(-1);
+    check_channel(channel, 1);
+    ch = Mix_FadeInChannelTimed(NUM2INT(channel), Get_Mix_Chunk(chunk),
+                                NUM2INT(loops), NUM2INT(ms), NUM2INT(ticks));
+    HANDLE_MIX_ERROR(ch);
+    protect_playing_chunk_from_gc(ch, chunk);
+    return INT2FIX(ch);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fade_out-class_method">
+  
+    .<strong>fade_out</strong>(channel, ms)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Halt playing of a specified channel with fade-out effect.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the channel to be halted, or -1 for all channels.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ms</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>milliseconds of fade-out effect</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#halt-class_method" title="SDL2::Mixer::Channels.halt (method)">halt</a></span></li>
+    
+      <li><span class='object_link'><a href="#expire-class_method" title="SDL2::Mixer::Channels.expire (method)">expire</a></span></li>
+    
+      <li><span class='object_link'><a href="#play%3F-class_method" title="SDL2::Mixer::Channels.play? (method)">play?</a></span></li>
+    
+      <li><span class='object_link'><a href="#fade_in-class_method" title="SDL2::Mixer::Channels.fade_in (method)">fade_in</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+447
+448
+449
+450
+451
+452</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 447</span>
+
+static VALUE Channels_s_fade_out(VALUE self, VALUE channel, VALUE ms)
+{
+    check_channel(channel, 1);
+    Mix_FadeOutChannel(NUM2INT(channel), NUM2INT(ms));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fading-class_method">
+  
+    .<strong>fading</strong>(channel)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Return the fading state of a specified channel.</p>
+
+<p>The return value is one of the following:</p>
+<ul><li>
+<p><span class='object_link'><a href="../Mixer.html#NO_FADING-constant" title="SDL2::Mixer::NO_FADING (constant)">NO_FADING</a></span> - <strong>channel</strong> is not fading in, and
+fading out</p>
+</li><li>
+<p><span class='object_link'><a href="../Mixer.html#FADING_IN-constant" title="SDL2::Mixer::FADING_IN (constant)">FADING_IN</a></span> - <strong>channel</strong> is fading in</p>
+</li><li>
+<p><span class='object_link'><a href="../Mixer.html#FADING_OUT-constant" title="SDL2::Mixer::FADING_OUT (constant)">FADING_OUT</a></span> - <strong>channel</strong> is fading out</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>channel to test</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#play%3F-class_method" title="SDL2::Mixer::Channels.play? (method)">play?</a></span></li>
+    
+      <li><span class='object_link'><a href="#pause%3F-class_method" title="SDL2::Mixer::Channels.pause? (method)">pause?</a></span></li>
+    
+      <li><span class='object_link'><a href="#fade_in-class_method" title="SDL2::Mixer::Channels.fade_in (method)">fade_in</a></span></li>
+    
+      <li><span class='object_link'><a href="#fade_out-class_method" title="SDL2::Mixer::Channels.fade_out (method)">fade_out</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+505
+506
+507
+508
+509</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 505</span>
+
+static VALUE Channels_s_fading(VALUE self, VALUE which)
+{
+    check_channel(which, 0);
+    return INT2FIX(Mix_FadingChannel(NUM2INT(which)));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="halt-class_method">
+  
+    .<strong>halt</strong>(channel)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Halt playing of a specified channel.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the channel to be halted, or -1 for all channels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#expire-class_method" title="SDL2::Mixer::Channels.expire (method)">expire</a></span></li>
+    
+      <li><span class='object_link'><a href="#fade_out-class_method" title="SDL2::Mixer::Channels.fade_out (method)">fade_out</a></span></li>
+    
+      <li><span class='object_link'><a href="#play%3F-class_method" title="SDL2::Mixer::Channels.play? (method)">play?</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+408
+409
+410
+411
+412
+413</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 408</span>
+
+static VALUE Channels_s_halt(VALUE self, VALUE channel)
+{
+    check_channel(channel, 1);
+    Mix_HaltChannel(NUM2INT(channel));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pause-class_method">
+  
+    .<strong>pause</strong>(channel)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Pause a specified channel.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the channel to pause, or -1 for all channels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#resume-class_method" title="SDL2::Mixer::Channels.resume (method)">resume</a></span></li>
+    
+      <li><span class='object_link'><a href="#pause%3F-class_method" title="SDL2::Mixer::Channels.pause? (method)">pause?</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+372
+373
+374
+375
+376
+377</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 372</span>
+
+static VALUE Channels_s_pause(VALUE self, VALUE channel)
+{
+    check_channel(channel, 1);
+    Mix_Pause(NUM2INT(channel));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pause?-class_method">
+  
+    .<strong>pause?</strong>(channel)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>This method returns true if a paused channel is halted by <span class='object_link'><a href="#halt-class_method" title="SDL2::Mixer::Channels.halt (method)">halt</a></span>, or any
+other halting methods.</p>
+</div>
+  </div>
+
+
+<p>Return true if a specified channel is paused.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>channel to test</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#play%3F-class_method" title="SDL2::Mixer::Channels.play? (method)">play?</a></span></li>
+    
+      <li><span class='object_link'><a href="#fading-class_method" title="SDL2::Mixer::Channels.fading (method)">fading</a></span></li>
+    
+  </ul>
+
+</div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+480
+481
+482
+483
+484</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 480</span>
+
+static VALUE Channels_s_pause_p(VALUE self, VALUE channel)
+{
+    check_channel(channel, 0);
+    return INT2BOOL(Mix_Paused(NUM2INT(channel)));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="play-class_method">
+  
+    .<strong>play</strong>(channel, chunk, loops, ticks = -1)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Play a <span class='object_link'><a href="Chunk.html" title="SDL2::Mixer::Chunk (class)">SDL2::Mixer::Chunk</a></span> on <strong>channel</strong>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the channel to play, or -1 for the first free unreserved channel</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>chunk</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Chunk.html" title="SDL2::Mixer::Chunk (class)">SDL2::Mixer::Chunk</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the chunk to play</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>loops</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the number of loops, or -1 for infite loops. passing 1 plays the sample
+twice (1 loop).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ticks</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>-1</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>milliseconds limit to play, at most. If the chunk is long enough and
+<strong>loops</strong> is large enough, the play will stop after
+<strong>ticks</strong> milliseconds. Otherwise, the play will stop when the
+loop ends. -1 means infinity.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the channel that plays the chunk.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Error.html" title="SDL2::Error (class)">SDL2::Error</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>raised on a playing error. For example, <strong>channel</strong> is out of
+the allocated channels, or there is no free channels when
+<strong>channel</strong> is -1.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#fade_in-class_method" title="SDL2::Mixer::Channels.fade_in (method)">fade_in</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 308</span>
+
+static VALUE Channels_s_play(int argc, VALUE* argv, VALUE self)
+{
+    VALUE channel, chunk, loops, ticks;
+    int ch;
+    rb_scan_args(argc, argv, &quot;31&quot;, &amp;channel, &amp;chunk, &amp;loops, &amp;ticks);
+    if (ticks == Qnil)
+        ticks = INT2FIX(-1);
+    check_channel(channel, 1);
+    ch = Mix_PlayChannelTimed(NUM2INT(channel), Get_Mix_Chunk(chunk),
+                              NUM2INT(loops), NUM2INT(ticks));
+    HANDLE_MIX_ERROR(ch);
+    protect_playing_chunk_from_gc(ch, chunk);
+    return INT2FIX(ch);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="play?-class_method">
+  
+    .<strong>play?</strong>(channel)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Return true if a specified channel is playing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>channel to test</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#pause%3F-class_method" title="SDL2::Mixer::Channels.pause? (method)">pause?</a></span></li>
+    
+      <li><span class='object_link'><a href="#fading-class_method" title="SDL2::Mixer::Channels.fading (method)">fading</a></span></li>
+    
+  </ul>
+
+</div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+462
+463
+464
+465
+466</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 462</span>
+
+static VALUE Channels_s_play_p(VALUE self, VALUE channel)
+{
+    check_channel(channel, 0);
+    return INT2BOOL(Mix_Playing(NUM2INT(channel)));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="playing_chunk-class_method">
+  
+    .<strong>playing_chunk</strong>(channel)  &#x21d2; <tt><span class='object_link'><a href="Chunk.html" title="SDL2::Mixer::Chunk (class)">SDL2::Mixer::Chunk</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Get the <span class='object_link'><a href="Chunk.html" title="SDL2::Mixer::Chunk (class)">SDL2::Mixer::Chunk</a></span> object most recently playing on
+<strong>channel</strong>.</p>
+
+<p>If <strong>channel</strong> is out of allocated channels, or no chunk is
+played yet on <strong>channel</strong>, this method returns nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the channel to get the chunk object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Chunk.html" title="SDL2::Mixer::Chunk (class)">SDL2::Mixer::Chunk</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+521
+522
+523
+524
+525</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 521</span>
+
+static VALUE Channels_s_playing_chunk(VALUE self, VALUE channel)
+{
+    check_channel(channel, 0);
+    return rb_ary_entry(playing_chunks, NUM2INT(channel));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reserve-class_method">
+  
+    .<strong>reserve</strong>(num)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Reserve channel from 0 to num-1 and reserved channels are not used by
+<span class='object_link'><a href="#play-class_method" title="SDL2::Mixer::Channels.play (method)">play</a></span> and <span class='object_link'><a href="#fade_in-class_method" title="SDL2::Mixer::Channels.fade_in (method)">fade_in</a></span> with <strong>channels</strong>==-1.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>num</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+242
+243
+244
+245</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 242</span>
+
+static VALUE Channels_s_reserve(VALUE self, VALUE num)
+{
+    return INT2NUM(Mix_ReserveChannels(NUM2INT(num)));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resume-class_method">
+  
+    .<strong>resume</strong>(channel)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>This method has no effect to unpaused channels.</p>
+</div>
+  </div>
+
+
+<p>Resume a specified channel that already pauses.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the channel to be resumed, or -1 for all channels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#pause-class_method" title="SDL2::Mixer::Channels.pause (method)">pause</a></span></li>
+    
+      <li><span class='object_link'><a href="#pause%3F-class_method" title="SDL2::Mixer::Channels.pause? (method)">pause?</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+390
+391
+392
+393
+394
+395</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 390</span>
+
+static VALUE Channels_s_resume(VALUE self, VALUE channel)
+{
+    check_channel(channel, 1);
+    Mix_Resume(NUM2INT(channel));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_volume-class_method">
+  
+    .<strong>set_volume</strong>(channel, volume)  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Set the volume of specified channel.</p>
+
+<p>The volume should be from 0 to <span class='object_link'><a href="../Mixer.html#MAX_VOLUME-constant" title="SDL2::Mixer::MAX_VOLUME (constant)">MAX_VOLUME</a></span>(128). If the
+specified channel is -1, set volume for all channels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the channel to set volume for.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>volume</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the volume to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#volume-class_method" title="SDL2::Mixer::Channels.volume (method)">volume</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+276
+277
+278
+279</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 276</span>
+
+static VALUE Channels_s_set_volume(VALUE self, VALUE channel, VALUE volume)
+{
+    return INT2NUM(Mix_Volume(NUM2INT(channel), NUM2INT(volume)));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="volume-class_method">
+  
+    .<strong>volume</strong>(channel)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Get the volume of specified channel.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the channel to get volume for. If the specified channel is -1, this method
+returns the average volume of all channels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the volume, 0-128</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#set_volume-class_method" title="SDL2::Mixer::Channels.set_volume (method)">set_volume</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+258
+259
+260
+261</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 258</span>
+
+static VALUE Channels_s_volume(VALUE self, VALUE channel)
+{
+    return INT2NUM(Mix_Volume(NUM2INT(channel), -1));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Tue Sep 15 17:11:04 2015 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.2.3).
+</div>
+
+    </div>
+  </body>
+</html>

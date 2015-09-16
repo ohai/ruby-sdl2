@@ -1,0 +1,4208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: SDL2::Renderer
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "SDL2::Renderer";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../SDL2.html" title="SDL2 (module)">SDL2</a></span></span>
+     &raquo; 
+    <span class="title">Renderer</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <iframe id="search_frame" src="../class_list.html"></iframe>
+
+      <div id="content"><h1>Class: SDL2::Renderer
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">SDL2::Renderer</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>video.c<span class="defines">,<br />
+  video.c</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This class represents a 2D rendering context for a window.</p>
+
+<p>You can create a renderer using <span class='object_link'><a href="Window.html#create_renderer-instance_method" title="SDL2::Window#create_renderer (method)">Window#create_renderer</a></span> and use it
+to draw figures on the window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Renderer/Flags.html" title="SDL2::Renderer::Flags (module)">Flags</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Renderer/Info.html" title="SDL2::Renderer::Info (class)">Info</a></span>
+    
+  
+</p>
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="FLIP_NONE-constant" class="">FLIP_NONE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Do not flip, used in <span class='object_link'><a href="#copy_ex-instance_method" title="SDL2::Renderer#copy_ex (method)">#copy_ex</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_FLIP_NONE</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="FLIP_HORIZONTAL-constant" class="">FLIP_HORIZONTAL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Flip horizontally, used in <span class='object_link'><a href="#copy_ex-instance_method" title="SDL2::Renderer#copy_ex (method)">#copy_ex</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_FLIP_HORIZONTAL</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="FLIP_VERTICAL-constant" class="">FLIP_VERTICAL =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Flip vertically, used in <span class='object_link'><a href="#copy_ex-instance_method" title="SDL2::Renderer#copy_ex (method)">#copy_ex</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_FLIP_VERTICAL</span><span class='rparen'>)</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#drivers_info-class_method" title="drivers_info (class method)">.<strong>drivers_info</strong>  &#x21d2; Array&lt;SDL2::Renderer::Info&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return information of all available rendering contexts.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clear-instance_method" title="#clear (instance method)">#<strong>clear</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Crear the rendering target with the drawing color.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clip_enabled%3F-instance_method" title="#clip_enabled? (instance method)">#<strong>clip_enabled?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get whether clipping is enabled on the renderer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clip_rect-instance_method" title="#clip_rect (instance method)">#<strong>clip_rect</strong>  &#x21d2; SDL2::Rect </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the clip rectangle for the current target.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clip_rect%3D-instance_method" title="#clip_rect= (instance method)">#<strong>clip_rect=</strong>(rect)  &#x21d2; rect </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set the clip rectangle for the current target.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy-instance_method" title="#copy (instance method)">#<strong>copy</strong>(texture, srcrect, dstrect)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Copy a portion of the texture to the current rendering target.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy_ex-instance_method" title="#copy_ex (instance method)">#<strong>copy_ex</strong>(texture, srcrect, dstrect, angle, center, flip)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Copy a portion of the texture to the current rendering target, rotating it
+by angle around the given center and also flipping it top-bottom and/or
+left-right.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_texture-instance_method" title="#create_texture (instance method)">#<strong>create_texture</strong>(format, access, w, h)  &#x21d2; SDL2::Texture </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a new texture for the rendering context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_texture_from-instance_method" title="#create_texture_from (instance method)">#<strong>create_texture_from</strong>(surface)  &#x21d2; SDL2::Texture </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a texture from an existing surface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#debug_info-instance_method" title="#debug_info (instance method)">#<strong>debug_info</strong>  &#x21d2; Hash&lt;String=&gt;Object&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>(GC) debug information.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#destroy-instance_method" title="#destroy (instance method)">#<strong>destroy</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Destroy the rendering context and free associated textures.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#destroy%3F-instance_method" title="#destroy? (instance method)">#<strong>destroy?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the renderer is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Renderer#destroy (method)">destroyed</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#draw_blend_mode-instance_method" title="#draw_blend_mode (instance method)">#<strong>draw_blend_mode</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the blend mode used for drawing operations like <span class='object_link'><a href="#fill_rect-instance_method" title="SDL2::Renderer#fill_rect (method)">#fill_rect</a></span> and
+<span class='object_link'><a href="#draw_line-instance_method" title="SDL2::Renderer#draw_line (method)">#draw_line</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#draw_blend_mode%3D-instance_method" title="#draw_blend_mode= (instance method)">#<strong>draw_blend_mode=</strong>(mode)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set the blend mode used for drawing operations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#draw_color-instance_method" title="#draw_color (instance method)">#<strong>draw_color</strong>  &#x21d2; [Integer,Integer,Integer,Integer] </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the color used for drawing operations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#draw_color%3D-instance_method" title="#draw_color= (instance method)">#<strong>draw_color=</strong>(color)  &#x21d2; color </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set the color used for drawing operations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#draw_line-instance_method" title="#draw_line (instance method)">#<strong>draw_line</strong>(x1, y1, x2, y2)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Draw a line from (x1, y1) to (x2, y2) using drawing color given by
+<span class='object_link'><a href="#draw_color%3D-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#draw_point-instance_method" title="#draw_point (instance method)">#<strong>draw_point</strong>(x, y)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Draw a point at (x, y) using drawing color given by <span class='object_link'><a href="#draw_color%3D-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#draw_rect-instance_method" title="#draw_rect (instance method)">#<strong>draw_rect</strong>(rect)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Draw a rectangle using drawing color given by <span class='object_link'><a href="#draw_color%3D-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fill_rect-instance_method" title="#fill_rect (instance method)">#<strong>fill_rect</strong>(rect)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Draw a filled rectangle using drawing color given by <span class='object_link'><a href="#draw_color%3D-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#info-instance_method" title="#info (instance method)">#<strong>info</strong>  &#x21d2; SDL2::Renderer::Info </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get information about <em>self</em> rendering context .</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_texture-instance_method" title="#load_texture (instance method)">#<strong>load_texture</strong>(file)  &#x21d2; SDL2::Texture </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Load file and create a new <span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">Texture</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logical_size-instance_method" title="#logical_size (instance method)">#<strong>logical_size</strong>  &#x21d2; [Integer, Integer] </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get device indepndent resolution for rendering.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logical_size%3D-instance_method" title="#logical_size= (instance method)">#<strong>logical_size=</strong>(w_and_h)  &#x21d2; w_and_h </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set a device indepndent resolution for rendering.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#output_size-instance_method" title="#output_size (instance method)">#<strong>output_size</strong>  &#x21d2; [Integer, Integer] </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the output size of a rendering context.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#present-instance_method" title="#present (instance method)">#<strong>present</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update the screen with rendering performed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_target-instance_method" title="#render_target (instance method)">#<strong>render_target</strong>  &#x21d2; SDL2::Texture<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the current render target.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_target%3D-instance_method" title="#render_target= (instance method)">#<strong>render_target=</strong>(target)  &#x21d2; target </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set a texture as the current render target.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_render_target-instance_method" title="#reset_render_target (instance method)">#<strong>reset_render_target</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reset the render target to the screen.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scale-instance_method" title="#scale (instance method)">#<strong>scale</strong>  &#x21d2; [Integer, Integer] </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the drawing scale for the current target.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scale%3D-instance_method" title="#scale= (instance method)">#<strong>scale=</strong>(scaleX_and_scaleY)  &#x21d2; scaleX_and_scaleY </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set the drawing scale for rendering.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#support_render_target%3F-instance_method" title="#support_render_target? (instance method)">#<strong>support_render_target?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the renderer supports render target.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#viewport-instance_method" title="#viewport (instance method)">#<strong>viewport</strong>  &#x21d2; SDL2::Rect </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the drawing area for the current target.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#viewport%3D-instance_method" title="#viewport= (instance method)">#<strong>viewport=</strong>(area)  &#x21d2; area </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set the drawing area for rendering on the current target.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="drivers_info-class_method">
+  
+    .<strong>drivers_info</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Renderer/Info.html" title="SDL2::Renderer::Info (class)">SDL2::Renderer::Info</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Return information of all available rendering contexts.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Renderer/Info.html" title="SDL2::Renderer::Info (class)">SDL2::Renderer::Info</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>information about rendering contexts</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1177
+1178
+1179
+1180
+1181
+1182
+1183
+1184
+1185
+1186
+1187
+1188</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1177</span>
+
+static VALUE Renderer_s_drivers_info(VALUE self)
+{
+    int num_drivers = SDL_GetNumRenderDrivers();
+    VALUE info_ary = rb_ary_new();
+    int i;
+    for (i=0; i&lt;num_drivers; ++i) {
+        SDL_RendererInfo info;
+        HANDLE_ERROR(SDL_GetRenderDriverInfo(i, &amp;info));
+        rb_ary_push(info_ary, RendererInfo_new(&amp;info));
+    }
+    return info_ary;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="clear-instance_method">
+  
+    #<strong>clear</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Crear the rendering target with the drawing color.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#draw_color%3D-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1343
+1344
+1345
+1346
+1347</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1343</span>
+
+static VALUE Renderer_clear(VALUE self)
+{
+    HANDLE_ERROR(SDL_RenderClear(Get_SDL_Renderer(self)));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clip_enabled?-instance_method">
+  
+    #<strong>clip_enabled?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>This method is available since SDL 2.0.4.</p>
+</div>
+  </div>
+
+
+<p>Get whether clipping is enabled on the renderer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1544
+1545
+1546
+1547</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1544</span>
+
+static VALUE Render_clip_enabled_p(VALUE self)
+{
+    return INT2BOOL(SDL_RenderIsClipEnabled(Get_SDL_Renderer(self)));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clip_rect-instance_method">
+  
+    #<strong>clip_rect</strong>  &#x21d2; <tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the clip rectangle for the current target.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the current clip rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>SDL2::Renderer.{{#clip_rect=}</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1517
+1518
+1519
+1520
+1521
+1522</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1517</span>
+
+static VALUE Renderer_clip_rect(VALUE self)
+{
+    VALUE rect = rb_obj_alloc(cRect);
+    SDL_RenderGetClipRect(Get_SDL_Renderer(self), Get_SDL_Rect(rect));
+    return rect;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clip_rect=-instance_method">
+  
+    #<strong>clip_rect=</strong>(rect)  &#x21d2; <tt>rect</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Set the clip rectangle for the current target.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>rect</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#clip_rect-instance_method" title="SDL2::Renderer#clip_rect (method)">#clip_rect</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1532
+1533
+1534
+1535
+1536</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1532</span>
+
+static VALUE Renderer_set_clip_rect(VALUE self, VALUE rect)
+{
+    HANDLE_ERROR(SDL_RenderSetClipRect(Get_SDL_Renderer(self), Get_SDL_Rect(rect)));
+    return rect;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="copy-instance_method">
+  
+    #<strong>copy</strong>(texture, srcrect, dstrect)  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Copy a portion of the texture to the current rendering target.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>texture</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">SDL2::Texture</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the source texture</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>srcrect</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the source rectangle, or nil for the entire texture</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dstrect</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the destination rectangle, or nil for the entire rendering target; the
+texture will be stretched to fill the given rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#copy_ex-instance_method" title="SDL2::Renderer#copy_ex (method)">#copy_ex</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1278
+1279
+1280
+1281
+1282
+1283
+1284
+1285</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1278</span>
+
+static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstrect)
+{
+    HANDLE_ERROR(SDL_RenderCopy(Get_SDL_Renderer(self),
+                                Get_SDL_Texture(texture),
+                                Get_SDL_Rect_or_NULL(srcrect),
+                                Get_SDL_Rect_or_NULL(dstrect)));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="copy_ex-instance_method">
+  
+    #<strong>copy_ex</strong>(texture, srcrect, dstrect, angle, center, flip)  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Copy a portion of the texture to the current rendering target, rotating it
+by angle around the given center and also flipping it top-bottom and/or
+left-right.</p>
+
+<p>You can use the following constants to specify the horizontal/vertical
+flip:</p>
+<ul><li>
+<p><span class='object_link'><a href="#FLIP_HORIZONTAL-constant" title="SDL2::Renderer::FLIP_HORIZONTAL (constant)">FLIP_HORIZONTAL</a></span> - flip horizontally</p>
+</li><li>
+<p><span class='object_link'><a href="#FLIP_VERTICAL-constant" title="SDL2::Renderer::FLIP_VERTICAL (constant)">FLIP_VERTICAL</a></span> - flip vertically</p>
+</li><li>
+<p><span class='object_link'><a href="#FLIP_NONE-constant" title="SDL2::Renderer::FLIP_NONE (constant)">FLIP_NONE</a></span> - do not flip, equal to zero</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>texture</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">SDL2::Texture</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the source texture</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>srcrect</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the source rectangle, or nil for the entire texture</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dstrect</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the destination rectangle, or nil for the entire rendering target; the
+texture will be stretched to fill the given rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>angle</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an angle in degree indicating the rotation that will be applied to dstrect</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>center</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Point.html" title="SDL2::Point (class)">SDL2::Point</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the point around which dstrect will be rotated, (if nil, rotation will be
+done around the center of dstrect)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flip</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>bits OR&#39;d of the flip consntants</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#copy-instance_method" title="SDL2::Renderer#copy (method)">#copy</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1314
+1315
+1316
+1317
+1318
+1319
+1320
+1321
+1322
+1323
+1324
+1325</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1314</span>
+
+static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE dstrect,
+                              VALUE angle, VALUE center, VALUE flip)
+{
+    HANDLE_ERROR(SDL_RenderCopyEx(Get_SDL_Renderer(self),
+                                  Get_SDL_Texture(texture),
+                                  Get_SDL_Rect_or_NULL(srcrect),
+                                  Get_SDL_Rect_or_NULL(dstrect),
+                                  NUM2DBL(angle),
+                                  Get_SDL_Point_or_NULL(center),
+                                  NUM2INT(flip)));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_texture-instance_method">
+  
+    #<strong>create_texture</strong>(format, access, w, h)  &#x21d2; <tt><span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">SDL2::Texture</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Create a new texture for the rendering context.</p>
+
+<p>You can use the following constants to specify access pattern</p>
+<ul><li>
+<p><span class='object_link'><a href="Texture.html#ACCESS_STATIC-constant" title="SDL2::Texture::ACCESS_STATIC (constant)">Texture::ACCESS_STATIC</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="Texture.html#ACCESS_STREAMING-constant" title="SDL2::Texture::ACCESS_STREAMING (constant)">Texture::ACCESS_STREAMING</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="Texture.html#ACCESS_TARGET-constant" title="SDL2::Texture::ACCESS_TARGET (constant)">Texture::ACCESS_TARGET</a></span></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PixelFormat.html" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>format of the texture</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>access</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>texture access pattern</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>w</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the width ofthe texture in pixels</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>h</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the height ofthe texture in pixels</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">SDL2::Texture</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the created texture</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Error.html" title="SDL2::Error (class)">SDL2::Error</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>raised when the texture cannot be created</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#create_texture_from-instance_method" title="SDL2::Renderer#create_texture_from (method)">#create_texture_from</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1223
+1224
+1225
+1226
+1227
+1228
+1229
+1230
+1231
+1232</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1223</span>
+
+static VALUE Renderer_create_texture(VALUE self, VALUE format, VALUE access,
+                                     VALUE w, VALUE h)
+{
+    SDL_Texture* texture = SDL_CreateTexture(Get_SDL_Renderer(self),
+                                             uint32_for_format(format),
+                                             NUM2INT(access), NUM2INT(w), NUM2INT(h));
+    if (!texture)
+        SDL_ERROR();
+    return Texture_new(texture, Get_Renderer(self));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_texture_from-instance_method">
+  
+    #<strong>create_texture_from</strong>(surface)  &#x21d2; <tt><span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">SDL2::Texture</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Create a texture from an existing surface.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>surface</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Surface.html" title="SDL2::Surface (class)">SDL2::Surface</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the surface containing pixels for the texture</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">SDL2::Texture</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the created texture</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Error.html" title="SDL2::Error (class)">SDL2::Error</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>raised when the texture cannot be created</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#create_texture-instance_method" title="SDL2::Renderer#create_texture (method)">#create_texture</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1245
+1246
+1247
+1248
+1249
+1250
+1251
+1252
+1253</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1245</span>
+
+static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
+{
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(Get_SDL_Renderer(self),
+                                                        Get_SDL_Surface(surface));
+    if (texture == NULL)
+        SDL_ERROR();
+  
+    return Texture_new(texture, Get_Renderer(self));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="debug_info-instance_method">
+  
+    #<strong>debug_info</strong>  &#x21d2; <tt>Hash&lt;String=&gt;Object&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns (GC) debug information</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;String=&gt;Object&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>(GC) debug information</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1718
+1719
+1720
+1721
+1722
+1723
+1724
+1725
+1726
+1727
+1728
+1729
+1730
+1731
+1732
+1733
+1734</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1718</span>
+
+static VALUE Renderer_debug_info(VALUE self)
+{
+    Renderer* r = Get_Renderer(self);
+    VALUE info = rb_hash_new();
+    int num_active_textures = 0;
+    int i;
+    rb_hash_aset(info, rb_str_new2(&quot;destroy?&quot;), INT2BOOL(r-&gt;renderer == NULL));
+    rb_hash_aset(info, rb_str_new2(&quot;max_textures&quot;), INT2NUM(r-&gt;max_textures));
+    rb_hash_aset(info, rb_str_new2(&quot;num_textures&quot;), INT2NUM(r-&gt;num_textures));
+    for (i=0; i&lt;r-&gt;num_textures; ++i)
+        if (r-&gt;textures[i]-&gt;texture)
+            ++num_active_textures;
+    rb_hash_aset(info, rb_str_new2(&quot;num_active_textures&quot;), INT2NUM(num_active_textures));
+    rb_hash_aset(info, rb_str_new2(&quot;refcount&quot;), INT2NUM(r-&gt;refcount));
+  
+    return info;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="destroy-instance_method">
+  
+    #<strong>destroy</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Destroy the rendering context and free associated textures.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#destroy%3F-instance_method" title="SDL2::Renderer#destroy? (method)">#destroy?</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1196
+1197
+1198
+1199
+1200</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1196</span>
+
+static VALUE Renderer_destroy(VALUE self)
+{
+    Renderer_destroy_internal(Get_Renderer(self));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="destroy?-instance_method">
+  
+    #<strong>destroy?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Return true if the renderer is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Renderer#destroy (method)">destroyed</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="draw_blend_mode-instance_method">
+  
+    #<strong>draw_blend_mode</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the blend mode used for drawing operations like <span class='object_link'><a href="#fill_rect-instance_method" title="SDL2::Renderer#fill_rect (method)">#fill_rect</a></span> and
+<span class='object_link'><a href="#draw_line-instance_method" title="SDL2::Renderer#draw_line (method)">#draw_line</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#draw_blend_mode%3D-instance_method" title="SDL2::Renderer#draw_blend_mode= (method)">#draw_blend_mode=</a></span></li>
+    
+      <li><span class='object_link'><a href="BlendMode.html" title="SDL2::BlendMode (module)">BlendMode</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1480
+1481
+1482
+1483
+1484
+1485</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1480</span>
+
+static VALUE Renderer_draw_blend_mode(VALUE self)
+{
+    SDL_BlendMode mode;
+    HANDLE_ERROR(SDL_GetRenderDrawBlendMode(Get_SDL_Renderer(self), &amp;mode));
+    return INT2FIX(mode);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="draw_blend_mode=-instance_method">
+  
+    #<strong>draw_blend_mode=</strong>(mode)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Set the blend mode used for drawing operations.</p>
+
+<p>This method effects the following methods.</p>
+<ul><li>
+<p><span class='object_link'><a href="#draw_line-instance_method" title="SDL2::Renderer#draw_line (method)">#draw_line</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#draw_point-instance_method" title="SDL2::Renderer#draw_point (method)">#draw_point</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#draw_rect-instance_method" title="SDL2::Renderer#draw_rect (method)">#draw_rect</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#fill_rect-instance_method" title="SDL2::Renderer#fill_rect (method)">#fill_rect</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#clear-instance_method" title="SDL2::Renderer#clear (method)">#clear</a></span></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the blending mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#draw_blend_mode-instance_method" title="SDL2::Renderer#draw_blend_mode (method)">#draw_blend_mode</a></span></li>
+    
+      <li><span class='object_link'><a href="BlendMode.html" title="SDL2::BlendMode (module)">BlendMode</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1505
+1506
+1507
+1508
+1509</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1505</span>
+
+static VALUE Renderer_set_draw_blend_mode(VALUE self, VALUE mode)
+{
+    HANDLE_ERROR(SDL_SetRenderDrawBlendMode(Get_SDL_Renderer(self), NUM2INT(mode)));
+    return mode;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="draw_color-instance_method">
+  
+    #<strong>draw_color</strong>  &#x21d2; <tt>[Integer,Integer,Integer,Integer]</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the color used for drawing operations</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>[Integer,Integer,Integer,Integer]</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>red, green, blue, and alpha components of the drawing color (all components
+are more than or equal to 0 and less than and equal to 255)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#draw_color%3D-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1357
+1358
+1359
+1360
+1361
+1362</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1357</span>
+
+static VALUE Renderer_draw_color(VALUE self)
+{
+    Uint8 r, g, b, a;
+    HANDLE_ERROR(SDL_GetRenderDrawColor(Get_SDL_Renderer(self), &amp;r, &amp;g, &amp;b, &amp;a));
+    return rb_ary_new3(4, INT2FIX(r), INT2FIX(g), INT2FIX(b), INT2FIX(a));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="draw_color=-instance_method">
+  
+    #<strong>draw_color=</strong>(color)  &#x21d2; <tt>color</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Set the color used for drawing operations</p>
+
+<p>All color components (including alpha) must be more than or equal to 0 and
+less than and equal to 255</p>
+
+<p>This method effects the following methods.</p>
+<ul><li>
+<p><span class='object_link'><a href="#draw_line-instance_method" title="SDL2::Renderer#draw_line (method)">#draw_line</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#draw_point-instance_method" title="SDL2::Renderer#draw_point (method)">#draw_point</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#draw_rect-instance_method" title="SDL2::Renderer#draw_rect (method)">#draw_rect</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#fill_rect-instance_method" title="SDL2::Renderer#fill_rect (method)">#fill_rect</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#clear-instance_method" title="SDL2::Renderer#clear (method)">#clear</a></span></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>[Integer, Integer, Integer]</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>red, green, and blue components used for drawing</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>[Integer, Integer, Integer, Integer]</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>red, green, blue, and alpha components used for drawing</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>color</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#draw_color-instance_method" title="SDL2::Renderer#draw_color (method)">#draw_color</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1388
+1389
+1390
+1391
+1392
+1393
+1394
+1395
+1396</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1388</span>
+
+static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
+{
+    SDL_Color color = Array_to_SDL_Color(rgba);
+    
+    HANDLE_ERROR(SDL_SetRenderDrawColor(Get_SDL_Renderer(self),
+                                        color.r, color.g, color.b, color.a));
+                                        
+    return rgba;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="draw_line-instance_method">
+  
+    #<strong>draw_line</strong>(x1, y1, x2, y2)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Draw a line from (x1, y1) to (x2, y2) using drawing color given by
+<span class='object_link'><a href="#draw_color%3D-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x1</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the x coordinate of the start point</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y1</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the y coordinate of the start point</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x2</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the x coordinate of the end point</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y2</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the y coordinate of the end point</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1409
+1410
+1411
+1412
+1413
+1414</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1409</span>
+
+static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
+{
+    HANDLE_ERROR(SDL_RenderDrawLine(Get_SDL_Renderer(self),
+                                    NUM2INT(x1), NUM2INT(y1), NUM2INT(x2), NUM2INT(y2)));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="draw_point-instance_method">
+  
+    #<strong>draw_point</strong>(x, y)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Draw a point at (x, y) using drawing color given by <span class='object_link'><a href="#draw_color%3D-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the x coordinate of the point</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the y coordinate of the point</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1425
+1426
+1427
+1428
+1429</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1425</span>
+
+static VALUE Renderer_draw_point(VALUE self, VALUE x, VALUE y)
+{
+    HANDLE_ERROR(SDL_RenderDrawPoint(Get_SDL_Renderer(self), NUM2INT(x), NUM2INT(y)));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="draw_rect-instance_method">
+  
+    #<strong>draw_rect</strong>(rect)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Draw a rectangle using drawing color given by <span class='object_link'><a href="#draw_color%3D-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the drawing rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1439
+1440
+1441
+1442
+1443</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1439</span>
+
+static VALUE Renderer_draw_rect(VALUE self, VALUE rect)
+{
+    HANDLE_ERROR(SDL_RenderDrawRect(Get_SDL_Renderer(self), Get_SDL_Rect(rect)));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fill_rect-instance_method">
+  
+    #<strong>fill_rect</strong>(rect)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Draw a filled rectangle using drawing color given by <span class='object_link'><a href="#draw_color%3D-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the drawing rectangle</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1453
+1454
+1455
+1456
+1457</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1453</span>
+
+static VALUE Renderer_fill_rect(VALUE self, VALUE rect)
+{
+    HANDLE_ERROR(SDL_RenderFillRect(Get_SDL_Renderer(self), Get_SDL_Rect(rect)));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="info-instance_method">
+  
+    #<strong>info</strong>  &#x21d2; <tt><span class='object_link'><a href="Renderer/Info.html" title="SDL2::Renderer::Info (class)">SDL2::Renderer::Info</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get information about <em>self</em> rendering context .</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Renderer/Info.html" title="SDL2::Renderer::Info (class)">SDL2::Renderer::Info</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>rendering information</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1464
+1465
+1466
+1467
+1468
+1469</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1464</span>
+
+static VALUE Renderer_info(VALUE self)
+{
+    SDL_RendererInfo info;
+    HANDLE_ERROR(SDL_GetRendererInfo(Get_SDL_Renderer(self), &amp;info));
+    return RendererInfo_new(&amp;info);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="load_texture-instance_method">
+  
+    #<strong>load_texture</strong>(file)  &#x21d2; <tt><span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">SDL2::Texture</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Load file and create a new <span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">Texture</a></span>.</p>
+
+<p>This method uses SDL_image. SDL_image supports following formats: BMP, CUR,
+GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>file</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the image file name to load a texture from</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">SDL2::Texture</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Created texture</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Error.html" title="SDL2::Error (class)">SDL2::Error</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>raised when you fail to load (for example, you have a wrong file name, or
+the file is broken)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="IMG.html#init-class_method" title="SDL2::IMG.init (method)">IMG.init</a></span></li>
+    
+      <li><span class='object_link'><a href="Surface.html#load-class_method" title="SDL2::Surface.load (method)">Surface.load</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+3471
+3472
+3473
+3474
+3475
+3476
+3477
+3478
+3479</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 3471</span>
+
+static VALUE Renderer_load_texture(VALUE self, VALUE fname)
+{
+    SDL_Texture* texture = IMG_LoadTexture(Get_SDL_Renderer(self), StringValueCStr(fname));
+    if (!texture) {
+        SDL_SetError(IMG_GetError());
+        SDL_ERROR();
+    }
+    return Texture_new(texture, Get_Renderer(self));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="logical_size-instance_method">
+  
+    #<strong>logical_size</strong>  &#x21d2; <tt>[Integer, Integer]</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get device indepndent resolution for rendering.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>[Integer, Integer]</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the logical width and height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#logical_size%3D-instance_method" title="SDL2::Renderer#logical_size= (method)">#logical_size=</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1556
+1557
+1558
+1559
+1560
+1561</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1556</span>
+
+static VALUE Renderer_logical_size(VALUE self)
+{
+    int w, h;
+    SDL_RenderGetLogicalSize(Get_SDL_Renderer(self), &amp;w, &amp;h);
+    return rb_ary_new3(2, INT2FIX(w), INT2FIX(h));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="logical_size=-instance_method">
+  
+    #<strong>logical_size=</strong>(w_and_h)  &#x21d2; <tt>w_and_h</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Set a device indepndent resolution for rendering.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>w_and_h</span>
+      
+      
+        <span class='type'>(<tt>[Integer, Integer]</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the width and height of the logical resolution</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>w_and_h</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#logical_size-instance_method" title="SDL2::Renderer#logical_size (method)">#logical_size</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1572
+1573
+1574
+1575
+1576
+1577
+1578</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1572</span>
+
+static VALUE Renderer_set_logical_size(VALUE self, VALUE wh)
+{
+    HANDLE_ERROR(SDL_RenderSetLogicalSize(Get_SDL_Renderer(self),
+                                          NUM2DBL(rb_ary_entry(wh, 0)),
+                                          NUM2DBL(rb_ary_entry(wh, 1))));
+    return wh;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="output_size-instance_method">
+  
+    #<strong>output_size</strong>  &#x21d2; <tt>[Integer, Integer]</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the output size of a rendering context.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>[Integer, Integer]</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the width and the height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1660
+1661
+1662
+1663
+1664
+1665</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1660</span>
+
+static VALUE Renderer_output_size(VALUE self)
+{
+    int w, h;
+    HANDLE_ERROR(SDL_GetRendererOutputSize(Get_SDL_Renderer(self), &amp;w, &amp;h));
+    return rb_ary_new3(2, INT2FIX(w), INT2FIX(h));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="present-instance_method">
+  
+    #<strong>present</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Update the screen with rendering performed</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1331
+1332
+1333
+1334
+1335</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1331</span>
+
+static VALUE Renderer_present(VALUE self)
+{
+    SDL_RenderPresent(Get_SDL_Renderer(self));
+    return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_target-instance_method">
+  
+    #<strong>render_target</strong>  &#x21d2; <tt><span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">SDL2::Texture</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the current render target.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">SDL2::Texture</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the current rendering target</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>for the default render target (i.e. screen)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#render_target%3D-instance_method" title="SDL2::Renderer#render_target= (method)">#render_target=</a></span></li>
+    
+      <li><span class='object_link'><a href="#support_render_target%3F-instance_method" title="SDL2::Renderer#support_render_target? (method)">#support_render_target?</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1702
+1703
+1704
+1705</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1702</span>
+
+static VALUE Renderer_render_target(VALUE self)
+{
+    return rb_iv_get(self, &quot;render_target&quot;);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_target=-instance_method">
+  
+    #<strong>render_target=</strong>(target)  &#x21d2; <tt>target</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Set a texture as the current render target.</p>
+
+<p>Some renderers have ability to render to a texture instead of a screen. You
+can judge whether your renderer has this ability using
+<span class='object_link'><a href="#support_render_target%3F-instance_method" title="SDL2::Renderer#support_render_target? (method)">#support_render_target?</a></span>.</p>
+
+<p>The target texture musbe be <span class='object_link'><a href="#create_texture-instance_method" title="SDL2::Renderer#create_texture (method)">created</a></span> with the
+<span class='object_link'><a href="Texture.html#ACCESS_TARGET-constant" title="SDL2::Texture::ACCESS_TARGET (constant)">Texture::ACCESS_TARGET</a></span> flag.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>target</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">SDL2::Texture</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the targeted texture, or nil for the default render target(i.e. screen)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>target</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#render_target-instance_method" title="SDL2::Renderer#render_target (method)">#render_target</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1685
+1686
+1687
+1688
+1689
+1690
+1691</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1685</span>
+
+static VALUE Renderer_set_render_target(VALUE self, VALUE target)
+{
+    HANDLE_ERROR(SDL_SetRenderTarget(Get_SDL_Renderer(self),
+                                     (target == Qnil) ? NULL : Get_SDL_Texture(target)));
+    rb_iv_set(self, &quot;render_target&quot;, target);
+    return target;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset_render_target-instance_method">
+  
+    #<strong>reset_render_target</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Reset the render target to the screen.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1712
+1713
+1714
+1715</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1712</span>
+
+static VALUE Renderer_reset_render_target(VALUE self)
+{
+    return Renderer_set_render_target(self, Qnil);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scale-instance_method">
+  
+    #<strong>scale</strong>  &#x21d2; <tt>[Integer, Integer]</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the drawing scale for the current target.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>[Integer, Integer]</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>horizontal and vertical scale factor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#scale%3D-instance_method" title="SDL2::Renderer#scale= (method)">#scale=</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1586
+1587
+1588
+1589
+1590
+1591</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1586</span>
+
+static VALUE Renderer_scale(VALUE self)
+{
+    float scaleX, scaleY;
+    SDL_RenderGetScale(Get_SDL_Renderer(self), &amp;scaleX, &amp;scaleY);
+    return rb_ary_new3(2, DBL2NUM(scaleX), DBL2NUM(scaleY));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="scale=-instance_method">
+  
+    #<strong>scale=</strong>(scaleX_and_scaleY)  &#x21d2; <tt>scaleX_and_scaleY</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Set the drawing scale for rendering.</p>
+
+<p>The drawing coordinates are scaled by the x/y scaling factors before they
+are used by the renderer. This allows resolution independent drawing with a
+single coordinate system.</p>
+
+<p>If this results in scaling or subpixel drawing by the rendering backend, it
+will be handled using the appropriate quality hints. For best results use
+integer scaling factors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scaleX_and_scaleY</span>
+      
+      
+        <span class='type'>(<tt>[Float, Float]</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the horizontal and vertical scaling factors</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>scaleX_and_scaleY</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#scale-instance_method" title="SDL2::Renderer#scale (method)">#scale</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1609
+1610
+1611
+1612
+1613
+1614
+1615
+1616</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1609</span>
+
+static VALUE Renderer_set_scale(VALUE self, VALUE xy)
+{
+    float scaleX, scaleY;
+    scaleX = NUM2DBL(rb_ary_entry(xy, 0));
+    scaleY = NUM2DBL(rb_ary_entry(xy, 1));
+    HANDLE_ERROR(SDL_RenderSetScale(Get_SDL_Renderer(self), scaleX, scaleY));
+    return xy;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="support_render_target?-instance_method">
+  
+    #<strong>support_render_target?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Return true if the renderer supports render target.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#render_target%3D-instance_method" title="SDL2::Renderer#render_target= (method)">#render_target=</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1650
+1651
+1652
+1653</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1650</span>
+
+static VALUE Renderer_support_render_target_p(VALUE self)
+{
+    return INT2BOOL(SDL_RenderTargetSupported(Get_SDL_Renderer(self)));
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="viewport-instance_method">
+  
+    #<strong>viewport</strong>  &#x21d2; <tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the drawing area for the current target.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the current drawing area</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#viewport%3D-instance_method" title="SDL2::Renderer#viewport= (method)">#viewport=</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1624
+1625
+1626
+1627
+1628
+1629</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1624</span>
+
+static VALUE Renderer_viewport(VALUE self)
+{
+    VALUE rect = rb_obj_alloc(cRect);
+    SDL_RenderGetViewport(Get_SDL_Renderer(self), Get_SDL_Rect(rect));
+    return rect;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="viewport=-instance_method">
+  
+    #<strong>viewport=</strong>(area)  &#x21d2; <tt>area</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Set the drawing area for rendering on the current target.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>area</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the drawing area, or nil to set the viewport to the entire target</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>area</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#viewport-instance_method" title="SDL2::Renderer#viewport (method)">#viewport</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1639
+1640
+1641
+1642
+1643</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1639</span>
+
+static VALUE Renderer_set_viewport(VALUE self, VALUE rect)
+{
+    HANDLE_ERROR(SDL_RenderSetClipRect(Get_SDL_Renderer(self), Get_SDL_Rect_or_NULL(rect)));
+    return rect;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Tue Sep 15 17:11:25 2015 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.2.3).
+</div>
+
+    </div>
+  </body>
+</html>
