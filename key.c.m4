@@ -168,21 +168,60 @@ static VALUE Mod_s_set_state(VALUE self, VALUE keymod)
     return Qnil;
 }
 
+/*
+ * Document-module: SDL2::TextInput
+ *
+ * This module provides Unicode text input support.
+ *
+ * Normally, you can handle key inputs from key events
+ * and {SDL2::Key} module. This module is required to
+ * input thousands kinds of symbols like CJK languages.
+ * Please see {https://wiki.libsdl.org/Tutorials/TextInput}
+ * to understand the concept of Unicode text input.
+ */
+
+/*
+ * Return true if Unicode text input events are enabled.
+ *
+ * @see .start
+ * @see .stop
+ */
 static VALUE TextInput_s_active_p(VALUE self)
 {
     return INT2BOOL(SDL_IsTextInputActive());
 }
 
+/*
+ * Enable Unicode input events.
+ *
+ * @return [nil]
+ * @see .stop
+ * @see .active?
+ */
 static VALUE TextInput_s_start(VALUE self)
 {
     SDL_StartTextInput(); return Qnil;
 }
 
+/*
+ * Disable Unicode input events.
+ *
+ * @return [nil]
+ * @see .start
+ * @see .active?
+ */
 static VALUE TextInput_s_stop(VALUE self)
 {
     SDL_StopTextInput(); return Qnil;
 }
 
+/*
+ * @overload rect=(rect)
+ *   Set the rectanlgle used to type Unicode text inputs.
+ *
+ *   @param rect [SDL2::Rect] the rectangle to receive text
+ *   @return [rect]
+ */
 static VALUE TextInput_s_set_rect(VALUE self, VALUE rect)
 {
     SDL_Rect *r = Get_SDL_Rect(rect);
