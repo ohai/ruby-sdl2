@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: SDL2::Joystick::Hat
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "SDL2::Joystick::Hat";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (H)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../SDL2.html" title="SDL2 (module)">SDL2</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Joystick.html" title="SDL2::Joystick (class)">Joystick</a></span></span>
+     &raquo; 
+    <span class="title">Hat</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <iframe id="search_frame" src="../../class_list.html"></iframe>
+
+      <div id="content"><h1>Module: SDL2::Joystick::Hat
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>joystick.c<span class="defines">,<br />
+  joystick.c</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This module provides constants of joysticks&#39;s hat positions used by
+<span class='object_link'><a href="../Joystick.html" title="SDL2::Joystick (class)">SDL2::Joystick</a></span> class. The position of the hat is represented by OR&#39;d
+bits of <span class='object_link'><a href="#RIGHT-constant" title="SDL2::Joystick::Hat::RIGHT (constant)">RIGHT</a></span>, <span class='object_link'><a href="#LEFT-constant" title="SDL2::Joystick::Hat::LEFT (constant)">LEFT</a></span>, <span class='object_link'><a href="#UP-constant" title="SDL2::Joystick::Hat::UP (constant)">UP</a></span>, <span class='object_link'><a href="#DOWN-constant" title="SDL2::Joystick::Hat::DOWN (constant)">DOWN</a></span>. This means the center position
+(<span class='object_link'><a href="#CENTERED-constant" title="SDL2::Joystick::Hat::CENTERED (constant)">CENTERED</a></span>) is represeted by 0 and the left up position <span class='object_link'><a href="#LEFTUP-constant" title="SDL2::Joystick::Hat::LEFTUP (constant)">LEFTUP</a></span> is
+represeted by (<span class='object_link'><a href="#LEFT-constant" title="SDL2::Joystick::Hat::LEFT (constant)">LEFT</a></span>|<span class='object_link'><a href="#UP-constant" title="SDL2::Joystick::Hat::UP (constant)">UP</a></span>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="CENTERED-constant" class="">CENTERED =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Center position. Equal to 0.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HAT_CENTERED</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="UP-constant" class="">UP =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Up position.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HAT_UP</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="RIGHT-constant" class="">RIGHT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Right position.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HAT_RIGHT</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="DOWN-constant" class="">DOWN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Down position.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HAT_DOWN</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="LEFT-constant" class="">LEFT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Left position.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HAT_LEFT</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="RIGHTUP-constant" class="">RIGHTUP =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Right Up position. Equal to (<span class='object_link'><a href="#RIGHT-constant" title="SDL2::Joystick::Hat::RIGHT (constant)">RIGHT</a></span> | <span class='object_link'><a href="#UP-constant" title="SDL2::Joystick::Hat::UP (constant)">UP</a></span>)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HAT_RIGHTUP</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="RIGHTDOWN-constant" class="">RIGHTDOWN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Right Down position. Equal to (<span class='object_link'><a href="#RIGHT-constant" title="SDL2::Joystick::Hat::RIGHT (constant)">RIGHT</a></span> | <span class='object_link'><a href="#DOWN-constant" title="SDL2::Joystick::Hat::DOWN (constant)">DOWN</a></span>)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HAT_RIGHTDOWN</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="LEFTUP-constant" class="">LEFTUP =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Left Up position. Equal to (<span class='object_link'><a href="#LEFT-constant" title="SDL2::Joystick::Hat::LEFT (constant)">LEFT</a></span> | <span class='object_link'><a href="#UP-constant" title="SDL2::Joystick::Hat::UP (constant)">UP</a></span>)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HAT_LEFTUP</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="LEFTDOWN-constant" class="">LEFTDOWN =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Left Down position. Equal to (<span class='object_link'><a href="#LEFT-constant" title="SDL2::Joystick::Hat::LEFT (constant)">LEFT</a></span> | <span class='object_link'><a href="#DOWN-constant" title="SDL2::Joystick::Hat::DOWN (constant)">DOWN</a></span>)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HAT_LEFTDOWN</span><span class='rparen'>)</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Sep 24 01:24:54 2015 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.2.3).
+</div>
+
+    </div>
+  </body>
+</html>
