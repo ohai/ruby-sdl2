@@ -1,9 +1,11 @@
+/* -*- mode: C -*- */
 #include "rubysdl2_internal.h"
 #include <SDL_joystick.h>
 #include <SDL_gamecontroller.h>
 
 static VALUE cJoystick;
 static VALUE cDeviceInfo;
+static VALUE mHat;
 
 typedef struct Joystick {
     SDL_Joystick* joystick;
@@ -266,6 +268,16 @@ static VALUE Joystick_hat(VALUE self, VALUE which)
  *
  * You can get the information with {SDL2::Joystick.devices}.
  */
+
+/*
+ * Document-module: SDL2::Joystick::Hat
+ *
+ * This module provides constants of joysticks's hat positions used by {SDL2::Joystick} class.
+ * The position of the hat is represented by OR'd bits of {RIGHT}, {LEFT}, {UP}, and {DOWN}.
+ * This means the center position ({CENTERED}) is represeted by 0 and
+ * the left up position {LEFTUP} is represeted by ({LEFT}|{UP}).
+ */
+
 void rubysdl2_init_joystick(void)
 {
     cJoystick = rb_define_class_under(mSDL2, "Joystick", rb_cObject);
@@ -293,16 +305,27 @@ void rubysdl2_init_joystick(void)
     rb_define_method(cJoystick, "ball", Joystick_ball, 1);
     rb_define_method(cJoystick, "button", Joystick_button, 1);
     rb_define_method(cJoystick, "hat", Joystick_hat, 1);
-#define DEFINE_JOY_HAT_CONST(state) \
-    rb_define_const(cJoystick, "HAT_" #state, INT2NUM(SDL_HAT_##state))
+
+    mHat = rb_define_module_under(cJoystick, "Hat");
+    
+    /* define(`DEFINE_JOY_HAT_CONST',`rb_define_const(mHat, "$1", INT2NUM(SDL_HAT_$1))') */
+    /* Center position. Equal to 0. */
     DEFINE_JOY_HAT_CONST(CENTERED);
+    /* Up position. */
     DEFINE_JOY_HAT_CONST(UP);
+    /* Right position. */
     DEFINE_JOY_HAT_CONST(RIGHT);
+    /* Down position. */
     DEFINE_JOY_HAT_CONST(DOWN);
+    /* Left position. */
     DEFINE_JOY_HAT_CONST(LEFT);
+    /* Right Up position. Equal to ({RIGHT} | {UP}) */
     DEFINE_JOY_HAT_CONST(RIGHTUP);
+    /* Right Down position. Equal to ({RIGHT} | {DOWN}) */
     DEFINE_JOY_HAT_CONST(RIGHTDOWN);
+    /* Left Up position. Equal to ({LEFT} | {UP}) */
     DEFINE_JOY_HAT_CONST(LEFTUP);
+    /* Left Down position. Equal to ({LEFT} | {DOWN}) */
     DEFINE_JOY_HAT_CONST(LEFTDOWN);
 
     /* Device GUID
