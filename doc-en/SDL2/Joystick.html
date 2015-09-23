@@ -121,6 +121,8 @@ the SDL2::INIT_JOYSTICK flag.</p>
 <p class="children">
   
     
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Joystick/Hat.html" title="SDL2::Joystick::Hat (module)">Hat</a></span>
+    
   
     
       <strong class="classes">Classes:</strong> <span class='object_link'><a href="Joystick/DeviceInfo.html" title="SDL2::Joystick::DeviceInfo (class)">DeviceInfo</a></span>
@@ -641,8 +643,6 @@ interface.</p>
       <pre class="lines">
 
 
-63
-64
 65
 66
 67
@@ -653,10 +653,12 @@ interface.</p>
 72
 73
 74
-75</pre>
+75
+76
+77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 63</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 65</span>
 
 static VALUE Joystick_s_devices(VALUE self)
 {
@@ -754,13 +756,13 @@ interface.</p>
       <pre class="lines">
 
 
-103
-104
 105
-106</pre>
+106
+107
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 103</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 105</span>
 
 static VALUE Joystick_s_game_controller_p(VALUE self, VALUE index)
 {
@@ -810,13 +812,13 @@ static VALUE Joystick_s_game_controller_p(VALUE self, VALUE index)
       <pre class="lines">
 
 
-46
-47
 48
-49</pre>
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 46</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 48</span>
 
 static VALUE Joystick_s_num_connected_joysticks(VALUE self)
 {
@@ -921,16 +923,16 @@ range.</p>
       <pre class="lines">
 
 
-86
-87
 88
 89
 90
 91
-92</pre>
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 86</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 88</span>
 
 static VALUE Joystick_s_open(VALUE self, VALUE device_index)
 {
@@ -989,16 +991,16 @@ static VALUE Joystick_s_open(VALUE self, VALUE device_index)
       <pre class="lines">
 
 
-111
-112
 113
 114
 115
 116
-117</pre>
+117
+118
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 111</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 113</span>
 
 static VALUE Joystick_attached_p(VALUE self)
 {
@@ -1094,13 +1096,13 @@ static VALUE Joystick_attached_p(VALUE self)
       <pre class="lines">
 
 
-216
-217
 218
-219</pre>
+219
+220
+221</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 216</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 218</span>
 
 static VALUE Joystick_axis(VALUE self, VALUE which)
 {
@@ -1193,15 +1195,15 @@ static VALUE Joystick_axis(VALUE self, VALUE which)
       <pre class="lines">
 
 
-229
-230
 231
 232
 233
-234</pre>
+234
+235
+236</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 229</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 231</span>
 
 static VALUE Joystick_ball(VALUE self, VALUE which)
 {
@@ -1296,13 +1298,13 @@ static VALUE Joystick_ball(VALUE self, VALUE which)
       <pre class="lines">
 
 
-244
-245
 246
-247</pre>
+247
+248
+249</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 244</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 246</span>
 
 static VALUE Joystick_button(VALUE self, VALUE which)
 {
@@ -1363,17 +1365,17 @@ static VALUE Joystick_button(VALUE self, VALUE which)
       <pre class="lines">
 
 
-149
-150
 151
 152
 153
 154
 155
-156</pre>
+156
+157
+158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 149</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 151</span>
 
 static VALUE Joystick_destroy(VALUE self)
 {
@@ -1479,17 +1481,17 @@ static VALUE Joystick_destroy(VALUE self)
       <pre class="lines">
 
 
-124
-125
 126
 127
 128
 129
 130
-131</pre>
+131
+132
+133</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 124</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 126</span>
 
 static VALUE Joystick_GUID(VALUE self)
 {
@@ -1586,13 +1588,13 @@ static VALUE Joystick_GUID(VALUE self)
       <pre class="lines">
 
 
-257
-258
 259
-260</pre>
+260
+261
+262</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 257</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 259</span>
 
 static VALUE Joystick_hat(VALUE self, VALUE which)
 {
@@ -1647,13 +1649,13 @@ static VALUE Joystick_hat(VALUE self, VALUE which)
       <pre class="lines">
 
 
-138
-139
 140
-141</pre>
+141
+142
+143</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 138</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 140</span>
 
 static VALUE Joystick_index(VALUE self)
 {
@@ -1708,13 +1710,13 @@ static VALUE Joystick_index(VALUE self)
       <pre class="lines">
 
 
-163
-164
 165
-166</pre>
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 163</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 165</span>
 
 static VALUE Joystick_name(VALUE self)
 {
@@ -1771,13 +1773,13 @@ static VALUE Joystick_name(VALUE self)
       <pre class="lines">
 
 
-173
-174
 175
-176</pre>
+176
+177
+178</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 173</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 175</span>
 
 static VALUE Joystick_num_axes(VALUE self)
 {
@@ -1834,13 +1836,13 @@ static VALUE Joystick_num_axes(VALUE self)
       <pre class="lines">
 
 
-183
-184
 185
-186</pre>
+186
+187
+188</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 183</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 185</span>
 
 static VALUE Joystick_num_balls(VALUE self)
 {
@@ -1897,13 +1899,13 @@ static VALUE Joystick_num_balls(VALUE self)
       <pre class="lines">
 
 
-193
-194
 195
-196</pre>
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 193</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 195</span>
 
 static VALUE Joystick_num_buttons(VALUE self)
 {
@@ -1960,13 +1962,13 @@ static VALUE Joystick_num_buttons(VALUE self)
       <pre class="lines">
 
 
-203
-204
 205
-206</pre>
+206
+207
+208</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'joystick.c', line 203</span>
+      <pre class="code"><span class="info file"># File 'joystick.c', line 205</span>
 
 static VALUE Joystick_num_hats(VALUE self)
 {
@@ -1982,7 +1984,7 @@ static VALUE Joystick_num_hats(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Tue Sep 15 17:11:16 2015 by
+  Generated on Thu Sep 24 01:25:03 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.3).
 </div>

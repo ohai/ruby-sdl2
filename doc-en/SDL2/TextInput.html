@@ -92,6 +92,11 @@
     
 <p>This module provides Unicode text input support.</p>
 
+<p>Normally, you can handle key inputs from key events and <span class='object_link'><a href="Key.html" title="SDL2::Key (module)">Key</a></span> module.
+This module is required to input thousands kinds of symbols like CJK
+languages. Please see <a href="https://wiki.libsdl.org/Tutorials/TextInput" target="_parent" title="https://wiki.libsdl.org/Tutorials/TextInput">https://wiki.libsdl.org/Tutorials/TextInput</a> to
+understand the concept of Unicode text input.</p>
+
 
   </div>
 </div>
@@ -131,7 +136,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>This module provides Unicode text input support.</p>
+<p>Return true if Unicode text input events are enabled.</p>
 </div></span>
   
 </li>
@@ -140,7 +145,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#rect%3D-class_method" title="rect= (class method)">.<strong>rect=</strong>  &#x21d2; Object </a>
+      <a href="#rect%3D-class_method" title="rect= (class method)">.<strong>rect=</strong>(rect)  &#x21d2; rect </a>
     
 
     
@@ -154,7 +159,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Set the rectanlgle used to type Unicode text inputs.</p>
+</div></span>
   
 </li>
 
@@ -162,7 +169,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#start-class_method" title="start (class method)">.<strong>start</strong>  &#x21d2; Object </a>
+      <a href="#start-class_method" title="start (class method)">.<strong>start</strong>  &#x21d2; nil </a>
     
 
     
@@ -176,7 +183,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Enable Unicode input events.</p>
+</div></span>
   
 </li>
 
@@ -184,7 +193,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#stop-class_method" title="stop (class method)">.<strong>stop</strong>  &#x21d2; Object </a>
+      <a href="#stop-class_method" title="stop (class method)">.<strong>stop</strong>  &#x21d2; nil </a>
     
 
     
@@ -198,7 +207,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Disable Unicode input events.</p>
+</div></span>
   
 </li>
 
@@ -224,7 +235,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>This module provides Unicode text input support.</p>
+<p>Return true if Unicode text input events are enabled.</p>
 
 
   </div>
@@ -245,19 +256,28 @@
   
 </ul>
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#start-class_method" title="SDL2::TextInput.start (method)">start</a></span></li>
+    
+      <li><span class='object_link'><a href="#stop-class_method" title="SDL2::TextInput.stop (method)">stop</a></span></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-177
-178
-179
-180</pre>
+189
+190
+191
+192</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'key.c', line 177</span>
+      <pre class="code"><span class="info file"># File 'key.c', line 189</span>
 
 static VALUE TextInput_s_active_p(VALUE self)
 {
@@ -271,27 +291,82 @@ static VALUE TextInput_s_active_p(VALUE self)
       <div class="method_details ">
   <h3 class="signature " id="rect=-class_method">
   
-    .<strong>rect=</strong>  &#x21d2; <tt>Object</tt> 
+    .<strong>rect=</strong>(rect)  &#x21d2; <tt>rect</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Set the rectanlgle used to type Unicode text inputs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the rectangle to receive text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>rect</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-192
-193
-194
-195
-196
-197</pre>
+225
+226
+227
+228
+229
+230</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'key.c', line 192</span>
+      <pre class="code"><span class="info file"># File 'key.c', line 225</span>
 
 static VALUE TextInput_s_set_rect(VALUE self, VALUE rect)
 {
@@ -307,25 +382,58 @@ static VALUE TextInput_s_set_rect(VALUE self, VALUE rect)
       <div class="method_details ">
   <h3 class="signature " id="start-class_method">
   
-    .<strong>start</strong>  &#x21d2; <tt>Object</tt> 
+    .<strong>start</strong>  &#x21d2; <tt>nil</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Enable Unicode input events.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#stop-class_method" title="SDL2::TextInput.stop (method)">stop</a></span></li>
+    
+      <li><span class='object_link'><a href="#active%3F-class_method" title="SDL2::TextInput.active? (method)">active?</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-182
-183
-184
-185</pre>
+201
+202
+203
+204</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'key.c', line 182</span>
+      <pre class="code"><span class="info file"># File 'key.c', line 201</span>
 
 static VALUE TextInput_s_start(VALUE self)
 {
@@ -339,25 +447,58 @@ static VALUE TextInput_s_start(VALUE self)
       <div class="method_details ">
   <h3 class="signature " id="stop-class_method">
   
-    .<strong>stop</strong>  &#x21d2; <tt>Object</tt> 
+    .<strong>stop</strong>  &#x21d2; <tt>nil</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Disable Unicode input events.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#start-class_method" title="SDL2::TextInput.start (method)">start</a></span></li>
+    
+      <li><span class='object_link'><a href="#active%3F-class_method" title="SDL2::TextInput.active? (method)">active?</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-187
-188
-189
-190</pre>
+213
+214
+215
+216</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'key.c', line 187</span>
+      <pre class="code"><span class="info file"># File 'key.c', line 213</span>
 
 static VALUE TextInput_s_stop(VALUE self)
 {
@@ -373,7 +514,7 @@ static VALUE TextInput_s_stop(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Tue Sep 15 17:11:12 2015 by
+  Generated on Thu Sep 24 01:25:00 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.3).
 </div>
