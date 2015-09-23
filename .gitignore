@@ -7,6 +7,7 @@ video.c
 gl.c
 ttf.c
 mixer.c
+joystick.c
 gamecontroller.c
 pkg/
 TAGS
