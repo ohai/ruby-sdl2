@@ -46,7 +46,7 @@ static inline SDL_Window* Get_SDL_Window_or_NULL(VALUE win)
  *   @param [SDL2::Window,nil] parent the parent window, or nil for no parent
  *   @return [nil]
  *   
- *   @see .show_message_box
+ *   @see .show
  */
 static VALUE MessageBox_s_show_simple_box(VALUE self, VALUE flag, VALUE title,
                                           VALUE message, VALUE parent)
@@ -138,7 +138,7 @@ static void set_color_scheme(VALUE colors, VALUE sym, SDL_MessageBoxColor* color
  *       color scheme, or nil for the default color scheme
  *   @return [Integer] pressed button id
  *   
- *   @see .show_simple_message_box
+ *   @see .show_simple_box
  */
 static VALUE MessageBox_s_show(VALUE self, VALUE params)
 {
