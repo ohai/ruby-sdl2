@@ -923,7 +923,7 @@ static VALUE ControllerDevice_inspect(VALUE self)
  * You don't handle the instance 
  * of this class directly, but you handle the instances of 
  * two subclasses of this subclasses:
- * {SDL2::Event::FingerMotion} and {SDL2::Event::MouseButtonUp}.
+ * {SDL2::Event::FingerMotion}, {SDL2::Event::FingerDown}, and {SDL2::Event::FingerUp}.
  *
  * @attribute touch_id
  *   the touch device id
@@ -981,7 +981,7 @@ static VALUE EvTouchFinger_inspect(VALUE self)
  *   @return [Float]
  *
  * @attribute dy
- *   the distance moved in the x-axis, normalized (0...1)
+ *   the distance moved in the y-axis, normalized (0...1)
  *   @return [Float]
  *
  */
