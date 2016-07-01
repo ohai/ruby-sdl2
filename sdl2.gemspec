@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/ohai/ruby-sdl2"
   spec.files = `git ls-files`.split(/\n/)
   spec.test_files = []
-  spec.extensions = ["ext/sdl2_native/extconf.rb"]
+  spec.extensions = ["ext/sdl2_ext/extconf.rb"]
   spec.has_rdoc = false
 
   spec.add_development_dependency "rake", "~> 10.0"
