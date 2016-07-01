@@ -216,7 +216,9 @@ void rubysdl2_init_gl(void)
     rb_define_module_function(mGL, "get_attribute", GL_s_get_attribute, 1);
     rb_define_module_function(mGL, "set_attribute", GL_s_set_attribute, 2);
 
-    /* define(`DEFINE_GL_ATTR_CONST',`rb_define_const(mGL, "$1", INT2NUM(SDL_GL_$1))') */
+#define DEFINE_GL_ATTR_CONST(c) \
+  rb_define_const(mGL, #c, INT2NUM(SDL_GL_ ## c))
+
     /* OpenGL attribute - minimal bits of red channel in color buffer, default is 3 */
     DEFINE_GL_ATTR_CONST(RED_SIZE);
     /* OpenGL attribute - minimal bits of green channel in color buffer, default is 3 */
@@ -301,7 +303,8 @@ void rubysdl2_init_gl(void)
     /* OpenGL attribute - not used (deprecated) */
     DEFINE_GL_ATTR_CONST(CONTEXT_EGL);
 
-    /* define(`DEFINE_GL_CONTEXT_CONST',`rb_define_const(mGL, "CONTEXT_$1", INT2NUM(SDL_GL_CONTEXT_$1))') */
+#define DEFINE_GL_CONTEXT_CONST(c) \
+  rb_define_const(mGL, "CONTEXT_" #c, INT2NUM(SDL_GL_CONTEXT_ ## c))
 
     /* This flag maps to GLX_CONTEXT_DEBUG_BIT_ARB in
      * the GLX_ARB_create_context extension for X11

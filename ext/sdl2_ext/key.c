@@ -229,29 +229,34 @@ static VALUE TextInput_s_set_rect(VALUE self, VALUE rect)
     return rect;
 }
 
-/*
-define(`DEFINE_SCANCODE',`ifelse(`$#',`2',`$2
-    ',`/$8* @return [Integer] scancode for "$1" key *$8/
-    ')rb_define_const(mScan, "$1", INT2NUM(SDL_SCANCODE_$1))')
-    
-define(`DEFINE_SCANCODE_NUMBER',`/$8* @return [Integer] scancode for number key "$1" (not on keypad) *$8/
-    rb_define_const(mScan, "K$1", INT2NUM(SDL_SCANCODE_$1))')
+/* @return [Integer] scancode for "$1" key */
+#define DEFINE_SCANCODE(c) \
+  rb_define_const(mScan, #c, INT2NUM(SDL_SCANCODE_ ## c))
 
-define(`DEFINE_SCANCODE_ALPH',`/$8* @return [Integer] scancode for alphabet key "$1" *$8/
-    rb_define_const(mScan, "$1", INT2NUM(SDL_SCANCODE_$1))')
+/* @return [Integer] scancode for "$1" key */
+#define DEFINE_SCANCODE_NUMBER(c) \
+  rb_define_const(mScan, "K" #c, INT2NUM(SDL_SCANCODE_ ## c))
 
-define(`DEFINE_KEYCODE', `ifelse(`$#',`2',`$2
-    ',`/$8* @return [Integer] keycode for "$1" key *$8/
-    ')rb_define_const(mKey, "$1", INT2NUM(SDLK_$1))')
-    
-define(`DEFINE_KEYCODE_NUMBER',`/$8* @return [Integer] keycode for number key "$1" (not on keypad) *$8/
-    rb_define_const(mKey, "K$1", INT2NUM(SDLK_$1))')
-    
-define(`DEFINE_KEYCODE_ALPH',`/$8* @return [Integer] keycode for alphabet key "$1" *$8/
-    rb_define_const(mKey, "translit($1,`a-z',`A-Z')", INT2NUM(SDLK_$1))')
+/* @return [Integer] scancode for alphabet key "$1" */
+#define DEFINE_SCANCODE_ALPH(c) \
+  rb_define_const(mScan, #c, INT2NUM(SDL_SCANCODE_ ## c))
 
-define(`DEFINE_KEYMOD',`rb_define_const(mMod, "$1", INT2NUM(KMOD_$1))')
-*/
+/* @return [Integer] keycode for "$1" key */
+#define DEFINE_KEYCODE(c) \
+  rb_define_const(mScan, #c, INT2NUM(SDLK_ ## c))
+
+/* @return [Integer] keycode for "$1" key */
+#define DEFINE_KEYCODE_NUMBER(c) \
+  rb_define_const(mScan, "K" #c, INT2NUM(SDLK_ ## c))
+
+/* @return [Integer] keycode for alphabet key "$1" */
+#define DEFINE_KEYCODE_ALPH(c) \
+  rb_define_const(mScan, #c, INT2NUM(SDLK_ ## c))
+
+#define DEFINE_KEYMOD(c) \
+  rb_define_const(mMod, #c, INT2NUM(KMOD_ ## c))
+
+
 void rubysdl2_init_key(void)
 {
     mKey = rb_define_module_under(mSDL2, "Key");
@@ -273,7 +278,8 @@ void rubysdl2_init_key(void)
     rb_define_module_function(mTextInput, "stop", TextInput_s_stop, 0);
     rb_define_module_function(mTextInput, "rect=", TextInput_s_set_rect, 1);
     
-    DEFINE_SCANCODE(UNKNOWN,/* @return [Integer] unused scancode */);
+    /* @return [Integer] unused scancode */
+    DEFINE_SCANCODE(UNKNOWN);
     DEFINE_SCANCODE_ALPH(A);
     DEFINE_SCANCODE_ALPH(B);
     DEFINE_SCANCODE_ALPH(C);
@@ -540,7 +546,8 @@ void rubysdl2_init_key(void)
     DEFINE_SCANCODE(APP1);
     DEFINE_SCANCODE(APP2);
 
-    DEFINE_KEYCODE(UNKNOWN,/* @return [Integer] unused keycode */);
+    /* @return [Integer] unused keycode */
+    DEFINE_KEYCODE(UNKNOWN);
     DEFINE_KEYCODE(RETURN);
     DEFINE_KEYCODE(ESCAPE);
     DEFINE_KEYCODE(BACKSPACE);

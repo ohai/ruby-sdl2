@@ -352,7 +352,9 @@ void rubysdl2_init_gamecontorller(void)
     mAxis = rb_define_module_under(cGameController, "Axis");
     mButton = rb_define_module_under(cGameController, "Button");
 
-    /* define(`DEFINE_CONTROLLER_AXIS_CONST',`rb_define_const(mAxis, "$1", INT2NUM(SDL_CONTROLLER_AXIS_$1))') */
+#define DEFINE_CONTROLLER_AXIS_CONST(c) \
+  rb_define_const(mAxis, #c, INT2NUM(SDL_CONTROLLER_AXIS_ ## c))
+
     /* Invalid axis index */
     DEFINE_CONTROLLER_AXIS_CONST(INVALID);
     /* Left X axis */
@@ -370,7 +372,9 @@ void rubysdl2_init_gamecontorller(void)
     /* The max of an axis index */
     DEFINE_CONTROLLER_AXIS_CONST(MAX);
 
-    /* define(`DEFINE_CONTROLLER_BUTTON_CONST',`rb_define_const(mButton, "$1", INT2NUM(SDL_CONTROLLER_BUTTON_$1))') */
+#define DEFINE_CONTROLLER_BUTTON_CONST(c) \
+  rb_define_const(mButton, #c, INT2NUM(SDL_CONTROLLER_BUTTON_ ## c))
+
     /* Invalid button index */
     DEFINE_CONTROLLER_BUTTON_CONST(INVALID);
     /* Button A */

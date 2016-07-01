@@ -308,7 +308,9 @@ void rubysdl2_init_joystick(void)
 
     mHat = rb_define_module_under(cJoystick, "Hat");
     
-    /* define(`DEFINE_JOY_HAT_CONST',`rb_define_const(mHat, "$1", INT2NUM(SDL_HAT_$1))') */
+#define DEFINE_JOY_HAT_CONST(c) \
+  rb_define_const(mHat, #c, INT2NUM(SDL_HAT_ ## c))
+    
     /* Center position. Equal to 0. */
     DEFINE_JOY_HAT_CONST(CENTERED);
     /* Up position. */

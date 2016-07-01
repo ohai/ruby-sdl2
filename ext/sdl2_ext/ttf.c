@@ -8,7 +8,7 @@ static VALUE cTTF;
 static VALUE mStyle;
 static VALUE mHinting;
 
-#define TTF_ERROR() do { HANDLE_ERROR(SDL_SetError(TTF_GetError())); } while (0)
+#define TTF_ERROR() do { HANDLE_ERROR(SDL_SetError("%s", TTF_GetError())); } while (0)
 #define HANDLE_TTF_ERROR(code) \
     do { if ((code) < 0) { TTF_ERROR(); } } while (0)
 
@@ -343,7 +343,10 @@ void rubysdl2_init_ttf(void)
     rb_define_method(cTTF, "render_blended", TTF_render_blended, 2);
 
     mStyle = rb_define_module_under(cTTF, "Style");
-    /* define(`DEFINE_TTF_STYLE_CONST',`rb_define_const(mStyle, "$1", INT2NUM((TTF_STYLE_$1)))') */
+
+#define DEFINE_TTF_STYLE_CONST(c) \
+  rb_define_const(mStyle, #c, INT2NUM(TTF_STYLE_ ## c))
+
     /* normal style */
     DEFINE_TTF_STYLE_CONST(NORMAL);
     /* bold style */
@@ -356,7 +359,10 @@ void rubysdl2_init_ttf(void)
     DEFINE_TTF_STYLE_CONST(STRIKETHROUGH);
 
     mHinting = rb_define_module_under(cTTF, "Hinting");
-    /* define(`DEFINE_TTF_HINTING_CONST',`rb_define_const(mHinting, "$1", INT2NUM((TTF_HINTING_$1)))') */
+
+#define DEFINE_TTF_HINTING_CONST(c) \
+  rb_define_const(mHinting, #c, INT2NUM(TTF_HINTING_ ## c))
+
     /* normal hinting, default */
     DEFINE_TTF_HINTING_CONST(NORMAL);
     /*  lighter hinting for non-monochrome modes */

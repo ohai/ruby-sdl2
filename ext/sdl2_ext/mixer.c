@@ -1066,7 +1066,9 @@ void rubysdl2_init_mixer(void)
     rb_define_module_function(mMixer, "close", Mixer_s_close, 0);
     rb_define_module_function(mMixer, "query", Mixer_s_query, 0);
     
-    /* define(`DEFINE_MIX_INIT',`rb_define_const(mMixer, "INIT_$1", UINT2NUM(MIX_INIT_$1))') */
+#define DEFINE_MIX_INIT(c) \
+  rb_define_const(mMixer, "INIT_" #c, UINT2NUM(MIX_INIT_## c))
+
     /* Initialize Ogg flac loader */
     DEFINE_MIX_INIT(FLAC);
     /* Initialize MOD loader */
@@ -1080,7 +1082,9 @@ void rubysdl2_init_mixer(void)
     /* Initialize fluidsynth */
     DEFINE_MIX_INIT(FLUIDSYNTH);
 
-    /* define(`DEFINE_MIX_FORMAT',`rb_define_const(mMixer, "FORMAT_$1", UINT2NUM(AUDIO_$1))') */
+#define DEFINE_MIX_FORMAT(c) \
+  rb_define_const(mMixer, "FORMAT_" #c, UINT2NUM(AUDIO_ ## c))
+
     /* Unsiged 8-bit sample format. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(U8);
     /* Siged 8-bit sample format. Used by {Mixer.open} */

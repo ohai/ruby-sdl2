@@ -788,12 +788,11 @@ static VALUE Window_set_title(VALUE self, VALUE title)
     return Qnil;
 }
 
-/*
-define(`SIMPLE_WINDOW_METHOD',`static VALUE Window_$2(VALUE self)
-{
-    SDL_$1Window(Get_SDL_Window(self)); return Qnil;
-}')
-*/
+#define SIMPLE_WINDOW_METHOD(n1, n2) \
+  static VALUE Window_## n2(VALUE self) { \
+    SDL_ ## n1 ## Window(Get_SDL_Window(self)); return Qnil; \
+  }
+
 /*
  * Show the window.
  *
@@ -2628,13 +2627,10 @@ static VALUE PixelFormat_type(VALUE self)
     return UINT2NUM(SDL_PIXELTYPE(NUM2UINT(rb_iv_get(self, "@format"))));
 }
 
-/*
-define(`PIXELFORMAT_ATTR_READER',
-`static VALUE PixelFormat_$1(VALUE self)
-{
-    return $3($2(NUM2UINT(rb_iv_get(self, "@format"))));
-}')
- */
+#define PIXELFORMAT_ATTR_READER(n, f, m) \
+  static VALUE PixelFormat_ ## n (VALUE self) { \
+    return m(f(NUM2UINT(rb_iv_get(self, "@format")))); \
+  }
 
 /*
  * Get the human readable name of the pixel format
@@ -2759,10 +2755,9 @@ static VALUE ScreenSaver_enabled_p(VALUE self)
     return INT2BOOL(SDL_IsScreenSaverEnabled());
 }
 
-/*
-define(`DEFINE_C_ACCESSOR',`rb_define_method($2, "$3", $1_$3, 0);
-    rb_define_method($2, "$3=", $1_set_$3, 1)')
- */
+#define DEFINE_C_ACCESSOR(p, c, m) \
+  rb_define_method(c, #m, p ## _ ## m, 0); \
+  rb_define_method(c, #m "=", p ## _set_ ## m, 0); \
     
 void rubysdl2_init_video(void)
 {
@@ -2816,7 +2811,10 @@ void rubysdl2_init_video(void)
     rb_define_const(cWindow, "POS_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 
     mWindowFlags = rb_define_module_under(cWindow, "Flags");
-    /* define(`DEFINE_WINDOW_FLAGS_CONST',`rb_define_const(mWindowFlags, "$1", UINT2NUM(SDL_WINDOW_$1))') */
+    
+#define DEFINE_WINDOW_FLAGS_CONST(c) \
+  rb_define_const(mWindowFlags, #c, UINT2NUM(SDL_WINDOW_## c))
+  
     /* fullscreen window */ 
     DEFINE_WINDOW_FLAGS_CONST(FULLSCREEN);
     /* fullscreen window at the current desktop resolution */
@@ -2917,7 +2915,9 @@ void rubysdl2_init_video(void)
 
     mRendererFlags = rb_define_module_under(cRenderer, "Flags");
     
-    /* define(`DEFINE_RENDERER_FLAGS_CONST',`rb_define_const(mRendererFlags, "$1", UINT2NUM(SDL_RENDERER_$1))') */
+#define DEFINE_RENDERER_FLAGS_CONST(c) \
+  rb_define_const(mRendererFlags, #c, UINT2NUM(SDL_RENDERER_## c))
+    
     /* the renderer is a software fallback */
     DEFINE_RENDERER_FLAGS_CONST(SOFTWARE);
     /* the renderer uses hardware acceleration */
@@ -2928,7 +2928,10 @@ void rubysdl2_init_video(void)
 #endif
     /* the renderer supports rendering to texture */ 
     DEFINE_RENDERER_FLAGS_CONST(TARGETTEXTURE);
-    /* define(`DEFINE_SDL_FLIP_CONST',`rb_define_const(cRenderer, "FLIP_$1", INT2FIX(SDL_FLIP_$1))') */
+
+#define DEFINE_SDL_FLIP_CONST(c) \
+  rb_define_const(cRenderer, "FLIP_" #c, INT2FIX(SDL_FLIP_## c))
+    
     /* Do not flip, used in {Renderer#copy_ex} */
     DEFINE_SDL_FLIP_CONST(NONE);
     /* Flip horizontally, used in {Renderer#copy_ex} */
@@ -2937,7 +2940,10 @@ void rubysdl2_init_video(void)
     DEFINE_SDL_FLIP_CONST(VERTICAL);
     
     mBlendMode = rb_define_module_under(mSDL2, "BlendMode");
-    /* define(`DEFINE_BLENDMODE_CONST',`rb_define_const(mBlendMode, "$1", INT2FIX(SDL_BLENDMODE_$1))') */
+    
+#define DEFINE_BLENDMODE_CONST(c) \
+  rb_define_const(mBlendMode, #c, INT2FIX(SDL_BLENDMODE_## c))
+    
     /* no blending (dstRGBA = srcRGBA) */
     DEFINE_BLENDMODE_CONST(NONE);
     /* alpha blending (dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA), dstA = srcA + (dstA * (1-srcA)))*/
@@ -2961,7 +2967,10 @@ void rubysdl2_init_video(void)
     rb_define_method(cTexture, "h", Texture_h, 0);
     rb_define_method(cTexture, "inspect", Texture_inspect, 0);
     rb_define_method(cTexture, "debug_info", Texture_debug_info, 0);
-    /* define(`DEFINE_TEXTUREAH_ACCESS_CONST', `rb_define_const(cTexture, "ACCESS_$1", INT2NUM(SDL_TEXTUREACCESS_$1))') */
+    
+#define DEFINE_TEXTUREAH_ACCESS_CONST(c) \
+  rb_define_const(cTexture, "ACCESS_" #c, INT2NUM(SDL_TEXTUREACCESS_ ## c))
+  
     /* texture access pattern - changes rarely, not lockable */
     DEFINE_TEXTUREAH_ACCESS_CONST(STATIC);
     /* texture access pattern - changes frequently, lockable */
@@ -3041,7 +3050,10 @@ void rubysdl2_init_video(void)
     rb_define_method(cPixelFormat, "==", PixelFormat_eq, 1);
 
     mPixelType = rb_define_module_under(cPixelFormat, "Type");
-    /* define(`DEFINE_PIXELTYPE_CONST',`rb_define_const(mPixelType, "$1", UINT2NUM(SDL_PIXELTYPE_$1))') */
+    
+#define DEFINE_PIXELTYPE_CONST(c) \
+  rb_define_const(mPixelType, #c, UINT2NUM(SDL_PIXELTYPE_ ## c))
+    
     DEFINE_PIXELTYPE_CONST(UNKNOWN);
     DEFINE_PIXELTYPE_CONST(INDEX1);
     DEFINE_PIXELTYPE_CONST(INDEX4);
@@ -3061,7 +3073,10 @@ void rubysdl2_init_video(void)
     rb_define_const(mBitmapOrder, "O_4321", UINT2NUM(SDL_BITMAPORDER_4321));
     
     mPackedOrder = rb_define_module_under(cPixelFormat, "PackedOrder");
-    /* define(`DEFINE_PACKEDORDER_CONST',`rb_define_const(mPackedOrder, "$1", UINT2NUM(SDL_PACKEDORDER_$1))') */
+
+#define DEFINE_PACKEDORDER_CONST(c) \
+  rb_define_const(mPackedOrder, #c, UINT2NUM(SDL_PACKEDORDER_ ## c))
+    
     DEFINE_PACKEDORDER_CONST(NONE);
     DEFINE_PACKEDORDER_CONST(XRGB);
     DEFINE_PACKEDORDER_CONST(RGBX);
@@ -3073,7 +3088,10 @@ void rubysdl2_init_video(void)
     DEFINE_PACKEDORDER_CONST(BGRA);
 
     mArrayOrder = rb_define_module_under(cPixelFormat, "ArrayOrder");
-    /* define(`DEFINE_ARRAYORDER_CONST',`rb_define_const(mArrayOrder, "$1", UINT2NUM(SDL_ARRAYORDER_$1))') */
+    
+#define DEFINE_ARRAYORDER_CONST(c) \
+  rb_define_const(mArrayOrder, #c, UINT2NUM(SDL_ARRAYORDER_ ## c))
+    
     DEFINE_ARRAYORDER_CONST(NONE);
     DEFINE_ARRAYORDER_CONST(RGB);
     DEFINE_ARRAYORDER_CONST(RGBA);
@@ -3083,7 +3101,10 @@ void rubysdl2_init_video(void)
     DEFINE_ARRAYORDER_CONST(ABGR);
 
     mPackedLayout = rb_define_module_under(cPixelFormat, "PackedLayout");
-    /* define(`DEFINE_PACKEDLAYOUT_CONST',`rb_define_const(mPackedLayout, "L_$1", UINT2NUM(SDL_PACKEDLAYOUT_$1))') */
+    
+#define DEFINE_PACKEDLAYOUT_CONST(c) \
+  rb_define_const(mPackedLayout, "L_" #c, UINT2NUM(SDL_PACKEDLAYOUT_ ## c))
+    
     rb_define_const(mPackedLayout, "NONE", UINT2NUM(SDL_PACKEDLAYOUT_NONE));
     DEFINE_PACKEDLAYOUT_CONST(332);
     DEFINE_PACKEDLAYOUT_CONST(4444);
@@ -3098,15 +3119,15 @@ void rubysdl2_init_video(void)
         VALUE formats = rb_ary_new();
         /* -: Array of all available formats */
         rb_define_const(cPixelFormat, "FORMATS", formats);
-        /* define(`DEFINE_PIXELFORMAT_CONST',`do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_$1);
-            $2
-            rb_define_const(cPixelFormat, "$1", format);
-            rb_ary_push(formats, format);
-        } while (0)')
-         */
         
-        DEFINE_PIXELFORMAT_CONST(UNKNOWN, /* -: PixelFormat: Unused - reserved by SDL */);
+#define DEFINE_PIXELFORMAT_CONST(c) \
+do { \
+  VALUE format = PixelFormat_new(SDL_PIXELFORMAT_ ## c); \
+  rb_define_const(cPixelFormat, #c, format); \
+  rb_ary_push(formats, format); \
+} while(0);
+        
+        DEFINE_PIXELFORMAT_CONST(UNKNOWN);
         DEFINE_PIXELFORMAT_CONST(INDEX1LSB);
         DEFINE_PIXELFORMAT_CONST(INDEX1MSB);
         DEFINE_PIXELFORMAT_CONST(INDEX4LSB);
