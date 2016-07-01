@@ -1,8 +1,14 @@
-require 'sdl2'
+begin
+  require 'sdl2'
+rescue LoadError
+  $LOAD_PATH.unshift File.expand_path File.join(__dir__, '../lib')
+  retry
+end
+
 
 SDL2.init(SDL2::INIT_EVERYTHING)
 window = SDL2::Window.create("testsprite",0, 0, 640, 480, 0)
-renderer = window.create_renderer(0, SDL2::Renderer::ACCELERATED)
+renderer = window.create_renderer(0, SDL2::Renderer::Flags::ACCELERATED)
 SDL2::TextInput.stop
 
 loop do

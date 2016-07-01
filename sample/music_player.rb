@@ -1,4 +1,9 @@
-require 'sdl2'
+begin
+  require 'sdl2'
+rescue LoadError
+  $LOAD_PATH.unshift File.expand_path File.join(__dir__, '../lib')
+  retry
+end
 
 class TextureForText
   def initialize(renderer, font)

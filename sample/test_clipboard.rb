@@ -1,4 +1,9 @@
-require 'sdl2'
+begin
+  require 'sdl2'
+rescue LoadError
+  $LOAD_PATH.unshift File.expand_path File.join(__dir__, '../lib')
+  retry
+end
 
 SDL2.init(SDL2::INIT_EVERYTHING)
 window = SDL2::Window.create("clipboard", 0, 0, 640, 480, 0)

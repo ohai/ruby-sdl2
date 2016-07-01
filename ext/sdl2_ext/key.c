@@ -241,17 +241,25 @@ static VALUE TextInput_s_set_rect(VALUE self, VALUE rect)
 #define DEFINE_SCANCODE_ALPH(c) \
   rb_define_const(mScan, #c, INT2NUM(SDL_SCANCODE_ ## c))
 
+
+
 /* @return [Integer] keycode for "$1" key */
 #define DEFINE_KEYCODE(c) \
-  rb_define_const(mScan, #c, INT2NUM(SDLK_ ## c))
+  rb_define_const(mKey, #c, INT2NUM(SDLK_ ## c))
 
 /* @return [Integer] keycode for "$1" key */
 #define DEFINE_KEYCODE_NUMBER(c) \
-  rb_define_const(mScan, "K" #c, INT2NUM(SDLK_ ## c))
+  rb_define_const(mKey, "K" #c, INT2NUM(SDLK_ ## c))
 
 /* @return [Integer] keycode for alphabet key "$1" */
 #define DEFINE_KEYCODE_ALPH(c) \
-  rb_define_const(mScan, #c, INT2NUM(SDLK_ ## c))
+do {\
+  char k[2];\
+  const char cstr[] = #c; \
+  k[0] = toupper(cstr[0]); \
+  k[1] = '\0'; \
+  rb_define_const(mKey, k, INT2NUM(SDLK_ ## c)); \
+} while(0);
 
 #define DEFINE_KEYMOD(c) \
   rb_define_const(mMod, #c, INT2NUM(KMOD_ ## c))
