@@ -1,0 +1,24 @@
+PATH
+  remote: .
+  specs:
+    sdl2 (0.3.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rake (10.5.0)
+    rake-compiler (0.9.9)
+      rake
+    yard (0.8.7.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rake (~> 10.0)
+  rake-compiler (~> 0.9)
+  sdl2!
+  yard (~> 0.8)
+
+BUNDLED WITH
+   1.11.2
