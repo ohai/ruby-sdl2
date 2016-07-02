@@ -216,53 +216,53 @@ void rubysdl2_init_gl(void)
     rb_define_module_function(mGL, "get_attribute", GL_s_get_attribute, 1);
     rb_define_module_function(mGL, "set_attribute", GL_s_set_attribute, 2);
 
-    /*  */
+    /* define(`DEFINE_GL_ATTR_CONST',`rb_define_const(mGL, "$1", INT2NUM(SDL_GL_$1))') */
     /* OpenGL attribute - minimal bits of red channel in color buffer, default is 3 */
-    rb_define_const(mGL, "RED_SIZE", INT2NUM(SDL_GL_RED_SIZE));
+    DEFINE_GL_ATTR_CONST(RED_SIZE);
     /* OpenGL attribute - minimal bits of green channel in color buffer, default is 3 */
-    rb_define_const(mGL, "GREEN_SIZE", INT2NUM(SDL_GL_GREEN_SIZE));
+    DEFINE_GL_ATTR_CONST(GREEN_SIZE);
     /* OpenGL attribute - minimal bits of blue channel in color buffer, default is 2 */
-    rb_define_const(mGL, "BLUE_SIZE", INT2NUM(SDL_GL_BLUE_SIZE));
+    DEFINE_GL_ATTR_CONST(BLUE_SIZE);
     /* OpenGL attribute - minimal bits of alpha channel in color buffer, default is 0 */
-    rb_define_const(mGL, "ALPHA_SIZE", INT2NUM(SDL_GL_ALPHA_SIZE));
+    DEFINE_GL_ATTR_CONST(ALPHA_SIZE);
     /* OpenGL attribute - minimal bits of framebufer, default is 0 */
-    rb_define_const(mGL, "BUFFER_SIZE", INT2NUM(SDL_GL_BUFFER_SIZE));
+    DEFINE_GL_ATTR_CONST(BUFFER_SIZE);
     /* OpenGL attribute - whether the single buffer (0) or double buffer (1), default
        is double buffer */
-    rb_define_const(mGL, "DOUBLEBUFFER", INT2NUM(SDL_GL_DOUBLEBUFFER));
+    DEFINE_GL_ATTR_CONST(DOUBLEBUFFER);
     /* OpenGL attribute - bits of depth buffer, default is 16 */
-    rb_define_const(mGL, "DEPTH_SIZE", INT2NUM(SDL_GL_DEPTH_SIZE));
+    DEFINE_GL_ATTR_CONST(DEPTH_SIZE);
     /* OpenGL attribute - bits of stencil buffer, default is 0 */
-    rb_define_const(mGL, "STENCIL_SIZE", INT2NUM(SDL_GL_STENCIL_SIZE));
+    DEFINE_GL_ATTR_CONST(STENCIL_SIZE);
     /* OpenGL attribute - minimal bits of red channel in accumlation buffer,
        default is 0 */
-    rb_define_const(mGL, "ACCUM_RED_SIZE", INT2NUM(SDL_GL_ACCUM_RED_SIZE));
+    DEFINE_GL_ATTR_CONST(ACCUM_RED_SIZE);
     /* OpenGL attribute - minimal bits of green channel in accumlation buffer,
        default is 0 */
-    rb_define_const(mGL, "ACCUM_GREEN_SIZE", INT2NUM(SDL_GL_ACCUM_GREEN_SIZE));
+    DEFINE_GL_ATTR_CONST(ACCUM_GREEN_SIZE);
     /* OpenGL attribute - minimal bits of blue channel in accumlation buffer,
        default is 0 */
-    rb_define_const(mGL, "ACCUM_BLUE_SIZE", INT2NUM(SDL_GL_ACCUM_BLUE_SIZE));
+    DEFINE_GL_ATTR_CONST(ACCUM_BLUE_SIZE);
     /* OpenGL attribute - minimal bits of alpha channel in accumlation buffer,
        default is 0 */
-    rb_define_const(mGL, "ACCUM_ALPHA_SIZE", INT2NUM(SDL_GL_ACCUM_ALPHA_SIZE));
+    DEFINE_GL_ATTR_CONST(ACCUM_ALPHA_SIZE);
     /* OpenGL attribute - whether output is stereo (1) or not (0), default is 0 */
-    rb_define_const(mGL, "STEREO", INT2NUM(SDL_GL_STEREO));
+    DEFINE_GL_ATTR_CONST(STEREO);
     /* OpenGL attribuite - the number of buffers used for multisampe anti-aliasing,
        default is 0 */
-    rb_define_const(mGL, "MULTISAMPLEBUFFERS", INT2NUM(SDL_GL_MULTISAMPLEBUFFERS));
+    DEFINE_GL_ATTR_CONST(MULTISAMPLEBUFFERS);
     /* OpenGL attribute - the number of samples used around the current pixel
        use for multisample anti-aliasing, default is 0 */
-    rb_define_const(mGL, "MULTISAMPLESAMPLES", INT2NUM(SDL_GL_MULTISAMPLESAMPLES));
+    DEFINE_GL_ATTR_CONST(MULTISAMPLESAMPLES);
     /* OpenGL attribute - 1 for requiring hardware acceleration, 0 for software rendering,
        default is allowing either */
-    rb_define_const(mGL, "ACCELERATED_VISUAL", INT2NUM(SDL_GL_ACCELERATED_VISUAL));
+    DEFINE_GL_ATTR_CONST(ACCELERATED_VISUAL);
     /* OpenGL attribute - not used (deprecated) */
-    rb_define_const(mGL, "RETAINED_BACKING", INT2NUM(SDL_GL_RETAINED_BACKING));
+    DEFINE_GL_ATTR_CONST(RETAINED_BACKING);
     /* OpenGL attribute - OpenGL context major version */
-    rb_define_const(mGL, "CONTEXT_MAJOR_VERSION", INT2NUM(SDL_GL_CONTEXT_MAJOR_VERSION));
+    DEFINE_GL_ATTR_CONST(CONTEXT_MAJOR_VERSION);
     /* OpenGL attribute - OpenGL context minor version */
-    rb_define_const(mGL, "CONTEXT_MINOR_VERSION", INT2NUM(SDL_GL_CONTEXT_MINOR_VERSION));
+    DEFINE_GL_ATTR_CONST(CONTEXT_MINOR_VERSION);
     /*
      * INT2NUM(SDL_GL_CONTEXT_FLAGS):
      * 
@@ -279,7 +279,7 @@ void rubysdl2_init_gl(void)
      *
      * https://wiki.libsdl.org/SDL_GLcontextFlag
      */
-    rb_define_const(mGL, "CONTEXT_FLAGS", INT2NUM(SDL_GL_CONTEXT_FLAGS));
+    DEFINE_GL_ATTR_CONST(CONTEXT_FLAGS);
     /* INT2NUM(SDL_GL_CONTEXT_PROFILE_MASK):
      *
      * OpenGL attribute - type of GL context, one of the following constants,
@@ -291,61 +291,61 @@ void rubysdl2_init_gl(void)
      *
      * https://wiki.libsdl.org/SDL_GLprofile
      */
-    rb_define_const(mGL, "CONTEXT_PROFILE_MASK", INT2NUM(SDL_GL_CONTEXT_PROFILE_MASK));
+    DEFINE_GL_ATTR_CONST(CONTEXT_PROFILE_MASK);
     /* OpenGL attribute - OpenGL context sharing, default is 0 */
-    rb_define_const(mGL, "SHARE_WITH_CURRENT_CONTEXT", INT2NUM(SDL_GL_SHARE_WITH_CURRENT_CONTEXT));
+    DEFINE_GL_ATTR_CONST(SHARE_WITH_CURRENT_CONTEXT);
 #if SDL_VERSION_ATLEAST(2,0,1)
     /* OpenGL attribute - 1 for requesting sRGB capable visual, default to 0 */
-    rb_define_const(mGL, "FRAMEBUFFER_SRGB_CAPABLE", INT2NUM(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE));
+    DEFINE_GL_ATTR_CONST(FRAMEBUFFER_SRGB_CAPABLE);
 #endif
     /* OpenGL attribute - not used (deprecated) */
-    rb_define_const(mGL, "CONTEXT_EGL", INT2NUM(SDL_GL_CONTEXT_EGL));
+    DEFINE_GL_ATTR_CONST(CONTEXT_EGL);
 
-    /*  */
+    /* define(`DEFINE_GL_CONTEXT_CONST',`rb_define_const(mGL, "CONTEXT_$1", INT2NUM(SDL_GL_CONTEXT_$1))') */
 
     /* This flag maps to GLX_CONTEXT_DEBUG_BIT_ARB in
      * the GLX_ARB_create_context extension for X11
      * and WGL_CONTEXT_DEBUG_BIT_ARB in the WGL_ARB_create_context
      * extension for Windows.
      */
-    rb_define_const(mGL, "CONTEXT_DEBUG_FLAG", INT2NUM(SDL_GL_CONTEXT_DEBUG_FLAG));
+    DEFINE_GL_CONTEXT_CONST(DEBUG_FLAG);
     /*
      * This flag maps to GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB in the
      * GLX_ARB_create_context extension for X11 and
      * WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB in the WGL_ARB_create_context
      * extension for Windows.
      */
-    rb_define_const(mGL, "CONTEXT_FORWARD_COMPATIBLE_FLAG", INT2NUM(SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG));
+    DEFINE_GL_CONTEXT_CONST(FORWARD_COMPATIBLE_FLAG);
     /*
      * This flag maps to GLX_CONTEXT_ROBUST_ACCESS_BIT_ARB in the
      * GLX_ARB_create_context_robustness extension for X11 and
      * WGL_CONTEXT_ROBUST_ACCESS_BIT_ARB in the WGL_ARB_create_context_robustness
      * extension for Windows. 
      */
-    rb_define_const(mGL, "CONTEXT_ROBUST_ACCESS_FLAG", INT2NUM(SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG));
+    DEFINE_GL_CONTEXT_CONST(ROBUST_ACCESS_FLAG);
     /*
      * This flag maps to GLX_CONTEXT_RESET_ISOLATION_BIT_ARB in the
      * GLX_ARB_robustness_isolation extension for X11 and
      * WGL_CONTEXT_RESET_ISOLATION_BIT_ARB in the WGL_ARB_create_context_robustness
      * extension for Windows.
      */
-    rb_define_const(mGL, "CONTEXT_RESET_ISOLATION_FLAG", INT2NUM(SDL_GL_CONTEXT_RESET_ISOLATION_FLAG));
+    DEFINE_GL_CONTEXT_CONST(RESET_ISOLATION_FLAG);
 
     /*
      * OpenGL core profile - deprecated
      * functions are disabled
      */
-    rb_define_const(mGL, "CONTEXT_PROFILE_CORE", INT2NUM(SDL_GL_CONTEXT_PROFILE_CORE));
+    DEFINE_GL_CONTEXT_CONST(PROFILE_CORE);
     /*
      * OpenGL compatibility profile -
      * deprecated functions are allowed
      */
-    rb_define_const(mGL, "CONTEXT_PROFILE_COMPATIBILITY", INT2NUM(SDL_GL_CONTEXT_PROFILE_COMPATIBILITY));
+    DEFINE_GL_CONTEXT_CONST(PROFILE_COMPATIBILITY);
     /*
      * OpenGL ES profile - only a subset of the
      * base OpenGL functionality is available
      */
-    rb_define_const(mGL, "CONTEXT_PROFILE_ES", INT2NUM(SDL_GL_CONTEXT_PROFILE_ES));
+    DEFINE_GL_CONTEXT_CONST(PROFILE_ES);
     
     rb_gc_register_address(&current_context);
 }

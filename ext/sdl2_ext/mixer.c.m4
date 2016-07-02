@@ -1066,37 +1066,37 @@ void rubysdl2_init_mixer(void)
     rb_define_module_function(mMixer, "close", Mixer_s_close, 0);
     rb_define_module_function(mMixer, "query", Mixer_s_query, 0);
     
-    /*  */
+    /* define(`DEFINE_MIX_INIT',`rb_define_const(mMixer, "INIT_$1", UINT2NUM(MIX_INIT_$1))') */
     /* Initialize Ogg flac loader */
-    rb_define_const(mMixer, "INIT_FLAC", UINT2NUM(MIX_INIT_FLAC));
+    DEFINE_MIX_INIT(FLAC);
     /* Initialize MOD loader */
-    rb_define_const(mMixer, "INIT_MOD", UINT2NUM(MIX_INIT_MOD));
+    DEFINE_MIX_INIT(MOD);
     /* Initialize libmodplug */
-    rb_define_const(mMixer, "INIT_MODPLUG", UINT2NUM(MIX_INIT_MODPLUG));
+    DEFINE_MIX_INIT(MODPLUG);
     /* Initialize MP3 loader */
-    rb_define_const(mMixer, "INIT_MP3", UINT2NUM(MIX_INIT_MP3));
+    DEFINE_MIX_INIT(MP3);
     /* Initialize Ogg vorbis loader */
-    rb_define_const(mMixer, "INIT_OGG", UINT2NUM(MIX_INIT_OGG));
+    DEFINE_MIX_INIT(OGG);
     /* Initialize fluidsynth */
-    rb_define_const(mMixer, "INIT_FLUIDSYNTH", UINT2NUM(MIX_INIT_FLUIDSYNTH));
+    DEFINE_MIX_INIT(FLUIDSYNTH);
 
-    /*  */
+    /* define(`DEFINE_MIX_FORMAT',`rb_define_const(mMixer, "FORMAT_$1", UINT2NUM(AUDIO_$1))') */
     /* Unsiged 8-bit sample format. Used by {Mixer.open} */
-    rb_define_const(mMixer, "FORMAT_U8", UINT2NUM(AUDIO_U8));
+    DEFINE_MIX_FORMAT(U8);
     /* Siged 8-bit sample format. Used by {Mixer.open} */
-    rb_define_const(mMixer, "FORMAT_S8", UINT2NUM(AUDIO_S8));
+    DEFINE_MIX_FORMAT(S8);
     /* Unsiged 16-bit little-endian sample format. Used by {Mixer.open} */
-    rb_define_const(mMixer, "FORMAT_U16LSB", UINT2NUM(AUDIO_U16LSB));
+    DEFINE_MIX_FORMAT(U16LSB);
     /* Siged 16-bit little-endian sample format. Used by {Mixer.open} */
-    rb_define_const(mMixer, "FORMAT_S16LSB", UINT2NUM(AUDIO_S16LSB));
+    DEFINE_MIX_FORMAT(S16LSB);
     /* Unsiged 16-bit big-endian sample format. Used by {Mixer.open} */
-    rb_define_const(mMixer, "FORMAT_U16MSB", UINT2NUM(AUDIO_U16MSB));
+    DEFINE_MIX_FORMAT(U16MSB);
     /* Unsiged 16-bit big-endian sample format. Used by {Mixer.open} */
-    rb_define_const(mMixer, "FORMAT_S16MSB", UINT2NUM(AUDIO_S16MSB));
+    DEFINE_MIX_FORMAT(S16MSB);
     /* Unsiged 16-bit sample format. Endian is same as system byte order. Used by {Mixer.open} */
-    rb_define_const(mMixer, "FORMAT_U16SYS", UINT2NUM(AUDIO_U16SYS));
+    DEFINE_MIX_FORMAT(U16SYS);
     /* Siged 16-bit sample format. Endian is same as system byte order. Used by {Mixer.open} */
-    rb_define_const(mMixer, "FORMAT_S16SYS", UINT2NUM(AUDIO_S16SYS));
+    DEFINE_MIX_FORMAT(S16SYS);
     /* Default frequency. 22050 (Hz) */
     rb_define_const(mMixer, "DEFAULT_FREQUENCY", UINT2NUM(MIX_DEFAULT_FREQUENCY));
     /* Default sample format. Same as {Mixer::FORMAT_S16SYS}. */

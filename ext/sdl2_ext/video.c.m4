@@ -789,7 +789,10 @@ static VALUE Window_set_title(VALUE self, VALUE title)
 }
 
 /*
-
+define(`SIMPLE_WINDOW_METHOD',`static VALUE Window_$2(VALUE self)
+{
+    SDL_$1Window(Get_SDL_Window(self)); return Qnil;
+}')
 */
 /*
  * Show the window.
@@ -797,10 +800,7 @@ static VALUE Window_set_title(VALUE self, VALUE title)
  * @return [nil]
  * @see #hide
  */
-static VALUE Window_show(VALUE self)
-{
-    SDL_ShowWindow(Get_SDL_Window(self)); return Qnil;
-};
+SIMPLE_WINDOW_METHOD(Show, show);
 
 /*
  * Hide the window.
@@ -808,10 +808,7 @@ static VALUE Window_show(VALUE self)
  * @return [nil]
  * @see #show
  */
-static VALUE Window_hide(VALUE self)
-{
-    SDL_HideWindow(Get_SDL_Window(self)); return Qnil;
-};
+SIMPLE_WINDOW_METHOD(Hide, hide);
 
 /*
  * Maximize the window.
@@ -820,10 +817,7 @@ static VALUE Window_hide(VALUE self)
  * @see #minimize
  * @see #restore
  */
-static VALUE Window_maximize(VALUE self)
-{
-    SDL_MaximizeWindow(Get_SDL_Window(self)); return Qnil;
-};
+SIMPLE_WINDOW_METHOD(Maximize, maximize);
 
 /*
  * Minimize the window.
@@ -832,20 +826,14 @@ static VALUE Window_maximize(VALUE self)
  * @see #maximize
  * @see #restore
  */
-static VALUE Window_minimize(VALUE self)
-{
-    SDL_MinimizeWindow(Get_SDL_Window(self)); return Qnil;
-};
+SIMPLE_WINDOW_METHOD(Minimize, minimize);
 
 /*
  * Raise the window above other windows and set the input focus.
  *
  * @return [nil]
  */
-static VALUE Window_raise(VALUE self)
-{
-    SDL_RaiseWindow(Get_SDL_Window(self)); return Qnil;
-};
+SIMPLE_WINDOW_METHOD(Raise, raise);
 
 /*
  * Restore the size and position of a minimized or maixmized window.
@@ -854,10 +842,7 @@ static VALUE Window_raise(VALUE self)
  * @see #minimize
  * @see #maximize
  */
-static VALUE Window_restore(VALUE self)
-{
-    SDL_RestoreWindow(Get_SDL_Window(self)); return Qnil;
-};
+SIMPLE_WINDOW_METHOD(Restore, restore);
 
 /*
  * Get the fullscreen stete of the window
@@ -2644,7 +2629,11 @@ static VALUE PixelFormat_type(VALUE self)
 }
 
 /*
-
+define(`PIXELFORMAT_ATTR_READER',
+`static VALUE PixelFormat_$1(VALUE self)
+{
+    return $3($2(NUM2UINT(rb_iv_get(self, "@format"))));
+}')
  */
 
 /*
@@ -2652,75 +2641,51 @@ static VALUE PixelFormat_type(VALUE self)
  * 
  * @return [String]
  */
-static VALUE PixelFormat_name(VALUE self)
-{
-    return utf8str_new_cstr(SDL_GetPixelFormatName(NUM2UINT(rb_iv_get(self, "@format"))));
-};
+PIXELFORMAT_ATTR_READER(name, SDL_GetPixelFormatName, utf8str_new_cstr);
 
 /*
  * Get the ordering of channels or bits in the pixel format.
  *
  * @return [Integer] One of the constants of {BitmapOrder} module or {PackedOrder} module.
  */
-static VALUE PixelFormat_order(VALUE self)
-{
-    return UINT2NUM(SDL_PIXELORDER(NUM2UINT(rb_iv_get(self, "@format"))));
-};
+PIXELFORMAT_ATTR_READER(order,  SDL_PIXELORDER, UINT2NUM);
 
 /*
  * Get the channel bit pattern of the pixel format.
  *
  * @return [Integer] One of the constants of {PackedLayout} module.
  */
-static VALUE PixelFormat_layout(VALUE self)
-{
-    return UINT2NUM(SDL_PIXELLAYOUT(NUM2UINT(rb_iv_get(self, "@format"))));
-};
+PIXELFORMAT_ATTR_READER(layout,  SDL_PIXELLAYOUT, UINT2NUM);
 
 /*
  * Get the number of bits per pixel.
  *
  * @return [Integer]
  */
-static VALUE PixelFormat_bits_per_pixel(VALUE self)
-{
-    return INT2NUM(SDL_BITSPERPIXEL(NUM2UINT(rb_iv_get(self, "@format"))));
-};
+PIXELFORMAT_ATTR_READER(bits_per_pixel,  SDL_BITSPERPIXEL, INT2NUM);
 
 /*
  * Get the number of bytes per pixel.
  *
  * @return [Integer]
  */
-static VALUE PixelFormat_bytes_per_pixel(VALUE self)
-{
-    return INT2NUM(SDL_BYTESPERPIXEL(NUM2UINT(rb_iv_get(self, "@format"))));
-};
+PIXELFORMAT_ATTR_READER(bytes_per_pixel,  SDL_BYTESPERPIXEL, INT2NUM);
 
 /*
  * Return true if the pixel format have a palette.
  */
-static VALUE PixelFormat_indexed_p(VALUE self)
-{
-    return INT2BOOL(SDL_ISPIXELFORMAT_INDEXED(NUM2UINT(rb_iv_get(self, "@format"))));
-};
+PIXELFORMAT_ATTR_READER(indexed_p,  SDL_ISPIXELFORMAT_INDEXED, INT2BOOL);
 
 /*
  * Return true if the pixel format have an alpha channel.
  */
-static VALUE PixelFormat_alpha_p(VALUE self)
-{
-    return INT2BOOL(SDL_ISPIXELFORMAT_ALPHA(NUM2UINT(rb_iv_get(self, "@format"))));
-};
+PIXELFORMAT_ATTR_READER(alpha_p,  SDL_ISPIXELFORMAT_ALPHA, INT2BOOL);
 
 /*
  * Return true if the pixel format is not indexed, and not RGB(A),
  * for example, the pixel format is YUV.
  */
-static VALUE PixelFormat_fourcc_p(VALUE self)
-{
-    return INT2BOOL(SDL_ISPIXELFORMAT_FOURCC(NUM2UINT(rb_iv_get(self, "@format"))));
-};
+PIXELFORMAT_ATTR_READER(fourcc_p,  SDL_ISPIXELFORMAT_FOURCC, INT2BOOL);
 
 /* 
  * @overload ==(other)
@@ -2795,7 +2760,8 @@ static VALUE ScreenSaver_enabled_p(VALUE self)
 }
 
 /*
-
+define(`DEFINE_C_ACCESSOR',`rb_define_method($2, "$3", $1_$3, 0);
+    rb_define_method($2, "$3=", $1_set_$3, 1)')
  */
     
 void rubysdl2_init_video(void)
@@ -2819,24 +2785,17 @@ void rubysdl2_init_video(void)
     rb_define_method(cWindow, "display_mode", Window_display_mode, 0);
     rb_define_method(cWindow, "display", Window_display, 0);
     rb_define_method(cWindow, "debug_info", Window_debug_info, 0);
-    rb_define_method(cWindow, "brightness", Window_brightness, 0);
-    rb_define_method(cWindow, "brightness=", Window_set_brightness, 1);
+    DEFINE_C_ACCESSOR(Window, cWindow, brightness);
     rb_define_method(cWindow, "flags", Window_flags, 0);
     rb_define_method(cWindow, "gamma_ramp", Window_gamma_ramp, 0);
     rb_define_method(cWindow, "input_is_grabbed?", Window_input_is_grabbed_p, 0);
     rb_define_method(cWindow, "input_is_grabbed=", Window_set_input_is_grabbed, 1);
-    rb_define_method(cWindow, "maximum_size", Window_maximum_size, 0);
-    rb_define_method(cWindow, "maximum_size=", Window_set_maximum_size, 1);
-    rb_define_method(cWindow, "minimum_size", Window_minimum_size, 0);
-    rb_define_method(cWindow, "minimum_size=", Window_set_minimum_size, 1);
-    rb_define_method(cWindow, "position", Window_position, 0);
-    rb_define_method(cWindow, "position=", Window_set_position, 1);
-    rb_define_method(cWindow, "size", Window_size, 0);
-    rb_define_method(cWindow, "size=", Window_set_size, 1);
-    rb_define_method(cWindow, "title", Window_title, 0);
-    rb_define_method(cWindow, "title=", Window_set_title, 1);
-    rb_define_method(cWindow, "bordered", Window_bordered, 0);
-    rb_define_method(cWindow, "bordered=", Window_set_bordered, 1);
+    DEFINE_C_ACCESSOR(Window, cWindow, maximum_size);
+    DEFINE_C_ACCESSOR(Window, cWindow, minimum_size);
+    DEFINE_C_ACCESSOR(Window, cWindow, position);
+    DEFINE_C_ACCESSOR(Window, cWindow, size);
+    DEFINE_C_ACCESSOR(Window, cWindow, title);
+    DEFINE_C_ACCESSOR(Window, cWindow, bordered);
     rb_define_method(cWindow, "icon=", Window_set_icon, 1);
     rb_define_method(cWindow, "show", Window_show, 0);
     rb_define_method(cWindow, "hide", Window_hide, 0);
@@ -2857,40 +2816,40 @@ void rubysdl2_init_video(void)
     rb_define_const(cWindow, "POS_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 
     mWindowFlags = rb_define_module_under(cWindow, "Flags");
-    /*  */
+    /* define(`DEFINE_WINDOW_FLAGS_CONST',`rb_define_const(mWindowFlags, "$1", UINT2NUM(SDL_WINDOW_$1))') */
     /* fullscreen window */ 
-    rb_define_const(mWindowFlags, "FULLSCREEN", UINT2NUM(SDL_WINDOW_FULLSCREEN));
+    DEFINE_WINDOW_FLAGS_CONST(FULLSCREEN);
     /* fullscreen window at the current desktop resolution */
-    rb_define_const(mWindowFlags, "FULLSCREEN_DESKTOP", UINT2NUM(SDL_WINDOW_FULLSCREEN_DESKTOP));
+    DEFINE_WINDOW_FLAGS_CONST(FULLSCREEN_DESKTOP);
     /* window usable with OpenGL context */ 
-    rb_define_const(mWindowFlags, "OPENGL", UINT2NUM(SDL_WINDOW_OPENGL));
+    DEFINE_WINDOW_FLAGS_CONST(OPENGL);
     /* window is visible */
-    rb_define_const(mWindowFlags, "SHOWN", UINT2NUM(SDL_WINDOW_SHOWN));
+    DEFINE_WINDOW_FLAGS_CONST(SHOWN);
     /* window is not visible */
-    rb_define_const(mWindowFlags, "HIDDEN", UINT2NUM(SDL_WINDOW_HIDDEN));
+    DEFINE_WINDOW_FLAGS_CONST(HIDDEN);
     /* no window decoration */
-    rb_define_const(mWindowFlags, "BORDERLESS", UINT2NUM(SDL_WINDOW_BORDERLESS));
+    DEFINE_WINDOW_FLAGS_CONST(BORDERLESS);
     /* window is resizable */ 
-    rb_define_const(mWindowFlags, "RESIZABLE", UINT2NUM(SDL_WINDOW_RESIZABLE));
+    DEFINE_WINDOW_FLAGS_CONST(RESIZABLE);
     /* window is minimized */
-    rb_define_const(mWindowFlags, "MINIMIZED", UINT2NUM(SDL_WINDOW_MINIMIZED));
+    DEFINE_WINDOW_FLAGS_CONST(MINIMIZED);
     /* window is maximized */
-    rb_define_const(mWindowFlags, "MAXIMIZED", UINT2NUM(SDL_WINDOW_MAXIMIZED));
+    DEFINE_WINDOW_FLAGS_CONST(MAXIMIZED);
     /* window has grabbed input focus */
-    rb_define_const(mWindowFlags, "INPUT_GRABBED", UINT2NUM(SDL_WINDOW_INPUT_GRABBED));
+    DEFINE_WINDOW_FLAGS_CONST(INPUT_GRABBED);
     /* window has input focus */
-    rb_define_const(mWindowFlags, "INPUT_FOCUS", UINT2NUM(SDL_WINDOW_INPUT_FOCUS));
+    DEFINE_WINDOW_FLAGS_CONST(INPUT_FOCUS);
     /* window has mouse focus */
-    rb_define_const(mWindowFlags, "MOUSE_FOCUS", UINT2NUM(SDL_WINDOW_MOUSE_FOCUS));
+    DEFINE_WINDOW_FLAGS_CONST(MOUSE_FOCUS);
     /* window is not created by SDL */
-    rb_define_const(mWindowFlags, "FOREIGN", UINT2NUM(SDL_WINDOW_FOREIGN));
+    DEFINE_WINDOW_FLAGS_CONST(FOREIGN);
 #ifdef SDL_WINDOW_ALLOW_HIGHDPI
     /* window should be created in high-DPI mode if supported (>= SDL 2.0.1)*/
-    rb_define_const(mWindowFlags, "ALLOW_HIGHDPI", UINT2NUM(SDL_WINDOW_ALLOW_HIGHDPI));
+    DEFINE_WINDOW_FLAGS_CONST(ALLOW_HIGHDPI);
 #endif
 #ifdef SDL_WINDOW_MOSUE_CAPTURE
     /* window has mouse caputred (>= SDL 2.0.4) */
-    rb_define_const(mWindowFlags, "MOUSE_CAPTURE", UINT2NUM(SDL_WINDOW_MOUSE_CAPTURE));
+    DEFINE_WINDOW_FLAGS_CONST(MOUSE_CAPTURE);
 #endif
 
     cDisplay = rb_define_class_under(mSDL2, "Display", rb_cObject);
@@ -2958,60 +2917,57 @@ void rubysdl2_init_video(void)
 
     mRendererFlags = rb_define_module_under(cRenderer, "Flags");
     
-    /*  */
+    /* define(`DEFINE_RENDERER_FLAGS_CONST',`rb_define_const(mRendererFlags, "$1", UINT2NUM(SDL_RENDERER_$1))') */
     /* the renderer is a software fallback */
-    rb_define_const(mRendererFlags, "SOFTWARE", UINT2NUM(SDL_RENDERER_SOFTWARE));
+    DEFINE_RENDERER_FLAGS_CONST(SOFTWARE);
     /* the renderer uses hardware acceleration */
-    rb_define_const(mRendererFlags, "ACCELERATED", UINT2NUM(SDL_RENDERER_ACCELERATED));
+    DEFINE_RENDERER_FLAGS_CONST(ACCELERATED);
 #ifdef SDL_RENDERER_PRESENTVSYNC
     /* present is synchronized with the refresh rate */
-    rb_define_const(mRendererFlags, "PRESENTVSYNC", UINT2NUM(SDL_RENDERER_PRESENTVSYNC));
+    DEFINE_RENDERER_FLAGS_CONST(PRESENTVSYNC);
 #endif
     /* the renderer supports rendering to texture */ 
-    rb_define_const(mRendererFlags, "TARGETTEXTURE", UINT2NUM(SDL_RENDERER_TARGETTEXTURE));
-    /*  */
+    DEFINE_RENDERER_FLAGS_CONST(TARGETTEXTURE);
+    /* define(`DEFINE_SDL_FLIP_CONST',`rb_define_const(cRenderer, "FLIP_$1", INT2FIX(SDL_FLIP_$1))') */
     /* Do not flip, used in {Renderer#copy_ex} */
-    rb_define_const(cRenderer, "FLIP_NONE", INT2FIX(SDL_FLIP_NONE));
+    DEFINE_SDL_FLIP_CONST(NONE);
     /* Flip horizontally, used in {Renderer#copy_ex} */
-    rb_define_const(cRenderer, "FLIP_HORIZONTAL", INT2FIX(SDL_FLIP_HORIZONTAL));
+    DEFINE_SDL_FLIP_CONST(HORIZONTAL);
     /* Flip vertically, used in {Renderer#copy_ex} */
-    rb_define_const(cRenderer, "FLIP_VERTICAL", INT2FIX(SDL_FLIP_VERTICAL));
+    DEFINE_SDL_FLIP_CONST(VERTICAL);
     
     mBlendMode = rb_define_module_under(mSDL2, "BlendMode");
-    /*  */
+    /* define(`DEFINE_BLENDMODE_CONST',`rb_define_const(mBlendMode, "$1", INT2FIX(SDL_BLENDMODE_$1))') */
     /* no blending (dstRGBA = srcRGBA) */
-    rb_define_const(mBlendMode, "NONE", INT2FIX(SDL_BLENDMODE_NONE));
+    DEFINE_BLENDMODE_CONST(NONE);
     /* alpha blending (dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA), dstA = srcA + (dstA * (1-srcA)))*/
-    rb_define_const(mBlendMode, "BLEND", INT2FIX(SDL_BLENDMODE_BLEND));
+    DEFINE_BLENDMODE_CONST(BLEND);
     /* additive blending (dstRGB = (srcRGB * srcA) + dstRGB, dstA = dstA) */
-    rb_define_const(mBlendMode, "ADD", INT2FIX(SDL_BLENDMODE_ADD));
+    DEFINE_BLENDMODE_CONST(ADD);
     /* color modulate (multiplicative) (dstRGB = srcRGB * dstRGB, dstA = dstA) */
-    rb_define_const(mBlendMode, "MOD", INT2FIX(SDL_BLENDMODE_MOD));
+    DEFINE_BLENDMODE_CONST(MOD);
     
     cTexture = rb_define_class_under(mSDL2, "Texture", rb_cObject);
     
     rb_undef_alloc_func(cTexture);
     rb_define_method(cTexture, "destroy?", Texture_destroy_p, 0);
     rb_define_method(cTexture, "destroy", Texture_destroy, 0);
-    rb_define_method(cTexture, "blend_mode", Texture_blend_mode, 0);
-    rb_define_method(cTexture, "blend_mode=", Texture_set_blend_mode, 1);
-    rb_define_method(cTexture, "color_mod", Texture_color_mod, 0);
-    rb_define_method(cTexture, "color_mod=", Texture_set_color_mod, 1);
-    rb_define_method(cTexture, "alpha_mod", Texture_alpha_mod, 0);
-    rb_define_method(cTexture, "alpha_mod=", Texture_set_alpha_mod, 1);
+    DEFINE_C_ACCESSOR(Texture, cTexture, blend_mode);
+    DEFINE_C_ACCESSOR(Texture, cTexture, color_mod);
+    DEFINE_C_ACCESSOR(Texture, cTexture, alpha_mod);
     rb_define_method(cTexture, "format", Texture_format, 0);
     rb_define_method(cTexture, "access_pattern", Texture_access_pattern, 0);
     rb_define_method(cTexture, "w", Texture_w, 0);
     rb_define_method(cTexture, "h", Texture_h, 0);
     rb_define_method(cTexture, "inspect", Texture_inspect, 0);
     rb_define_method(cTexture, "debug_info", Texture_debug_info, 0);
-    /*  */
+    /* define(`DEFINE_TEXTUREAH_ACCESS_CONST', `rb_define_const(cTexture, "ACCESS_$1", INT2NUM(SDL_TEXTUREACCESS_$1))') */
     /* texture access pattern - changes rarely, not lockable */
-    rb_define_const(cTexture, "ACCESS_STATIC", INT2NUM(SDL_TEXTUREACCESS_STATIC));
+    DEFINE_TEXTUREAH_ACCESS_CONST(STATIC);
     /* texture access pattern - changes frequently, lockable */
-    rb_define_const(cTexture, "ACCESS_STREAMING", INT2NUM(SDL_TEXTUREACCESS_STREAMING));
+    DEFINE_TEXTUREAH_ACCESS_CONST(STREAMING);
     /* texture access pattern - can be used as a render target */
-    rb_define_const(cTexture, "ACCESS_TARGET", INT2NUM(SDL_TEXTUREACCESS_TARGET));
+    DEFINE_TEXTUREAH_ACCESS_CONST(TARGET);
 
     
     cSurface = rb_define_class_under(mSDL2, "Surface", rb_cObject);
@@ -3023,8 +2979,7 @@ void rubysdl2_init_video(void)
     rb_define_singleton_method(cSurface, "from_string", Surface_s_from_string, -1);
     rb_define_method(cSurface, "destroy?", Surface_destroy_p, 0);
     rb_define_method(cSurface, "destroy", Surface_destroy, 0);
-    rb_define_method(cSurface, "blend_mode", Surface_blend_mode, 0);
-    rb_define_method(cSurface, "blend_mode=", Surface_set_blend_mode, 1);
+    DEFINE_C_ACCESSOR(Surface, cSurface, blend_mode);
     rb_define_method(cSurface, "must_lock?", Surface_must_lock_p, 0);
     rb_define_method(cSurface, "lock", Surface_lock, 0);
     rb_define_method(cSurface, "unlock", Surface_unlock, 0);
@@ -3046,14 +3001,10 @@ void rubysdl2_init_video(void)
     rb_define_method(cRect, "initialize", Rect_initialize, -1);
     rb_define_alias(rb_singleton_class(cRect), "[]", "new");
     rb_define_method(cRect, "inspect", Rect_inspect, 0);
-    rb_define_method(cRect, "x", Rect_x, 0);
-    rb_define_method(cRect, "x=", Rect_set_x, 1);
-    rb_define_method(cRect, "y", Rect_y, 0);
-    rb_define_method(cRect, "y=", Rect_set_y, 1);
-    rb_define_method(cRect, "w", Rect_w, 0);
-    rb_define_method(cRect, "w=", Rect_set_w, 1);
-    rb_define_method(cRect, "h", Rect_h, 0);
-    rb_define_method(cRect, "h=", Rect_set_h, 1);
+    DEFINE_C_ACCESSOR(Rect, cRect, x);
+    DEFINE_C_ACCESSOR(Rect, cRect, y);
+    DEFINE_C_ACCESSOR(Rect, cRect, w);
+    DEFINE_C_ACCESSOR(Rect, cRect, h);
     rb_define_method(cRect, "union", Rect_union, 1);
     rb_define_method(cRect, "intersection", Rect_intersection, 1);
     
@@ -3063,10 +3014,8 @@ void rubysdl2_init_video(void)
     rb_define_method(cPoint, "initialize", Point_initialize, -1);
     rb_define_alias(rb_singleton_class(cPoint), "[]", "new");
     rb_define_method(cPoint, "inspect", Point_inspect, 0);
-    rb_define_method(cPoint, "x", Point_x, 0);
-    rb_define_method(cPoint, "x=", Point_set_x, 1);
-    rb_define_method(cPoint, "y", Point_y, 0);
-    rb_define_method(cPoint, "y=", Point_set_y, 1);
+    DEFINE_C_ACCESSOR(Point, cPoint, x);
+    DEFINE_C_ACCESSOR(Point, cPoint, y);
 
     
     cRendererInfo = rb_define_class_under(cRenderer, "Info", rb_cObject);
@@ -3092,19 +3041,19 @@ void rubysdl2_init_video(void)
     rb_define_method(cPixelFormat, "==", PixelFormat_eq, 1);
 
     mPixelType = rb_define_module_under(cPixelFormat, "Type");
-    /*  */
-    rb_define_const(mPixelType, "UNKNOWN", UINT2NUM(SDL_PIXELTYPE_UNKNOWN));
-    rb_define_const(mPixelType, "INDEX1", UINT2NUM(SDL_PIXELTYPE_INDEX1));
-    rb_define_const(mPixelType, "INDEX4", UINT2NUM(SDL_PIXELTYPE_INDEX4));
-    rb_define_const(mPixelType, "INDEX8", UINT2NUM(SDL_PIXELTYPE_INDEX8));
-    rb_define_const(mPixelType, "PACKED8", UINT2NUM(SDL_PIXELTYPE_PACKED8));
-    rb_define_const(mPixelType, "PACKED16", UINT2NUM(SDL_PIXELTYPE_PACKED16));
-    rb_define_const(mPixelType, "PACKED32", UINT2NUM(SDL_PIXELTYPE_PACKED32));
-    rb_define_const(mPixelType, "ARRAYU8", UINT2NUM(SDL_PIXELTYPE_ARRAYU8));
-    rb_define_const(mPixelType, "ARRAYU16", UINT2NUM(SDL_PIXELTYPE_ARRAYU16));
-    rb_define_const(mPixelType, "ARRAYU32", UINT2NUM(SDL_PIXELTYPE_ARRAYU32));
-    rb_define_const(mPixelType, "ARRAYF16", UINT2NUM(SDL_PIXELTYPE_ARRAYF16));
-    rb_define_const(mPixelType, "ARRAYF32", UINT2NUM(SDL_PIXELTYPE_ARRAYF32));
+    /* define(`DEFINE_PIXELTYPE_CONST',`rb_define_const(mPixelType, "$1", UINT2NUM(SDL_PIXELTYPE_$1))') */
+    DEFINE_PIXELTYPE_CONST(UNKNOWN);
+    DEFINE_PIXELTYPE_CONST(INDEX1);
+    DEFINE_PIXELTYPE_CONST(INDEX4);
+    DEFINE_PIXELTYPE_CONST(INDEX8);
+    DEFINE_PIXELTYPE_CONST(PACKED8);
+    DEFINE_PIXELTYPE_CONST(PACKED16);
+    DEFINE_PIXELTYPE_CONST(PACKED32);
+    DEFINE_PIXELTYPE_CONST(ARRAYU8);
+    DEFINE_PIXELTYPE_CONST(ARRAYU16);
+    DEFINE_PIXELTYPE_CONST(ARRAYU32);
+    DEFINE_PIXELTYPE_CONST(ARRAYF16);
+    DEFINE_PIXELTYPE_CONST(ARRAYF32);
 
     mBitmapOrder = rb_define_module_under(cPixelFormat, "BitmapOrder");
     rb_define_const(mBitmapOrder, "NONE", UINT2NUM(SDL_BITMAPORDER_NONE));
@@ -3112,262 +3061,87 @@ void rubysdl2_init_video(void)
     rb_define_const(mBitmapOrder, "O_4321", UINT2NUM(SDL_BITMAPORDER_4321));
     
     mPackedOrder = rb_define_module_under(cPixelFormat, "PackedOrder");
-    /*  */
-    rb_define_const(mPackedOrder, "NONE", UINT2NUM(SDL_PACKEDORDER_NONE));
-    rb_define_const(mPackedOrder, "XRGB", UINT2NUM(SDL_PACKEDORDER_XRGB));
-    rb_define_const(mPackedOrder, "RGBX", UINT2NUM(SDL_PACKEDORDER_RGBX));
-    rb_define_const(mPackedOrder, "ARGB", UINT2NUM(SDL_PACKEDORDER_ARGB));
-    rb_define_const(mPackedOrder, "RGBA", UINT2NUM(SDL_PACKEDORDER_RGBA));
-    rb_define_const(mPackedOrder, "XBGR", UINT2NUM(SDL_PACKEDORDER_XBGR));
-    rb_define_const(mPackedOrder, "BGRX", UINT2NUM(SDL_PACKEDORDER_BGRX));
-    rb_define_const(mPackedOrder, "ABGR", UINT2NUM(SDL_PACKEDORDER_ABGR));
-    rb_define_const(mPackedOrder, "BGRA", UINT2NUM(SDL_PACKEDORDER_BGRA));
+    /* define(`DEFINE_PACKEDORDER_CONST',`rb_define_const(mPackedOrder, "$1", UINT2NUM(SDL_PACKEDORDER_$1))') */
+    DEFINE_PACKEDORDER_CONST(NONE);
+    DEFINE_PACKEDORDER_CONST(XRGB);
+    DEFINE_PACKEDORDER_CONST(RGBX);
+    DEFINE_PACKEDORDER_CONST(ARGB);
+    DEFINE_PACKEDORDER_CONST(RGBA);
+    DEFINE_PACKEDORDER_CONST(XBGR);
+    DEFINE_PACKEDORDER_CONST(BGRX);
+    DEFINE_PACKEDORDER_CONST(ABGR);
+    DEFINE_PACKEDORDER_CONST(BGRA);
 
     mArrayOrder = rb_define_module_under(cPixelFormat, "ArrayOrder");
-    /*  */
-    rb_define_const(mArrayOrder, "NONE", UINT2NUM(SDL_ARRAYORDER_NONE));
-    rb_define_const(mArrayOrder, "RGB", UINT2NUM(SDL_ARRAYORDER_RGB));
-    rb_define_const(mArrayOrder, "RGBA", UINT2NUM(SDL_ARRAYORDER_RGBA));
-    rb_define_const(mArrayOrder, "ARGB", UINT2NUM(SDL_ARRAYORDER_ARGB));
-    rb_define_const(mArrayOrder, "BGR", UINT2NUM(SDL_ARRAYORDER_BGR));
-    rb_define_const(mArrayOrder, "BGRA", UINT2NUM(SDL_ARRAYORDER_BGRA));
-    rb_define_const(mArrayOrder, "ABGR", UINT2NUM(SDL_ARRAYORDER_ABGR));
+    /* define(`DEFINE_ARRAYORDER_CONST',`rb_define_const(mArrayOrder, "$1", UINT2NUM(SDL_ARRAYORDER_$1))') */
+    DEFINE_ARRAYORDER_CONST(NONE);
+    DEFINE_ARRAYORDER_CONST(RGB);
+    DEFINE_ARRAYORDER_CONST(RGBA);
+    DEFINE_ARRAYORDER_CONST(ARGB);
+    DEFINE_ARRAYORDER_CONST(BGR);
+    DEFINE_ARRAYORDER_CONST(BGRA);
+    DEFINE_ARRAYORDER_CONST(ABGR);
 
     mPackedLayout = rb_define_module_under(cPixelFormat, "PackedLayout");
-    /*  */
+    /* define(`DEFINE_PACKEDLAYOUT_CONST',`rb_define_const(mPackedLayout, "L_$1", UINT2NUM(SDL_PACKEDLAYOUT_$1))') */
     rb_define_const(mPackedLayout, "NONE", UINT2NUM(SDL_PACKEDLAYOUT_NONE));
-    rb_define_const(mPackedLayout, "L_332", UINT2NUM(SDL_PACKEDLAYOUT_332));
-    rb_define_const(mPackedLayout, "L_4444", UINT2NUM(SDL_PACKEDLAYOUT_4444));
-    rb_define_const(mPackedLayout, "L_1555", UINT2NUM(SDL_PACKEDLAYOUT_1555));
-    rb_define_const(mPackedLayout, "L_5551", UINT2NUM(SDL_PACKEDLAYOUT_5551));
-    rb_define_const(mPackedLayout, "L_565", UINT2NUM(SDL_PACKEDLAYOUT_565));
-    rb_define_const(mPackedLayout, "L_8888", UINT2NUM(SDL_PACKEDLAYOUT_8888));
-    rb_define_const(mPackedLayout, "L_2101010", UINT2NUM(SDL_PACKEDLAYOUT_2101010));
-    rb_define_const(mPackedLayout, "L_1010102", UINT2NUM(SDL_PACKEDLAYOUT_1010102));
+    DEFINE_PACKEDLAYOUT_CONST(332);
+    DEFINE_PACKEDLAYOUT_CONST(4444);
+    DEFINE_PACKEDLAYOUT_CONST(1555);
+    DEFINE_PACKEDLAYOUT_CONST(5551);
+    DEFINE_PACKEDLAYOUT_CONST(565);
+    DEFINE_PACKEDLAYOUT_CONST(8888);
+    DEFINE_PACKEDLAYOUT_CONST(2101010);
+    DEFINE_PACKEDLAYOUT_CONST(1010102);
     
     {
         VALUE formats = rb_ary_new();
         /* -: Array of all available formats */
         rb_define_const(cPixelFormat, "FORMATS", formats);
-        /* 
+        /* define(`DEFINE_PIXELFORMAT_CONST',`do {
+            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_$1);
+            $2
+            rb_define_const(cPixelFormat, "$1", format);
+            rb_ary_push(formats, format);
+        } while (0)')
          */
         
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_UNKNOWN);
-            /* -: PixelFormat: Unused - reserved by SDL */
-            rb_define_const(cPixelFormat, "UNKNOWN", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_INDEX1LSB);
-            
-            rb_define_const(cPixelFormat, "INDEX1LSB", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_INDEX1MSB);
-            
-            rb_define_const(cPixelFormat, "INDEX1MSB", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_INDEX4LSB);
-            
-            rb_define_const(cPixelFormat, "INDEX4LSB", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_INDEX4MSB);
-            
-            rb_define_const(cPixelFormat, "INDEX4MSB", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_INDEX8);
-            
-            rb_define_const(cPixelFormat, "INDEX8", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_RGB332);
-            
-            rb_define_const(cPixelFormat, "RGB332", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_RGB444);
-            
-            rb_define_const(cPixelFormat, "RGB444", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_RGB555);
-            
-            rb_define_const(cPixelFormat, "RGB555", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_BGR555);
-            
-            rb_define_const(cPixelFormat, "BGR555", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_ARGB4444);
-            
-            rb_define_const(cPixelFormat, "ARGB4444", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_RGBA4444);
-            
-            rb_define_const(cPixelFormat, "RGBA4444", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_ABGR4444);
-            
-            rb_define_const(cPixelFormat, "ABGR4444", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_BGRA4444);
-            
-            rb_define_const(cPixelFormat, "BGRA4444", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_ARGB1555);
-            
-            rb_define_const(cPixelFormat, "ARGB1555", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_RGBA5551);
-            
-            rb_define_const(cPixelFormat, "RGBA5551", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_ABGR1555);
-            
-            rb_define_const(cPixelFormat, "ABGR1555", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_BGRA5551);
-            
-            rb_define_const(cPixelFormat, "BGRA5551", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_RGB565);
-            
-            rb_define_const(cPixelFormat, "RGB565", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_BGR565);
-            
-            rb_define_const(cPixelFormat, "BGR565", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_RGB24);
-            
-            rb_define_const(cPixelFormat, "RGB24", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_BGR24);
-            
-            rb_define_const(cPixelFormat, "BGR24", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_RGB888);
-            
-            rb_define_const(cPixelFormat, "RGB888", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_RGBX8888);
-            
-            rb_define_const(cPixelFormat, "RGBX8888", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_BGR888);
-            
-            rb_define_const(cPixelFormat, "BGR888", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_BGRX8888);
-            
-            rb_define_const(cPixelFormat, "BGRX8888", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_ARGB8888);
-            
-            rb_define_const(cPixelFormat, "ARGB8888", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_RGBA8888);
-            
-            rb_define_const(cPixelFormat, "RGBA8888", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_ABGR8888);
-            
-            rb_define_const(cPixelFormat, "ABGR8888", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_BGRA8888);
-            
-            rb_define_const(cPixelFormat, "BGRA8888", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_ARGB2101010);
-            
-            rb_define_const(cPixelFormat, "ARGB2101010", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_YV12);
-            
-            rb_define_const(cPixelFormat, "YV12", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_IYUV);
-            
-            rb_define_const(cPixelFormat, "IYUV", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_YUY2);
-            
-            rb_define_const(cPixelFormat, "YUY2", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_UYVY);
-            
-            rb_define_const(cPixelFormat, "UYVY", format);
-            rb_ary_push(formats, format);
-        } while (0);
-        do {
-            VALUE format = PixelFormat_new(SDL_PIXELFORMAT_YVYU);
-            
-            rb_define_const(cPixelFormat, "YVYU", format);
-            rb_ary_push(formats, format);
-        } while (0);
+        DEFINE_PIXELFORMAT_CONST(UNKNOWN, /* -: PixelFormat: Unused - reserved by SDL */);
+        DEFINE_PIXELFORMAT_CONST(INDEX1LSB);
+        DEFINE_PIXELFORMAT_CONST(INDEX1MSB);
+        DEFINE_PIXELFORMAT_CONST(INDEX4LSB);
+        DEFINE_PIXELFORMAT_CONST(INDEX4MSB);
+        DEFINE_PIXELFORMAT_CONST(INDEX8);
+        DEFINE_PIXELFORMAT_CONST(RGB332);
+        DEFINE_PIXELFORMAT_CONST(RGB444);
+        DEFINE_PIXELFORMAT_CONST(RGB555);
+        DEFINE_PIXELFORMAT_CONST(BGR555);
+        DEFINE_PIXELFORMAT_CONST(ARGB4444);
+        DEFINE_PIXELFORMAT_CONST(RGBA4444);
+        DEFINE_PIXELFORMAT_CONST(ABGR4444);
+        DEFINE_PIXELFORMAT_CONST(BGRA4444);
+        DEFINE_PIXELFORMAT_CONST(ARGB1555);
+        DEFINE_PIXELFORMAT_CONST(RGBA5551);
+        DEFINE_PIXELFORMAT_CONST(ABGR1555);
+        DEFINE_PIXELFORMAT_CONST(BGRA5551);
+        DEFINE_PIXELFORMAT_CONST(RGB565);
+        DEFINE_PIXELFORMAT_CONST(BGR565);
+        DEFINE_PIXELFORMAT_CONST(RGB24);
+        DEFINE_PIXELFORMAT_CONST(BGR24);
+        DEFINE_PIXELFORMAT_CONST(RGB888);
+        DEFINE_PIXELFORMAT_CONST(RGBX8888);
+        DEFINE_PIXELFORMAT_CONST(BGR888);
+        DEFINE_PIXELFORMAT_CONST(BGRX8888);
+        DEFINE_PIXELFORMAT_CONST(ARGB8888);
+        DEFINE_PIXELFORMAT_CONST(RGBA8888);
+        DEFINE_PIXELFORMAT_CONST(ABGR8888);
+        DEFINE_PIXELFORMAT_CONST(BGRA8888);
+        DEFINE_PIXELFORMAT_CONST(ARGB2101010);
+        DEFINE_PIXELFORMAT_CONST(YV12);
+        DEFINE_PIXELFORMAT_CONST(IYUV);
+        DEFINE_PIXELFORMAT_CONST(YUY2);
+        DEFINE_PIXELFORMAT_CONST(UYVY);
+        DEFINE_PIXELFORMAT_CONST(YVYU);
         rb_obj_freeze(formats);
     }
 

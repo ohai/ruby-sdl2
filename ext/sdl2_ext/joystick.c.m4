@@ -308,25 +308,25 @@ void rubysdl2_init_joystick(void)
 
     mHat = rb_define_module_under(cJoystick, "Hat");
     
-    /*  */
+    /* define(`DEFINE_JOY_HAT_CONST',`rb_define_const(mHat, "$1", INT2NUM(SDL_HAT_$1))') */
     /* Center position. Equal to 0. */
-    rb_define_const(mHat, "CENTERED", INT2NUM(SDL_HAT_CENTERED));
+    DEFINE_JOY_HAT_CONST(CENTERED);
     /* Up position. */
-    rb_define_const(mHat, "UP", INT2NUM(SDL_HAT_UP));
+    DEFINE_JOY_HAT_CONST(UP);
     /* Right position. */
-    rb_define_const(mHat, "RIGHT", INT2NUM(SDL_HAT_RIGHT));
+    DEFINE_JOY_HAT_CONST(RIGHT);
     /* Down position. */
-    rb_define_const(mHat, "DOWN", INT2NUM(SDL_HAT_DOWN));
+    DEFINE_JOY_HAT_CONST(DOWN);
     /* Left position. */
-    rb_define_const(mHat, "LEFT", INT2NUM(SDL_HAT_LEFT));
+    DEFINE_JOY_HAT_CONST(LEFT);
     /* Right Up position. Equal to ({RIGHT} | {UP}) */
-    rb_define_const(mHat, "RIGHTUP", INT2NUM(SDL_HAT_RIGHTUP));
+    DEFINE_JOY_HAT_CONST(RIGHTUP);
     /* Right Down position. Equal to ({RIGHT} | {DOWN}) */
-    rb_define_const(mHat, "RIGHTDOWN", INT2NUM(SDL_HAT_RIGHTDOWN));
+    DEFINE_JOY_HAT_CONST(RIGHTDOWN);
     /* Left Up position. Equal to ({LEFT} | {UP}) */
-    rb_define_const(mHat, "LEFTUP", INT2NUM(SDL_HAT_LEFTUP));
+    DEFINE_JOY_HAT_CONST(LEFTUP);
     /* Left Down position. Equal to ({LEFT} | {DOWN}) */
-    rb_define_const(mHat, "LEFTDOWN", INT2NUM(SDL_HAT_LEFTDOWN));
+    DEFINE_JOY_HAT_CONST(LEFTDOWN);
 
     /* Device GUID
      * @return [String] */

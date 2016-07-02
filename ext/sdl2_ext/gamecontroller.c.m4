@@ -352,57 +352,57 @@ void rubysdl2_init_gamecontorller(void)
     mAxis = rb_define_module_under(cGameController, "Axis");
     mButton = rb_define_module_under(cGameController, "Button");
 
-    /*  */
+    /* define(`DEFINE_CONTROLLER_AXIS_CONST',`rb_define_const(mAxis, "$1", INT2NUM(SDL_CONTROLLER_AXIS_$1))') */
     /* Invalid axis index */
-    rb_define_const(mAxis, "INVALID", INT2NUM(SDL_CONTROLLER_AXIS_INVALID));
+    DEFINE_CONTROLLER_AXIS_CONST(INVALID);
     /* Left X axis */
-    rb_define_const(mAxis, "LEFTX", INT2NUM(SDL_CONTROLLER_AXIS_LEFTX));
+    DEFINE_CONTROLLER_AXIS_CONST(LEFTX);
     /* Left Y axis */
-    rb_define_const(mAxis, "LEFTY", INT2NUM(SDL_CONTROLLER_AXIS_LEFTY));
+    DEFINE_CONTROLLER_AXIS_CONST(LEFTY);
     /* Right X axis */
-    rb_define_const(mAxis, "RIGHTX", INT2NUM(SDL_CONTROLLER_AXIS_RIGHTX));
+    DEFINE_CONTROLLER_AXIS_CONST(RIGHTX);
     /* Right Y axis */
-    rb_define_const(mAxis, "RIGHTY", INT2NUM(SDL_CONTROLLER_AXIS_RIGHTY));
+    DEFINE_CONTROLLER_AXIS_CONST(RIGHTY);
     /* Left trigger axis */
-    rb_define_const(mAxis, "TRIGGERLEFT", INT2NUM(SDL_CONTROLLER_AXIS_TRIGGERLEFT));
+    DEFINE_CONTROLLER_AXIS_CONST(TRIGGERLEFT);
     /* Right trigger axis */
-    rb_define_const(mAxis, "TRIGGERRIGHT", INT2NUM(SDL_CONTROLLER_AXIS_TRIGGERRIGHT));
+    DEFINE_CONTROLLER_AXIS_CONST(TRIGGERRIGHT);
     /* The max of an axis index */
-    rb_define_const(mAxis, "MAX", INT2NUM(SDL_CONTROLLER_AXIS_MAX));
+    DEFINE_CONTROLLER_AXIS_CONST(MAX);
 
-    /*  */
+    /* define(`DEFINE_CONTROLLER_BUTTON_CONST',`rb_define_const(mButton, "$1", INT2NUM(SDL_CONTROLLER_BUTTON_$1))') */
     /* Invalid button index */
-    rb_define_const(mButton, "INVALID", INT2NUM(SDL_CONTROLLER_BUTTON_INVALID));
+    DEFINE_CONTROLLER_BUTTON_CONST(INVALID);
     /* Button A */
-    rb_define_const(mButton, "A", INT2NUM(SDL_CONTROLLER_BUTTON_A));
+    DEFINE_CONTROLLER_BUTTON_CONST(A);
     /* Button B */
-    rb_define_const(mButton, "B", INT2NUM(SDL_CONTROLLER_BUTTON_B));
+    DEFINE_CONTROLLER_BUTTON_CONST(B);
     /* Button X */
-    rb_define_const(mButton, "X", INT2NUM(SDL_CONTROLLER_BUTTON_X));
+    DEFINE_CONTROLLER_BUTTON_CONST(X);
     /* Button Y */
-    rb_define_const(mButton, "Y", INT2NUM(SDL_CONTROLLER_BUTTON_Y));
+    DEFINE_CONTROLLER_BUTTON_CONST(Y);
     /* Back Button */
-    rb_define_const(mButton, "BACK", INT2NUM(SDL_CONTROLLER_BUTTON_BACK));
+    DEFINE_CONTROLLER_BUTTON_CONST(BACK);
     /* Guide Button */
-    rb_define_const(mButton, "GUIDE", INT2NUM(SDL_CONTROLLER_BUTTON_GUIDE));
+    DEFINE_CONTROLLER_BUTTON_CONST(GUIDE);
     /* Start Button */
-    rb_define_const(mButton, "START", INT2NUM(SDL_CONTROLLER_BUTTON_START));
+    DEFINE_CONTROLLER_BUTTON_CONST(START);
     /* Left stick Button */
-    rb_define_const(mButton, "LEFTSTICK", INT2NUM(SDL_CONTROLLER_BUTTON_LEFTSTICK));
+    DEFINE_CONTROLLER_BUTTON_CONST(LEFTSTICK);
     /* Right stick Button */
-    rb_define_const(mButton, "RIGHTSTICK", INT2NUM(SDL_CONTROLLER_BUTTON_RIGHTSTICK));
+    DEFINE_CONTROLLER_BUTTON_CONST(RIGHTSTICK);
     /* Left shoulder Button */
-    rb_define_const(mButton, "LEFTSHOULDER", INT2NUM(SDL_CONTROLLER_BUTTON_LEFTSHOULDER));
+    DEFINE_CONTROLLER_BUTTON_CONST(LEFTSHOULDER);
     /* Right shoulder Button */
-    rb_define_const(mButton, "RIGHTSHOULDER", INT2NUM(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER));
+    DEFINE_CONTROLLER_BUTTON_CONST(RIGHTSHOULDER);
     /* D-pad UP Button */
-    rb_define_const(mButton, "DPAD_UP", INT2NUM(SDL_CONTROLLER_BUTTON_DPAD_UP));
+    DEFINE_CONTROLLER_BUTTON_CONST(DPAD_UP);
     /* D-pad DOWN Button */
-    rb_define_const(mButton, "DPAD_DOWN", INT2NUM(SDL_CONTROLLER_BUTTON_DPAD_DOWN));
+    DEFINE_CONTROLLER_BUTTON_CONST(DPAD_DOWN);
     /* D-pad LEFT Button */
-    rb_define_const(mButton, "DPAD_LEFT", INT2NUM(SDL_CONTROLLER_BUTTON_DPAD_LEFT));
+    DEFINE_CONTROLLER_BUTTON_CONST(DPAD_LEFT);
     /* D-pad RIGHT Button */
-    rb_define_const(mButton, "DPAD_RIGHT", INT2NUM(SDL_CONTROLLER_BUTTON_DPAD_RIGHT));
+    DEFINE_CONTROLLER_BUTTON_CONST(DPAD_RIGHT);
     /* The max of a button index */
-    rb_define_const(mButton, "MAX", INT2NUM(SDL_CONTROLLER_BUTTON_MAX));
+    DEFINE_CONTROLLER_BUTTON_CONST(MAX);
 }

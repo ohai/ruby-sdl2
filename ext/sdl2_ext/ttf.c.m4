@@ -343,28 +343,28 @@ void rubysdl2_init_ttf(void)
     rb_define_method(cTTF, "render_blended", TTF_render_blended, 2);
 
     mStyle = rb_define_module_under(cTTF, "Style");
-    /*  */
+    /* define(`DEFINE_TTF_STYLE_CONST',`rb_define_const(mStyle, "$1", INT2NUM((TTF_STYLE_$1)))') */
     /* normal style */
-    rb_define_const(mStyle, "NORMAL", INT2NUM((TTF_STYLE_NORMAL)));
+    DEFINE_TTF_STYLE_CONST(NORMAL);
     /* bold style */
-    rb_define_const(mStyle, "BOLD", INT2NUM((TTF_STYLE_BOLD)));
+    DEFINE_TTF_STYLE_CONST(BOLD);
     /* italic style */
-    rb_define_const(mStyle, "ITALIC", INT2NUM((TTF_STYLE_ITALIC)));
+    DEFINE_TTF_STYLE_CONST(ITALIC);
     /* underline style */
-    rb_define_const(mStyle, "UNDERLINE", INT2NUM((TTF_STYLE_UNDERLINE)));
+    DEFINE_TTF_STYLE_CONST(UNDERLINE);
     /* strikethrough style */
-    rb_define_const(mStyle, "STRIKETHROUGH", INT2NUM((TTF_STYLE_STRIKETHROUGH)));
+    DEFINE_TTF_STYLE_CONST(STRIKETHROUGH);
 
     mHinting = rb_define_module_under(cTTF, "Hinting");
-    /*  */
+    /* define(`DEFINE_TTF_HINTING_CONST',`rb_define_const(mHinting, "$1", INT2NUM((TTF_HINTING_$1)))') */
     /* normal hinting, default */
-    rb_define_const(mHinting, "NORMAL", INT2NUM((TTF_HINTING_NORMAL)));
+    DEFINE_TTF_HINTING_CONST(NORMAL);
     /*  lighter hinting for non-monochrome modes */
-    rb_define_const(mHinting, "LIGHT", INT2NUM((TTF_HINTING_LIGHT)));
+    DEFINE_TTF_HINTING_CONST(LIGHT);
     /* strong hinting only used for monochrome output */
-    rb_define_const(mHinting, "MONO", INT2NUM((TTF_HINTING_MONO)));
+    DEFINE_TTF_HINTING_CONST(MONO);
     /* no hinting */
-    rb_define_const(mHinting, "NONE", INT2NUM((TTF_HINTING_NONE)));
+    DEFINE_TTF_HINTING_CONST(NONE);
 }
 
 #else /* HAVE_SDL_TTF_H */
