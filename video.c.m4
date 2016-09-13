@@ -37,7 +37,7 @@ struct Texture;
 #ifdef DEBUG_GC
 #define GC_LOG(args) fprintf args
 #else
-#define GC_LOG(args) 
+#define GC_LOG(args)
 #endif
 
 typedef struct Window {
@@ -69,7 +69,7 @@ static void Renderer_free(Renderer*);
 static void Window_destroy_internal(Window* w)
 {
     int i;
-    for (i=0; i<w->num_renderers; ++i) 
+    for (i=0; i<w->num_renderers; ++i)
         Renderer_free(w->renderers[i]);
     w->num_renderers = w->max_renderers = 0;
     free(w->renderers);
@@ -78,12 +78,12 @@ static void Window_destroy_internal(Window* w)
 
 static void Window_free(Window* w)
 {
-    
+
     GC_LOG((stderr, "Window free: %p\n", w));
     Window_destroy_internal(w);
     if (w->window && rubysdl2_is_active())
         SDL_DestroyWindow(w->window);
-    
+
     free(w);
 }
 
@@ -148,7 +148,7 @@ static void Renderer_free(Renderer* r)
 {
     GC_LOG((stderr, "Renderer free: %p (refcount=%d)\n", r, r->refcount));
     Renderer_destroy_internal(r);
-    
+
     r->refcount--;
     if (r->refcount == 0) {
         free(r);
@@ -254,14 +254,14 @@ static VALUE RendererInfo_new(SDL_RendererInfo* info)
     VALUE rinfo = rb_obj_alloc(cRendererInfo);
     VALUE texture_formats = rb_ary_new();
     unsigned int i;
-    
+
     rb_iv_set(rinfo, "@name", rb_usascii_str_new_cstr(info->name));
     rb_iv_set(rinfo, "@texture_formats", texture_formats);
     for (i=0; i<info->num_texture_formats; ++i)
         rb_ary_push(texture_formats, PixelFormat_new(info->texture_formats[i]));
     rb_iv_set(rinfo, "@max_texture_width", INT2NUM(info->max_texture_width));
     rb_iv_set(rinfo, "@max_texture_height", INT2NUM(info->max_texture_height));
-    
+
     return rinfo;
 }
 
@@ -273,7 +273,7 @@ SDL_Color Array_to_SDL_Color(VALUE ary)
         color.r = color.g = color.b = 0; color.a = 255;
         return color;
     }
-        
+
     Check_Type(ary, T_ARRAY);
     if (RARRAY_LEN(ary) != 3 && RARRAY_LEN(ary) != 4)
         rb_raise(rb_eArgError, "wrong number of Array elements (%ld for 3 or 4)",
@@ -293,7 +293,7 @@ SDL_Color Array_to_SDL_Color(VALUE ary)
  * Get the names of all video drivers.
  *
  * You can use the name as an argument of {.video_init}.
- * 
+ *
  * @return [Array<String>]
  */
 static VALUE SDL2_s_video_drivers(VALUE self)
@@ -322,12 +322,12 @@ static VALUE SDL2_s_current_video_driver(VALUE self)
 }
 
 /*
- * @overload video_init(driver_name) 
+ * @overload video_init(driver_name)
  *   Initialize the video subsystem, specifying a video driver.
- *   
+ *
  *   {.init} cannot specify a video driver, so you need to use
  *   this method to specify a driver.
- *   
+ *
  *   @param driver_name [String]
  *   @return [nil]
  *
@@ -341,12 +341,12 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
 
 /*
  * Document-class: SDL2::Window
- * 
+ *
  * This class represents a window.
  *
  * If you want to create graphical application using Ruby/SDL, first you need to
  * create a window.
- * 
+ *
  * All of methods/class methods are available only after initializing video
  * subsystem by {SDL2.init}.
  *
@@ -364,9 +364,9 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  *   @param [Integer] w the width of the window
  *   @param [Integer] h the height of the window
  *   @param [Integer] flags 0, or one or more {Flags} OR'd together
- *   
+ *
  *   @return [SDL2::Window] created window
- *   
+ *
  */
 static VALUE Window_s_create(VALUE self, VALUE title, VALUE x, VALUE y, VALUE w, VALUE h,
                              VALUE flags)
@@ -421,7 +421,7 @@ VALUE find_window_by_id(Uint32 id)
  *
  *   You cannot call almost all methods after calling this method.
  *   The exception is {#destroy?}.
- *   
+ *
  *   @return [void]
  */
 static VALUE Window_destroy(VALUE self)
@@ -445,10 +445,10 @@ static VALUE Window_create_renderer(VALUE self, VALUE index, VALUE flags)
     SDL_Renderer* sdl_renderer;
     VALUE renderer;
     sdl_renderer = SDL_CreateRenderer(Get_SDL_Window(self), NUM2INT(index), NUM2UINT(flags));
-  
+
     if (sdl_renderer == NULL)
         HANDLE_ERROR(-1);
-  
+
     renderer = Renderer_new(sdl_renderer, Get_Window(self));
     rb_iv_set(self, "renderer", renderer);
     return renderer;
@@ -568,7 +568,7 @@ static VALUE Window_gamma_ramp(VALUE self)
  * @overload icon=(icon)
  *
  *   Set the window icon.
- *   
+ *
  *   @param icon [SDL2::Surface] the icon for the window
  *   @return [icon]
  */
@@ -589,7 +589,7 @@ static VALUE Window_input_is_grabbed_p(VALUE self)
 }
 
 /*
- * @overload input_is_grabbed=(grabbed) 
+ * @overload input_is_grabbed=(grabbed)
  *   Set the window's input grab mode.
  *
  *   @param grabbed [Boolean] true to grub input, and false to release input
@@ -632,7 +632,7 @@ static VALUE Window_maximum_size(VALUE self)
 }
 
 /*
- * @overload maximum_size=(size) 
+ * @overload maximum_size=(size)
  *   Set the maximum size of the window's client area.
  *
  *   @param size [[Integer, Integer]] maximum width and maximum height,
@@ -660,7 +660,7 @@ static VALUE Window_minimum_size(VALUE self)
 }
 
 /*
- * @overload minimum_size=(size) 
+ * @overload minimum_size=(size)
  *   Set the minimum size of the window's client area.
  *
  *   @param size [[Integer, Integer]] minimum width and minimum height,
@@ -688,7 +688,7 @@ static VALUE Window_position(VALUE self)
 }
 
 /*
- * @overload position=(xy) 
+ * @overload position=(xy)
  *   Set the position of the window
  *
  *   @param xy [[Integer, Integer]] the x position and the y position,
@@ -708,7 +708,7 @@ static VALUE Window_set_position(VALUE self, VALUE xy)
  * Get the size of the window.
  *
  * @return [[Integer, Integer]] the width and the height
- * 
+ *
  * @see size=
  */
 static VALUE Window_size(VALUE self)
@@ -723,7 +723,7 @@ static VALUE Window_size(VALUE self)
  *   @param wh [[Integer, Integer]] new width and new height
  *
  *   @return [size]
- *   
+ *
  *   @see #size
  */
 static VALUE Window_set_size(VALUE self, VALUE size)
@@ -756,7 +756,7 @@ static VALUE Window_bordered(VALUE self)
 }
 
 /*
- * @overload bordered=(bordered) 
+ * @overload bordered=(bordered)
  *   Set the border state of the window.
  *
  *   @param bordered [Boolean] true for bordered window, anad false for
@@ -847,7 +847,7 @@ SIMPLE_WINDOW_METHOD(Restore, restore);
 /*
  * Get the fullscreen stete of the window
  *
- * @return [Integer] 0 for window mode, {SDL2::Window::Flags::FULLSCREEN} for 
+ * @return [Integer] 0 for window mode, {SDL2::Window::Flags::FULLSCREEN} for
  *   fullscreen mode, and {SDL2::Window::Flags::FULLSCREEN_DESKTOP} for fullscreen
  *   at the current desktop resolution.
  *
@@ -864,11 +864,11 @@ static VALUE Window_fullscreen_mode(VALUE self)
  * @overload fullscreen_mode=(flag)
  *   Set the fullscreen state of the window
  *
- *   @param flag [Integer] 0 for window mode, {SDL2::Window::Flags::FULLSCREEN} for 
+ *   @param flag [Integer] 0 for window mode, {SDL2::Window::Flags::FULLSCREEN} for
  *     fullscreen mode, and {SDL2::Flags::Window::FULLSCREEN_DESKTOP} for fullscreen
  *     at the current desktop resolution.
  *   @return [flag]
- *   
+ *
  *   @see #fullscreen_mode
  */
 static VALUE Window_set_fullscreen_mode(VALUE self, VALUE flags)
@@ -928,7 +928,7 @@ static VALUE Window_debug_info(VALUE self)
         if (w->renderers[i]->renderer)
             ++num_active_renderers;
     rb_hash_aset(info, rb_str_new2("num_active_renderers"), INT2NUM(num_active_renderers));
-  
+
     return info;
 }
 
@@ -936,7 +936,7 @@ static VALUE Window_debug_info(VALUE self)
  * Document-module: SDL2::Window::Flags
  *
  * OR'd bits of the constants of this module represents window states.
- * 
+ *
  * You can see a window state using {SDL2::Window#flags}
  * and create a window with a specified
  * state using flag parameter of {SDL2::Window.create}.
@@ -967,7 +967,7 @@ static VALUE Window_debug_info(VALUE self)
  * Get all connected displays.
  *
  * @return [Array<SDL2::Display>]
- * 
+ *
  */
 static VALUE Display_s_displays(VALUE self)
 {
@@ -988,7 +988,7 @@ static int Display_index_int(VALUE display)
  * Get available display modes of the display.
  *
  * @return [Array<SDL2::Display::Mode>]
- * 
+ *
  */
 static VALUE Display_modes(VALUE self)
 {
@@ -1008,7 +1008,7 @@ static VALUE Display_modes(VALUE self)
  * Get the current display mode.
  *
  * @return [SDL2::Display::Mode]
- * 
+ *
  * @see #desktop_mode
  */
 static VALUE Display_current_mode(VALUE self)
@@ -1022,7 +1022,7 @@ static VALUE Display_current_mode(VALUE self)
  * Get the desktop display mode.
  *
  * Normally, the return value of this method is
- * same as {#current_mode}. However, 
+ * same as {#current_mode}. However,
  * when you use fullscreen and chagne the resolution,
  * this method returns the previous native display mode,
  * and not the current mode.
@@ -1037,12 +1037,12 @@ static VALUE Display_desktop_mode(VALUE self)
 }
 
 /*
- * @overload closest_mode(mode) 
+ * @overload closest_mode(mode)
  *   Get the available display mode closest match to **mode**.
- *   
+ *
  *   @param mode [SDL2::Display::Mode] the desired display mode
  *   @return [SDL2::Display::Mode]
- *   
+ *
  */
 static VALUE Display_closest_mode(VALUE self, VALUE mode)
 {
@@ -1111,7 +1111,7 @@ static VALUE DisplayMode_inspect(VALUE self)
     return rb_sprintf("<%s: format=%s w=%d h=%d refresh_rate=%d>",
                       rb_obj_classname(self), SDL_GetPixelFormatName(mode->format),
                       mode->w, mode->h, mode->refresh_rate);
-                      
+
 }
 
 /* @return [SDL2::PixelFormat] the pixel format of the display mode */
@@ -1145,7 +1145,7 @@ static VALUE DisplayMode_refresh_rate(VALUE self)
  *
  * You can create a renderer using {SDL2::Window#create_renderer} and
  * use it to draw figures on the window.
- *      
+ *
  *
  * @!method destroy?
  *   Return true if the renderer is {#destroy destroyed}.
@@ -1157,7 +1157,7 @@ static VALUE DisplayMode_refresh_rate(VALUE self)
  * @overload drivers_info
  *   Return information of all available rendering contexts.
  *   @return [Array<SDL2::Renderer::Info>] information about rendering contexts
- *   
+ *
  */
 static VALUE Renderer_s_drivers_info(VALUE self)
 {
@@ -1189,16 +1189,16 @@ static VALUE Renderer_destroy(VALUE self)
  *   Create a new texture for the rendering context.
  *
  *   You can use the following constants to specify access pattern
- *   
+ *
  *   * {SDL2::Texture::ACCESS_STATIC}
  *   * {SDL2::Texture::ACCESS_STREAMING}
  *   * {SDL2::Texture::ACCESS_TARGET}
- *     
+ *
  *   @param [SDL2::PixelFormat,Integer] format format of the texture
  *   @param [Integer] access texture access pattern
  *   @param [Integer] w the width ofthe texture in pixels
  *   @param [Integer] h the height ofthe texture in pixels
- *   
+ *
  *   @return [SDL2::Texture] the created texture
  *
  *   @raise [SDL2::Error] raised when the texture cannot be created
@@ -1233,7 +1233,7 @@ static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
                                                         Get_SDL_Surface(surface));
     if (texture == NULL)
         SDL_ERROR();
-  
+
     return Texture_new(texture, Get_Renderer(self));
 }
 
@@ -1257,7 +1257,7 @@ static SDL_Point* Get_SDL_Point_or_NULL(VALUE point)
  *     rendering target; the texture will be stretched to fill the given rectangle
  *
  *   @return [void]
- *   
+ *
  *   @see #copy_ex
  */
 static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstrect)
@@ -1276,12 +1276,12 @@ static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstre
  *   it top-bottom and/or left-right.
  *
  *   You can use the following constants to specify the horizontal/vertical flip:
- *   
+ *
  *   * {SDL2::Renderer::FLIP_HORIZONTAL} - flip horizontally
  *   * {SDL2::Renderer::FLIP_VERTICAL} - flip vertically
  *   * {SDL2::Renderer::FLIP_NONE} - do not flip, equal to zero
  *
- *   
+ *
  *   @param [SDL2::Texture] texture the source texture
  *   @param [SDL2::Rect,nil] srcrect the source rectangle, or nil for the entire texture
  *   @param [SDL2::Rect,nil] dstrect the destination rectangle, or nil for the entire
@@ -1322,7 +1322,7 @@ static VALUE Renderer_present(VALUE self)
 /*
  * Crear the rendering target with the drawing color.
  * @return [nil]
- * 
+ *
  * @see #draw_color=
  */
 static VALUE Renderer_clear(VALUE self)
@@ -1331,12 +1331,12 @@ static VALUE Renderer_clear(VALUE self)
     return Qnil;
 }
 
-/* 
+/*
  * Get the color used for drawing operations
  * @return [[Integer,Integer,Integer,Integer]]
  *   red, green, blue, and alpha components of the drawing color
  *   (all components are more than or equal to 0 and less than and equal to 255)
- * 
+ *
  * @see #draw_color=
  */
 static VALUE Renderer_draw_color(VALUE self)
@@ -1354,29 +1354,29 @@ static VALUE Renderer_draw_color(VALUE self)
  *   and less than and equal to 255
  *
  *   This method effects the following methods.
- *   
+ *
  *   * {#draw_line}
  *   * {#draw_point}
  *   * {#draw_rect}
  *   * {#fill_rect}
  *   * {#clear}
- *   
+ *
  *   @param [[Integer, Integer, Integer]] color
  *     red, green, and blue components used for drawing
  *   @param [[Integer, Integer, Integer, Integer]] color
  *     red, green, blue, and alpha components used for drawing
  *
  *   @return [color]
- *   
+ *
  *   @see #draw_color
  */
 static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
 {
     SDL_Color color = Array_to_SDL_Color(rgba);
-    
+
     HANDLE_ERROR(SDL_SetRenderDrawColor(Get_SDL_Renderer(self),
                                         color.r, color.g, color.b, color.a));
-                                        
+
     return rgba;
 }
 
@@ -1418,7 +1418,7 @@ static VALUE Renderer_draw_point(VALUE self, VALUE x, VALUE y)
  *   Draw a rectangle using drawing color given by {#draw_color=}.
  *
  *   @param [SDL2::Rect] rect the drawing rectangle
- *   
+ *
  *   @return [nil]
  */
 static VALUE Renderer_draw_rect(VALUE self, VALUE rect)
@@ -1432,7 +1432,7 @@ static VALUE Renderer_draw_rect(VALUE self, VALUE rect)
  *   Draw a filled rectangle using drawing color given by {#draw_color=}.
  *
  *   @param [SDL2::Rect] rect the drawing rectangle
- *   
+ *
  *   @return [nil]
  */
 static VALUE Renderer_fill_rect(VALUE self, VALUE rect)
@@ -1458,7 +1458,7 @@ static VALUE Renderer_info(VALUE self)
  * {#fill_rect} and {#draw_line}.
  *
  * @return [Integer]
- * 
+ *
  * @see #draw_blend_mode=
  * @see SDL2::BlendMode
  */
@@ -1474,7 +1474,7 @@ static VALUE Renderer_draw_blend_mode(VALUE self)
  *   Set the blend mode used for drawing operations.
  *
  *   This method effects the following methods.
- *   
+ *
  *   * {#draw_line}
  *   * {#draw_point}
  *   * {#draw_rect}
@@ -1549,7 +1549,7 @@ static VALUE Renderer_logical_size(VALUE self)
  * @overload logical_size=(w_and_h)
  *
  *   Set a device indepndent resolution for rendering.
- *   
+ *
  *   @param w_and_h [[Integer, Integer]] the width and height of the logical resolution
  *   @return [w_and_h]
  *   @see #logical_size
@@ -1582,7 +1582,7 @@ static VALUE Renderer_scale(VALUE self)
  *
  *   The drawing coordinates are scaled by the x/y scaling factors before they are used by the renderer.
  *   This allows resolution independent drawing with a single coordinate system.
- *   
+ *
  *   If this results in scaling or subpixel drawing by the rendering backend,
  *   it will be handled using the appropriate
  *   quality hints. For best results use integer scaling factors.
@@ -1614,7 +1614,7 @@ static VALUE Renderer_viewport(VALUE self)
 }
 
 /*
- * @overload viewport=(area) 
+ * @overload viewport=(area)
  *   Set the drawing area for rendering on the current target.
  *
  *   @param area [SDL2::Rect,nil] the drawing area, or nil to set the viewport to the entire target
@@ -1652,19 +1652,19 @@ static VALUE Renderer_output_size(VALUE self)
 /*
  * @overload render_target=(target)
  *  Set a texture as the current render target.
- *  
+ *
  *  Some renderers have ability to render to a texture instead of a screen.
  *  You can judge whether your renderer has this ability using
  *  {#support_render_target?}.
- *  
+ *
  *  The target texture musbe be {#create_texture created} with the
  *  {SDL2::Texture::ACCESS_TARGET} flag.
- *  
+ *
  *  @param [SDL2::Texture,nil] target the targeted texture, or nil
  *    for the default render target(i.e. screen)
  *
  *  @return [target]
- *  
+ *
  *  @see #render_target
  */
 static VALUE Renderer_set_render_target(VALUE self, VALUE target)
@@ -1714,7 +1714,7 @@ static VALUE Renderer_debug_info(VALUE self)
             ++num_active_textures;
     rb_hash_aset(info, rb_str_new2("num_active_textures"), INT2NUM(num_active_textures));
     rb_hash_aset(info, rb_str_new2("refcount"), INT2NUM(r->refcount));
-  
+
     return info;
 }
 
@@ -1731,7 +1731,7 @@ static VALUE Renderer_debug_info(VALUE self)
  *
  * @!attribute [r] max_texture_width
  *   @return [Integer] maximum texture width
- *   
+ *
  * @!attribute [r] max_texture_height
  *   @return [Integer] maximum texture height
  */
@@ -1741,7 +1741,7 @@ static VALUE Renderer_debug_info(VALUE self)
  *
  * The OR'd bits of the constants of this module represents
  * the state of renderers.
- * 
+ *
  * You can use this flag
  * {SDL2::Window#create_renderer when you create a new renderer}.
  * No flags(==0) gives priority to available ACCELERATED renderers.
@@ -1785,7 +1785,7 @@ static VALUE Texture_destroy(VALUE self)
  * Get the blending mode of the texture.
  *
  * @return [Integer] blend mode
- * 
+ *
  * @see #blend_mode=
  */
 static VALUE Texture_blend_mode(VALUE self)
@@ -1825,7 +1825,7 @@ static VALUE Texture_alpha_mod(VALUE self)
 }
 
 /*
- * @overload alpha_mod=(alpha) 
+ * @overload alpha_mod=(alpha)
  *   Set an additional alpha value used in render copy operations.
  *
  *   @param alpha [Integer] the alpha value multiplied into copy operation,
@@ -1854,9 +1854,9 @@ static VALUE Texture_color_mod(VALUE self)
 }
 
 /*
- * @overload color_mod=(rgb) 
+ * @overload color_mod=(rgb)
  *   Set an additional color value used in render copy operations.
- *   
+ *
  *   @param rgb [[Integer, Integer, Integer]] the red, green, and blue
  *     color value multiplied into copy operations.
  *   @return [rgb]
@@ -1885,13 +1885,13 @@ static VALUE Texture_format(VALUE self)
  * Get the access pattern allowed for the texture.
  *
  * The return value is one of the following:
- * 
+ *
  * * {SDL2::Texture::ACCESS_STATIC}
  * * {SDL2::Texture::ACCESS_STREAMING}
  * * {SDL2::Texture::ACCESS_TARGET}
  *
  * @return [Integer]
- * 
+ *
  * @see SDL2::Renderer#create_texture
  */
 static VALUE Texture_access_pattern(VALUE self)
@@ -1905,7 +1905,7 @@ static VALUE Texture_access_pattern(VALUE self)
  * Get the width of the texture.
  *
  * @return [Integer]
- * 
+ *
  * @see SDL2::Renderer#create_texture
  */
 static VALUE Texture_w(VALUE self)
@@ -1919,7 +1919,7 @@ static VALUE Texture_w(VALUE self)
  * Get the height of the texture.
  *
  * @return [Integer]
- * 
+ *
  * @see SDL2::Renderer#create_texture
  */
 static VALUE Texture_h(VALUE self)
@@ -1937,7 +1937,7 @@ static VALUE Texture_inspect(VALUE self)
     int access, w, h;
     if (!t->texture)
         return rb_sprintf("<%s: (destroyed)>", rb_obj_classname(self));
-    
+
     HANDLE_ERROR(SDL_QueryTexture(t->texture, &format, &access, &w, &h));
     return rb_sprintf("<%s:%p format=%s access=%d w=%d h=%d>",
                       rb_obj_classname(self), (void*)self, SDL_GetPixelFormatName(format),
@@ -1995,13 +1995,33 @@ static VALUE Surface_s_load_bmp(VALUE self, VALUE fname)
 }
 
 /*
+ * @overload save_bmp(src, path)
+ *   Save a surface to bmp file.
+ *
+ *   @param src [SDL2::Surface] surface source
+ *   @param path [String] bmp file path
+ *   @return [Integer]
+ *   @raise [SDL2::Error] raised when an error occurs.
+ *
+ */
+static VALUE Surface_s_save_bmp(VALUE self, VALUE src, VALUE fname)
+{
+    SDL_Surface* surface = Get_SDL_Surface(src);
+
+    if (surface == NULL)
+        HANDLE_ERROR(-1);
+
+    return INT2NUM(SDL_SaveBMP(surface, StringValueCStr(fname)));
+}
+
+/*
  * @overload from_string(string, width, heigth, depth, pitch=nil, rmask=nil, gmask=nil, bmask=nil, amask=nil)
  *
  *   Create a RGB surface from pixel data as String object.
  *
  *   If rmask, gmask, bmask are omitted, the default masks are used.
  *   If amask is omitted, alpha mask is considered to be zero.
- *   
+ *
  *   @param string [String] the pixel data
  *   @param width [Integer] the width of the creating surface
  *   @param height [Integer] the height of the creating surface
@@ -2014,7 +2034,7 @@ static VALUE Surface_s_load_bmp(VALUE self, VALUE fname)
  *   @param amask [Integer] the alpha mask of a pixel
  *   @return [SDL2::Surface] a new surface
  *   @raise [SDL2::Error] raised when an error occurs in C SDL library
- *   
+ *
  */
 static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
 {
@@ -2023,7 +2043,7 @@ static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
     SDL_Surface* surface;
     void* pixels;
     Surface* s;
-    
+
     rb_scan_args(argc, argv, "45", &string, &width, &height, &depth,
                  &pitch, &Rmask, &Gmask, &Bmask, &Amask);
     StringValue(string);
@@ -2046,7 +2066,7 @@ static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
     surface = SDL_CreateRGBSurfaceFrom(pixels, w, h, d, p, r, g, b, a);
     if (!surface)
         SDL_ERROR();
-    
+
     RB_GC_GUARD(string);
 
     s = ALLOC(Surface);
@@ -2115,7 +2135,7 @@ static VALUE Surface_must_lock_p(VALUE self)
  * Lock the surface.
  *
  * @return [nil]
- * 
+ *
  * @see #unlock
  * @see #must_lock?
  */
@@ -2129,7 +2149,7 @@ static VALUE Surface_lock(VALUE self)
  * Unlock the surface.
  *
  * @return [nil]
- * 
+ *
  * @see #lock
  */
 static VALUE Surface_unlock(VALUE self)
@@ -2139,7 +2159,7 @@ static VALUE Surface_unlock(VALUE self)
 }
 
 /*
- * @overload pixel(x, y) 
+ * @overload pixel(x, y)
  *   Get a pixel data at (**x**, **y**)
  *
  *   @param x [Integer] the x coordinate
@@ -2147,7 +2167,7 @@ static VALUE Surface_unlock(VALUE self)
  *   @return [Integer] pixel data
  *
  *   @see #pixel_color
- *   
+ *
  */
 static VALUE Surface_pixel(VALUE self, VALUE x_coord, VALUE y_coord)
 {
@@ -2157,7 +2177,7 @@ static VALUE Surface_pixel(VALUE self, VALUE x_coord, VALUE y_coord)
     int offset;
     Uint32 pixel = 0;
     int i;
-    
+
     if (x < 0 || x >= surface->w || y < 0 || y >= surface->h)
         rb_raise(rb_eArgError, "(%d, %d) out of range for %dx%d",
                  x, y, surface->w, surface->h);
@@ -2271,7 +2291,7 @@ static VALUE Surface_unset_color_key(VALUE self)
 }
 
 /*
- * @overload color_key=(key) 
+ * @overload color_key=(key)
  *   Set the color key of the surface
  *
  *   @param key [Integer, Array<Integer>]
@@ -2288,9 +2308,9 @@ static VALUE Surface_set_color_key(VALUE self, VALUE key)
     SDL_Surface* surface = Get_SDL_Surface(self);
     if (key == Qnil)
         return Surface_unset_color_key(self);
-    
+
     HANDLE_ERROR(SDL_SetColorKey(surface, SDL_TRUE, pixel_value(key, surface->format)));
-    
+
     return key;
 }
 
@@ -2374,7 +2394,7 @@ static VALUE Surface_s_blit(VALUE self, VALUE src, VALUE srcrect, VALUE dst, VAL
  * @param gmask [Integer] the green mask of a pixel
  * @param bmask [Integer] the blue mask of a pixel
  * @param amask [Integer] the alpha mask of a pixel
- * 
+ *
  * @return [SDL2::Surface]
  */
 static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
@@ -2382,14 +2402,14 @@ static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
     VALUE width, height, depth;
     Uint32 Rmask, Gmask, Bmask, Amask;
     SDL_Surface * surface;
-    
+
     if  (argc == 3) {
         rb_scan_args(argc, argv, "30", &width, &height, &depth);
         Rmask = Gmask = Bmask = Amask = 0;
     } else if (argc == 7) {
         VALUE rm, gm, bm, am;
         rb_scan_args(argc, argv, "70", &width, &height, &depth, &rm, &gm, &bm, &am);
-        Rmask = NUM2UINT(rm); Gmask = NUM2UINT(gm); 
+        Rmask = NUM2UINT(rm); Gmask = NUM2UINT(gm);
         Bmask = NUM2UINT(bm); Amask = NUM2UINT(am);
     } else {
         rb_raise(rb_eArgError, "wrong number of arguments (%d for 4 or 7)", argc);
@@ -2447,23 +2467,23 @@ static VALUE Rect_s_allocate(VALUE klass)
 {
     SDL_Rect* rect = ALLOC(SDL_Rect);
     rect->x = rect->y = rect->w = rect->h = 0;
-  
+
     return Data_Wrap_Struct(cRect, 0, free, rect);
 }
 
-/* 
+/*
  * Create a new SDL2::Rect object
  *
  * @return [SDL2::Rect]
- * 
+ *
  * @overload initialze(x, y, w, h)
  *   Create a new SDL2::Rect object
- *   
+ *
  *   @param x [Integer] X coordiante of the left-top point of the rectangle
  *   @param y [Integer] Y coordiante of the left-top point of the rectangle
  *   @param w [Integer] Width of the rectangle
  *   @param h [Integer] Height of the rectangle
- *   
+ *
  * @overload initialize
  *   Create a new SDL2::Rect object whose x, w, w, and h are all
  *   zero.
@@ -2506,7 +2526,7 @@ FIELD_ACCESSOR(Rect, SDL_Rect, h);
  *   Returns the intersection rect of self and other.
  *
  *   If there is no intersection, returns nil.
- *   
+ *
  *   @return [SDL2::Rect, nil]
  *   @param [SDL2::Rect] other rectangle
  */
@@ -2534,10 +2554,10 @@ static VALUE Rect_union(VALUE self, VALUE other)
     return result;
 }
 
-/* 
+/*
  * Document-class: SDL2::Point
  *
- * This class represents a point in SDL library. 
+ * This class represents a point in SDL library.
  * Some method requires this method.
  *
  * @!attribute [rw] x
@@ -2556,16 +2576,16 @@ static VALUE Point_s_allocate(VALUE klass)
 
 /*
  * Create a new point object.
- * 
+ *
  * @overload initialize(x, y)
  *   @param x the x coordinate of the point
  *   @param y the y coordinate of the point
- *   
+ *
  * @overload initialize
  *   x and y of the created point object are initialized by 0
  *
  * @return [SDL2::Point]
- * 
+ *
  */
 static VALUE Point_initialize(int argc, VALUE* argv, VALUE self)
 {
@@ -2609,7 +2629,7 @@ FIELD_ACCESSOR(Point, SDL_Point, y);
  * @overload initialze(format)
  *
  *   Initialize pixel format from the given integer representing a fomrmat.
- *   
+ *
  *   @param format [Integer] an unsigned integer as a pixel formats
  */
 static VALUE PixelForamt_initialize(VALUE self, VALUE format)
@@ -2638,7 +2658,7 @@ define(`PIXELFORMAT_ATTR_READER',
 
 /*
  * Get the human readable name of the pixel format
- * 
+ *
  * @return [String]
  */
 PIXELFORMAT_ATTR_READER(name, SDL_GetPixelFormatName, utf8str_new_cstr);
@@ -2687,7 +2707,7 @@ PIXELFORMAT_ATTR_READER(alpha_p,  SDL_ISPIXELFORMAT_ALPHA, INT2BOOL);
  */
 PIXELFORMAT_ATTR_READER(fourcc_p,  SDL_ISPIXELFORMAT_FOURCC, INT2BOOL);
 
-/* 
+/*
  * @overload ==(other)
  *   Return true if two pixel format is the same format.
  *
@@ -2763,15 +2783,15 @@ static VALUE ScreenSaver_enabled_p(VALUE self)
 define(`DEFINE_C_ACCESSOR',`rb_define_method($2, "$3", $1_$3, 0);
     rb_define_method($2, "$3=", $1_set_$3, 1)')
  */
-    
+
 void rubysdl2_init_video(void)
 {
     rb_define_module_function(mSDL2, "video_drivers", SDL2_s_video_drivers, 0);
     rb_define_module_function(mSDL2, "current_video_driver", SDL2_s_current_video_driver, 0);
     rb_define_module_function(mSDL2, "video_init", SDL2_s_video_init, 1);
-    
+
     cWindow = rb_define_class_under(mSDL2, "Window", rb_cObject);
-    
+
     rb_undef_alloc_func(cWindow);
     rb_define_singleton_method(cWindow, "create", Window_s_create, 6);
     rb_define_singleton_method(cWindow, "all_windows", Window_s_all_windows, 0);
@@ -2817,11 +2837,11 @@ void rubysdl2_init_video(void)
 
     mWindowFlags = rb_define_module_under(cWindow, "Flags");
     /* define(`DEFINE_WINDOW_FLAGS_CONST',`rb_define_const(mWindowFlags, "$1", UINT2NUM(SDL_WINDOW_$1))') */
-    /* fullscreen window */ 
+    /* fullscreen window */
     DEFINE_WINDOW_FLAGS_CONST(FULLSCREEN);
     /* fullscreen window at the current desktop resolution */
     DEFINE_WINDOW_FLAGS_CONST(FULLSCREEN_DESKTOP);
-    /* window usable with OpenGL context */ 
+    /* window usable with OpenGL context */
     DEFINE_WINDOW_FLAGS_CONST(OPENGL);
     /* window is visible */
     DEFINE_WINDOW_FLAGS_CONST(SHOWN);
@@ -2829,7 +2849,7 @@ void rubysdl2_init_video(void)
     DEFINE_WINDOW_FLAGS_CONST(HIDDEN);
     /* no window decoration */
     DEFINE_WINDOW_FLAGS_CONST(BORDERLESS);
-    /* window is resizable */ 
+    /* window is resizable */
     DEFINE_WINDOW_FLAGS_CONST(RESIZABLE);
     /* window is minimized */
     DEFINE_WINDOW_FLAGS_CONST(MINIMIZED);
@@ -2853,17 +2873,17 @@ void rubysdl2_init_video(void)
 #endif
 
     cDisplay = rb_define_class_under(mSDL2, "Display", rb_cObject);
-    
+
     rb_define_module_function(cDisplay, "displays", Display_s_displays, 0);
     rb_define_attr(cDisplay, "index", 1, 0);
     rb_define_attr(cDisplay, "name", 1, 0);
-    rb_define_method(cDisplay, "modes", Display_modes, 0); 
+    rb_define_method(cDisplay, "modes", Display_modes, 0);
     rb_define_method(cDisplay, "current_mode", Display_current_mode, 0);
     rb_define_method(cDisplay, "desktop_mode", Display_desktop_mode, 0);
     rb_define_method(cDisplay, "closest_mode", Display_closest_mode, 1);
     rb_define_method(cDisplay, "bounds", Display_bounds, 0);
 
-    
+
     cDisplayMode = rb_define_class_under(cDisplay, "Mode", rb_cObject);
 
     rb_define_alloc_func(cDisplayMode, DisplayMode_s_allocate);
@@ -2873,10 +2893,10 @@ void rubysdl2_init_video(void)
     rb_define_method(cDisplayMode, "w", DisplayMode_w, 0);
     rb_define_method(cDisplayMode, "h", DisplayMode_h, 0);
     rb_define_method(cDisplayMode, "refresh_rate", DisplayMode_refresh_rate, 0);
-    
-    
+
+
     cRenderer = rb_define_class_under(mSDL2, "Renderer", rb_cObject);
-    
+
     rb_undef_alloc_func(cRenderer);
     rb_define_singleton_method(cRenderer, "drivers_info", Renderer_s_drivers_info, 0);
     rb_define_method(cRenderer, "destroy?", Renderer_destroy_p, 0);
@@ -2912,11 +2932,11 @@ void rubysdl2_init_video(void)
     rb_define_method(cRenderer, "render_target", Renderer_render_target, 0);
     rb_define_method(cRenderer, "render_target=", Renderer_set_render_target, 1);
     rb_define_method(cRenderer, "reset_render_target", Renderer_reset_render_target, 0);
-    
+
     rb_define_method(cRenderer, "info", Renderer_info, 0);
 
     mRendererFlags = rb_define_module_under(cRenderer, "Flags");
-    
+
     /* define(`DEFINE_RENDERER_FLAGS_CONST',`rb_define_const(mRendererFlags, "$1", UINT2NUM(SDL_RENDERER_$1))') */
     /* the renderer is a software fallback */
     DEFINE_RENDERER_FLAGS_CONST(SOFTWARE);
@@ -2926,7 +2946,7 @@ void rubysdl2_init_video(void)
     /* present is synchronized with the refresh rate */
     DEFINE_RENDERER_FLAGS_CONST(PRESENTVSYNC);
 #endif
-    /* the renderer supports rendering to texture */ 
+    /* the renderer supports rendering to texture */
     DEFINE_RENDERER_FLAGS_CONST(TARGETTEXTURE);
     /* define(`DEFINE_SDL_FLIP_CONST',`rb_define_const(cRenderer, "FLIP_$1", INT2FIX(SDL_FLIP_$1))') */
     /* Do not flip, used in {Renderer#copy_ex} */
@@ -2935,7 +2955,7 @@ void rubysdl2_init_video(void)
     DEFINE_SDL_FLIP_CONST(HORIZONTAL);
     /* Flip vertically, used in {Renderer#copy_ex} */
     DEFINE_SDL_FLIP_CONST(VERTICAL);
-    
+
     mBlendMode = rb_define_module_under(mSDL2, "BlendMode");
     /* define(`DEFINE_BLENDMODE_CONST',`rb_define_const(mBlendMode, "$1", INT2FIX(SDL_BLENDMODE_$1))') */
     /* no blending (dstRGBA = srcRGBA) */
@@ -2946,9 +2966,9 @@ void rubysdl2_init_video(void)
     DEFINE_BLENDMODE_CONST(ADD);
     /* color modulate (multiplicative) (dstRGB = srcRGB * dstRGB, dstA = dstA) */
     DEFINE_BLENDMODE_CONST(MOD);
-    
+
     cTexture = rb_define_class_under(mSDL2, "Texture", rb_cObject);
-    
+
     rb_undef_alloc_func(cTexture);
     rb_define_method(cTexture, "destroy?", Texture_destroy_p, 0);
     rb_define_method(cTexture, "destroy", Texture_destroy, 0);
@@ -2969,11 +2989,12 @@ void rubysdl2_init_video(void)
     /* texture access pattern - can be used as a render target */
     DEFINE_TEXTUREAH_ACCESS_CONST(TARGET);
 
-    
+
     cSurface = rb_define_class_under(mSDL2, "Surface", rb_cObject);
-    
+
     rb_undef_alloc_func(cSurface);
     rb_define_singleton_method(cSurface, "load_bmp", Surface_s_load_bmp, 1);
+    rb_define_singleton_method(cSurface, "save_bmp", Surface_s_save_bmp, 2);
     rb_define_singleton_method(cSurface, "blit", Surface_s_blit, 4);
     rb_define_singleton_method(cSurface, "new", Surface_s_new, -1);
     rb_define_singleton_method(cSurface, "from_string", Surface_s_from_string, -1);
@@ -2994,7 +3015,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cSurface, "pitch", Surface_pitch, 0);
     rb_define_method(cSurface, "bits_per_pixel", Surface_bits_per_pixel, 0);
     rb_define_method(cSurface, "bytes_per_pixel", Surface_bytes_per_pixel, 0);
-    
+
     cRect = rb_define_class_under(mSDL2, "Rect", rb_cObject);
 
     rb_define_alloc_func(cRect, Rect_s_allocate);
@@ -3007,7 +3028,7 @@ void rubysdl2_init_video(void)
     DEFINE_C_ACCESSOR(Rect, cRect, h);
     rb_define_method(cRect, "union", Rect_union, 1);
     rb_define_method(cRect, "intersection", Rect_intersection, 1);
-    
+
     cPoint = rb_define_class_under(mSDL2, "Point", rb_cObject);
 
     rb_define_alloc_func(cPoint, Point_s_allocate);
@@ -3017,14 +3038,14 @@ void rubysdl2_init_video(void)
     DEFINE_C_ACCESSOR(Point, cPoint, x);
     DEFINE_C_ACCESSOR(Point, cPoint, y);
 
-    
+
     cRendererInfo = rb_define_class_under(cRenderer, "Info", rb_cObject);
     define_attr_readers(cRendererInfo, "name", "flags", "texture_formats",
                         "max_texture_width", "max_texture_height", NULL);
-    
-    
+
+
     cPixelFormat = rb_define_class_under(mSDL2, "PixelFormat", rb_cObject);
-    
+
     rb_define_method(cPixelFormat, "initialize", PixelForamt_initialize, 1);
     rb_define_attr(cPixelFormat, "format", 1, 0);
     rb_define_method(cPixelFormat, "name", PixelFormat_name, 0);
@@ -3059,7 +3080,7 @@ void rubysdl2_init_video(void)
     rb_define_const(mBitmapOrder, "NONE", UINT2NUM(SDL_BITMAPORDER_NONE));
     rb_define_const(mBitmapOrder, "O_1234", UINT2NUM(SDL_BITMAPORDER_1234));
     rb_define_const(mBitmapOrder, "O_4321", UINT2NUM(SDL_BITMAPORDER_4321));
-    
+
     mPackedOrder = rb_define_module_under(cPixelFormat, "PackedOrder");
     /* define(`DEFINE_PACKEDORDER_CONST',`rb_define_const(mPackedOrder, "$1", UINT2NUM(SDL_PACKEDORDER_$1))') */
     DEFINE_PACKEDORDER_CONST(NONE);
@@ -3093,7 +3114,7 @@ void rubysdl2_init_video(void)
     DEFINE_PACKEDLAYOUT_CONST(8888);
     DEFINE_PACKEDLAYOUT_CONST(2101010);
     DEFINE_PACKEDLAYOUT_CONST(1010102);
-    
+
     {
         VALUE formats = rb_ary_new();
         /* -: Array of all available formats */
@@ -3105,7 +3126,7 @@ void rubysdl2_init_video(void)
             rb_ary_push(formats, format);
         } while (0)')
          */
-        
+
         DEFINE_PIXELFORMAT_CONST(UNKNOWN, /* -: PixelFormat: Unused - reserved by SDL */);
         DEFINE_PIXELFORMAT_CONST(INDEX1LSB);
         DEFINE_PIXELFORMAT_CONST(INDEX1MSB);
@@ -3149,12 +3170,12 @@ void rubysdl2_init_video(void)
     rb_define_module_function(mScreenSaver, "enable", ScreenSaver_enable, 0);
     rb_define_module_function(mScreenSaver, "disable", ScreenSaver_disable, 0);
     rb_define_module_function(mScreenSaver, "enabled?", ScreenSaver_enabled_p, 0);
-    
-    
+
+
     rb_gc_register_address(&hash_windowid_to_window);
     hash_windowid_to_window = rb_hash_new();
 }
-  
+
 #ifdef HAVE_SDL_IMAGE_H
 #include <SDL_image.h>
 
@@ -3165,15 +3186,15 @@ static VALUE mIMG;
  *
  * This module provides the interface to SDL_image. You can load
  * many kinds of image files using this modules.
- * 
+ *
  * This module provides only initialization interface {SDL2::IMG.init}.
  * After calling init, you can load image files using {SDL2::Surface.load}.
  */
 
 /*
  * @overload init(flags)
- *   Initialize SDL_image. 
- *   
+ *   Initialize SDL_image.
+ *
  *   You can specify the supporting image formats by bitwise OR'd of the
  *   following constants.
  *
@@ -3185,7 +3206,7 @@ static VALUE mIMG;
  *   You need to initialize SDL_image to check whether specified format
  *   is supported by your environment. If your environment does not
  *   support required support format, you have a {SDL2::Error} exception.
- *   
+ *
  *   @param [Integer] flags submodule bits
  *   @return [nil]
  *
@@ -3194,18 +3215,18 @@ static VALUE mIMG;
 static VALUE IMG_s_init(VALUE self, VALUE f)
 {
     int flags = NUM2INT(f);
-    if (IMG_Init(flags) & flags != flags) 
+    if (IMG_Init(flags) & flags != flags)
         rb_raise(eSDL2Error, "Couldn't initialze SDL_image");
     return Qnil;
 }
 
 /*
- * @overload load(file) 
+ * @overload load(file)
  *   Load file and create a new {SDL2::Surface}.
  *
  *   This method uses SDL_image. SDL_image supports following formats:
  *   BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.
- *   
+ *
  *   @param [String] file the image file name to load a surface from
  *   @return [SDL2::Surface] Created surface
  *
@@ -3259,7 +3280,7 @@ void rubysdl2_init_image(void)
 
     rb_define_singleton_method(cSurface, "load", Surface_s_load, 1);
     rb_define_method(cRenderer, "load_texture", Renderer_load_texture, 1);
-                     
+
 
     /* Initialize the JPEG loader */
     rb_define_const(mIMG, "INIT_JPG", INT2NUM(IMG_INIT_JPG));
