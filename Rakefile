@@ -39,7 +39,7 @@ def gem_spec
       using opengl or Direct3D.
       Ruby/SDL is used for games and visual demos.
     EOS
-    spec.license = "LGPL v3"
+    spec.license = "LGPL-3.0"
     spec.author = "Ippei Obayashi"
     spec.email = "ohai@kmc.gr.jp"
     spec.homepage = "https://github.com/ohai/ruby-sdl2"
