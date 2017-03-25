@@ -3240,7 +3240,7 @@ static VALUE Surface_s_load(VALUE self, VALUE fname)
 {
     SDL_Surface* surface = IMG_Load(StringValueCStr(fname));
     if (!surface) {
-        SDL_SetError(IMG_GetError());
+        SDL_SetError("%s", IMG_GetError());
         SDL_ERROR();
     }
     return Surface_new(surface);
@@ -3267,7 +3267,7 @@ static VALUE Renderer_load_texture(VALUE self, VALUE fname)
 {
     SDL_Texture* texture = IMG_LoadTexture(Get_SDL_Renderer(self), StringValueCStr(fname));
     if (!texture) {
-        SDL_SetError(IMG_GetError());
+        SDL_SetError("%s", IMG_GetError());
         SDL_ERROR();
     }
     return Texture_new(texture, Get_Renderer(self));

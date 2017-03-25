@@ -13,7 +13,7 @@ static VALUE mMusicChannel;
 static VALUE playing_chunks = Qnil;
 static VALUE playing_music = Qnil;
 
-#define MIX_ERROR() do { HANDLE_ERROR(SDL_SetError(Mix_GetError())); } while(0)
+#define MIX_ERROR() do { HANDLE_ERROR(SDL_SetError("%s", Mix_GetError())); } while(0)
 #define HANDLE_MIX_ERROR(code) \
     do { if ((code) < 0) { MIX_ERROR(); } } while (0)
 

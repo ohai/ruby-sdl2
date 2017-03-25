@@ -8,7 +8,7 @@ static VALUE cTTF;
 static VALUE mStyle;
 static VALUE mHinting;
 
-#define TTF_ERROR() do { HANDLE_ERROR(SDL_SetError(TTF_GetError())); } while (0)
+#define TTF_ERROR() do { HANDLE_ERROR(SDL_SetError("%s", TTF_GetError())); } while (0)
 #define HANDLE_TTF_ERROR(code) \
     do { if ((code) < 0) { TTF_ERROR(); } } while (0)
 
