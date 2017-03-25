@@ -3215,7 +3215,7 @@ static VALUE mIMG;
 static VALUE IMG_s_init(VALUE self, VALUE f)
 {
     int flags = NUM2INT(f);
-    if (IMG_Init(flags) & flags != flags)
+    if ((IMG_Init(flags) & flags) != flags)
         rb_raise(eSDL2Error, "Couldn't initialze SDL_image");
     return Qnil;
 }

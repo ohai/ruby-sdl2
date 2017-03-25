@@ -124,7 +124,7 @@ DEFINE_WRAPPER(Mix_Music, Music, music, cMusic, "SDL2::Mixer::Music");
 static VALUE Mixer_s_init(VALUE self, VALUE f)
 {
     int flags = NUM2INT(f);
-    if (Mix_Init(flags) & flags != flags) 
+    if ((Mix_Init(flags) & flags) != flags) 
         rb_raise(eSDL2Error, "Couldn't initialize SDL_mixer");
     
     return Qnil;
