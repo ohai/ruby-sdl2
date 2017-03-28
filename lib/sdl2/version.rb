@@ -1,6 +1,6 @@
 module SDL2
   # Version string of Ruby/SDL2
-  VERSION = "0.3.0"
+  VERSION = "0.3.1"
   # Version of Ruby/SDL2, [major, minor, patch level] 
-  VERSION_NUMBER = [0, 2, 0]
+  VERSION_NUMBER = VERSION.split(".").map(&:to_i)
 end
