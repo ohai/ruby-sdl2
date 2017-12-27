@@ -1,17 +1,22 @@
 require 'rubygems'
 require 'rubygems/package_task'
+require 'rake/clean'
 require_relative "lib/sdl2/version"
 
 C_M4_FILES = Dir.glob("*.c.m4")
 C_FROM_M4_FILES = C_M4_FILES.map{|path| path.gsub(/\.c\.m4\Z/, ".c") }
 C_FILES = Dir.glob("*.c") | C_FROM_M4_FILES
 RB_FILES = Dir.glob("lib/**/*.rb")
+O_FILES = Rake::FileList[*C_FILES].pathmap('%n.o')
 
 POT_SOURCES = RB_FILES + ["main.c"] + (C_FILES - ["main.c"])
 YARD_SOURCES = "-m markdown --main README.md --files COPYING.txt #{POT_SOURCES.join(" ")}"
 
 WATCH_TARGETS = (C_FILES - C_FROM_M4_FILES) + C_M4_FILES + ["README.md"]
-  
+
+CLEAN.include(O_FILES)
+CLOBBER.include(*C_FROM_M4_FILES)
+
 locale = ENV["YARD_LOCALE"]
 
 def extconf_options
