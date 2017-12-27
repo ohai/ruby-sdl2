@@ -50,4 +50,9 @@ config("SDL2_mixer", "SDL_mixer.h", ["SDL2_mixer", "SDL_mixer"])
 config("SDL2_ttf", "SDL_ttf.h", ["SDL2_ttf", "SDL_ttf"])
 have_header("SDL_filesystem.h")
 
+have_const("MIX_INIT_MODPLUG", "SDL_mixer.h")
+have_const("MIX_INIT_FLUIDSYNTH", "SDL_mixer.h")
+have_const("MIX_INIT_MID", "SDL_mixer.h")
+
+create_header
 create_makefile('sdl2_ext')

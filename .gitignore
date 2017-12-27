@@ -9,6 +9,7 @@ ttf.c
 mixer.c
 joystick.c
 gamecontroller.c
+extconf.h
 pkg/
 TAGS
 local/

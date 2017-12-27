@@ -1,5 +1,6 @@
 /* -*- mode: C -*- */
 #ifdef HAVE_SDL_MIXER_H
+#include "extconf.h"
 #include "rubysdl2_internal.h"
 #include <SDL_mixer.h>
 
@@ -1071,14 +1072,23 @@ void rubysdl2_init_mixer(void)
     DEFINE_MIX_INIT(FLAC);
     /* Initialize MOD loader */
     DEFINE_MIX_INIT(MOD);
-    /* Initialize libmodplug */
-    DEFINE_MIX_INIT(MODPLUG);
     /* Initialize MP3 loader */
     DEFINE_MIX_INIT(MP3);
     /* Initialize Ogg vorbis loader */
     DEFINE_MIX_INIT(OGG);
+
+#if HAVE_CONST_MIX_INIT_MODPLUG
+    /* Initialize libmodplug */
+    DEFINE_MIX_INIT(MODPLUG);
+#endif
+#if HAVE_CONST_MIX_INIT_FLUIDSYNTH
     /* Initialize fluidsynth */
     DEFINE_MIX_INIT(FLUIDSYNTH);
+#endif
+#if HAVE_CONST_MIX_INIT_MID
+    /* Initialize mid */
+    DEFINE_MIX_INIT(MID);
+#endif
 
     /* define(`DEFINE_MIX_FORMAT',`rb_define_const(mMixer, "FORMAT_$1", UINT2NUM(AUDIO_$1))') */
     /* Unsiged 8-bit sample format. Used by {Mixer.open} */
