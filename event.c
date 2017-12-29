@@ -233,7 +233,7 @@ static VALUE Event_inspect(VALUE self)
  */
 static VALUE Event_window(VALUE self)
 {
-    VALUE window_id = rb_funcall(self, rb_intern("window_id"), 0, 0);
+    VALUE window_id = rb_funcall(self, rb_intern("window_id"), 0);
     return find_window_by_id(NUM2UINT(window_id));
 }
 

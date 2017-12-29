@@ -2254,7 +2254,7 @@ static VALUE Surface_pixel_color(VALUE self, VALUE x, VALUE y)
 
 static Uint32 pixel_value(VALUE val, SDL_PixelFormat* format)
 {
-    if (RTEST(rb_funcall(val, rb_intern("integer?"), 0, 0))) {
+    if (RTEST(rb_funcall(val, rb_intern("integer?"), 0))) {
         return NUM2UINT(val);
     } else {
         long len;

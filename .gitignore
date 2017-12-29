@@ -1,4 +1,5 @@
 *.o
+*.bundle
 *~
 Makefile
 *.so
