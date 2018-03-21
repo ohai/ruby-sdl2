@@ -7,7 +7,7 @@ window = SDL2::Window.create("testsprite",
                              640, 480, 0)
 
 renderer = window.create_renderer(-1,
-                                  SDL2::Renderer::ACCELERATED|SDL2::Renderer::TARGETTEXTURE)
+                                  SDL2::Renderer::Flags::ACCELERATED|SDL2::Renderer::Flags::TARGETTEXTURE)
 texture = renderer.load_texture("icon.bmp")
 
 rect = SDL2::Rect.new(48, 128, 32, 32)
