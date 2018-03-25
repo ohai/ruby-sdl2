@@ -6,7 +6,7 @@
 <title>
   Class: SDL2::Mixer::Channels::Group
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../../../class_list.html"></iframe>
+      <iframe id="nav" src="../../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../../../class_list.html"></iframe>
 
       <div id="content"><h1>Class: SDL2::Mixer::Channels::Group
   
@@ -105,10 +103,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>This class represents a channel group. A channel group is a set of channels
-and you can stop playing and fade out playing channels of an group at the
-same time.</p>
+    <p>This class represents a channel group. A channel group is
+a set of channels and you can stop playing and fade out playing
+channels of an group at the same time.</p>
 
 <p>Each channel group is identified by an integer called tag.</p>
 
@@ -147,8 +144,7 @@ same time.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Tag id.</p>
+    <span class="summary_desc"><div class='inline'><p>Tag id.</p>
 </div></span>
   
 </li>
@@ -184,8 +180,7 @@ same time.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the default channel group.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the default channel group.</p>
 </div></span>
   
 </li>
@@ -203,7 +198,7 @@ same time.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#%3D%3D-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean </a>
+      <a href="#==-instance_method" title="#== (instance method)">#<strong>==</strong>(other)  &#x21d2; Boolean </a>
     
 
     
@@ -217,8 +212,7 @@ same time.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Return true if <strong>self</strong> and <strong>other</strong> are same.</p>
+    <span class="summary_desc"><div class='inline'><p>Return true if <strong>self</strong> and <strong>other</strong> are same.</p>
 </div></span>
   
 </li>
@@ -241,8 +235,7 @@ same time.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Add a channel to the group.</p>
+    <span class="summary_desc"><div class='inline'><p>Add a channel to the group.</p>
 </div></span>
   
 </li>
@@ -265,8 +258,7 @@ same time.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Return the first available channel in the group.</p>
+    <span class="summary_desc"><div class='inline'><p>Return the first available channel in the group.</p>
 </div></span>
   
 </li>
@@ -289,8 +281,7 @@ same time.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the number of channels belong to the group.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the number of channels belong to the group.</p>
 </div></span>
   
 </li>
@@ -313,8 +304,7 @@ same time.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Halt playing of all channels in the group with fade-out effect.</p>
+    <span class="summary_desc"><div class='inline'><p>Halt playing of all channels in the group with fade-out effect.</p>
 </div></span>
   
 </li>
@@ -337,8 +327,7 @@ same time.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Halt playing of all channels in the group.</p>
+    <span class="summary_desc"><div class='inline'><p>Halt playing of all channels in the group.</p>
 </div></span>
   
 </li>
@@ -347,7 +336,7 @@ same time.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Object </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(tag)  &#x21d2; Object </a>
     
 
     
@@ -363,8 +352,7 @@ same time.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Initialize the channel with given <strong>tag</strong>.</p>
+    <span class="summary_desc"><div class='inline'><p>Initialize the channel with given <strong>tag</strong>.</p>
 </div></span>
   
 </li>
@@ -387,8 +375,7 @@ same time.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Return the newer cahnnel in the group.</p>
+    <span class="summary_desc"><div class='inline'><p>Return the newer cahnnel in the group.</p>
 </div></span>
   
 </li>
@@ -411,8 +398,7 @@ same time.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Return the oldest cahnnel in the group.</p>
+    <span class="summary_desc"><div class='inline'><p>Return the oldest cahnnel in the group.</p>
 </div></span>
   
 </li>
@@ -427,7 +413,7 @@ same time.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>initialize</strong>(tag)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -435,8 +421,7 @@ same time.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Initialize the channel with given <strong>tag</strong>.</p>
+    <p>Initialize the channel with given <strong>tag</strong>.</p>
 
 <p>Groups with a common tag are identified.</p>
 
@@ -452,14 +437,14 @@ same time.</p>
       <pre class="lines">
 
 
-542
 543
 544
 545
-546</pre>
+546
+547</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 542</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 543</span>
 
 static VALUE Group_initialize(VALUE self, VALUE tag)
 {
@@ -489,8 +474,7 @@ static VALUE Group_initialize(VALUE self, VALUE tag)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns tag id</p>
+    <p>Returns tag id</p>
 
 
   </div>
@@ -508,8 +492,7 @@ static VALUE Group_initialize(VALUE self, VALUE tag)
       
       
         &mdash;
-        <div class='inline'>
-<p>tag id</p>
+        <div class='inline'><p>tag id</p>
 </div>
       
     </li>
@@ -537,8 +520,7 @@ static VALUE Group_initialize(VALUE self, VALUE tag)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the default channel group.</p>
+    <p>Get the default channel group.</p>
 
 <p>The default channel group refers all channels in the mixer system.</p>
 
@@ -567,14 +549,14 @@ static VALUE Group_initialize(VALUE self, VALUE tag)
       <pre class="lines">
 
 
-555
 556
 557
 558
-559</pre>
+559
+560</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 555</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 556</span>
 
 static VALUE Group_s_default(VALUE self)
 {
@@ -605,14 +587,14 @@ static VALUE Group_s_default(VALUE self)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Return true if <strong>self</strong> and <strong>other</strong> are same.</p>
+    <p>Return true if <strong>self</strong> and <strong>other</strong> are same.</p>
 
 <p><strong>self</strong> and <strong>other</strong> are considered to be same
 if they have the same tag.</p>
@@ -634,8 +616,7 @@ if they have the same tag.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>a compared object</p>
+        <div class='inline'><p>a compared object</p>
 </div>
       
     </li>
@@ -665,14 +646,14 @@ if they have the same tag.</p>
       <pre class="lines">
 
 
-581
 582
 583
 584
-585</pre>
+585
+586</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 581</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 582</span>
 
 static VALUE Group_eq(VALUE self, VALUE other)
 {
@@ -697,14 +678,14 @@ static VALUE Group_eq(VALUE self, VALUE other)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Add a channel to the group.</p>
+    <p>Add a channel to the group.</p>
 
 
   </div>
@@ -723,8 +704,7 @@ static VALUE Group_eq(VALUE self, VALUE other)
       
       
         &mdash;
-        <div class='inline'>
-<p>a channel id</p>
+        <div class='inline'><p>a channel id</p>
 </div>
       
     </li>
@@ -754,17 +734,17 @@ static VALUE Group_eq(VALUE self, VALUE other)
       <pre class="lines">
 
 
-594
 595
 596
 597
 598
 599
 600
-601</pre>
+601
+602</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 594</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 595</span>
 
 static VALUE Group_add(VALUE self, VALUE which)
 {
@@ -790,8 +770,7 @@ static VALUE Group_add(VALUE self, VALUE which)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Return the first available channel in the group.</p>
+    <p>Return the first available channel in the group.</p>
 
 <p>Return -1 if no channel is available.</p>
 
@@ -820,13 +799,13 @@ static VALUE Group_add(VALUE self, VALUE which)
       <pre class="lines">
 
 
-620
 621
 622
-623</pre>
+623
+624</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 620</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 621</span>
 
 static VALUE Group_available(VALUE self)
 {
@@ -848,8 +827,7 @@ static VALUE Group_available(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the number of channels belong to the group.</p>
+    <p>Get the number of channels belong to the group.</p>
 
 
   </div>
@@ -876,13 +854,13 @@ static VALUE Group_available(VALUE self)
       <pre class="lines">
 
 
-608
 609
 610
-611</pre>
+611
+612</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 608</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 609</span>
 
 static VALUE Group_count(VALUE self)
 {
@@ -906,14 +884,14 @@ static VALUE Group_count(VALUE self)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Halt playing of all channels in the group with fade-out effect.</p>
+    <p>Halt playing of all channels in the group with fade-out effect.</p>
 
 
   </div>
@@ -932,8 +910,7 @@ static VALUE Group_count(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>milliseconds of fade-out effect</p>
+        <div class='inline'><p>milliseconds of fade-out effect</p>
 </div>
       
     </li>
@@ -951,8 +928,7 @@ static VALUE Group_count(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>the number of channels affected by this method</p>
+        <div class='inline'><p>the number of channels affected by this method</p>
 </div>
       
     </li>
@@ -977,13 +953,13 @@ static VALUE Group_count(VALUE self)
       <pre class="lines">
 
 
-658
 659
 660
-661</pre>
+661
+662</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 658</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 659</span>
 
 static VALUE Group_fade_out(VALUE self, VALUE ms)
 {
@@ -1005,8 +981,7 @@ static VALUE Group_fade_out(VALUE self, VALUE ms)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Halt playing of all channels in the group.</p>
+    <p>Halt playing of all channels in the group.</p>
 
 
   </div>
@@ -1042,14 +1017,14 @@ static VALUE Group_fade_out(VALUE self, VALUE ms)
       <pre class="lines">
 
 
-670
 671
 672
 673
-674</pre>
+674
+675</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 670</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 671</span>
 
 static VALUE Group_halt(VALUE self)
 {
@@ -1072,8 +1047,7 @@ static VALUE Group_halt(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Return the newer cahnnel in the group.</p>
+    <p>Return the newer cahnnel in the group.</p>
 
 <p>Return -1 if no channel is available.</p>
 
@@ -1102,13 +1076,13 @@ static VALUE Group_halt(VALUE self)
       <pre class="lines">
 
 
-644
 645
 646
-647</pre>
+647
+648</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 644</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 645</span>
 
 static VALUE Group_newer(VALUE self)
 {
@@ -1130,8 +1104,7 @@ static VALUE Group_newer(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Return the oldest cahnnel in the group.</p>
+    <p>Return the oldest cahnnel in the group.</p>
 
 <p>Return -1 if no channel is available.</p>
 
@@ -1160,13 +1133,13 @@ static VALUE Group_newer(VALUE self)
       <pre class="lines">
 
 
-632
 633
 634
-635</pre>
+635
+636</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 632</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 633</span>
 
 static VALUE Group_oldest(VALUE self)
 {
@@ -1182,9 +1155,9 @@ static VALUE Group_oldest(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:25:02 2015 by
+  Generated on Sun Mar 25 14:38:18 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

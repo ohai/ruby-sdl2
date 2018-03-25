@@ -6,7 +6,7 @@
 <title>
   Module: SDL2::IMG
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../class_list.html"></iframe>
+      <iframe id="nav" src="../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -59,8 +59,6 @@
         <div class="clear"></div>
       </div>
 
-      <iframe id="search_frame" src="../class_list.html"></iframe>
-
       <div id="content"><h1>Module: SDL2::IMG
   
   
@@ -89,12 +87,11 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>This module provides the interface to SDL_image. You can load many kinds of
-image files using this modules.</p>
+    <p>This module provides the interface to SDL_image. You can load
+many kinds of image files using this modules.</p>
 
-<p>This module provides only initialization interface <span class='object_link'><a href="#init-class_method" title="SDL2::IMG.init (method)">IMG.init</a></span>. After
-calling init, you can load image files using <span class='object_link'><a href="Surface.html#load-class_method" title="SDL2::Surface.load (method)">Surface.load</a></span>.</p>
+<p>This module provides only initialization interface <span class='object_link'><a href="#init-class_method" title="SDL2::IMG.init (method)">IMG.init</a></span>.
+After calling init, you can load image files using <span class='object_link'><a href="Surface.html#load-class_method" title="SDL2::Surface.load (method)">Surface.load</a></span>.</p>
 
 
   </div>
@@ -104,14 +101,12 @@ calling init, you can load image files using <span class='object_link'><a href="
 
 </div>
   <h2>Constant Summary</h2>
-  
-    <dl class="constants">
-      
-        <dt id="INIT_JPG-constant" class="">INIT_JPG =
-          <div class="docstring">
-  <div class="discussion">
+  <dl class="constants">
     
-<p>Initialize the JPEG loader</p>
+      <dt id="INIT_JPG-constant" class="">INIT_JPG =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Initialize the JPEG loader</p>
 
 
   </div>
@@ -120,14 +115,13 @@ calling init, you can load image files using <span class='object_link'><a href="
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>IMG_INIT_JPG</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="INIT_PNG-constant" class="">INIT_PNG =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>IMG_INIT_JPG</span><span class='rparen'>)</span></pre></dd>
     
-<p>Initialize the PNG loader</p>
+      <dt id="INIT_PNG-constant" class="">INIT_PNG =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Initialize the PNG loader</p>
 
 
   </div>
@@ -136,14 +130,13 @@ calling init, you can load image files using <span class='object_link'><a href="
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>IMG_INIT_PNG</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="INIT_TIF-constant" class="">INIT_TIF =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>IMG_INIT_PNG</span><span class='rparen'>)</span></pre></dd>
     
-<p>Initialize the TIF loader</p>
+      <dt id="INIT_TIF-constant" class="">INIT_TIF =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Initialize the TIF loader</p>
 
 
   </div>
@@ -152,14 +145,13 @@ calling init, you can load image files using <span class='object_link'><a href="
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>IMG_INIT_TIF</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="INIT_WEBP-constant" class="">INIT_WEBP =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>IMG_INIT_TIF</span><span class='rparen'>)</span></pre></dd>
     
-<p>Initialize the WEBP loader</p>
+      <dt id="INIT_WEBP-constant" class="">INIT_WEBP =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Initialize the WEBP loader</p>
 
 
   </div>
@@ -168,11 +160,10 @@ calling init, you can load image files using <span class='object_link'><a href="
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>IMG_INIT_WEBP</span><span class='rparen'>)</span></pre></dd>
-      
-    </dl>
-  
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>IMG_INIT_WEBP</span><span class='rparen'>)</span></pre></dd>
+    
+  </dl>
 
 
 
@@ -205,8 +196,7 @@ calling init, you can load image files using <span class='object_link'><a href="
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Initialize SDL_image.</p>
+    <span class="summary_desc"><div class='inline'><p>Initialize SDL_image.</p>
 </div></span>
   
 </li>
@@ -234,30 +224,28 @@ calling init, you can load image files using <span class='object_link'><a href="
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Initialize SDL_image.</p>
+    <p>Initialize SDL_image.</p>
 
-<p>You can specify the supporting image formats by bitwise OR&#39;d of the
+<p>You can specify the supporting image formats by bitwise OR’d of the
 following constants.</p>
-<ul><li>
-<p><span class='object_link'><a href="#INIT_JPG-constant" title="SDL2::IMG::INIT_JPG (constant)">INIT_JPG</a></span></p>
-</li><li>
-<p><span class='object_link'><a href="#INIT_PNG-constant" title="SDL2::IMG::INIT_PNG (constant)">INIT_PNG</a></span></p>
-</li><li>
-<p><span class='object_link'><a href="#INIT_TIF-constant" title="SDL2::IMG::INIT_TIF (constant)">INIT_TIF</a></span></p>
-</li><li>
-<p><span class='object_link'><a href="#INIT_WEBP-constant" title="SDL2::IMG::INIT_WEBP (constant)">INIT_WEBP</a></span></p>
-</li></ul>
 
-<p>You need to initialize SDL_image to check whether specified format is
-supported by your environment. If your environment does not support
-required support format, you have a <span class='object_link'><a href="Error.html" title="SDL2::Error (class)">Error</a></span> exception.</p>
+<ul>
+  <li><span class='object_link'><a href="#INIT_JPG-constant" title="SDL2::IMG::INIT_JPG (constant)">INIT_JPG</a></span></li>
+  <li><span class='object_link'><a href="#INIT_PNG-constant" title="SDL2::IMG::INIT_PNG (constant)">INIT_PNG</a></span></li>
+  <li><span class='object_link'><a href="#INIT_TIF-constant" title="SDL2::IMG::INIT_TIF (constant)">INIT_TIF</a></span></li>
+  <li><span class='object_link'><a href="#INIT_WEBP-constant" title="SDL2::IMG::INIT_WEBP (constant)">INIT_WEBP</a></span></li>
+</ul>
+
+<p>You need to initialize SDL_image to check whether specified format
+is supported by your environment. If your environment does not
+support required support format, you have a <span class='object_link'><a href="Error.html" title="SDL2::Error (class)">Error</a></span> exception.</p>
 
 
   </div>
@@ -276,8 +264,7 @@ required support format, you have a <span class='object_link'><a href="Error.htm
       
       
         &mdash;
-        <div class='inline'>
-<p>submodule bits</p>
+        <div class='inline'><p>submodule bits</p>
 </div>
       
     </li>
@@ -308,8 +295,7 @@ required support format, you have a <span class='object_link'><a href="Error.htm
       
       
         &mdash;
-        <div class='inline'>
-<p>raised when initializing is failed.</p>
+        <div class='inline'><p>raised when initializing is failed.</p>
 </div>
       
     </li>
@@ -325,21 +311,21 @@ required support format, you have a <span class='object_link'><a href="Error.htm
       <pre class="lines">
 
 
-3420
-3421
-3422
-3423
-3424
-3425
-3426</pre>
+3441
+3442
+3443
+3444
+3445
+3446
+3447</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 3420</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 3441</span>
 
 static VALUE IMG_s_init(VALUE self, VALUE f)
 {
     int flags = NUM2INT(f);
-    if (IMG_Init(flags) &amp; flags != flags) 
+    if ((IMG_Init(flags) &amp; flags) != flags)
         rb_raise(eSDL2Error, &quot;Couldn&#39;t initialze SDL_image&quot;);
     return Qnil;
 }</pre>
@@ -353,9 +339,9 @@ static VALUE IMG_s_init(VALUE self, VALUE f)
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:25:02 2015 by
+  Generated on Sun Mar 25 14:38:17 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

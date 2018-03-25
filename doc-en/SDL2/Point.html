@@ -6,7 +6,7 @@
 <title>
   Class: SDL2::Point
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../class_list.html"></iframe>
+      <iframe id="nav" src="../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../class_list.html"></iframe>
 
       <div id="content"><h1>Class: SDL2::Point
   
@@ -105,9 +103,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>This class represents a point in SDL library. Some method requires this
-method.</p>
+    <p>This class represents a point in SDL library.
+Some method requires this method.</p>
 
 
   </div>
@@ -142,8 +139,7 @@ method.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>X coordiante of the point.</p>
+    <span class="summary_desc"><div class='inline'><p>X coordiante of the point.</p>
 </div></span>
   
 </li>
@@ -169,8 +165,7 @@ method.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Y coordiante of the point.</p>
+    <span class="summary_desc"><div class='inline'><p>Y coordiante of the point.</p>
 </div></span>
   
 </li>
@@ -192,7 +187,7 @@ method.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; SDL2::Point </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(*args)  &#x21d2; SDL2::Point </a>
     
 
     
@@ -208,8 +203,7 @@ method.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create a new point object.</p>
+    <span class="summary_desc"><div class='inline'><p>Create a new point object.</p>
 </div></span>
   
 </li>
@@ -232,8 +226,7 @@ method.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Return inspection string.</p>
+    <span class="summary_desc"><div class='inline'><p>Return inspection string.</p>
 </div></span>
   
 </li>
@@ -260,8 +253,7 @@ method.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create a new point object.</p>
+    <p>Create a new point object.</p>
 
 
   </div>
@@ -277,6 +269,7 @@ method.</p>
         <div class="docstring">
   <div class="discussion">
     
+
 
   </div>
 </div>
@@ -294,8 +287,7 @@ method.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>the x coordinate of the point</p>
+        <div class='inline'><p>the x coordinate of the point</p>
 </div>
       
     </li>
@@ -310,8 +302,7 @@ method.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>the y coordinate of the point</p>
+        <div class='inline'><p>the y coordinate of the point</p>
 </div>
       
     </li>
@@ -327,8 +318,7 @@ method.</p>
         <span class="signature">#<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="SDL2::Point (class)">SDL2::Point</a></span></tt> </span>
         <div class="docstring">
   <div class="discussion">
-    
-<p>x and y of the created point object are initialized by 0</p>
+    <p>x and y of the created point object are initialized by 0</p>
 
 
   </div>
@@ -348,18 +338,18 @@ method.</p>
       <pre class="lines">
 
 
-2585
-2586
-2587
-2588
-2589
-2590
-2591
-2592
-2593</pre>
+2605
+2606
+2607
+2608
+2609
+2610
+2611
+2612
+2613</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2585</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2605</span>
 
 static VALUE Point_initialize(int argc, VALUE* argv, VALUE self)
 {
@@ -393,8 +383,7 @@ static VALUE Point_initialize(int argc, VALUE* argv, VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>X coordiante of the point.</p>
+    <p>X coordiante of the point.</p>
 
 
   </div>
@@ -431,8 +420,7 @@ static VALUE Point_initialize(int argc, VALUE* argv, VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Y coordiante of the point.</p>
+    <p>Y coordiante of the point.</p>
 
 
   </div>
@@ -474,8 +462,7 @@ static VALUE Point_initialize(int argc, VALUE* argv, VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Return inspection string.</p>
+    <p>Return inspection string.</p>
 
 
   </div>
@@ -502,14 +489,14 @@ static VALUE Point_initialize(int argc, VALUE* argv, VALUE self)
       <pre class="lines">
 
 
-2599
-2600
-2601
-2602
-2603</pre>
+2619
+2620
+2621
+2622
+2623</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2599</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2619</span>
 
 static VALUE Point_inspect(VALUE self)
 {
@@ -526,9 +513,9 @@ static VALUE Point_inspect(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:25:11 2015 by
+  Generated on Sun Mar 25 14:38:21 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

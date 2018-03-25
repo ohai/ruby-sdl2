@@ -6,7 +6,7 @@
 <title>
   Module: SDL2::GL
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../class_list.html"></iframe>
+      <iframe id="nav" src="../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -59,8 +59,6 @@
         <div class="clear"></div>
       </div>
 
-      <iframe id="search_frame" src="../class_list.html"></iframe>
-
       <div id="content"><h1>Module: SDL2::GL
   
   
@@ -89,8 +87,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>This module provides the initialize/shutdown functions of OpenGL.</p>
+    <p>This module provides the initialize/shutdown functions of OpenGL.</p>
 
 
   </div>
@@ -110,15 +107,12 @@
 </p>
 
   <h2>Constant Summary</h2>
-  
-    <dl class="constants">
-      
-        <dt id="RED_SIZE-constant" class="">RED_SIZE =
-          <div class="docstring">
-  <div class="discussion">
+  <dl class="constants">
     
-<p>OpenGL attribute - minimal bits of red channel in color buffer, default is
-3</p>
+      <dt id="RED_SIZE-constant" class="">RED_SIZE =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - minimal bits of red channel in color buffer, default is 3</p>
 
 
   </div>
@@ -127,15 +121,13 @@
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_RED_SIZE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="GREEN_SIZE-constant" class="">GREEN_SIZE =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_RED_SIZE</span><span class='rparen'>)</span></pre></dd>
     
-<p>OpenGL attribute - minimal bits of green channel in color buffer, default
-is 3</p>
+      <dt id="GREEN_SIZE-constant" class="">GREEN_SIZE =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - minimal bits of green channel in color buffer, default is 3</p>
 
 
   </div>
@@ -144,15 +136,13 @@ is 3</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_GREEN_SIZE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="BLUE_SIZE-constant" class="">BLUE_SIZE =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_GREEN_SIZE</span><span class='rparen'>)</span></pre></dd>
     
-<p>OpenGL attribute - minimal bits of blue channel in color buffer, default is
-2</p>
+      <dt id="BLUE_SIZE-constant" class="">BLUE_SIZE =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - minimal bits of blue channel in color buffer, default is 2</p>
 
 
   </div>
@@ -161,15 +151,13 @@ is 3</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_BLUE_SIZE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="ALPHA_SIZE-constant" class="">ALPHA_SIZE =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_BLUE_SIZE</span><span class='rparen'>)</span></pre></dd>
     
-<p>OpenGL attribute - minimal bits of alpha channel in color buffer, default
-is 0</p>
+      <dt id="ALPHA_SIZE-constant" class="">ALPHA_SIZE =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - minimal bits of alpha channel in color buffer, default is 0</p>
 
 
   </div>
@@ -178,14 +166,13 @@ is 0</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_ALPHA_SIZE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="BUFFER_SIZE-constant" class="">BUFFER_SIZE =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_ALPHA_SIZE</span><span class='rparen'>)</span></pre></dd>
     
-<p>OpenGL attribute - minimal bits of framebufer, default is 0</p>
+      <dt id="BUFFER_SIZE-constant" class="">BUFFER_SIZE =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - minimal bits of framebufer, default is 0</p>
 
 
   </div>
@@ -194,15 +181,14 @@ is 0</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_BUFFER_SIZE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="DOUBLEBUFFER-constant" class="">DOUBLEBUFFER =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_BUFFER_SIZE</span><span class='rparen'>)</span></pre></dd>
     
-<p>OpenGL attribute - whether the single buffer (0) or double buffer (1),
-default  is double buffer</p>
+      <dt id="DOUBLEBUFFER-constant" class="">DOUBLEBUFFER =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - whether the single buffer (0) or double buffer (1), default
+      is double buffer</p>
 
 
   </div>
@@ -211,14 +197,13 @@ default  is double buffer</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_DOUBLEBUFFER</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="DEPTH_SIZE-constant" class="">DEPTH_SIZE =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_DOUBLEBUFFER</span><span class='rparen'>)</span></pre></dd>
     
-<p>OpenGL attribute - bits of depth buffer, default is 16</p>
+      <dt id="DEPTH_SIZE-constant" class="">DEPTH_SIZE =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - bits of depth buffer, default is 16</p>
 
 
   </div>
@@ -227,14 +212,13 @@ default  is double buffer</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_DEPTH_SIZE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="STENCIL_SIZE-constant" class="">STENCIL_SIZE =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_DEPTH_SIZE</span><span class='rparen'>)</span></pre></dd>
     
-<p>OpenGL attribute - bits of stencil buffer, default is 0</p>
+      <dt id="STENCIL_SIZE-constant" class="">STENCIL_SIZE =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - bits of stencil buffer, default is 0</p>
 
 
   </div>
@@ -243,32 +227,198 @@ default  is double buffer</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_STENCIL_SIZE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="ACCUM_RED_SIZE-constant" class="">ACCUM_RED_SIZE =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_STENCIL_SIZE</span><span class='rparen'>)</span></pre></dd>
     
-<p>OpenGL attribute - minimal bits of red channel in accumlation buffer, 
+      <dt id="ACCUM_RED_SIZE-constant" class="">ACCUM_RED_SIZE =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - minimal bits of red channel in accumlation buffer,
+      default is 0</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_ACCUM_RED_SIZE</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="ACCUM_GREEN_SIZE-constant" class="">ACCUM_GREEN_SIZE =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - minimal bits of green channel in accumlation buffer,
+      default is 0</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_ACCUM_GREEN_SIZE</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="ACCUM_BLUE_SIZE-constant" class="">ACCUM_BLUE_SIZE =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - minimal bits of blue channel in accumlation buffer,
+      default is 0</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_ACCUM_BLUE_SIZE</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="ACCUM_ALPHA_SIZE-constant" class="">ACCUM_ALPHA_SIZE =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - minimal bits of alpha channel in accumlation buffer,
+      default is 0</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_ACCUM_ALPHA_SIZE</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="STEREO-constant" class="">STEREO =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - whether output is stereo (1) or not (0), default is 0</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_STEREO</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="MULTISAMPLEBUFFERS-constant" class="">MULTISAMPLEBUFFERS =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribuite - the number of buffers used for multisampe anti-aliasing,
+      default is 0</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_MULTISAMPLEBUFFERS</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="MULTISAMPLESAMPLES-constant" class="">MULTISAMPLESAMPLES =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - the number of samples used around the current pixel
+      use for multisample anti-aliasing, default is 0</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_MULTISAMPLESAMPLES</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="ACCELERATED_VISUAL-constant" class="">ACCELERATED_VISUAL =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - 1 for requiring hardware acceleration, 0 for software rendering,
+      default is allowing either</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_ACCELERATED_VISUAL</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="RETAINED_BACKING-constant" class="">RETAINED_BACKING =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - not used (deprecated)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_RETAINED_BACKING</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="CONTEXT_MAJOR_VERSION-constant" class="">CONTEXT_MAJOR_VERSION =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - OpenGL context major version</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_MAJOR_VERSION</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="CONTEXT_MINOR_VERSION-constant" class="">CONTEXT_MINOR_VERSION =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - OpenGL context minor version</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_MINOR_VERSION</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="CONTEXT_FLAGS-constant" class="">CONTEXT_FLAGS =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - the bit combination of following constants, or 0.
 default is 0</p>
 
+<ul>
+  <li><span class='object_link'><a href="#CONTEXT_DEBUG_FLAG-constant" title="SDL2::GL::CONTEXT_DEBUG_FLAG (constant)">CONTEXT_DEBUG_FLAG</a></span></li>
+  <li><span class='object_link'><a href="#CONTEXT_FORWARD_COMPATIBLE_FLAG-constant" title="SDL2::GL::CONTEXT_FORWARD_COMPATIBLE_FLAG (constant)">CONTEXT_FORWARD_COMPATIBLE_FLAG</a></span></li>
+  <li><span class='object_link'><a href="#CONTEXT_ROBUST_ACCESS_FLAG-constant" title="SDL2::GL::CONTEXT_ROBUST_ACCESS_FLAG (constant)">CONTEXT_ROBUST_ACCESS_FLAG</a></span></li>
+  <li><span class='object_link'><a href="#CONTEXT_RESET_ISOLATION_FLAG-constant" title="SDL2::GL::CONTEXT_RESET_ISOLATION_FLAG (constant)">CONTEXT_RESET_ISOLATION_FLAG</a></span></li>
+</ul>
 
-  </div>
-</div>
-<div class="tags">
-  
+<p>These flags are mapped to some OpenGL extensions. Please see
+the documentation of each constant for more details.</p>
 
-</div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_ACCUM_RED_SIZE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="ACCUM_GREEN_SIZE-constant" class="">ACCUM_GREEN_SIZE =
-          <div class="docstring">
-  <div class="discussion">
-    
-<p>OpenGL attribute - minimal bits of green channel in accumlation buffer, 
-default is 0</p>
+<p>https://wiki.libsdl.org/SDL_GLcontextFlag</p>
 
 
   </div>
@@ -277,206 +427,22 @@ default is 0</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_ACCUM_GREEN_SIZE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="ACCUM_BLUE_SIZE-constant" class="">ACCUM_BLUE_SIZE =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_FLAGS</span><span class='rparen'>)</span></pre></dd>
     
-<p>OpenGL attribute - minimal bits of blue channel in accumlation buffer, 
-default is 0</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_ACCUM_BLUE_SIZE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="ACCUM_ALPHA_SIZE-constant" class="">ACCUM_ALPHA_SIZE =
-          <div class="docstring">
+      <dt id="CONTEXT_PROFILE_MASK-constant" class="">CONTEXT_PROFILE_MASK =
+        <div class="docstring">
   <div class="discussion">
-    
-<p>OpenGL attribute - minimal bits of alpha channel in accumlation buffer, 
-default is 0</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_ACCUM_ALPHA_SIZE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="STEREO-constant" class="">STEREO =
-          <div class="docstring">
-  <div class="discussion">
-    
-<p>OpenGL attribute - whether output is stereo (1) or not (0), default is 0</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_STEREO</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="MULTISAMPLEBUFFERS-constant" class="">MULTISAMPLEBUFFERS =
-          <div class="docstring">
-  <div class="discussion">
-    
-<p>OpenGL attribuite - the number of buffers used for multisampe
-anti-aliasing,  default is 0</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_MULTISAMPLEBUFFERS</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="MULTISAMPLESAMPLES-constant" class="">MULTISAMPLESAMPLES =
-          <div class="docstring">
-  <div class="discussion">
-    
-<p>OpenGL attribute - the number of samples used around the current pixel  use
-for multisample anti-aliasing, default is 0</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_MULTISAMPLESAMPLES</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="ACCELERATED_VISUAL-constant" class="">ACCELERATED_VISUAL =
-          <div class="docstring">
-  <div class="discussion">
-    
-<p>OpenGL attribute - 1 for requiring hardware acceleration, 0 for software
-rendering,  default is allowing either</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_ACCELERATED_VISUAL</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="RETAINED_BACKING-constant" class="">RETAINED_BACKING =
-          <div class="docstring">
-  <div class="discussion">
-    
-<p>OpenGL attribute - not used (deprecated)</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_RETAINED_BACKING</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="CONTEXT_MAJOR_VERSION-constant" class="">CONTEXT_MAJOR_VERSION =
-          <div class="docstring">
-  <div class="discussion">
-    
-<p>OpenGL attribute - OpenGL context major version</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_MAJOR_VERSION</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="CONTEXT_MINOR_VERSION-constant" class="">CONTEXT_MINOR_VERSION =
-          <div class="docstring">
-  <div class="discussion">
-    
-<p>OpenGL attribute - OpenGL context minor version</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_MINOR_VERSION</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="CONTEXT_FLAGS-constant" class="">CONTEXT_FLAGS =
-          <div class="docstring">
-  <div class="discussion">
-    
-<p>OpenGL attribute - the bit combination of following constants, or 0.
-default is 0</p>
-<ul><li>
-<p><span class='object_link'><a href="#CONTEXT_DEBUG_FLAG-constant" title="SDL2::GL::CONTEXT_DEBUG_FLAG (constant)">CONTEXT_DEBUG_FLAG</a></span></p>
-</li><li>
-<p><span class='object_link'><a href="#CONTEXT_FORWARD_COMPATIBLE_FLAG-constant" title="SDL2::GL::CONTEXT_FORWARD_COMPATIBLE_FLAG (constant)">CONTEXT_FORWARD_COMPATIBLE_FLAG</a></span></p>
-</li><li>
-<p><span class='object_link'><a href="#CONTEXT_ROBUST_ACCESS_FLAG-constant" title="SDL2::GL::CONTEXT_ROBUST_ACCESS_FLAG (constant)">CONTEXT_ROBUST_ACCESS_FLAG</a></span></p>
-</li><li>
-<p><span class='object_link'><a href="#CONTEXT_RESET_ISOLATION_FLAG-constant" title="SDL2::GL::CONTEXT_RESET_ISOLATION_FLAG (constant)">CONTEXT_RESET_ISOLATION_FLAG</a></span></p>
-</li></ul>
-
-<p>These flags are mapped to some OpenGL extensions. Please see the
-documentation of each constant for more details.</p>
-
-<p><a
-href="https://wiki.libsdl.org/SDL_GLcontextFlag">wiki.libsdl.org/SDL_GLcontextFlag</a></p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_FLAGS</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="CONTEXT_PROFILE_MASK-constant" class="">CONTEXT_PROFILE_MASK =
-          <div class="docstring">
-  <div class="discussion">
-    
-<p>OpenGL attribute - type of GL context, one of the following constants,
+    <p>OpenGL attribute - type of GL context, one of the following constants,
 defaults depends on platform</p>
-<ul><li>
-<p><span class='object_link'><a href="#CONTEXT_PROFILE_CORE-constant" title="SDL2::GL::CONTEXT_PROFILE_CORE (constant)">CONTEXT_PROFILE_CORE</a></span></p>
-</li><li>
-<p><span class='object_link'><a href="#CONTEXT_PROFILE_COMPATIBILITY-constant" title="SDL2::GL::CONTEXT_PROFILE_COMPATIBILITY (constant)">CONTEXT_PROFILE_COMPATIBILITY</a></span></p>
-</li><li>
-<p><span class='object_link'><a href="#CONTEXT_PROFILE_ES-constant" title="SDL2::GL::CONTEXT_PROFILE_ES (constant)">CONTEXT_PROFILE_ES</a></span></p>
-</li></ul>
 
-<p><a
-href="https://wiki.libsdl.org/SDL_GLprofile">wiki.libsdl.org/SDL_GLprofile</a></p>
+<ul>
+  <li><span class='object_link'><a href="#CONTEXT_PROFILE_CORE-constant" title="SDL2::GL::CONTEXT_PROFILE_CORE (constant)">CONTEXT_PROFILE_CORE</a></span></li>
+  <li><span class='object_link'><a href="#CONTEXT_PROFILE_COMPATIBILITY-constant" title="SDL2::GL::CONTEXT_PROFILE_COMPATIBILITY (constant)">CONTEXT_PROFILE_COMPATIBILITY</a></span></li>
+  <li><span class='object_link'><a href="#CONTEXT_PROFILE_ES-constant" title="SDL2::GL::CONTEXT_PROFILE_ES (constant)">CONTEXT_PROFILE_ES</a></span></li>
+</ul>
+
+<p>https://wiki.libsdl.org/SDL_GLprofile</p>
 
 
   </div>
@@ -485,14 +451,13 @@ href="https://wiki.libsdl.org/SDL_GLprofile">wiki.libsdl.org/SDL_GLprofile</a></
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_PROFILE_MASK</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="SHARE_WITH_CURRENT_CONTEXT-constant" class="">SHARE_WITH_CURRENT_CONTEXT =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_PROFILE_MASK</span><span class='rparen'>)</span></pre></dd>
     
-<p>OpenGL attribute - OpenGL context sharing, default is 0</p>
+      <dt id="SHARE_WITH_CURRENT_CONTEXT-constant" class="">SHARE_WITH_CURRENT_CONTEXT =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - OpenGL context sharing, default is 0</p>
 
 
   </div>
@@ -501,14 +466,13 @@ href="https://wiki.libsdl.org/SDL_GLprofile">wiki.libsdl.org/SDL_GLprofile</a></
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_SHARE_WITH_CURRENT_CONTEXT</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="FRAMEBUFFER_SRGB_CAPABLE-constant" class="">FRAMEBUFFER_SRGB_CAPABLE =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_SHARE_WITH_CURRENT_CONTEXT</span><span class='rparen'>)</span></pre></dd>
     
-<p>OpenGL attribute - 1 for requesting sRGB capable visual, default to 0</p>
+      <dt id="FRAMEBUFFER_SRGB_CAPABLE-constant" class="">FRAMEBUFFER_SRGB_CAPABLE =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - 1 for requesting sRGB capable visual, default to 0</p>
 
 
   </div>
@@ -517,14 +481,13 @@ href="https://wiki.libsdl.org/SDL_GLprofile">wiki.libsdl.org/SDL_GLprofile</a></
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_FRAMEBUFFER_SRGB_CAPABLE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="CONTEXT_EGL-constant" class="">CONTEXT_EGL =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_FRAMEBUFFER_SRGB_CAPABLE</span><span class='rparen'>)</span></pre></dd>
     
-<p>OpenGL attribute - not used (deprecated)</p>
+      <dt id="CONTEXT_EGL-constant" class="">CONTEXT_EGL =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL attribute - not used (deprecated)</p>
 
 
   </div>
@@ -533,16 +496,16 @@ href="https://wiki.libsdl.org/SDL_GLprofile">wiki.libsdl.org/SDL_GLprofile</a></
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_EGL</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="CONTEXT_DEBUG_FLAG-constant" class="">CONTEXT_DEBUG_FLAG =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_EGL</span><span class='rparen'>)</span></pre></dd>
     
-<p>This flag maps to GLX_CONTEXT_DEBUG_BIT_ARB in the GLX_ARB_create_context
-extension for X11 and WGL_CONTEXT_DEBUG_BIT_ARB in the
-WGL_ARB_create_context extension for Windows.</p>
+      <dt id="CONTEXT_DEBUG_FLAG-constant" class="">CONTEXT_DEBUG_FLAG =
+        <div class="docstring">
+  <div class="discussion">
+    <p>This flag maps to GLX_CONTEXT_DEBUG_BIT_ARB in
+the GLX_ARB_create_context extension for X11
+and WGL_CONTEXT_DEBUG_BIT_ARB in the WGL_ARB_create_context
+extension for Windows.</p>
 
 
   </div>
@@ -551,14 +514,13 @@ WGL_ARB_create_context extension for Windows.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_DEBUG_FLAG</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="CONTEXT_FORWARD_COMPATIBLE_FLAG-constant" class="">CONTEXT_FORWARD_COMPATIBLE_FLAG =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_DEBUG_FLAG</span><span class='rparen'>)</span></pre></dd>
     
-<p>This flag maps to GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB in the
+      <dt id="CONTEXT_FORWARD_COMPATIBLE_FLAG-constant" class="">CONTEXT_FORWARD_COMPATIBLE_FLAG =
+        <div class="docstring">
+  <div class="discussion">
+    <p>This flag maps to GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB in the
 GLX_ARB_create_context extension for X11 and
 WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB in the WGL_ARB_create_context
 extension for Windows.</p>
@@ -570,14 +532,13 @@ extension for Windows.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="CONTEXT_ROBUST_ACCESS_FLAG-constant" class="">CONTEXT_ROBUST_ACCESS_FLAG =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG</span><span class='rparen'>)</span></pre></dd>
     
-<p>This flag maps to GLX_CONTEXT_ROBUST_ACCESS_BIT_ARB in the
+      <dt id="CONTEXT_ROBUST_ACCESS_FLAG-constant" class="">CONTEXT_ROBUST_ACCESS_FLAG =
+        <div class="docstring">
+  <div class="discussion">
+    <p>This flag maps to GLX_CONTEXT_ROBUST_ACCESS_BIT_ARB in the
 GLX_ARB_create_context_robustness extension for X11 and
 WGL_CONTEXT_ROBUST_ACCESS_BIT_ARB in the WGL_ARB_create_context_robustness
 extension for Windows.</p>
@@ -589,17 +550,16 @@ extension for Windows.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="CONTEXT_RESET_ISOLATION_FLAG-constant" class="">CONTEXT_RESET_ISOLATION_FLAG =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG</span><span class='rparen'>)</span></pre></dd>
     
-<p>This flag maps to GLX_CONTEXT_RESET_ISOLATION_BIT_ARB in the
+      <dt id="CONTEXT_RESET_ISOLATION_FLAG-constant" class="">CONTEXT_RESET_ISOLATION_FLAG =
+        <div class="docstring">
+  <div class="discussion">
+    <p>This flag maps to GLX_CONTEXT_RESET_ISOLATION_BIT_ARB in the
 GLX_ARB_robustness_isolation extension for X11 and
-WGL_CONTEXT_RESET_ISOLATION_BIT_ARB in the
-WGL_ARB_create_context_robustness extension for Windows.</p>
+WGL_CONTEXT_RESET_ISOLATION_BIT_ARB in the WGL_ARB_create_context_robustness
+extension for Windows.</p>
 
 
   </div>
@@ -608,30 +568,14 @@ WGL_ARB_create_context_robustness extension for Windows.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_RESET_ISOLATION_FLAG</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="CONTEXT_PROFILE_CORE-constant" class="">CONTEXT_PROFILE_CORE =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_RESET_ISOLATION_FLAG</span><span class='rparen'>)</span></pre></dd>
     
-<p>OpenGL core profile - deprecated functions are disabled</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_PROFILE_CORE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="CONTEXT_PROFILE_COMPATIBILITY-constant" class="">CONTEXT_PROFILE_COMPATIBILITY =
-          <div class="docstring">
+      <dt id="CONTEXT_PROFILE_CORE-constant" class="">CONTEXT_PROFILE_CORE =
+        <div class="docstring">
   <div class="discussion">
-    
-<p>OpenGL compatibility profile - deprecated functions are allowed</p>
+    <p>OpenGL core profile - deprecated
+functions are disabled</p>
 
 
   </div>
@@ -640,15 +584,14 @@ WGL_ARB_create_context_robustness extension for Windows.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_PROFILE_COMPATIBILITY</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="CONTEXT_PROFILE_ES-constant" class="">CONTEXT_PROFILE_ES =
-          <div class="docstring">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_PROFILE_CORE</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="CONTEXT_PROFILE_COMPATIBILITY-constant" class="">CONTEXT_PROFILE_COMPATIBILITY =
+        <div class="docstring">
   <div class="discussion">
-    
-<p>OpenGL ES profile - only a subset of the base OpenGL functionality is
-available</p>
+    <p>OpenGL compatibility profile -
+deprecated functions are allowed</p>
 
 
   </div>
@@ -657,11 +600,26 @@ available</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_PROFILE_ES</span><span class='rparen'>)</span></pre></dd>
-      
-    </dl>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_PROFILE_COMPATIBILITY</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="CONTEXT_PROFILE_ES-constant" class="">CONTEXT_PROFILE_ES =
+        <div class="docstring">
+  <div class="discussion">
+    <p>OpenGL ES profile - only a subset of the
+base OpenGL functionality is available</p>
+
+
+  </div>
+</div>
+<div class="tags">
   
+
+</div>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_GL_CONTEXT_PROFILE_ES</span><span class='rparen'>)</span></pre></dd>
+    
+  </dl>
 
 
 
@@ -694,8 +652,7 @@ available</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Return true if the current context supports <strong>extension</strong>.</p>
+    <span class="summary_desc"><div class='inline'><p>Return true if the current context supports <strong>extension</strong>.</p>
 </div></span>
   
 </li>
@@ -718,8 +675,7 @@ available</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the acutal value for an attribute from current context.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the acutal value for an attribute from current context.</p>
 </div></span>
   
 </li>
@@ -742,8 +698,7 @@ available</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Set an OpenGL window attribute before window creation.</p>
+    <span class="summary_desc"><div class='inline'><p>Set an OpenGL window attribute before window creation.</p>
 </div></span>
   
 </li>
@@ -766,8 +721,7 @@ available</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the state of swap interval of the current context.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the state of swap interval of the current context.</p>
 </div></span>
   
 </li>
@@ -776,7 +730,7 @@ available</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#swap_interval%3D-class_method" title="swap_interval= (class method)">.<strong>swap_interval=</strong>(interval)  &#x21d2; nil </a>
+      <a href="#swap_interval=-class_method" title="swap_interval= (class method)">.<strong>swap_interval=</strong>(interval)  &#x21d2; nil </a>
     
 
     
@@ -790,8 +744,7 @@ available</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Set the state of swap interval of the current context.</p>
+    <span class="summary_desc"><div class='inline'><p>Set the state of swap interval of the current context.</p>
 </div></span>
   
 </li>
@@ -819,14 +772,14 @@ available</p>
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Return true if the current context supports <strong>extension</strong></p>
+    <p>Return true if the current context supports <strong>extension</strong></p>
 
 
   </div>
@@ -837,7 +790,7 @@ available</p>
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='const'>SDL2</span><span class='op'>::</span><span class='const'>GL</span><span class='period'>.</span><span class='id identifier rubyid_extension_supported?'>extension_supported?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>GL_EXT_framebuffer_blit</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></code></pre>
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="../SDL2.html" title="SDL2 (module)">SDL2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="SDL2::GL (module)">GL</a></span></span><span class='period'>.</span><span class='id identifier rubyid_extension_supported?'>extension_supported?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>GL_EXT_framebuffer_blit</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -853,8 +806,7 @@ available</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>the name of an extension</p>
+        <div class='inline'><p>the name of an extension</p>
 </div>
       
     </li>
@@ -914,14 +866,14 @@ static VALUE GL_s_extension_supported_p(VALUE self, VALUE extension)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Get the acutal value for an attribute from current context.</p>
+    <p>Get the acutal value for an attribute from current context.</p>
 
 
   </div>
@@ -940,8 +892,7 @@ static VALUE GL_s_extension_supported_p(VALUE self, VALUE extension)
       
       
         &mdash;
-        <div class='inline'>
-<p>the OpenGL attribute to query</p>
+        <div class='inline'><p>the OpenGL attribute to query</p>
 </div>
       
     </li>
@@ -1005,14 +956,14 @@ static VALUE GL_s_get_attribute(VALUE self, VALUE attr)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Set an OpenGL window attribute before window creation.</p>
+    <p>Set an OpenGL window attribute before window creation.</p>
 
 
   </div>
@@ -1031,8 +982,7 @@ static VALUE GL_s_get_attribute(VALUE self, VALUE attr)
       
       
         &mdash;
-        <div class='inline'>
-<p>the OpenGL attribute to set</p>
+        <div class='inline'><p>the OpenGL attribute to set</p>
 </div>
       
     </li>
@@ -1047,8 +997,7 @@ static VALUE GL_s_get_attribute(VALUE self, VALUE attr)
       
       
         &mdash;
-        <div class='inline'>
-<p>the desired value for the attribute</p>
+        <div class='inline'><p>the desired value for the attribute</p>
 </div>
       
     </li>
@@ -1108,8 +1057,7 @@ static VALUE GL_s_set_attribute(VALUE self, VALUE attr, VALUE value)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the state of swap interval of the current context.</p>
+    <p>Get the state of swap interval of the current context.</p>
 
 
   </div>
@@ -1127,9 +1075,9 @@ static VALUE GL_s_set_attribute(VALUE self, VALUE attr, VALUE value)
       
       
         &mdash;
-        <div class='inline'>
-<p>return 0 when vsync is not used, return 1 when vsync is used, and return -1
-when vsync is not supported by the system (OS).</p>
+        <div class='inline'><p>return 0 when vsync is not used,
+return 1 when vsync is used,
+and return -1 when vsync is not supported by the system (OS).</p>
 </div>
       
     </li>
@@ -1172,14 +1120,14 @@ static VALUE GL_s_swap_interval(VALUE self)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Set the state of swap interval of the current context.</p>
+    <p>Set the state of swap interval of the current context.</p>
 
 
   </div>
@@ -1198,8 +1146,8 @@ static VALUE GL_s_swap_interval(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>0 if you don&#39;t want to wait for vsync, 1 if you want to wait for vsync,
+        <div class='inline'><p>0 if you don’t want to wait for vsync,
+1 if you want to wait for vsync,
 -1 if you want to use late swap tearing</p>
 </div>
       
@@ -1254,9 +1202,9 @@ static VALUE GL_s_set_swap_interval(VALUE self, VALUE interval)
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:25:00 2015 by
+  Generated on Sun Mar 25 14:38:15 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

@@ -6,7 +6,7 @@
 <title>
   Class: SDL2::GL::Context
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../../class_list.html"></iframe>
 
       <div id="content"><h1>Class: SDL2::GL::Context
   
@@ -105,10 +103,10 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>This class represents an OpenGL context.</p>
+    <p>This class represents an OpenGL context.</p>
 
-<p>You must create a new OpenGL context before using OpenGL functions.</p>
+<p>You must create a new OpenGL context before using
+OpenGL functions.</p>
 
 
   </div>
@@ -148,9 +146,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create an OpenGL context for use with an OpenGL window, and make it
-current.</p>
+    <span class="summary_desc"><div class='inline'><p>Create an OpenGL context for use with an OpenGL window, and make it current.</p>
 </div></span>
   
 </li>
@@ -173,8 +169,7 @@ current.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the current OpenGL context.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the current OpenGL context.</p>
 </div></span>
   
 </li>
@@ -206,8 +201,7 @@ current.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Delete the OpenGL context.</p>
+    <span class="summary_desc"><div class='inline'><p>Delete the OpenGL context.</p>
 </div></span>
   
 </li>
@@ -230,8 +224,7 @@ current.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Return true if the context is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::GL::Context#destroy (method)">destroyed</a></span>.</p>
+    <span class="summary_desc"><div class='inline'><p>Return true if the context is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::GL::Context#destroy (method)">destroyed</a></span>.</p>
 </div></span>
   
 </li>
@@ -254,8 +247,7 @@ current.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Set the OpenGL context for rendering into an OpenGL window.</p>
+    <span class="summary_desc"><div class='inline'><p>Set the OpenGL context for rendering into an OpenGL window.</p>
 </div></span>
   
 </li>
@@ -283,14 +275,14 @@ current.</p>
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Create an OpenGL context for use with an OpenGL window, and make it
+    <p>Create an OpenGL context for use with an OpenGL window, and make it
 current.</p>
 
 
@@ -331,8 +323,7 @@ context.destroy</code></pre>
       
       
         &mdash;
-        <div class='inline'>
-<p>the window associate with a new context</p>
+        <div class='inline'><p>the window associate with a new context</p>
 </div>
       
     </li>
@@ -405,8 +396,7 @@ static VALUE GLContext_s_create(VALUE self, VALUE window)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the current OpenGL context.</p>
+    <p>Get the current OpenGL context.</p>
 
 
   </div>
@@ -424,8 +414,7 @@ static VALUE GLContext_s_create(VALUE self, VALUE window)
       
       
         &mdash;
-        <div class='inline'>
-<p>the curren context</p>
+        <div class='inline'><p>the curren context</p>
 </div>
       
     </li>
@@ -438,8 +427,7 @@ static VALUE GLContext_s_create(VALUE self, VALUE window)
       
       
         &mdash;
-        <div class='inline'>
-<p>if there is no current context</p>
+        <div class='inline'><p>if there is no current context</p>
 </div>
       
     </li>
@@ -493,8 +481,7 @@ static VALUE GLContext_s_current(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Delete the OpenGL context.</p>
+    <p>Delete the OpenGL context.</p>
 
 
   </div>
@@ -564,8 +551,7 @@ static VALUE GLContext_destroy(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Return true if the context is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::GL::Context#destroy (method)">destroyed</a></span>.</p>
+    <p>Return true if the context is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::GL::Context#destroy (method)">destroyed</a></span>.</p>
 
 
   </div>
@@ -602,14 +588,14 @@ static VALUE GLContext_destroy(VALUE self)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Set the OpenGL context for rendering into an OpenGL window.</p>
+    <p>Set the OpenGL context for rendering into an OpenGL window.</p>
 
 
   </div>
@@ -628,8 +614,7 @@ static VALUE GLContext_destroy(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>the window to associate with the context</p>
+        <div class='inline'><p>the window to associate with the context</p>
 </div>
       
     </li>
@@ -685,9 +670,9 @@ static VALUE GLContext_make_current(VALUE self, VALUE window)
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:25:03 2015 by
+  Generated on Sun Mar 25 14:38:17 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

@@ -6,7 +6,7 @@
 <title>
   Module: SDL2::BlendMode
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../class_list.html"></iframe>
+      <iframe id="nav" src="../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -59,8 +59,6 @@
         <div class="clear"></div>
       </div>
 
-      <iframe id="search_frame" src="../class_list.html"></iframe>
-
       <div id="content"><h1>Module: SDL2::BlendMode
   
   
@@ -89,15 +87,14 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Constants represent blend mode for Renderer.copy and drawing
-operations.</p>
+    <p>Constants represent blend mode for Renderer.copy and
+drawing operations.</p>
 
-<p>You can change the blending mode using <span class='object_link'><a href="Renderer.html#draw_blend_mode%3D-instance_method" title="SDL2::Renderer#draw_blend_mode= (method)">Renderer#draw_blend_mode=</a></span>
-and <span class='object_link'><a href="Texture.html#blend_mode%3D-instance_method" title="SDL2::Texture#blend_mode= (method)">Texture#blend_mode=</a></span>.</p>
+<p>You can change the blending mode using
+<span class='object_link'><a href="Renderer.html#draw_blend_mode=-instance_method" title="SDL2::Renderer#draw_blend_mode= (method)">Renderer#draw_blend_mode=</a></span> and <span class='object_link'><a href="Texture.html#blend_mode=-instance_method" title="SDL2::Texture#blend_mode= (method)">Texture#blend_mode=</a></span>.</p>
 
-<p>In the backend of SDL, opengl or direct3d blending mechanism is used for
-blending operations.</p>
+<p>In the backend of SDL, opengl or direct3d blending
+mechanism is used for blending operations.</p>
 
 
   </div>
@@ -107,14 +104,12 @@ blending operations.</p>
 
 </div>
   <h2>Constant Summary</h2>
-  
-    <dl class="constants">
-      
-        <dt id="NONE-constant" class="">NONE =
-          <div class="docstring">
-  <div class="discussion">
+  <dl class="constants">
     
-<p>no blending (dstRGBA = srcRGBA)</p>
+      <dt id="NONE-constant" class="">NONE =
+        <div class="docstring">
+  <div class="discussion">
+    <p>no blending (dstRGBA = srcRGBA)</p>
 
 
   </div>
@@ -123,15 +118,13 @@ blending operations.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_NONE</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="BLEND-constant" class="">BLEND =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_NONE</span><span class='rparen'>)</span></pre></dd>
     
-<p>alpha blending (dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA), dstA = srcA
-+ (dstA * (1-srcA)))</p>
+      <dt id="BLEND-constant" class="">BLEND =
+        <div class="docstring">
+  <div class="discussion">
+    <p>alpha blending (dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA), dstA = srcA + (dstA * (1-srcA)))</p>
 
 
   </div>
@@ -140,14 +133,13 @@ blending operations.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_BLEND</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="ADD-constant" class="">ADD =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_BLEND</span><span class='rparen'>)</span></pre></dd>
     
-<p>additive blending (dstRGB = (srcRGB * srcA) + dstRGB, dstA = dstA)</p>
+      <dt id="ADD-constant" class="">ADD =
+        <div class="docstring">
+  <div class="discussion">
+    <p>additive blending (dstRGB = (srcRGB * srcA) + dstRGB, dstA = dstA)</p>
 
 
   </div>
@@ -156,14 +148,13 @@ blending operations.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_ADD</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="MOD-constant" class="">MOD =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_ADD</span><span class='rparen'>)</span></pre></dd>
     
-<p>color modulate (multiplicative) (dstRGB = srcRGB * dstRGB, dstA = dstA)</p>
+      <dt id="MOD-constant" class="">MOD =
+        <div class="docstring">
+  <div class="discussion">
+    <p>color modulate (multiplicative) (dstRGB = srcRGB * dstRGB, dstA = dstA)</p>
 
 
   </div>
@@ -172,11 +163,10 @@ blending operations.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_MOD</span><span class='rparen'>)</span></pre></dd>
-      
-    </dl>
-  
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_MOD</span><span class='rparen'>)</span></pre></dd>
+    
+  </dl>
 
 
 
@@ -189,9 +179,9 @@ blending operations.</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:25:02 2015 by
+  Generated on Sun Mar 25 14:38:17 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

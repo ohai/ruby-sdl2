@@ -6,7 +6,7 @@
 <title>
   Class: SDL2::Mixer::Music
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../../class_list.html"></iframe>
 
       <div id="content"><h1>Class: SDL2::Mixer::Music
   
@@ -105,11 +103,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>This class represents music, a kind of sound sources.</p>
+    <p>This class represents music, a kind of sound sources.</p>
 
-<p>Music is playable on <span class='object_link'><a href="MusicChannel.html" title="SDL2::Mixer::MusicChannel (module)">MusicChannel</a></span>, not on
-<span class='object_link'><a href="Channels.html" title="SDL2::Mixer::Channels (module)">Channels</a></span>.</p>
+<p>Music is playable on <span class='object_link'><a href="MusicChannel.html" title="SDL2::Mixer::MusicChannel (module)">MusicChannel</a></span>, not on <span class='object_link'><a href="Channels.html" title="SDL2::Mixer::Channels (module)">Channels</a></span>.</p>
 
 
   </div>
@@ -149,8 +145,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the names of music decoders.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the names of music decoders.</p>
 </div></span>
   
 </li>
@@ -173,8 +168,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Load a music from file.</p>
+    <span class="summary_desc"><div class='inline'><p>Load a music from file.</p>
 </div></span>
   
 </li>
@@ -206,8 +200,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Deallocate the music memory.</p>
+    <span class="summary_desc"><div class='inline'><p>Deallocate the music memory.</p>
 </div></span>
   
 </li>
@@ -230,8 +223,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Return true if the memory is deallocated by <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Mixer::Music#destroy (method)">#destroy</a></span>.</p>
+    <span class="summary_desc"><div class='inline'><p>Return true if the memory is deallocated by <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Mixer::Music#destroy (method)">#destroy</a></span>.</p>
 </div></span>
   
 </li>
@@ -254,8 +246,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Inspection string.</p>
+    <span class="summary_desc"><div class='inline'><p>Inspection string.</p>
 </div></span>
   
 </li>
@@ -281,8 +272,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the names of music decoders.</p>
+    <p>Get the names of music decoders.</p>
 
 
   </div>
@@ -300,9 +290,8 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the names of decorders (supported sound formats), such as: “OGG”, “WAVE”,
-“MP3”</p>
+        <div class='inline'><p>the names of decorders (supported sound formats),
+such as: “OGG”, “WAVE”, “MP3”</p>
 </div>
       
     </li>
@@ -315,7 +304,6 @@
       <pre class="lines">
 
 
-1002
 1003
 1004
 1005
@@ -323,10 +311,11 @@
 1007
 1008
 1009
-1010</pre>
+1010
+1011</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 1002</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 1003</span>
 
 static VALUE Music_s_decoders(VALUE self)
 {
@@ -355,14 +344,14 @@ static VALUE Music_s_decoders(VALUE self)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Load a music from file.</p>
+    <p>Load a music from file.</p>
 
 
   </div>
@@ -381,8 +370,7 @@ static VALUE Music_s_decoders(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>the file path</p>
+        <div class='inline'><p>the file path</p>
 </div>
       
     </li>
@@ -413,8 +401,7 @@ static VALUE Music_s_decoders(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>raised when failing to load.</p>
+        <div class='inline'><p>raised when failing to load.</p>
 </div>
       
     </li>
@@ -430,7 +417,6 @@ static VALUE Music_s_decoders(VALUE self)
       <pre class="lines">
 
 
-1021
 1022
 1023
 1024
@@ -438,10 +424,11 @@ static VALUE Music_s_decoders(VALUE self)
 1026
 1027
 1028
-1029</pre>
+1029
+1030</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 1021</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 1022</span>
 
 static VALUE Music_s_load(VALUE self, VALUE fname)
 {
@@ -474,11 +461,10 @@ static VALUE Music_s_load(VALUE self, VALUE fname)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Deallocate the music memory.</p>
+    <p>Deallocate the music memory.</p>
 
-<p>Normally, the memory is deallocated by ruby&#39;s GC, but you can surely
-deallocate the memory with this method at any time.</p>
+<p>Normally, the memory is deallocated by ruby’s GC, but
+you can surely deallocate the memory with this method at any time.</p>
 
 
   </div>
@@ -505,16 +491,16 @@ deallocate the memory with this method at any time.</p>
       <pre class="lines">
 
 
-1039
 1040
 1041
 1042
 1043
 1044
-1045</pre>
+1045
+1046</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 1039</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 1040</span>
 
 static VALUE Music_destroy(VALUE self)
 {
@@ -539,8 +525,7 @@ static VALUE Music_destroy(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Return true if the memory is deallocated by <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Mixer::Music#destroy (method)">#destroy</a></span>.</p>
+    <p>Return true if the memory is deallocated by <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Mixer::Music#destroy (method)">#destroy</a></span>.</p>
 
 
   </div>
@@ -575,8 +560,7 @@ static VALUE Music_destroy(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns inspection string</p>
+    <p>Returns inspection string</p>
 
 
   </div>
@@ -594,8 +578,7 @@ static VALUE Music_destroy(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>inspection string</p>
+        <div class='inline'><p>inspection string</p>
 </div>
       
     </li>
@@ -608,7 +591,6 @@ static VALUE Music_destroy(VALUE self)
       <pre class="lines">
 
 
-1048
 1049
 1050
 1051
@@ -617,10 +599,11 @@ static VALUE Music_destroy(VALUE self)
 1054
 1055
 1056
-1057</pre>
+1057
+1058</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 1048</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 1049</span>
 
 static VALUE Music_inspect(VALUE self)
 {
@@ -642,9 +625,9 @@ static VALUE Music_inspect(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:25:02 2015 by
+  Generated on Sun Mar 25 14:38:18 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

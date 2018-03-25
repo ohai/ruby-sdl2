@@ -6,7 +6,7 @@
 <title>
   Class: SDL2::Display
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../class_list.html"></iframe>
+      <iframe id="nav" src="../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../class_list.html"></iframe>
 
       <div id="content"><h1>Class: SDL2::Display
   
@@ -105,8 +103,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>This class represents displays, screens, or monitors.</p>
+    <p>This class represents displays, screens, or monitors.</p>
 
 <p>This means that if you use dual screen, <span class='object_link'><a href="#displays-class_method" title="SDL2::Display.displays (method)">Display.displays</a></span> returns two displays.</p>
 
@@ -157,8 +154,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The index of the display, 0 origin.</p>
+    <span class="summary_desc"><div class='inline'><p>The index of the display, 0 origin.</p>
 </div></span>
   
 </li>
@@ -186,8 +182,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The name of the display.</p>
+    <span class="summary_desc"><div class='inline'><p>The name of the display.</p>
 </div></span>
   
 </li>
@@ -223,8 +218,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get all connected displays.</p>
+    <span class="summary_desc"><div class='inline'><p>Get all connected displays.</p>
 </div></span>
   
 </li>
@@ -256,9 +250,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the desktop area represented by the display, with the primary display
-located at (0, 0).</p>
+    <span class="summary_desc"><div class='inline'><p>Get the desktop area represented by the display, with the primary display located at (0, 0).</p>
 </div></span>
   
 </li>
@@ -281,8 +273,7 @@ located at (0, 0).</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the available display mode closest match to <strong>mode</strong>.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the available display mode closest match to <strong>mode</strong>.</p>
 </div></span>
   
 </li>
@@ -305,8 +296,7 @@ located at (0, 0).</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the current display mode.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the current display mode.</p>
 </div></span>
   
 </li>
@@ -329,8 +319,7 @@ located at (0, 0).</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the desktop display mode.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the desktop display mode.</p>
 </div></span>
   
 </li>
@@ -353,8 +342,7 @@ located at (0, 0).</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get available display modes of the display.</p>
+    <span class="summary_desc"><div class='inline'><p>Get available display modes of the display.</p>
 </div></span>
   
 </li>
@@ -380,8 +368,7 @@ located at (0, 0).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>The index of the display, 0 origin</p>
+    <p>The index of the display, 0 origin</p>
 
 
   </div>
@@ -418,8 +405,7 @@ located at (0, 0).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>The name of the display</p>
+    <p>The name of the display</p>
 
 
   </div>
@@ -461,8 +447,7 @@ located at (0, 0).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get all connected displays.</p>
+    <p>Get all connected displays.</p>
 
 
   </div>
@@ -533,9 +518,8 @@ static VALUE Display_s_displays(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the desktop area represented by the display, with the primary display
-located at (0, 0).</p>
+    <p>Get the desktop area represented by the display, with the primary
+display located at (0, 0).</p>
 
 
   </div>
@@ -596,14 +580,14 @@ static VALUE Display_bounds(VALUE self)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Get the available display mode closest match to <strong>mode</strong>.</p>
+    <p>Get the available display mode closest match to <strong>mode</strong>.</p>
 
 
   </div>
@@ -622,8 +606,7 @@ static VALUE Display_bounds(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>the desired display mode</p>
+        <div class='inline'><p>the desired display mode</p>
 </div>
       
     </li>
@@ -689,8 +672,7 @@ static VALUE Display_closest_mode(VALUE self, VALUE mode)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the current display mode.</p>
+    <p>Get the current display mode.</p>
 
 
   </div>
@@ -756,12 +738,13 @@ static VALUE Display_current_mode(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the desktop display mode.</p>
+    <p>Get the desktop display mode.</p>
 
-<p>Normally, the return value of this method is same as <span class='object_link'><a href="#current_mode-instance_method" title="SDL2::Display#current_mode (method)">#current_mode</a></span>.
-However, when you use fullscreen and chagne the resolution, this method
-returns the previous native display mode, and not the current mode.</p>
+<p>Normally, the return value of this method is
+same as <span class='object_link'><a href="#current_mode-instance_method" title="SDL2::Display#current_mode (method)">#current_mode</a></span>. However,
+when you use fullscreen and chagne the resolution,
+this method returns the previous native display mode,
+and not the current mode.</p>
 
 
   </div>
@@ -820,8 +803,7 @@ static VALUE Display_desktop_mode(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get available display modes of the display.</p>
+    <p>Get available display modes of the display.</p>
 
 
   </div>
@@ -888,9 +870,9 @@ static VALUE Display_modes(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:25:08 2015 by
+  Generated on Sun Mar 25 14:38:20 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

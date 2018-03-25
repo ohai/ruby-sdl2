@@ -6,7 +6,7 @@
 <title>
   Class: SDL2::Event
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../class_list.html"></iframe>
+      <iframe id="nav" src="../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../class_list.html"></iframe>
 
       <div id="content"><h1>Class: SDL2::Event
   
@@ -105,26 +103,23 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>This class represents SDL&#39;s events.</p>
+    <p>This class represents SDL’s events.</p>
 
 <p>All events are represented by the instance of subclasses of this class.</p>
 
-<h1 id="label-Introduction+of+event+subsystem">Introduction of event subsystem</h1>
+<h1 id="introduction-of-event-subsystem">Introduction of event subsystem</h1>
+<p>Event handling allows your application to receive input from the user. Event handling is
+initialized (along with video) with a call to:</p>
 
-<p>Event handling allows your application to receive input from the user.
-Event handling is initialized (along with video) with a call to:</p>
-
-<pre class="code ruby"><code class="ruby"><span class='const'>SDL2</span><span class='period'>.</span><span class='id identifier rubyid_init'>init</span><span class='lparen'>(</span><span class='const'>SDL2</span><span class='op'>::</span><span class='const'>INIT_VIDEO</span><span class='op'>|</span><span class='const'>SDL2</span><span class='op'>::</span><span class='const'>INIT_EVENTS</span><span class='rparen'>)</span>
+<pre class="code ruby"><code class="ruby"><span class='const'><span class='object_link'><a href="../SDL2.html" title="SDL2 (module)">SDL2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_init'><span class='object_link'><a href="../SDL2.html#init-class_method" title="SDL2.init (method)">init</a></span></span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../SDL2.html" title="SDL2 (module)">SDL2</a></span></span><span class='op'>::</span><span class='const'>INIT_VIDEO</span><span class='op'>|</span><span class='const'>SDL2</span><span class='op'>::</span><span class='const'>INIT_EVENTS</span><span class='rparen'>)</span>
 </code></pre>
 
-<p>Internally, SDL stores all the events waiting to be handled in an event
-queue. Using methods like <span class='object_link'><a href="#poll-class_method" title="SDL2::Event.poll (method)">Event.poll</a></span>, you can observe and handle
-input events.</p>
+<p>Internally, SDL stores all the events waiting to be handled in an event queue.
+Using methods like <span class='object_link'><a href="#poll-class_method" title="SDL2::Event.poll (method)">Event.poll</a></span>, you can observe and handle input events.</p>
 
-<p>The queue is conceptually a sequence of objects of SDL2::Event. You can
-read an event from the queue with <span class='object_link'><a href="#poll-class_method" title="SDL2::Event.poll (method)">Event.poll</a></span> and you can process
-the information from the object.</p>
+<p>The queue is conceptually a sequence of objects of SDL2::Event.
+You can read an event from the queue with <span class='object_link'><a href="#poll-class_method" title="SDL2::Event.poll (method)">Event.poll</a></span> and
+you can process the information from the object.</p>
 
 <p>Note: peep and wait will be implemented later.</p>
 
@@ -175,8 +170,7 @@ the information from the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>timestamp of the event.</p>
+    <span class="summary_desc"><div class='inline'><p>timestamp of the event.</p>
 </div></span>
   
 </li>
@@ -202,8 +196,7 @@ the information from the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>SDL&#39;s internal event type enum.</p>
+    <span class="summary_desc"><div class='inline'><p>SDL’s internal event type enum.</p>
 </div></span>
   
 </li>
@@ -225,7 +218,7 @@ the information from the object.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#enable%3D-class_method" title="enable= (class method)">.<strong>enable=</strong>(bool)  &#x21d2; Boolean </a>
+      <a href="#enable=-class_method" title="enable= (class method)">.<strong>enable=</strong>(bool)  &#x21d2; Boolean </a>
     
 
     
@@ -239,8 +232,7 @@ the information from the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Set wheter the event is enable.</p>
+    <span class="summary_desc"><div class='inline'><p>Set wheter the event is enable.</p>
 </div></span>
   
 </li>
@@ -263,8 +255,7 @@ the information from the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get whether the event is enabled.</p>
+    <span class="summary_desc"><div class='inline'><p>Get whether the event is enabled.</p>
 </div></span>
   
 </li>
@@ -287,8 +278,7 @@ the information from the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Poll for currently pending events.</p>
+    <span class="summary_desc"><div class='inline'><p>Poll for currently pending events.</p>
 </div></span>
   
 </li>
@@ -320,8 +310,7 @@ the information from the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Inspection string.</p>
+    <span class="summary_desc"><div class='inline'><p>Inspection string.</p>
 </div></span>
   
 </li>
@@ -344,9 +333,7 @@ the information from the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Return the object of <span class='object_link'><a href="Window.html" title="SDL2::Window (class)">Window</a></span> corresponding to the window_id
-attribute.</p>
+    <span class="summary_desc"><div class='inline'><p>Return the object of <span class='object_link'><a href="Window.html" title="SDL2::Window (class)">Window</a></span> corresponding to the window_id attribute.</p>
 </div></span>
   
 </li>
@@ -372,8 +359,7 @@ attribute.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>timestamp of the event</p>
+    <p>timestamp of the event</p>
 
 
   </div>
@@ -410,8 +396,7 @@ attribute.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>SDL&#39;s internal event type enum</p>
+    <p>SDL’s internal event type enum</p>
 
 
   </div>
@@ -455,17 +440,17 @@ attribute.</p>
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Set wheter the event is enable</p>
+    <p>Set wheter the event is enable</p>
 
-<p>This method is only available for subclasses of SDL2::Event corresponding
-to SDL&#39;s event types.</p>
+<p>This method is only available for subclasses of SDL2::Event corresponding to
+SDL’s event types.</p>
 
 
   </div>
@@ -476,11 +461,10 @@ to SDL&#39;s event types.</p>
     <p class="tag_title">Examples:</p>
     
       
-        <p class="example_title"><div class='inline'>
-<p>disable mouse wheel events</p>
+        <p class="example_title"><div class='inline'><p>disable mouse wheel events</p>
 </div></p>
       
-      <pre class="example code"><code><span class='const'>SDL2</span><span class='op'>::</span><span class='const'>Event</span><span class='op'>::</span><span class='const'>MouseWheel</span><span class='period'>.</span><span class='id identifier rubyid_enable'>enable</span> <span class='op'>=</span> <span class='kw'>false</span></code></pre>
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="../SDL2.html" title="SDL2 (module)">SDL2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="SDL2::Event (class)">Event</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Event/MouseWheel.html" title="SDL2::Event::MouseWheel (class)">MouseWheel</a></span></span><span class='period'>.</span><span class='id identifier rubyid_enable'>enable</span> <span class='op'>=</span> <span class='kw'>false</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -496,8 +480,7 @@ to SDL&#39;s event types.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>true for enabling the event.</p>
+        <div class='inline'><p>true for enabling the event.</p>
 </div>
       
     </li>
@@ -570,11 +553,10 @@ static VALUE Event_s_set_enable(VALUE self, VALUE val)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get whether the event is enabled.</p>
+    <p>Get whether the event is enabled.</p>
 
 <p>This method is available for subclasses of SDL2::Event corresponding to
-SDL&#39;s event types.</p>
+SDL’s event types.</p>
 
 
   </div>
@@ -646,8 +628,7 @@ static VALUE Event_s_enabled_p(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Poll for currently pending events.</p>
+    <p>Poll for currently pending events.</p>
 
 
   </div>
@@ -665,8 +646,7 @@ static VALUE Event_s_enabled_p(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>next event from the queue</p>
+        <div class='inline'><p>next event from the queue</p>
 </div>
       
     </li>
@@ -679,8 +659,7 @@ static VALUE Event_s_enabled_p(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>the queue is empty</p>
+        <div class='inline'><p>the queue is empty</p>
 </div>
       
     </li>
@@ -737,8 +716,7 @@ static VALUE Event_s_poll(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns inspection string</p>
+    <p>Returns inspection string</p>
 
 
   </div>
@@ -756,8 +734,7 @@ static VALUE Event_s_poll(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>inspection string</p>
+        <div class='inline'><p>inspection string</p>
 </div>
       
     </li>
@@ -802,14 +779,13 @@ static VALUE Event_inspect(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Return the object of <span class='object_link'><a href="Window.html" title="SDL2::Window (class)">Window</a></span> corresponding to the window_id
-attribute.</p>
+    <p>Return the object of <span class='object_link'><a href="Window.html" title="SDL2::Window (class)">Window</a></span> corresponding to the window_id attribute.</p>
 
-<p>Some subclasses of SDL2::Event have window_id attribute to point the window
-which creates the event. The type of the window_id attribute is integer,
-and you need to convert it with <span class='object_link'><a href="Window.html#find_by_id-class_method" title="SDL2::Window.find_by_id (method)">Window.find_by_id</a></span> to get the
-<span class='object_link'><a href="Window.html" title="SDL2::Window (class)">Window</a></span> object. This method returns the <span class='object_link'><a href="Window.html" title="SDL2::Window (class)">Window</a></span> object.</p>
+<p>Some subclasses of SDL2::Event have window_id attribute to point the
+window which creates the event. The type of the window_id attribute
+is integer, and you need to convert it with <span class='object_link'><a href="Window.html#find_by_id-class_method" title="SDL2::Window.find_by_id (method)">Window.find_by_id</a></span>
+to get the <span class='object_link'><a href="Window.html" title="SDL2::Window (class)">Window</a></span> object. This method returns the <span class='object_link'><a href="Window.html" title="SDL2::Window (class)">Window</a></span>
+object.</p>
 
 
   </div>
@@ -827,8 +803,7 @@ and you need to convert it with <span class='object_link'><a href="Window.html#f
       
       
         &mdash;
-        <div class='inline'>
-<p>the window which creates the event.</p>
+        <div class='inline'><p>the window which creates the event.</p>
 </div>
       
     </li>
@@ -845,8 +820,7 @@ and you need to convert it with <span class='object_link'><a href="Window.html#f
       
       
         &mdash;
-        <div class='inline'>
-<p>raised if the window_id attribute is not present.</p>
+        <div class='inline'><p>raised if the window_id attribute is not present.</p>
 </div>
       
     </li>
@@ -870,7 +844,7 @@ and you need to convert it with <span class='object_link'><a href="Window.html#f
 
 static VALUE Event_window(VALUE self)
 {
-    VALUE window_id = rb_funcall(self, rb_intern(&quot;window_id&quot;), 0, 0);
+    VALUE window_id = rb_funcall(self, rb_intern(&quot;window_id&quot;), 0);
     return find_window_by_id(NUM2UINT(window_id));
 }</pre>
     </td>
@@ -883,9 +857,9 @@ static VALUE Event_window(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:25:04 2015 by
+  Generated on Sun Mar 25 14:38:18 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

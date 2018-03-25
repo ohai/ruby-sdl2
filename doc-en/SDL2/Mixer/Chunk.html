@@ -6,7 +6,7 @@
 <title>
   Class: SDL2::Mixer::Chunk
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../../class_list.html"></iframe>
 
       <div id="content"><h1>Class: SDL2::Mixer::Chunk
   
@@ -105,8 +103,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>This class represents a sound sample, a kind of sound sources.</p>
+    <p>This class represents a sound sample, a kind of sound sources.</p>
 
 <p>Chunk objects is playable on <span class='object_link'><a href="Channels.html" title="SDL2::Mixer::Channels (module)">Channels</a></span>.</p>
 
@@ -145,8 +142,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The file name of the file from which the sound is loaded.</p>
+    <span class="summary_desc"><div class='inline'><p>The file name of the file from which the sound is loaded.</p>
 </div></span>
   
 </li>
@@ -182,8 +178,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the names of the sample decoders.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the names of the sample decoders.</p>
 </div></span>
   
 </li>
@@ -206,8 +201,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Load a sample from file.</p>
+    <span class="summary_desc"><div class='inline'><p>Load a sample from file.</p>
 </div></span>
   
 </li>
@@ -239,8 +233,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Deallocate the sample memory.</p>
+    <span class="summary_desc"><div class='inline'><p>Deallocate the sample memory.</p>
 </div></span>
   
 </li>
@@ -263,8 +256,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Return true if the memory is deallocated by <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Mixer::Chunk#destroy (method)">#destroy</a></span>.</p>
+    <span class="summary_desc"><div class='inline'><p>Return true if the memory is deallocated by <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Mixer::Chunk#destroy (method)">#destroy</a></span>.</p>
 </div></span>
   
 </li>
@@ -287,8 +279,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Inspection string.</p>
+    <span class="summary_desc"><div class='inline'><p>Inspection string.</p>
 </div></span>
   
 </li>
@@ -311,8 +302,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the volume of the sample.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the volume of the sample.</p>
 </div></span>
   
 </li>
@@ -321,7 +311,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#volume%3D-instance_method" title="#volume= (instance method)">#<strong>volume=</strong>(vol)  &#x21d2; vol </a>
+      <a href="#volume=-instance_method" title="#volume= (instance method)">#<strong>volume=</strong>(vol)  &#x21d2; vol </a>
     
 
     
@@ -335,8 +325,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Set the volume of the sample.</p>
+    <span class="summary_desc"><div class='inline'><p>Set the volume of the sample.</p>
 </div></span>
   
 </li>
@@ -362,8 +351,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns The file name of the file from which the sound is loaded.</p>
+    <p>Returns The file name of the file from which the sound is loaded.</p>
 
 
   </div>
@@ -381,8 +369,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The file name of the file from which the sound is loaded.</p>
+        <div class='inline'><p>The file name of the file from which the sound is loaded.</p>
 </div>
       
     </li>
@@ -410,8 +397,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the names of the sample decoders.</p>
+    <p>Get the names of the sample decoders.</p>
 
 
   </div>
@@ -429,8 +415,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the names of decoders, such as: “WAVE”, “OGG”, etc.</p>
+        <div class='inline'><p>the names of decoders, such as: “WAVE”, “OGG”, etc.</p>
 </div>
       
     </li>
@@ -443,7 +428,6 @@
       <pre class="lines">
 
 
-920
 921
 922
 923
@@ -451,10 +435,11 @@
 925
 926
 927
-928</pre>
+928
+929</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 920</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 921</span>
 
 static VALUE Chunk_s_decoders(VALUE self)
 {
@@ -483,6 +468,7 @@ static VALUE Chunk_s_decoders(VALUE self)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
@@ -492,11 +478,9 @@ static VALUE Chunk_s_decoders(VALUE self)
     
   <div class="note notetag">
     <strong>Note:</strong>
-    <div class='inline'>
-<p><span class='object_link'><a href="../Mixer.html#open-class_method" title="SDL2::Mixer.open (method)">SDL2::Mixer.open</a></span> must be called before calling this method.</p>
+    <div class='inline'><p><span class='object_link'><a href="../Mixer.html#open-class_method" title="SDL2::Mixer.open (method)">SDL2::Mixer.open</a></span> must be called before calling this method.</p>
 </div>
   </div>
-
 
 <p>Load a sample from file.</p>
 
@@ -519,8 +503,7 @@ static VALUE Chunk_s_decoders(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>the fine name</p>
+        <div class='inline'><p>the fine name</p>
 </div>
       
     </li>
@@ -551,8 +534,7 @@ static VALUE Chunk_s_decoders(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>raised when failing to load</p>
+        <div class='inline'><p>raised when failing to load</p>
 </div>
       
     </li>
@@ -568,7 +550,6 @@ static VALUE Chunk_s_decoders(VALUE self)
       <pre class="lines">
 
 
-904
 905
 906
 907
@@ -577,10 +558,11 @@ static VALUE Chunk_s_decoders(VALUE self)
 910
 911
 912
-913</pre>
+913
+914</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 904</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 905</span>
 
 static VALUE Chunk_s_load(VALUE self, VALUE fname)
 {
@@ -614,11 +596,10 @@ static VALUE Chunk_s_load(VALUE self, VALUE fname)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Deallocate the sample memory.</p>
+    <p>Deallocate the sample memory.</p>
 
-<p>Normally, the memory is deallocated by ruby&#39;s GC, but you can surely
-deallocate the memory with this method at any time.</p>
+<p>Normally, the memory is deallocated by ruby’s GC, but
+you can surely deallocate the memory with this method at any time.</p>
 
 
   </div>
@@ -645,16 +626,16 @@ deallocate the memory with this method at any time.</p>
       <pre class="lines">
 
 
-938
 939
 940
 941
 942
 943
-944</pre>
+944
+945</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 938</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 939</span>
 
 static VALUE Chunk_destroy(VALUE self)
 {
@@ -679,8 +660,7 @@ static VALUE Chunk_destroy(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Return true if the memory is deallocated by <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Mixer::Chunk#destroy (method)">#destroy</a></span>.</p>
+    <p>Return true if the memory is deallocated by <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Mixer::Chunk#destroy (method)">#destroy</a></span>.</p>
 
 
   </div>
@@ -715,8 +695,7 @@ static VALUE Chunk_destroy(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns inspection string</p>
+    <p>Returns inspection string</p>
 
 
   </div>
@@ -734,8 +713,7 @@ static VALUE Chunk_destroy(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>inspection string</p>
+        <div class='inline'><p>inspection string</p>
 </div>
       
     </li>
@@ -748,7 +726,6 @@ static VALUE Chunk_destroy(VALUE self)
       <pre class="lines">
 
 
-973
 974
 975
 976
@@ -758,10 +735,11 @@ static VALUE Chunk_destroy(VALUE self)
 980
 981
 982
-983</pre>
+983
+984</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 973</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 974</span>
 
 static VALUE Chunk_inspect(VALUE self)
 {
@@ -790,8 +768,7 @@ static VALUE Chunk_inspect(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the volume of the sample.</p>
+    <p>Get the volume of the sample.</p>
 
 
   </div>
@@ -809,8 +786,7 @@ static VALUE Chunk_inspect(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>the volume from 0 to <span class='object_link'><a href="../Mixer.html#MAX_VOLUME-constant" title="SDL2::Mixer::MAX_VOLUME (constant)">MAX_VOLUME</a></span>.</p>
+        <div class='inline'><p>the volume from 0 to <span class='object_link'><a href="../Mixer.html#MAX_VOLUME-constant" title="SDL2::Mixer::MAX_VOLUME (constant)">MAX_VOLUME</a></span>.</p>
 </div>
       
     </li>
@@ -820,7 +796,7 @@ static VALUE Chunk_inspect(VALUE self)
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><span class='object_link'><a href="#volume%3D-instance_method" title="SDL2::Mixer::Chunk#volume= (method)">#volume=</a></span></li>
+      <li><span class='object_link'><a href="#volume=-instance_method" title="SDL2::Mixer::Chunk#volume= (method)">#volume=</a></span></li>
     
   </ul>
 
@@ -830,13 +806,13 @@ static VALUE Chunk_inspect(VALUE self)
       <pre class="lines">
 
 
-953
 954
 955
-956</pre>
+956
+957</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 953</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 954</span>
 
 static VALUE Chunk_volume(VALUE self)
 {
@@ -860,14 +836,14 @@ static VALUE Chunk_volume(VALUE self)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Set the volume of the sample.</p>
+    <p>Set the volume of the sample.</p>
 
 
   </div>
@@ -886,8 +862,7 @@ static VALUE Chunk_volume(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>the new volume</p>
+        <div class='inline'><p>the new volume</p>
 </div>
       
     </li>
@@ -924,13 +899,13 @@ static VALUE Chunk_volume(VALUE self)
       <pre class="lines">
 
 
-967
 968
 969
-970</pre>
+970
+971</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 967</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 968</span>
 
 static VALUE Chunk_set_volume(VALUE self, VALUE vol)
 {
@@ -946,9 +921,9 @@ static VALUE Chunk_set_volume(VALUE self, VALUE vol)
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:25:02 2015 by
+  Generated on Sun Mar 25 14:38:18 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

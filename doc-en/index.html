@@ -6,7 +6,7 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="class_list.html"></iframe>
+      <iframe id="nav" src="class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -57,57 +57,50 @@
         <div class="clear"></div>
       </div>
 
-      <iframe id="search_frame" src="class_list.html"></iframe>
-
-      <div id="content"><div id='filecontents'>
-<h1 id="label-Ruby-2FSDL2">Ruby/SDL2</h1>
+      <div id="content"><div id='filecontents'><h1 id="rubysdl2">Ruby/SDL2</h1>
 
 <p>The simple ruby extension library for SDL 2.x.</p>
 
-<h1 id="label-Install">Install</h1>
-
+<h1 id="install">Install</h1>
 <p>Before installing Ruby/SDL2, you need to install:</p>
-<ul><li>
-<p><a href="http://rubyinstaller.org/add-ons/devkit/">devkit</a> (only for
-windows)</p>
-</li><li>
-<p>M4 (only for installing from git repository)</p>
-</li><li>
-<p><a href="http://www.libsdl.org/download-2.0.php">SDL 2.x</a></p>
-</li><li>
-<p><a href="https://www.libsdl.org/projects/SDL_image/">SDL_image</a></p>
-</li><li>
-<p><a href="https://www.libsdl.org/projects/SDL_mixer/">SDL_mixer</a></p>
-</li><li>
-<p><a href="https://www.libsdl.org/projects/SDL_ttf/">SDL_ttf</a></p>
-</li></ul>
 
-<p>After installing these libraries, you can install Ruby/SDL2 from github:</p>
+<ul>
+  <li><a href="http://rubyinstaller.org/add-ons/devkit/">devkit</a> (only for windows)</li>
+  <li>M4 (only for installing from git repository)</li>
+  <li><a href="http://www.libsdl.org/download-2.0.php">SDL 2.x</a></li>
+  <li><a href="https://www.libsdl.org/projects/SDL_image/">SDL_image</a></li>
+  <li><a href="https://www.libsdl.org/projects/SDL_mixer/">SDL_mixer</a></li>
+  <li><a href="https://www.libsdl.org/projects/SDL_ttf/">SDL_ttf</a></li>
+</ul>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_git'>git</span> <span class='id identifier rubyid_clone'>clone</span> <span class='label'>https:</span><span class='tstring'><span class='regexp_beg'>/</span><span class='regexp_end'>/github</span></span><span class='period'>.</span><span class='id identifier rubyid_com'>com</span><span class='op'>/</span><span class='id identifier rubyid_ohai'>ohai</span><span class='op'>/</span><span class='id identifier rubyid_ruby'>ruby</span><span class='op'>-</span><span class='id identifier rubyid_sdl2'>sdl2</span><span class='period'>.</span><span class='id identifier rubyid_git'>git</span>
-<span class='id identifier rubyid_cd'>cd</span> <span class='id identifier rubyid_ruby'>ruby</span><span class='op'>-</span><span class='id identifier rubyid_sdl2'>sdl2</span>
-<span class='id identifier rubyid_rake'>rake</span> <span class='id identifier rubyid_gem'>gem</span>
-<span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_pkg'>pkg</span><span class='op'>/</span><span class='id identifier rubyid_ruby'>ruby</span><span class='op'>-</span><span class='id identifier rubyid_sdl2'>sdl2</span><span class='op'>-</span><span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span><span class='period'>.</span><span class='id identifier rubyid_z'>z</span><span class='period'>.</span><span class='id identifier rubyid_gem'>gem</span></code></pre>
+<p>After installing these libraries, you can install Ruby/SDL2
+from github:</p>
 
-<h1 id="label-Document">Document</h1>
-<ul><li>
-<p><a href="http://ohai.github.io/ruby-sdl2/doc-en/">English Reference
-manual</a></p>
-</li></ul>
+<pre class="code ruby"><code class="ruby">git clone https://github.com/ohai/ruby-sdl2.git
+cd ruby-sdl2
+rake gem
+gem install pkg/ruby-sdl2-x.y.z.gem
+</code></pre>
 
-<h1 id="label-License">License</h1>
+<h1 id="document">Document</h1>
+
+<ul>
+  <li><a href="http://ohai.github.io/ruby-sdl2/doc-en/">English Reference manual</a></li>
+</ul>
+
+<h1 id="license">License</h1>
 
 <p>LGPL v3 (see <a href="file.COPYING.html" title="COPYING">COPYING</a>).</p>
 
-<h1 id="label-Author">Author</h1>
+<h1 id="author">Author</h1>
 
 <p>Ippei Obayashi <a href="mailto:ohai@kmc.gr.jp">ohai@kmc.gr.jp</a></p>
 </div></div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:24:52 2015 by
+  Generated on Sun Mar 25 14:38:15 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

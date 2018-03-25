@@ -6,7 +6,7 @@
 <title>
   Module: SDL2::Mixer
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../class_list.html"></iframe>
+      <iframe id="nav" src="../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -59,8 +59,6 @@
         <div class="clear"></div>
       </div>
 
-      <iframe id="search_frame" src="../class_list.html"></iframe>
-
       <div id="content"><h1>Module: SDL2::Mixer
   
   
@@ -89,50 +87,45 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Sound mixing module.</p>
+    <p>Sound mixing module.</p>
 
 <p>With this module, you can play many kinds of sound files such as:</p>
-<ul><li>
-<p>WAVE/RIFF (.wav)</p>
-</li><li>
-<p>AIFF (.aiff)</p>
-</li><li>
-<p>VOC (.voc)</p>
-</li><li>
-<p>MOD (.mod .xm .s3m .669 .it .med etc.)</p>
-</li><li>
-<p>MIDI (.mid)</p>
-</li><li>
-<p>OggVorbis (.ogg)</p>
-</li><li>
-<p>MP3 (.mp3)</p>
-</li><li>
-<p>FLAC (.flac)</p>
-</li></ul>
 
-<p>Before playing sounds, you need to initialize this module by <span class='object_link'><a href="#init-class_method" title="SDL2::Mixer.init (method)">Mixer.init</a></span> and
+<ul>
+  <li>WAVE/RIFF (.wav)</li>
+  <li>AIFF (.aiff)</li>
+  <li>VOC (.voc)</li>
+  <li>MOD (.mod .xm .s3m .669 .it .med etc.)</li>
+  <li>MIDI (.mid)</li>
+  <li>OggVorbis (.ogg)</li>
+  <li>MP3 (.mp3)</li>
+  <li>FLAC (.flac)</li>
+</ul>
+
+<p>Before playing sounds,
+you need to initialize this module by <span class='object_link'><a href="#init-class_method" title="SDL2::Mixer.init (method)">Mixer.init</a></span> and
 open a sound device by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">Mixer.open</a></span>.</p>
 
-<p>This module mixes multiple sound sources in parallel. To play a sound
-source, you assign the source to a “channel” and this module mixes all
-sound sources assigned to the channels.</p>
+<p>This module mixes multiple sound sources in parallel.
+To play a sound source, you assign the source to a “channel”
+and this module mixes all sound sources assigned to the channels.</p>
 
-<p>In this module, there are two types of sound sources: <span class='object_link'><a href="Mixer/Chunk.html" title="SDL2::Mixer::Chunk (class)">Chunk</a></span>
-and <span class='object_link'><a href="Mixer/Music.html" title="SDL2::Mixer::Music (class)">Music</a></span>. And there are two corresponding types of
-channels: <span class='object_link'><a href="Mixer/Channels.html" title="SDL2::Mixer::Channels (module)">Channels</a></span> and <span class='object_link'><a href="Mixer/MusicChannel.html" title="SDL2::Mixer::MusicChannel (module)">MusicChannel</a></span>.</p>
+<p>In this module, there are two types of sound sources:
+<span class='object_link'><a href="Mixer/Chunk.html" title="SDL2::Mixer::Chunk (class)">Chunk</a></span> and <span class='object_link'><a href="Mixer/Music.html" title="SDL2::Mixer::Music (class)">Music</a></span>.
+And there are two corresponding types of channels:
+<span class='object_link'><a href="Mixer/Channels.html" title="SDL2::Mixer::Channels (module)">Channels</a></span> and <span class='object_link'><a href="Mixer/MusicChannel.html" title="SDL2::Mixer::MusicChannel (module)">MusicChannel</a></span>.</p>
 
-<p><span class='object_link'><a href="Mixer/Channels.html" title="SDL2::Mixer::Channels (module)">Channels</a></span> module plays <span class='object_link'><a href="Mixer/Chunk.html" title="SDL2::Mixer::Chunk (class)">Chunk</a></span> objects, through
-multiple (default eight) channels. This module is suitable for the sound
-effects. The number of channels is variable with
-<span class='object_link'><a href="Mixer/Channels.html#allocate-class_method" title="SDL2::Mixer::Channels.allocate (method)">Channels.allocate</a></span>.</p>
+<p><span class='object_link'><a href="Mixer/Channels.html" title="SDL2::Mixer::Channels (module)">Channels</a></span> module plays <span class='object_link'><a href="Mixer/Chunk.html" title="SDL2::Mixer::Chunk (class)">Chunk</a></span> objects,
+through multiple (default eight) channels. This module is suitable
+for the sound effects.
+The number of channels is variable with <span class='object_link'><a href="Mixer/Channels.html#allocate-class_method" title="SDL2::Mixer::Channels.allocate (method)">Channels.allocate</a></span>.</p>
 
-<p><span class='object_link'><a href="Mixer/MusicChannel.html" title="SDL2::Mixer::MusicChannel (module)">MusicChannel</a></span> module plays <span class='object_link'><a href="Mixer/Music.html" title="SDL2::Mixer::Music (class)">Music</a></span> objects. This
-module has only one playing channel, and you cannot play multiple music in
-parallel. However an <span class='object_link'><a href="Mixer/Music.html" title="SDL2::Mixer::Music (class)">Music</a></span> object is more efficient for
-memory, and this module supports more file formats than
-<span class='object_link'><a href="Mixer/Channels.html" title="SDL2::Mixer::Channels (module)">Channels</a></span>. This module is suitable for playing “BGMs” of your
-application.</p>
+<p><span class='object_link'><a href="Mixer/MusicChannel.html" title="SDL2::Mixer::MusicChannel (module)">MusicChannel</a></span> module plays <span class='object_link'><a href="Mixer/Music.html" title="SDL2::Mixer::Music (class)">Music</a></span> objects.
+This module has only one playing channel, and you cannot play
+multiple music in parallel. However an <span class='object_link'><a href="Mixer/Music.html" title="SDL2::Mixer::Music (class)">Music</a></span> object
+is more efficient for memory, and this module supports more file formats
+than <span class='object_link'><a href="Mixer/Channels.html" title="SDL2::Mixer::Channels (module)">Channels</a></span>.
+This module is suitable for playing “BGMs” of your application.</p>
 
 
   </div>
@@ -154,14 +147,12 @@ application.</p>
 </p>
 
   <h2>Constant Summary</h2>
-  
-    <dl class="constants">
-      
-        <dt id="INIT_FLAC-constant" class="">INIT_FLAC =
-          <div class="docstring">
-  <div class="discussion">
+  <dl class="constants">
     
-<p>Initialize Ogg flac loader</p>
+      <dt id="INIT_FLAC-constant" class="">INIT_FLAC =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Initialize Ogg flac loader</p>
 
 
   </div>
@@ -170,14 +161,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_INIT_FLAC</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="INIT_MOD-constant" class="">INIT_MOD =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_INIT_FLAC</span><span class='rparen'>)</span></pre></dd>
     
-<p>Initialize MOD loader</p>
+      <dt id="INIT_MOD-constant" class="">INIT_MOD =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Initialize MOD loader</p>
 
 
   </div>
@@ -186,14 +176,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_INIT_MOD</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="INIT_MODPLUG-constant" class="">INIT_MODPLUG =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_INIT_MOD</span><span class='rparen'>)</span></pre></dd>
     
-<p>Initialize libmodplug</p>
+      <dt id="INIT_MP3-constant" class="">INIT_MP3 =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Initialize MP3 loader</p>
 
 
   </div>
@@ -202,14 +191,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_INIT_MODPLUG</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="INIT_MP3-constant" class="">INIT_MP3 =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_INIT_MP3</span><span class='rparen'>)</span></pre></dd>
     
-<p>Initialize MP3 loader</p>
+      <dt id="INIT_OGG-constant" class="">INIT_OGG =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Initialize Ogg vorbis loader</p>
 
 
   </div>
@@ -218,14 +206,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_INIT_MP3</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="INIT_OGG-constant" class="">INIT_OGG =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_INIT_OGG</span><span class='rparen'>)</span></pre></dd>
     
-<p>Initialize Ogg vorbis loader</p>
+      <dt id="INIT_MODPLUG-constant" class="">INIT_MODPLUG =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Initialize libmodplug</p>
 
 
   </div>
@@ -234,14 +221,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_INIT_OGG</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="INIT_FLUIDSYNTH-constant" class="">INIT_FLUIDSYNTH =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_INIT_MODPLUG</span><span class='rparen'>)</span></pre></dd>
     
-<p>Initialize fluidsynth</p>
+      <dt id="INIT_FLUIDSYNTH-constant" class="">INIT_FLUIDSYNTH =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Initialize fluidsynth</p>
 
 
   </div>
@@ -250,14 +236,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_INIT_FLUIDSYNTH</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="FORMAT_U8-constant" class="">FORMAT_U8 =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_INIT_FLUIDSYNTH</span><span class='rparen'>)</span></pre></dd>
     
-<p>Unsiged 8-bit sample format. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
+      <dt id="INIT_MID-constant" class="">INIT_MID =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Initialize mid</p>
 
 
   </div>
@@ -266,14 +251,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_U8</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="FORMAT_S8-constant" class="">FORMAT_S8 =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_INIT_MID</span><span class='rparen'>)</span></pre></dd>
     
-<p>Siged 8-bit sample format. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
+      <dt id="FORMAT_U8-constant" class="">FORMAT_U8 =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Unsiged 8-bit sample format. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
 
 
   </div>
@@ -282,14 +266,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_S8</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="FORMAT_U16LSB-constant" class="">FORMAT_U16LSB =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_U8</span><span class='rparen'>)</span></pre></dd>
     
-<p>Unsiged 16-bit little-endian sample format. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
+      <dt id="FORMAT_S8-constant" class="">FORMAT_S8 =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Siged 8-bit sample format. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
 
 
   </div>
@@ -298,14 +281,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_U16LSB</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="FORMAT_S16LSB-constant" class="">FORMAT_S16LSB =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_S8</span><span class='rparen'>)</span></pre></dd>
     
-<p>Siged 16-bit little-endian sample format. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
+      <dt id="FORMAT_U16LSB-constant" class="">FORMAT_U16LSB =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Unsiged 16-bit little-endian sample format. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
 
 
   </div>
@@ -314,14 +296,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_S16LSB</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="FORMAT_U16MSB-constant" class="">FORMAT_U16MSB =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_U16LSB</span><span class='rparen'>)</span></pre></dd>
     
-<p>Unsiged 16-bit big-endian sample format. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
+      <dt id="FORMAT_S16LSB-constant" class="">FORMAT_S16LSB =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Siged 16-bit little-endian sample format. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
 
 
   </div>
@@ -330,14 +311,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_U16MSB</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="FORMAT_S16MSB-constant" class="">FORMAT_S16MSB =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_S16LSB</span><span class='rparen'>)</span></pre></dd>
     
-<p>Unsiged 16-bit big-endian sample format. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
+      <dt id="FORMAT_U16MSB-constant" class="">FORMAT_U16MSB =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Unsiged 16-bit big-endian sample format. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
 
 
   </div>
@@ -346,15 +326,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_S16MSB</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="FORMAT_U16SYS-constant" class="">FORMAT_U16SYS =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_U16MSB</span><span class='rparen'>)</span></pre></dd>
     
-<p>Unsiged 16-bit sample format. Endian is same as system byte order. Used by
-<span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
+      <dt id="FORMAT_S16MSB-constant" class="">FORMAT_S16MSB =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Unsiged 16-bit big-endian sample format. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
 
 
   </div>
@@ -363,15 +341,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_U16SYS</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="FORMAT_S16SYS-constant" class="">FORMAT_S16SYS =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_S16MSB</span><span class='rparen'>)</span></pre></dd>
     
-<p>Siged 16-bit sample format. Endian is same as system byte order. Used by
-<span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
+      <dt id="FORMAT_U16SYS-constant" class="">FORMAT_U16SYS =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Unsiged 16-bit sample format. Endian is same as system byte order. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
 
 
   </div>
@@ -380,14 +356,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_S16SYS</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="DEFAULT_FREQUENCY-constant" class="">DEFAULT_FREQUENCY =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_U16SYS</span><span class='rparen'>)</span></pre></dd>
     
-<p>Default frequency. 22050 (Hz)</p>
+      <dt id="FORMAT_S16SYS-constant" class="">FORMAT_S16SYS =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Siged 16-bit sample format. Endian is same as system byte order. Used by <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span></p>
 
 
   </div>
@@ -396,14 +371,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_DEFAULT_FREQUENCY</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="DEFAULT_FORMAT-constant" class="">DEFAULT_FORMAT =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>AUDIO_S16SYS</span><span class='rparen'>)</span></pre></dd>
     
-<p>:FORMAT_S16SYS}.</p>
+      <dt id="DEFAULT_FREQUENCY-constant" class="">DEFAULT_FREQUENCY =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Default frequency. 22050 (Hz)</p>
 
 
   </div>
@@ -412,14 +386,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code">Default sample format. Same as {Mixer</pre></dd>
-      
-        <dt id="DEFAULT_CHANNELS-constant" class="">DEFAULT_CHANNELS =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>UINT2NUM</span><span class='lparen'>(</span><span class='const'>MIX_DEFAULT_FREQUENCY</span><span class='rparen'>)</span></pre></dd>
     
-<p>Default number of channels. 2.</p>
+      <dt id="DEFAULT_FORMAT-constant" class="">DEFAULT_FORMAT =
+        <div class="docstring">
+  <div class="discussion">
+    <p>:FORMAT_S16SYS}.</p>
 
 
   </div>
@@ -428,14 +401,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>MIX_DEFAULT_CHANNELS</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="MAX_VOLUME-constant" class="">MAX_VOLUME =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code">Default sample format. Same as {Mixer</pre></dd>
     
-<p>Max volume value. 128.</p>
+      <dt id="DEFAULT_CHANNELS-constant" class="">DEFAULT_CHANNELS =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Default number of channels. 2.</p>
 
 
   </div>
@@ -444,14 +416,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>MIX_MAX_VOLUME</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="NO_FADING-constant" class="">NO_FADING =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>MIX_DEFAULT_CHANNELS</span><span class='rparen'>)</span></pre></dd>
     
-<p>This constants represents that the channel is not fading in and fading out.</p>
+      <dt id="MAX_VOLUME-constant" class="">MAX_VOLUME =
+        <div class="docstring">
+  <div class="discussion">
+    <p>Max volume value. 128.</p>
 
 
   </div>
@@ -460,14 +431,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>MIX_NO_FADING</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="FADING_OUT-constant" class="">FADING_OUT =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>MIX_MAX_VOLUME</span><span class='rparen'>)</span></pre></dd>
     
-<p>This constants represents that the channel is fading out.</p>
+      <dt id="NO_FADING-constant" class="">NO_FADING =
+        <div class="docstring">
+  <div class="discussion">
+    <p>This constants represents that the channel is not fading in and fading out.</p>
 
 
   </div>
@@ -476,14 +446,13 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>MIX_FADING_OUT</span><span class='rparen'>)</span></pre></dd>
-      
-        <dt id="FADING_IN-constant" class="">FADING_IN =
-          <div class="docstring">
-  <div class="discussion">
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>MIX_NO_FADING</span><span class='rparen'>)</span></pre></dd>
     
-<p>This constants represents that the channel is fading in.</p>
+      <dt id="FADING_OUT-constant" class="">FADING_OUT =
+        <div class="docstring">
+  <div class="discussion">
+    <p>This constants represents that the channel is fading out.</p>
 
 
   </div>
@@ -492,11 +461,25 @@ application.</p>
   
 
 </div>
-        </dt>
-        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>MIX_FADING_IN</span><span class='rparen'>)</span></pre></dd>
-      
-    </dl>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>MIX_FADING_OUT</span><span class='rparen'>)</span></pre></dd>
+    
+      <dt id="FADING_IN-constant" class="">FADING_IN =
+        <div class="docstring">
+  <div class="discussion">
+    <p>This constants represents that the channel is fading in.</p>
+
+
+  </div>
+</div>
+<div class="tags">
   
+
+</div>
+      </dt>
+      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>MIX_FADING_IN</span><span class='rparen'>)</span></pre></dd>
+    
+  </dl>
 
 
 
@@ -529,8 +512,7 @@ application.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Close the audio device.</p>
+    <span class="summary_desc"><div class='inline'><p>Close the audio device.</p>
 </div></span>
   
 </li>
@@ -553,8 +535,7 @@ application.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Initialize the mixer library.</p>
+    <span class="summary_desc"><div class='inline'><p>Initialize the mixer library.</p>
 </div></span>
   
 </li>
@@ -577,8 +558,7 @@ application.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Open a sound device.</p>
+    <span class="summary_desc"><div class='inline'><p>Open a sound device.</p>
 </div></span>
   
 </li>
@@ -601,8 +581,7 @@ application.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Query a sound device spec.</p>
+    <span class="summary_desc"><div class='inline'><p>Query a sound device spec.</p>
 </div></span>
   
 </li>
@@ -628,8 +607,7 @@ application.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Close the audio device.</p>
+    <p>Close the audio device.</p>
 
 
   </div>
@@ -656,14 +634,14 @@ application.</p>
       <pre class="lines">
 
 
-184
 185
 186
 187
-188</pre>
+188
+189</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 184</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 185</span>
 
 static VALUE Mixer_s_close(VALUE self)
 {
@@ -688,33 +666,29 @@ static VALUE Mixer_s_close(VALUE self)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Initialize the mixer library.</p>
+    <p>Initialize the mixer library.</p>
 
 <p>This module function load dynamically-linked libraries for sound file
 formats such as ogg and flac.</p>
 
-<p>You can give the initialized libraries (file formats) with OR&#39;d bits of
-the following constants:</p>
-<ul><li>
-<p>SDL2::Mixer::INIT_FLAC</p>
-</li><li>
-<p>SDL2::Mixer::INIT_MOD</p>
-</li><li>
-<p>SDL2::Mixer::INIT_MODPLUG</p>
-</li><li>
-<p>SDL2::Mixer::INIT_MP3</p>
-</li><li>
-<p>SDL2::Mixer::INIT_OGG</p>
-</li><li>
-<p>SDL2::Mixer::INIT_FLUIDSYNTH</p>
-</li></ul>
+<p>You can give the initialized libraries (file formats) with OR’d bits of the
+following constants:</p>
+
+<ul>
+  <li>SDL2::Mixer::INIT_FLAC</li>
+  <li>SDL2::Mixer::INIT_MOD</li>
+  <li>SDL2::Mixer::INIT_MODPLUG</li>
+  <li>SDL2::Mixer::INIT_MP3</li>
+  <li>SDL2::Mixer::INIT_OGG</li>
+  <li>SDL2::Mixer::INIT_FLUIDSYNTH</li>
+</ul>
 
 
   </div>
@@ -733,8 +707,7 @@ the following constants:</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>intialized sublibraries</p>
+        <div class='inline'><p>intialized sublibraries</p>
 </div>
       
     </li>
@@ -764,22 +737,22 @@ the following constants:</p>
       <pre class="lines">
 
 
-124
 125
 126
 127
 128
 129
 130
-131</pre>
+131
+132</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 124</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 125</span>
 
 static VALUE Mixer_s_init(VALUE self, VALUE f)
 {
     int flags = NUM2INT(f);
-    if (Mix_Init(flags) &amp; flags != flags) 
+    if ((Mix_Init(flags) &amp; flags) != flags) 
         rb_raise(eSDL2Error, &quot;Couldn&#39;t initialize SDL_mixer&quot;);
     
     return Qnil;
@@ -802,18 +775,19 @@ static VALUE Mixer_s_init(VALUE self, VALUE f)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Open a sound device.</p>
+    <p>Open a sound device.</p>
 
-<p>Before calling loading/playing methods in the mixer module, this method
-must be called. Before calling this method, <span class='object_link'><a href="../SDL2.html#init-class_method" title="SDL2.init (method)">SDL2.init</a></span> must be called with
-SDL2::INIT_AUDIO.</p>
+<p>Before calling loading/playing methods in the mixer module,
+this method must be called.
+Before calling this method,
+<span class='object_link'><a href="../SDL2.html#init-class_method" title="SDL2.init (method)">SDL2.init</a></span> must be called with SDL2::INIT_AUDIO.</p>
 
 
   </div>
@@ -834,10 +808,10 @@ SDL2::INIT_AUDIO.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>output sampling frequency in Hz. Normally 22050 or 44100 is used. 44100 is
-CD audio rate. SDL2::Mixer::DEFAULT_FREQUENCY(22050) is best for many kinds
-of game because 44100 requires too much CPU power on older computers.</p>
+        <div class='inline'><p>output sampling frequency in Hz.
+Normally 22050 or 44100 is used.
+44100 is CD audio rate. SDL2::Mixer::DEFAULT_FREQUENCY(22050) is best for
+many kinds of game because 44100 requires too much CPU power on older computers.</p>
 </div>
       
     </li>
@@ -854,8 +828,7 @@ of game because 44100 requires too much CPU power on older computers.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>output sample format</p>
+        <div class='inline'><p>output sample format</p>
 </div>
       
     </li>
@@ -872,8 +845,7 @@ of game because 44100 requires too much CPU power on older computers.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>1 is for mono, and 2 is for stereo.</p>
+        <div class='inline'><p>1 is for mono, and 2 is for stereo.</p>
 </div>
       
     </li>
@@ -890,8 +862,7 @@ of game because 44100 requires too much CPU power on older computers.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>bytes used per output sample</p>
+        <div class='inline'><p>bytes used per output sample</p>
 </div>
       
     </li>
@@ -922,8 +893,7 @@ of game because 44100 requires too much CPU power on older computers.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>raised when a device cannot be opened</p>
+        <div class='inline'><p>raised when a device cannot be opened</p>
 </div>
       
     </li>
@@ -950,7 +920,6 @@ of game because 44100 requires too much CPU power on older computers.</p>
       <pre class="lines">
 
 
-167
 168
 169
 170
@@ -960,10 +929,11 @@ of game because 44100 requires too much CPU power on older computers.</p>
 174
 175
 176
-177</pre>
+177
+178</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 167</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 168</span>
 
 static VALUE Mixer_s_open(int argc, VALUE* argv, VALUE self)
 {
@@ -992,8 +962,7 @@ static VALUE Mixer_s_open(int argc, VALUE* argv, VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Query a sound device spec.</p>
+    <p>Query a sound device spec.</p>
 
 <p>This method returns the most suitable setting for <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span> the device.</p>
 
@@ -1013,9 +982,9 @@ static VALUE Mixer_s_open(int argc, VALUE* argv, VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>the suitable frequency in Hz, the suitable format, the suitable number of
-channels (1 for mono, 2 for stereo), and the number of call of <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span>.</p>
+        <div class='inline'><p>the suitable frequency in Hz, the suitable format,
+the suitable number of channels (1 for mono, 2 for stereo),
+and the number of call of <span class='object_link'><a href="#open-class_method" title="SDL2::Mixer.open (method)">open</a></span>.</p>
 </div>
       
     </li>
@@ -1028,7 +997,6 @@ channels (1 for mono, 2 for stereo), and the number of call of <span class='obje
       <pre class="lines">
 
 
-202
 203
 204
 205
@@ -1036,10 +1004,11 @@ channels (1 for mono, 2 for stereo), and the number of call of <span class='obje
 207
 208
 209
-210</pre>
+210
+211</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'mixer.c', line 202</span>
+      <pre class="code"><span class="info file"># File 'mixer.c', line 203</span>
 
 static VALUE Mixer_s_query(VALUE self)
 {
@@ -1060,9 +1029,9 @@ static VALUE Mixer_s_query(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:24:53 2015 by
+  Generated on Sun Mar 25 14:38:15 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

@@ -6,7 +6,7 @@
 <title>
   Class: SDL2::Event::TouchFinger
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../../class_list.html"></iframe>
 
       <div id="content"><h1>Class: SDL2::Event::TouchFinger
   
@@ -107,12 +105,12 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>This class represents touch finger events.</p>
+    <p>This class represents touch finger events.</p>
 
-<p>You don&#39;t handle the instance of this class directly, but you handle
-the instances of two subclasses of this subclasses:
-<span class='object_link'><a href="FingerMotion.html" title="SDL2::Event::FingerMotion (class)">FingerMotion</a></span> and <span class='object_link'><a href="MouseButtonUp.html" title="SDL2::Event::MouseButtonUp (class)">MouseButtonUp</a></span>.</p>
+<p>You don’t handle the instance
+of this class directly, but you handle the instances of
+two subclasses of this subclasses:
+<span class='object_link'><a href="FingerMotion.html" title="SDL2::Event::FingerMotion (class)">FingerMotion</a></span>, <span class='object_link'><a href="FingerDown.html" title="SDL2::Event::FingerDown (class)">FingerDown</a></span>, and <span class='object_link'><a href="FingerUp.html" title="SDL2::Event::FingerUp (class)">FingerUp</a></span>.</p>
 
 
   </div>
@@ -151,8 +149,7 @@ the instances of two subclasses of this subclasses:
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>the finger id.</p>
+    <span class="summary_desc"><div class='inline'><p>the finger id.</p>
 </div></span>
   
 </li>
@@ -178,8 +175,7 @@ the instances of two subclasses of this subclasses:
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>the quantity of pressure applied, normalized (0…1).</p>
+    <span class="summary_desc"><div class='inline'><p>the quantity of pressure applied, normalized (0…1).</p>
 </div></span>
   
 </li>
@@ -205,8 +201,7 @@ the instances of two subclasses of this subclasses:
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>the touch device id.</p>
+    <span class="summary_desc"><div class='inline'><p>the touch device id.</p>
 </div></span>
   
 </li>
@@ -232,8 +227,7 @@ the instances of two subclasses of this subclasses:
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>the x-axis location of the touch event, normalized (0…1).</p>
+    <span class="summary_desc"><div class='inline'><p>the x-axis location of the touch event, normalized (0…1).</p>
 </div></span>
   
 </li>
@@ -259,8 +253,7 @@ the instances of two subclasses of this subclasses:
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>the y-axis location of the touch event, normalized (0…1).</p>
+    <span class="summary_desc"><div class='inline'><p>the y-axis location of the touch event, normalized (0…1).</p>
 </div></span>
   
 </li>
@@ -301,8 +294,7 @@ the instances of two subclasses of this subclasses:
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Inspection string.</p>
+    <span class="summary_desc"><div class='inline'><p>Inspection string.</p>
 </div></span>
   
 </li>
@@ -321,7 +313,7 @@ the instances of two subclasses of this subclasses:
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Event.html" title="SDL2::Event (class)">SDL2::Event</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../Event.html#enable%3D-class_method" title="SDL2::Event.enable= (method)">enable=</a></span>, <span class='object_link'><a href="../Event.html#enabled%3F-class_method" title="SDL2::Event.enabled? (method)">enabled?</a></span>, <span class='object_link'><a href="../Event.html#poll-class_method" title="SDL2::Event.poll (method)">poll</a></span>, <span class='object_link'><a href="../Event.html#window-instance_method" title="SDL2::Event#window (method)">#window</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../Event.html#enable=-class_method" title="SDL2::Event.enable= (method)">enable=</a></span>, <span class='object_link'><a href="../Event.html#enabled%3F-class_method" title="SDL2::Event.enabled? (method)">enabled?</a></span>, <span class='object_link'><a href="../Event.html#poll-class_method" title="SDL2::Event.poll (method)">poll</a></span>, <span class='object_link'><a href="../Event.html#window-instance_method" title="SDL2::Event#window (method)">#window</a></span></p>
 
   <div id="instance_attr_details" class="attr_details">
     <h2>Instance Attribute Details</h2>
@@ -339,8 +331,7 @@ the instances of two subclasses of this subclasses:
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>the finger id</p>
+    <p>the finger id</p>
 
 
   </div>
@@ -377,8 +368,7 @@ the instances of two subclasses of this subclasses:
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>the quantity of pressure applied, normalized (0…1)</p>
+    <p>the quantity of pressure applied, normalized (0…1)</p>
 
 
   </div>
@@ -415,8 +405,7 @@ the instances of two subclasses of this subclasses:
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>the touch device id</p>
+    <p>the touch device id</p>
 
 
   </div>
@@ -453,8 +442,7 @@ the instances of two subclasses of this subclasses:
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>the x-axis location of the touch event, normalized (0…1)</p>
+    <p>the x-axis location of the touch event, normalized (0…1)</p>
 
 
   </div>
@@ -491,8 +479,7 @@ the instances of two subclasses of this subclasses:
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>the y-axis location of the touch event, normalized (0…1)</p>
+    <p>the y-axis location of the touch event, normalized (0…1)</p>
 
 
   </div>
@@ -534,8 +521,7 @@ the instances of two subclasses of this subclasses:
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns inspection string</p>
+    <p>Returns inspection string</p>
 
 
   </div>
@@ -553,8 +539,7 @@ the instances of two subclasses of this subclasses:
       
       
         &mdash;
-        <div class='inline'>
-<p>inspection string</p>
+        <div class='inline'><p>inspection string</p>
 </div>
       
     </li>
@@ -601,9 +586,9 @@ static VALUE EvTouchFinger_inspect(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:25:06 2015 by
+  Generated on Sun Mar 25 14:38:19 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

@@ -6,7 +6,7 @@
 <title>
   Module: SDL2::TextInput
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../class_list.html"></iframe>
+      <iframe id="nav" src="../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -59,8 +59,6 @@
         <div class="clear"></div>
       </div>
 
-      <iframe id="search_frame" src="../class_list.html"></iframe>
-
       <div id="content"><h1>Module: SDL2::TextInput
   
   
@@ -89,13 +87,13 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>This module provides Unicode text input support.</p>
+    <p>This module provides Unicode text input support.</p>
 
-<p>Normally, you can handle key inputs from key events and <span class='object_link'><a href="Key.html" title="SDL2::Key (module)">Key</a></span> module.
-This module is required to input thousands kinds of symbols like CJK
-languages. Please see <a href="https://wiki.libsdl.org/Tutorials/TextInput" target="_parent" title="https://wiki.libsdl.org/Tutorials/TextInput">https://wiki.libsdl.org/Tutorials/TextInput</a> to
-understand the concept of Unicode text input.</p>
+<p>Normally, you can handle key inputs from key events
+and <span class='object_link'><a href="Key.html" title="SDL2::Key (module)">Key</a></span> module. This module is required to
+input thousands kinds of symbols like CJK languages.
+Please see <a href="https://wiki.libsdl.org/Tutorials/TextInput" target="_parent" title="https://wiki.libsdl.org/Tutorials/TextInput">https://wiki.libsdl.org/Tutorials/TextInput</a>
+to understand the concept of Unicode text input.</p>
 
 
   </div>
@@ -135,8 +133,7 @@ understand the concept of Unicode text input.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Return true if Unicode text input events are enabled.</p>
+    <span class="summary_desc"><div class='inline'><p>Return true if Unicode text input events are enabled.</p>
 </div></span>
   
 </li>
@@ -145,7 +142,7 @@ understand the concept of Unicode text input.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#rect%3D-class_method" title="rect= (class method)">.<strong>rect=</strong>(rect)  &#x21d2; rect </a>
+      <a href="#rect=-class_method" title="rect= (class method)">.<strong>rect=</strong>(rect)  &#x21d2; rect </a>
     
 
     
@@ -159,8 +156,7 @@ understand the concept of Unicode text input.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Set the rectanlgle used to type Unicode text inputs.</p>
+    <span class="summary_desc"><div class='inline'><p>Set the rectanlgle used to type Unicode text inputs.</p>
 </div></span>
   
 </li>
@@ -183,8 +179,7 @@ understand the concept of Unicode text input.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Enable Unicode input events.</p>
+    <span class="summary_desc"><div class='inline'><p>Enable Unicode input events.</p>
 </div></span>
   
 </li>
@@ -207,8 +202,7 @@ understand the concept of Unicode text input.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Disable Unicode input events.</p>
+    <span class="summary_desc"><div class='inline'><p>Disable Unicode input events.</p>
 </div></span>
   
 </li>
@@ -234,8 +228,7 @@ understand the concept of Unicode text input.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Return true if Unicode text input events are enabled.</p>
+    <p>Return true if Unicode text input events are enabled.</p>
 
 
   </div>
@@ -301,14 +294,14 @@ static VALUE TextInput_s_active_p(VALUE self)
   <div class="discussion">
     
 
+
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    
-<p>Set the rectanlgle used to type Unicode text inputs.</p>
+    <p>Set the rectanlgle used to type Unicode text inputs.</p>
 
 
   </div>
@@ -327,8 +320,7 @@ static VALUE TextInput_s_active_p(VALUE self)
       
       
         &mdash;
-        <div class='inline'>
-<p>the rectangle to receive text</p>
+        <div class='inline'><p>the rectangle to receive text</p>
 </div>
       
     </li>
@@ -390,8 +382,7 @@ static VALUE TextInput_s_set_rect(VALUE self, VALUE rect)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Enable Unicode input events.</p>
+    <p>Enable Unicode input events.</p>
 
 
   </div>
@@ -455,8 +446,7 @@ static VALUE TextInput_s_start(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Disable Unicode input events.</p>
+    <p>Disable Unicode input events.</p>
 
 
   </div>
@@ -514,9 +504,9 @@ static VALUE TextInput_s_stop(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:25:00 2015 by
+  Generated on Sun Mar 25 14:38:17 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>

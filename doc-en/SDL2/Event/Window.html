@@ -6,7 +6,7 @@
 <title>
   Class: SDL2::Event::Window
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.12
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../../class_list.html"></iframe>
 
       <div id="content"><h1>Class: SDL2::Event::Window
   
@@ -107,9 +105,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>This class represents window event. This type of event occurs when window
-state is changed.</p>
+    <p>This class represents window event. This type of event occurs when
+window state is changed.</p>
 
 
   </div>
@@ -144,8 +141,7 @@ state is changed.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>event dependent data.</p>
+    <span class="summary_desc"><div class='inline'><p>event dependent data.</p>
 </div></span>
   
 </li>
@@ -171,8 +167,7 @@ state is changed.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>event dependent data.</p>
+    <span class="summary_desc"><div class='inline'><p>event dependent data.</p>
 </div></span>
   
 </li>
@@ -198,8 +193,7 @@ state is changed.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>event type, one of the following:.</p>
+    <span class="summary_desc"><div class='inline'><p>event type, one of the following:.</p>
 </div></span>
   
 </li>
@@ -225,8 +219,7 @@ state is changed.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>the associate window id.</p>
+    <span class="summary_desc"><div class='inline'><p>the associate window id.</p>
 </div></span>
   
 </li>
@@ -267,8 +260,7 @@ state is changed.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Inspection string.</p>
+    <span class="summary_desc"><div class='inline'><p>Inspection string.</p>
 </div></span>
   
 </li>
@@ -287,7 +279,7 @@ state is changed.</p>
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Event.html" title="SDL2::Event (class)">SDL2::Event</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../Event.html#enable%3D-class_method" title="SDL2::Event.enable= (method)">enable=</a></span>, <span class='object_link'><a href="../Event.html#enabled%3F-class_method" title="SDL2::Event.enabled? (method)">enabled?</a></span>, <span class='object_link'><a href="../Event.html#poll-class_method" title="SDL2::Event.poll (method)">poll</a></span>, <span class='object_link'><a href="../Event.html#window-instance_method" title="SDL2::Event#window (method)">#window</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../Event.html#enable=-class_method" title="SDL2::Event.enable= (method)">enable=</a></span>, <span class='object_link'><a href="../Event.html#enabled%3F-class_method" title="SDL2::Event.enabled? (method)">enabled?</a></span>, <span class='object_link'><a href="../Event.html#poll-class_method" title="SDL2::Event.poll (method)">poll</a></span>, <span class='object_link'><a href="../Event.html#window-instance_method" title="SDL2::Event#window (method)">#window</a></span></p>
 
   <div id="instance_attr_details" class="attr_details">
     <h2>Instance Attribute Details</h2>
@@ -305,8 +297,7 @@ state is changed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>event dependent data</p>
+    <p>event dependent data</p>
 
 
   </div>
@@ -343,8 +334,7 @@ state is changed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>event dependent data</p>
+    <p>event dependent data</p>
 
 
   </div>
@@ -381,46 +371,32 @@ state is changed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>event type, one of the following:</p>
-<ul><li>
-<p>SDL2::Event::Window::NONE - (never used)</p>
-</li><li>
-<p>SDL2::Event::Window::SHOWN - window has been shown</p>
-</li><li>
-<p>SDL2::Event::Window::HIDDEN - window has been hidden</p>
-</li><li>
-<p>SDL2::Event::Window::EXPOSED - window has been exposed and should be
-redrawn</p>
-</li><li>
-<p>SDL2::Event::Window::MOVED - window has been moved to data1, data2</p>
-</li><li>
-<p>SDL2::Event::Window::RESIZED - window has been resized to data1xdata2; this
-is event is always preceded by SIZE_CHANGED</p>
-</li><li>
-<p>SDL2::Event::Window::SIZE_CHANGED - window size has changed, either as a
-result of an API call or through the system or user changing the window
-size; this event is followed by RESIZED if the size was changed by an
-external event, i.e. the user or the window manager</p>
-</li><li>
-<p>SDL2::Event::Window::MINIMIZED - window has been minimized</p>
-</li><li>
-<p>SDL2::Event::Window::MAXIMIZED - window has been maximized</p>
-</li><li>
-<p>SDL2::Event::Window::RESTORED - window has been restored to normal size and
-position</p>
-</li><li>
-<p>SDL2::Event::Window::ENTER - window has gained mouse focus</p>
-</li><li>
-<p>SDL2::Event::Window::LEAVE - window has lost mouse focus</p>
-</li><li>
-<p>SDL2::Event::Window::FOCUS_GAINED - window has gained keyboard focus</p>
-</li><li>
-<p>SDL2::Event::Window::FOCUS_LOST -window has lost keyboard focus</p>
-</li><li>
-<p>SDL2::Event::Window::CLOSE - the window manager requests that the window be
-closed</p>
-</li></ul>
+    <p>event type, one of the following:</p>
+
+<ul>
+  <li>SDL2::Event::Window::NONE - (never used)</li>
+  <li>SDL2::Event::Window::SHOWN - window has been shown</li>
+  <li>SDL2::Event::Window::HIDDEN - window has been hidden</li>
+  <li>SDL2::Event::Window::EXPOSED - window has been exposed and should be redrawn</li>
+  <li>SDL2::Event::Window::MOVED - window has been moved to data1, data2</li>
+  <li>SDL2::Event::Window::RESIZED - window has been resized to data1xdata2;
+  this is event is always preceded by SIZE_CHANGED</li>
+  <li>SDL2::Event::Window::SIZE_CHANGED -
+  window size has changed, either as a result of an API call or through
+  the system or user changing the window size;
+  this event is followed by
+  RESIZED if the size was changed by an external event,
+  i.e. the user or the window manager</li>
+  <li>SDL2::Event::Window::MINIMIZED - window has been minimized</li>
+  <li>SDL2::Event::Window::MAXIMIZED - window has been maximized</li>
+  <li>SDL2::Event::Window::RESTORED - window has been restored to normal size and position</li>
+  <li>SDL2::Event::Window::ENTER - window has gained mouse focus</li>
+  <li>SDL2::Event::Window::LEAVE - window has lost mouse focus</li>
+  <li>SDL2::Event::Window::FOCUS_GAINED - window has gained keyboard focus</li>
+  <li>SDL2::Event::Window::FOCUS_LOST -window has lost keyboard focus</li>
+  <li>SDL2::Event::Window::CLOSE -
+  the window manager requests that the window be closed</li>
+</ul>
 
 
   </div>
@@ -457,8 +433,7 @@ closed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>the associate window id</p>
+    <p>the associate window id</p>
 
 
   </div>
@@ -500,8 +475,7 @@ closed</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns inspection string</p>
+    <p>Returns inspection string</p>
 
 
   </div>
@@ -519,8 +493,7 @@ closed</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>inspection string</p>
+        <div class='inline'><p>inspection string</p>
 </div>
       
     </li>
@@ -563,9 +536,9 @@ static VALUE EvWindow_inspect(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Thu Sep 24 01:25:04 2015 by
+  Generated on Sun Mar 25 14:38:18 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.9.12 (ruby-2.5.0).
 </div>
 
     </div>
