@@ -20,7 +20,7 @@ loop do
         p [state.x, state.y, state.button_bits,
            state.pressed?(1), state.pressed?(2), state.pressed?(3)]
       when SDL2::Key::R
-        p SDL2::Mouse.relative_state        
+        p SDL2::Mouse.relative_state
       when SDL2::Key::SPACE
         SDL2::Mouse.relative_mode = ! SDL2::Mouse.relative_mode?
       when SDL2::Key::T

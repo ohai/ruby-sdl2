@@ -32,7 +32,7 @@ class Cycle < Struct.new(:cycle_color, :cycle_alpha, :color, :alpha,
     end
   end
 end
-                   
+
 
 class WindowData
   def initialize(sdl_window, renderer, cycle, blend_mode, use_color_key)
@@ -50,7 +50,7 @@ class WindowData
       Sprite.new(@sdl_window, @renderer, @sprite)
     }
   end
-  
+
   def load_sprite(fname)
     bitmap = SDL2::Surface.load(fname)
     bitmap.color_key = bitmap.pixel(0, 0) if @use_color_key
@@ -82,7 +82,7 @@ class WindowData
     # Draw rect
     @renderer.draw_color = [0, 0, 0]
     @renderer.draw_rect(SDL2::Rect[viewport.w/2 - 50, viewport.h/2 - 50, 100, 100])
-    
+
     # lines
     @renderer.draw_color = [0, 0xff, 0]
     @renderer.draw_line(1, 1, viewport.w - 2, viewport.h - 2)
@@ -90,11 +90,11 @@ class WindowData
 
     @sprite.color_mod = [@cycle.color, 255, @cycle.color] if @cycle.cycle_color
     @sprite.alpha_mod = @cycle.alpha if @cycle.cycle_alpha
-    
+
     @sprites.each(&:draw)
     @renderer.present
   end
-  
+
   class Sprite
     def initialize(window, renderer, sprite, max_speed = MAX_SPEED)
       @renderer = renderer
@@ -156,7 +156,7 @@ class App
     opts = OptionParser.new("Usage: testsprite [options] [SPRITE]")
     opts.version = SDL2::VERSION
     opts.release = nil
-    
+
     opts.on("-m", "--mode MODE", "fullscreen|fullscreen-desktop|window"){|mode|
       case mode
       when "fullscreen"
@@ -169,7 +169,7 @@ class App
         @window_flags &= ~(SDL2::Window::FULLSCREEN|SDL2::Window::FULLSCREEN_DESKTOP)
       end
     }
-    
+
     opts.on("--windows N", "Number of windows", Integer){|n|
       if n != 1 and @window_flags.bit?(SDL2::Window::FULLSCREEN|SDL2::Window::FULLSCREEN_DESKTOP)
         raise "Only one window is available for fullscreen mode"
@@ -212,7 +212,7 @@ class App
                       SDL2::BlendMode::MOD
                     end
     }
-    
+
     opts.on("--cycle-color"){ @cycle.cycle_color = true }
 
     opts.on("--cycle-alpha"){ @cycle.cycle_alpha = true }
@@ -228,7 +228,7 @@ class App
   def run(argv)
     options.parse!(argv)
     @spritepath = argv.shift || @spritepath
-    
+
     SDL2.init(SDL2::INIT_VIDEO)
     icon = load_icon
     @windows = @num_window.times.map do |n|
@@ -237,7 +237,7 @@ class App
                                    @window_flags)
       renderer = window.create_renderer(-1, @renderer_flags)
       window.icon = icon if icon
-      
+
       WindowData.new(window, renderer, @cycle, @blend_mode, @use_color_key)
     end
 
@@ -257,7 +257,7 @@ class App
     return nil if @icon_path.nil?
     SDL2::Surface.load(@icon_path)
   end
-  
+
   def handle_event(event)
     case event
     when SDL2::Event::Quit
