@@ -436,7 +436,7 @@ static VALUE Window_destroy(VALUE self)
  *
  *   @param [Integer] index the index of the rendering driver to initialize,
  *     or -1 to initialize the first one supporting the requested flags
- *   @param [Integer] flags 0, or one or more [Renderer flag masks](SDL2) OR'd together;
+ *   @param [Integer] flags 0, or one or more {Flags} OR'd together
  *
  *   @return [SDL2::Renderer] the created renderer (rendering context)
  */
