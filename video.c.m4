@@ -1497,7 +1497,7 @@ static VALUE Renderer_set_draw_blend_mode(VALUE self, VALUE mode)
  * Get the clip rectangle for the current target.
  *
  * @return [SDL2::Rect] the current clip rectangle
- * @see {#clip_rect=}
+ * @see #clip_rect=
  */
 static VALUE Renderer_clip_rect(VALUE self)
 {
