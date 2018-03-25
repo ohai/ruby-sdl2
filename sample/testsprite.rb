@@ -218,7 +218,7 @@ class App
     opts.on("--cycle-alpha"){ @cycle.cycle_alpha = true }
 
     opts.on("--vsync", "Present is syncronized with the refresh rate") {
-      @renderer_flags |= SDL2::Renderer::PRESENTVSYNC
+      @renderer_flags |= SDL2::Renderer::Flags::PRESENTVSYNC
     }
 
     opts.on("--use-color-key (yes|no)", TrueClass){|bool| @use_color_key = bool }
