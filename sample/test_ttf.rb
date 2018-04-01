@@ -46,15 +46,15 @@ font.outline = 1
 draw_three_types(renderer, font, 150, 50)
 
 font.outline = 0
-font.style = SDL2::TTF::STYLE_BOLD
+font.style = SDL2::TTF::Style::BOLD
 draw_three_types(renderer, font, 280, 50)
 
 font.style = 0
-font.hinting = SDL2::TTF::HINTING_MONO
+font.hinting = SDL2::TTF::Hinting::MONO
 draw_three_types(renderer, font, 410, 50)
 
 font.style = 0
-font.hinting = SDL2::TTF::HINTING_NORMAL
+font.hinting = SDL2::TTF::Hinting::NORMAL
 font.kerning = false
 draw_three_types(renderer, font, 540, 50)
 

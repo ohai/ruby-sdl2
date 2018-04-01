@@ -3,10 +3,10 @@ require 'sdl2'
 SDL2.init(SDL2::INIT_EVERYTHING)
 
 
-p SDL2::GameController.axis_name_of(SDL2::GameController::AXIS_LEFTY)
+p SDL2::GameController.axis_name_of(SDL2::GameController::Axis::LEFTY)
 p SDL2::GameController.axis_name_of(129) rescue p $!
 p SDL2::GameController.axis_from_name("rightx")
-p SDL2::GameController.button_name_of(SDL2::GameController::BUTTON_Y)
+p SDL2::GameController.button_name_of(SDL2::GameController::Button::Y)
 p SDL2::GameController.button_from_name("x")
 p SDL2::GameController.button_from_name("rightx") rescue p $!
 
@@ -42,14 +42,14 @@ loop do
       exit if event.sym == SDL2::Key::ESCAPE
     when SDL2::Event::ControllerAxisMotion
       p event
-      p controller.axis(SDL2::GameController::AXIS_LEFTX)
-      p controller.axis(SDL2::GameController::AXIS_LEFTY)
+      p controller.axis(SDL2::GameController::Axis::LEFTX)
+      p controller.axis(SDL2::GameController::Axis::LEFTY)
     when SDL2::Event::ControllerButton
       p event
-      p controller.button_pressed?(SDL2::GameController::BUTTON_A)
-      p controller.button_pressed?(SDL2::GameController::BUTTON_B)
-      p controller.button_pressed?(SDL2::GameController::BUTTON_X)
-      p controller.button_pressed?(SDL2::GameController::BUTTON_Y)
+      p controller.button_pressed?(SDL2::GameController::Button::A)
+      p controller.button_pressed?(SDL2::GameController::Button::B)
+      p controller.button_pressed?(SDL2::GameController::Button::X)
+      p controller.button_pressed?(SDL2::GameController::Button::Y)
     when SDL2::Event::ControllerDevice
       p event
     end
