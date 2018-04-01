@@ -26,7 +26,10 @@ loop do
     case ev
     when SDL2::Event::Quit
       exit
-    when SDL2::Event::TextInput, SDL2::Event::TextEditing
+    when SDL2::Event::TextInput
+      p ev
+      p ev.text
+    when SDL2::Event::TextEditing
       p ev
     when SDL2::Event::KeyDown
       puts "scancode: #{ev.scancode}(#{SDL2::Key::Scan.name_of(ev.scancode)})"
