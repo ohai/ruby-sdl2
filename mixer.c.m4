@@ -1,6 +1,5 @@
 /* -*- mode: C -*- */
 #ifdef HAVE_SDL_MIXER_H
-#include "extconf.h"
 #include "rubysdl2_internal.h"
 #include <SDL_mixer.h>
 
