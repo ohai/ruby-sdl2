@@ -100,8 +100,6 @@ class MusicPlayer
     match_keydown("o", event) { SDL2::Mixer::MusicChannel.fade_out(1000) }
     match_keydown("i", event) { SDL2::Mixer::MusicChannel.fade_in(@music, 1, 1000) }
     match_keydown("SPACE", event) {
-      p "SPACE"
-      p SDL2::Mixer::MusicChannel.pause?
       if SDL2::Mixer::MusicChannel.pause?
         SDL2::Mixer::MusicChannel.resume
       else
