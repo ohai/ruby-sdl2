@@ -48,9 +48,8 @@ class MusicPlayer
     file = argv.shift
     
     SDL2.init(SDL2::INIT_EVERYTHING)
-    SDL2::Mixer.init(SDL2::Mixer::INIT_FLAC|SDL2::Mixer::INIT_MOD|
-                     SDL2::Mixer::INIT_MODPLUG|SDL2::Mixer::INIT_MP3|
-                     SDL2::Mixer::INIT_OGG)
+    SDL2::Mixer.init(SDL2::Mixer::INIT_FLAC|SDL2::Mixer::INIT_MODPLUG|
+                     SDL2::Mixer::INIT_MP3|SDL2::Mixer::INIT_OGG)
     SDL2::Mixer.open(44100, SDL2::Mixer::DEFAULT_FORMAT, 2, 512)
     SDL2::TTF.init
 
@@ -101,6 +100,8 @@ class MusicPlayer
     match_keydown("o", event) { SDL2::Mixer::MusicChannel.fade_out(1000) }
     match_keydown("i", event) { SDL2::Mixer::MusicChannel.fade_in(@music, 1, 1000) }
     match_keydown("SPACE", event) {
+      p "SPACE"
+      p SDL2::Mixer::MusicChannel.pause?
       if SDL2::Mixer::MusicChannel.pause?
         SDL2::Mixer::MusicChannel.resume
       else
