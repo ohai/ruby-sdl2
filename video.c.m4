@@ -1623,7 +1623,7 @@ static VALUE Renderer_viewport(VALUE self)
  */
 static VALUE Renderer_set_viewport(VALUE self, VALUE rect)
 {
-    HANDLE_ERROR(SDL_RenderSetClipRect(Get_SDL_Renderer(self), Get_SDL_Rect_or_NULL(rect)));
+    HANDLE_ERROR(SDL_RenderSetViewport(Get_SDL_Renderer(self), Get_SDL_Rect_or_NULL(rect)));
     return rect;
 }
 
