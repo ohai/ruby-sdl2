@@ -50,7 +50,7 @@ static VALUE cEvFingerMotion;
    SDL_QuitRequested
    - difficult
    SDL_PushEvent
-   SDL_WaitEvent{,Timeout}
+   SDL_WaitEventTimeout
    SDL_UserEvent, SDL_RegisterEvents
  */
 
@@ -70,13 +70,14 @@ static VALUE event_type_to_class[SDL_LASTEVENT];
  *     SDL2.init(SDL2::INIT_VIDEO|SDL2::INIT_EVENTS)
  *
  * Internally, SDL stores all the events waiting to be handled in an event queue.
- * Using methods like {SDL2::Event.poll}, you can observe and handle input events.
+ * Using methods like {SDL2::Event.poll} and {SDL2::Event.wait}, you can observe
+ * and handle input events.
  *
  * The queue is conceptually a sequence of objects of SDL2::Event.
- * You can read an event from the queue with {SDL2::Event.poll} and
- * you can process the information from the object.
- * 
- * Note: peep and wait will be implemented later.
+ * You can read an event from the queue with {SDL2::Event.poll} or
+ * {SDL3::Event.wait} and you can process the information from the object.
+ *
+ * Note: peep will be implemented later.
  *
  * @attribute [rw] type
  *   SDL's internal event type enum
@@ -120,6 +121,18 @@ static VALUE Event_s_poll(VALUE self)
     } else {
         return Qnil;
     }
+}
+
+/*
+ * Wait on currently pending events, blocking if the queue is empty
+ *
+ * @return [SDL2::Event] next event from the queue
+ */
+static VALUE Event_s_wait(VALUE self)
+{
+    SDL_Event ev;
+    HANDLE_ERROR(SDL_WaitEvent(&ev));
+    return Event_new(&ev);
 }
 
 /*
@@ -1069,6 +1082,7 @@ void rubysdl2_init_event(void)
     cEvent = rb_define_class_under(mSDL2, "Event", rb_cObject);
     rb_define_alloc_func(cEvent, Event_s_allocate);
     rb_define_singleton_method(cEvent, "poll", Event_s_poll, 0);
+    rb_define_singleton_method(cEvent, "wait", Event_s_wait, 0);
     rb_define_singleton_method(cEvent, "enabled?", Event_s_enabled_p, 0);
     rb_define_singleton_method(cEvent, "enable=", Event_s_set_enable, 1);
     
