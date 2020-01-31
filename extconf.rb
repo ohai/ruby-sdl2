@@ -53,6 +53,8 @@ have_header("SDL_filesystem.h")
 have_const("MIX_INIT_MODPLUG", "SDL_mixer.h")
 have_const("MIX_INIT_FLUIDSYNTH", "SDL_mixer.h")
 have_const("MIX_INIT_MID", "SDL_mixer.h")
-
+have_const("SDL_RENDERER_PRESENTVSYNC", "SDL_render.h")
+have_const("SDL_WINDOW_ALLOW_HIGHDPI", "SDL_video.h")
+have_const("SDL_WINDOW_MOUSE_CAPTURE", "SDL_video.h")
 
 create_makefile('sdl2_ext')
