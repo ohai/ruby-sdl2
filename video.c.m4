@@ -2863,11 +2863,11 @@ void rubysdl2_init_video(void)
     DEFINE_WINDOW_FLAGS_CONST(MOUSE_FOCUS);
     /* window is not created by SDL */
     DEFINE_WINDOW_FLAGS_CONST(FOREIGN);
-#ifdef SDL_WINDOW_ALLOW_HIGHDPI
+#ifdef HAVE_CONST_SDL_WINDOW_ALLOW_HIGHDPI
     /* window should be created in high-DPI mode if supported (>= SDL 2.0.1)*/
     DEFINE_WINDOW_FLAGS_CONST(ALLOW_HIGHDPI);
 #endif
-#ifdef SDL_WINDOW_MOSUE_CAPTURE
+#ifdef HAVE_CONST_SDL_WINDOW_MOUSE_CAPTURE
     /* window has mouse caputred (>= SDL 2.0.4) */
     DEFINE_WINDOW_FLAGS_CONST(MOUSE_CAPTURE);
 #endif
@@ -2942,7 +2942,7 @@ void rubysdl2_init_video(void)
     DEFINE_RENDERER_FLAGS_CONST(SOFTWARE);
     /* the renderer uses hardware acceleration */
     DEFINE_RENDERER_FLAGS_CONST(ACCELERATED);
-#ifdef SDL_RENDERER_PRESENTVSYNC
+#ifdef HAVE_CONST_SDL_RENDERER_PRESENTVSYNC
     /* present is synchronized with the refresh rate */
     DEFINE_RENDERER_FLAGS_CONST(PRESENTVSYNC);
 #endif
