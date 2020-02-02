@@ -51,7 +51,6 @@ def gem_spec
     spec.files = `git ls-files`.split(/\n/) + C_FROM_M4_FILES
     spec.test_files = []
     spec.extensions = ["extconf.rb"]
-    spec.has_rdoc = false
   end
 end
 
