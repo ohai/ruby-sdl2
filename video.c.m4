@@ -426,7 +426,10 @@ VALUE find_window_by_id(Uint32 id)
  */
 static VALUE Window_destroy(VALUE self)
 {
-    Window_destroy_internal(Get_Window(self));
+    Window* w = Get_Window(self);
+    Window_destroy_internal(w);
+    SDL_DestroyWindow(w->window);
+    w->window = NULL;
     return Qnil;
 }
 
