@@ -12,8 +12,11 @@ Before installing Ruby/SDL2, you need to install:
 * [SDL_mixer](https://www.libsdl.org/projects/SDL_mixer/)
 * [SDL_ttf](https://www.libsdl.org/projects/SDL_ttf/)
 
-After installing these libraries, you can install Ruby/SDL2
-from github:
+After installing these libraries, you can install Ruby/SDL2 by gem command as follows:
+
+    gem install ruby-sdl2
+    
+Alternatively You can also install the master version of Ruby/SDL2 from github:
 
     git clone https://github.com/ohai/ruby-sdl2.git
     cd ruby-sdl2
