@@ -3013,7 +3013,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cSurface, "pixel_color", Surface_pixel_color, 2);
     rb_define_method(cSurface, "color_key", Surface_color_key, 0);
     rb_define_method(cSurface, "color_key=", Surface_set_color_key, 1);
-    rb_define_method(cSurface, "unset_color_key", Surface_set_color_key, 0);
+    rb_define_method(cSurface, "unset_color_key", Surface_unset_color_key, 0);
     rb_define_method(cSurface, "pixels", Surface_pixels, 0);
     rb_define_method(cSurface, "pitch", Surface_pitch, 0);
     rb_define_method(cSurface, "bits_per_pixel", Surface_bits_per_pixel, 0);
