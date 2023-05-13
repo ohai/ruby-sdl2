@@ -184,7 +184,7 @@ void Init_sdl2_ext(void)
     rb_define_const(mSDL2, "LIBSDL_VERSION_NUMBER", libsdl_version_number());
     /* SDL's revision (from VCS) string  */
     rb_define_const(mSDL2, "LIBSDL_REVISION", libsdl_revision());
-    /* Obsolute, always 0 */
+    /* Obsolete, always 0 */
     rb_define_const(mSDL2, "LIBSDL_REVISION_NUMBER", INT2NUM(0));
 
 #ifdef HAVE_SDL_IMAGE_H
