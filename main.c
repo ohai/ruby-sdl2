@@ -145,11 +145,6 @@ static VALUE libsdl_revision(void)
     return rb_usascii_str_new_cstr(SDL_GetRevision());
 }
 
-static VALUE libsdl_revision_number(void)
-{
-    return INT2NUM(SDL_GetRevisionNumber());
-}
-
 /*
  * Document-module: SDL2
  *
@@ -189,8 +184,8 @@ void Init_sdl2_ext(void)
     rb_define_const(mSDL2, "LIBSDL_VERSION_NUMBER", libsdl_version_number());
     /* SDL's revision (from VCS) string  */
     rb_define_const(mSDL2, "LIBSDL_REVISION", libsdl_revision());
-    /* SDL's revision (from VCS) array of numbers  */
-    rb_define_const(mSDL2, "LIBSDL_REVISION_NUMBER", libsdl_revision_number());
+    /* Obsolute, always 0 */
+    rb_define_const(mSDL2, "LIBSDL_REVISION_NUMBER", INT2NUM(0));
 
 #ifdef HAVE_SDL_IMAGE_H
     {
