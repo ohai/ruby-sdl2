@@ -135,7 +135,7 @@ static void check_channel(VALUE ch, int allow_minus_1)
     int channel = NUM2INT(ch);
     if (channel >= Mix_AllocateChannels(-1))
         rb_raise(rb_eArgError, "too large number of channel (%d)", channel);
-    if (channel == -1 && !allow_minus_1 || channel < -1)
+    if ((channel == -1 && !allow_minus_1) || channel < -1)
         rb_raise(rb_eArgError, "negative number of channel is not allowed");
 }
 
@@ -1076,15 +1076,15 @@ void rubysdl2_init_mixer(void)
     /* Initialize Ogg vorbis loader */
     DEFINE_MIX_INIT(OGG);
 
-#if HAVE_CONST_MIX_INIT_MODPLUG
+#ifdef HAVE_CONST_MIX_INIT_MODPLUG
     /* Initialize libmodplug */
     DEFINE_MIX_INIT(MODPLUG);
 #endif
-#if HAVE_CONST_MIX_INIT_FLUIDSYNTH
+#ifdef HAVE_CONST_MIX_INIT_FLUIDSYNTH
     /* Initialize fluidsynth */
     DEFINE_MIX_INIT(FLUIDSYNTH);
 #endif
-#if HAVE_CONST_MIX_INIT_MID
+#ifdef HAVE_CONST_MIX_INIT_MID
     /* Initialize mid */
     DEFINE_MIX_INIT(MID);
 #endif
