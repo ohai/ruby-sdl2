@@ -326,11 +326,11 @@ static VALUE EvWindow_inspect(VALUE self)
  *
  * @attribute pressed
  *   key is pressed
- *   @return [Integer]
+ *   @return [boolean]
  *
  * @attribute repeat
  *   key repeat
- *   @return [Integer]
+ *   @return [boolean]
  *   
  * @attribute scancode
  *   physical key code
