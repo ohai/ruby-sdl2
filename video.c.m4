@@ -482,7 +482,7 @@ static VALUE Window_window_id(VALUE self)
 /*
  * Get information about the window.
  *
- * @return [SDL2::Window::Mode]
+ * @return [SDL2::Display::Mode]
  */
 static VALUE Window_display_mode(VALUE self)
 {
@@ -625,7 +625,7 @@ static VALUE Window_set_int_int(void (*func)(SDL_Window*, int, int), VALUE windo
 /*
  * Get the maximum size of the window's client area.
  *
- * @return [Integer,Integer] maximum width and maximum height.
+ * @return [Array(Integer,Integer)] maximum width and maximum height.
  *
  * @see #maximum_size=
  */
@@ -638,7 +638,7 @@ static VALUE Window_maximum_size(VALUE self)
  * @overload maximum_size=(size)
  *   Set the maximum size of the window's client area.
  *
- *   @param size [[Integer, Integer]] maximum width and maximum height,
+ *   @param size [Array(Integer, Integer)] maximum width and maximum height,
  *     the both must be positive.
  *
  *   @return [size]
@@ -653,7 +653,7 @@ static VALUE Window_set_maximum_size(VALUE self, VALUE max_size)
 /*
  * Get the minimum size of the window's client area.
  *
- * @return [Integer,Integer] minimum width and minimum height.
+ * @return [Array(Integer,Integer)] minimum width and minimum height.
  *
  * @see #minimum_size=
  */
@@ -666,7 +666,7 @@ static VALUE Window_minimum_size(VALUE self)
  * @overload minimum_size=(size)
  *   Set the minimum size of the window's client area.
  *
- *   @param size [[Integer, Integer]] minimum width and minimum height,
+ *   @param size [Array(Integer, Integer)] minimum width and minimum height,
  *     the both must be positive.
  *
  *   @return [size]
@@ -681,7 +681,7 @@ static VALUE Window_set_minimum_size(VALUE self, VALUE min_size)
 /*
  * Get the position of the window.
  *
- * @return [Integer,Integer] the x position and the y position
+ * @return [Array(Integer,Integer)] the x position and the y position
  *
  * @see #position=
  */
@@ -694,7 +694,7 @@ static VALUE Window_position(VALUE self)
  * @overload position=(xy)
  *   Set the position of the window
  *
- *   @param xy [[Integer, Integer]] the x position and the y position,
+ *   @param xy [Array(Integer, Integer)] the x position and the y position,
  *     {SDL2::Window::POS_CENTERED} and {SDL2::Window::POS_UNDEFINED}
  *     are available.
  *
@@ -710,7 +710,7 @@ static VALUE Window_set_position(VALUE self, VALUE xy)
 /*
  * Get the size of the window.
  *
- * @return [[Integer, Integer]] the width and the height
+ * @return [Array(Integer, Integer)] the width and the height
  *
  * @see size=
  */
@@ -723,7 +723,7 @@ static VALUE Window_size(VALUE self)
  * @overload size=(size)
  *   Set the size of the window.
  *
- *   @param wh [[Integer, Integer]] new width and new height
+ *   @param wh [Array(Integer, Integer)] new width and new height
  *
  *   @return [size]
  *
@@ -884,7 +884,7 @@ static VALUE Window_set_fullscreen_mode(VALUE self, VALUE flags)
 /*
  * Get the size of the drawable region.
  *
- * @return [[Integer, Integer]] the width and height of the region
+ * @return [Array(Integer, Integer)] the width and height of the region
  */
 static VALUE Window_gl_drawable_size(VALUE self)
 {
@@ -962,7 +962,7 @@ static VALUE Window_debug_info(VALUE self)
  *
  * @!attribute [r] name
  *   The name of the display
- *   @return [Stirng]
+ *   @return [String]
  *
  */
 
@@ -1336,7 +1336,7 @@ static VALUE Renderer_clear(VALUE self)
 
 /*
  * Get the color used for drawing operations
- * @return [[Integer,Integer,Integer,Integer]]
+ * @return [Array(Integer,Integer,Integer,Integer)]
  *   red, green, blue, and alpha components of the drawing color
  *   (all components are more than or equal to 0 and less than and equal to 255)
  *
@@ -1364,12 +1364,10 @@ static VALUE Renderer_draw_color(VALUE self)
  *   * {#fill_rect}
  *   * {#clear}
  *
- *   @param [[Integer, Integer, Integer]] color
- *     red, green, and blue components used for drawing
- *   @param [[Integer, Integer, Integer, Integer]] color
- *     red, green, blue, and alpha components used for drawing
+ *   @param [Array<Integer>] color
+ *     red, green, blue, and optionally alpha components used for drawing
  *
- *   @return [color]
+ *   @return [Array<Integer>]
  *
  *   @see #draw_color
  */
@@ -1538,7 +1536,7 @@ static VALUE Render_clip_enabled_p(VALUE self)
 /*
  * Get device indepndent resolution for rendering.
  *
- * @return [[Integer, Integer]] the logical width and height
+ * @return [Array(Integer, Integer)] the logical width and height
  * @see #logical_size=
  */
 static VALUE Renderer_logical_size(VALUE self)
@@ -1553,7 +1551,7 @@ static VALUE Renderer_logical_size(VALUE self)
  *
  *   Set a device indepndent resolution for rendering.
  *
- *   @param w_and_h [[Integer, Integer]] the width and height of the logical resolution
+ *   @param w_and_h [Array(Integer, Integer)] the width and height of the logical resolution
  *   @return [w_and_h]
  *   @see #logical_size
  */
@@ -1568,7 +1566,7 @@ static VALUE Renderer_set_logical_size(VALUE self, VALUE wh)
 /*
  * Get the drawing scale for the current target.
  *
- * @return [[Integer, Integer]] horizontal and vertical scale factor
+ * @return [Array(Integer, Integer)] horizontal and vertical scale factor
  * @see #scale=
  */
 static VALUE Renderer_scale(VALUE self)
@@ -1590,7 +1588,7 @@ static VALUE Renderer_scale(VALUE self)
  *   it will be handled using the appropriate
  *   quality hints. For best results use integer scaling factors.
  *
- *   @param scaleX_and_scaleY [[Float, Float]] the horizontal and vertical scaling factors
+ *   @param scaleX_and_scaleY [Array(Float, Float)] the horizontal and vertical scaling factors
  *   @return [scaleX_and_scaleY]
  *   @see #scale
  */
@@ -1643,7 +1641,7 @@ static VALUE Renderer_support_render_target_p(VALUE self)
 /*
  * Get the output size of a rendering context.
  *
- * @return [[Integer, Integer]] the width and the height
+ * @return [Array(Integer, Integer)] the width and the height
  */
 static VALUE Renderer_output_size(VALUE self)
 {
@@ -1846,7 +1844,7 @@ static VALUE Texture_set_alpha_mod(VALUE self, VALUE alpha)
 /*
  * Get an additional color value used in render copy operations.
  *
- * @return [[Integer, Integer, Integer]] the current red, green, and blue
+ * @return [Array(Integer, Integer, Integer)] the current red, green, and blue
  *   color value.
  */
 static VALUE Texture_color_mod(VALUE self)
@@ -1860,7 +1858,7 @@ static VALUE Texture_color_mod(VALUE self)
  * @overload color_mod=(rgb)
  *   Set an additional color value used in render copy operations.
  *
- *   @param rgb [[Integer, Integer, Integer]] the red, green, and blue
+ *   @param rgb [Array(Integer, Integer, Integer)] the red, green, and blue
  *     color value multiplied into copy operations.
  *   @return [rgb]
  */
@@ -2241,7 +2239,7 @@ static VALUE Surface_bytes_per_pixel(VALUE self)
  *
  *   @param x [Integer] the x coordinate
  *   @param y [Integer] the y coordinate
- *   @return [[Integer, Integer, Integer, Integer]]
+ *   @return [Array(Integer, Integer, Integer, Integer)]
  *     the red, green, blue, and alpha component of the specified pixel.
  *
  */
@@ -2301,7 +2299,7 @@ static VALUE Surface_unset_color_key(VALUE self)
  *     the color key, pixel value (see {#pixel}) or pixel color (array of
  *     three or four integer elements).
  *
- *   @return [key]
+ *   @return [Integer, Array<Integer>] value
  *
  *   @see #color_key
  *   @see #unset_color_key
