@@ -76,7 +76,7 @@ DEFINE_WRAPPER(TTF_Font, TTF, font, cTTF, "SDL2::TTF");
  *   
  * @!attribute kerning
  *   True if kerning is enabled.
- *   @return [Booelan]
+ *   @return [boolean]
  *   
  * @!attribute [r] height
  *   The maximum pixel height of all glyphs of the font.
@@ -193,7 +193,7 @@ TTF_ATTR_READER(face_style_name, FaceStyleName, utf8str_new_cstr);
  *
  *   @param text [String] the string to size up
  *   
- * @return [[Integer, Integer]] a pair of width and height of the rendered surface
+ * @return [Array(Integer, Integer)] a pair of width and height of the rendered surface
  *
  * @raise [SDL2::Error] It is raised when an error occurs, such as a glyph ins the
  *   string not being found.
@@ -237,7 +237,7 @@ static VALUE render(SDL_Surface* (*renderer)(TTF_Font*, const char*, SDL_Color, 
  *   Solid mode rendering is quick but dirty.
  *   
  *   @param text [String] the text to render
- *   @param fg [[Integer, Integer, Integer]]
+ *   @param fg [Array(Integer, Integer, Integer)]
  *     the color to render. An array of r, g, and b components.
  *     
  * @return [SDL2::Surface]
@@ -258,9 +258,9 @@ static VALUE TTF_render_solid(VALUE self, VALUE text, VALUE fg)
  *   the background color.
  *   
  *   @param text [String] the text to render
- *   @param fg [[Integer, Integer, Integer]]
+ *   @param fg [Array(Integer, Integer, Integer)]
  *     the color to render. An array of r, g, and b components.
- *   @param bg [[Integer, Integer, Integer]]
+ *   @param bg [Array(Integer, Integer, Integer)]
  *     the background color. An array of r, g, and b components.
  *     
  * @return [SDL2::Surface]
@@ -281,7 +281,7 @@ static VALUE TTF_render_shaded(VALUE self, VALUE text, VALUE fg, VALUE bg)
  *   The rendered surface has an alpha channel, 
  *   
  *   @param text [String] the text to render
- *   @param fg [[Integer, Integer, Integer]]
+ *   @param fg [Array(Integer, Integer, Integer)]
  *     the color to render. An array of r, g, and b components.
  *     
  * @return [SDL2::Surface]
@@ -344,26 +344,26 @@ void rubysdl2_init_ttf(void)
 
     mStyle = rb_define_module_under(cTTF, "Style");
     /* define(`DEFINE_TTF_STYLE_CONST',`rb_define_const(mStyle, "$1", INT2NUM((TTF_STYLE_$1)))') */
-    /* normal style */
+    /* @return [Integer] integer representing normal style */
     DEFINE_TTF_STYLE_CONST(NORMAL);
-    /* bold style */
+    /* @return [Integer] integer representing bold style */
     DEFINE_TTF_STYLE_CONST(BOLD);
-    /* italic style */
+    /* @return [Integer] integer representing italic style */
     DEFINE_TTF_STYLE_CONST(ITALIC);
-    /* underline style */
+    /* @return [Integer] integer representing underline style */
     DEFINE_TTF_STYLE_CONST(UNDERLINE);
-    /* strikethrough style */
+    /* @return [Integer] integer representing strikethrough style */
     DEFINE_TTF_STYLE_CONST(STRIKETHROUGH);
 
     mHinting = rb_define_module_under(cTTF, "Hinting");
     /* define(`DEFINE_TTF_HINTING_CONST',`rb_define_const(mHinting, "$1", INT2NUM((TTF_HINTING_$1)))') */
-    /* normal hinting, default */
+    /* @return [Integer] integer representing normal hinting, default */
     DEFINE_TTF_HINTING_CONST(NORMAL);
-    /*  lighter hinting for non-monochrome modes */
+    /*  @return [Integer] integer representing lighter hinting for non-monochrome modes */
     DEFINE_TTF_HINTING_CONST(LIGHT);
-    /* strong hinting only used for monochrome output */
+    /* @return [Integer] integer representing strong hinting, only used for monochrome output */
     DEFINE_TTF_HINTING_CONST(MONO);
-    /* no hinting */
+    /* @return [Integer] integer representing no hinting */
     DEFINE_TTF_HINTING_CONST(NONE);
 }
 
