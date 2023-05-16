@@ -65,6 +65,8 @@ static VALUE Key_s_keycode_from_scancode(VALUE self, VALUE scancode)
  * @overload pressed?(code)
  *   @param [Integer] code scancode
  *
+ * @return [Boolean] true if pressed
+ *
  * Get whether the key of the given scancode is pressed or not.
  */
 static VALUE Key_s_pressed_p(VALUE self, VALUE code)
@@ -796,38 +798,38 @@ void rubysdl2_init_key(void)
     DEFINE_KEYCODE(EJECT);
     DEFINE_KEYCODE(SLEEP);
 
-    /* 0 (no modifier is applicable) */
+    /* @return [Integer] 0 (no modifier is applicable) */
     DEFINE_KEYMOD(NONE);
-    /* the modifier key bit mask for the left shift key */
+    /* @return [Integer] the modifier key bit mask for the left shift key */
     DEFINE_KEYMOD(LSHIFT);
-    /* the modifier key bit mask for the right shift key */
+    /* @return [Integer] the modifier key bit mask for the right shift key */
     DEFINE_KEYMOD(RSHIFT);
-    /* the modifier key bit mask for the left control key */
+    /* @return [Integer] the modifier key bit mask for the left control key */
     DEFINE_KEYMOD(LCTRL);
-    /* the modifier key bit mask for the right control key */
+    /* @return [Integer] the modifier key bit mask for the right control key */
     DEFINE_KEYMOD(RCTRL);
-    /* the modifier key bit mask for the left alt key */
+    /* @return [Integer] the modifier key bit mask for the left alt key */
     DEFINE_KEYMOD(LALT);
-    /* the modifier key bit mask for the right alt key */
+    /* @return [Integer] the modifier key bit mask for the right alt key */
     DEFINE_KEYMOD(RALT);
-    /* the modifier key bit mask for the left GUI key (often the window key) */
+    /* @return [Integer] the modifier key bit mask for the left GUI key (often the window key) */
     DEFINE_KEYMOD(LGUI);
-    /* the modifier key bit mask for the right GUI key (often the window key) */
+    /* @return [Integer] the modifier key bit mask for the right GUI key (often the window key) */
     DEFINE_KEYMOD(RGUI);
-    /* the modifier key bit mask for the numlock key */
+    /* @return [Integer] the modifier key bit mask for the numlock key */
     DEFINE_KEYMOD(NUM);
-    /* the modifier key bit mask for the capslock key */
+    /* @return [Integer] the modifier key bit mask for the capslock key */
     DEFINE_KEYMOD(CAPS);
-    /* the modifier key bit mask for the mode key (AltGr) */
+    /* @return [Integer] the modifier key bit mask for the mode key (AltGr) */
     DEFINE_KEYMOD(MODE);
-    /* the modifier key bit mask for the left and right control key */
+    /* @return [Integer] the modifier key bit mask for the left and right control key */
     DEFINE_KEYMOD(CTRL);
-    /* the modifier key bit mask for the left and right shift key */
+    /* @return [Integer] the modifier key bit mask for the left and right shift key */
     DEFINE_KEYMOD(SHIFT);
-    /* the modifier key bit mask for the left and right alt key */
+    /* @return [Integer] the modifier key bit mask for the left and right alt key */
     DEFINE_KEYMOD(ALT);
-    /* the modifier key bit mask for the left and right GUI key */
+    /* @return [Integer] the modifier key bit mask for the left and right GUI key */
     DEFINE_KEYMOD(GUI);
-    /* reserved for future use */
+    /* @return [Integer] reserved bit mask for future use */
     DEFINE_KEYMOD(RESERVED);
 }
