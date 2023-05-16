@@ -723,7 +723,7 @@ static VALUE Window_size(VALUE self)
  * @overload size=(size)
  *   Set the size of the window.
  *
- *   @param wh [Array(Integer, Integer)] new width and new height
+ *   @param size [Array(Integer, Integer)] new width and new height
  *
  *   @return [size]
  *
@@ -2016,7 +2016,7 @@ static VALUE Surface_s_save_bmp(VALUE self, VALUE src, VALUE fname)
 }
 
 /*
- * @overload from_string(string, width, heigth, depth, pitch=nil, rmask=nil, gmask=nil, bmask=nil, amask=nil)
+ * @overload from_string(string, width, height, depth, pitch=nil, rmask=nil, gmask=nil, bmask=nil, amask=nil)
  *
  *   Create a RGB surface from pixel data as String object.
  *
@@ -2460,8 +2460,13 @@ static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
  *   Height of the rectangle
  *   @return [Integer]
  *
- * @!method self.[](*args)
+ * @!method self.[](x, y, w, h)
  *   Alias of new. See {#initialize}.
+ *
+ *   @param x [Integer] X coordiante of the left-top point of the rectangle
+ *   @param y [Integer] Y coordiante of the left-top point of the rectangle
+ *   @param w [Integer] Width of the rectangle
+ *   @param h [Integer] Height of the rectangle
  *   @return [SDL2::Rect]
  */
 static VALUE Rect_s_allocate(VALUE klass)
@@ -2712,6 +2717,8 @@ PIXELFORMAT_ATTR_READER(fourcc_p,  SDL_ISPIXELFORMAT_FOURCC, INT2BOOL);
  * @overload ==(other)
  *   Return true if two pixel format is the same format.
  *
+ * @param other [SDL2::PixelFormat] other PixelFormat object
+ *
  * @return [Boolean]
  */
 static VALUE PixelFormat_eq(VALUE self, VALUE other)
@@ -2838,38 +2845,38 @@ void rubysdl2_init_video(void)
 
     mWindowFlags = rb_define_module_under(cWindow, "Flags");
     /* define(`DEFINE_WINDOW_FLAGS_CONST',`rb_define_const(mWindowFlags, "$1", UINT2NUM(SDL_WINDOW_$1))') */
-    /* fullscreen window */
+    /* @return [Integer] fullscreen window */
     DEFINE_WINDOW_FLAGS_CONST(FULLSCREEN);
-    /* fullscreen window at the current desktop resolution */
+    /* @return [Integer] fullscreen window at the current desktop resolution */
     DEFINE_WINDOW_FLAGS_CONST(FULLSCREEN_DESKTOP);
-    /* window usable with OpenGL context */
+    /* @return [Integer] window usable with OpenGL context */
     DEFINE_WINDOW_FLAGS_CONST(OPENGL);
-    /* window is visible */
+    /* @return [Integer] window is visible */
     DEFINE_WINDOW_FLAGS_CONST(SHOWN);
-    /* window is not visible */
+    /* @return [Integer] window is not visible */
     DEFINE_WINDOW_FLAGS_CONST(HIDDEN);
-    /* no window decoration */
+    /* @return [Integer] no window decoration */
     DEFINE_WINDOW_FLAGS_CONST(BORDERLESS);
-    /* window is resizable */
+    /* @return [Integer] window is resizable */
     DEFINE_WINDOW_FLAGS_CONST(RESIZABLE);
-    /* window is minimized */
+    /* @return [Integer] window is minimized */
     DEFINE_WINDOW_FLAGS_CONST(MINIMIZED);
-    /* window is maximized */
+    /* @return [Integer] window is maximized */
     DEFINE_WINDOW_FLAGS_CONST(MAXIMIZED);
-    /* window has grabbed input focus */
+    /* @return [Integer] window has grabbed input focus */
     DEFINE_WINDOW_FLAGS_CONST(INPUT_GRABBED);
-    /* window has input focus */
+    /* @return [Integer] window has input focus */
     DEFINE_WINDOW_FLAGS_CONST(INPUT_FOCUS);
-    /* window has mouse focus */
+    /* @return [Integer] window has mouse focus */
     DEFINE_WINDOW_FLAGS_CONST(MOUSE_FOCUS);
-    /* window is not created by SDL */
+    /* @return [Integer] window is not created by SDL */
     DEFINE_WINDOW_FLAGS_CONST(FOREIGN);
 #ifdef HAVE_CONST_SDL_WINDOW_ALLOW_HIGHDPI
-    /* window should be created in high-DPI mode if supported (>= SDL 2.0.1)*/
+    /* @return [Integer] window should be created in high-DPI mode if supported (>= SDL 2.0.1)*/
     DEFINE_WINDOW_FLAGS_CONST(ALLOW_HIGHDPI);
 #endif
 #ifdef HAVE_CONST_SDL_WINDOW_MOUSE_CAPTURE
-    /* window has mouse caputred (>= SDL 2.0.4) */
+    /* @return [Integer] window has mouse caputred (>= SDL 2.0.4) */
     DEFINE_WINDOW_FLAGS_CONST(MOUSE_CAPTURE);
 #endif
 
@@ -2939,33 +2946,33 @@ void rubysdl2_init_video(void)
     mRendererFlags = rb_define_module_under(cRenderer, "Flags");
 
     /* define(`DEFINE_RENDERER_FLAGS_CONST',`rb_define_const(mRendererFlags, "$1", UINT2NUM(SDL_RENDERER_$1))') */
-    /* the renderer is a software fallback */
+    /* @return [Integer] the renderer is a software fallback */
     DEFINE_RENDERER_FLAGS_CONST(SOFTWARE);
-    /* the renderer uses hardware acceleration */
+    /* @return [Integer] the renderer uses hardware acceleration */
     DEFINE_RENDERER_FLAGS_CONST(ACCELERATED);
 #ifdef HAVE_CONST_SDL_RENDERER_PRESENTVSYNC
-    /* present is synchronized with the refresh rate */
+    /* @return [Integer] present is synchronized with the refresh rate */
     DEFINE_RENDERER_FLAGS_CONST(PRESENTVSYNC);
 #endif
-    /* the renderer supports rendering to texture */
+    /* @return [Integer] the renderer supports rendering to texture */
     DEFINE_RENDERER_FLAGS_CONST(TARGETTEXTURE);
     /* define(`DEFINE_SDL_FLIP_CONST',`rb_define_const(cRenderer, "FLIP_$1", INT2FIX(SDL_FLIP_$1))') */
-    /* Do not flip, used in {Renderer#copy_ex} */
+    /* @return [Integer] Do not flip, used in {Renderer#copy_ex} */
     DEFINE_SDL_FLIP_CONST(NONE);
-    /* Flip horizontally, used in {Renderer#copy_ex} */
+    /* @return [Integer] Flip horizontally, used in {Renderer#copy_ex} */
     DEFINE_SDL_FLIP_CONST(HORIZONTAL);
-    /* Flip vertically, used in {Renderer#copy_ex} */
+    /* @return [Integer] Flip vertically, used in {Renderer#copy_ex} */
     DEFINE_SDL_FLIP_CONST(VERTICAL);
 
     mBlendMode = rb_define_module_under(mSDL2, "BlendMode");
     /* define(`DEFINE_BLENDMODE_CONST',`rb_define_const(mBlendMode, "$1", INT2FIX(SDL_BLENDMODE_$1))') */
-    /* no blending (dstRGBA = srcRGBA) */
+    /* @return [Integer] no blending (dstRGBA = srcRGBA) */
     DEFINE_BLENDMODE_CONST(NONE);
-    /* alpha blending (dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA), dstA = srcA + (dstA * (1-srcA)))*/
+    /* @return [Integer] alpha blending (dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA), dstA = srcA + (dstA * (1-srcA)))*/
     DEFINE_BLENDMODE_CONST(BLEND);
-    /* additive blending (dstRGB = (srcRGB * srcA) + dstRGB, dstA = dstA) */
+    /* @return [Integer] additive blending (dstRGB = (srcRGB * srcA) + dstRGB, dstA = dstA) */
     DEFINE_BLENDMODE_CONST(ADD);
-    /* color modulate (multiplicative) (dstRGB = srcRGB * dstRGB, dstA = dstA) */
+    /* @return [Integer] color modulate (multiplicative) (dstRGB = srcRGB * dstRGB, dstA = dstA) */
     DEFINE_BLENDMODE_CONST(MOD);
 
     cTexture = rb_define_class_under(mSDL2, "Texture", rb_cObject);
@@ -2983,11 +2990,11 @@ void rubysdl2_init_video(void)
     rb_define_method(cTexture, "inspect", Texture_inspect, 0);
     rb_define_method(cTexture, "debug_info", Texture_debug_info, 0);
     /* define(`DEFINE_TEXTUREAH_ACCESS_CONST', `rb_define_const(cTexture, "ACCESS_$1", INT2NUM(SDL_TEXTUREACCESS_$1))') */
-    /* texture access pattern - changes rarely, not lockable */
+    /* @return [Integer] texture access pattern code - changes rarely, not lockable */
     DEFINE_TEXTUREAH_ACCESS_CONST(STATIC);
-    /* texture access pattern - changes frequently, lockable */
+    /* @return [Integer] texture access pattern code - changes frequently, lockable */
     DEFINE_TEXTUREAH_ACCESS_CONST(STREAMING);
-    /* texture access pattern - can be used as a render target */
+    /* @return [Integer] texture access pattern code - can be used as a render target */
     DEFINE_TEXTUREAH_ACCESS_CONST(TARGET);
 
 
@@ -3063,7 +3070,8 @@ void rubysdl2_init_video(void)
     rb_define_method(cPixelFormat, "==", PixelFormat_eq, 1);
 
     mPixelType = rb_define_module_under(cPixelFormat, "Type");
-    /* define(`DEFINE_PIXELTYPE_CONST',`rb_define_const(mPixelType, "$1", UINT2NUM(SDL_PIXELTYPE_$1))') */
+    /* define(`DEFINE_PIXELTYPE_CONST',`/$8* @return [Integer] *$8/
+    rb_define_const(mPixelType, "$1", UINT2NUM(SDL_PIXELTYPE_$1))') */
     DEFINE_PIXELTYPE_CONST(UNKNOWN);
     DEFINE_PIXELTYPE_CONST(INDEX1);
     DEFINE_PIXELTYPE_CONST(INDEX4);
@@ -3078,12 +3086,17 @@ void rubysdl2_init_video(void)
     DEFINE_PIXELTYPE_CONST(ARRAYF32);
 
     mBitmapOrder = rb_define_module_under(cPixelFormat, "BitmapOrder");
+    /* @return [Integer] */
     rb_define_const(mBitmapOrder, "NONE", UINT2NUM(SDL_BITMAPORDER_NONE));
+    /* @return [Integer] */
     rb_define_const(mBitmapOrder, "O_1234", UINT2NUM(SDL_BITMAPORDER_1234));
+    /* @return [Integer] */
     rb_define_const(mBitmapOrder, "O_4321", UINT2NUM(SDL_BITMAPORDER_4321));
 
     mPackedOrder = rb_define_module_under(cPixelFormat, "PackedOrder");
-    /* define(`DEFINE_PACKEDORDER_CONST',`rb_define_const(mPackedOrder, "$1", UINT2NUM(SDL_PACKEDORDER_$1))') */
+    /*
+      define(`DEFINE_PACKEDORDER_CONST',`/$8* @return [Integer] *$8/
+    rb_define_const(mPackedOrder, "$1", UINT2NUM(SDL_PACKEDORDER_$1))') */
     DEFINE_PACKEDORDER_CONST(NONE);
     DEFINE_PACKEDORDER_CONST(XRGB);
     DEFINE_PACKEDORDER_CONST(RGBX);
@@ -3095,7 +3108,8 @@ void rubysdl2_init_video(void)
     DEFINE_PACKEDORDER_CONST(BGRA);
 
     mArrayOrder = rb_define_module_under(cPixelFormat, "ArrayOrder");
-    /* define(`DEFINE_ARRAYORDER_CONST',`rb_define_const(mArrayOrder, "$1", UINT2NUM(SDL_ARRAYORDER_$1))') */
+    /* define(`DEFINE_ARRAYORDER_CONST',`/$8* @return [Integer] *$8/
+    rb_define_const(mArrayOrder, "$1", UINT2NUM(SDL_ARRAYORDER_$1))') */
     DEFINE_ARRAYORDER_CONST(NONE);
     DEFINE_ARRAYORDER_CONST(RGB);
     DEFINE_ARRAYORDER_CONST(RGBA);
@@ -3105,7 +3119,9 @@ void rubysdl2_init_video(void)
     DEFINE_ARRAYORDER_CONST(ABGR);
 
     mPackedLayout = rb_define_module_under(cPixelFormat, "PackedLayout");
-    /* define(`DEFINE_PACKEDLAYOUT_CONST',`rb_define_const(mPackedLayout, "L_$1", UINT2NUM(SDL_PACKEDLAYOUT_$1))') */
+    /* define(`DEFINE_PACKEDLAYOUT_CONST',`/$8* @return [Integer] *$8/
+    rb_define_const(mPackedLayout, "L_$1", UINT2NUM(SDL_PACKEDLAYOUT_$1))') */
+    /* @return [Integer] */
     rb_define_const(mPackedLayout, "NONE", UINT2NUM(SDL_PACKEDLAYOUT_NONE));
     DEFINE_PACKEDLAYOUT_CONST(332);
     DEFINE_PACKEDLAYOUT_CONST(4444);
@@ -3118,17 +3134,17 @@ void rubysdl2_init_video(void)
 
     {
         VALUE formats = rb_ary_new();
-        /* -: Array of all available formats */
+        /* -: @return [Array<SDL2::PixelFormat>] array of all available formats */
         rb_define_const(cPixelFormat, "FORMATS", formats);
         /* define(`DEFINE_PIXELFORMAT_CONST',`do {
             VALUE format = PixelFormat_new(SDL_PIXELFORMAT_$1);
-            $2
+            /$8* -: @return [SDL2::PixelFormat] $2 *$8/
             rb_define_const(cPixelFormat, "$1", format);
             rb_ary_push(formats, format);
         } while (0)')
          */
 
-        DEFINE_PIXELFORMAT_CONST(UNKNOWN, /* -: PixelFormat: Unused - reserved by SDL */);
+        DEFINE_PIXELFORMAT_CONST(UNKNOWN, Unused - reserved by SDL);
         DEFINE_PIXELFORMAT_CONST(INDEX1LSB);
         DEFINE_PIXELFORMAT_CONST(INDEX1MSB);
         DEFINE_PIXELFORMAT_CONST(INDEX4LSB);
@@ -3283,13 +3299,13 @@ void rubysdl2_init_image(void)
     rb_define_method(cRenderer, "load_texture", Renderer_load_texture, 1);
 
 
-    /* Initialize the JPEG loader */
+    /* @return [Integer] Initialize the JPEG loader */
     rb_define_const(mIMG, "INIT_JPG", INT2NUM(IMG_INIT_JPG));
-    /* Initialize the PNG loader */
+    /* @return [Integer] Initialize the PNG loader */
     rb_define_const(mIMG, "INIT_PNG", INT2NUM(IMG_INIT_PNG));
-    /* Initialize the TIF loader */
+    /* @return [Integer] Initialize the TIF loader */
     rb_define_const(mIMG, "INIT_TIF", INT2NUM(IMG_INIT_TIF));
-    /* Initialize the WEBP loader */
+    /* @return [Integer] Initialize the WEBP loader */
     rb_define_const(mIMG, "INIT_WEBP", INT2NUM(IMG_INIT_WEBP));
 }
 
