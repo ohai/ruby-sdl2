@@ -88,11 +88,11 @@ void rubysdl2_init_hints(void)
     rb_define_singleton_method(mHints, "get", Hints_s_aref, 1);
     rb_define_singleton_method(mHints, "[]=", Hints_s_aset, -1);
 
-    /* low priority, used fro default values */
+    /* @return [Integer] index for low priority, used fro default values */
     rb_define_const(mHints, "DEFAULT", INT2NUM(SDL_HINT_DEFAULT));
-    /* medium priority, overrided by an environment variable */
+    /* @return [Integer] index for medium priority, overrided by an environment variable */
     rb_define_const(mHints, "NORMAL", INT2NUM(SDL_HINT_NORMAL));
-    /* high priority, this priority overrides the value by environment variables */
+    /* @return [Integer] index for high priority, this priority overrides the value by environment variables */
     rb_define_const(mHints, "OVERRIDE", INT2NUM(SDL_HINT_OVERRIDE));
 
     sym_priority = ID2SYM(rb_intern("priority"));
