@@ -302,6 +302,7 @@ static VALUE GameController_axis(VALUE self, VALUE axis)
  *   Return true if a button is pressed.
  *   
  *   @param button [Integer] the index of a button, one of the constants in {Button}
+ *   @return [Boolean]
  */
 static VALUE GameController_button_pressed_p(VALUE self, VALUE button)
 {
@@ -353,56 +354,56 @@ void rubysdl2_init_gamecontorller(void)
     mButton = rb_define_module_under(cGameController, "Button");
 
     /* define(`DEFINE_CONTROLLER_AXIS_CONST',`rb_define_const(mAxis, "$1", INT2NUM(SDL_CONTROLLER_AXIS_$1))') */
-    /* Invalid axis index */
+    /* @return [Integer] index for invalid axis*/
     DEFINE_CONTROLLER_AXIS_CONST(INVALID);
-    /* Left X axis */
+    /* @return [Integer] index for Left X axis */
     DEFINE_CONTROLLER_AXIS_CONST(LEFTX);
-    /* Left Y axis */
+    /* @return [Integer] index for Left Y axis */
     DEFINE_CONTROLLER_AXIS_CONST(LEFTY);
-    /* Right X axis */
+    /* @return [Integer] index for Right X axis */
     DEFINE_CONTROLLER_AXIS_CONST(RIGHTX);
-    /* Right Y axis */
+    /* @return [Integer] index for Right Y axis */
     DEFINE_CONTROLLER_AXIS_CONST(RIGHTY);
-    /* Left trigger axis */
+    /* @return [Integer] index for Left trigger axis */
     DEFINE_CONTROLLER_AXIS_CONST(TRIGGERLEFT);
-    /* Right trigger axis */
+    /* @return [Integer] index for Right trigger axis */
     DEFINE_CONTROLLER_AXIS_CONST(TRIGGERRIGHT);
-    /* The max of an axis index */
+    /* @return [Integer] the max value of axis indices */
     DEFINE_CONTROLLER_AXIS_CONST(MAX);
 
     /* define(`DEFINE_CONTROLLER_BUTTON_CONST',`rb_define_const(mButton, "$1", INT2NUM(SDL_CONTROLLER_BUTTON_$1))') */
-    /* Invalid button index */
+    /* @return [Integer] index for Invalid button */
     DEFINE_CONTROLLER_BUTTON_CONST(INVALID);
-    /* Button A */
+    /* @return [Integer] index for Button A */
     DEFINE_CONTROLLER_BUTTON_CONST(A);
-    /* Button B */
+    /* @return [Integer] index for Button B */
     DEFINE_CONTROLLER_BUTTON_CONST(B);
-    /* Button X */
+    /* @return [Integer] index for Button X */
     DEFINE_CONTROLLER_BUTTON_CONST(X);
-    /* Button Y */
+    /* @return [Integer] index for Button Y */
     DEFINE_CONTROLLER_BUTTON_CONST(Y);
-    /* Back Button */
+    /* @return [Integer] index for Back Button */
     DEFINE_CONTROLLER_BUTTON_CONST(BACK);
-    /* Guide Button */
+    /* @return [Integer] index for Guide Button */
     DEFINE_CONTROLLER_BUTTON_CONST(GUIDE);
-    /* Start Button */
+    /* @return [Integer] index for Start Button */
     DEFINE_CONTROLLER_BUTTON_CONST(START);
-    /* Left stick Button */
+    /* @return [Integer] index for Left stick Button */
     DEFINE_CONTROLLER_BUTTON_CONST(LEFTSTICK);
-    /* Right stick Button */
+    /* @return [Integer] index for Right stick Button */
     DEFINE_CONTROLLER_BUTTON_CONST(RIGHTSTICK);
-    /* Left shoulder Button */
+    /* @return [Integer] index for Left shoulder Button */
     DEFINE_CONTROLLER_BUTTON_CONST(LEFTSHOULDER);
-    /* Right shoulder Button */
+    /* @return [Integer] index for Right shoulder Button */
     DEFINE_CONTROLLER_BUTTON_CONST(RIGHTSHOULDER);
-    /* D-pad UP Button */
+    /* @return [Integer] index for D-pad UP Button */
     DEFINE_CONTROLLER_BUTTON_CONST(DPAD_UP);
-    /* D-pad DOWN Button */
+    /* @return [Integer] index for D-pad DOWN Button */
     DEFINE_CONTROLLER_BUTTON_CONST(DPAD_DOWN);
-    /* D-pad LEFT Button */
+    /* @return [Integer] index for D-pad LEFT Button */
     DEFINE_CONTROLLER_BUTTON_CONST(DPAD_LEFT);
-    /* D-pad RIGHT Button */
+    /* @return [Integer] index for D-pad RIGHT Button */
     DEFINE_CONTROLLER_BUTTON_CONST(DPAD_RIGHT);
-    /* The max of a button index */
+    /* @return [Integer] The max value of button indices */
     DEFINE_CONTROLLER_BUTTON_CONST(MAX);
 }
