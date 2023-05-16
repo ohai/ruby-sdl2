@@ -178,39 +178,41 @@ void Init_sdl2_ext(void)
     DEFINE_SDL_INIT_CONST(EVERYTHING);
     DEFINE_SDL_INIT_CONST(NOPARACHUTE);
 
-    /* SDL's version string  */
+    /* @return [String] SDL's version string  */
     rb_define_const(mSDL2, "LIBSDL_VERSION", libsdl_version());
-    /* SDL's version array of numbers  */
+    /* @return [Array(Integer, Integer, Integer)] SDL's version array of numbers  */
     rb_define_const(mSDL2, "LIBSDL_VERSION_NUMBER", libsdl_version_number());
-    /* SDL's revision (from VCS) string  */
+    /* @return [String] SDL's revision (from VCS) string  */
     rb_define_const(mSDL2, "LIBSDL_REVISION", libsdl_revision());
-    /* Obsolete, always 0 */
+    /* @return [Integer] always 0
+     * @deprecated
+     */
     rb_define_const(mSDL2, "LIBSDL_REVISION_NUMBER", INT2NUM(0));
 
 #ifdef HAVE_SDL_IMAGE_H
     {
         const SDL_version* version = IMG_Linked_Version();
-        /* SDL_image's version string, only available if SDL_image is linked */
+        /* @return [String] SDL_image's version string, only available if SDL_image is linked */
         rb_define_const(mSDL2, "LIBSDL_IMAGE_VERSION", SDL_version_to_String(version));
-        /* SDL_image's version array of numbers */
+        /* @return [Array(Integer, Integer, Integer)] SDL_image's version array of numbers */
         rb_define_const(mSDL2, "LIBSDL_IMAGE_VERSION_NUMBER", SDL_version_to_Array(version));
     }
 #endif
 #ifdef HAVE_SDL_TTF_H
     {
         const SDL_version* version = TTF_Linked_Version();
-        /* SDL_ttf's version string, only available if SDL_ttf is linked */
+        /* @return [String] SDL_ttf's version string, only available if SDL_ttf is linked */
         rb_define_const(mSDL2, "LIBSDL_TTF_VERSION", SDL_version_to_String(version));
-        /* SDL_ttf's version array of numbers */
+        /* @return [Array(Integer, Integer, Integer)] SDL_ttf's version array of numbers */
         rb_define_const(mSDL2, "LIBSDL_TTF_VERSION_NUMBER", SDL_version_to_Array(version));
     }
 #endif
 #ifdef HAVE_SDL_MIXER_H
     {
         const SDL_version* version = Mix_Linked_Version();
-        /* SDL_mixer's version string , only available if SDL_mixer is linked */
+        /* @return [Integer] SDL_mixer's version string , only available if SDL_mixer is linked */
         rb_define_const(mSDL2, "LIBSDL_MIXER_VERSION", SDL_version_to_String(version));
-        /* SDL_mixer's version array of numbers */
+        /* @return [Array(Integer, Integer, Integer)] SDL_mixer's version array of numbers */
         rb_define_const(mSDL2, "LIBSDL_MIXER_VERSION_NUMBER", SDL_version_to_Array(version));
     }
 #endif
