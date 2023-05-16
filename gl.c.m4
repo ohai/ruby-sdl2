@@ -115,8 +115,7 @@ static VALUE GLContext_make_current(VALUE self, VALUE window)
 /*
  * Get the current OpenGL context.
  *
- * @return [SDL2::GL::Context] the curren context
- * @return [nil] if there is no current context
+ * @return [SDL2::GL::Context,nil] the current context, nil if there is no current context
  *
  * @see #make_current
  */
@@ -130,6 +129,7 @@ static VALUE GLContext_s_current(VALUE self)
  *   Return true if the current context supports **extension**
  *
  *   @param extension [String] the name of an extension
+ *   @return [Boolean] 
  *   @example
  *     SDL2::GL.extension_supported?("GL_EXT_framebuffer_blit")
  */
@@ -217,56 +217,48 @@ void rubysdl2_init_gl(void)
     rb_define_module_function(mGL, "set_attribute", GL_s_set_attribute, 2);
 
     /* define(`DEFINE_GL_ATTR_CONST',`rb_define_const(mGL, "$1", INT2NUM(SDL_GL_$1))') */
-    /* OpenGL attribute - minimal bits of red channel in color buffer, default is 3 */
+    /* @return [Integer] index for OpenGL attribute - minimal bits of red channel in color buffer, default is 3 */
     DEFINE_GL_ATTR_CONST(RED_SIZE);
-    /* OpenGL attribute - minimal bits of green channel in color buffer, default is 3 */
+    /* @return [Integer] index for OpenGL attribute - minimal bits of green channel in color buffer, default is 3 */
     DEFINE_GL_ATTR_CONST(GREEN_SIZE);
-    /* OpenGL attribute - minimal bits of blue channel in color buffer, default is 2 */
+    /* @return [Integer] index for OpenGL attribute - minimal bits of blue channel in color buffer, default is 2 */
     DEFINE_GL_ATTR_CONST(BLUE_SIZE);
-    /* OpenGL attribute - minimal bits of alpha channel in color buffer, default is 0 */
+    /* @return [Integer] index for OpenGL attribute - minimal bits of alpha channel in color buffer, default is 0 */
     DEFINE_GL_ATTR_CONST(ALPHA_SIZE);
-    /* OpenGL attribute - minimal bits of framebufer, default is 0 */
+    /* @return [Integer] index for OpenGL attribute - minimal bits of framebufer, default is 0 */
     DEFINE_GL_ATTR_CONST(BUFFER_SIZE);
-    /* OpenGL attribute - whether the single buffer (0) or double buffer (1), default
-       is double buffer */
+    /* @return [Integer] index for OpenGL attribute - whether the single buffer (0) or double buffer (1), default is double buffer */
     DEFINE_GL_ATTR_CONST(DOUBLEBUFFER);
-    /* OpenGL attribute - bits of depth buffer, default is 16 */
+    /* @return [Integer] index for OpenGL attribute - bits of depth buffer, default is 16 */
     DEFINE_GL_ATTR_CONST(DEPTH_SIZE);
-    /* OpenGL attribute - bits of stencil buffer, default is 0 */
+    /* @return [Integer] index for OpenGL attribute - bits of stencil buffer, default is 0 */
     DEFINE_GL_ATTR_CONST(STENCIL_SIZE);
-    /* OpenGL attribute - minimal bits of red channel in accumlation buffer,
-       default is 0 */
+    /* @return [Integer] index for OpenGL attribute - minimal bits of red channel in accumlation buffer, default is 0 */
     DEFINE_GL_ATTR_CONST(ACCUM_RED_SIZE);
-    /* OpenGL attribute - minimal bits of green channel in accumlation buffer,
-       default is 0 */
+    /* @return [Integer] index for OpenGL attribute - minimal bits of green channel in accumlation buffer, default is 0 */
     DEFINE_GL_ATTR_CONST(ACCUM_GREEN_SIZE);
-    /* OpenGL attribute - minimal bits of blue channel in accumlation buffer,
-       default is 0 */
+    /* @return [Integer] index for OpenGL attribute - minimal bits of blue channel in accumlation buffer, default is 0 */
     DEFINE_GL_ATTR_CONST(ACCUM_BLUE_SIZE);
-    /* OpenGL attribute - minimal bits of alpha channel in accumlation buffer,
-       default is 0 */
+    /* @return [Integer] index for OpenGL attribute - minimal bits of alpha channel in accumlation buffer, default is 0 */
     DEFINE_GL_ATTR_CONST(ACCUM_ALPHA_SIZE);
-    /* OpenGL attribute - whether output is stereo (1) or not (0), default is 0 */
+    /* @return [Integer] index for OpenGL attribute - whether output is stereo (1) or not (0), default is 0 */
     DEFINE_GL_ATTR_CONST(STEREO);
-    /* OpenGL attribuite - the number of buffers used for multisampe anti-aliasing,
-       default is 0 */
+    /* @return [Integer] index for OpenGL attribuite - the number of buffers used for multisampe anti-aliasing, default is 0 */
     DEFINE_GL_ATTR_CONST(MULTISAMPLEBUFFERS);
-    /* OpenGL attribute - the number of samples used around the current pixel
-       use for multisample anti-aliasing, default is 0 */
+    /* @return [Integer] index for OpenGL attribute - the number of samples used around the current pixel use for multisample anti-aliasing, default is 0 */
     DEFINE_GL_ATTR_CONST(MULTISAMPLESAMPLES);
-    /* OpenGL attribute - 1 for requiring hardware acceleration, 0 for software rendering,
-       default is allowing either */
+    /* @return [Integer] index for OpenGL attribute - 1 for requiring hardware acceleration, 0 for software rendering, default is allowing either */
     DEFINE_GL_ATTR_CONST(ACCELERATED_VISUAL);
-    /* OpenGL attribute - not used (deprecated) */
+    /* @return [Integer] index for OpenGL attribute - not used (deprecated) */
     DEFINE_GL_ATTR_CONST(RETAINED_BACKING);
-    /* OpenGL attribute - OpenGL context major version */
+    /* @return [Integer] index for OpenGL attribute - OpenGL context major version */
     DEFINE_GL_ATTR_CONST(CONTEXT_MAJOR_VERSION);
-    /* OpenGL attribute - OpenGL context minor version */
+    /* @return [Integer] index for OpenGL attribute - OpenGL context minor version */
     DEFINE_GL_ATTR_CONST(CONTEXT_MINOR_VERSION);
     /*
      * INT2NUM(SDL_GL_CONTEXT_FLAGS):
      * 
-     * OpenGL attribute - the bit combination of following constants, or 0.
+     * @return [Integer] index for OpenGL attribute - the bit combination of following constants, or 0.
      * default is 0
      *
      * * {SDL2::GL::CONTEXT_DEBUG_FLAG}
@@ -282,7 +274,7 @@ void rubysdl2_init_gl(void)
     DEFINE_GL_ATTR_CONST(CONTEXT_FLAGS);
     /* INT2NUM(SDL_GL_CONTEXT_PROFILE_MASK):
      *
-     * OpenGL attribute - type of GL context, one of the following constants,
+     * @return [Integer] index for OpenGL attribute - type of GL context, one of the following constants,
      * defaults depends on platform
      *
      * * {CONTEXT_PROFILE_CORE}
@@ -292,58 +284,59 @@ void rubysdl2_init_gl(void)
      * https://wiki.libsdl.org/SDL_GLprofile
      */
     DEFINE_GL_ATTR_CONST(CONTEXT_PROFILE_MASK);
-    /* OpenGL attribute - OpenGL context sharing, default is 0 */
+    /* @return [Integer] index for OpenGL attribute - OpenGL context sharing, default is 0 */
     DEFINE_GL_ATTR_CONST(SHARE_WITH_CURRENT_CONTEXT);
 #if SDL_VERSION_ATLEAST(2,0,1)
-    /* OpenGL attribute - 1 for requesting sRGB capable visual, default to 0 */
+    /* @return [Integer] index for OpenGL attribute - 1 for requesting sRGB capable visual, default to 0 */
     DEFINE_GL_ATTR_CONST(FRAMEBUFFER_SRGB_CAPABLE);
 #endif
-    /* OpenGL attribute - not used (deprecated) */
+    /* @return [Integer] index for OpenGL attribute - not used (deprecated) */
     DEFINE_GL_ATTR_CONST(CONTEXT_EGL);
 
     /* define(`DEFINE_GL_CONTEXT_CONST',`rb_define_const(mGL, "CONTEXT_$1", INT2NUM(SDL_GL_CONTEXT_$1))') */
 
-    /* This flag maps to GLX_CONTEXT_DEBUG_BIT_ARB in
-     * the GLX_ARB_create_context extension for X11
-     * and WGL_CONTEXT_DEBUG_BIT_ARB in the WGL_ARB_create_context
-     * extension for Windows.
+    /* @return [Integer]
+     *   This flag maps to GLX_CONTEXT_DEBUG_BIT_ARB in
+     *   the GLX_ARB_create_context extension for X11
+     *   and WGL_CONTEXT_DEBUG_BIT_ARB in the WGL_ARB_create_context
+     *   extension for Windows.
      */
     DEFINE_GL_CONTEXT_CONST(DEBUG_FLAG);
-    /*
-     * This flag maps to GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB in the
-     * GLX_ARB_create_context extension for X11 and
-     * WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB in the WGL_ARB_create_context
-     * extension for Windows.
+    /* @return [Integer] 
+     *   This flag maps to GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB in the
+     *   GLX_ARB_create_context extension for X11 and
+     *   WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB in the WGL_ARB_create_context
+     *   extension for Windows.
      */
     DEFINE_GL_CONTEXT_CONST(FORWARD_COMPATIBLE_FLAG);
-    /*
-     * This flag maps to GLX_CONTEXT_ROBUST_ACCESS_BIT_ARB in the
-     * GLX_ARB_create_context_robustness extension for X11 and
-     * WGL_CONTEXT_ROBUST_ACCESS_BIT_ARB in the WGL_ARB_create_context_robustness
-     * extension for Windows. 
+    /* @return [Integer]
+     *   This flag maps to GLX_CONTEXT_ROBUST_ACCESS_BIT_ARB in the
+     *   GLX_ARB_create_context_robustness extension for X11 and
+     *   WGL_CONTEXT_ROBUST_ACCESS_BIT_ARB in the WGL_ARB_create_context_robustness
+     *   extension for Windows. 
      */
     DEFINE_GL_CONTEXT_CONST(ROBUST_ACCESS_FLAG);
-    /*
-     * This flag maps to GLX_CONTEXT_RESET_ISOLATION_BIT_ARB in the
-     * GLX_ARB_robustness_isolation extension for X11 and
-     * WGL_CONTEXT_RESET_ISOLATION_BIT_ARB in the WGL_ARB_create_context_robustness
-     * extension for Windows.
+    /* @return [Integer]
+     *   This flag maps to GLX_CONTEXT_RESET_ISOLATION_BIT_ARB in the
+     *   GLX_ARB_robustness_isolation extension for X11 and
+     *   WGL_CONTEXT_RESET_ISOLATION_BIT_ARB in the WGL_ARB_create_context_robustness
+     *   extension for Windows.
      */
     DEFINE_GL_CONTEXT_CONST(RESET_ISOLATION_FLAG);
 
-    /*
-     * OpenGL core profile - deprecated
-     * functions are disabled
+    /* @return [Integer]
+     *   OpenGL core profile - deprecated
+     *   functions are disabled
      */
     DEFINE_GL_CONTEXT_CONST(PROFILE_CORE);
-    /*
-     * OpenGL compatibility profile -
-     * deprecated functions are allowed
+    /* @return [Integer]
+     *   OpenGL compatibility profile -
+     *   deprecated functions are allowed
      */
     DEFINE_GL_CONTEXT_CONST(PROFILE_COMPATIBILITY);
-    /*
-     * OpenGL ES profile - only a subset of the
-     * base OpenGL functionality is available
+    /* @return [Integer]
+     *   OpenGL ES profile - only a subset of the
+     *   base OpenGL functionality is available
      */
     DEFINE_GL_CONTEXT_CONST(PROFILE_ES);
     
