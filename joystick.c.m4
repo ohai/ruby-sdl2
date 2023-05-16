@@ -99,6 +99,7 @@ static VALUE Joystick_s_open(VALUE self, VALUE device_index)
  *   interface.
  *
  *   @param [Integer] index the joystick device index
+ *   @return [Boolean]
  *   @see SDL2::GameController
  * 
  */
@@ -225,7 +226,7 @@ static VALUE Joystick_axis(VALUE self, VALUE which)
  *   Get the current state of a trackball on a joystick.
  *   
  *   @param [Integer] which an index of a trackball, started at index 0
- *   @return [[Integer,Integer]] dx and dy
+ *   @return [Array(Integer,Integer)] dx and dy
  *   @see #num_balls
  */
 static VALUE Joystick_ball(VALUE self, VALUE which)
@@ -309,23 +310,23 @@ void rubysdl2_init_joystick(void)
     mHat = rb_define_module_under(cJoystick, "Hat");
     
     /* define(`DEFINE_JOY_HAT_CONST',`rb_define_const(mHat, "$1", INT2NUM(SDL_HAT_$1))') */
-    /* Center position. Equal to 0. */
+    /* @return [Integer] hat state\: Center position. Equal to 0. */
     DEFINE_JOY_HAT_CONST(CENTERED);
-    /* Up position. */
+    /* @return [Integer] hat state\: Up position. */
     DEFINE_JOY_HAT_CONST(UP);
-    /* Right position. */
+    /* @return [Integer] hat state\: Right position. */
     DEFINE_JOY_HAT_CONST(RIGHT);
-    /* Down position. */
+    /* @return [Integer] hat state\: Down position. */
     DEFINE_JOY_HAT_CONST(DOWN);
-    /* Left position. */
+    /* @return [Integer] hat state\: Left position. */
     DEFINE_JOY_HAT_CONST(LEFT);
-    /* Right Up position. Equal to ({RIGHT} | {UP}) */
+    /* @return [Integer] hat state\: Right Up position. Equal to ({RIGHT} | {UP}) */
     DEFINE_JOY_HAT_CONST(RIGHTUP);
-    /* Right Down position. Equal to ({RIGHT} | {DOWN}) */
+    /* @return [Integer] hat state\: Right Down position. Equal to ({RIGHT} | {DOWN}) */
     DEFINE_JOY_HAT_CONST(RIGHTDOWN);
-    /* Left Up position. Equal to ({LEFT} | {UP}) */
+    /* @return [Integer] hat state\: Left Up position. Equal to ({LEFT} | {UP}) */
     DEFINE_JOY_HAT_CONST(LEFTUP);
-    /* Left Down position. Equal to ({LEFT} | {DOWN}) */
+    /* @return [Integer] hat state\: Left Down position. Equal to ({LEFT} | {DOWN}) */
     DEFINE_JOY_HAT_CONST(LEFTDOWN);
 
     /* Device GUID
