@@ -70,7 +70,7 @@ static void set_color_scheme(VALUE colors, VALUE sym, SDL_MessageBoxColor* color
 }
 
 /*
- * @overload show(flag:, window: nil, title:, message:, buttons:, color_scheme: nil)
+ * @overload show(flags:, window: nil, title:, message:, buttons:, color_scheme: nil)
  *   Create a model message box.
  *
  *   You specify one of the following constants as flag
@@ -134,7 +134,7 @@ static void set_color_scheme(VALUE colors, VALUE sym, SDL_MessageBoxColor* color
  *   @param [String] title the title text
  *   @param [String] message the message text
  *   @param [Array<Hash<Symbol => Object>>] buttons array of buttons
- *   @param [Hash<Symbol=>[Integer,Integer,Integer]> nil] color_scheme
+ *   @param [Hash<Symbol=>Array(Integer,Integer,Integer)>, nil] color_scheme
  *       color scheme, or nil for the default color scheme
  *   @return [Integer] pressed button id
  *   
@@ -205,16 +205,16 @@ void rubysdl2_init_messagebox(void)
     rb_define_singleton_method(mMessageBox, "show_simple_box",
                                MessageBox_s_show_simple_box, 4);
     rb_define_singleton_method(mMessageBox, "show", MessageBox_s_show, 1);
-    /* This flag means that the message box shows an error message */
+    /* @return [Integer] the flag whcih means that the message box shows an error message */
     rb_define_const(mMessageBox, "ERROR", INT2NUM(SDL_MESSAGEBOX_ERROR));
-    /* This flag means that the message box shows a warning message */
+    /* @return [Integer] the flag whcih means that the message box shows a warning message */
     rb_define_const(mMessageBox, "WARNING", INT2NUM(SDL_MESSAGEBOX_WARNING));
-    /* This flag means that the message box shows an informational message */
+    /* @return [Integer] the flag whcih means that the message box shows an informational message */
     rb_define_const(mMessageBox, "INFORMATION", INT2NUM(SDL_MESSAGEBOX_INFORMATION));
-    /* This flag represents the button is selected when return key is pressed */
+    /* @return [Integer] the flag whcih represents the button is selected when return key is pressed */
     rb_define_const(mMessageBox, "BUTTON_RETURNKEY_DEFAULT",
                     INT2NUM(SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT));
-    /* This flag represents the button is selected when escape key is pressed */
+    /* @return [Integer] the flag whcih represents the button is selected when escape key is pressed */
     rb_define_const(mMessageBox, "BUTTON_ESCAPEKEY_DEFAULT",
                     INT2NUM(SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT));
 
