@@ -359,6 +359,7 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  * @overload create(title, x, y, w, h, flags)
  *   Create a window with the specified position (x,y), dimensions (w,h) and flags.
  *
+ *   @param [String] title title of the created window
  *   @param [Integer] x the x position of the left-top of the window
  *   @param [Integer] y the y position of the left-top of the window
  *   @param [Integer] w the width of the window
@@ -2838,9 +2839,9 @@ void rubysdl2_init_video(void)
 #endif
     rb_define_method(cWindow, "gl_swap", Window_gl_swap, 0);
 
-    /* Indicate that you don't care what the window position is */
+    /* @return [Integer] Indicate that you don't care what the window position is */
     rb_define_const(cWindow, "POS_CENTERED", INT2NUM(SDL_WINDOWPOS_CENTERED));
-    /* Indicate that the window position should be centered */
+    /* @return [Integer] Indicate that the window position should be centered */
     rb_define_const(cWindow, "POS_UNDEFINED", INT2NUM(SDL_WINDOWPOS_UNDEFINED));
 
     mWindowFlags = rb_define_module_under(cWindow, "Flags");

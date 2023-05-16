@@ -690,7 +690,7 @@ static VALUE EvJoyButton_inspect(VALUE self)
 EVENT_ACCESSOR_INT(JoyAxisMotion, which, jaxis.which);
 EVENT_ACCESSOR_UINT8(JoyAxisMotion, axis, jaxis.axis);
 EVENT_ACCESSOR_INT(JoyAxisMotion, value, jaxis.value);
-/* @return [Stirng] inspection string */
+/* @return [String] inspection string */
 static VALUE EvJoyAxisMotion_inspect(VALUE self)
 {
     SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);

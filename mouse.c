@@ -192,7 +192,7 @@ static VALUE Cursor_s_shown_p(VALUE self)
  * @overload warp(window, x, y) 
  *   Move the mouse cursor to the given position within the window.
  *
- *   @param [SDL::Window] window the window to move the mouse cursor into
+ *   @param [SDL2::Window] window the window to move the mouse cursor into
  *   @param [Integer] x the x coordinate within the window
  *   @param [Integer] y the y coordinate within the window
  *   @return [nil]
