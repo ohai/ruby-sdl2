@@ -110,3 +110,8 @@ task "watch-doc" do
     sh "inotifywait -e modify #{WATCH_TARGETS.join(" ")} && rake doc && notify-send -u low \"Ruby/SDL2 build doc OK\""
   end
 end
+
+task "rbs" =>  POT_SOURCES do
+  sh "yard doc -n #{YARD_SOURCES}"
+  sh "sord --no-regenerate --rbs sdl2.rbs"
+end
