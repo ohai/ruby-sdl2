@@ -193,7 +193,7 @@ static VALUE Mixer_s_close(VALUE self)
  *
  * This method returns the most suitable setting for {.open} the device.
  *
- * @return [[Integer, Integer, Integer, Integer]]
+ * @return [Array(Integer, Integer, Integer, Integer)]
  *   the suitable frequency in Hz, the suitable format,
  *   the suitable number of channels (1 for mono, 2 for stereo),
  *   and the number of call of {.open}.
@@ -456,6 +456,8 @@ static VALUE Channels_s_fade_out(VALUE self, VALUE channel, VALUE ms)
  *   Return true if a specified channel is playing.
  *   
  *   @param channel [Integer] channel to test
+ *   @return [Boolean]
+ *
  *   @see .pause?
  *   @see .fading
  */
@@ -473,6 +475,7 @@ static VALUE Channels_s_play_p(VALUE self, VALUE channel)
  *     other halting methods.
  *   
  *   @param channel [Integer] channel to test
+ *   @return [Boolean]
  *
  *   @see .play?
  *   @see .fading
@@ -537,6 +540,8 @@ static VALUE Channels_s_playing_chunk(VALUE self, VALUE channel)
 /*
  * Initialize the channel with given **tag**.
  *
+ * @param tag [Integer] channel indentifier
+ * 
  * Groups with a common tag are identified.
  */
 static VALUE Group_initialize(VALUE self, VALUE tag)
@@ -575,7 +580,7 @@ inline static int Group_tag(VALUE group)
  *   **self** and **other** are considered to be same
  *   if they have the same tag.
  *   
- *   @param other [SDL2::Mixer::Channel::Group] a compared object
+ *   @param other [SDL2::Mixer::Channels::Group] a compared object
  *   @return [Boolean]
  */
 static VALUE Group_eq(VALUE self, VALUE other)
@@ -822,6 +827,7 @@ static VALUE MusicChannel_s_halt(VALUE self)
  * @overload fade_out(ms)
  *   Halt the music playback with fade-out effect.
  *
+ *   @param ms [Integer] milliseconds of fade-out effect
  *   @return [nil]
  */
 static VALUE MusicChannel_s_fade_out(VALUE self, VALUE fade_out_ms)
@@ -831,6 +837,8 @@ static VALUE MusicChannel_s_fade_out(VALUE self, VALUE fade_out_ms)
 
 /*
  * Return true if a music is playing.
+ *
+ * @return [Boolean]
  */
 static VALUE MusicChannel_s_play_p(VALUE self)
 {
@@ -839,6 +847,8 @@ static VALUE MusicChannel_s_play_p(VALUE self)
 
 /*
  * Return true if a music playback is paused.
+ *
+ * @return [Boolean]
  */
 static VALUE MusicChannel_s_pause_p(VALUE self)
 {
@@ -1067,58 +1077,58 @@ void rubysdl2_init_mixer(void)
     rb_define_module_function(mMixer, "query", Mixer_s_query, 0);
     
     /* define(`DEFINE_MIX_INIT',`rb_define_const(mMixer, "INIT_$1", UINT2NUM(MIX_INIT_$1))') */
-    /* Initialize Ogg flac loader */
+    /* @return [Integer] bitmask which means initialization of Ogg flac loader */
     DEFINE_MIX_INIT(FLAC);
-    /* Initialize MOD loader */
+    /* @return [Integer] bitmask which means initialization of MOD loader */
     DEFINE_MIX_INIT(MOD);
-    /* Initialize MP3 loader */
+    /* @return [Integer] bitmask which means initialization of MP3 loader */
     DEFINE_MIX_INIT(MP3);
-    /* Initialize Ogg vorbis loader */
+    /* @return [Integer] bitmask which means initialization of Ogg vorbis loader */
     DEFINE_MIX_INIT(OGG);
 
 #ifdef HAVE_CONST_MIX_INIT_MODPLUG
-    /* Initialize libmodplug */
+    /* @return [Integer] bitmask which means initialization of libmodplug */
     DEFINE_MIX_INIT(MODPLUG);
 #endif
 #ifdef HAVE_CONST_MIX_INIT_FLUIDSYNTH
-    /* Initialize fluidsynth */
+    /* @return [Integer] bitmask which means initialization of fluidsynth */
     DEFINE_MIX_INIT(FLUIDSYNTH);
 #endif
 #ifdef HAVE_CONST_MIX_INIT_MID
-    /* Initialize mid */
+    /* @return [Integer] bitmask which means initialization of mid */
     DEFINE_MIX_INIT(MID);
 #endif
 
     /* define(`DEFINE_MIX_FORMAT',`rb_define_const(mMixer, "FORMAT_$1", UINT2NUM(AUDIO_$1))') */
-    /* Unsiged 8-bit sample format. Used by {Mixer.open} */
+    /* @return [Integer] the value representing Unsiged 8-bit sample format. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(U8);
-    /* Siged 8-bit sample format. Used by {Mixer.open} */
+    /* @return [Integer] the value representing Siged 8-bit sample format. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(S8);
-    /* Unsiged 16-bit little-endian sample format. Used by {Mixer.open} */
+    /* @return [Integer] the value representing Unsiged 16-bit little-endian sample format. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(U16LSB);
-    /* Siged 16-bit little-endian sample format. Used by {Mixer.open} */
+    /* @return [Integer] the value representing Siged 16-bit little-endian sample format. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(S16LSB);
-    /* Unsiged 16-bit big-endian sample format. Used by {Mixer.open} */
+    /* @return [Integer] the value representing Unsiged 16-bit big-endian sample format. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(U16MSB);
-    /* Unsiged 16-bit big-endian sample format. Used by {Mixer.open} */
+    /* @return [Integer] the value representing Unsiged 16-bit big-endian sample format. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(S16MSB);
-    /* Unsiged 16-bit sample format. Endian is same as system byte order. Used by {Mixer.open} */
+    /* @return [Integer] the value representing Unsiged 16-bit sample format. Endian is same as system byte order. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(U16SYS);
-    /* Siged 16-bit sample format. Endian is same as system byte order. Used by {Mixer.open} */
+    /* @return [Integer] the value representing Siged 16-bit sample format. Endian is same as system byte order. Used by {Mixer.open} */
     DEFINE_MIX_FORMAT(S16SYS);
-    /* Default frequency. 22050 (Hz) */
+    /* @return [Integer] Default frequency. 22050 (Hz) */
     rb_define_const(mMixer, "DEFAULT_FREQUENCY", UINT2NUM(MIX_DEFAULT_FREQUENCY));
-    /* Default sample format. Same as {Mixer::FORMAT_S16SYS}. */
+    /* @return [Integer] Default sample format. Same as {Mixer\:\:FORMAT_S16SYS}. */
     rb_define_const(mMixer, "DEFAULT_FORMAT", UINT2NUM(MIX_DEFAULT_FORMAT));
-    /* Default number of channels. 2. */
+    /* @return [Integer] Default number of channels. 2. */
     rb_define_const(mMixer, "DEFAULT_CHANNELS", INT2FIX(MIX_DEFAULT_CHANNELS));
-    /* Max volume value. 128. */
+    /* @return [Integer] Max volume value. 128. */
     rb_define_const(mMixer, "MAX_VOLUME", INT2FIX(MIX_MAX_VOLUME));
-    /* This constants represents that the channel is not fading in and fading out. */
+    /* @return [Integer] the value represents that the channel is not fading in and fading out. */
     rb_define_const(mMixer, "NO_FADING", INT2FIX(MIX_NO_FADING));
-    /* This constants represents that the channel is fading out. */
+    /* @return [Integer] the value represents that the channel is fading out. */
     rb_define_const(mMixer, "FADING_OUT", INT2FIX(MIX_FADING_OUT));
-    /* This constants represents that the channel is fading in. */
+    /* @return [Integer] the value represents that the channel is fading in. */
     rb_define_const(mMixer, "FADING_IN", INT2FIX(MIX_FADING_IN));
 
     
