@@ -352,7 +352,7 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  *
  *
  * @!method destroy?
- *   Return true if the window is already destroyed.
+ *   @retrun [Boolean] true if the window is already destroyed.
  */
 
 /*
@@ -1774,6 +1774,8 @@ static VALUE Renderer_debug_info(VALUE self)
 
 /*
  * Destroy the texture and deallocate memory.
+ *
+ * @return [void]
  *
  * @see #destroy?
  */

@@ -225,7 +225,7 @@ static VALUE Cursor_s_warp_globally(VALUE self, VALUE x, VALUE y)
  *   Return true a mouse button is pressed.
  *
  *   @param [Integer] index the index of a mouse button, start at index 0
- * 
+ *   @return [Boolean]
  */
 static VALUE State_pressed_p(VALUE self, VALUE index)
 {
