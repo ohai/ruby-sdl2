@@ -754,7 +754,7 @@ static VALUE MusicChannel_s_volume(VALUE self)
  *
  *   @param vol [Integer] the volume for mixing,
  *     from 0 to {SDL2::Mixer::MAX_VOLUME}(128).
- *   @return [vol]
+ *   @return [void]
  *   
  *   @see .volume
  */
@@ -970,7 +970,7 @@ static VALUE Chunk_volume(VALUE self)
  *   Set the volume of the sample.
  *
  *   @param vol [Integer] the new volume
- *   @return [vol]
+ *   @return [void]
  *
  *   @see #volume
  */

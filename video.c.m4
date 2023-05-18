@@ -520,7 +520,7 @@ static VALUE Window_brightness(VALUE self)
  *
  *   @param brightness [Float] the brightness, 0.0 means complete dark and 1.0 means
  *     normal brightness.
- *   @return [brightness]
+ *   @return [void]
  *
  *   @see #brightness
  */
@@ -574,7 +574,7 @@ static VALUE Window_gamma_ramp(VALUE self)
  *   Set the window icon.
  *
  *   @param icon [SDL2::Surface] the icon for the window
- *   @return [icon]
+ *   @return [void]
  */
 static VALUE Window_set_icon(VALUE self, VALUE icon)
 {
@@ -597,7 +597,7 @@ static VALUE Window_input_is_grabbed_p(VALUE self)
  *   Set the window's input grab mode.
  *
  *   @param grabbed [Boolean] true to grub input, and false to release input
- *   @return [grabbed]
+ *   @return [void]
  *
  *   @see #input_is_grabbed?
  */
@@ -642,7 +642,7 @@ static VALUE Window_maximum_size(VALUE self)
  *   @param size [Array(Integer, Integer)] maximum width and maximum height,
  *     the both must be positive.
  *
- *   @return [size]
+ *   @return [void]
  *
  *   @see #maximum_size
  */
@@ -670,7 +670,7 @@ static VALUE Window_minimum_size(VALUE self)
  *   @param size [Array(Integer, Integer)] minimum width and minimum height,
  *     the both must be positive.
  *
- *   @return [size]
+ *   @return [void]
  *
  *   @see #minimum_size
  */
@@ -699,7 +699,7 @@ static VALUE Window_position(VALUE self)
  *     {SDL2::Window::POS_CENTERED} and {SDL2::Window::POS_UNDEFINED}
  *     are available.
  *
- *   @return [size]
+ *   @return [void]
  *
  *   @see #position
  */
@@ -726,7 +726,7 @@ static VALUE Window_size(VALUE self)
  *
  *   @param size [Array(Integer, Integer)] new width and new height
  *
- *   @return [size]
+ *   @return [void]
  *
  *   @see #size
  */
@@ -766,7 +766,7 @@ static VALUE Window_bordered(VALUE self)
  *   @param bordered [Boolean] true for bordered window, anad false for
  *     borderless window
  *
- *   @return [bordered]
+ *   @return [void]
  *
  *   @see #bordered
  */
@@ -781,7 +781,7 @@ static VALUE Window_set_bordered(VALUE self, VALUE bordered)
  *   Set the title of the window.
  *
  *   @param title [String] the title
- *   @return [title]
+ *   @return [void]
  *
  *   @see #title
  */
@@ -871,7 +871,7 @@ static VALUE Window_fullscreen_mode(VALUE self)
  *   @param flag [Integer] 0 for window mode, {SDL2::Window::Flags::FULLSCREEN} for
  *     fullscreen mode, and {SDL2::Flags::Window::FULLSCREEN_DESKTOP} for fullscreen
  *     at the current desktop resolution.
- *   @return [flag]
+ *   @return [void]
  *
  *   @see #fullscreen_mode
  */
@@ -1513,7 +1513,7 @@ static VALUE Renderer_clip_rect(VALUE self)
  *
  *   Set the clip rectangle for the current target.
  *
- *   @return [rect]
+ *   @return [void]
  *   @see #clip_rect
  */
 static VALUE Renderer_set_clip_rect(VALUE self, VALUE rect)
@@ -1553,7 +1553,7 @@ static VALUE Renderer_logical_size(VALUE self)
  *   Set a device indepndent resolution for rendering.
  *
  *   @param w_and_h [Array(Integer, Integer)] the width and height of the logical resolution
- *   @return [w_and_h]
+ *   @return [void]
  *   @see #logical_size
  */
 static VALUE Renderer_set_logical_size(VALUE self, VALUE wh)
@@ -1590,7 +1590,7 @@ static VALUE Renderer_scale(VALUE self)
  *   quality hints. For best results use integer scaling factors.
  *
  *   @param scaleX_and_scaleY [Array(Float, Float)] the horizontal and vertical scaling factors
- *   @return [scaleX_and_scaleY]
+ *   @return [void]
  *   @see #scale
  */
 static VALUE Renderer_set_scale(VALUE self, VALUE xy)
@@ -1620,7 +1620,7 @@ static VALUE Renderer_viewport(VALUE self)
  *   Set the drawing area for rendering on the current target.
  *
  *   @param area [SDL2::Rect,nil] the drawing area, or nil to set the viewport to the entire target
- *   @return [area]
+ *   @return [void]
  *   @see #viewport
  */
 static VALUE Renderer_set_viewport(VALUE self, VALUE rect)
@@ -1665,7 +1665,7 @@ static VALUE Renderer_output_size(VALUE self)
  *  @param [SDL2::Texture,nil] target the targeted texture, or nil
  *    for the default render target(i.e. screen)
  *
- *  @return [target]
+ *  @return [void]
  *
  *  @see #render_target
  */
@@ -1804,7 +1804,7 @@ static VALUE Texture_blend_mode(VALUE self)
  *   Set the blending model of the texture.
  *
  *   @param mode [Integer] blending mode
- *   @return [mode]
+ *   @return [void]
  *
  *   @see #blend_mode
  */
@@ -1834,7 +1834,7 @@ static VALUE Texture_alpha_mod(VALUE self)
  *
  *   @param alpha [Integer] the alpha value multiplied into copy operation,
  *     from 0 to 255
- *   @return [alpha]
+ *   @return [void]
  *
  *   @see #alpha_mod
  */
@@ -1863,7 +1863,7 @@ static VALUE Texture_color_mod(VALUE self)
  *
  *   @param rgb [Array(Integer, Integer, Integer)] the red, green, and blue
  *     color value multiplied into copy operations.
- *   @return [rgb]
+ *   @return [void]
  */
 static VALUE Texture_set_color_mod(VALUE self, VALUE rgb)
 {
@@ -2115,7 +2115,7 @@ static VALUE Surface_blend_mode(VALUE self)
  *   Set the blending mode of the surface used for blit operations.
  *
  *   @param mode [Integer] the blending mode
- *   @return [mode]
+ *   @return [void]
  *   @see #blend_mode
  */
 static VALUE Surface_set_blend_mode(VALUE self, VALUE mode)

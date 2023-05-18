@@ -161,7 +161,7 @@ static VALUE Mod_s_state(VALUE self)
  * Set the current key modifier state
  * 
  * @note This does not change the keyboard state, only the key modifier flags.
- * @return [keymod]
+ * @return [void]
  * @see .state
  */
 static VALUE Mod_s_set_state(VALUE self, VALUE keymod)
@@ -222,7 +222,7 @@ static VALUE TextInput_s_stop(VALUE self)
  *   Set the rectanlgle used to type Unicode text inputs.
  *
  *   @param rect [SDL2::Rect] the rectangle to receive text
- *   @return [rect]
+ *   @return [void]
  */
 static VALUE TextInput_s_set_rect(VALUE self, VALUE rect)
 {
