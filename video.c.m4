@@ -352,7 +352,7 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
  *
  *
  * @!method destroy?
- *   @retrun [Boolean] true if the window is already destroyed.
+ *   @return [Boolean] true if the window is already destroyed.
  */
 
 /*
@@ -1513,6 +1513,7 @@ static VALUE Renderer_clip_rect(VALUE self)
  *
  *   Set the clip rectangle for the current target.
  *
+ *   @param rect [SDL2::Rect]
  *   @return [void]
  *   @see #clip_rect
  */
