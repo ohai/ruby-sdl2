@@ -190,7 +190,7 @@ static VALUE GL_s_get_attribute(VALUE self, VALUE attr)
  *   
  *   @param attr [Integer] the OpenGL attribute to set
  *   @param value [Integer] the desired value for the attribute
- *   @return [value]
+ *   @return [void]
  */
 static VALUE GL_s_set_attribute(VALUE self, VALUE attr, VALUE value)
 {
