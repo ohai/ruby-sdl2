@@ -10,7 +10,9 @@ RB_FILES = Dir.glob("lib/**/*.rb")
 O_FILES = Rake::FileList[*C_FILES].pathmap('%n.o')
 
 POT_SOURCES = RB_FILES + ["main.c"] + (C_FILES - ["main.c"])
+YARD_DOC_FILES = ["README.md", "COPYING.txt"] + POT_SOURCES
 YARD_SOURCES = "-m markdown --main README.md --files COPYING.txt #{POT_SOURCES.join(" ")}"
+YARD_CHECKSUM_FILE = ".yardoc/checksums"
 
 WATCH_TARGETS = (C_FILES - C_FROM_M4_FILES) + C_M4_FILES + ["README.md"]
 
@@ -74,7 +76,7 @@ if locale
     sh "yard doc -o doc/doc-#{locale} --locale #{locale} --po-dir doc/po #{YARD_SOURCES}"
   end
 else
-  task "doc" => POT_SOURCES do
+  task "doc" => YARD_DOC_FILES do
     sh "yard doc -o doc/doc-en #{YARD_SOURCES}"
   end
 end
@@ -84,7 +86,7 @@ task "doc-all" do
 end
 
 desc "List undocumented classes/modules/methods/constants"
-task "doc-stat-undocumented" => POT_SOURCES do
+task "doc-stat-undocumented" => YARD_DOC_FILES do
   sh "yard stats --list-undoc --compact #{YARD_SOURCES}"
 end
 
@@ -111,7 +113,20 @@ task "watch-doc" do
   end
 end
 
-task "rbs" =>  POT_SOURCES do
+file YARD_CHECKSUM_FILE => YARD_DOC_FILES do
   sh "yard doc -n #{YARD_SOURCES}"
+end
+
+file "sdl2.rbs" => YARD_CHECKSUM_FILE do
   sh "sord --no-regenerate --rbs sdl2.rbs"
+end
+
+file "sdl2.rbi" => YARD_CHECKSUM_FILE do
+  sh "sord --no-regenerate --rbi sdl2.rbi"
+end
+
+task "clean" do
+  sh "rm -r .yardoc"
+  sh "rm -r doc/doc-en"
+  sh "rm #{C_FROM_M4_FILES.join(' ')}"
 end

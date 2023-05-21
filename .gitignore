@@ -11,6 +11,8 @@ mixer.c
 joystick.c
 gamecontroller.c
 extconf.h
+sdl2.rbi
+sdl2.rbs
 pkg/
 TAGS
 local/
@@ -21,3 +23,4 @@ sample/sample.wav
 doc/doc-*
 doc/po/rubysdl2.pot
 extconf-options.txt
+.gem_rbs_collection/
