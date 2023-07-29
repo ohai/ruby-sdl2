@@ -5,7 +5,7 @@ The simple ruby extension library for SDL 2.x.
 # Install
 Before installing Ruby/SDL2, you need to install:
 
-* [devkit](http://rubyinstaller.org/add-ons/devkit/) (only for windows)
+* [devkit](https://rubyinstaller.org/add-ons/devkit.html) (only for windows)
 * M4 (only for installing from git repository)
 * [SDL 2.x](http://www.libsdl.org/download-2.0.php)
 * [SDL_image](https://www.libsdl.org/projects/SDL_image/)
