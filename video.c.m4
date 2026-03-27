@@ -1336,6 +1336,52 @@ static VALUE Renderer_present(VALUE self)
 }
 
 /*
+ * Read pixels from the current rendering target.
+ *
+ * @param rect [SDL2::Rect,nil] the area to read (the entire target if nil)
+ * @param format [Integer] the desired pixel format (0 for ARGB8888)
+ * @return [String] raw pixel data as a binary string (ARGB8888 by default)
+ *
+ * @example
+ *   # Read the entire screen before presenting
+ *   pixels = renderer.read_pixels(nil, 0)
+ */
+static VALUE Renderer_read_pixels(VALUE self, VALUE rect, VALUE format)
+{
+    SDL_Renderer* renderer = Get_SDL_Renderer(self);
+    SDL_Rect sdl_rect;
+    SDL_Rect* rect_ptr = NULL;
+    Uint32 fmt = NUM2UINT(format);
+    int w, h, pitch;
+    void* pixels;
+    VALUE result;
+
+    if (rect != Qnil) {
+        sdl_rect = *Get_SDL_Rect(rect);
+        rect_ptr = &sdl_rect;
+        w = sdl_rect.w;
+        h = sdl_rect.h;
+    } else {
+        HANDLE_ERROR(SDL_GetRendererOutputSize(renderer, &w, &h));
+    }
+
+    if (fmt == 0)
+        fmt = SDL_PIXELFORMAT_ARGB8888;
+
+    pitch = w * SDL_BYTESPERPIXEL(fmt);
+    pixels = ruby_xmalloc(pitch * h);
+
+    if (SDL_RenderReadPixels(renderer, rect_ptr, fmt, pixels, pitch) < 0) {
+        ruby_xfree(pixels);
+        HANDLE_ERROR(-1);
+    }
+
+    result = rb_str_new(pixels, pitch * h);
+    ruby_xfree(pixels);
+    return result;
+}
+
+/*
  * Crear the rendering target with the drawing color.
  * @return [nil]
  *
@@ -2934,6 +2980,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cRenderer, "copy", Renderer_copy, 3);
     rb_define_method(cRenderer, "copy_ex", Renderer_copy_ex, 6);
     rb_define_method(cRenderer, "present", Renderer_present, 0);
+    rb_define_method(cRenderer, "read_pixels", Renderer_read_pixels, 2);
     rb_define_method(cRenderer, "draw_color",Renderer_draw_color, 0);
     rb_define_method(cRenderer, "draw_color=",Renderer_set_draw_color, 1);
     rb_define_method(cRenderer, "clear", Renderer_clear, 0);
