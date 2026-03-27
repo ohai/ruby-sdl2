@@ -27,34 +27,38 @@ typedef struct Music {
 
 static void Chunk_free(Chunk* c)
 {
-    if (rubysdl2_is_active() && c->chunk) 
+    if (rubysdl2_is_active() && c->chunk)
         Mix_FreeChunk(c->chunk);
     free(c);
 }
+
+DEFINE_DATA_TYPE(Chunk, Chunk_free);
 
 static VALUE Chunk_new(Mix_Chunk* chunk)
 {
     Chunk* c = ALLOC(Chunk);
     c->chunk = chunk;
-    return Data_Wrap_Struct(cChunk, 0, Chunk_free, c);
+    return TypedData_Wrap_Struct(cChunk, &Chunk_data_type, c);
 }
 
 DEFINE_WRAPPER(Mix_Chunk, Chunk, chunk, cChunk, "SDL2::Mixer::Chunk");
 
 static void Music_free(Music* m)
 {
-    if (rubysdl2_is_active() && m->music) 
+    if (rubysdl2_is_active() && m->music)
         Mix_FreeMusic(m->music);
     free(m);
 }
+
+DEFINE_DATA_TYPE(Music, Music_free);
 
 static VALUE Music_new(Mix_Music* music)
 {
     Music* c = ALLOC(Music);
     c->music = music;
-    return Data_Wrap_Struct(cMusic, 0, Music_free, c);
+    return TypedData_Wrap_Struct(cMusic, &Music_data_type, c);
 }
-                            
+
 DEFINE_WRAPPER(Mix_Music, Music, music, cMusic, "SDL2::Mixer::Music");
 
 /*

@@ -18,11 +18,13 @@ static void Joystick_free(Joystick* j)
     free(j);
 }
 
+DEFINE_DATA_TYPE(Joystick, Joystick_free);
+
 static VALUE Joystick_new(SDL_Joystick* joystick)
 {
     Joystick* j = ALLOC(Joystick);
     j->joystick = joystick;
-    return Data_Wrap_Struct(cJoystick, 0, Joystick_free, j);
+    return TypedData_Wrap_Struct(cJoystick, &Joystick_data_type, j);
 }
 
 DEFINE_WRAPPER(SDL_Joystick, Joystick, joystick, cJoystick, "SDL2::Joystick");

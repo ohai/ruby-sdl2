@@ -86,11 +86,13 @@ static VALUE event_type_to_class[SDL_LASTEVENT];
  *   timestamp of the event
  *   @return [Integer] 
  */
+DEFINE_DATA_TYPE(SDL_Event, free);
+
 static VALUE Event_new(SDL_Event* ev)
 {
     SDL_Event* e = ALLOC(SDL_Event);
     *e = *ev;
-    return Data_Wrap_Struct(event_type_to_class[ev->type], 0, free, e);
+    return TypedData_Wrap_Struct(event_type_to_class[ev->type], &SDL_Event_data_type, e);
 }
 
 static VALUE Event_s_allocate(VALUE klass)
@@ -99,11 +101,11 @@ static VALUE Event_s_allocate(VALUE klass)
     VALUE event_type = rb_iv_get(klass, "event_type");
     if (event_type == Qnil)
         rb_raise(rb_eArgError, "Cannot allocate %s", rb_class2name(klass));
-    
+
     e = ALLOC(SDL_Event);
     memset(e, 0, sizeof(SDL_Event));
     e->common.type = NUM2INT(event_type);
-    return Data_Wrap_Struct(klass, 0, free, e);
+    return TypedData_Wrap_Struct(klass, &SDL_Event_data_type, e);
 }
 
 /*
@@ -176,7 +178,7 @@ static void set_string(char* field, VALUE str, int maxlength)
     static VALUE Ev##classname##_##name(VALUE self)             \
     {                                                           \
         SDL_Event* ev;                                          \
-        Data_Get_Struct(self, SDL_Event, ev);                   \
+        TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev); \
         return c2ruby(ev->field);                               \
     }                                                           \
 
@@ -184,7 +186,7 @@ static void set_string(char* field, VALUE str, int maxlength)
     static VALUE Ev##classname##_set_##name(VALUE self, VALUE val)      \
     {                                                                   \
         SDL_Event* ev;                                                  \
-        Data_Get_Struct(self, SDL_Event, ev);                           \
+        TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev); \
         ev->field = ruby2c(val);                                        \
         return Qnil;                                                    \
     }
@@ -214,7 +216,7 @@ EVENT_ACCESSOR_UINT(Event, timestamp, common.timestamp);
 /* @return [String] inspection string */
 static VALUE Event_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp);
 }
@@ -303,7 +305,7 @@ EVENT_ACCESSOR_INT(Window, data2, window.data2);
 /* @return [String] inspection string */
 static VALUE EvWindow_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u window_id=%u event=%u data1=%d data2=%d>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
                       ev->window.windowID, ev->window.event,
@@ -357,7 +359,7 @@ EVENT_ACCESSOR_UINT(Keyboard, mod, key.keysym.mod);
 /* @return [String] inspection string */
 static VALUE EvKeyboard_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
                       " window_id=%u state=%u repeat=%u"
                       " scancode=%u sym=%u mod=%u>",
@@ -407,7 +409,7 @@ EVENT_READER(TextEditing, text, edit.text, utf8str_new_cstr);
 static VALUE EvTextEditing_set_text(VALUE self, VALUE str)
 {
     SDL_Event* ev;
-    Data_Get_Struct(self, SDL_Event, ev);
+    TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     set_string(ev->edit.text, str, 30);
     return str;
 }
@@ -415,7 +417,7 @@ static VALUE EvTextEditing_set_text(VALUE self, VALUE str)
 /* @return [String] inspection string */
 static VALUE EvTextEditing_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
                       " window_id=%u text=%s start=%d length=%d>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
@@ -441,7 +443,7 @@ EVENT_READER(TextInput, text, text.text, utf8str_new_cstr);
 static VALUE EvTextInput_set_text(VALUE self, VALUE str)
 {
     SDL_Event* ev;
-    Data_Get_Struct(self, SDL_Event, ev);
+    TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     set_string(ev->text.text, str, 30);
     return str;
 }
@@ -449,7 +451,7 @@ static VALUE EvTextInput_set_text(VALUE self, VALUE str)
 /* @return [String] inspection string */
 static VALUE EvTextInput_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u window_id=%u text=%s>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
                       ev->text.windowID, ev->text.text);
@@ -507,7 +509,7 @@ EVENT_ACCESSOR_INT(MouseButton, y, button.y);
 /* @return [String] inspection string */
 static VALUE EvMouseButton_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
                       " window_id=%u which=%u button=%hhu pressed=%s"
 #if SDL_VERSION_ATLEAST(2,0,2)
@@ -576,7 +578,7 @@ EVENT_ACCESSOR_INT(MouseMotion, yrel, motion.yrel);
 /* @return [String] inspection string */
 static VALUE EvMouseMotion_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
                       " window_id=%u which=%u state=%u"
                       " x=%d y=%d xrel=%d yrel=%d>",
@@ -615,7 +617,7 @@ EVENT_ACCESSOR_INT(MouseWheel, y, wheel.y);
 /* @return [String] inspection string */
 static VALUE EvMouseWheel_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
                       " window_id=%u which=%u x=%d y=%d>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
@@ -651,7 +653,7 @@ EVENT_ACCESSOR_BOOL(JoyButton, pressed, jbutton.state);
 /* @return [String] inspection string */
 static VALUE EvJoyButton_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
                       " which=%d button=%u pressed=%s>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
@@ -693,7 +695,7 @@ EVENT_ACCESSOR_INT(JoyAxisMotion, value, jaxis.value);
 /* @return [String] inspection string */
 static VALUE EvJoyAxisMotion_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
                       " which=%d axis=%u value=%d>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
@@ -728,7 +730,7 @@ EVENT_ACCESSOR_INT(JoyBallMotion, yrel, jball.yrel);
 /* @return [String] inspection string */
 static VALUE EvJoyBallMotion_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
                       " which=%d ball=%u xrel=%d yrel=%d>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
@@ -758,7 +760,7 @@ EVENT_ACCESSOR_UINT8(JoyHatMotion, value, jhat.value);
 /* @return [String] inspection string */
 static VALUE EvJoyHatMotion_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u which=%d hat=%u value=%u>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
                       ev->jhat.which, ev->jhat.hat, ev->jhat.value);
@@ -775,7 +777,7 @@ EVENT_ACCESSOR_INT(JoyDevice, which, jdevice.which);
 /* @return [String] inspection string */
 static VALUE EvJoyDevice_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u which=%d>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
                       ev->jdevice.which);
@@ -816,7 +818,7 @@ EVENT_ACCESSOR_INT(ControllerAxis, value, caxis.value);
 /* @return [String] inspection string */
 static VALUE ControllerAxis_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
                       " which=%d axis=%s value=%d>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
@@ -853,7 +855,7 @@ EVENT_ACCESSOR_BOOL(ControllerButton, pressed, cbutton.state);
 /* @return [String] inspection string */
 static VALUE ControllerButton_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
                       " which=%d button=%s state=%s>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
@@ -893,7 +895,7 @@ EVENT_ACCESSOR_INT(ControllerDevice, which, cdevice.which);
 /* @return [String] inspection string */
 static VALUE ControllerDevice_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u which=%d>",
                       rb_obj_classname(self), ev->common.type, ev->common.timestamp,
                       ev->cdevice.which);
@@ -953,7 +955,7 @@ EVENT_ACCESSOR_DBL(TouchFinger, pressure, tfinger.pressure);
 /* @return [String] inspection string */
 static VALUE EvTouchFinger_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
                       " touch_id=%d finger_id=%d"
                       " x=%f y=%f pressure=%f>",
@@ -990,7 +992,7 @@ EVENT_ACCESSOR_DBL(FingerMotion, dy, tfinger.dy);
 /* @return [String] inspection string */
 static VALUE EvFingerMotion_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &SDL_Event_data_type, ev);
     return rb_sprintf("<%s: type=%u timestamp=%u"
                       " touch_id=%d finger_id=%d"
                       " x=%f y=%f pressure=%f"

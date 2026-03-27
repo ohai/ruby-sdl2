@@ -43,11 +43,13 @@ static void TTF_free(TTF* f)
     free(f);
 }
 
+DEFINE_DATA_TYPE(TTF, TTF_free);
+
 static VALUE TTF_new(TTF_Font* font)
 {
     TTF* f = ALLOC(TTF);
     f->font = font;
-    return Data_Wrap_Struct(cTTF, 0, TTF_free, f);
+    return TypedData_Wrap_Struct(cTTF, &TTF_data_type, f);
 }
 
 DEFINE_WRAPPER(TTF_Font, TTF, font, cTTF, "SDL2::TTF");

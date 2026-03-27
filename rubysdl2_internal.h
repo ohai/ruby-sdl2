@@ -71,6 +71,17 @@ void rubysdl2_init_gamecontorller(void);
 #define UCHAR2NUM UINT2NUM
 #define rb_str_export_to_utf8(str) rb_str_export_to_enc((str), rb_utf8_encoding())
 
+/* Helper macro to define a rb_data_type_t for TypedData.
+ * Usage: DEFINE_DATA_TYPE(struct_name, free_func)
+ * Defines: static const rb_data_type_t struct_name##_data_type
+ */
+#define DEFINE_DATA_TYPE(struct_name, free_func)                         \
+    static const rb_data_type_t struct_name##_data_type = {             \
+        #struct_name,                                                   \
+        { NULL, (void (*)(void*))(free_func), NULL },                   \
+        NULL, NULL, 0                                                   \
+    };
+
 #define DEFINE_GETTER(scope, ctype, var_class, classname)               \
     scope ctype* Get_##ctype(VALUE obj)                                 \
     {                                                                   \
@@ -78,7 +89,7 @@ void rubysdl2_init_gamecontorller(void);
         if (!rb_obj_is_kind_of(obj, var_class))                         \
             rb_raise(rb_eTypeError, "wrong argument type %s (expected %s)", \
                      rb_obj_classname(obj), classname);                 \
-        Data_Get_Struct(obj, ctype, s);                                 \
+        TypedData_Get_Struct(obj, ctype, &ctype##_data_type, s);        \
                                                                         \
         return s;                                                       \
     }

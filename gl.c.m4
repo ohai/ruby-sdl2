@@ -12,8 +12,6 @@ typedef struct GLContext {
     SDL_GLContext context;
 } GLContext;
 
-DEFINE_WRAPPER(SDL_GLContext, GLContext, context, cGLContext, "SDL2::GL::Context");
-
 static void GLContext_free(GLContext* c)
 {
     if (c->context)
@@ -21,11 +19,15 @@ static void GLContext_free(GLContext* c)
     free(c);
 }
 
+DEFINE_DATA_TYPE(GLContext, GLContext_free);
+
+DEFINE_WRAPPER(SDL_GLContext, GLContext, context, cGLContext, "SDL2::GL::Context");
+
 static VALUE GLContext_new(SDL_GLContext context)
 {
     GLContext* c = ALLOC(GLContext);
     c->context = context;
-    return Data_Wrap_Struct(cGLContext, 0, GLContext_free, c);
+    return TypedData_Wrap_Struct(cGLContext, &GLContext_data_type, c);
 }
 
 /*
