@@ -77,9 +77,9 @@ void rubysdl2_init_gamecontorller(void);
  */
 #define DEFINE_DATA_TYPE(struct_name, free_func)                         \
     static const rb_data_type_t struct_name##_data_type = {             \
-        #struct_name,                                                   \
+        "ruby-sdl2/" #struct_name,                                      \
         { NULL, (void (*)(void*))(free_func), NULL },                   \
-        NULL, NULL, 0                                                   \
+        NULL, NULL, RUBY_TYPED_FREE_IMMEDIATELY                         \
     };
 
 #define DEFINE_GETTER(scope, ctype, var_class, classname)               \

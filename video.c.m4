@@ -102,12 +102,12 @@ static void Window_free(Window* w)
 
 static VALUE Window_new(SDL_Window* window)
 {
-    Window* w = ALLOC(Window);
+    Window* w;
+    VALUE obj = TypedData_Make_Struct(cWindow, Window, &Window_data_type, w);
     w->window = window;
-    w->num_renderers = 0;
     w->max_renderers = 4;
     w->renderers = ALLOC_N(struct Renderer*, 4);
-    return TypedData_Wrap_Struct(cWindow, &Window_data_type, w);
+    return obj;
 }
 
 DEFINE_GETTER(static, Window, cWindow, "SDL2::Window");
@@ -124,10 +124,9 @@ static VALUE Display_new(int index)
 
 static VALUE DisplayMode_s_allocate(VALUE klass)
 {
-    SDL_DisplayMode* mode = ALLOC(SDL_DisplayMode);
-    mode->format = mode->w = mode->h = mode->refresh_rate = 0;
-    mode->driverdata = NULL;
-    return TypedData_Wrap_Struct(klass, &SDL_DisplayMode_data_type, mode);
+    SDL_DisplayMode* mode;
+    VALUE obj = TypedData_Make_Struct(klass, SDL_DisplayMode, &SDL_DisplayMode_data_type, mode);
+    return obj;
 }
 
 static VALUE DisplayMode_new(SDL_DisplayMode* mode)
@@ -179,14 +178,14 @@ static void Window_attach_renderer(Window* w, Renderer* r)
 
 static VALUE Renderer_new(SDL_Renderer* renderer, Window* w)
 {
-    Renderer* r = ALLOC(Renderer);
+    Renderer* r;
+    VALUE obj = TypedData_Make_Struct(cRenderer, Renderer, &Renderer_data_type, r);
     r->renderer = renderer;
-    r->num_textures = 0;
     r->max_textures = 16;
     r->textures = ALLOC_N(Texture*, 16);
     r->refcount = 1;
     Window_attach_renderer(w, r);
-    return TypedData_Wrap_Struct(cRenderer, &Renderer_data_type, r);
+    return obj;
 }
 
 DEFINE_WRAPPER(SDL_Renderer, Renderer, renderer, cRenderer, "SDL2::Renderer");
@@ -221,11 +220,12 @@ static void Renderer_attach_texture(Renderer* r, Texture* t)
 
 static VALUE Texture_new(SDL_Texture* texture, Renderer* r)
 {
-    Texture* t = ALLOC(Texture);
+    Texture* t;
+    VALUE obj = TypedData_Make_Struct(cTexture, Texture, &Texture_data_type, t);
     t->texture = texture;
     t->refcount = 1;
     Renderer_attach_texture(r, t);
-    return TypedData_Wrap_Struct(cTexture, &Texture_data_type, t);
+    return obj;
 }
 
 DEFINE_WRAPPER(SDL_Texture, Texture, texture, cTexture, "SDL2::Texture");
@@ -243,10 +243,10 @@ static void Surface_free(Surface* s)
 
 VALUE Surface_new(SDL_Surface* surface)
 {
-    Surface* s = ALLOC(Surface);
+    Surface* s;
+    VALUE obj = TypedData_Make_Struct(cSurface, Surface, &Surface_data_type, s);
     s->surface = surface;
-    s->need_to_free_pixels = 0;
-    return TypedData_Wrap_Struct(cSurface, &Surface_data_type, s);
+    return obj;
 }
 
 DEFINE_WRAPPER(SDL_Surface, Surface, surface, cSurface, "SDL2::Surface");
@@ -2060,6 +2060,7 @@ static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
     SDL_Surface* surface;
     void* pixels;
     Surface* s;
+    VALUE obj;
 
     rb_scan_args(argc, argv, "45", &string, &width, &height, &depth,
                  &pitch, &Rmask, &Gmask, &Bmask, &Amask);
@@ -2086,10 +2087,10 @@ static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
 
     RB_GC_GUARD(string);
 
-    s = ALLOC(Surface);
+    obj = TypedData_Make_Struct(cSurface, Surface, &Surface_data_type, s);
     s->surface = surface;
     s->need_to_free_pixels = 1;
-    return TypedData_Wrap_Struct(cSurface, &Surface_data_type, s);
+    return obj;
 }
 
 /*
@@ -2489,10 +2490,9 @@ static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
  */
 static VALUE Rect_s_allocate(VALUE klass)
 {
-    SDL_Rect* rect = ALLOC(SDL_Rect);
-    rect->x = rect->y = rect->w = rect->h = 0;
-
-    return TypedData_Wrap_Struct(cRect, &SDL_Rect_data_type, rect);
+    SDL_Rect* rect;
+    VALUE obj = TypedData_Make_Struct(klass, SDL_Rect, &SDL_Rect_data_type, rect);
+    return obj;
 }
 
 /*
@@ -2594,9 +2594,9 @@ static VALUE Rect_union(VALUE self, VALUE other)
  */
 static VALUE Point_s_allocate(VALUE klass)
 {
-    SDL_Point* point = ALLOC(SDL_Point);
-    memset(point, 0, sizeof(SDL_Point));
-    return TypedData_Wrap_Struct(klass, &SDL_Point_data_type, point);
+    SDL_Point* point;
+    VALUE obj = TypedData_Make_Struct(klass, SDL_Point, &SDL_Point_data_type, point);
+    return obj;
 }
 
 /*

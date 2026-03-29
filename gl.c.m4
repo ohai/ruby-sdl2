@@ -25,9 +25,10 @@ DEFINE_WRAPPER(SDL_GLContext, GLContext, context, cGLContext, "SDL2::GL::Context
 
 static VALUE GLContext_new(SDL_GLContext context)
 {
-    GLContext* c = ALLOC(GLContext);
+    GLContext* c;
+    VALUE obj = TypedData_Make_Struct(cGLContext, GLContext, &GLContext_data_type, c);
     c->context = context;
-    return TypedData_Wrap_Struct(cGLContext, &GLContext_data_type, c);
+    return obj;
 }
 
 /*

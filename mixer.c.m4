@@ -36,9 +36,10 @@ DEFINE_DATA_TYPE(Chunk, Chunk_free);
 
 static VALUE Chunk_new(Mix_Chunk* chunk)
 {
-    Chunk* c = ALLOC(Chunk);
+    Chunk* c;
+    VALUE obj = TypedData_Make_Struct(cChunk, Chunk, &Chunk_data_type, c);
     c->chunk = chunk;
-    return TypedData_Wrap_Struct(cChunk, &Chunk_data_type, c);
+    return obj;
 }
 
 DEFINE_WRAPPER(Mix_Chunk, Chunk, chunk, cChunk, "SDL2::Mixer::Chunk");
@@ -54,9 +55,10 @@ DEFINE_DATA_TYPE(Music, Music_free);
 
 static VALUE Music_new(Mix_Music* music)
 {
-    Music* c = ALLOC(Music);
+    Music* c;
+    VALUE obj = TypedData_Make_Struct(cMusic, Music, &Music_data_type, c);
     c->music = music;
-    return TypedData_Wrap_Struct(cMusic, &Music_data_type, c);
+    return obj;
 }
 
 DEFINE_WRAPPER(Mix_Music, Music, music, cMusic, "SDL2::Mixer::Music");

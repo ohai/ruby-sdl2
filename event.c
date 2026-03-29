@@ -90,9 +90,10 @@ DEFINE_DATA_TYPE(SDL_Event, free);
 
 static VALUE Event_new(SDL_Event* ev)
 {
-    SDL_Event* e = ALLOC(SDL_Event);
+    SDL_Event* e;
+    VALUE obj = TypedData_Make_Struct(event_type_to_class[ev->type], SDL_Event, &SDL_Event_data_type, e);
     *e = *ev;
-    return TypedData_Wrap_Struct(event_type_to_class[ev->type], &SDL_Event_data_type, e);
+    return obj;
 }
 
 static VALUE Event_s_allocate(VALUE klass)
@@ -102,10 +103,11 @@ static VALUE Event_s_allocate(VALUE klass)
     if (event_type == Qnil)
         rb_raise(rb_eArgError, "Cannot allocate %s", rb_class2name(klass));
 
-    e = ALLOC(SDL_Event);
-    memset(e, 0, sizeof(SDL_Event));
-    e->common.type = NUM2INT(event_type);
-    return TypedData_Wrap_Struct(klass, &SDL_Event_data_type, e);
+    {
+        VALUE obj = TypedData_Make_Struct(klass, SDL_Event, &SDL_Event_data_type, e);
+        e->common.type = NUM2INT(event_type);
+        return obj;
+    }
 }
 
 /*
