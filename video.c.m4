@@ -125,8 +125,7 @@ static VALUE Display_new(int index)
 static VALUE DisplayMode_s_allocate(VALUE klass)
 {
     SDL_DisplayMode* mode;
-    VALUE obj = TypedData_Make_Struct(klass, SDL_DisplayMode, &SDL_DisplayMode_data_type, mode);
-    return obj;
+    return TypedData_Make_Struct(klass, SDL_DisplayMode, &SDL_DisplayMode_data_type, mode);
 }
 
 static VALUE DisplayMode_new(SDL_DisplayMode* mode)
@@ -2491,8 +2490,7 @@ static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
 static VALUE Rect_s_allocate(VALUE klass)
 {
     SDL_Rect* rect;
-    VALUE obj = TypedData_Make_Struct(klass, SDL_Rect, &SDL_Rect_data_type, rect);
-    return obj;
+    return TypedData_Make_Struct(klass, SDL_Rect, &SDL_Rect_data_type, rect);
 }
 
 /*
@@ -2595,8 +2593,7 @@ static VALUE Rect_union(VALUE self, VALUE other)
 static VALUE Point_s_allocate(VALUE klass)
 {
     SDL_Point* point;
-    VALUE obj = TypedData_Make_Struct(klass, SDL_Point, &SDL_Point_data_type, point);
-    return obj;
+    return TypedData_Make_Struct(klass, SDL_Point, &SDL_Point_data_type, point);
 }
 
 /*
