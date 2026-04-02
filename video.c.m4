@@ -105,6 +105,7 @@ static VALUE Window_new(SDL_Window* window)
     Window* w;
     VALUE obj = TypedData_Make_Struct(cWindow, Window, &Window_data_type, w);
     w->window = window;
+    w->num_renderers = 0;
     w->max_renderers = 4;
     w->renderers = ALLOC_N(struct Renderer*, 4);
     return obj;
@@ -125,7 +126,10 @@ static VALUE Display_new(int index)
 static VALUE DisplayMode_s_allocate(VALUE klass)
 {
     SDL_DisplayMode* mode;
-    return TypedData_Make_Struct(klass, SDL_DisplayMode, &SDL_DisplayMode_data_type, mode);
+    VALUE obj = TypedData_Make_Struct(klass, SDL_DisplayMode, &SDL_DisplayMode_data_type, mode);
+    mode->format = mode->w = mode->h = mode->refresh_rate = 0;
+    mode->driverdata = NULL;
+    return obj;
 }
 
 static VALUE DisplayMode_new(SDL_DisplayMode* mode)
@@ -180,6 +184,7 @@ static VALUE Renderer_new(SDL_Renderer* renderer, Window* w)
     Renderer* r;
     VALUE obj = TypedData_Make_Struct(cRenderer, Renderer, &Renderer_data_type, r);
     r->renderer = renderer;
+    r->num_textures = 0;
     r->max_textures = 16;
     r->textures = ALLOC_N(Texture*, 16);
     r->refcount = 1;
@@ -245,6 +250,7 @@ VALUE Surface_new(SDL_Surface* surface)
     Surface* s;
     VALUE obj = TypedData_Make_Struct(cSurface, Surface, &Surface_data_type, s);
     s->surface = surface;
+    s->need_to_free_pixels = 0;
     return obj;
 }
 
@@ -2490,7 +2496,9 @@ static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
 static VALUE Rect_s_allocate(VALUE klass)
 {
     SDL_Rect* rect;
-    return TypedData_Make_Struct(klass, SDL_Rect, &SDL_Rect_data_type, rect);
+    VALUE obj = TypedData_Make_Struct(klass, SDL_Rect, &SDL_Rect_data_type, rect);
+    rect->x = rect->y = rect->w = rect->h = 0;
+    return obj;
 }
 
 /*
