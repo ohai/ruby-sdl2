@@ -17,6 +17,8 @@ static void GameController_free(GameController* g)
     free(g);
 }
 
+DEFINE_DATA_TYPE(GameController, GameController_free);
+
 /*
  * Document-class: SDL2::GameController
  *
@@ -60,9 +62,10 @@ static void GameController_free(GameController* g)
 
 static VALUE GameController_new(SDL_GameController* controller)
 {
-    GameController* g = ALLOC(GameController);
+    GameController* g;
+    VALUE obj = TypedData_Make_Struct(cGameController, GameController, &GameController_data_type, g);
     g->controller = controller;
-    return Data_Wrap_Struct(cGameController, 0, GameController_free, g);
+    return obj;
 }
 
 DEFINE_WRAPPER(SDL_GameController, GameController, controller, cGameController,

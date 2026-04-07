@@ -65,7 +65,20 @@ typedef struct Surface {
     int need_to_free_pixels;
 } Surface;
 
+static void Window_free(Window*);
 static void Renderer_free(Renderer*);
+static void Texture_free(Texture*);
+static void Surface_free(Surface*);
+
+/* Forward-declare TypedData types (need free function declarations above) */
+DEFINE_DATA_TYPE(Window, Window_free);
+DEFINE_DATA_TYPE(SDL_DisplayMode, free);
+DEFINE_DATA_TYPE(Renderer, Renderer_free);
+DEFINE_DATA_TYPE(Texture, Texture_free);
+DEFINE_DATA_TYPE(Surface, Surface_free);
+DEFINE_DATA_TYPE(SDL_Rect, free);
+DEFINE_DATA_TYPE(SDL_Point, free);
+
 static void Window_destroy_internal(Window* w)
 {
     int i;
@@ -89,12 +102,13 @@ static void Window_free(Window* w)
 
 static VALUE Window_new(SDL_Window* window)
 {
-    Window* w = ALLOC(Window);
+    Window* w;
+    VALUE obj = TypedData_Make_Struct(cWindow, Window, &Window_data_type, w);
     w->window = window;
     w->num_renderers = 0;
     w->max_renderers = 4;
     w->renderers = ALLOC_N(struct Renderer*, 4);
-    return Data_Wrap_Struct(cWindow, 0, Window_free, w);
+    return obj;
 }
 
 DEFINE_GETTER(static, Window, cWindow, "SDL2::Window");
@@ -111,24 +125,24 @@ static VALUE Display_new(int index)
 
 static VALUE DisplayMode_s_allocate(VALUE klass)
 {
-    SDL_DisplayMode* mode = ALLOC(SDL_DisplayMode);
+    SDL_DisplayMode* mode;
+    VALUE obj = TypedData_Make_Struct(klass, SDL_DisplayMode, &SDL_DisplayMode_data_type, mode);
     mode->format = mode->w = mode->h = mode->refresh_rate = 0;
     mode->driverdata = NULL;
-    return Data_Wrap_Struct(klass, 0, free, mode);
+    return obj;
 }
 
 static VALUE DisplayMode_new(SDL_DisplayMode* mode)
 {
     VALUE display_mode = DisplayMode_s_allocate(cDisplayMode);
     SDL_DisplayMode* m;
-    Data_Get_Struct(display_mode, SDL_DisplayMode, m);
+    TypedData_Get_Struct(display_mode, SDL_DisplayMode, &SDL_DisplayMode_data_type, m);
     *m = *mode;
     return display_mode;
 }
 
 DEFINE_GETTER(static, SDL_DisplayMode, cDisplayMode, "SDL2::Display::Mode");
 
-static void Texture_free(Texture*);
 static void Renderer_destroy_internal(Renderer* r)
 {
     int i;
@@ -167,14 +181,15 @@ static void Window_attach_renderer(Window* w, Renderer* r)
 
 static VALUE Renderer_new(SDL_Renderer* renderer, Window* w)
 {
-    Renderer* r = ALLOC(Renderer);
+    Renderer* r;
+    VALUE obj = TypedData_Make_Struct(cRenderer, Renderer, &Renderer_data_type, r);
     r->renderer = renderer;
     r->num_textures = 0;
     r->max_textures = 16;
     r->textures = ALLOC_N(Texture*, 16);
     r->refcount = 1;
     Window_attach_renderer(w, r);
-    return Data_Wrap_Struct(cRenderer, 0, Renderer_free, r);
+    return obj;
 }
 
 DEFINE_WRAPPER(SDL_Renderer, Renderer, renderer, cRenderer, "SDL2::Renderer");
@@ -209,11 +224,12 @@ static void Renderer_attach_texture(Renderer* r, Texture* t)
 
 static VALUE Texture_new(SDL_Texture* texture, Renderer* r)
 {
-    Texture* t = ALLOC(Texture);
+    Texture* t;
+    VALUE obj = TypedData_Make_Struct(cTexture, Texture, &Texture_data_type, t);
     t->texture = texture;
     t->refcount = 1;
     Renderer_attach_texture(r, t);
-    return Data_Wrap_Struct(cTexture, 0, Texture_free, t);
+    return obj;
 }
 
 DEFINE_WRAPPER(SDL_Texture, Texture, texture, cTexture, "SDL2::Texture");
@@ -231,10 +247,11 @@ static void Surface_free(Surface* s)
 
 VALUE Surface_new(SDL_Surface* surface)
 {
-    Surface* s = ALLOC(Surface);
+    Surface* s;
+    VALUE obj = TypedData_Make_Struct(cSurface, Surface, &Surface_data_type, s);
     s->surface = surface;
     s->need_to_free_pixels = 0;
-    return Data_Wrap_Struct(cSurface, 0, Surface_free, s);
+    return obj;
 }
 
 DEFINE_WRAPPER(SDL_Surface, Surface, surface, cSurface, "SDL2::Surface");
@@ -2048,6 +2065,7 @@ static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
     SDL_Surface* surface;
     void* pixels;
     Surface* s;
+    VALUE obj;
 
     rb_scan_args(argc, argv, "45", &string, &width, &height, &depth,
                  &pitch, &Rmask, &Gmask, &Bmask, &Amask);
@@ -2074,10 +2092,10 @@ static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
 
     RB_GC_GUARD(string);
 
-    s = ALLOC(Surface);
+    obj = TypedData_Make_Struct(cSurface, Surface, &Surface_data_type, s);
     s->surface = surface;
     s->need_to_free_pixels = 1;
-    return Data_Wrap_Struct(cSurface, 0, Surface_free, s);
+    return obj;
 }
 
 /*
@@ -2431,12 +2449,14 @@ static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
 #define FIELD_ACCESSOR(classname, typename, field)              \
     static VALUE classname##_##field(VALUE self)                \
     {                                                           \
-        typename* r; Data_Get_Struct(self, typename, r);        \
+        typename* r;                                            \
+        TypedData_Get_Struct(self, typename, &typename##_data_type, r); \
         return INT2NUM(r->field);                               \
     }                                                           \
     static VALUE classname##_set_##field(VALUE self, VALUE val) \
     {                                                           \
-        typename* r; Data_Get_Struct(self, typename, r);        \
+        typename* r;                                            \
+        TypedData_Get_Struct(self, typename, &typename##_data_type, r); \
         r->field = NUM2INT(val); return val;                    \
     }
 
@@ -2475,10 +2495,10 @@ static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
  */
 static VALUE Rect_s_allocate(VALUE klass)
 {
-    SDL_Rect* rect = ALLOC(SDL_Rect);
+    SDL_Rect* rect;
+    VALUE obj = TypedData_Make_Struct(klass, SDL_Rect, &SDL_Rect_data_type, rect);
     rect->x = rect->y = rect->w = rect->h = 0;
-
-    return Data_Wrap_Struct(cRect, 0, free, rect);
+    return obj;
 }
 
 /*
@@ -2506,7 +2526,7 @@ static VALUE Rect_initialize(int argc, VALUE* argv, VALUE self)
         /* do nothing*/
     } else if (argc == 4) {
         SDL_Rect* rect;
-        Data_Get_Struct(self, SDL_Rect, rect);
+        TypedData_Get_Struct(self, SDL_Rect, &SDL_Rect_data_type, rect);
         rect->x = NUM2INT(x); rect->y = NUM2INT(y);
         rect->w = NUM2INT(w); rect->h = NUM2INT(h);
     } else {
@@ -2581,7 +2601,7 @@ static VALUE Rect_union(VALUE self, VALUE other)
 static VALUE Point_s_allocate(VALUE klass)
 {
     SDL_Point* point;
-    return Data_Make_Struct(klass, SDL_Point, 0, free, point);
+    return TypedData_Make_Struct(klass, SDL_Point, &SDL_Point_data_type, point);
 }
 
 /*
