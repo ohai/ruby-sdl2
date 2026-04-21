@@ -31,6 +31,8 @@ Alternatively You can also install the master version of Ruby/SDL2 from github:
 
 LGPL v3 (see {file:COPYING.txt}).
 
+The API documentation is based on [SDL2 Wiki](https://wiki.libsdl.org/SDL2/FrontPage), which is distributed under CC-BY 4.0.
+
 # Author
 
 Ippei Obayashi <ohai@kmc.gr.jp>
