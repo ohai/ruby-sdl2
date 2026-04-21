@@ -1341,6 +1341,60 @@ static VALUE Renderer_present(VALUE self)
 }
 
 /*
+ * @overload read_pixels(rect, format)
+ *   Read pixels from the current rendering target.
+ *
+ *   ## Remarks
+ *
+ *   **WARNING**: This is a very slow operation, and should not be used frequently.
+ *   If you're using this on the main rendering target, it should be called after
+ *   rendering and before {#present}.
+ *
+ *   @param [SDL2::Rect,nil] rect the area to read, or nil for the entire target
+ *   @param [SDL2::PixelFormat,Integer] format the desired pixel format
+ *     (0 to use the format of the rendering target)
+ *   @return [String] raw pixel data as a binary string
+ */
+static VALUE Renderer_read_pixels(VALUE self, VALUE rect, VALUE format)
+{
+    SDL_Renderer* renderer = Get_SDL_Renderer(self);
+    SDL_Rect sdl_rect;
+    SDL_Rect* rect_ptr = NULL;
+    Uint32 fmt = uint32_for_format(format);
+    int w, h, pitch;
+    void* pixels;
+    VALUE result;
+
+    if (rect != Qnil) {
+        sdl_rect = *Get_SDL_Rect(rect);
+        rect_ptr = &sdl_rect;
+        w = sdl_rect.w;
+        h = sdl_rect.h;
+    } else {
+        HANDLE_ERROR(SDL_GetRendererOutputSize(renderer, &w, &h));
+    }
+
+    if (fmt == 0) {
+        SDL_RendererInfo info;
+        HANDLE_ERROR(SDL_GetRendererInfo(renderer, &info));
+        pitch = w * SDL_BYTESPERPIXEL(info.texture_formats[0]);
+    } else {
+        pitch = w * SDL_BYTESPERPIXEL(fmt);
+    }
+
+    pixels = ruby_xmalloc(pitch * h);
+
+    if (SDL_RenderReadPixels(renderer, rect_ptr, fmt, pixels, pitch) < 0) {
+        ruby_xfree(pixels);
+        HANDLE_ERROR(-1);
+    }
+
+    result = rb_str_new(pixels, pitch * h);
+    ruby_xfree(pixels);
+    return result;
+}
+
+/*
  * Crear the rendering target with the drawing color.
  * @return [nil]
  *
@@ -2939,6 +2993,7 @@ void rubysdl2_init_video(void)
     rb_define_method(cRenderer, "copy", Renderer_copy, 3);
     rb_define_method(cRenderer, "copy_ex", Renderer_copy_ex, 6);
     rb_define_method(cRenderer, "present", Renderer_present, 0);
+    rb_define_method(cRenderer, "read_pixels", Renderer_read_pixels, 2);
     rb_define_method(cRenderer, "draw_color",Renderer_draw_color, 0);
     rb_define_method(cRenderer, "draw_color=",Renderer_set_draw_color, 1);
     rb_define_method(cRenderer, "clear", Renderer_clear, 0);
