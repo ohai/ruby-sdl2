@@ -1344,6 +1344,12 @@ static VALUE Renderer_present(VALUE self)
  * @overload read_pixels(rect, format)
  *   Read pixels from the current rendering target.
  *
+ *   ## Remarks
+ *
+ *   **WARNING**: This is a very slow operation, and should not be used frequently.
+ *   If you're using this on the main rendering target, it should be called after
+ *   rendering and before {#present}.
+ *
  *   @param [SDL2::Rect,nil] rect the area to read, or nil for the entire target
  *   @param [SDL2::PixelFormat,Integer] format the desired pixel format
  *     (0 to use the format of the rendering target)
