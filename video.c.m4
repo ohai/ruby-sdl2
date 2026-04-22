@@ -1363,7 +1363,6 @@ static VALUE Renderer_read_pixels(VALUE self, VALUE rect, VALUE format)
     Uint32 fmt = uint32_for_format(format);
     int w, h, pitch;
     void* pixels;
-    VALUE result;
 
     if (rect != Qnil) {
         sdl_rect = *Get_SDL_Rect(rect);
@@ -1382,16 +1381,11 @@ static VALUE Renderer_read_pixels(VALUE self, VALUE rect, VALUE format)
         pitch = w * SDL_BYTESPERPIXEL(fmt);
     }
 
-    pixels = ruby_xmalloc(pitch * h);
+    pixels = ALLOCA_N(char, pitch * h);
 
-    if (SDL_RenderReadPixels(renderer, rect_ptr, fmt, pixels, pitch) < 0) {
-        ruby_xfree(pixels);
-        HANDLE_ERROR(-1);
-    }
-
-    result = rb_str_new(pixels, pitch * h);
-    ruby_xfree(pixels);
-    return result;
+    HANDLE_ERROR(SDL_RenderReadPixels(renderer, rect_ptr, fmt, pixels, pitch));
+    
+    return rb_str_new(pixels, pitch * h);
 }
 
 /*
