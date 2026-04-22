@@ -6,15 +6,15 @@
 <title>
   Module: SDL2::BlendMode
   
-    &mdash; Documentation by YARD 0.9.12
+    &mdash; Documentation by YARD 0.9.39
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "SDL2::BlendMode";
   relpath = '../';
 </script>
@@ -87,14 +87,12 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Constants represent blend mode for Renderer.copy and
-drawing operations.</p>
+    
+<p>Constants represent blend mode for Renderer.copy and drawing operations.</p>
 
-<p>You can change the blending mode using
-<span class='object_link'><a href="Renderer.html#draw_blend_mode=-instance_method" title="SDL2::Renderer#draw_blend_mode= (method)">Renderer#draw_blend_mode=</a></span> and <span class='object_link'><a href="Texture.html#blend_mode=-instance_method" title="SDL2::Texture#blend_mode= (method)">Texture#blend_mode=</a></span>.</p>
+<p>You can change the blending mode using <span class='object_link'><a href="Renderer.html#draw_blend_mode=-instance_method" title="SDL2::Renderer#draw_blend_mode= (method)">Renderer#draw_blend_mode=</a></span> and <span class='object_link'><a href="Texture.html#blend_mode=-instance_method" title="SDL2::Texture#blend_mode= (method)">Texture#blend_mode=</a></span>.</p>
 
-<p>In the backend of SDL, opengl or direct3d blending
-mechanism is used for blending operations.</p>
+<p>In the backend of SDL, opengl or direct3d blending mechanism is used for blending operations.</p>
 
 
   </div>
@@ -103,70 +101,152 @@ mechanism is used for blending operations.</p>
   
 
 </div>
-  <h2>Constant Summary</h2>
-  <dl class="constants">
-    
-      <dt id="NONE-constant" class="">NONE =
-        <div class="docstring">
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="NONE-constant" class="">NONE =
+          <div class="docstring">
   <div class="discussion">
-    <p>no blending (dstRGBA = srcRGBA)</p>
+    
+<p>Returns no blending (dstRGBA = srcRGBA).</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>no blending (dstRGBA = srcRGBA)</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_NONE</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="BLEND-constant" class="">BLEND =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_NONE</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="BLEND-constant" class="">BLEND =
+          <div class="docstring">
   <div class="discussion">
-    <p>alpha blending (dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA), dstA = srcA + (dstA * (1-srcA)))</p>
+    
+<p>Returns alpha blending (dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA), dstA = srcA + (dstA * (1-srcA))).</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>alpha blending (dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA), dstA = srcA + (dstA * (1-srcA)))</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_BLEND</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="ADD-constant" class="">ADD =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_BLEND</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="ADD-constant" class="">ADD =
+          <div class="docstring">
   <div class="discussion">
-    <p>additive blending (dstRGB = (srcRGB * srcA) + dstRGB, dstA = dstA)</p>
+    
+<p>Returns additive blending (dstRGB = (srcRGB * srcA) + dstRGB, dstA = dstA).</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>additive blending (dstRGB = (srcRGB * srcA) + dstRGB, dstA = dstA)</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_ADD</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="MOD-constant" class="">MOD =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_ADD</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="MOD-constant" class="">MOD =
+          <div class="docstring">
   <div class="discussion">
-    <p>color modulate (multiplicative) (dstRGB = srcRGB * dstRGB, dstA = dstA)</p>
+    
+<p>Returns color modulate (multiplicative) (dstRGB = srcRGB * dstRGB, dstA = dstA).</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>color modulate (multiplicative) (dstRGB = srcRGB * dstRGB, dstA = dstA)</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_MOD</span><span class='rparen'>)</span></pre></dd>
-    
-  </dl>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_BLENDMODE_MOD</span><span class='rparen'>)</span></pre></dd>
+      
+    </dl>
+  
 
 
 
@@ -179,9 +259,9 @@ mechanism is used for blending operations.</p>
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 25 14:38:17 2018 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.12 (ruby-2.5.0).
+  Generated on Wed Apr 22 11:16:02 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.1).
 </div>
 
     </div>

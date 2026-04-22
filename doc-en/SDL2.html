@@ -6,15 +6,15 @@
 <title>
   Module: SDL2
   
-    &mdash; Documentation by YARD 0.9.12
+    &mdash; Documentation by YARD 0.9.39
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "SDL2";
   relpath = '';
 </script>
@@ -87,7 +87,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Namespace module for Ruby/SDL2.</p>
+    
+<p>Namespace module for Ruby/SDL2.</p>
 
 
   </div>
@@ -108,190 +109,425 @@
   
 </p>
 
-  <h2>Constant Summary</h2>
-  <dl class="constants">
-    
-      <dt id="VERSION-constant" class="">VERSION =
-        <div class="docstring">
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="VERSION-constant" class="">VERSION =
+          <div class="docstring">
   <div class="discussion">
-    <p>Version string of Ruby/SDL2</p>
+    
+<p>Returns Version string of Ruby/SDL2.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Version string of Ruby/SDL2</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.3.2</span><span class='tstring_end'>&quot;</span></span></pre></dd>
-    
-      <dt id="VERSION_NUMBER-constant" class="">VERSION_NUMBER =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.3.6</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="VERSION_NUMBER-constant" class="">VERSION_NUMBER =
+          <div class="docstring">
   <div class="discussion">
-    <p>Version of Ruby/SDL2, [major, minor, patch level]</p>
+    
+<p>Returns Version of Ruby/SDL2, [major, minor, patch level].</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Version of Ruby/SDL2, [major, minor, patch level]</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'><span class='object_link'><a href="#VERSION-constant" title="SDL2::VERSION (constant)">VERSION</a></span></span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_i</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="LIBSDL_VERSION-constant" class="">LIBSDL_VERSION =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="#VERSION-constant" title="SDL2::VERSION (constant)">VERSION</a></span></span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_i</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="LIBSDL_VERSION-constant" class="">LIBSDL_VERSION =
+          <div class="docstring">
   <div class="discussion">
-    <p>SDL’s version string</p>
+    
+<p>Returns SDL’s version string.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>SDL’s version string</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_libsdl_version'>libsdl_version</span><span class='lparen'>(</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="LIBSDL_VERSION_NUMBER-constant" class="">LIBSDL_VERSION_NUMBER =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_libsdl_version'>libsdl_version</span><span class='lparen'>(</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="LIBSDL_VERSION_NUMBER-constant" class="">LIBSDL_VERSION_NUMBER =
+          <div class="docstring">
   <div class="discussion">
-    <p>SDL’s version array of numbers</p>
+    
+<p>Returns SDL’s version array of numbers.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array(Integer, Integer, Integer)</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>SDL’s version array of numbers</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_libsdl_version_number'>libsdl_version_number</span><span class='lparen'>(</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="LIBSDL_REVISION-constant" class="">LIBSDL_REVISION =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_libsdl_version_number'>libsdl_version_number</span><span class='lparen'>(</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="LIBSDL_REVISION-constant" class="">LIBSDL_REVISION =
+          <div class="docstring">
   <div class="discussion">
-    <p>SDL’s revision (from VCS) string</p>
+    
+<p>Returns SDL’s revision (from VCS) string.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>SDL’s revision (from VCS) string</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_libsdl_revision'>libsdl_revision</span><span class='lparen'>(</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="LIBSDL_REVISION_NUMBER-constant" class="">LIBSDL_REVISION_NUMBER =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_libsdl_revision'>libsdl_revision</span><span class='lparen'>(</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="LIBSDL_REVISION_NUMBER-constant" class="deprecated">LIBSDL_REVISION_NUMBER =
+          <div class="docstring">
   <div class="discussion">
-    <p>SDL’s revision (from VCS) array of numbers</p>
+    <div class="note deprecated"><strong>Deprecated.</strong> <div class='inline'></div></div>
+
+<p>Returns always 0.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>always 0</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_libsdl_revision_number'>libsdl_revision_number</span><span class='lparen'>(</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="LIBSDL_IMAGE_VERSION-constant" class="">LIBSDL_IMAGE_VERSION =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='int'>0</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="LIBSDL_IMAGE_VERSION-constant" class="">LIBSDL_IMAGE_VERSION =
+          <div class="docstring">
   <div class="discussion">
-    <p>SDL_image’s version string, only available if SDL_image is linked</p>
+    
+<p>Returns SDL_image’s version string, only available if SDL_image is linked.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>SDL_image’s version string, only available if SDL_image is linked</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>SDL_version_to_String</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="LIBSDL_IMAGE_VERSION_NUMBER-constant" class="">LIBSDL_IMAGE_VERSION_NUMBER =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'>SDL_version_to_String</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="LIBSDL_IMAGE_VERSION_NUMBER-constant" class="">LIBSDL_IMAGE_VERSION_NUMBER =
+          <div class="docstring">
   <div class="discussion">
-    <p>SDL_image’s version array of numbers</p>
+    
+<p>Returns SDL_image’s version array of numbers.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array(Integer, Integer, Integer)</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>SDL_image’s version array of numbers</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>SDL_version_to_Array</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="LIBSDL_TTF_VERSION-constant" class="">LIBSDL_TTF_VERSION =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'>SDL_version_to_Array</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="LIBSDL_TTF_VERSION-constant" class="">LIBSDL_TTF_VERSION =
+          <div class="docstring">
   <div class="discussion">
-    <p>SDL_ttf’s version string, only available if SDL_ttf is linked</p>
+    
+<p>Returns SDL_ttf’s version string, only available if SDL_ttf is linked.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>SDL_ttf’s version string, only available if SDL_ttf is linked</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>SDL_version_to_String</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="LIBSDL_TTF_VERSION_NUMBER-constant" class="">LIBSDL_TTF_VERSION_NUMBER =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'>SDL_version_to_String</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="LIBSDL_TTF_VERSION_NUMBER-constant" class="">LIBSDL_TTF_VERSION_NUMBER =
+          <div class="docstring">
   <div class="discussion">
-    <p>SDL_ttf’s version array of numbers</p>
+    
+<p>Returns SDL_ttf’s version array of numbers.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array(Integer, Integer, Integer)</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>SDL_ttf’s version array of numbers</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>SDL_version_to_Array</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="LIBSDL_MIXER_VERSION-constant" class="">LIBSDL_MIXER_VERSION =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'>SDL_version_to_Array</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="LIBSDL_MIXER_VERSION-constant" class="">LIBSDL_MIXER_VERSION =
+          <div class="docstring">
   <div class="discussion">
-    <p>SDL_mixer’s version string , only available if SDL_mixer is linked</p>
+    
+<p>Returns SDL_mixer’s version string , only available if SDL_mixer is linked.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>SDL_mixer’s version string , only available if SDL_mixer is linked</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>SDL_version_to_String</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="LIBSDL_MIXER_VERSION_NUMBER-constant" class="">LIBSDL_MIXER_VERSION_NUMBER =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'>SDL_version_to_String</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="LIBSDL_MIXER_VERSION_NUMBER-constant" class="">LIBSDL_MIXER_VERSION_NUMBER =
+          <div class="docstring">
   <div class="discussion">
-    <p>SDL_mixer’s version array of numbers</p>
+    
+<p>Returns SDL_mixer’s version array of numbers.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array(Integer, Integer, Integer)</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>SDL_mixer’s version array of numbers</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>SDL_version_to_Array</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span></pre></dd>
-    
-  </dl>
+        </dt>
+        <dd><pre class="code"><span class='const'>SDL_version_to_Array</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span></pre></dd>
+      
+    </dl>
+  
 
 
 
@@ -324,7 +560,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the directory where the application was run from.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the directory where the application was run from.</p>
 </div></span>
   
 </li>
@@ -347,7 +584,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the name of current video driver.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the name of current video driver.</p>
 </div></span>
   
 </li>
@@ -370,7 +608,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Wait a specified milliseconds.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Wait a specified milliseconds.</p>
 </div></span>
   
 </li>
@@ -393,7 +632,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return the current value of the high resolution counter.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return the current value of the high resolution counter.</p>
 </div></span>
   
 </li>
@@ -416,7 +656,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return the frequency (count per second) of the high resolution counter.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return the frequency (count per second) of the high resolution counter.</p>
 </div></span>
   
 </li>
@@ -439,7 +680,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return the number of milliseconds since <span class='object_link'><a href="#init-class_method" title="SDL2.init (method)">SDL2.init</a></span> is called.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return the number of milliseconds since <span class='object_link'><a href="#init-class_method" title="SDL2.init (method)">SDL2.init</a></span> is called.</p>
 </div></span>
   
 </li>
@@ -462,7 +704,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Initialize SDL.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Initialize SDL.</p>
 </div></span>
   
 </li>
@@ -485,7 +728,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the “pref dir”.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the “pref dir”.</p>
 </div></span>
   
 </li>
@@ -508,7 +752,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the names of all video drivers.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the names of all video drivers.</p>
 </div></span>
   
 </li>
@@ -531,7 +776,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Initialize the video subsystem, specifying a video driver.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Initialize the video subsystem, specifying a video driver.</p>
 </div></span>
   
 </li>
@@ -560,14 +806,15 @@
     
   <div class="note notetag">
     <strong>Note:</strong>
-    <div class='inline'><p>This method is available since SDL 2.0.1.</p>
+    <div class='inline'>
+<p>This method is available since SDL 2.0.1.</p>
 </div>
   </div>
 
+
 <p>Get the directory where the application was run from.</p>
 
-<p>In almost all cases, using this method, you will get the directory where ruby executable is in.
-Probably what you hope is $0 or <strong>FILE</strong>.</p>
+<p>In almost all cases, using this method, you will get the directory where ruby executable is in. Probably what you hope is $0 or <strong>FILE</strong>.</p>
 
 
   </div>
@@ -585,7 +832,8 @@ Probably what you hope is $0 or <strong>FILE</strong>.</p>
       
       
         &mdash;
-        <div class='inline'><p>an absolute path in UTF-8 encoding to the application data directory</p>
+        <div class='inline'>
+<p>an absolute path in UTF-8 encoding to the application data directory</p>
 </div>
       
     </li>
@@ -602,7 +850,8 @@ Probably what you hope is $0 or <strong>FILE</strong>.</p>
       
       
         &mdash;
-        <div class='inline'><p>raised if your platform doesn’t implement this functionality.</p>
+        <div class='inline'>
+<p>raised if your platform doesn’t implement this functionality.</p>
 </div>
       
     </li>
@@ -655,7 +904,8 @@ static VALUE SDL2_s_base_path(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the name of current video driver</p>
+    
+<p>Get the name of current video driver</p>
 
 
   </div>
@@ -673,7 +923,8 @@ static VALUE SDL2_s_base_path(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the name of the current video driver</p>
+        <div class='inline'>
+<p>the name of the current video driver</p>
 </div>
       
     </li>
@@ -686,7 +937,8 @@ static VALUE SDL2_s_base_path(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>when the video is not initialized</p>
+        <div class='inline'>
+<p>when the video is not initialized</p>
 </div>
       
     </li>
@@ -699,17 +951,17 @@ static VALUE SDL2_s_base_path(VALUE self)
       <pre class="lines">
 
 
-315
-316
-317
-318
-319
-320
-321
-322</pre>
+332
+333
+334
+335
+336
+337
+338
+339</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 315</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 332</span>
 
 static VALUE SDL2_s_current_video_driver(VALUE self)
 {
@@ -735,10 +987,10 @@ static VALUE SDL2_s_current_video_driver(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Wait a specified milliseconds.</p>
+    
+<p>Wait a specified milliseconds.</p>
 
-<p>This function stops all ruby threads. If you want to keep running other
-threads, you should use Kernel.sleep instead of this function.</p>
+<p>This function stops all ruby threads. If you want to keep running other threads, you should use Kernel.sleep instead of this function.</p>
 
 
   </div>
@@ -748,7 +1000,6 @@ threads, you should use Kernel.sleep instead of this function.</p>
   <div class="docstring">
   <div class="discussion">
     
-
 
   </div>
 </div>
@@ -766,7 +1017,8 @@ threads, you should use Kernel.sleep instead of this function.</p>
       
       
         &mdash;
-        <div class='inline'><p>the number of milliseconds to delay</p>
+        <div class='inline'>
+<p>the number of milliseconds to delay</p>
 </div>
       
     </li>
@@ -826,7 +1078,8 @@ static VALUE SDL_s_delay(VALUE self, VALUE ms)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return the current value of the high resolution counter.</p>
+    
+<p>Return the current value of the high resolution counter.</p>
 
 <p>This method is typically used for profiling.</p>
 
@@ -846,7 +1099,8 @@ static VALUE SDL_s_delay(VALUE self, VALUE ms)
       
       
         &mdash;
-        <div class='inline'><p>the current counter value</p>
+        <div class='inline'>
+<p>the current counter value</p>
 </div>
       
     </li>
@@ -894,7 +1148,8 @@ static VALUE SDL_s_get_performance_counter(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return the frequency (count per second) of the high resolution counter.</p>
+    
+<p>Return the frequency (count per second) of the high resolution counter.</p>
 
 
   </div>
@@ -912,7 +1167,8 @@ static VALUE SDL_s_get_performance_counter(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>a platform-specific count per second.</p>
+        <div class='inline'>
+<p>a platform-specific count per second.</p>
 </div>
       
     </li>
@@ -960,7 +1216,8 @@ static VALUE SDL_s_get_performance_frequency(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return the number of milliseconds since <span class='object_link'><a href="#init-class_method" title="SDL2.init (method)">init</a></span> is called.</p>
+    
+<p>Return the number of milliseconds since <span class='object_link'><a href="#init-class_method" title="SDL2.init (method)">init</a></span> is called.</p>
 
 
   </div>
@@ -978,7 +1235,8 @@ static VALUE SDL_s_get_performance_frequency(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>milliseconds in 32bit unsigned value.</p>
+        <div class='inline'>
+<p>milliseconds in 32bit unsigned value.</p>
 </div>
       
     </li>
@@ -1019,24 +1277,29 @@ static VALUE SDL_s_get_ticks(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Initialize SDL.
-You must call this function before using any other Ruby/SDL2 methods.</p>
+    
+<p>Initialize SDL. You must call this function before using any other Ruby/SDL2 methods.</p>
 
-<p>You can specify initialized subsystem by flags which is
-bitwise OR of the following constants:</p>
-
-<ul>
-  <li>SDL2::INIT_TIMER - timer subsystem</li>
-  <li>SDL2::INIT_AUDIO - audio subsystem</li>
-  <li>SDL2::INIT_VIDEO - video subsystem</li>
-  <li>SDL2::INIT_JOYSTICK - joystick subsystem</li>
-  <li>SDL2::INIT_HAPTIC - haptic (force feedback) subsystem
-  (interface is not implemented yet)</li>
-  <li>SDL2::INIT_GAMECONTROLLER - controller subsystem</li>
-  <li>SDL2::INIT_EVENTS - events subsystem</li>
-  <li>SDL2::INIT_EVERYTHING - all of the above flags</li>
-  <li>SDL2::INIT_NOPARACHUTE - this flag is ignored; for compatibility</li>
-</ul>
+<p>You can specify initialized subsystem by flags which is bitwise OR of the following constants:</p>
+<ul><li>
+<p>SDL2::INIT_TIMER - timer subsystem</p>
+</li><li>
+<p>SDL2::INIT_AUDIO - audio subsystem</p>
+</li><li>
+<p>SDL2::INIT_VIDEO - video subsystem</p>
+</li><li>
+<p>SDL2::INIT_JOYSTICK - joystick subsystem</p>
+</li><li>
+<p>SDL2::INIT_HAPTIC - haptic (force feedback) subsystem (interface is not implemented yet)</p>
+</li><li>
+<p>SDL2::INIT_GAMECONTROLLER - controller subsystem</p>
+</li><li>
+<p>SDL2::INIT_EVENTS - events subsystem</p>
+</li><li>
+<p>SDL2::INIT_EVERYTHING - all of the above flags</p>
+</li><li>
+<p>SDL2::INIT_NOPARACHUTE - this flag is ignored; for compatibility</p>
+</li></ul>
 
 
   </div>
@@ -1046,7 +1309,6 @@ bitwise OR of the following constants:</p>
   <div class="docstring">
   <div class="discussion">
     
-
 
   </div>
 </div>
@@ -1064,7 +1326,8 @@ bitwise OR of the following constants:</p>
       
       
         &mdash;
-        <div class='inline'><p>initializing subsystems</p>
+        <div class='inline'>
+<p>initializing subsystems</p>
 </div>
       
     </li>
@@ -1130,7 +1393,6 @@ static VALUE SDL2_s_init(VALUE self, VALUE flags)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
@@ -1140,12 +1402,13 @@ static VALUE SDL2_s_init(VALUE self, VALUE flags)
     
   <div class="note notetag">
     <strong>Note:</strong>
-    <div class='inline'><p>This method is available since SDL 2.0.1.</p>
+    <div class='inline'>
+<p>This method is available since SDL 2.0.1.</p>
 </div>
   </div>
 
-<p>Get the “pref dir”. You can use the directory to write personal files such as
-preferences and save games.</p>
+
+<p>Get the “pref dir”. You can use the directory to write personal files such as preferences and save games.</p>
 
 <p>The directory is unique per user and per application.</p>
 
@@ -1155,7 +1418,7 @@ preferences and save games.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
       <pre class="example code"><code><span class='const'><span class='object_link'><a href="" title="SDL2 (module)">SDL2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_preference_path'>preference_path</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bar</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='comment'># =&gt; &quot;/home/ohai/.local/share/foo/bar/&quot; (on Linux)</span></code></pre>
@@ -1174,7 +1437,8 @@ preferences and save games.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of your organization</p>
+        <div class='inline'>
+<p>the name of your organization</p>
 </div>
       
     </li>
@@ -1189,7 +1453,8 @@ preferences and save games.</p>
       
       
         &mdash;
-        <div class='inline'><p>the name of your application</p>
+        <div class='inline'>
+<p>the name of your application</p>
 </div>
       
     </li>
@@ -1207,7 +1472,8 @@ preferences and save games.</p>
       
       
         &mdash;
-        <div class='inline'><p>a UTF-8 string of the user directory in platform-depnedent notation.</p>
+        <div class='inline'>
+<p>a UTF-8 string of the user directory in platform-depnedent notation.</p>
 </div>
       
     </li>
@@ -1224,7 +1490,8 @@ preferences and save games.</p>
       
       
         &mdash;
-        <div class='inline'><p>raised if your platform doesn’t implement this functionality.</p>
+        <div class='inline'>
+<p>raised if your platform doesn’t implement this functionality.</p>
 </div>
       
     </li>
@@ -1280,7 +1547,8 @@ static VALUE SDL2_s_preference_path(VALUE self, VALUE org, VALUE app)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the names of all video drivers.</p>
+    
+<p>Get the names of all video drivers.</p>
 
 <p>You can use the name as an argument of <span class='object_link'><a href="#video_init-class_method" title="SDL2.video_init (method)">video_init</a></span>.</p>
 
@@ -1309,18 +1577,18 @@ static VALUE SDL2_s_preference_path(VALUE self, VALUE org, VALUE app)
       <pre class="lines">
 
 
-299
-300
-301
-302
-303
-304
-305
-306
-307</pre>
+316
+317
+318
+319
+320
+321
+322
+323
+324</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 299</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 316</span>
 
 static VALUE SDL2_s_video_drivers(VALUE self)
 {
@@ -1349,17 +1617,16 @@ static VALUE SDL2_s_video_drivers(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Initialize the video subsystem, specifying a video driver.</p>
+    
+<p>Initialize the video subsystem, specifying a video driver.</p>
 
-<p><span class='object_link'><a href="#init-class_method" title="SDL2.init (method)">init</a></span> cannot specify a video driver, so you need to use
-this method to specify a driver.</p>
+<p><span class='object_link'><a href="#init-class_method" title="SDL2.init (method)">init</a></span> cannot specify a video driver, so you need to use this method to specify a driver.</p>
 
 
   </div>
@@ -1411,14 +1678,14 @@ this method to specify a driver.</p>
       <pre class="lines">
 
 
-336
-337
-338
-339
-340</pre>
+353
+354
+355
+356
+357</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 336</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 353</span>
 
 static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
 {
@@ -1435,9 +1702,9 @@ static VALUE SDL2_s_video_init(VALUE self, VALUE driver_name)
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 25 14:38:15 2018 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.12 (ruby-2.5.0).
+  Generated on Wed Apr 22 11:15:55 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.1).
 </div>
 
     </div>

@@ -6,15 +6,15 @@
 <title>
   Class: SDL2::Event::FingerMotion
   
-    &mdash; Documentation by YARD 0.9.12
+    &mdash; Documentation by YARD 0.9.39
   
 </title>
 
-  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "SDL2::Event::FingerMotion";
   relpath = '../../';
 </script>
@@ -107,7 +107,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This class represents touch move events.</p>
+    
+<p>This class represents touch move events.</p>
 
 
   </div>
@@ -142,7 +143,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the distance moved in the x-axis, normalized (0…1).</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the distance moved in the x-axis, normalized (0…1).</p>
 </div></span>
   
 </li>
@@ -168,7 +170,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the distance moved in the y-axis, normalized (0…1).</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the distance moved in the y-axis, normalized (0…1).</p>
 </div></span>
   
 </li>
@@ -214,7 +217,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Inspection string.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Inspection string.</p>
 </div></span>
   
 </li>
@@ -257,7 +261,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the distance moved in the x-axis, normalized (0…1)</p>
+    
+<p>the distance moved in the x-axis, normalized (0…1)</p>
 
 
   </div>
@@ -294,7 +299,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the distance moved in the y-axis, normalized (0…1)</p>
+    
+<p>the distance moved in the y-axis, normalized (0…1)</p>
 
 
   </div>
@@ -336,7 +342,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns inspection string</p>
+    
+<p>Returns inspection string.</p>
 
 
   </div>
@@ -354,7 +361,8 @@
       
       
         &mdash;
-        <div class='inline'><p>inspection string</p>
+        <div class='inline'>
+<p>inspection string</p>
 </div>
       
     </li>
@@ -367,10 +375,6 @@
       <pre class="lines">
 
 
-991
-992
-993
-994
 995
 996
 997
@@ -378,14 +382,18 @@
 999
 1000
 1001
-1002</pre>
+1002
+1003
+1004
+1005
+1006</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'event.c', line 991</span>
+      <pre class="code"><span class="info file"># File 'event.c', line 995</span>
 
 static VALUE EvFingerMotion_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &amp;SDL_Event_data_type, ev);
     return rb_sprintf(&quot;&lt;%s: type=%u timestamp=%u&quot;
                       &quot; touch_id=%d finger_id=%d&quot;
                       &quot; x=%f y=%f pressure=%f&quot;
@@ -405,9 +413,9 @@ static VALUE EvFingerMotion_inspect(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 25 14:38:19 2018 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.12 (ruby-2.5.0).
+  Generated on Wed Apr 22 11:16:03 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.1).
 </div>
 
     </div>

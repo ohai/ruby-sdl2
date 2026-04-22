@@ -6,15 +6,15 @@
 <title>
   Class: SDL2::Surface
   
-    &mdash; Documentation by YARD 0.9.12
+    &mdash; Documentation by YARD 0.9.39
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "SDL2::Surface";
   relpath = '../';
 </script>
@@ -103,16 +103,12 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This class represents bitmap images (collection of pixels).</p>
+    
+<p>This class represents bitmap images (collection of pixels).</p>
 
-<p>Normally in SDL2, this class is not used for drawing a image
-on a window. <span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">Texture</a></span> is used for the purpose.</p>
+<p>Normally in SDL2, this class is not used for drawing a image on a window. <span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">Texture</a></span> is used for the purpose.</p>
 
-<p>Mainly this class is for compatibility with SDL1, but the class
-is useful for simple pixel manipulation.
-For example, <span class='object_link'><a href="TTF.html" title="SDL2::TTF (class)">TTF</a></span> can create only surfaces, not textures.
-You can convert a surface to texture with
-<span class='object_link'><a href="Renderer.html#create_texture_from-instance_method" title="SDL2::Renderer#create_texture_from (method)">Renderer#create_texture_from</a></span>.</p>
+<p>Mainly this class is for compatibility with SDL1, but the class is useful for simple pixel manipulation. For example, <span class='object_link'><a href="TTF.html" title="SDL2::TTF (class)">TTF</a></span> can create only surfaces, not textures. You can convert a surface to texture with <span class='object_link'><a href="Renderer.html#create_texture_from-instance_method" title="SDL2::Renderer#create_texture_from (method)">Renderer#create_texture_from</a></span>.</p>
 
 
   </div>
@@ -152,7 +148,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Perform a fast blit from <strong>src</strong> surface to <strong>dst</strong> surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Perform a fast blit from <strong>src</strong> surface to <strong>dst</strong> surface.</p>
 </div></span>
   
 </li>
@@ -161,7 +158,7 @@ You can convert a surface to texture with
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#from_string-class_method" title="from_string (class method)">.<strong>from_string</strong>(string, width, heigth, depth, pitch = nil, rmask = nil, gmask = nil, bmask = nil, amask = nil)  &#x21d2; SDL2::Surface </a>
+      <a href="#from_string-class_method" title="from_string (class method)">.<strong>from_string</strong>(string, width, height, depth, pitch = nil, rmask = nil, gmask = nil, bmask = nil, amask = nil)  &#x21d2; SDL2::Surface </a>
     
 
     
@@ -175,7 +172,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create a RGB surface from pixel data as String object.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Create a RGB surface from pixel data as String object.</p>
 </div></span>
   
 </li>
@@ -198,7 +196,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Load file and create a new <span class='object_link'><a href="" title="SDL2::Surface (class)">Surface</a></span>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Load file and create a new <span class='object_link'><a href="" title="SDL2::Surface (class)">Surface</a></span>.</p>
 </div></span>
   
 </li>
@@ -221,7 +220,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Load a surface from bmp file.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Load a surface from bmp file.</p>
 </div></span>
   
 </li>
@@ -244,7 +244,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create an empty RGB surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Create an empty RGB surface.</p>
 </div></span>
   
 </li>
@@ -267,7 +268,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Save a surface to bmp file.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Save a surface to bmp file.</p>
 </div></span>
   
 </li>
@@ -299,7 +301,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get bits per pixel of the surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get bits per pixel of the surface.</p>
 </div></span>
   
 </li>
@@ -322,7 +325,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the blending mode of the surface used for blit operations.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the blending mode of the surface used for blit operations.</p>
 </div></span>
   
 </li>
@@ -331,7 +335,7 @@ You can convert a surface to texture with
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#blend_mode=-instance_method" title="#blend_mode= (instance method)">#<strong>blend_mode=</strong>(mode)  &#x21d2; mode </a>
+      <a href="#blend_mode=-instance_method" title="#blend_mode= (instance method)">#<strong>blend_mode=</strong>(mode)  &#x21d2; void </a>
     
 
     
@@ -345,7 +349,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set the blending mode of the surface used for blit operations.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Set the blending mode of the surface used for blit operations.</p>
 </div></span>
   
 </li>
@@ -368,7 +373,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get bytes per pixel of the surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get bytes per pixel of the surface.</p>
 </div></span>
   
 </li>
@@ -391,7 +397,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the color key of the surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the color key of the surface.</p>
 </div></span>
   
 </li>
@@ -400,7 +407,7 @@ You can convert a surface to texture with
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#color_key=-instance_method" title="#color_key= (instance method)">#<strong>color_key=</strong>(key)  &#x21d2; key </a>
+      <a href="#color_key=-instance_method" title="#color_key= (instance method)">#<strong>color_key=</strong>(key)  &#x21d2; Integer<sup>+</sup> </a>
     
 
     
@@ -414,7 +421,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set the color key of the surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Set the color key of the surface.</p>
 </div></span>
   
 </li>
@@ -437,7 +445,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Destroy the surface and deallocate the memory for pixels.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Destroy the surface and deallocate the memory for pixels.</p>
 </div></span>
   
 </li>
@@ -460,7 +469,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return true if the surface is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Surface#destroy (method)">destroyed</a></span>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the surface is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Surface#destroy (method)">destroyed</a></span>.</p>
 </div></span>
   
 </li>
@@ -483,7 +493,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the height of the surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the height of the surface.</p>
 </div></span>
   
 </li>
@@ -506,7 +517,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Lock the surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Lock the surface.</p>
 </div></span>
   
 </li>
@@ -529,7 +541,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return true if the surface need to lock when you get access to the pixel data of the surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the surface need to lock when you get access to the pixel data of the surface.</p>
 </div></span>
   
 </li>
@@ -552,7 +565,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the pitch (bytes per horizontal line) of the surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the pitch (bytes per horizontal line) of the surface.</p>
 </div></span>
   
 </li>
@@ -575,7 +589,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get a pixel data at (<strong>x</strong>, <strong>y</strong>).</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get a pixel data at (<strong>x</strong>, <strong>y</strong>).</p>
 </div></span>
   
 </li>
@@ -584,7 +599,7 @@ You can convert a surface to texture with
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#pixel_color-instance_method" title="#pixel_color (instance method)">#<strong>pixel_color</strong>(x, y)  &#x21d2; [Integer, Integer, Integer, Integer] </a>
+      <a href="#pixel_color-instance_method" title="#pixel_color (instance method)">#<strong>pixel_color</strong>(x, y)  &#x21d2; Array(Integer, Integer, Integer, Integer) </a>
     
 
     
@@ -598,7 +613,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the pixel color (r,g,b and a) at (<strong>x</strong>, <strong>y</strong>) of the surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the pixel color (r,g,b and a) at (<strong>x</strong>, <strong>y</strong>) of the surface.</p>
 </div></span>
   
 </li>
@@ -621,7 +637,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get all pixel data of the surface as a string.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get all pixel data of the surface as a string.</p>
 </div></span>
   
 </li>
@@ -644,7 +661,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Unlock the surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Unlock the surface.</p>
 </div></span>
   
 </li>
@@ -653,7 +671,7 @@ You can convert a surface to texture with
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#unset_color_key-instance_method" title="#color_key= (instance method)">#<strong>color_key=</strong>(key)  &#x21d2; key </a>
+      <a href="#unset_color_key-instance_method" title="#unset_color_key (instance method)">#<strong>unset_color_key</strong>  &#x21d2; nil </a>
     
 
     
@@ -667,7 +685,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set the color key of the surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Unset the color key of the surface.</p>
 </div></span>
   
 </li>
@@ -690,7 +709,8 @@ You can convert a surface to texture with
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the width of the surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the width of the surface.</p>
 </div></span>
   
 </li>
@@ -718,14 +738,14 @@ You can convert a surface to texture with
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Perform a fast blit from <strong>src</strong> surface to <strong>dst</strong> surface.</p>
+    
+<p>Perform a fast blit from <strong>src</strong> surface to <strong>dst</strong> surface.</p>
 
 
   </div>
@@ -744,7 +764,8 @@ You can convert a surface to texture with
       
       
         &mdash;
-        <div class='inline'><p>the source surface</p>
+        <div class='inline'>
+<p>the source surface</p>
 </div>
       
     </li>
@@ -759,8 +780,8 @@ You can convert a surface to texture with
       
       
         &mdash;
-        <div class='inline'><p>the region in the source surface,
-if nil is given, the whole source is used</p>
+        <div class='inline'>
+<p>the region in the source surface, if nil is given, the whole source is used</p>
 </div>
       
     </li>
@@ -775,7 +796,8 @@ if nil is given, the whole source is used</p>
       
       
         &mdash;
-        <div class='inline'><p>the destination surface</p>
+        <div class='inline'>
+<p>the destination surface</p>
 </div>
       
     </li>
@@ -790,12 +812,8 @@ if nil is given, the whole source is used</p>
       
       
         &mdash;
-        <div class='inline'><p>the region in the destination surface
-if nil is given, the source image is copied to (0, 0) on
-the destination surface.
-<strong>dstrect</strong> is changed by this method to store the
-actually copied region (since the surface has clipping functionality,
-actually copied region may be different from given <strong>dstrect</strong>).</p>
+        <div class='inline'>
+<p>the region in the destination surface if nil is given, the source image is copied to (0, 0) on the destination surface. <strong>dstrect</strong> is changed by this method to store the actually copied region (since the surface has clipping functionality, actually copied region may be different from given <strong>dstrect</strong>).</p>
 </div>
       
     </li>
@@ -825,17 +843,17 @@ actually copied region may be different from given <strong>dstrect</strong>).</p
       <pre class="lines">
 
 
-2386
-2387
-2388
-2389
-2390
-2391
-2392
-2393</pre>
+2457
+2458
+2459
+2460
+2461
+2462
+2463
+2464</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2386</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2457</span>
 
 static VALUE Surface_s_blit(VALUE self, VALUE src, VALUE srcrect, VALUE dst, VALUE dstrect)
 {
@@ -853,7 +871,7 @@ static VALUE Surface_s_blit(VALUE self, VALUE src, VALUE srcrect, VALUE dst, VAL
       <div class="method_details ">
   <h3 class="signature " id="from_string-class_method">
   
-    .<strong>from_string</strong>(string, width, heigth, depth, pitch = nil, rmask = nil, gmask = nil, bmask = nil, amask = nil)  &#x21d2; <tt><span class='object_link'><a href="" title="SDL2::Surface (class)">SDL2::Surface</a></span></tt> 
+    .<strong>from_string</strong>(string, width, height, depth, pitch = nil, rmask = nil, gmask = nil, bmask = nil, amask = nil)  &#x21d2; <tt><span class='object_link'><a href="" title="SDL2::Surface (class)">SDL2::Surface</a></span></tt> 
   
 
   
@@ -863,17 +881,16 @@ static VALUE Surface_s_blit(VALUE self, VALUE src, VALUE srcrect, VALUE dst, VAL
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Create a RGB surface from pixel data as String object.</p>
+    
+<p>Create a RGB surface from pixel data as String object.</p>
 
-<p>If rmask, gmask, bmask are omitted, the default masks are used.
-If amask is omitted, alpha mask is considered to be zero.</p>
+<p>If rmask, gmask, bmask are omitted, the default masks are used. If amask is omitted, alpha mask is considered to be zero.</p>
 
 
   </div>
@@ -892,7 +909,8 @@ If amask is omitted, alpha mask is considered to be zero.</p>
       
       
         &mdash;
-        <div class='inline'><p>the pixel data</p>
+        <div class='inline'>
+<p>the pixel data</p>
 </div>
       
     </li>
@@ -907,7 +925,8 @@ If amask is omitted, alpha mask is considered to be zero.</p>
       
       
         &mdash;
-        <div class='inline'><p>the width of the creating surface</p>
+        <div class='inline'>
+<p>the width of the creating surface</p>
 </div>
       
     </li>
@@ -922,7 +941,8 @@ If amask is omitted, alpha mask is considered to be zero.</p>
       
       
         &mdash;
-        <div class='inline'><p>the height of the creating surface</p>
+        <div class='inline'>
+<p>the height of the creating surface</p>
 </div>
       
     </li>
@@ -937,7 +957,8 @@ If amask is omitted, alpha mask is considered to be zero.</p>
       
       
         &mdash;
-        <div class='inline'><p>the color depth (in bits) of the creating surface</p>
+        <div class='inline'>
+<p>the color depth (in bits) of the creating surface</p>
 </div>
       
     </li>
@@ -954,8 +975,8 @@ If amask is omitted, alpha mask is considered to be zero.</p>
       
       
         &mdash;
-        <div class='inline'><p>the number of bytes of one scanline
-if this argument is omitted, width*depth/8 is used.</p>
+        <div class='inline'>
+<p>the number of bytes of one scanline if this argument is omitted, width*depth/8 is used.</p>
 </div>
       
     </li>
@@ -972,7 +993,8 @@ if this argument is omitted, width*depth/8 is used.</p>
       
       
         &mdash;
-        <div class='inline'><p>the red mask of a pixel</p>
+        <div class='inline'>
+<p>the red mask of a pixel</p>
 </div>
       
     </li>
@@ -989,7 +1011,8 @@ if this argument is omitted, width*depth/8 is used.</p>
       
       
         &mdash;
-        <div class='inline'><p>the green mask of a pixel</p>
+        <div class='inline'>
+<p>the green mask of a pixel</p>
 </div>
       
     </li>
@@ -1006,7 +1029,8 @@ if this argument is omitted, width*depth/8 is used.</p>
       
       
         &mdash;
-        <div class='inline'><p>the blue mask of a pixel</p>
+        <div class='inline'>
+<p>the blue mask of a pixel</p>
 </div>
       
     </li>
@@ -1023,7 +1047,8 @@ if this argument is omitted, width*depth/8 is used.</p>
       
       
         &mdash;
-        <div class='inline'><p>the alpha mask of a pixel</p>
+        <div class='inline'>
+<p>the alpha mask of a pixel</p>
 </div>
       
     </li>
@@ -1041,7 +1066,8 @@ if this argument is omitted, width*depth/8 is used.</p>
       
       
         &mdash;
-        <div class='inline'><p>a new surface</p>
+        <div class='inline'>
+<p>a new surface</p>
 </div>
       
     </li>
@@ -1058,7 +1084,8 @@ if this argument is omitted, width*depth/8 is used.</p>
       
       
         &mdash;
-        <div class='inline'><p>raised when an error occurs in C SDL library</p>
+        <div class='inline'>
+<p>raised when an error occurs in C SDL library</p>
 </div>
       
     </li>
@@ -1074,47 +1101,48 @@ if this argument is omitted, width*depth/8 is used.</p>
       <pre class="lines">
 
 
-2054
-2055
-2056
-2057
-2058
-2059
-2060
-2061
-2062
-2063
-2064
-2065
-2066
-2067
-2068
-2069
-2070
-2071
-2072
-2073
-2074
-2075
-2076
-2077
-2078
-2079
-2080
-2081
-2082
-2083
-2084
-2085
-2086
-2087
-2088
-2089
-2090
-2091</pre>
+2124
+2125
+2126
+2127
+2128
+2129
+2130
+2131
+2132
+2133
+2134
+2135
+2136
+2137
+2138
+2139
+2140
+2141
+2142
+2143
+2144
+2145
+2146
+2147
+2148
+2149
+2150
+2151
+2152
+2153
+2154
+2155
+2156
+2157
+2158
+2159
+2160
+2161
+2162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2054</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2124</span>
 
 static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
 {
@@ -1123,6 +1151,7 @@ static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
     SDL_Surface* surface;
     void* pixels;
     Surface* s;
+    VALUE obj;
 
     rb_scan_args(argc, argv, &quot;45&quot;, &amp;string, &amp;width, &amp;height, &amp;depth,
                  &amp;pitch, &amp;Rmask, &amp;Gmask, &amp;Bmask, &amp;Amask);
@@ -1149,10 +1178,10 @@ static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
 
     RB_GC_GUARD(string);
 
-    s = ALLOC(Surface);
+    obj = TypedData_Make_Struct(cSurface, Surface, &amp;Surface_data_type, s);
     s-&gt;surface = surface;
     s-&gt;need_to_free_pixels = 1;
-    return Data_Wrap_Struct(cSurface, 0, Surface_free, s);
+    return obj;
 }</pre>
     </td>
   </tr>
@@ -1172,17 +1201,16 @@ static VALUE Surface_s_from_string(int argc, VALUE* argv, VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Load file and create a new <span class='object_link'><a href="" title="SDL2::Surface (class)">SDL2::Surface</a></span>.</p>
+    
+<p>Load file and create a new <span class='object_link'><a href="" title="SDL2::Surface (class)">SDL2::Surface</a></span>.</p>
 
-<p>This method uses SDL_image. SDL_image supports following formats:
-BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.</p>
+<p>This method uses SDL_image. SDL_image supports following formats: BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.</p>
 
 
   </div>
@@ -1201,7 +1229,8 @@ BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.</p>
       
       
         &mdash;
-        <div class='inline'><p>the image file name to load a surface from</p>
+        <div class='inline'>
+<p>the image file name to load a surface from</p>
 </div>
       
     </li>
@@ -1219,7 +1248,8 @@ BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.</p>
       
       
         &mdash;
-        <div class='inline'><p>Created surface</p>
+        <div class='inline'>
+<p>Created surface</p>
 </div>
       
     </li>
@@ -1236,8 +1266,8 @@ BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.</p>
       
       
         &mdash;
-        <div class='inline'><p>raised when you fail to load (for example,
-you have a wrong file name, or the file is broken)</p>
+        <div class='inline'>
+<p>raised when you fail to load (for example, you have a wrong file name, or the file is broken)</p>
 </div>
       
     </li>
@@ -1262,18 +1292,18 @@ you have a wrong file name, or the file is broken)</p>
       <pre class="lines">
 
 
-3465
-3466
-3467
-3468
-3469
-3470
-3471
-3472
-3473</pre>
+3587
+3588
+3589
+3590
+3591
+3592
+3593
+3594
+3595</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 3465</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 3587</span>
 
 static VALUE Surface_s_load(VALUE self, VALUE fname)
 {
@@ -1302,14 +1332,14 @@ static VALUE Surface_s_load(VALUE self, VALUE fname)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Load a surface from bmp file.</p>
+    
+<p>Load a surface from bmp file.</p>
 
 
   </div>
@@ -1328,7 +1358,8 @@ static VALUE Surface_s_load(VALUE self, VALUE fname)
       
       
         &mdash;
-        <div class='inline'><p>bmp file path</p>
+        <div class='inline'>
+<p>bmp file path</p>
 </div>
       
     </li>
@@ -1359,9 +1390,8 @@ static VALUE Surface_s_load(VALUE self, VALUE fname)
       
       
         &mdash;
-        <div class='inline'><p>raised when an error occurs.
-For example, if there is no file or the file file
-format is not Windows BMP.</p>
+        <div class='inline'>
+<p>raised when an error occurs. For example, if there is no file or the file file format is not Windows BMP.</p>
 </div>
       
     </li>
@@ -1377,18 +1407,18 @@ format is not Windows BMP.</p>
       <pre class="lines">
 
 
-2002
-2003
-2004
-2005
-2006
-2007
-2008
-2009
-2010</pre>
+2072
+2073
+2074
+2075
+2076
+2077
+2078
+2079
+2080</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2002</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2072</span>
 
 static VALUE Surface_s_load_bmp(VALUE self, VALUE fname)
 {
@@ -1421,10 +1451,10 @@ static VALUE Surface_s_load_bmp(VALUE self, VALUE fname)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create an empty RGB surface.</p>
+    
+<p>Create an empty RGB surface.</p>
 
-<p>If rmask, gmask, bmask are omitted, the default masks are used.
-If amask is omitted, alpha mask is considered to be zero.</p>
+<p>If rmask, gmask, bmask are omitted, the default masks are used. If amask is omitted, alpha mask is considered to be zero.</p>
 
 
   </div>
@@ -1443,7 +1473,8 @@ If amask is omitted, alpha mask is considered to be zero.</p>
       
       
         &mdash;
-        <div class='inline'><p>the width of the new surface</p>
+        <div class='inline'>
+<p>the width of the new surface</p>
 </div>
       
     </li>
@@ -1458,7 +1489,8 @@ If amask is omitted, alpha mask is considered to be zero.</p>
       
       
         &mdash;
-        <div class='inline'><p>the height of the new surface</p>
+        <div class='inline'>
+<p>the height of the new surface</p>
 </div>
       
     </li>
@@ -1473,7 +1505,8 @@ If amask is omitted, alpha mask is considered to be zero.</p>
       
       
         &mdash;
-        <div class='inline'><p>the bit depth of the new surface</p>
+        <div class='inline'>
+<p>the bit depth of the new surface</p>
 </div>
       
     </li>
@@ -1488,7 +1521,8 @@ If amask is omitted, alpha mask is considered to be zero.</p>
       
       
         &mdash;
-        <div class='inline'><p>the red mask of a pixel</p>
+        <div class='inline'>
+<p>the red mask of a pixel</p>
 </div>
       
     </li>
@@ -1503,7 +1537,8 @@ If amask is omitted, alpha mask is considered to be zero.</p>
       
       
         &mdash;
-        <div class='inline'><p>the green mask of a pixel</p>
+        <div class='inline'>
+<p>the green mask of a pixel</p>
 </div>
       
     </li>
@@ -1518,7 +1553,8 @@ If amask is omitted, alpha mask is considered to be zero.</p>
       
       
         &mdash;
-        <div class='inline'><p>the blue mask of a pixel</p>
+        <div class='inline'>
+<p>the blue mask of a pixel</p>
 </div>
       
     </li>
@@ -1533,7 +1569,8 @@ If amask is omitted, alpha mask is considered to be zero.</p>
       
       
         &mdash;
-        <div class='inline'><p>the alpha mask of a pixel</p>
+        <div class='inline'>
+<p>the alpha mask of a pixel</p>
 </div>
       
     </li>
@@ -1560,34 +1597,34 @@ If amask is omitted, alpha mask is considered to be zero.</p>
       <pre class="lines">
 
 
-2415
-2416
-2417
-2418
-2419
-2420
-2421
-2422
-2423
-2424
-2425
-2426
-2427
-2428
-2429
-2430
-2431
-2432
-2433
-2434
-2435
-2436
-2437
-2438
-2439</pre>
+2486
+2487
+2488
+2489
+2490
+2491
+2492
+2493
+2494
+2495
+2496
+2497
+2498
+2499
+2500
+2501
+2502
+2503
+2504
+2505
+2506
+2507
+2508
+2509
+2510</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2415</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2486</span>
 
 static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
 {
@@ -1632,14 +1669,14 @@ static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Save a surface to bmp file.</p>
+    
+<p>Save a surface to bmp file.</p>
 
 
   </div>
@@ -1658,7 +1695,8 @@ static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>surface source</p>
+        <div class='inline'>
+<p>surface source</p>
 </div>
       
     </li>
@@ -1673,7 +1711,8 @@ static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>bmp file path</p>
+        <div class='inline'>
+<p>bmp file path</p>
 </div>
       
     </li>
@@ -1704,7 +1743,8 @@ static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>raised when an error occurs.</p>
+        <div class='inline'>
+<p>raised when an error occurs.</p>
 </div>
       
     </li>
@@ -1720,18 +1760,18 @@ static VALUE Surface_s_new(int argc, VALUE* argv, VALUE self)
       <pre class="lines">
 
 
-2022
-2023
-2024
-2025
-2026
-2027
-2028
-2029
-2030</pre>
+2092
+2093
+2094
+2095
+2096
+2097
+2098
+2099
+2100</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2022</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2092</span>
 
 static VALUE Surface_s_save_bmp(VALUE self, VALUE src, VALUE fname)
 {
@@ -1764,7 +1804,8 @@ static VALUE Surface_s_save_bmp(VALUE self, VALUE src, VALUE fname)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get bits per pixel of the surface.</p>
+    
+<p>Get bits per pixel of the surface.</p>
 
 
   </div>
@@ -1791,13 +1832,13 @@ static VALUE Surface_s_save_bmp(VALUE self, VALUE src, VALUE fname)
       <pre class="lines">
 
 
-2235
-2236
-2237
-2238</pre>
+2306
+2307
+2308
+2309</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2235</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2306</span>
 
 static VALUE Surface_bits_per_pixel(VALUE self)
 {
@@ -1819,7 +1860,8 @@ static VALUE Surface_bits_per_pixel(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the blending mode of the surface used for blit operations.</p>
+    
+<p>Get the blending mode of the surface used for blit operations.</p>
 
 
   </div>
@@ -1853,15 +1895,15 @@ static VALUE Surface_bits_per_pixel(VALUE self)
       <pre class="lines">
 
 
-2117
-2118
-2119
-2120
-2121
-2122</pre>
+2188
+2189
+2190
+2191
+2192
+2193</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2117</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2188</span>
 
 static VALUE Surface_blend_mode(VALUE self)
 {
@@ -1877,7 +1919,7 @@ static VALUE Surface_blend_mode(VALUE self)
       <div class="method_details ">
   <h3 class="signature " id="blend_mode=-instance_method">
   
-    #<strong>blend_mode=</strong>(mode)  &#x21d2; <tt>mode</tt> 
+    #<strong>blend_mode=</strong>(mode)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -1887,14 +1929,14 @@ static VALUE Surface_blend_mode(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Set the blending mode of the surface used for blit operations.</p>
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Set the blending mode of the surface used for blit operations.</p>
 
 
   </div>
@@ -1913,26 +1955,14 @@ static VALUE Surface_blend_mode(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the blending mode</p>
+        <div class='inline'>
+<p>the blending mode</p>
 </div>
       
     </li>
   
 </ul>
 
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>mode</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
 
   <p class="tag_title">See Also:</p>
   <ul class="see">
@@ -1950,14 +1980,14 @@ static VALUE Surface_blend_mode(VALUE self)
       <pre class="lines">
 
 
-2132
-2133
-2134
-2135
-2136</pre>
+2203
+2204
+2205
+2206
+2207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2132</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2203</span>
 
 static VALUE Surface_set_blend_mode(VALUE self, VALUE mode)
 {
@@ -1980,7 +2010,8 @@ static VALUE Surface_set_blend_mode(VALUE self, VALUE mode)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get bytes per pixel of the surface.</p>
+    
+<p>Get bytes per pixel of the surface.</p>
 
 
   </div>
@@ -2007,13 +2038,13 @@ static VALUE Surface_set_blend_mode(VALUE self, VALUE mode)
       <pre class="lines">
 
 
-2245
-2246
-2247
-2248</pre>
+2316
+2317
+2318
+2319</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2245</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2316</span>
 
 static VALUE Surface_bytes_per_pixel(VALUE self)
 {
@@ -2035,7 +2066,8 @@ static VALUE Surface_bytes_per_pixel(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the color key of the surface</p>
+    
+<p>Get the color key of the surface</p>
 
 
   </div>
@@ -2053,7 +2085,8 @@ static VALUE Surface_bytes_per_pixel(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the color key, as pixel value (see <span class='object_link'><a href="#pixel-instance_method" title="SDL2::Surface#pixel (method)">#pixel</a></span>)</p>
+        <div class='inline'>
+<p>the color key, as pixel value (see <span class='object_link'><a href="#pixel-instance_method" title="SDL2::Surface#pixel (method)">#pixel</a></span>)</p>
 </div>
       
     </li>
@@ -2075,17 +2108,17 @@ static VALUE Surface_bytes_per_pixel(VALUE self)
       <pre class="lines">
 
 
-2340
-2341
-2342
-2343
-2344
-2345
-2346
-2347</pre>
+2411
+2412
+2413
+2414
+2415
+2416
+2417
+2418</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2340</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2411</span>
 
 static VALUE Surface_color_key(VALUE self)
 {
@@ -2103,7 +2136,7 @@ static VALUE Surface_color_key(VALUE self)
       <div class="method_details ">
   <h3 class="signature " id="color_key=-instance_method">
   
-    #<strong>color_key=</strong>(key)  &#x21d2; <tt>key</tt> 
+    #<strong>color_key=</strong>(key)  &#x21d2; <tt>Integer</tt><sup>+</sup> 
   
 
   
@@ -2113,14 +2146,14 @@ static VALUE Surface_color_key(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Set the color key of the surface</p>
+    
+<p>Set the color key of the surface</p>
 
 
   </div>
@@ -2139,8 +2172,8 @@ static VALUE Surface_color_key(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the color key, pixel value (see <span class='object_link'><a href="#pixel-instance_method" title="SDL2::Surface#pixel (method)">#pixel</a></span>) or pixel color (array of
-three or four integer elements).</p>
+        <div class='inline'>
+<p>the color key, pixel value (see <span class='object_link'><a href="#pixel-instance_method" title="SDL2::Surface#pixel (method)">#pixel</a></span>) or pixel color (array of three or four integer elements).</p>
 </div>
       
     </li>
@@ -2153,9 +2186,14 @@ three or four integer elements).</p>
     <li>
       
       
-        <span class='type'>(<tt>key</tt>)</span>
+        <span class='type'>(<tt>Integer</tt>, <tt>Array&lt;Integer&gt;</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'>
+<p>value</p>
+</div>
       
     </li>
   
@@ -2179,19 +2217,19 @@ three or four integer elements).</p>
       <pre class="lines">
 
 
-2321
-2322
-2323
-2324
-2325
-2326
-2327
-2328
-2329
-2330</pre>
+2392
+2393
+2394
+2395
+2396
+2397
+2398
+2399
+2400
+2401</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2321</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2392</span>
 
 static VALUE Surface_set_color_key(VALUE self, VALUE key)
 {
@@ -2219,7 +2257,8 @@ static VALUE Surface_set_color_key(VALUE self, VALUE key)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Destroy the surface and deallocate the memory for pixels.</p>
+    
+<p>Destroy the surface and deallocate the memory for pixels.</p>
 
 
   </div>
@@ -2253,20 +2292,20 @@ static VALUE Surface_set_color_key(VALUE self, VALUE key)
       <pre class="lines">
 
 
-2099
-2100
-2101
-2102
-2103
-2104
-2105
-2106
-2107
-2108
-2109</pre>
+2170
+2171
+2172
+2173
+2174
+2175
+2176
+2177
+2178
+2179
+2180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2099</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2170</span>
 
 static VALUE Surface_destroy(VALUE self)
 {
@@ -2295,7 +2334,8 @@ static VALUE Surface_destroy(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return true if the surface is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Surface#destroy (method)">destroyed</a></span>.</p>
+    
+<p>Return true if the surface is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Surface#destroy (method)">destroyed</a></span>.</p>
 
 
   </div>
@@ -2330,7 +2370,8 @@ static VALUE Surface_destroy(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the height of the surface.</p>
+    
+<p>Get the height of the surface.</p>
 
 
   </div>
@@ -2357,13 +2398,13 @@ static VALUE Surface_destroy(VALUE self)
       <pre class="lines">
 
 
-2364
-2365
-2366
-2367</pre>
+2435
+2436
+2437
+2438</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2364</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2435</span>
 
 static VALUE Surface_h(VALUE self)
 {
@@ -2385,7 +2426,8 @@ static VALUE Surface_h(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Lock the surface.</p>
+    
+<p>Lock the surface.</p>
 
 
   </div>
@@ -2421,14 +2463,14 @@ static VALUE Surface_h(VALUE self)
       <pre class="lines">
 
 
-2157
-2158
-2159
-2160
-2161</pre>
+2228
+2229
+2230
+2231
+2232</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2157</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2228</span>
 
 static VALUE Surface_lock(VALUE self)
 {
@@ -2451,8 +2493,8 @@ static VALUE Surface_lock(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return true if the surface need to lock when you get access to the
-pixel data of the surface.</p>
+    
+<p>Return true if the surface need to lock when you get access to the pixel data of the surface.</p>
 
 
   </div>
@@ -2486,13 +2528,13 @@ pixel data of the surface.</p>
       <pre class="lines">
 
 
-2144
-2145
-2146
-2147</pre>
+2215
+2216
+2217
+2218</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2144</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2215</span>
 
 static VALUE Surface_must_lock_p(VALUE self)
 {
@@ -2514,7 +2556,8 @@ static VALUE Surface_must_lock_p(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the pitch (bytes per horizontal line) of the surface.</p>
+    
+<p>Get the pitch (bytes per horizontal line) of the surface.</p>
 
 
   </div>
@@ -2541,13 +2584,13 @@ static VALUE Surface_must_lock_p(VALUE self)
       <pre class="lines">
 
 
-2225
-2226
-2227
-2228</pre>
+2296
+2297
+2298
+2299</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2225</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2296</span>
 
 static VALUE Surface_pitch(VALUE self)
 {
@@ -2571,14 +2614,14 @@ static VALUE Surface_pitch(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Get a pixel data at (<strong>x</strong>, <strong>y</strong>)</p>
+    
+<p>Get a pixel data at (<strong>x</strong>, <strong>y</strong>)</p>
 
 
   </div>
@@ -2597,7 +2640,8 @@ static VALUE Surface_pitch(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the x coordinate</p>
+        <div class='inline'>
+<p>the x coordinate</p>
 </div>
       
     </li>
@@ -2612,7 +2656,8 @@ static VALUE Surface_pitch(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the y coordinate</p>
+        <div class='inline'>
+<p>the y coordinate</p>
 </div>
       
     </li>
@@ -2630,7 +2675,8 @@ static VALUE Surface_pitch(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>pixel data</p>
+        <div class='inline'>
+<p>pixel data</p>
 </div>
       
     </li>
@@ -2653,28 +2699,28 @@ static VALUE Surface_pitch(VALUE self)
       <pre class="lines">
 
 
-2187
-2188
-2189
-2190
-2191
-2192
-2193
-2194
-2195
-2196
-2197
-2198
-2199
-2200
-2201
-2202
-2203
-2204
-2205</pre>
+2258
+2259
+2260
+2261
+2262
+2263
+2264
+2265
+2266
+2267
+2268
+2269
+2270
+2271
+2272
+2273
+2274
+2275
+2276</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2187</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2258</span>
 
 static VALUE Surface_pixel(VALUE self, VALUE x_coord, VALUE y_coord)
 {
@@ -2703,7 +2749,7 @@ static VALUE Surface_pixel(VALUE self, VALUE x_coord, VALUE y_coord)
       <div class="method_details ">
   <h3 class="signature " id="pixel_color-instance_method">
   
-    #<strong>pixel_color</strong>(x, y)  &#x21d2; <tt>[Integer, Integer, Integer, Integer]</tt> 
+    #<strong>pixel_color</strong>(x, y)  &#x21d2; <tt>Array(Integer, Integer, Integer, Integer)</tt> 
   
 
   
@@ -2713,14 +2759,14 @@ static VALUE Surface_pixel(VALUE self, VALUE x_coord, VALUE y_coord)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Get the pixel color (r,g,b and a) at (<strong>x</strong>, <strong>y</strong>) of the surface.</p>
+    
+<p>Get the pixel color (r,g,b and a) at (<strong>x</strong>, <strong>y</strong>) of the surface.</p>
 
 
   </div>
@@ -2739,7 +2785,8 @@ static VALUE Surface_pixel(VALUE self, VALUE x_coord, VALUE y_coord)
       
       
         &mdash;
-        <div class='inline'><p>the x coordinate</p>
+        <div class='inline'>
+<p>the x coordinate</p>
 </div>
       
     </li>
@@ -2754,7 +2801,8 @@ static VALUE Surface_pixel(VALUE self, VALUE x_coord, VALUE y_coord)
       
       
         &mdash;
-        <div class='inline'><p>the y coordinate</p>
+        <div class='inline'>
+<p>the y coordinate</p>
 </div>
       
     </li>
@@ -2767,12 +2815,13 @@ static VALUE Surface_pixel(VALUE self, VALUE x_coord, VALUE y_coord)
     <li>
       
       
-        <span class='type'>(<tt>[Integer, Integer, Integer, Integer]</tt>)</span>
+        <span class='type'>(<tt>Array(Integer, Integer, Integer, Integer)</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>the red, green, blue, and alpha component of the specified pixel.</p>
+        <div class='inline'>
+<p>the red, green, blue, and alpha component of the specified pixel.</p>
 </div>
       
     </li>
@@ -2788,18 +2837,18 @@ static VALUE Surface_pixel(VALUE self, VALUE x_coord, VALUE y_coord)
       <pre class="lines">
 
 
-2260
-2261
-2262
-2263
-2264
-2265
-2266
-2267
-2268</pre>
+2331
+2332
+2333
+2334
+2335
+2336
+2337
+2338
+2339</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2260</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2331</span>
 
 static VALUE Surface_pixel_color(VALUE self, VALUE x, VALUE y)
 {
@@ -2826,7 +2875,8 @@ static VALUE Surface_pixel_color(VALUE self, VALUE x, VALUE y)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get all pixel data of the surface as a string.</p>
+    
+<p>Get all pixel data of the surface as a string.</p>
 
 
   </div>
@@ -2853,15 +2903,15 @@ static VALUE Surface_pixel_color(VALUE self, VALUE x, VALUE y)
       <pre class="lines">
 
 
-2213
-2214
-2215
-2216
-2217
-2218</pre>
+2284
+2285
+2286
+2287
+2288
+2289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2213</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2284</span>
 
 static VALUE Surface_pixels(VALUE self)
 {
@@ -2885,7 +2935,8 @@ static VALUE Surface_pixels(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Unlock the surface.</p>
+    
+<p>Unlock the surface.</p>
 
 
   </div>
@@ -2919,14 +2970,14 @@ static VALUE Surface_pixels(VALUE self)
       <pre class="lines">
 
 
-2170
-2171
-2172
-2173
-2174</pre>
+2241
+2242
+2243
+2244
+2245</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2170</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2241</span>
 
 static VALUE Surface_unlock(VALUE self)
 {
@@ -2941,7 +2992,7 @@ static VALUE Surface_unlock(VALUE self)
       <div class="method_details ">
   <h3 class="signature " id="unset_color_key-instance_method">
   
-    #<strong>color_key=</strong>(key)  &#x21d2; <tt>key</tt> 
+    #<strong>unset_color_key</strong>  &#x21d2; <tt>nil</tt> 
   
 
   
@@ -2950,48 +3001,20 @@ static VALUE Surface_unlock(VALUE self)
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Unset the color key of the surface.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
-  <div class="docstring">
-  <div class="discussion">
-    <p>Set the color key of the surface</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>key</span>
-      
-      
-        <span class='type'>(<tt>Integer</tt>, <tt>Array&lt;Integer&gt;</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>the color key, pixel value (see <span class='object_link'><a href="#pixel-instance_method" title="SDL2::Surface#pixel (method)">#pixel</a></span>) or pixel color (array of
-three or four integer elements).</p>
-</div>
-      
-    </li>
-  
-</ul>
-
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
     <li>
       
       
-        <span class='type'>(<tt>key</tt>)</span>
+        <span class='type'>(<tt>nil</tt>)</span>
       
       
       
@@ -3002,14 +3025,9 @@ three or four integer elements).</p>
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><span class='object_link'><a href="#color_key-instance_method" title="SDL2::Surface#color_key (method)">#color_key</a></span></li>
-    
-      <li><span class='object_link'><a href="#unset_color_key-instance_method" title="SDL2::Surface#unset_color_key (method)">#unset_color_key</a></span></li>
+      <li><span class='object_link'><a href="#color_key=-instance_method" title="SDL2::Surface#color_key= (method)">#color_key=</a></span></li>
     
   </ul>
-
-</div>
-
 
 </div><table class="source_code">
   <tr>
@@ -3017,29 +3035,19 @@ three or four integer elements).</p>
       <pre class="lines">
 
 
-2321
-2322
-2323
-2324
-2325
-2326
-2327
-2328
-2329
-2330</pre>
+2373
+2374
+2375
+2376
+2377</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2321</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2373</span>
 
-static VALUE Surface_set_color_key(VALUE self, VALUE key)
+static VALUE Surface_unset_color_key(VALUE self)
 {
-    SDL_Surface* surface = Get_SDL_Surface(self);
-    if (key == Qnil)
-        return Surface_unset_color_key(self);
-
-    HANDLE_ERROR(SDL_SetColorKey(surface, SDL_TRUE, pixel_value(key, surface-&gt;format)));
-
-    return key;
+    HANDLE_ERROR(SDL_SetColorKey(Get_SDL_Surface(self), SDL_FALSE, 0));
+    return Qnil;
 }</pre>
     </td>
   </tr>
@@ -3057,7 +3065,8 @@ static VALUE Surface_set_color_key(VALUE self, VALUE key)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the width of the surface.</p>
+    
+<p>Get the width of the surface.</p>
 
 
   </div>
@@ -3084,13 +3093,13 @@ static VALUE Surface_set_color_key(VALUE self, VALUE key)
       <pre class="lines">
 
 
-2354
-2355
-2356
-2357</pre>
+2425
+2426
+2427
+2428</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2354</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2425</span>
 
 static VALUE Surface_w(VALUE self)
 {
@@ -3106,9 +3115,9 @@ static VALUE Surface_w(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 25 14:38:21 2018 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.12 (ruby-2.5.0).
+  Generated on Wed Apr 22 11:16:07 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.1).
 </div>
 
     </div>

@@ -6,15 +6,15 @@
 <title>
   Module: SDL2::Mouse
   
-    &mdash; Documentation by YARD 0.9.12
+    &mdash; Documentation by YARD 0.9.39
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "SDL2::Mouse";
   relpath = '../';
 </script>
@@ -87,7 +87,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This module has mouse input handling functions.</p>
+    
+<p>This module has mouse input handling functions.</p>
 
 
   </div>
@@ -137,7 +138,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the window which has mouse focus.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the window which has mouse focus.</p>
 </div></span>
   
 </li>
@@ -160,7 +162,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the current mouse state in relation to the desktop.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the current mouse state in relation to the desktop.</p>
 </div></span>
   
 </li>
@@ -183,7 +186,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set relative mouse mode.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Set relative mouse mode.</p>
 </div></span>
   
 </li>
@@ -206,7 +210,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return true if relative mouse mode is enabled.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if relative mouse mode is enabled.</p>
 </div></span>
   
 </li>
@@ -229,7 +234,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the relative state of the mouse.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the relative state of the mouse.</p>
 </div></span>
   
 </li>
@@ -252,7 +258,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the current state of the mouse.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the current state of the mouse.</p>
 </div></span>
   
 </li>
@@ -278,7 +285,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the window which has mouse focus.</p>
+    
+<p>Get the window which has mouse focus.</p>
 
 
   </div>
@@ -296,7 +304,8 @@
       
       
         &mdash;
-        <div class='inline'><p>the window which has mouse focus</p>
+        <div class='inline'>
+<p>the window which has mouse focus</p>
 </div>
       
     </li>
@@ -309,7 +318,8 @@
       
       
         &mdash;
-        <div class='inline'><p>if no window governed by SDL has mouse focus</p>
+        <div class='inline'>
+<p>if no window governed by SDL has mouse focus</p>
 </div>
       
     </li>
@@ -361,14 +371,15 @@ static VALUE Mouse_s_focused_window(VALUE self)
     
   <div class="note notetag">
     <strong>Note:</strong>
-    <div class='inline'><p>This module function is available since SDL 2.0.4.</p>
+    <div class='inline'>
+<p>This module function is available since SDL 2.0.4.</p>
 </div>
   </div>
 
+
 <p>Get the current mouse state in relation to the desktop.</p>
 
-<p>The return value contains the x and y coordinates of the cursor
-relative to the desktop and the state of mouse buttons.</p>
+<p>The return value contains the x and y coordinates of the cursor relative to the desktop and the state of mouse buttons.</p>
 
 
   </div>
@@ -386,7 +397,8 @@ relative to the desktop and the state of mouse buttons.</p>
       
       
         &mdash;
-        <div class='inline'><p>current state</p>
+        <div class='inline'>
+<p>current state</p>
 </div>
       
     </li>
@@ -430,16 +442,15 @@ static VALUE Mouse_s_global_state(VALUE self)
     
   <div class="note notetag">
     <strong>Note:</strong>
-    <div class='inline'><p>This function will flush any pending mouse motion.</p>
+    <div class='inline'>
+<p>This function will flush any pending mouse motion.</p>
 </div>
   </div>
 
+
 <p>Set relative mouse mode.</p>
 
-<p>While the mouse is in relative mode, the cursor is hidden, and the
-driver will try to report continuous motion in the current window.
-Only relative motion events will be delivered, the mouse position
-will not change.</p>
+<p>While the mouse is in relative mode, the cursor is hidden, and the driver will try to report continuous motion in the current window. Only relative motion events will be delivered, the mouse position will not change.</p>
 
 
   </div>
@@ -449,7 +460,6 @@ will not change.</p>
   <div class="docstring">
   <div class="discussion">
     
-
 
   </div>
 </div>
@@ -467,7 +477,8 @@ will not change.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if you want to enable relative mouse mode</p>
+        <div class='inline'>
+<p>true if you want to enable relative mouse mode</p>
 </div>
       
     </li>
@@ -534,7 +545,8 @@ static VALUE Mouse_s_set_relative_mode(VALUE self, VALUE enabled)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return true if relative mouse mode is enabled.</p>
+    
+<p>Return true if relative mouse mode is enabled.</p>
 
 
   </div>
@@ -596,11 +608,10 @@ static VALUE Mouse_s_relative_mode_p(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the relative state of the mouse.</p>
+    
+<p>Get the relative state of the mouse.</p>
 
-<p>The button state is same as <span class='object_link'><a href="#state-class_method" title="SDL2::Mouse.state (method)">state</a></span> and
-x and y of the returned object are set to the
-mouse deltas since the last call to this method.</p>
+<p>The button state is same as <span class='object_link'><a href="#state-class_method" title="SDL2::Mouse.state (method)">state</a></span> and x and y of the returned object are set to the mouse deltas since the last call to this method.</p>
 
 
   </div>
@@ -655,10 +666,10 @@ static VALUE Mouse_s_relative_state(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the current state of the mouse.</p>
+    
+<p>Get the current state of the mouse.</p>
 
-<p>The return value contains the x and y coordinates of the cursor and
-the state of mouse buttons.</p>
+<p>The return value contains the x and y coordinates of the cursor and the state of mouse buttons.</p>
 
 
   </div>
@@ -676,7 +687,8 @@ the state of mouse buttons.</p>
       
       
         &mdash;
-        <div class='inline'><p>current state</p>
+        <div class='inline'>
+<p>current state</p>
 </div>
       
     </li>
@@ -711,9 +723,9 @@ static VALUE Mouse_s_state(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 25 14:38:15 2018 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.12 (ruby-2.5.0).
+  Generated on Wed Apr 22 11:16:01 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.1).
 </div>
 
     </div>

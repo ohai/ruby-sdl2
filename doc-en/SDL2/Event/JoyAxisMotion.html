@@ -6,15 +6,15 @@
 <title>
   Class: SDL2::Event::JoyAxisMotion
   
-    &mdash; Documentation by YARD 0.9.12
+    &mdash; Documentation by YARD 0.9.39
   
 </title>
 
-  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "SDL2::Event::JoyAxisMotion";
   relpath = '../../';
 </script>
@@ -105,7 +105,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This class represents the joystick axis motion events.</p>
+    
+<p>This class represents the joystick axis motion events.</p>
 
 
   </div>
@@ -140,7 +141,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the axis index.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the axis index.</p>
 </div></span>
   
 </li>
@@ -166,7 +168,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the axis value (range: -32768 to -32767, 0 for newtral).</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the axis value (range: -32768 to -32767, 0 for newtral).</p>
 </div></span>
   
 </li>
@@ -192,7 +195,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the joystick index.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the joystick index.</p>
 </div></span>
   
 </li>
@@ -219,7 +223,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#inspect-instance_method" title="#inspect (instance method)">#<strong>inspect</strong>  &#x21d2; Stirng </a>
+      <a href="#inspect-instance_method" title="#inspect (instance method)">#<strong>inspect</strong>  &#x21d2; String </a>
     
 
     
@@ -233,7 +237,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Inspection string.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Inspection string.</p>
 </div></span>
   
 </li>
@@ -270,7 +275,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the axis index</p>
+    
+<p>the axis index</p>
 
 
   </div>
@@ -307,7 +313,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the axis value (range: -32768 to -32767, 0 for newtral)</p>
+    
+<p>the axis value (range: -32768 to -32767, 0 for newtral)</p>
 
 
   </div>
@@ -344,7 +351,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the joystick index</p>
+    
+<p>the joystick index</p>
 
 
   </div>
@@ -378,7 +386,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="inspect-instance_method">
   
-    #<strong>inspect</strong>  &#x21d2; <tt>Stirng</tt> 
+    #<strong>inspect</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -386,7 +394,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns inspection string</p>
+    
+<p>Returns inspection string.</p>
 
 
   </div>
@@ -399,12 +408,13 @@
     <li>
       
       
-        <span class='type'>(<tt>Stirng</tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>inspection string</p>
+        <div class='inline'>
+<p>inspection string</p>
 </div>
       
     </li>
@@ -417,21 +427,21 @@
       <pre class="lines">
 
 
-694
-695
-696
-697
 698
 699
 700
-701</pre>
+701
+702
+703
+704
+705</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'event.c', line 694</span>
+      <pre class="code"><span class="info file"># File 'event.c', line 698</span>
 
 static VALUE EvJoyAxisMotion_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &amp;SDL_Event_data_type, ev);
     return rb_sprintf(&quot;&lt;%s: type=%u timestamp=%u&quot;
                       &quot; which=%d axis=%u value=%d&gt;&quot;,
                       rb_obj_classname(self), ev-&gt;common.type, ev-&gt;common.timestamp,
@@ -447,9 +457,9 @@ static VALUE EvJoyAxisMotion_inspect(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 25 14:38:19 2018 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.12 (ruby-2.5.0).
+  Generated on Wed Apr 22 11:16:03 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.1).
 </div>
 
     </div>

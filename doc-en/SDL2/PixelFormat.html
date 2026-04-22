@@ -6,15 +6,15 @@
 <title>
   Class: SDL2::PixelFormat
   
-    &mdash; Documentation by YARD 0.9.12
+    &mdash; Documentation by YARD 0.9.39
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "SDL2::PixelFormat";
   relpath = '../';
 </script>
@@ -103,10 +103,10 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This class represents pixel format of textures, windows, and displays.</p>
+    
+<p>This class represents pixel format of textures, windows, and displays.</p>
 
-<p>In C level, SDL use unsigned integers as pixel formats. This class
-wraps these integers. You can get the integers from <span class='object_link'><a href="#format-instance_method" title="SDL2::PixelFormat#format (method)">#format</a></span>.</p>
+<p>In C level, SDL use unsigned integers as pixel formats. This class wraps these integers. You can get the integers from <span class='object_link'><a href="#format-instance_method" title="SDL2::PixelFormat#format (method)">#format</a></span>.</p>
 
 
   </div>
@@ -125,215 +125,1029 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 </p>
 
-  <h2>Constant Summary</h2>
-  <dl class="constants">
-    
-      <dt id="FORMATS-constant" class="">FORMATS =
-        <div class="docstring">
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="FORMATS-constant" class="">FORMATS =
+          <div class="docstring">
   <div class="discussion">
-    <p>Array of all available formats</p>
+    
+<p>Returns array of all available formats.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>array of all available formats</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code">-</pre></dd>
-    
-      <dt id="UNKNOWN-constant" class="">UNKNOWN =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="UNKNOWN-constant" class="">UNKNOWN =
+          <div class="docstring">
   <div class="discussion">
-    <p>PixelFormat: Unused - reserved by SDL</p>
+    
+<p>Returns Unused - reserved by SDL.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Unused - reserved by SDL</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code">-</pre></dd>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="INDEX1LSB-constant" class="">INDEX1LSB =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="INDEX1LSB-constant" class="">INDEX1LSB =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="INDEX1MSB-constant" class="">INDEX1MSB =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="INDEX1MSB-constant" class="">INDEX1MSB =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="INDEX4LSB-constant" class="">INDEX4LSB =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="INDEX4LSB-constant" class="">INDEX4LSB =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="INDEX4MSB-constant" class="">INDEX4MSB =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="INDEX4MSB-constant" class="">INDEX4MSB =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="INDEX8-constant" class="">INDEX8 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="INDEX8-constant" class="">INDEX8 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="RGB332-constant" class="">RGB332 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="RGB332-constant" class="">RGB332 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="RGB444-constant" class="">RGB444 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="RGB444-constant" class="">RGB444 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="RGB555-constant" class="">RGB555 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="RGB555-constant" class="">RGB555 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="BGR555-constant" class="">BGR555 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="BGR555-constant" class="">BGR555 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="ARGB4444-constant" class="">ARGB4444 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="ARGB4444-constant" class="">ARGB4444 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="RGBA4444-constant" class="">RGBA4444 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="RGBA4444-constant" class="">RGBA4444 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="ABGR4444-constant" class="">ABGR4444 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="ABGR4444-constant" class="">ABGR4444 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="BGRA4444-constant" class="">BGRA4444 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="BGRA4444-constant" class="">BGRA4444 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="ARGB1555-constant" class="">ARGB1555 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="ARGB1555-constant" class="">ARGB1555 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="RGBA5551-constant" class="">RGBA5551 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="RGBA5551-constant" class="">RGBA5551 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="ABGR1555-constant" class="">ABGR1555 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="ABGR1555-constant" class="">ABGR1555 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="BGRA5551-constant" class="">BGRA5551 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="BGRA5551-constant" class="">BGRA5551 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="RGB565-constant" class="">RGB565 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="RGB565-constant" class="">RGB565 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="BGR565-constant" class="">BGR565 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="BGR565-constant" class="">BGR565 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="RGB24-constant" class="">RGB24 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="RGB24-constant" class="">RGB24 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="BGR24-constant" class="">BGR24 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="BGR24-constant" class="">BGR24 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="RGB888-constant" class="">RGB888 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="RGB888-constant" class="">RGB888 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="RGBX8888-constant" class="">RGBX8888 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="RGBX8888-constant" class="">RGBX8888 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="BGR888-constant" class="">BGR888 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="BGR888-constant" class="">BGR888 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="BGRX8888-constant" class="">BGRX8888 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="BGRX8888-constant" class="">BGRX8888 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="ARGB8888-constant" class="">ARGB8888 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="ARGB8888-constant" class="">ARGB8888 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="RGBA8888-constant" class="">RGBA8888 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="RGBA8888-constant" class="">RGBA8888 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="ABGR8888-constant" class="">ABGR8888 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="ABGR8888-constant" class="">ABGR8888 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="BGRA8888-constant" class="">BGRA8888 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="BGRA8888-constant" class="">BGRA8888 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="ARGB2101010-constant" class="">ARGB2101010 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="ARGB2101010-constant" class="">ARGB2101010 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="YV12-constant" class="">YV12 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="YV12-constant" class="">YV12 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="IYUV-constant" class="">IYUV =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="IYUV-constant" class="">IYUV =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="YUY2-constant" class="">YUY2 =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="YUY2-constant" class="">YUY2 =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="UYVY-constant" class="">UYVY =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="UYVY-constant" class="">UYVY =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+        <dt id="YVYU-constant" class="">YVYU =
+          <div class="docstring">
+  <div class="discussion">
     
-      <dt id="YVYU-constant" class="">YVYU =
-        
-      </dt>
-      <dd><pre class="code"><span class='id identifier rubyid_format'>format</span></pre></dd>
-    
-  </dl>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+        </dt>
+        <dd><pre class="code">-</pre></dd>
+      
+    </dl>
+  
 
 
 
@@ -363,7 +1177,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 
   
-    <span class="summary_desc"><div class='inline'><p>An integer representing the pixel format.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>An integer representing the pixel format.</p>
 </div></span>
   
 </li>
@@ -399,7 +1214,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return true if two pixel format is the same format.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if two pixel format is the same format.</p>
 </div></span>
   
 </li>
@@ -422,7 +1238,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return true if the pixel format have an alpha channel.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the pixel format have an alpha channel.</p>
 </div></span>
   
 </li>
@@ -447,7 +1264,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the number of bits per pixel.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the number of bits per pixel.</p>
 </div></span>
   
 </li>
@@ -470,7 +1288,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the number of bytes per pixel.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the number of bytes per pixel.</p>
 </div></span>
   
 </li>
@@ -493,7 +1312,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return true if the pixel format is not indexed, and not RGB(A), for example, the pixel format is YUV.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the pixel format is not indexed, and not RGB(A), for example, the pixel format is YUV.</p>
 </div></span>
   
 </li>
@@ -516,7 +1336,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return true if the pixel format have a palette.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the pixel format have a palette.</p>
 </div></span>
   
 </li>
@@ -541,7 +1362,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Initialize pixel format from the given integer representing a fomrmat.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Initialize pixel format from the given integer representing a fomrmat.</p>
 </div></span>
   
 </li>
@@ -564,7 +1386,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Inspection string.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Inspection string.</p>
 </div></span>
   
 </li>
@@ -587,7 +1410,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the channel bit pattern of the pixel format.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the channel bit pattern of the pixel format.</p>
 </div></span>
   
 </li>
@@ -610,7 +1434,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the human readable name of the pixel format.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the human readable name of the pixel format.</p>
 </div></span>
   
 </li>
@@ -633,7 +1458,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the ordering of channels or bits in the pixel format.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the ordering of channels or bits in the pixel format.</p>
 </div></span>
   
 </li>
@@ -656,7 +1482,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the type of the format.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the type of the format.</p>
 </div></span>
   
 </li>
@@ -681,14 +1508,14 @@ wraps these integers. You can get the integers from <span class='object_link'><a
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Initialize pixel format from the given integer representing a fomrmat.</p>
+    
+<p>Initialize pixel format from the given integer representing a fomrmat.</p>
 
 
   </div>
@@ -707,7 +1534,8 @@ wraps these integers. You can get the integers from <span class='object_link'><a
       
       
         &mdash;
-        <div class='inline'><p>an unsigned integer as a pixel formats</p>
+        <div class='inline'>
+<p>an unsigned integer as a pixel formats</p>
 </div>
       
     </li>
@@ -724,14 +1552,14 @@ wraps these integers. You can get the integers from <span class='object_link'><a
       <pre class="lines">
 
 
-2650
-2651
-2652
-2653
-2654</pre>
+2728
+2729
+2730
+2731
+2732</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2650</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2728</span>
 
 static VALUE PixelForamt_initialize(VALUE self, VALUE format)
 {
@@ -761,7 +1589,8 @@ static VALUE PixelForamt_initialize(VALUE self, VALUE format)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>An integer representing the pixel format.</p>
+    
+<p>An integer representing the pixel format.</p>
 
 
   </div>
@@ -805,14 +1634,14 @@ static VALUE PixelForamt_initialize(VALUE self, VALUE format)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Return true if two pixel format is the same format.</p>
+    
+<p>Return true if two pixel format is the same format.</p>
 
 
   </div>
@@ -821,6 +1650,26 @@ static VALUE PixelForamt_initialize(VALUE self, VALUE format)
   
 
 </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>other</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>other PixelFormat object</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -842,16 +1691,16 @@ static VALUE PixelForamt_initialize(VALUE self, VALUE format)
       <pre class="lines">
 
 
-2751
-2752
-2753
-2754
-2755
-2756
-2757</pre>
+2831
+2832
+2833
+2834
+2835
+2836
+2837</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2751</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2831</span>
 
 static VALUE PixelFormat_eq(VALUE self, VALUE other)
 {
@@ -876,7 +1725,8 @@ static VALUE PixelFormat_eq(VALUE self, VALUE other)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return true if the pixel format have an alpha channel.</p>
+    
+<p>Return true if the pixel format have an alpha channel.</p>
 
 
   </div>
@@ -903,13 +1753,13 @@ static VALUE PixelFormat_eq(VALUE self, VALUE other)
       <pre class="lines">
 
 
-2731
-2732
-2733
-2734</pre>
+2809
+2810
+2811
+2812</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2731</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2809</span>
 
 static VALUE PixelFormat_alpha_p(VALUE self)
 {
@@ -935,7 +1785,8 @@ static VALUE PixelFormat_alpha_p(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the number of bits per pixel.</p>
+    
+<p>Get the number of bits per pixel.</p>
 
 
   </div>
@@ -962,13 +1813,13 @@ static VALUE PixelFormat_alpha_p(VALUE self)
       <pre class="lines">
 
 
-2705
-2706
-2707
-2708</pre>
+2783
+2784
+2785
+2786</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2705</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2783</span>
 
 static VALUE PixelFormat_bits_per_pixel(VALUE self)
 {
@@ -990,7 +1841,8 @@ static VALUE PixelFormat_bits_per_pixel(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the number of bytes per pixel.</p>
+    
+<p>Get the number of bytes per pixel.</p>
 
 
   </div>
@@ -1017,13 +1869,13 @@ static VALUE PixelFormat_bits_per_pixel(VALUE self)
       <pre class="lines">
 
 
-2715
-2716
-2717
-2718</pre>
+2793
+2794
+2795
+2796</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2715</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2793</span>
 
 static VALUE PixelFormat_bytes_per_pixel(VALUE self)
 {
@@ -1045,8 +1897,8 @@ static VALUE PixelFormat_bytes_per_pixel(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return true if the pixel format is not indexed, and not RGB(A),
-for example, the pixel format is YUV.</p>
+    
+<p>Return true if the pixel format is not indexed, and not RGB(A), for example, the pixel format is YUV.</p>
 
 
   </div>
@@ -1073,13 +1925,13 @@ for example, the pixel format is YUV.</p>
       <pre class="lines">
 
 
-2740
-2741
-2742
-2743</pre>
+2818
+2819
+2820
+2821</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2740</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2818</span>
 
 static VALUE PixelFormat_fourcc_p(VALUE self)
 {
@@ -1101,7 +1953,8 @@ static VALUE PixelFormat_fourcc_p(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return true if the pixel format have a palette.</p>
+    
+<p>Return true if the pixel format have a palette.</p>
 
 
   </div>
@@ -1128,13 +1981,13 @@ static VALUE PixelFormat_fourcc_p(VALUE self)
       <pre class="lines">
 
 
-2723
-2724
-2725
-2726</pre>
+2801
+2802
+2803
+2804</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2723</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2801</span>
 
 static VALUE PixelFormat_indexed_p(VALUE self)
 {
@@ -1156,7 +2009,8 @@ static VALUE PixelFormat_indexed_p(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns inspection string</p>
+    
+<p>Returns inspection string.</p>
 
 
   </div>
@@ -1174,7 +2028,8 @@ static VALUE PixelFormat_indexed_p(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>inspection string</p>
+        <div class='inline'>
+<p>inspection string</p>
 </div>
       
     </li>
@@ -1187,22 +2042,22 @@ static VALUE PixelFormat_indexed_p(VALUE self)
       <pre class="lines">
 
 
-2760
-2761
-2762
-2763
-2764
-2765
-2766
-2767
-2768
-2769
-2770
-2771
-2772</pre>
+2840
+2841
+2842
+2843
+2844
+2845
+2846
+2847
+2848
+2849
+2850
+2851
+2852</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2760</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2840</span>
 
 static VALUE PixelFormat_inspect(VALUE self)
 {
@@ -1233,7 +2088,8 @@ static VALUE PixelFormat_inspect(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the channel bit pattern of the pixel format.</p>
+    
+<p>Get the channel bit pattern of the pixel format.</p>
 
 
   </div>
@@ -1251,7 +2107,8 @@ static VALUE PixelFormat_inspect(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>One of the constants of <span class='object_link'><a href="PixelFormat/PackedLayout.html" title="SDL2::PixelFormat::PackedLayout (module)">PackedLayout</a></span> module.</p>
+        <div class='inline'>
+<p>One of the constants of <span class='object_link'><a href="PixelFormat/PackedLayout.html" title="SDL2::PixelFormat::PackedLayout (module)">PackedLayout</a></span> module.</p>
 </div>
       
     </li>
@@ -1264,13 +2121,13 @@ static VALUE PixelFormat_inspect(VALUE self)
       <pre class="lines">
 
 
-2695
-2696
-2697
-2698</pre>
+2773
+2774
+2775
+2776</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2695</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2773</span>
 
 static VALUE PixelFormat_layout(VALUE self)
 {
@@ -1292,7 +2149,8 @@ static VALUE PixelFormat_layout(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the human readable name of the pixel format</p>
+    
+<p>Get the human readable name of the pixel format</p>
 
 
   </div>
@@ -1319,13 +2177,13 @@ static VALUE PixelFormat_layout(VALUE self)
       <pre class="lines">
 
 
-2675
-2676
-2677
-2678</pre>
+2753
+2754
+2755
+2756</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2675</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2753</span>
 
 static VALUE PixelFormat_name(VALUE self)
 {
@@ -1347,7 +2205,8 @@ static VALUE PixelFormat_name(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the ordering of channels or bits in the pixel format.</p>
+    
+<p>Get the ordering of channels or bits in the pixel format.</p>
 
 
   </div>
@@ -1365,7 +2224,8 @@ static VALUE PixelFormat_name(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>One of the constants of <span class='object_link'><a href="PixelFormat/BitmapOrder.html" title="SDL2::PixelFormat::BitmapOrder (module)">BitmapOrder</a></span> module or <span class='object_link'><a href="PixelFormat/PackedOrder.html" title="SDL2::PixelFormat::PackedOrder (module)">PackedOrder</a></span> module.</p>
+        <div class='inline'>
+<p>One of the constants of <span class='object_link'><a href="PixelFormat/BitmapOrder.html" title="SDL2::PixelFormat::BitmapOrder (module)">BitmapOrder</a></span> module or <span class='object_link'><a href="PixelFormat/PackedOrder.html" title="SDL2::PixelFormat::PackedOrder (module)">PackedOrder</a></span> module.</p>
 </div>
       
     </li>
@@ -1378,13 +2238,13 @@ static VALUE PixelFormat_name(VALUE self)
       <pre class="lines">
 
 
-2685
-2686
-2687
-2688</pre>
+2763
+2764
+2765
+2766</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2685</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2763</span>
 
 static VALUE PixelFormat_order(VALUE self)
 {
@@ -1406,7 +2266,8 @@ static VALUE PixelFormat_order(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the type of the format.</p>
+    
+<p>Get the type of the format.</p>
 
 
   </div>
@@ -1424,7 +2285,8 @@ static VALUE PixelFormat_order(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>One of the constants of <span class='object_link'><a href="PixelFormat/Type.html" title="SDL2::PixelFormat::Type (module)">Type</a></span> module.</p>
+        <div class='inline'>
+<p>One of the constants of <span class='object_link'><a href="PixelFormat/Type.html" title="SDL2::PixelFormat::Type (module)">Type</a></span> module.</p>
 </div>
       
     </li>
@@ -1437,13 +2299,13 @@ static VALUE PixelFormat_order(VALUE self)
       <pre class="lines">
 
 
-2661
-2662
-2663
-2664</pre>
+2739
+2740
+2741
+2742</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 2661</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 2739</span>
 
 static VALUE PixelFormat_type(VALUE self)
 {
@@ -1459,9 +2321,9 @@ static VALUE PixelFormat_type(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 25 14:38:21 2018 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.12 (ruby-2.5.0).
+  Generated on Wed Apr 22 11:16:07 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.1).
 </div>
 
     </div>

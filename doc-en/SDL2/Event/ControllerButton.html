@@ -6,15 +6,15 @@
 <title>
   Class: SDL2::Event::ControllerButton
   
-    &mdash; Documentation by YARD 0.9.12
+    &mdash; Documentation by YARD 0.9.39
   
 </title>
 
-  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "SDL2::Event::ControllerButton";
   relpath = '../../';
 </script>
@@ -105,12 +105,10 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This class represents the <span class='object_link'><a href="../GameController.html" title="SDL2::GameController (class)">controller</a></span> button events.</p>
+    
+<p>This class represents the <span class='object_link'><a href="../GameController.html" title="SDL2::GameController (class)">controller</a></span> button events.</p>
 
-<p>You don’t handle the instance
-of this class directly, but you handle the instances of
-two subclasses of this subclasses:
-<span class='object_link'><a href="ControllerButtonDown.html" title="SDL2::Event::ControllerButtonDown (class)">ControllerButtonDown</a></span> and <span class='object_link'><a href="ControllerButtonUp.html" title="SDL2::Event::ControllerButtonUp (class)">ControllerButtonUp</a></span>.</p>
+<p>You don’t handle the instance of this class directly, but you handle the instances of two subclasses of this subclasses: <span class='object_link'><a href="ControllerButtonDown.html" title="SDL2::Event::ControllerButtonDown (class)">ControllerButtonDown</a></span> and <span class='object_link'><a href="ControllerButtonUp.html" title="SDL2::Event::ControllerButtonUp (class)">ControllerButtonUp</a></span>.</p>
 
 
   </div>
@@ -149,7 +147,8 @@ two subclasses of this subclasses:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the controller button index.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the controller button index.</p>
 </div></span>
   
 </li>
@@ -175,7 +174,8 @@ two subclasses of this subclasses:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>button is pressed or not.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>button is pressed or not.</p>
 </div></span>
   
 </li>
@@ -201,7 +201,8 @@ two subclasses of this subclasses:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the controller index.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the controller index.</p>
 </div></span>
   
 </li>
@@ -242,7 +243,8 @@ two subclasses of this subclasses:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Inspection string.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Inspection string.</p>
 </div></span>
   
 </li>
@@ -279,7 +281,8 @@ two subclasses of this subclasses:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the controller button index</p>
+    
+<p>the controller button index</p>
 
 
   </div>
@@ -316,7 +319,8 @@ two subclasses of this subclasses:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>button is pressed or not</p>
+    
+<p>button is pressed or not</p>
 
 
   </div>
@@ -353,7 +357,8 @@ two subclasses of this subclasses:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the controller index</p>
+    
+<p>the controller index</p>
 
 
   </div>
@@ -395,7 +400,8 @@ two subclasses of this subclasses:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns inspection string</p>
+    
+<p>Returns inspection string.</p>
 
 
   </div>
@@ -413,7 +419,8 @@ two subclasses of this subclasses:
       
       
         &mdash;
-        <div class='inline'><p>inspection string</p>
+        <div class='inline'>
+<p>inspection string</p>
 </div>
       
     </li>
@@ -426,23 +433,23 @@ two subclasses of this subclasses:
       <pre class="lines">
 
 
-854
-855
-856
-857
 858
 859
 860
 861
 862
-863</pre>
+863
+864
+865
+866
+867</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'event.c', line 854</span>
+      <pre class="code"><span class="info file"># File 'event.c', line 858</span>
 
 static VALUE ControllerButton_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &amp;SDL_Event_data_type, ev);
     return rb_sprintf(&quot;&lt;%s: type=%u timestamp=%u&quot;
                       &quot; which=%d button=%s state=%s&gt;&quot;,
                       rb_obj_classname(self), ev-&gt;common.type, ev-&gt;common.timestamp,
@@ -460,9 +467,9 @@ static VALUE ControllerButton_inspect(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 25 14:38:19 2018 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.12 (ruby-2.5.0).
+  Generated on Wed Apr 22 11:16:03 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.1).
 </div>
 
     </div>

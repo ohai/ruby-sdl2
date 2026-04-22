@@ -6,15 +6,15 @@
 <title>
   Class: SDL2::GameController
   
-    &mdash; Documentation by YARD 0.9.12
+    &mdash; Documentation by YARD 0.9.39
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "SDL2::GameController";
   relpath = '../';
 </script>
@@ -103,41 +103,25 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This class represents a “Game Controller”.</p>
+    
+<p>This class represents a “Game Controller”.</p>
 
-<p>In SDL2, there is a gamecontroller framework to
-hide the details of joystick types. This framework
-is built on the existing joystick API.</p>
+<p>In SDL2, there is a gamecontroller framework to hide the details of joystick types. This framework is built on the existing joystick API.</p>
 
 <p>The framework consists of two parts:</p>
-
-<ul>
-  <li>Mapping joysticks to game controllers</li>
-  <li>Aquire input from game controllers</li>
-</ul>
+<ul><li>
+<p>Mapping joysticks to game controllers</p>
+</li><li>
+<p>Aquire input from game controllers</p>
+</li></ul>
 
 <p>Mapping information is a string, and described as:</p>
 
 <p>GUID,name,mapping</p>
 
-<p>GUID is a unique ID of a type of joystick and
-given by <span class='object_link'><a href="Joystick.html#GUID-instance_method" title="SDL2::Joystick#GUID (method)">Joystick#GUID</a></span>. name is the human readable
-string for the device, and mappings are contorller mappings
-to joystick ones.</p>
+<p>GUID is a unique ID of a type of joystick and given by <span class='object_link'><a href="Joystick.html#GUID-instance_method" title="SDL2::Joystick#GUID (method)">Joystick#GUID</a></span>. name is the human readable string for the device, and mappings are contorller mappings to joystick ones.</p>
 
-<p>This mappings abstract the details of joysticks, for exmaple,
-the number of buttons, the number of axes, and the position
-of these buttons a on pad.
-You can use unified interface
-with this framework theoretically.
-Howerver, we need to prepare the
-database of many joysticks that users will use. A database
-is available at https://github.com/gabomdq/SDL_GameControllerDB,
-but perhaps this is not sufficient for your usage.
-In fact, Steam prepares its own database for Steam games,
-so if you will create a game for Steam, this framework is
-useful. Otherwise, it is a better way to use joystick API
-directly.</p>
+<p>This mappings abstract the details of joysticks, for exmaple, the number of buttons, the number of axes, and the position of these buttons a on pad. You can use unified interface with this framework theoretically. Howerver, we need to prepare the database of many joysticks that users will use. A database is available at <a href="https://github.com/gabomdq/SDL_GameControllerDB">github.com/gabomdq/SDL_GameControllerDB</a>, but perhaps this is not sufficient for your usage. In fact, Steam prepares its own database for Steam games, so if you will create a game for Steam, this framework is useful. Otherwise, it is a better way to use joystick API directly.</p>
 
 
   </div>
@@ -187,7 +171,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Add suuport for controolers that SDL is unaware of or to cause an existing controller to have a different binding.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Add suuport for controolers that SDL is unaware of or to cause an existing controller to have a different binding.</p>
 </div></span>
   
 </li>
@@ -210,7 +195,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get a integer representation of the axis whose string representation is <strong>name</strong>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get a integer representation of the axis whose string representation is <strong>name</strong>.</p>
 </div></span>
   
 </li>
@@ -233,7 +219,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get a string representing <strong>axis</strong>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get a string representing <strong>axis</strong>.</p>
 </div></span>
   
 </li>
@@ -256,7 +243,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get a integer representation of the button whose string representation is <strong>name</strong>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get a integer representation of the button whose string representation is <strong>name</strong>.</p>
 </div></span>
   
 </li>
@@ -279,7 +267,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get a string representing <strong>button</strong>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get a string representing <strong>button</strong>.</p>
 </div></span>
   
 </li>
@@ -302,7 +291,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the implementation dependent name for the game controllers connected to the machine.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the implementation dependent name for the game controllers connected to the machine.</p>
 </div></span>
   
 </li>
@@ -325,7 +315,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the game controller mapping string for a given GUID.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the game controller mapping string for a given GUID.</p>
 </div></span>
   
 </li>
@@ -348,7 +339,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Open a game controller and return the opened GameController object.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Open a game controller and return the opened GameController object.</p>
 </div></span>
   
 </li>
@@ -380,7 +372,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return true if <strong>self</strong> is opened and attached.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if <strong>self</strong> is opened and attached.</p>
 </div></span>
   
 </li>
@@ -403,7 +396,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the state of an axis control.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the state of an axis control.</p>
 </div></span>
   
 </li>
@@ -426,7 +420,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return true if a button is pressed.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if a button is pressed.</p>
 </div></span>
   
 </li>
@@ -449,7 +444,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Close the game controller.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Close the game controller.</p>
 </div></span>
   
 </li>
@@ -472,7 +468,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return true if the gamecontroller is already closed.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the gamecontroller is already closed.</p>
 </div></span>
   
 </li>
@@ -495,7 +492,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the mapping string of <strong>self</strong>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the mapping string of <strong>self</strong>.</p>
 </div></span>
   
 </li>
@@ -518,7 +516,8 @@ directly.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the name of an opened game controller.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the name of an opened game controller.</p>
 </div></span>
   
 </li>
@@ -546,32 +545,27 @@ directly.</p>
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Add suuport for controolers that SDL is unaware of or to cause an
-existing controller to have a different binding.</p>
+    
+<p>Add suuport for controolers that SDL is unaware of or to cause an existing controller to have a different binding.</p>
 
-<p>“GUID,name,mapping”, where GUID is
-the string value from SDL_JoystickGetGUIDString(), name is the human
-readable string for the device and mappings are controller mappings to
-joystick ones. Under Windows there is a reserved GUID of “xinput” that
-covers all XInput devices. The mapping format for joystick is:</p>
-
-<ul>
-  <li>bX:   a joystick button, index X</li>
-  <li>hX.Y: hat X with value Y</li>
-  <li>aX:   axis X of the joystick</li>
-</ul>
+<p>“GUID,name,mapping”, where GUID is the string value from SDL_JoystickGetGUIDString(), name is the human readable string for the device and mappings are controller mappings to joystick ones. Under Windows there is a reserved GUID of “xinput” that covers all XInput devices. The mapping format for joystick is:</p>
+<ul><li>
+<p>bX: a joystick button, index X</p>
+</li><li>
+<p>hX.Y: hat X with value Y</p>
+</li><li>
+<p>aX: axis X of the joystick</p>
+</li></ul>
 
 <p>Buttons can be used as a controller axes and vice versa.</p>
 
-<p>This string shows an example of a valid mapping for a controller:
-“341a3608000000000000504944564944,Afterglow PS3 Controller,a:b1,b:b2,y:b3,x:b0,start:b9,guide:b12,back:b8,dpup:h0.1,dpleft:h0.8,dpdown:h0.4,dpright:h0.2,leftshoulder:b4,,rightshoulder:b5,leftstick:b10,rightstick:b11,leftx:a0,lefty:a1,rightx:a2,righty:a3,lefttrigger:b6,righttrigger:b7”</p>
+<p>This string shows an example of a valid mapping for a controller: “341a3608000000000000504944564944,Afterglow PS3 Controller,a:b1,b:b2,y:b3,x:b0,start:b9,guide:b12,back:b8,dpup:h0.1,dpleft:h0.8,dpdown:h0.4,dpright:h0.2,leftshoulder:b4,,rightshoulder:b5,leftstick:b10,rightstick:b11,leftx:a0,lefty:a1,rightx:a2,righty:a3,lefttrigger:b6,righttrigger:b7”</p>
 
 
   </div>
@@ -590,7 +584,8 @@ covers all XInput devices. The mapping format for joystick is:</p>
       
       
         &mdash;
-        <div class='inline'><p>mapping string</p>
+        <div class='inline'>
+<p>mapping string</p>
 </div>
       
     </li>
@@ -608,7 +603,8 @@ covers all XInput devices. The mapping format for joystick is:</p>
       
       
         &mdash;
-        <div class='inline'><p>1 if a new mapping, 0 if an existing mapping is updated.</p>
+        <div class='inline'>
+<p>1 if a new mapping, 0 if an existing mapping is updated.</p>
 </div>
       
     </li>
@@ -624,14 +620,14 @@ covers all XInput devices. The mapping format for joystick is:</p>
       <pre class="lines">
 
 
-96
-97
-98
 99
-100</pre>
+100
+101
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 96</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 99</span>
 
 static VALUE GameController_s_add_mapping(VALUE self, VALUE string)
 {
@@ -656,15 +652,14 @@ static VALUE GameController_s_add_mapping(VALUE self, VALUE string)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Get a integer representation of the axis
-whose string representation is <strong>name</strong>.</p>
+    
+<p>Get a integer representation of the axis whose string representation is <strong>name</strong>.</p>
 
 <p>The return value is the value of one of the constants in <span class='object_link'><a href="GameController/Axis.html" title="SDL2::GameController::Axis (module)">Axis</a></span></p>
 
@@ -685,7 +680,8 @@ whose string representation is <strong>name</strong>.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string representing an axis</p>
+        <div class='inline'>
+<p>a string representing an axis</p>
 </div>
       
     </li>
@@ -715,18 +711,18 @@ whose string representation is <strong>name</strong>.</p>
       <pre class="lines">
 
 
-149
-150
-151
 152
 153
 154
 155
 156
-157</pre>
+157
+158
+159
+160</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 149</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 152</span>
 
 static VALUE GameController_s_axis_from_name(VALUE self, VALUE name)
 {
@@ -755,14 +751,14 @@ static VALUE GameController_s_axis_from_name(VALUE self, VALUE name)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Get a string representing <strong>axis</strong>.</p>
+    
+<p>Get a string representing <strong>axis</strong>.</p>
 
 
   </div>
@@ -781,7 +777,8 @@ static VALUE GameController_s_axis_from_name(VALUE self, VALUE name)
       
       
         &mdash;
-        <div class='inline'><p>axis constant in <span class='object_link'><a href="GameController/Axis.html" title="SDL2::GameController::Axis (module)">Axis</a></span></p>
+        <div class='inline'>
+<p>axis constant in <span class='object_link'><a href="GameController/Axis.html" title="SDL2::GameController::Axis (module)">Axis</a></span></p>
 </div>
       
     </li>
@@ -811,18 +808,18 @@ static VALUE GameController_s_axis_from_name(VALUE self, VALUE name)
       <pre class="lines">
 
 
-110
-111
-112
 113
 114
 115
 116
 117
-118</pre>
+118
+119
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 110</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 113</span>
 
 static VALUE GameController_s_axis_name_of(VALUE self, VALUE axis)
 {
@@ -851,15 +848,14 @@ static VALUE GameController_s_axis_name_of(VALUE self, VALUE axis)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Get a integer representation of the button
-whose string representation is <strong>name</strong>.</p>
+    
+<p>Get a integer representation of the button whose string representation is <strong>name</strong>.</p>
 
 <p>The return value is the value of one of the constants in <span class='object_link'><a href="GameController/Button.html" title="SDL2::GameController::Button (module)">Button</a></span></p>
 
@@ -880,7 +876,8 @@ whose string representation is <strong>name</strong>.</p>
       
       
         &mdash;
-        <div class='inline'><p>a string representing a button</p>
+        <div class='inline'>
+<p>a string representing a button</p>
 </div>
       
     </li>
@@ -910,18 +907,18 @@ whose string representation is <strong>name</strong>.</p>
       <pre class="lines">
 
 
-170
-171
-172
 173
 174
 175
 176
 177
-178</pre>
+178
+179
+180
+181</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 170</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 173</span>
 
 static VALUE GameController_s_button_from_name(VALUE self, VALUE name)
 {
@@ -950,14 +947,14 @@ static VALUE GameController_s_button_from_name(VALUE self, VALUE name)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Get a string representing <strong>button</strong>.</p>
+    
+<p>Get a string representing <strong>button</strong>.</p>
 
 
   </div>
@@ -976,7 +973,8 @@ static VALUE GameController_s_button_from_name(VALUE self, VALUE name)
       
       
         &mdash;
-        <div class='inline'><p>button constant in <span class='object_link'><a href="GameController/Button.html" title="SDL2::GameController::Button (module)">Button</a></span></p>
+        <div class='inline'>
+<p>button constant in <span class='object_link'><a href="GameController/Button.html" title="SDL2::GameController::Button (module)">Button</a></span></p>
 </div>
       
     </li>
@@ -1006,18 +1004,18 @@ static VALUE GameController_s_button_from_name(VALUE self, VALUE name)
       <pre class="lines">
 
 
-128
-129
-130
 131
 132
 133
 134
 135
-136</pre>
+136
+137
+138
+139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 128</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 131</span>
 
 static VALUE GameController_s_button_name_of(VALUE self, VALUE button)
 {
@@ -1044,11 +1042,10 @@ static VALUE GameController_s_button_name_of(VALUE self, VALUE button)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the implementation dependent name for the game controllers
-connected to the machine.</p>
+    
+<p>Get the implementation dependent name for the game controllers connected to the machine.</p>
 
-<p>The number of elements of returning array is same as
-<span class='object_link'><a href="Joystick.html#num_connected_joysticks-class_method" title="SDL2::Joystick.num_connected_joysticks (method)">Joystick.num_connected_joysticks</a></span>.</p>
+<p>The number of elements of returning array is same as <span class='object_link'><a href="Joystick.html#num_connected_joysticks-class_method" title="SDL2::Joystick.num_connected_joysticks (method)">Joystick.num_connected_joysticks</a></span>.</p>
 
 
   </div>
@@ -1075,9 +1072,6 @@ connected to the machine.</p>
       <pre class="lines">
 
 
-189
-190
-191
 192
 193
 194
@@ -1088,10 +1082,13 @@ connected to the machine.</p>
 199
 200
 201
-202</pre>
+202
+203
+204
+205</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 189</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 192</span>
 
 static VALUE GameController_s_device_names(VALUE self)
 {
@@ -1125,14 +1122,14 @@ static VALUE GameController_s_device_names(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Get the game controller mapping string for a given GUID.</p>
+    
+<p>Get the game controller mapping string for a given GUID.</p>
 
 
   </div>
@@ -1151,7 +1148,8 @@ static VALUE GameController_s_device_names(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>GUID string</p>
+        <div class='inline'>
+<p>GUID string</p>
 </div>
       
     </li>
@@ -1181,14 +1179,14 @@ static VALUE GameController_s_device_names(VALUE self)
       <pre class="lines">
 
 
-212
-213
-214
 215
-216</pre>
+216
+217
+218
+219</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 212</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 215</span>
 
 static VALUE GameController_s_mapping_for(VALUE self, VALUE guid_string)
 {
@@ -1213,14 +1211,14 @@ static VALUE GameController_s_mapping_for(VALUE self, VALUE guid_string)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Open a game controller and return the opened GameController object.</p>
+    
+<p>Open a game controller and return the opened GameController object.</p>
 
 
   </div>
@@ -1239,7 +1237,8 @@ static VALUE GameController_s_mapping_for(VALUE self, VALUE guid_string)
       
       
         &mdash;
-        <div class='inline'><p>device index, up to the return value of <span class='object_link'><a href="Joystick.html#num_connected_joysticks-class_method" title="SDL2::Joystick.num_connected_joysticks (method)">Joystick.num_connected_joysticks</a></span>.</p>
+        <div class='inline'>
+<p>device index, up to the return value of <span class='object_link'><a href="Joystick.html#num_connected_joysticks-class_method" title="SDL2::Joystick.num_connected_joysticks (method)">Joystick.num_connected_joysticks</a></span>.</p>
 </div>
       
     </li>
@@ -1270,8 +1269,8 @@ static VALUE GameController_s_mapping_for(VALUE self, VALUE guid_string)
       
       
         &mdash;
-        <div class='inline'><p>raised when device open is failed.
-For exmaple, <strong>index</strong> is out of range.</p>
+        <div class='inline'>
+<p>raised when device open is failed. For exmaple, <strong>index</strong> is out of range.</p>
 </div>
       
     </li>
@@ -1287,16 +1286,16 @@ For exmaple, <strong>index</strong> is out of range.</p>
       <pre class="lines">
 
 
-228
-229
-230
 231
 232
 233
-234</pre>
+234
+235
+236
+237</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 228</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 231</span>
 
 static VALUE GameController_s_open(VALUE self, VALUE index)
 {
@@ -1327,7 +1326,8 @@ static VALUE GameController_s_open(VALUE self, VALUE index)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return true if <strong>self</strong> is opened and attached.</p>
+    
+<p>Return true if <strong>self</strong> is opened and attached.</p>
 
 
   </div>
@@ -1354,13 +1354,13 @@ static VALUE GameController_s_open(VALUE self, VALUE index)
       <pre class="lines">
 
 
-253
-254
-255
-256</pre>
+256
+257
+258
+259</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 253</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 256</span>
 
 static VALUE GameController_attached_p(VALUE self)
 {
@@ -1384,17 +1384,16 @@ static VALUE GameController_attached_p(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Get the state of an axis control.</p>
+    
+<p>Get the state of an axis control.</p>
 
-<p>The state is an integer from -32768 to 32767.
-The state of trigger never returns negative value (from 0 to 32767).</p>
+<p>The state is an integer from -32768 to 32767. The state of trigger never returns negative value (from 0 to 32767).</p>
 
 
   </div>
@@ -1413,7 +1412,8 @@ The state of trigger never returns negative value (from 0 to 32767).</p>
       
       
         &mdash;
-        <div class='inline'><p>the index of an axis, one of the constants in <span class='object_link'><a href="GameController/Axis.html" title="SDL2::GameController::Axis (module)">Axis</a></span></p>
+        <div class='inline'>
+<p>the index of an axis, one of the constants in <span class='object_link'><a href="GameController/Axis.html" title="SDL2::GameController::Axis (module)">Axis</a></span></p>
 </div>
       
     </li>
@@ -1443,14 +1443,14 @@ The state of trigger never returns negative value (from 0 to 32767).</p>
       <pre class="lines">
 
 
-294
-295
-296
 297
-298</pre>
+298
+299
+300
+301</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 294</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 297</span>
 
 static VALUE GameController_axis(VALUE self, VALUE axis)
 {
@@ -1475,14 +1475,14 @@ static VALUE GameController_axis(VALUE self, VALUE axis)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Return true if a button is pressed.</p>
+    
+<p>Return true if a button is pressed.</p>
 
 
   </div>
@@ -1501,15 +1501,13 @@ static VALUE GameController_axis(VALUE self, VALUE axis)
       
       
         &mdash;
-        <div class='inline'><p>the index of a button, one of the constants in <span class='object_link'><a href="GameController/Button.html" title="SDL2::GameController::Button (module)">Button</a></span></p>
+        <div class='inline'>
+<p>the index of a button, one of the constants in <span class='object_link'><a href="GameController/Button.html" title="SDL2::GameController::Button (module)">Button</a></span></p>
 </div>
       
     </li>
   
 </ul>
-
-
-</div>
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -1525,20 +1523,23 @@ static VALUE GameController_axis(VALUE self, VALUE axis)
   
 </ul>
 
+</div>
+
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-306
-307
-308
-309
-310</pre>
+310
+311
+312
+313
+314</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 306</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 310</span>
 
 static VALUE GameController_button_pressed_p(VALUE self, VALUE button)
 {
@@ -1561,7 +1562,8 @@ static VALUE GameController_button_pressed_p(VALUE self, VALUE button)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Close the game controller.</p>
+    
+<p>Close the game controller.</p>
 
 
   </div>
@@ -1579,7 +1581,8 @@ static VALUE GameController_button_pressed_p(VALUE self, VALUE button)
       
       
         
-        <div class='inline'><p>nil</p>
+        <div class='inline'>
+<p>nil</p>
 </div>
       
     </li>
@@ -1592,17 +1595,17 @@ static VALUE GameController_button_pressed_p(VALUE self, VALUE button)
       <pre class="lines">
 
 
-263
-264
-265
 266
 267
 268
 269
-270</pre>
+270
+271
+272
+273</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 263</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 266</span>
 
 static VALUE GameController_destroy(VALUE self)
 {
@@ -1628,7 +1631,8 @@ static VALUE GameController_destroy(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return true if the gamecontroller is already closed.</p>
+    
+<p>Return true if the gamecontroller is already closed.</p>
 
 
   </div>
@@ -1663,7 +1667,8 @@ static VALUE GameController_destroy(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the mapping string of <strong>self</strong>.</p>
+    
+<p>Get the mapping string of <strong>self</strong>.</p>
 
 
   </div>
@@ -1699,13 +1704,13 @@ static VALUE GameController_destroy(VALUE self)
       <pre class="lines">
 
 
-279
-280
-281
-282</pre>
+282
+283
+284
+285</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 279</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 282</span>
 
 static VALUE GameController_mapping(VALUE self)
 {
@@ -1727,7 +1732,8 @@ static VALUE GameController_mapping(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the name of an opened game controller.</p>
+    
+<p>Get the name of an opened game controller.</p>
 
 
   </div>
@@ -1754,17 +1760,17 @@ static VALUE GameController_mapping(VALUE self)
       <pre class="lines">
 
 
-241
-242
-243
 244
 245
 246
 247
-248</pre>
+248
+249
+250
+251</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 241</span>
+      <pre class="code"><span class="info file"># File 'gamecontroller.c', line 244</span>
 
 static VALUE GameController_name(VALUE self)
 {
@@ -1784,9 +1790,9 @@ static VALUE GameController_name(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 25 14:38:19 2018 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.12 (ruby-2.5.0).
+  Generated on Wed Apr 22 11:16:04 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.1).
 </div>
 
     </div>

@@ -6,15 +6,15 @@
 <title>
   Class: SDL2::Event::MouseMotion
   
-    &mdash; Documentation by YARD 0.9.12
+    &mdash; Documentation by YARD 0.9.39
   
 </title>
 
-  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "SDL2::Event::MouseMotion";
   relpath = '../../';
 </script>
@@ -105,7 +105,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This class represents mouse motion events.</p>
+    
+<p>This class represents mouse motion events.</p>
 
 
   </div>
@@ -140,7 +141,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the current mouse state.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the current mouse state.</p>
 </div></span>
   
 </li>
@@ -166,7 +168,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the mouse index.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the mouse index.</p>
 </div></span>
   
 </li>
@@ -192,7 +195,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the window id with mouse focus.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the window id with mouse focus.</p>
 </div></span>
   
 </li>
@@ -218,7 +222,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the x coordinate of the mouse pointer, relative to window.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the x coordinate of the mouse pointer, relative to window.</p>
 </div></span>
   
 </li>
@@ -244,7 +249,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the relative motion in the x direction.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the relative motion in the x direction.</p>
 </div></span>
   
 </li>
@@ -270,7 +276,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the y coordinate of the mouse pointer, relative to window.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the y coordinate of the mouse pointer, relative to window.</p>
 </div></span>
   
 </li>
@@ -296,7 +303,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>the relative motion in the y direction.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the relative motion in the y direction.</p>
 </div></span>
   
 </li>
@@ -337,7 +345,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Inspection string.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Inspection string.</p>
 </div></span>
   
 </li>
@@ -377,9 +386,11 @@
     
   <div class="note todo">
     <strong>TODO:</strong>
-    <div class='inline'><p>use SDL2::Mouse::State</p>
+    <div class='inline'>
+<p>use SDL2::Mouse::State</p>
 </div>
   </div>
+
 
 <p>the current mouse state</p>
 
@@ -418,7 +429,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the mouse index</p>
+    
+<p>the mouse index</p>
 
 
   </div>
@@ -455,7 +467,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the window id with mouse focus</p>
+    
+<p>the window id with mouse focus</p>
 
 
   </div>
@@ -492,7 +505,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the x coordinate of the mouse pointer, relative to window</p>
+    
+<p>the x coordinate of the mouse pointer, relative to window</p>
 
 
   </div>
@@ -529,7 +543,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the relative motion in the x direction</p>
+    
+<p>the relative motion in the x direction</p>
 
 
   </div>
@@ -566,7 +581,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the y coordinate of the mouse pointer, relative to window</p>
+    
+<p>the y coordinate of the mouse pointer, relative to window</p>
 
 
   </div>
@@ -603,7 +619,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>the relative motion in the y direction</p>
+    
+<p>the relative motion in the y direction</p>
 
 
   </div>
@@ -645,7 +662,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns inspection string</p>
+    
+<p>Returns inspection string.</p>
 
 
   </div>
@@ -663,7 +681,8 @@
       
       
         &mdash;
-        <div class='inline'><p>inspection string</p>
+        <div class='inline'>
+<p>inspection string</p>
 </div>
       
     </li>
@@ -676,23 +695,23 @@
       <pre class="lines">
 
 
-577
-578
-579
-580
 581
 582
 583
 584
 585
-586</pre>
+586
+587
+588
+589
+590</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'event.c', line 577</span>
+      <pre class="code"><span class="info file"># File 'event.c', line 581</span>
 
 static VALUE EvMouseMotion_inspect(VALUE self)
 {
-    SDL_Event* ev; Data_Get_Struct(self, SDL_Event, ev);
+    SDL_Event* ev; TypedData_Get_Struct(self, SDL_Event, &amp;SDL_Event_data_type, ev);
     return rb_sprintf(&quot;&lt;%s: type=%u timestamp=%u&quot;
                       &quot; window_id=%u which=%u state=%u&quot;
                       &quot; x=%d y=%d xrel=%d yrel=%d&gt;&quot;,
@@ -710,9 +729,9 @@ static VALUE EvMouseMotion_inspect(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 25 14:38:18 2018 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.12 (ruby-2.5.0).
+  Generated on Wed Apr 22 11:16:03 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.1).
 </div>
 
     </div>

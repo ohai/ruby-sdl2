@@ -6,15 +6,15 @@
 <title>
   Class: SDL2::Renderer
   
-    &mdash; Documentation by YARD 0.9.12
+    &mdash; Documentation by YARD 0.9.39
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "SDL2::Renderer";
   relpath = '../';
 </script>
@@ -103,10 +103,10 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This class represents a 2D rendering context for a window.</p>
+    
+<p>This class represents a 2D rendering context for a window.</p>
 
-<p>You can create a renderer using <span class='object_link'><a href="Window.html#create_renderer-instance_method" title="SDL2::Window#create_renderer (method)">Window#create_renderer</a></span> and
-use it to draw figures on the window.</p>
+<p>You can create a renderer using <span class='object_link'><a href="Window.html#create_renderer-instance_method" title="SDL2::Window#create_renderer (method)">Window#create_renderer</a></span> and use it to draw figures on the window.</p>
 
 
   </div>
@@ -127,55 +127,118 @@ use it to draw figures on the window.</p>
   
 </p>
 
-  <h2>Constant Summary</h2>
-  <dl class="constants">
-    
-      <dt id="FLIP_NONE-constant" class="">FLIP_NONE =
-        <div class="docstring">
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="FLIP_NONE-constant" class="">FLIP_NONE =
+          <div class="docstring">
   <div class="discussion">
-    <p>Do not flip, used in <span class='object_link'><a href="#copy_ex-instance_method" title="SDL2::Renderer#copy_ex (method)">#copy_ex</a></span></p>
+    
+<p>Returns Do not flip, used in <span class='object_link'><a href="#copy_ex-instance_method" title="SDL2::Renderer#copy_ex (method)">#copy_ex</a></span>.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Do not flip, used in <span class='object_link'><a href="#copy_ex-instance_method" title="SDL2::Renderer#copy_ex (method)">#copy_ex</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_FLIP_NONE</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="FLIP_HORIZONTAL-constant" class="">FLIP_HORIZONTAL =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_FLIP_NONE</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="FLIP_HORIZONTAL-constant" class="">FLIP_HORIZONTAL =
+          <div class="docstring">
   <div class="discussion">
-    <p>Flip horizontally, used in <span class='object_link'><a href="#copy_ex-instance_method" title="SDL2::Renderer#copy_ex (method)">#copy_ex</a></span></p>
+    
+<p>Returns Flip horizontally, used in <span class='object_link'><a href="#copy_ex-instance_method" title="SDL2::Renderer#copy_ex (method)">#copy_ex</a></span>.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Flip horizontally, used in <span class='object_link'><a href="#copy_ex-instance_method" title="SDL2::Renderer#copy_ex (method)">#copy_ex</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_FLIP_HORIZONTAL</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="FLIP_VERTICAL-constant" class="">FLIP_VERTICAL =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_FLIP_HORIZONTAL</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="FLIP_VERTICAL-constant" class="">FLIP_VERTICAL =
+          <div class="docstring">
   <div class="discussion">
-    <p>Flip vertically, used in <span class='object_link'><a href="#copy_ex-instance_method" title="SDL2::Renderer#copy_ex (method)">#copy_ex</a></span></p>
+    
+<p>Returns Flip vertically, used in <span class='object_link'><a href="#copy_ex-instance_method" title="SDL2::Renderer#copy_ex (method)">#copy_ex</a></span>.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Flip vertically, used in <span class='object_link'><a href="#copy_ex-instance_method" title="SDL2::Renderer#copy_ex (method)">#copy_ex</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_FLIP_VERTICAL</span><span class='rparen'>)</span></pre></dd>
-    
-  </dl>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2FIX</span><span class='lparen'>(</span><span class='const'>SDL_FLIP_VERTICAL</span><span class='rparen'>)</span></pre></dd>
+      
+    </dl>
+  
 
 
 
@@ -208,7 +271,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return information of all available rendering contexts.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return information of all available rendering contexts.</p>
 </div></span>
   
 </li>
@@ -240,7 +304,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Crear the rendering target with the drawing color.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Crear the rendering target with the drawing color.</p>
 </div></span>
   
 </li>
@@ -263,7 +328,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get whether clipping is enabled on the renderer.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get whether clipping is enabled on the renderer.</p>
 </div></span>
   
 </li>
@@ -286,7 +352,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the clip rectangle for the current target.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the clip rectangle for the current target.</p>
 </div></span>
   
 </li>
@@ -295,7 +362,7 @@ use it to draw figures on the window.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#clip_rect=-instance_method" title="#clip_rect= (instance method)">#<strong>clip_rect=</strong>(rect)  &#x21d2; rect </a>
+      <a href="#clip_rect=-instance_method" title="#clip_rect= (instance method)">#<strong>clip_rect=</strong>(rect)  &#x21d2; void </a>
     
 
     
@@ -309,7 +376,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set the clip rectangle for the current target.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Set the clip rectangle for the current target.</p>
 </div></span>
   
 </li>
@@ -332,7 +400,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Copy a portion of the texture to the current rendering target.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Copy a portion of the texture to the current rendering target.</p>
 </div></span>
   
 </li>
@@ -355,7 +424,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Copy a portion of the texture to the current rendering target, rotating it by angle around the given center and also flipping it top-bottom and/or left-right.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Copy a portion of the texture to the current rendering target, rotating it by angle around the given center and also flipping it top-bottom and/or left-right.</p>
 </div></span>
   
 </li>
@@ -378,7 +448,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create a new texture for the rendering context.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Create a new texture for the rendering context.</p>
 </div></span>
   
 </li>
@@ -401,7 +472,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create a texture from an existing surface.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Create a texture from an existing surface.</p>
 </div></span>
   
 </li>
@@ -424,7 +496,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(GC) debug information.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>(GC) debug information.</p>
 </div></span>
   
 </li>
@@ -447,7 +520,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Destroy the rendering context and free associated textures.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Destroy the rendering context and free associated textures.</p>
 </div></span>
   
 </li>
@@ -470,7 +544,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return true if the renderer is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Renderer#destroy (method)">destroyed</a></span>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the renderer is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Renderer#destroy (method)">destroyed</a></span>.</p>
 </div></span>
   
 </li>
@@ -493,7 +568,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the blend mode used for drawing operations like <span class='object_link'><a href="#fill_rect-instance_method" title="SDL2::Renderer#fill_rect (method)">#fill_rect</a></span> and <span class='object_link'><a href="#draw_line-instance_method" title="SDL2::Renderer#draw_line (method)">#draw_line</a></span>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the blend mode used for drawing operations like <span class='object_link'><a href="#fill_rect-instance_method" title="SDL2::Renderer#fill_rect (method)">#fill_rect</a></span> and <span class='object_link'><a href="#draw_line-instance_method" title="SDL2::Renderer#draw_line (method)">#draw_line</a></span>.</p>
 </div></span>
   
 </li>
@@ -516,7 +592,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set the blend mode used for drawing operations.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Set the blend mode used for drawing operations.</p>
 </div></span>
   
 </li>
@@ -525,7 +602,7 @@ use it to draw figures on the window.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#draw_color-instance_method" title="#draw_color (instance method)">#<strong>draw_color</strong>  &#x21d2; [Integer,Integer,Integer,Integer] </a>
+      <a href="#draw_color-instance_method" title="#draw_color (instance method)">#<strong>draw_color</strong>  &#x21d2; Array(Integer,Integer,Integer,Integer) </a>
     
 
     
@@ -539,7 +616,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the color used for drawing operations.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the color used for drawing operations.</p>
 </div></span>
   
 </li>
@@ -548,7 +626,7 @@ use it to draw figures on the window.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#draw_color=-instance_method" title="#draw_color= (instance method)">#<strong>draw_color=</strong>(color)  &#x21d2; color </a>
+      <a href="#draw_color=-instance_method" title="#draw_color= (instance method)">#<strong>draw_color=</strong>(color)  &#x21d2; Array&lt;Integer&gt; </a>
     
 
     
@@ -562,7 +640,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set the color used for drawing operations.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Set the color used for drawing operations.</p>
 </div></span>
   
 </li>
@@ -585,7 +664,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Draw a line from (x1, y1) to (x2, y2) using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Draw a line from (x1, y1) to (x2, y2) using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
 </div></span>
   
 </li>
@@ -608,7 +688,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Draw a point at (x, y) using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Draw a point at (x, y) using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
 </div></span>
   
 </li>
@@ -631,7 +712,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Draw a rectangle using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Draw a rectangle using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
 </div></span>
   
 </li>
@@ -654,7 +736,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Draw a filled rectangle using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Draw a filled rectangle using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
 </div></span>
   
 </li>
@@ -677,7 +760,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get information about <em>self</em> rendering context .</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get information about <em>self</em> rendering context .</p>
 </div></span>
   
 </li>
@@ -700,7 +784,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Load file and create a new <span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">Texture</a></span>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Load file and create a new <span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">Texture</a></span>.</p>
 </div></span>
   
 </li>
@@ -709,7 +794,7 @@ use it to draw figures on the window.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#logical_size-instance_method" title="#logical_size (instance method)">#<strong>logical_size</strong>  &#x21d2; [Integer, Integer] </a>
+      <a href="#logical_size-instance_method" title="#logical_size (instance method)">#<strong>logical_size</strong>  &#x21d2; Array(Integer, Integer) </a>
     
 
     
@@ -723,7 +808,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get device indepndent resolution for rendering.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get device indepndent resolution for rendering.</p>
 </div></span>
   
 </li>
@@ -732,7 +818,7 @@ use it to draw figures on the window.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#logical_size=-instance_method" title="#logical_size= (instance method)">#<strong>logical_size=</strong>(w_and_h)  &#x21d2; w_and_h </a>
+      <a href="#logical_size=-instance_method" title="#logical_size= (instance method)">#<strong>logical_size=</strong>(w_and_h)  &#x21d2; void </a>
     
 
     
@@ -746,7 +832,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set a device indepndent resolution for rendering.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Set a device indepndent resolution for rendering.</p>
 </div></span>
   
 </li>
@@ -755,7 +842,7 @@ use it to draw figures on the window.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#output_size-instance_method" title="#output_size (instance method)">#<strong>output_size</strong>  &#x21d2; [Integer, Integer] </a>
+      <a href="#output_size-instance_method" title="#output_size (instance method)">#<strong>output_size</strong>  &#x21d2; Array(Integer, Integer) </a>
     
 
     
@@ -769,7 +856,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the output size of a rendering context.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the output size of a rendering context.</p>
 </div></span>
   
 </li>
@@ -792,7 +880,32 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Update the screen with rendering performed.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Update the screen with rendering performed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_pixels-instance_method" title="#read_pixels (instance method)">#<strong>read_pixels</strong>(rect, format)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Read pixels from the current rendering target.</p>
 </div></span>
   
 </li>
@@ -815,7 +928,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the current render target.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the current render target.</p>
 </div></span>
   
 </li>
@@ -824,7 +938,7 @@ use it to draw figures on the window.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#render_target=-instance_method" title="#render_target= (instance method)">#<strong>render_target=</strong>(target)  &#x21d2; target </a>
+      <a href="#render_target=-instance_method" title="#render_target= (instance method)">#<strong>render_target=</strong>(target)  &#x21d2; void </a>
     
 
     
@@ -838,7 +952,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set a texture as the current render target.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Set a texture as the current render target.</p>
 </div></span>
   
 </li>
@@ -861,7 +976,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Reset the render target to the screen.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Reset the render target to the screen.</p>
 </div></span>
   
 </li>
@@ -870,7 +986,7 @@ use it to draw figures on the window.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#scale-instance_method" title="#scale (instance method)">#<strong>scale</strong>  &#x21d2; [Integer, Integer] </a>
+      <a href="#scale-instance_method" title="#scale (instance method)">#<strong>scale</strong>  &#x21d2; Array(Integer, Integer) </a>
     
 
     
@@ -884,7 +1000,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the drawing scale for the current target.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the drawing scale for the current target.</p>
 </div></span>
   
 </li>
@@ -893,7 +1010,7 @@ use it to draw figures on the window.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#scale=-instance_method" title="#scale= (instance method)">#<strong>scale=</strong>(scaleX_and_scaleY)  &#x21d2; scaleX_and_scaleY </a>
+      <a href="#scale=-instance_method" title="#scale= (instance method)">#<strong>scale=</strong>(scaleX_and_scaleY)  &#x21d2; void </a>
     
 
     
@@ -907,7 +1024,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set the drawing scale for rendering.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Set the drawing scale for rendering.</p>
 </div></span>
   
 </li>
@@ -930,7 +1048,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Return true if the renderer supports render target.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the renderer supports render target.</p>
 </div></span>
   
 </li>
@@ -953,7 +1072,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the drawing area for the current target.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the drawing area for the current target.</p>
 </div></span>
   
 </li>
@@ -962,7 +1082,7 @@ use it to draw figures on the window.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#viewport=-instance_method" title="#viewport= (instance method)">#<strong>viewport=</strong>(area)  &#x21d2; area </a>
+      <a href="#viewport=-instance_method" title="#viewport= (instance method)">#<strong>viewport=</strong>(area)  &#x21d2; void </a>
     
 
     
@@ -976,7 +1096,8 @@ use it to draw figures on the window.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set the drawing area for rendering on the current target.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Set the drawing area for rendering on the current target.</p>
 </div></span>
   
 </li>
@@ -1004,14 +1125,14 @@ use it to draw figures on the window.</p>
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Return information of all available rendering contexts.</p>
+    
+<p>Return information of all available rendering contexts.</p>
 
 
   </div>
@@ -1029,7 +1150,8 @@ use it to draw figures on the window.</p>
       
       
         &mdash;
-        <div class='inline'><p>information about rendering contexts</p>
+        <div class='inline'>
+<p>information about rendering contexts</p>
 </div>
       
     </li>
@@ -1045,21 +1167,21 @@ use it to draw figures on the window.</p>
       <pre class="lines">
 
 
-1177
-1178
-1179
-1180
-1181
-1182
-1183
-1184
-1185
-1186
-1187
-1188</pre>
+1198
+1199
+1200
+1201
+1202
+1203
+1204
+1205
+1206
+1207
+1208
+1209</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1177</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1198</span>
 
 static VALUE Renderer_s_drivers_info(VALUE self)
 {
@@ -1095,7 +1217,8 @@ static VALUE Renderer_s_drivers_info(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Crear the rendering target with the drawing color.</p>
+    
+<p>Crear the rendering target with the drawing color.</p>
 
 
   </div>
@@ -1129,14 +1252,14 @@ static VALUE Renderer_s_drivers_info(VALUE self)
       <pre class="lines">
 
 
-1343
-1344
-1345
-1346
-1347</pre>
+1412
+1413
+1414
+1415
+1416</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1343</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1412</span>
 
 static VALUE Renderer_clear(VALUE self)
 {
@@ -1162,9 +1285,11 @@ static VALUE Renderer_clear(VALUE self)
     
   <div class="note notetag">
     <strong>Note:</strong>
-    <div class='inline'><p>This method is available since SDL 2.0.4.</p>
+    <div class='inline'>
+<p>This method is available since SDL 2.0.4.</p>
 </div>
   </div>
+
 
 <p>Get whether clipping is enabled on the renderer.</p>
 
@@ -1193,13 +1318,13 @@ static VALUE Renderer_clear(VALUE self)
       <pre class="lines">
 
 
-1544
-1545
-1546
-1547</pre>
+1612
+1613
+1614
+1615</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1544</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1612</span>
 
 static VALUE Render_clip_enabled_p(VALUE self)
 {
@@ -1221,7 +1346,8 @@ static VALUE Render_clip_enabled_p(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the clip rectangle for the current target.</p>
+    
+<p>Get the clip rectangle for the current target.</p>
 
 
   </div>
@@ -1239,7 +1365,8 @@ static VALUE Render_clip_enabled_p(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the current clip rectangle</p>
+        <div class='inline'>
+<p>the current clip rectangle</p>
 </div>
       
     </li>
@@ -1259,15 +1386,15 @@ static VALUE Render_clip_enabled_p(VALUE self)
       <pre class="lines">
 
 
-1517
-1518
-1519
-1520
-1521
-1522</pre>
+1584
+1585
+1586
+1587
+1588
+1589</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1517</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1584</span>
 
 static VALUE Renderer_clip_rect(VALUE self)
 {
@@ -1283,7 +1410,7 @@ static VALUE Renderer_clip_rect(VALUE self)
       <div class="method_details ">
   <h3 class="signature " id="clip_rect=-instance_method">
   
-    #<strong>clip_rect=</strong>(rect)  &#x21d2; <tt>rect</tt> 
+    #<strong>clip_rect=</strong>(rect)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -1293,33 +1420,35 @@ static VALUE Renderer_clip_rect(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Set the clip rectangle for the current target.</p>
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Set the clip rectangle for the current target.</p>
 
 
   </div>
 </div>
 <div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
     <li>
       
+        <span class='name'>rect</span>
       
-        <span class='type'>(<tt>rect</tt>)</span>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt>)</span>
       
       
       
     </li>
   
 </ul>
+
 
   <p class="tag_title">See Also:</p>
   <ul class="see">
@@ -1337,14 +1466,14 @@ static VALUE Renderer_clip_rect(VALUE self)
       <pre class="lines">
 
 
-1532
-1533
-1534
-1535
-1536</pre>
+1600
+1601
+1602
+1603
+1604</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1532</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1600</span>
 
 static VALUE Renderer_set_clip_rect(VALUE self, VALUE rect)
 {
@@ -1369,14 +1498,14 @@ static VALUE Renderer_set_clip_rect(VALUE self, VALUE rect)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p class="note returns_void">This method returns an undefined value.</p><p>Copy a portion of the texture to the current rendering target.</p>
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Copy a portion of the texture to the current rendering target.</p>
 
 
   </div>
@@ -1395,7 +1524,8 @@ static VALUE Renderer_set_clip_rect(VALUE self, VALUE rect)
       
       
         &mdash;
-        <div class='inline'><p>the source texture</p>
+        <div class='inline'>
+<p>the source texture</p>
 </div>
       
     </li>
@@ -1410,7 +1540,8 @@ static VALUE Renderer_set_clip_rect(VALUE self, VALUE rect)
       
       
         &mdash;
-        <div class='inline'><p>the source rectangle, or nil for the entire texture</p>
+        <div class='inline'>
+<p>the source rectangle, or nil for the entire texture</p>
 </div>
       
     </li>
@@ -1425,8 +1556,8 @@ static VALUE Renderer_set_clip_rect(VALUE self, VALUE rect)
       
       
         &mdash;
-        <div class='inline'><p>the destination rectangle, or nil for the entire
-rendering target; the texture will be stretched to fill the given rectangle</p>
+        <div class='inline'>
+<p>the destination rectangle, or nil for the entire rendering target; the texture will be stretched to fill the given rectangle</p>
 </div>
       
     </li>
@@ -1450,17 +1581,17 @@ rendering target; the texture will be stretched to fill the given rectangle</p>
       <pre class="lines">
 
 
-1278
-1279
-1280
-1281
-1282
-1283
-1284
-1285</pre>
+1299
+1300
+1301
+1302
+1303
+1304
+1305
+1306</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1278</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1299</span>
 
 static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstrect)
 {
@@ -1488,24 +1619,23 @@ static VALUE Renderer_copy(VALUE self, VALUE texture, VALUE srcrect, VALUE dstre
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p class="note returns_void">This method returns an undefined value.</p><p>Copy a portion of the texture to the current rendering target,
-rotating it by angle around the given center and also flipping
-it top-bottom and/or left-right.</p>
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Copy a portion of the texture to the current rendering target, rotating it by angle around the given center and also flipping it top-bottom and/or left-right.</p>
 
 <p>You can use the following constants to specify the horizontal/vertical flip:</p>
-
-<ul>
-  <li><span class='object_link'><a href="#FLIP_HORIZONTAL-constant" title="SDL2::Renderer::FLIP_HORIZONTAL (constant)">FLIP_HORIZONTAL</a></span> - flip horizontally</li>
-  <li><span class='object_link'><a href="#FLIP_VERTICAL-constant" title="SDL2::Renderer::FLIP_VERTICAL (constant)">FLIP_VERTICAL</a></span> - flip vertically</li>
-  <li><span class='object_link'><a href="#FLIP_NONE-constant" title="SDL2::Renderer::FLIP_NONE (constant)">FLIP_NONE</a></span> - do not flip, equal to zero</li>
-</ul>
+<ul><li>
+<p><span class='object_link'><a href="#FLIP_HORIZONTAL-constant" title="SDL2::Renderer::FLIP_HORIZONTAL (constant)">FLIP_HORIZONTAL</a></span> - flip horizontally</p>
+</li><li>
+<p><span class='object_link'><a href="#FLIP_VERTICAL-constant" title="SDL2::Renderer::FLIP_VERTICAL (constant)">FLIP_VERTICAL</a></span> - flip vertically</p>
+</li><li>
+<p><span class='object_link'><a href="#FLIP_NONE-constant" title="SDL2::Renderer::FLIP_NONE (constant)">FLIP_NONE</a></span> - do not flip, equal to zero</p>
+</li></ul>
 
 
   </div>
@@ -1524,7 +1654,8 @@ it top-bottom and/or left-right.</p>
       
       
         &mdash;
-        <div class='inline'><p>the source texture</p>
+        <div class='inline'>
+<p>the source texture</p>
 </div>
       
     </li>
@@ -1539,7 +1670,8 @@ it top-bottom and/or left-right.</p>
       
       
         &mdash;
-        <div class='inline'><p>the source rectangle, or nil for the entire texture</p>
+        <div class='inline'>
+<p>the source rectangle, or nil for the entire texture</p>
 </div>
       
     </li>
@@ -1554,8 +1686,8 @@ it top-bottom and/or left-right.</p>
       
       
         &mdash;
-        <div class='inline'><p>the destination rectangle, or nil for the entire
-rendering target; the texture will be stretched to fill the given rectangle</p>
+        <div class='inline'>
+<p>the destination rectangle, or nil for the entire rendering target; the texture will be stretched to fill the given rectangle</p>
 </div>
       
     </li>
@@ -1570,8 +1702,8 @@ rendering target; the texture will be stretched to fill the given rectangle</p>
       
       
         &mdash;
-        <div class='inline'><p>an angle in degree indicating the rotation
-that will be applied to dstrect</p>
+        <div class='inline'>
+<p>an angle in degree indicating the rotation that will be applied to dstrect</p>
 </div>
       
     </li>
@@ -1586,8 +1718,8 @@ that will be applied to dstrect</p>
       
       
         &mdash;
-        <div class='inline'><p>the point around which dstrect will be rotated,
-(if nil, rotation will be done around the center of dstrect)</p>
+        <div class='inline'>
+<p>the point around which dstrect will be rotated, (if nil, rotation will be done around the center of dstrect)</p>
 </div>
       
     </li>
@@ -1602,7 +1734,8 @@ that will be applied to dstrect</p>
       
       
         &mdash;
-        <div class='inline'><p>bits OR’d of the flip consntants</p>
+        <div class='inline'>
+<p>bits OR’d of the flip consntants</p>
 </div>
       
     </li>
@@ -1626,21 +1759,21 @@ that will be applied to dstrect</p>
       <pre class="lines">
 
 
-1314
-1315
-1316
-1317
-1318
-1319
-1320
-1321
-1322
-1323
-1324
-1325</pre>
+1335
+1336
+1337
+1338
+1339
+1340
+1341
+1342
+1343
+1344
+1345
+1346</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1314</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1335</span>
 
 static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE dstrect,
                               VALUE angle, VALUE center, VALUE flip)
@@ -1672,22 +1805,23 @@ static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE ds
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Create a new texture for the rendering context.</p>
+    
+<p>Create a new texture for the rendering context.</p>
 
 <p>You can use the following constants to specify access pattern</p>
-
-<ul>
-  <li><span class='object_link'><a href="Texture.html#ACCESS_STATIC-constant" title="SDL2::Texture::ACCESS_STATIC (constant)">Texture::ACCESS_STATIC</a></span></li>
-  <li><span class='object_link'><a href="Texture.html#ACCESS_STREAMING-constant" title="SDL2::Texture::ACCESS_STREAMING (constant)">Texture::ACCESS_STREAMING</a></span></li>
-  <li><span class='object_link'><a href="Texture.html#ACCESS_TARGET-constant" title="SDL2::Texture::ACCESS_TARGET (constant)">Texture::ACCESS_TARGET</a></span></li>
-</ul>
+<ul><li>
+<p><span class='object_link'><a href="Texture.html#ACCESS_STATIC-constant" title="SDL2::Texture::ACCESS_STATIC (constant)">Texture::ACCESS_STATIC</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="Texture.html#ACCESS_STREAMING-constant" title="SDL2::Texture::ACCESS_STREAMING (constant)">Texture::ACCESS_STREAMING</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="Texture.html#ACCESS_TARGET-constant" title="SDL2::Texture::ACCESS_TARGET (constant)">Texture::ACCESS_TARGET</a></span></p>
+</li></ul>
 
 
   </div>
@@ -1706,7 +1840,8 @@ static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE ds
       
       
         &mdash;
-        <div class='inline'><p>format of the texture</p>
+        <div class='inline'>
+<p>format of the texture</p>
 </div>
       
     </li>
@@ -1721,7 +1856,8 @@ static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE ds
       
       
         &mdash;
-        <div class='inline'><p>texture access pattern</p>
+        <div class='inline'>
+<p>texture access pattern</p>
 </div>
       
     </li>
@@ -1736,7 +1872,8 @@ static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE ds
       
       
         &mdash;
-        <div class='inline'><p>the width ofthe texture in pixels</p>
+        <div class='inline'>
+<p>the width ofthe texture in pixels</p>
 </div>
       
     </li>
@@ -1751,7 +1888,8 @@ static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE ds
       
       
         &mdash;
-        <div class='inline'><p>the height ofthe texture in pixels</p>
+        <div class='inline'>
+<p>the height ofthe texture in pixels</p>
 </div>
       
     </li>
@@ -1769,7 +1907,8 @@ static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE ds
       
       
         &mdash;
-        <div class='inline'><p>the created texture</p>
+        <div class='inline'>
+<p>the created texture</p>
 </div>
       
     </li>
@@ -1786,7 +1925,8 @@ static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE ds
       
       
         &mdash;
-        <div class='inline'><p>raised when the texture cannot be created</p>
+        <div class='inline'>
+<p>raised when the texture cannot be created</p>
 </div>
       
     </li>
@@ -1809,19 +1949,19 @@ static VALUE Renderer_copy_ex(VALUE self, VALUE texture, VALUE srcrect, VALUE ds
       <pre class="lines">
 
 
-1223
-1224
-1225
-1226
-1227
-1228
-1229
-1230
-1231
-1232</pre>
+1244
+1245
+1246
+1247
+1248
+1249
+1250
+1251
+1252
+1253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1223</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1244</span>
 
 static VALUE Renderer_create_texture(VALUE self, VALUE format, VALUE access,
                                      VALUE w, VALUE h)
@@ -1851,14 +1991,14 @@ static VALUE Renderer_create_texture(VALUE self, VALUE format, VALUE access,
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Create a texture from an existing surface.</p>
+    
+<p>Create a texture from an existing surface.</p>
 
 
   </div>
@@ -1877,7 +2017,8 @@ static VALUE Renderer_create_texture(VALUE self, VALUE format, VALUE access,
       
       
         &mdash;
-        <div class='inline'><p>the surface containing pixels for the texture</p>
+        <div class='inline'>
+<p>the surface containing pixels for the texture</p>
 </div>
       
     </li>
@@ -1895,7 +2036,8 @@ static VALUE Renderer_create_texture(VALUE self, VALUE format, VALUE access,
       
       
         &mdash;
-        <div class='inline'><p>the created texture</p>
+        <div class='inline'>
+<p>the created texture</p>
 </div>
       
     </li>
@@ -1912,7 +2054,8 @@ static VALUE Renderer_create_texture(VALUE self, VALUE format, VALUE access,
       
       
         &mdash;
-        <div class='inline'><p>raised when the texture cannot be created</p>
+        <div class='inline'>
+<p>raised when the texture cannot be created</p>
 </div>
       
     </li>
@@ -1935,18 +2078,18 @@ static VALUE Renderer_create_texture(VALUE self, VALUE format, VALUE access,
       <pre class="lines">
 
 
-1245
-1246
-1247
-1248
-1249
-1250
-1251
-1252
-1253</pre>
+1266
+1267
+1268
+1269
+1270
+1271
+1272
+1273
+1274</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1245</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1266</span>
 
 static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
 {
@@ -1973,7 +2116,8 @@ static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (GC) debug information</p>
+    
+<p>Returns (GC) debug information.</p>
 
 
   </div>
@@ -1991,7 +2135,8 @@ static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
       
       
         &mdash;
-        <div class='inline'><p>(GC) debug information</p>
+        <div class='inline'>
+<p>(GC) debug information</p>
 </div>
       
     </li>
@@ -2004,26 +2149,26 @@ static VALUE Renderer_create_texture_from(VALUE self, VALUE surface)
       <pre class="lines">
 
 
-1718
-1719
-1720
-1721
-1722
-1723
-1724
-1725
-1726
-1727
-1728
-1729
-1730
-1731
-1732
-1733
-1734</pre>
+1786
+1787
+1788
+1789
+1790
+1791
+1792
+1793
+1794
+1795
+1796
+1797
+1798
+1799
+1800
+1801
+1802</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1718</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1786</span>
 
 static VALUE Renderer_debug_info(VALUE self)
 {
@@ -2058,7 +2203,8 @@ static VALUE Renderer_debug_info(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Destroy the rendering context and free associated textures.</p>
+    
+<p>Destroy the rendering context and free associated textures.</p>
 
 
   </div>
@@ -2092,14 +2238,14 @@ static VALUE Renderer_debug_info(VALUE self)
       <pre class="lines">
 
 
-1196
-1197
-1198
-1199
-1200</pre>
+1217
+1218
+1219
+1220
+1221</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1196</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1217</span>
 
 static VALUE Renderer_destroy(VALUE self)
 {
@@ -2122,7 +2268,8 @@ static VALUE Renderer_destroy(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return true if the renderer is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Renderer#destroy (method)">destroyed</a></span>.</p>
+    
+<p>Return true if the renderer is <span class='object_link'><a href="#destroy-instance_method" title="SDL2::Renderer#destroy (method)">destroyed</a></span>.</p>
 
 
   </div>
@@ -2157,8 +2304,8 @@ static VALUE Renderer_destroy(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the blend mode used for drawing operations like
-<span class='object_link'><a href="#fill_rect-instance_method" title="SDL2::Renderer#fill_rect (method)">#fill_rect</a></span> and <span class='object_link'><a href="#draw_line-instance_method" title="SDL2::Renderer#draw_line (method)">#draw_line</a></span>.</p>
+    
+<p>Get the blend mode used for drawing operations like <span class='object_link'><a href="#fill_rect-instance_method" title="SDL2::Renderer#fill_rect (method)">#fill_rect</a></span> and <span class='object_link'><a href="#draw_line-instance_method" title="SDL2::Renderer#draw_line (method)">#draw_line</a></span>.</p>
 
 
   </div>
@@ -2194,15 +2341,15 @@ static VALUE Renderer_destroy(VALUE self)
       <pre class="lines">
 
 
-1480
-1481
-1482
-1483
-1484
-1485</pre>
+1547
+1548
+1549
+1550
+1551
+1552</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1480</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1547</span>
 
 static VALUE Renderer_draw_blend_mode(VALUE self)
 {
@@ -2228,24 +2375,27 @@ static VALUE Renderer_draw_blend_mode(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Set the blend mode used for drawing operations.</p>
+    
+<p>Set the blend mode used for drawing operations.</p>
 
 <p>This method effects the following methods.</p>
-
-<ul>
-  <li><span class='object_link'><a href="#draw_line-instance_method" title="SDL2::Renderer#draw_line (method)">#draw_line</a></span></li>
-  <li><span class='object_link'><a href="#draw_point-instance_method" title="SDL2::Renderer#draw_point (method)">#draw_point</a></span></li>
-  <li><span class='object_link'><a href="#draw_rect-instance_method" title="SDL2::Renderer#draw_rect (method)">#draw_rect</a></span></li>
-  <li><span class='object_link'><a href="#fill_rect-instance_method" title="SDL2::Renderer#fill_rect (method)">#fill_rect</a></span></li>
-  <li><span class='object_link'><a href="#clear-instance_method" title="SDL2::Renderer#clear (method)">#clear</a></span></li>
-</ul>
+<ul><li>
+<p><span class='object_link'><a href="#draw_line-instance_method" title="SDL2::Renderer#draw_line (method)">#draw_line</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#draw_point-instance_method" title="SDL2::Renderer#draw_point (method)">#draw_point</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#draw_rect-instance_method" title="SDL2::Renderer#draw_rect (method)">#draw_rect</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#fill_rect-instance_method" title="SDL2::Renderer#fill_rect (method)">#fill_rect</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#clear-instance_method" title="SDL2::Renderer#clear (method)">#clear</a></span></p>
+</li></ul>
 
 
   </div>
@@ -2264,7 +2414,8 @@ static VALUE Renderer_draw_blend_mode(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the blending mode</p>
+        <div class='inline'>
+<p>the blending mode</p>
 </div>
       
     </li>
@@ -2282,7 +2433,8 @@ static VALUE Renderer_draw_blend_mode(VALUE self)
       
       
         
-        <div class='inline'><p>mode</p>
+        <div class='inline'>
+<p>mode</p>
 </div>
       
     </li>
@@ -2307,14 +2459,14 @@ static VALUE Renderer_draw_blend_mode(VALUE self)
       <pre class="lines">
 
 
-1505
-1506
-1507
-1508
-1509</pre>
+1572
+1573
+1574
+1575
+1576</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1505</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1572</span>
 
 static VALUE Renderer_set_draw_blend_mode(VALUE self, VALUE mode)
 {
@@ -2329,7 +2481,7 @@ static VALUE Renderer_set_draw_blend_mode(VALUE self, VALUE mode)
       <div class="method_details ">
   <h3 class="signature " id="draw_color-instance_method">
   
-    #<strong>draw_color</strong>  &#x21d2; <tt>[Integer,Integer,Integer,Integer]</tt> 
+    #<strong>draw_color</strong>  &#x21d2; <tt>Array(Integer,Integer,Integer,Integer)</tt> 
   
 
   
@@ -2337,7 +2489,8 @@ static VALUE Renderer_set_draw_blend_mode(VALUE self, VALUE mode)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the color used for drawing operations</p>
+    
+<p>Get the color used for drawing operations</p>
 
 
   </div>
@@ -2350,13 +2503,13 @@ static VALUE Renderer_set_draw_blend_mode(VALUE self, VALUE mode)
     <li>
       
       
-        <span class='type'>(<tt>[Integer,Integer,Integer,Integer]</tt>)</span>
+        <span class='type'>(<tt>Array(Integer,Integer,Integer,Integer)</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>red, green, blue, and alpha components of the drawing color
-(all components are more than or equal to 0 and less than and equal to 255)</p>
+        <div class='inline'>
+<p>red, green, blue, and alpha components of the drawing color (all components are more than or equal to 0 and less than and equal to 255)</p>
 </div>
       
     </li>
@@ -2376,15 +2529,15 @@ static VALUE Renderer_set_draw_blend_mode(VALUE self, VALUE mode)
       <pre class="lines">
 
 
-1357
-1358
-1359
-1360
-1361
-1362</pre>
+1426
+1427
+1428
+1429
+1430
+1431</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1357</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1426</span>
 
 static VALUE Renderer_draw_color(VALUE self)
 {
@@ -2400,7 +2553,7 @@ static VALUE Renderer_draw_color(VALUE self)
       <div class="method_details ">
   <h3 class="signature " id="draw_color=-instance_method">
   
-    #<strong>draw_color=</strong>(color)  &#x21d2; <tt>color</tt> 
+    #<strong>draw_color=</strong>(color)  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
   
 
   
@@ -2410,27 +2563,29 @@ static VALUE Renderer_draw_color(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Set the color used for drawing operations</p>
+    
+<p>Set the color used for drawing operations</p>
 
-<p>All color components (including alpha) must be more than or equal to 0
-and less than and equal to 255</p>
+<p>All color components (including alpha) must be more than or equal to 0 and less than and equal to 255</p>
 
 <p>This method effects the following methods.</p>
-
-<ul>
-  <li><span class='object_link'><a href="#draw_line-instance_method" title="SDL2::Renderer#draw_line (method)">#draw_line</a></span></li>
-  <li><span class='object_link'><a href="#draw_point-instance_method" title="SDL2::Renderer#draw_point (method)">#draw_point</a></span></li>
-  <li><span class='object_link'><a href="#draw_rect-instance_method" title="SDL2::Renderer#draw_rect (method)">#draw_rect</a></span></li>
-  <li><span class='object_link'><a href="#fill_rect-instance_method" title="SDL2::Renderer#fill_rect (method)">#fill_rect</a></span></li>
-  <li><span class='object_link'><a href="#clear-instance_method" title="SDL2::Renderer#clear (method)">#clear</a></span></li>
-</ul>
+<ul><li>
+<p><span class='object_link'><a href="#draw_line-instance_method" title="SDL2::Renderer#draw_line (method)">#draw_line</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#draw_point-instance_method" title="SDL2::Renderer#draw_point (method)">#draw_point</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#draw_rect-instance_method" title="SDL2::Renderer#draw_rect (method)">#draw_rect</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#fill_rect-instance_method" title="SDL2::Renderer#fill_rect (method)">#fill_rect</a></span></p>
+</li><li>
+<p><span class='object_link'><a href="#clear-instance_method" title="SDL2::Renderer#clear (method)">#clear</a></span></p>
+</li></ul>
 
 
   </div>
@@ -2444,27 +2599,13 @@ and less than and equal to 255</p>
         <span class='name'>color</span>
       
       
-        <span class='type'>(<tt>[Integer, Integer, Integer]</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>red, green, and blue components used for drawing</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>color</span>
-      
-      
-        <span class='type'>(<tt>[Integer, Integer, Integer, Integer]</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>red, green, blue, and alpha components used for drawing</p>
+        <div class='inline'>
+<p>red, green, blue, and optionally alpha components used for drawing</p>
 </div>
       
     </li>
@@ -2477,7 +2618,7 @@ and less than and equal to 255</p>
     <li>
       
       
-        <span class='type'>(<tt>color</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
       
       
       
@@ -2501,18 +2642,18 @@ and less than and equal to 255</p>
       <pre class="lines">
 
 
-1388
-1389
-1390
-1391
-1392
-1393
-1394
-1395
-1396</pre>
+1455
+1456
+1457
+1458
+1459
+1460
+1461
+1462
+1463</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1388</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1455</span>
 
 static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
 {
@@ -2541,15 +2682,14 @@ static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Draw a line from (x1, y1) to (x2, y2) using drawing color given by
-<span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+    
+<p>Draw a line from (x1, y1) to (x2, y2) using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
 
 
   </div>
@@ -2568,7 +2708,8 @@ static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
       
       
         &mdash;
-        <div class='inline'><p>the x coordinate of the start point</p>
+        <div class='inline'>
+<p>the x coordinate of the start point</p>
 </div>
       
     </li>
@@ -2583,7 +2724,8 @@ static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
       
       
         &mdash;
-        <div class='inline'><p>the y coordinate of the start point</p>
+        <div class='inline'>
+<p>the y coordinate of the start point</p>
 </div>
       
     </li>
@@ -2598,7 +2740,8 @@ static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
       
       
         &mdash;
-        <div class='inline'><p>the x coordinate of the end point</p>
+        <div class='inline'>
+<p>the x coordinate of the end point</p>
 </div>
       
     </li>
@@ -2613,7 +2756,8 @@ static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
       
       
         &mdash;
-        <div class='inline'><p>the y coordinate of the end point</p>
+        <div class='inline'>
+<p>the y coordinate of the end point</p>
 </div>
       
     </li>
@@ -2643,15 +2787,15 @@ static VALUE Renderer_set_draw_color(VALUE self, VALUE rgba)
       <pre class="lines">
 
 
-1409
-1410
-1411
-1412
-1413
-1414</pre>
+1476
+1477
+1478
+1479
+1480
+1481</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1409</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1476</span>
 
 static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
 {
@@ -2677,14 +2821,14 @@ static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE 
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Draw a point at (x, y) using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+    
+<p>Draw a point at (x, y) using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
 
 
   </div>
@@ -2703,7 +2847,8 @@ static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE 
       
       
         &mdash;
-        <div class='inline'><p>the x coordinate of the point</p>
+        <div class='inline'>
+<p>the x coordinate of the point</p>
 </div>
       
     </li>
@@ -2718,7 +2863,8 @@ static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE 
       
       
         &mdash;
-        <div class='inline'><p>the y coordinate of the point</p>
+        <div class='inline'>
+<p>the y coordinate of the point</p>
 </div>
       
     </li>
@@ -2748,14 +2894,14 @@ static VALUE Renderer_draw_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE 
       <pre class="lines">
 
 
-1425
-1426
-1427
-1428
-1429</pre>
+1492
+1493
+1494
+1495
+1496</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1425</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1492</span>
 
 static VALUE Renderer_draw_point(VALUE self, VALUE x, VALUE y)
 {
@@ -2780,14 +2926,14 @@ static VALUE Renderer_draw_point(VALUE self, VALUE x, VALUE y)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Draw a rectangle using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+    
+<p>Draw a rectangle using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
 
 
   </div>
@@ -2806,7 +2952,8 @@ static VALUE Renderer_draw_point(VALUE self, VALUE x, VALUE y)
       
       
         &mdash;
-        <div class='inline'><p>the drawing rectangle</p>
+        <div class='inline'>
+<p>the drawing rectangle</p>
 </div>
       
     </li>
@@ -2836,14 +2983,14 @@ static VALUE Renderer_draw_point(VALUE self, VALUE x, VALUE y)
       <pre class="lines">
 
 
-1439
-1440
-1441
-1442
-1443</pre>
+1506
+1507
+1508
+1509
+1510</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1439</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1506</span>
 
 static VALUE Renderer_draw_rect(VALUE self, VALUE rect)
 {
@@ -2868,14 +3015,14 @@ static VALUE Renderer_draw_rect(VALUE self, VALUE rect)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Draw a filled rectangle using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
+    
+<p>Draw a filled rectangle using drawing color given by <span class='object_link'><a href="#draw_color=-instance_method" title="SDL2::Renderer#draw_color= (method)">#draw_color=</a></span>.</p>
 
 
   </div>
@@ -2894,7 +3041,8 @@ static VALUE Renderer_draw_rect(VALUE self, VALUE rect)
       
       
         &mdash;
-        <div class='inline'><p>the drawing rectangle</p>
+        <div class='inline'>
+<p>the drawing rectangle</p>
 </div>
       
     </li>
@@ -2924,14 +3072,14 @@ static VALUE Renderer_draw_rect(VALUE self, VALUE rect)
       <pre class="lines">
 
 
-1453
-1454
-1455
-1456
-1457</pre>
+1520
+1521
+1522
+1523
+1524</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1453</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1520</span>
 
 static VALUE Renderer_fill_rect(VALUE self, VALUE rect)
 {
@@ -2954,7 +3102,8 @@ static VALUE Renderer_fill_rect(VALUE self, VALUE rect)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get information about <em>self</em> rendering context .</p>
+    
+<p>Get information about <em>self</em> rendering context .</p>
 
 
   </div>
@@ -2972,7 +3121,8 @@ static VALUE Renderer_fill_rect(VALUE self, VALUE rect)
       
       
         &mdash;
-        <div class='inline'><p>rendering information</p>
+        <div class='inline'>
+<p>rendering information</p>
 </div>
       
     </li>
@@ -2985,15 +3135,15 @@ static VALUE Renderer_fill_rect(VALUE self, VALUE rect)
       <pre class="lines">
 
 
-1464
-1465
-1466
-1467
-1468
-1469</pre>
+1531
+1532
+1533
+1534
+1535
+1536</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1464</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1531</span>
 
 static VALUE Renderer_info(VALUE self)
 {
@@ -3019,17 +3169,16 @@ static VALUE Renderer_info(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Load file and create a new <span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">Texture</a></span>.</p>
+    
+<p>Load file and create a new <span class='object_link'><a href="Texture.html" title="SDL2::Texture (class)">Texture</a></span>.</p>
 
-<p>This method uses SDL_image. SDL_image supports following formats:
-BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.</p>
+<p>This method uses SDL_image. SDL_image supports following formats: BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.</p>
 
 
   </div>
@@ -3048,7 +3197,8 @@ BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.</p>
       
       
         &mdash;
-        <div class='inline'><p>the image file name to load a texture from</p>
+        <div class='inline'>
+<p>the image file name to load a texture from</p>
 </div>
       
     </li>
@@ -3066,7 +3216,8 @@ BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.</p>
       
       
         &mdash;
-        <div class='inline'><p>Created texture</p>
+        <div class='inline'>
+<p>Created texture</p>
 </div>
       
     </li>
@@ -3083,8 +3234,8 @@ BMP, CUR, GIF, ICO, JPG, LBP, PCX, PNG, PNM, TGA, TIF, XCF, XPM, and XV.</p>
       
       
         &mdash;
-        <div class='inline'><p>raised when you fail to load (for example,
-you have a wrong file name, or the file is broken)</p>
+        <div class='inline'>
+<p>raised when you fail to load (for example, you have a wrong file name, or the file is broken)</p>
 </div>
       
     </li>
@@ -3109,18 +3260,18 @@ you have a wrong file name, or the file is broken)</p>
       <pre class="lines">
 
 
-3492
-3493
-3494
-3495
-3496
-3497
-3498
-3499
-3500</pre>
+3614
+3615
+3616
+3617
+3618
+3619
+3620
+3621
+3622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 3492</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 3614</span>
 
 static VALUE Renderer_load_texture(VALUE self, VALUE fname)
 {
@@ -3139,7 +3290,7 @@ static VALUE Renderer_load_texture(VALUE self, VALUE fname)
       <div class="method_details ">
   <h3 class="signature " id="logical_size-instance_method">
   
-    #<strong>logical_size</strong>  &#x21d2; <tt>[Integer, Integer]</tt> 
+    #<strong>logical_size</strong>  &#x21d2; <tt>Array(Integer, Integer)</tt> 
   
 
   
@@ -3147,7 +3298,8 @@ static VALUE Renderer_load_texture(VALUE self, VALUE fname)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get device indepndent resolution for rendering.</p>
+    
+<p>Get device indepndent resolution for rendering.</p>
 
 
   </div>
@@ -3160,12 +3312,13 @@ static VALUE Renderer_load_texture(VALUE self, VALUE fname)
     <li>
       
       
-        <span class='type'>(<tt>[Integer, Integer]</tt>)</span>
+        <span class='type'>(<tt>Array(Integer, Integer)</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>the logical width and height</p>
+        <div class='inline'>
+<p>the logical width and height</p>
 </div>
       
     </li>
@@ -3185,15 +3338,15 @@ static VALUE Renderer_load_texture(VALUE self, VALUE fname)
       <pre class="lines">
 
 
-1556
-1557
-1558
-1559
-1560
-1561</pre>
+1624
+1625
+1626
+1627
+1628
+1629</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1556</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1624</span>
 
 static VALUE Renderer_logical_size(VALUE self)
 {
@@ -3209,7 +3362,7 @@ static VALUE Renderer_logical_size(VALUE self)
       <div class="method_details ">
   <h3 class="signature " id="logical_size=-instance_method">
   
-    #<strong>logical_size=</strong>(w_and_h)  &#x21d2; <tt>w_and_h</tt> 
+    #<strong>logical_size=</strong>(w_and_h)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -3219,14 +3372,14 @@ static VALUE Renderer_logical_size(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Set a device indepndent resolution for rendering.</p>
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Set a device indepndent resolution for rendering.</p>
 
 
   </div>
@@ -3240,31 +3393,19 @@ static VALUE Renderer_logical_size(VALUE self)
         <span class='name'>w_and_h</span>
       
       
-        <span class='type'>(<tt>[Integer, Integer]</tt>)</span>
+        <span class='type'>(<tt>Array(Integer, Integer)</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>the width and height of the logical resolution</p>
+        <div class='inline'>
+<p>the width and height of the logical resolution</p>
 </div>
       
     </li>
   
 </ul>
 
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>w_and_h</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
 
   <p class="tag_title">See Also:</p>
   <ul class="see">
@@ -3282,16 +3423,16 @@ static VALUE Renderer_logical_size(VALUE self)
       <pre class="lines">
 
 
-1572
-1573
-1574
-1575
-1576
-1577
-1578</pre>
+1640
+1641
+1642
+1643
+1644
+1645
+1646</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1572</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1640</span>
 
 static VALUE Renderer_set_logical_size(VALUE self, VALUE wh)
 {
@@ -3308,7 +3449,7 @@ static VALUE Renderer_set_logical_size(VALUE self, VALUE wh)
       <div class="method_details ">
   <h3 class="signature " id="output_size-instance_method">
   
-    #<strong>output_size</strong>  &#x21d2; <tt>[Integer, Integer]</tt> 
+    #<strong>output_size</strong>  &#x21d2; <tt>Array(Integer, Integer)</tt> 
   
 
   
@@ -3316,7 +3457,8 @@ static VALUE Renderer_set_logical_size(VALUE self, VALUE wh)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the output size of a rendering context.</p>
+    
+<p>Get the output size of a rendering context.</p>
 
 
   </div>
@@ -3329,12 +3471,13 @@ static VALUE Renderer_set_logical_size(VALUE self, VALUE wh)
     <li>
       
       
-        <span class='type'>(<tt>[Integer, Integer]</tt>)</span>
+        <span class='type'>(<tt>Array(Integer, Integer)</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>the width and the height</p>
+        <div class='inline'>
+<p>the width and the height</p>
 </div>
       
     </li>
@@ -3347,15 +3490,15 @@ static VALUE Renderer_set_logical_size(VALUE self, VALUE wh)
       <pre class="lines">
 
 
-1660
-1661
-1662
-1663
-1664
-1665</pre>
+1728
+1729
+1730
+1731
+1732
+1733</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1660</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1728</span>
 
 static VALUE Renderer_output_size(VALUE self)
 {
@@ -3379,7 +3522,8 @@ static VALUE Renderer_output_size(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Update the screen with rendering performed</p>
+    
+<p>Update the screen with rendering performed</p>
 
 
   </div>
@@ -3406,19 +3550,187 @@ static VALUE Renderer_output_size(VALUE self)
       <pre class="lines">
 
 
-1331
-1332
-1333
-1334
-1335</pre>
+1352
+1353
+1354
+1355
+1356</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1331</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1352</span>
 
 static VALUE Renderer_present(VALUE self)
 {
     SDL_RenderPresent(Get_SDL_Renderer(self));
     return Qnil;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="read_pixels-instance_method">
+  
+    #<strong>read_pixels</strong>(rect, format)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    
+<p>Read pixels from the current rendering target.</p>
+
+<h2 id="label-Remarks">Remarks</h2>
+
+<p><strong>WARNING</strong>: This is a very slow operation, and should not be used frequently. If you’re using this on the main rendering target, it should be called after rendering and before <span class='object_link'><a href="#present-instance_method" title="SDL2::Renderer#present (method)">#present</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rect.html" title="SDL2::Rect (class)">SDL2::Rect</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the area to read, or nil for the entire target</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PixelFormat.html" title="SDL2::PixelFormat (class)">SDL2::PixelFormat</a></span></tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the desired pixel format (0 to use the format of the rendering target)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>raw pixel data as a binary string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1373
+1374
+1375
+1376
+1377
+1378
+1379
+1380
+1381
+1382
+1383
+1384
+1385
+1386
+1387
+1388
+1389
+1390
+1391
+1392
+1393
+1394
+1395
+1396
+1397
+1398
+1399
+1400
+1401
+1402
+1403
+1404</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'video.c', line 1373</span>
+
+static VALUE Renderer_read_pixels(VALUE self, VALUE rect, VALUE format)
+{
+    SDL_Renderer* renderer = Get_SDL_Renderer(self);
+    SDL_Rect sdl_rect;
+    SDL_Rect* rect_ptr = NULL;
+    Uint32 fmt = uint32_for_format(format);
+    int w, h, pitch;
+    void* pixels;
+
+    if (rect != Qnil) {
+        sdl_rect = *Get_SDL_Rect(rect);
+        rect_ptr = &amp;sdl_rect;
+        w = sdl_rect.w;
+        h = sdl_rect.h;
+    } else {
+        HANDLE_ERROR(SDL_GetRendererOutputSize(renderer, &amp;w, &amp;h));
+    }
+
+    if (fmt == 0) {
+        SDL_RendererInfo info;
+        HANDLE_ERROR(SDL_GetRendererInfo(renderer, &amp;info));
+        pitch = w * SDL_BYTESPERPIXEL(info.texture_formats[0]);
+    } else {
+        pitch = w * SDL_BYTESPERPIXEL(fmt);
+    }
+
+    pixels = ALLOCA_N(char, pitch * h);
+
+    HANDLE_ERROR(SDL_RenderReadPixels(renderer, rect_ptr, fmt, pixels, pitch));
+    
+    return rb_str_new(pixels, pitch * h);
 }</pre>
     </td>
   </tr>
@@ -3436,7 +3748,8 @@ static VALUE Renderer_present(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the current render target.</p>
+    
+<p>Get the current render target.</p>
 
 
   </div>
@@ -3454,7 +3767,8 @@ static VALUE Renderer_present(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the current rendering target</p>
+        <div class='inline'>
+<p>the current rendering target</p>
 </div>
       
     </li>
@@ -3467,7 +3781,8 @@ static VALUE Renderer_present(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>for the default render target (i.e. screen)</p>
+        <div class='inline'>
+<p>for the default render target (i.e. screen)</p>
 </div>
       
     </li>
@@ -3489,13 +3804,13 @@ static VALUE Renderer_present(VALUE self)
       <pre class="lines">
 
 
-1702
-1703
-1704
-1705</pre>
+1770
+1771
+1772
+1773</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1702</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1770</span>
 
 static VALUE Renderer_render_target(VALUE self)
 {
@@ -3509,7 +3824,7 @@ static VALUE Renderer_render_target(VALUE self)
       <div class="method_details ">
   <h3 class="signature " id="render_target=-instance_method">
   
-    #<strong>render_target=</strong>(target)  &#x21d2; <tt>target</tt> 
+    #<strong>render_target=</strong>(target)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -3519,21 +3834,18 @@ static VALUE Renderer_render_target(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Set a texture as the current render target.</p>
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Set a texture as the current render target.</p>
 
-<p>Some renderers have ability to render to a texture instead of a screen.
-You can judge whether your renderer has this ability using
-<span class='object_link'><a href="#support_render_target%3F-instance_method" title="SDL2::Renderer#support_render_target? (method)">#support_render_target?</a></span>.</p>
+<p>Some renderers have ability to render to a texture instead of a screen. You can judge whether your renderer has this ability using <span class='object_link'><a href="#support_render_target%3F-instance_method" title="SDL2::Renderer#support_render_target? (method)">#support_render_target?</a></span>.</p>
 
-<p>The target texture musbe be <span class='object_link'><a href="#create_texture-instance_method" title="SDL2::Renderer#create_texture (method)">created</a></span> with the
-<span class='object_link'><a href="Texture.html#ACCESS_TARGET-constant" title="SDL2::Texture::ACCESS_TARGET (constant)">Texture::ACCESS_TARGET</a></span> flag.</p>
+<p>The target texture musbe be <span class='object_link'><a href="#create_texture-instance_method" title="SDL2::Renderer#create_texture (method)">created</a></span> with the <span class='object_link'><a href="Texture.html#ACCESS_TARGET-constant" title="SDL2::Texture::ACCESS_TARGET (constant)">Texture::ACCESS_TARGET</a></span> flag.</p>
 
 
   </div>
@@ -3552,27 +3864,14 @@ You can judge whether your renderer has this ability using
       
       
         &mdash;
-        <div class='inline'><p>the targeted texture, or nil
-for the default render target(i.e. screen)</p>
+        <div class='inline'>
+<p>the targeted texture, or nil for the default render target(i.e. screen)</p>
 </div>
       
     </li>
   
 </ul>
 
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>target</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
 
   <p class="tag_title">See Also:</p>
   <ul class="see">
@@ -3590,16 +3889,16 @@ for the default render target(i.e. screen)</p>
       <pre class="lines">
 
 
-1685
-1686
-1687
-1688
-1689
-1690
-1691</pre>
+1753
+1754
+1755
+1756
+1757
+1758
+1759</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1685</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1753</span>
 
 static VALUE Renderer_set_render_target(VALUE self, VALUE target)
 {
@@ -3624,7 +3923,8 @@ static VALUE Renderer_set_render_target(VALUE self, VALUE target)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Reset the render target to the screen.</p>
+    
+<p>Reset the render target to the screen.</p>
 
 
   </div>
@@ -3651,13 +3951,13 @@ static VALUE Renderer_set_render_target(VALUE self, VALUE target)
       <pre class="lines">
 
 
-1712
-1713
-1714
-1715</pre>
+1780
+1781
+1782
+1783</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1712</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1780</span>
 
 static VALUE Renderer_reset_render_target(VALUE self)
 {
@@ -3671,7 +3971,7 @@ static VALUE Renderer_reset_render_target(VALUE self)
       <div class="method_details ">
   <h3 class="signature " id="scale-instance_method">
   
-    #<strong>scale</strong>  &#x21d2; <tt>[Integer, Integer]</tt> 
+    #<strong>scale</strong>  &#x21d2; <tt>Array(Integer, Integer)</tt> 
   
 
   
@@ -3679,7 +3979,8 @@ static VALUE Renderer_reset_render_target(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the drawing scale for the current target.</p>
+    
+<p>Get the drawing scale for the current target.</p>
 
 
   </div>
@@ -3692,12 +3993,13 @@ static VALUE Renderer_reset_render_target(VALUE self)
     <li>
       
       
-        <span class='type'>(<tt>[Integer, Integer]</tt>)</span>
+        <span class='type'>(<tt>Array(Integer, Integer)</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>horizontal and vertical scale factor</p>
+        <div class='inline'>
+<p>horizontal and vertical scale factor</p>
 </div>
       
     </li>
@@ -3717,15 +4019,15 @@ static VALUE Renderer_reset_render_target(VALUE self)
       <pre class="lines">
 
 
-1586
-1587
-1588
-1589
-1590
-1591</pre>
+1654
+1655
+1656
+1657
+1658
+1659</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1586</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1654</span>
 
 static VALUE Renderer_scale(VALUE self)
 {
@@ -3741,7 +4043,7 @@ static VALUE Renderer_scale(VALUE self)
       <div class="method_details ">
   <h3 class="signature " id="scale=-instance_method">
   
-    #<strong>scale=</strong>(scaleX_and_scaleY)  &#x21d2; <tt>scaleX_and_scaleY</tt> 
+    #<strong>scale=</strong>(scaleX_and_scaleY)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -3751,21 +4053,18 @@ static VALUE Renderer_scale(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Set the drawing scale for rendering.</p>
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Set the drawing scale for rendering.</p>
 
-<p>The drawing coordinates are scaled by the x/y scaling factors before they are used by the renderer.
-This allows resolution independent drawing with a single coordinate system.</p>
+<p>The drawing coordinates are scaled by the x/y scaling factors before they are used by the renderer. This allows resolution independent drawing with a single coordinate system.</p>
 
-<p>If this results in scaling or subpixel drawing by the rendering backend,
-it will be handled using the appropriate
-quality hints. For best results use integer scaling factors.</p>
+<p>If this results in scaling or subpixel drawing by the rendering backend, it will be handled using the appropriate quality hints. For best results use integer scaling factors.</p>
 
 
   </div>
@@ -3779,31 +4078,19 @@ quality hints. For best results use integer scaling factors.</p>
         <span class='name'>scaleX_and_scaleY</span>
       
       
-        <span class='type'>(<tt>[Float, Float]</tt>)</span>
+        <span class='type'>(<tt>Array(Float, Float)</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>the horizontal and vertical scaling factors</p>
+        <div class='inline'>
+<p>the horizontal and vertical scaling factors</p>
 </div>
       
     </li>
   
 </ul>
 
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>scaleX_and_scaleY</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
 
   <p class="tag_title">See Also:</p>
   <ul class="see">
@@ -3821,17 +4108,17 @@ quality hints. For best results use integer scaling factors.</p>
       <pre class="lines">
 
 
-1609
-1610
-1611
-1612
-1613
-1614
-1615
-1616</pre>
+1677
+1678
+1679
+1680
+1681
+1682
+1683
+1684</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1609</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1677</span>
 
 static VALUE Renderer_set_scale(VALUE self, VALUE xy)
 {
@@ -3857,7 +4144,8 @@ static VALUE Renderer_set_scale(VALUE self, VALUE xy)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Return true if the renderer supports render target.</p>
+    
+<p>Return true if the renderer supports render target.</p>
 
 
   </div>
@@ -3891,13 +4179,13 @@ static VALUE Renderer_set_scale(VALUE self, VALUE xy)
       <pre class="lines">
 
 
-1650
-1651
-1652
-1653</pre>
+1718
+1719
+1720
+1721</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1650</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1718</span>
 
 static VALUE Renderer_support_render_target_p(VALUE self)
 {
@@ -3919,7 +4207,8 @@ static VALUE Renderer_support_render_target_p(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the drawing area for the current target.</p>
+    
+<p>Get the drawing area for the current target.</p>
 
 
   </div>
@@ -3937,7 +4226,8 @@ static VALUE Renderer_support_render_target_p(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the current drawing area</p>
+        <div class='inline'>
+<p>the current drawing area</p>
 </div>
       
     </li>
@@ -3957,15 +4247,15 @@ static VALUE Renderer_support_render_target_p(VALUE self)
       <pre class="lines">
 
 
-1624
-1625
-1626
-1627
-1628
-1629</pre>
+1692
+1693
+1694
+1695
+1696
+1697</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1624</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1692</span>
 
 static VALUE Renderer_viewport(VALUE self)
 {
@@ -3981,7 +4271,7 @@ static VALUE Renderer_viewport(VALUE self)
       <div class="method_details ">
   <h3 class="signature " id="viewport=-instance_method">
   
-    #<strong>viewport=</strong>(area)  &#x21d2; <tt>area</tt> 
+    #<strong>viewport=</strong>(area)  &#x21d2; <tt>void</tt> 
   
 
   
@@ -3991,14 +4281,14 @@ static VALUE Renderer_viewport(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Set the drawing area for rendering on the current target.</p>
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Set the drawing area for rendering on the current target.</p>
 
 
   </div>
@@ -4017,26 +4307,14 @@ static VALUE Renderer_viewport(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the drawing area, or nil to set the viewport to the entire target</p>
+        <div class='inline'>
+<p>the drawing area, or nil to set the viewport to the entire target</p>
 </div>
       
     </li>
   
 </ul>
 
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>area</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
 
   <p class="tag_title">See Also:</p>
   <ul class="see">
@@ -4054,18 +4332,18 @@ static VALUE Renderer_viewport(VALUE self)
       <pre class="lines">
 
 
-1639
-1640
-1641
-1642
-1643</pre>
+1707
+1708
+1709
+1710
+1711</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1639</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1707</span>
 
 static VALUE Renderer_set_viewport(VALUE self, VALUE rect)
 {
-    HANDLE_ERROR(SDL_RenderSetClipRect(Get_SDL_Renderer(self), Get_SDL_Rect_or_NULL(rect)));
+    HANDLE_ERROR(SDL_RenderSetViewport(Get_SDL_Renderer(self), Get_SDL_Rect_or_NULL(rect)));
     return rect;
 }</pre>
     </td>
@@ -4078,9 +4356,9 @@ static VALUE Renderer_set_viewport(VALUE self, VALUE rect)
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 25 14:38:20 2018 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.12 (ruby-2.5.0).
+  Generated on Wed Apr 22 11:16:06 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.1).
 </div>
 
     </div>

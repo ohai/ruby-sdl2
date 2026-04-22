@@ -6,15 +6,15 @@
 <title>
   Module: SDL2::Hints
   
-    &mdash; Documentation by YARD 0.9.12
+    &mdash; Documentation by YARD 0.9.39
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "SDL2::Hints";
   relpath = '../';
 </script>
@@ -87,7 +87,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This module enables you to get and set configuration hints.</p>
+    
+<p>This module enables you to get and set configuration hints.</p>
 
 
   </div>
@@ -96,55 +97,118 @@
   
 
 </div>
-  <h2>Constant Summary</h2>
-  <dl class="constants">
-    
-      <dt id="DEFAULT-constant" class="">DEFAULT =
-        <div class="docstring">
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="DEFAULT-constant" class="">DEFAULT =
+          <div class="docstring">
   <div class="discussion">
-    <p>low priority, used fro default values</p>
+    
+<p>Returns index for low priority, used fro default values.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>index for low priority, used fro default values</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HINT_DEFAULT</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="NORMAL-constant" class="">NORMAL =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HINT_DEFAULT</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="NORMAL-constant" class="">NORMAL =
+          <div class="docstring">
   <div class="discussion">
-    <p>medium priority, overrided by an environment variable</p>
+    
+<p>Returns index for medium priority, overrided by an environment variable.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>index for medium priority, overrided by an environment variable</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HINT_NORMAL</span><span class='rparen'>)</span></pre></dd>
-    
-      <dt id="OVERRIDE-constant" class="">OVERRIDE =
-        <div class="docstring">
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HINT_NORMAL</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="OVERRIDE-constant" class="">OVERRIDE =
+          <div class="docstring">
   <div class="discussion">
-    <p>high priority, this priority overrides the value by environment variables</p>
+    
+<p>Returns index for high priority, this priority overrides the value by environment variables.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>index for high priority, this priority overrides the value by environment variables</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
-      </dt>
-      <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HINT_OVERRIDE</span><span class='rparen'>)</span></pre></dd>
-    
-  </dl>
+        </dt>
+        <dd><pre class="code"><span class='const'>INT2NUM</span><span class='lparen'>(</span><span class='const'>SDL_HINT_OVERRIDE</span><span class='rparen'>)</span></pre></dd>
+      
+    </dl>
+  
 
 
 
@@ -177,7 +241,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set the value of a hint.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Set the value of a hint.</p>
 </div></span>
   
 </li>
@@ -200,7 +265,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Clear all hints set by <span class='object_link'><a href="#[]=-class_method" title="SDL2::Hints.[]= (method)">Hints.[]=</a></span>.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Clear all hints set by <span class='object_link'><a href="#[]=-class_method" title="SDL2::Hints.[]= (method)">Hints.[]=</a></span>.</p>
 </div></span>
   
 </li>
@@ -223,7 +289,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the value of a hint.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Get the value of a hint.</p>
 </div></span>
   
 </li>
@@ -244,7 +311,7 @@
     
       <span class="overload">.<strong>[]=</strong>(hint, value)  &#x21d2; <tt>Boolean</tt> </span>
     
-      <span class="overload">.<strong>[]=</strong>(hint, priority: , value)  &#x21d2; <tt>Boolean</tt> </span>
+      <span class="overload">.<strong>[]=</strong>(hint, priority:, value)  &#x21d2; <tt>Boolean</tt> </span>
     
   
 
@@ -253,7 +320,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Set the value of a hint.</p>
+    
+<p>Set the value of a hint.</p>
 
 
   </div>
@@ -261,10 +329,10 @@
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-      <pre class="example code"><code><span class='const'><span class='object_link'><a href="../SDL2.html" title="SDL2 (module)">SDL2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="SDL2::Hints (module)">Hints</a></span></span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SDL_HINT_XINPUT_ENABLED</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>priority:</span> <span class='const'><span class='object_link'><a href="../SDL2.html" title="SDL2 (module)">SDL2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="SDL2::Hints (module)">Hints</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#OVERRIDE-constant" title="SDL2::Hints::OVERRIDE (constant)">OVERRIDE</a></span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0</span><span class='tstring_end'>&quot;</span></span></code></pre>
+      <pre class="example code"><code>SDL2::Hints[&quot;SDL_HINT_XINPUT_ENABLED&quot;, priority: SDL2::Hints::OVERRIDE] = &quot;0&quot;</code></pre>
     
   </div>
 
@@ -276,7 +344,8 @@
         <span class="signature">.<strong>[]=</strong>(hint, value)  &#x21d2; <tt>Boolean</tt> </span>
         <div class="docstring">
   <div class="discussion">
-    <p>Set a hint with normal priority.</p>
+    
+<p>Set a hint with normal priority.</p>
 
 
   </div>
@@ -295,7 +364,8 @@
       
       
         &mdash;
-        <div class='inline'><p>the name of the hint to query</p>
+        <div class='inline'>
+<p>the name of the hint to query</p>
 </div>
       
     </li>
@@ -310,7 +380,8 @@
       
       
         &mdash;
-        <div class='inline'><p>the value of the hint varaible</p>
+        <div class='inline'>
+<p>the value of the hint varaible</p>
 </div>
       
     </li>
@@ -323,10 +394,11 @@
     
       
       <li class="overload_item">
-        <span class="signature">.<strong>[]=</strong>(hint, priority: , value)  &#x21d2; <tt>Boolean</tt> </span>
+        <span class="signature">.<strong>[]=</strong>(hint, priority:, value)  &#x21d2; <tt>Boolean</tt> </span>
         <div class="docstring">
   <div class="discussion">
-    <p>Set a hint with given priority.</p>
+    
+<p>Set a hint with given priority.</p>
 
 
   </div>
@@ -345,7 +417,8 @@
       
       
         &mdash;
-        <div class='inline'><p>the name of the hint to query</p>
+        <div class='inline'>
+<p>the name of the hint to query</p>
 </div>
       
     </li>
@@ -360,8 +433,8 @@
       
       
         &mdash;
-        <div class='inline'><p>the priority, one of the
-<span class='object_link'><a href="#DEFAULT-constant" title="SDL2::Hints::DEFAULT (constant)">DEFAULT</a></span>, <span class='object_link'><a href="#NORMAL-constant" title="SDL2::Hints::NORMAL (constant)">NORMAL</a></span>, or <span class='object_link'><a href="#OVERRIDE-constant" title="SDL2::Hints::OVERRIDE (constant)">OVERRIDE</a></span>.</p>
+        <div class='inline'>
+<p>the priority, one of the <span class='object_link'><a href="#DEFAULT-constant" title="SDL2::Hints::DEFAULT (constant)">DEFAULT</a></span>, <span class='object_link'><a href="#NORMAL-constant" title="SDL2::Hints::NORMAL (constant)">NORMAL</a></span>, or <span class='object_link'><a href="#OVERRIDE-constant" title="SDL2::Hints::OVERRIDE (constant)">OVERRIDE</a></span>.</p>
 </div>
       
     </li>
@@ -376,7 +449,8 @@
       
       
         &mdash;
-        <div class='inline'><p>the value of the hint varaible</p>
+        <div class='inline'>
+<p>the value of the hint varaible</p>
 </div>
       
     </li>
@@ -400,7 +474,8 @@
       
       
         &mdash;
-        <div class='inline'><p>return true if the hint was set</p>
+        <div class='inline'>
+<p>return true if the hint was set</p>
 </div>
       
     </li>
@@ -467,7 +542,8 @@ static VALUE Hints_s_aset(int argc, VALUE* argv, VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Clear all hints set by <span class='object_link'><a href="#[]=-class_method" title="SDL2::Hints.[]= (method)">[]=</a></span>.</p>
+    
+<p>Clear all hints set by <span class='object_link'><a href="#[]=-class_method" title="SDL2::Hints.[]= (method)">[]=</a></span>.</p>
 
 
   </div>
@@ -526,14 +602,14 @@ static VALUE Hints_s_clear(VALUE self)
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Get the value of a hint.</p>
+    
+<p>Get the value of a hint.</p>
 
 
   </div>
@@ -552,7 +628,8 @@ static VALUE Hints_s_clear(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the name of the hint to query</p>
+        <div class='inline'>
+<p>the name of the hint to query</p>
 </div>
       
     </li>
@@ -573,7 +650,8 @@ static VALUE Hints_s_clear(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the string value of a hint</p>
+        <div class='inline'>
+<p>the string value of a hint</p>
 </div>
       
     </li>
@@ -586,7 +664,8 @@ static VALUE Hints_s_clear(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>if the hint isn’t set</p>
+        <div class='inline'>
+<p>if the hint isn’t set</p>
 </div>
       
     </li>
@@ -629,9 +708,9 @@ static VALUE Hints_s_aref(VALUE self, VALUE name)
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 25 14:38:15 2018 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.12 (ruby-2.5.0).
+  Generated on Wed Apr 22 11:15:56 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.1).
 </div>
 
     </div>

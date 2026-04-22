@@ -6,15 +6,15 @@
 <title>
   Class: SDL2::Display::Mode
   
-    &mdash; Documentation by YARD 0.9.12
+    &mdash; Documentation by YARD 0.9.39
   
 </title>
 
-  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "SDL2::Display::Mode";
   relpath = '../../';
 </script>
@@ -103,10 +103,10 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>This class represents the display mode.</p>
+    
+<p>This class represents the display mode.</p>
 
-<p>An object of this class has information about color depth, refresh rate,
-and resolution of a display.</p>
+<p>An object of this class has information about color depth, refresh rate, and resolution of a display.</p>
 
 
   </div>
@@ -146,7 +146,8 @@ and resolution of a display.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The pixel format of the display mode.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The pixel format of the display mode.</p>
 </div></span>
   
 </li>
@@ -169,7 +170,8 @@ and resolution of a display.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The height of the screen of the display mode.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The height of the screen of the display mode.</p>
 </div></span>
   
 </li>
@@ -194,7 +196,8 @@ and resolution of a display.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create a new Display::Mode object.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Create a new Display::Mode object.</p>
 </div></span>
   
 </li>
@@ -217,7 +220,8 @@ and resolution of a display.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Inspection string.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Inspection string.</p>
 </div></span>
   
 </li>
@@ -240,7 +244,8 @@ and resolution of a display.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The refresh rate of the display mode.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The refresh rate of the display mode.</p>
 </div></span>
   
 </li>
@@ -263,7 +268,8 @@ and resolution of a display.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The width of the screen of the display mode.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The width of the screen of the display mode.</p>
 </div></span>
   
 </li>
@@ -288,14 +294,14 @@ and resolution of a display.</p>
   <div class="discussion">
     
 
-
   </div>
 </div>
 <div class="tags">
   
   <div class="docstring">
   <div class="discussion">
-    <p>Create a new Display::Mode object.</p>
+    
+<p>Create a new Display::Mode object.</p>
 
 
   </div>
@@ -314,7 +320,8 @@ and resolution of a display.</p>
       
       
         &mdash;
-        <div class='inline'><p>pixel format</p>
+        <div class='inline'>
+<p>pixel format</p>
 </div>
       
     </li>
@@ -329,7 +336,8 @@ and resolution of a display.</p>
       
       
         &mdash;
-        <div class='inline'><p>the width</p>
+        <div class='inline'>
+<p>the width</p>
 </div>
       
     </li>
@@ -344,7 +352,8 @@ and resolution of a display.</p>
       
       
         &mdash;
-        <div class='inline'><p>the height</p>
+        <div class='inline'>
+<p>the height</p>
 </div>
       
     </li>
@@ -359,7 +368,8 @@ and resolution of a display.</p>
       
       
         &mdash;
-        <div class='inline'><p>refresh rate</p>
+        <div class='inline'>
+<p>refresh rate</p>
 </div>
       
     </li>
@@ -376,18 +386,18 @@ and resolution of a display.</p>
       <pre class="lines">
 
 
-1112
-1113
-1114
-1115
-1116
-1117
-1118
-1119
-1120</pre>
+1133
+1134
+1135
+1136
+1137
+1138
+1139
+1140
+1141</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1112</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1133</span>
 
 static VALUE DisplayMode_initialize(VALUE self, VALUE format, VALUE w, VALUE h,
                                     VALUE refresh_rate)
@@ -421,7 +431,8 @@ static VALUE DisplayMode_initialize(VALUE self, VALUE format, VALUE w, VALUE h,
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the pixel format of the display mode</p>
+    
+<p>Returns the pixel format of the display mode.</p>
 
 
   </div>
@@ -439,7 +450,8 @@ static VALUE DisplayMode_initialize(VALUE self, VALUE format, VALUE w, VALUE h,
       
       
         &mdash;
-        <div class='inline'><p>the pixel format of the display mode</p>
+        <div class='inline'>
+<p>the pixel format of the display mode</p>
 </div>
       
     </li>
@@ -452,13 +464,13 @@ static VALUE DisplayMode_initialize(VALUE self, VALUE format, VALUE w, VALUE h,
       <pre class="lines">
 
 
-1133
-1134
-1135
-1136</pre>
+1154
+1155
+1156
+1157</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1133</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1154</span>
 
 static VALUE DisplayMode_format(VALUE self)
 {
@@ -480,7 +492,8 @@ static VALUE DisplayMode_format(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the height of the screen of the display mode</p>
+    
+<p>Returns the height of the screen of the display mode.</p>
 
 
   </div>
@@ -498,7 +511,8 @@ static VALUE DisplayMode_format(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the height of the screen of the display mode</p>
+        <div class='inline'>
+<p>the height of the screen of the display mode</p>
 </div>
       
     </li>
@@ -511,13 +525,13 @@ static VALUE DisplayMode_format(VALUE self)
       <pre class="lines">
 
 
-1145
-1146
-1147
-1148</pre>
+1166
+1167
+1168
+1169</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1145</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1166</span>
 
 static VALUE DisplayMode_h(VALUE self)
 {
@@ -539,7 +553,8 @@ static VALUE DisplayMode_h(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns inspection string</p>
+    
+<p>Returns inspection string.</p>
 
 
   </div>
@@ -557,7 +572,8 @@ static VALUE DisplayMode_h(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>inspection string</p>
+        <div class='inline'>
+<p>inspection string</p>
 </div>
       
     </li>
@@ -570,17 +586,17 @@ static VALUE DisplayMode_h(VALUE self)
       <pre class="lines">
 
 
-1123
-1124
-1125
-1126
-1127
-1128
-1129
-1130</pre>
+1144
+1145
+1146
+1147
+1148
+1149
+1150
+1151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1123</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1144</span>
 
 static VALUE DisplayMode_inspect(VALUE self)
 {
@@ -606,7 +622,8 @@ static VALUE DisplayMode_inspect(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the refresh rate of the display mode</p>
+    
+<p>Returns the refresh rate of the display mode.</p>
 
 
   </div>
@@ -624,7 +641,8 @@ static VALUE DisplayMode_inspect(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the refresh rate of the display mode</p>
+        <div class='inline'>
+<p>the refresh rate of the display mode</p>
 </div>
       
     </li>
@@ -637,13 +655,13 @@ static VALUE DisplayMode_inspect(VALUE self)
       <pre class="lines">
 
 
-1151
-1152
-1153
-1154</pre>
+1172
+1173
+1174
+1175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1151</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1172</span>
 
 static VALUE DisplayMode_refresh_rate(VALUE self)
 {
@@ -665,7 +683,8 @@ static VALUE DisplayMode_refresh_rate(VALUE self)
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the width of the screen of the display mode</p>
+    
+<p>Returns the width of the screen of the display mode.</p>
 
 
   </div>
@@ -683,7 +702,8 @@ static VALUE DisplayMode_refresh_rate(VALUE self)
       
       
         &mdash;
-        <div class='inline'><p>the width of the screen of the display mode</p>
+        <div class='inline'>
+<p>the width of the screen of the display mode</p>
 </div>
       
     </li>
@@ -696,13 +716,13 @@ static VALUE DisplayMode_refresh_rate(VALUE self)
       <pre class="lines">
 
 
-1139
-1140
-1141
-1142</pre>
+1160
+1161
+1162
+1163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'video.c', line 1139</span>
+      <pre class="code"><span class="info file"># File 'video.c', line 1160</span>
 
 static VALUE DisplayMode_w(VALUE self)
 {
@@ -718,9 +738,9 @@ static VALUE DisplayMode_w(VALUE self)
 </div>
 
       <div id="footer">
-  Generated on Sun Mar 25 14:38:20 2018 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.12 (ruby-2.5.0).
+  Generated on Wed Apr 22 11:16:05 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.39 (ruby-4.0.1).
 </div>
 
     </div>
